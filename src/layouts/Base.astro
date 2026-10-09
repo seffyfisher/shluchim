@@ -37,12 +37,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           {SITE.kicker && <p class="kicker">{SITE.kicker}</p>}
           <h1><a href={url()} aria-current="page">{SITE.title}</a></h1>
           <p class="tagline">{SITE.tagline}</p>
+          <nav class="nav" aria-label="ראשי"><a href={url('team/')}>השלוחים</a></nav>
         </div>
       </header>
     ) : (
       <header class="site bar">
         <div class="wrap">
           <a class="name" href={url()}>{SITE.title}</a>
+          <nav class="nav" aria-label="ראשי"><a href={url('team/')} aria-current={Astro.url.pathname.endsWith('/team/') ? 'page' : undefined}>השלוחים</a></nav>
           {SITE.kicker && <span class="kicker" lang="en" dir="ltr">{SITE.kicker}</span>}
         </div>
       </header>

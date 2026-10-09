@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import { getPosts, url } from '../lib/posts';
+
+// Names exactly as in each שלוח's profile. Lines in Seffy's voice.
+const team = [
+  { name: 'באשר', slug: 'basher', size: 256, line: 'מנהל את הצוות. יודע למי לתת כל משימה.' },
+  { name: 'ניצה', slug: 'nitza', size: 256, line: 'מעצבת איתי כל מסך, עד שהוא באמת יושב.' },
+  { name: 'כוכבה', slug: 'kochava', size: 200, line: 'כותבת את הקוד של האתר, ולא דוחפת בלי אישור.' },
+  { name: 'דימה', slug: 'dima', size: 200, line: 'שובר את האתר לפני שהקוראים מספיקים.' },
+  { name: 'שאלתיאל', slug: 'shaltiel', size: 256, line: 'קורא כל פנייה של לקוח, ומספר לי מה כואב.' },
+  { name: 'אנאלי', slug: 'anali', size: 200, line: 'הופך מספרים להחלטות. סקפטי, וטוב שכך.' },
+  { name: 'שון', slug: 'shon', size: 200, line: 'עוזר לי לחשוב על התמונה הגדולה.' },
+  { name: 'היבא', slug: 'hiba', size: 200, line: 'מסדר בשבילי את הניירת המשעממת, בשקט.' },
+  { name: 'Chef', slug: 'chef', size: 144, line: 'מוצא מתכון עונתי, ועומד איתי ליד הכיריים.' },
+];
+const FIRST_ROW = 4; // desktop grid shows 4 per row; the rest load lazily
+
+const posts = await getPosts();
+const mentions = (name: string) =>
+  posts.filter((p) => (p.body ?? '').includes(name) || p.data.title.includes(name)).slice(0, 2);
+---
+<Base title="השלוחים" description="הצוות הקטן שעובד איתי כל יום.">
+  <header class="post-head">
+    <h1>השלוחים</h1>
+    <p class="lede">הצוות הקטן שעובד איתי כל יום.<br />כל אחד עם עבודה אחת, שהוא עושה טוב.</p>
+  </header>
+  <ul class="team" role="list">
+    {team.map((m, i) => {
+      const rel = mentions(m.name);
+      return (
+        <li class="member">
+          <img src={url(`images/team/${m.slug}.png`)} alt={m.name} width={m.size} height={m.size}
+            loading={i < FIRST_ROW ? 'eager' : 'lazy'} decoding="async" />
+          <h2>{m.name}</h2>
+          <p>{m.line}</p>
+          {rel.length > 0 && (
+            <p class="mentions">מופיע ב: {rel.map((p, j) => (<>{j > 0 && ', '}<a href={url(`posts/${p.id}/`)}>{p.data.title}</a></>))}</p>
+          )}
+        </li>
+      );
+    })}
+  </ul>
+</Base>
+
+<style>
+  .team { list-style: none; padding: 0; margin: 2rem 0 3rem; display: grid; gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 9.5rem), 1fr)); }
+  .member { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 1rem; text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .member img { width: 6.5rem; height: auto; aspect-ratio: 1; border-radius: 50%; object-fit: cover; background: var(--bg); }
+  .member h2 { font-family: 'Noa Shalev', var(--font); font-weight: 400; font-size: var(--step-1); margin: .75rem 0 .25rem; }
+  .member p { margin: 0; color: var(--muted); font-size: var(--step--1); line-height: 1.55; }
+  .member .mentions { margin-top: .6rem; font-size: calc(var(--step--1) * .92); }
+  .member .mentions a { color: var(--accent); }
+</style>
