@@ -166,3 +166,13 @@ footer.site .links a:hover { color: var(--accent); }
 .post-list h3, ol h3, ul h3 { font-family: 'Noa Shalev', var(--font); font-weight: 400; }
 
 .prose h2, .prose h3, a.name { font-family: 'Noa Shalev', var(--font); font-weight: 400; }
+
+/* Chat bubbles (```chat blocks, rendered at build time) */
+.chat { display: flex; flex-direction: column; gap: .75rem; margin: 1.75rem 0; font-family: var(--font); }
+.chat-msg { display: flex; flex-direction: column; max-width: 85%; }
+.chat-user { align-self: flex-start; align-items: flex-start; }
+.chat-bot { align-self: flex-end; align-items: flex-end; }
+.chat-who { font-size: .75rem; color: var(--muted); margin: 0 .5rem .2rem; }
+.chat-bubble { margin: 0; padding: .6rem .9rem; font-size: var(--step--1); line-height: 1.6; border-radius: 1rem; overflow-wrap: anywhere; }
+.chat-user .chat-bubble { background: color-mix(in srgb, var(--accent) 14%, var(--bg)); color: var(--fg); border-start-start-radius: .3rem; }
+.chat-bot .chat-bubble { background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-start-end-radius: .3rem; }

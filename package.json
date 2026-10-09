@@ -11,6 +11,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "test": "node --test src/lib/remark-chat.test.mjs",
     "build:drafts": "SHOW_DRAFTS=1 astro build",
     "preview:drafts": "SHOW_DRAFTS=1 astro preview"
   },

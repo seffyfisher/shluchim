@@ -1,6 +1,8 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { satteri } from '@astrojs/markdown-satteri';
+import { satteriChat } from './src/lib/remark-chat.mjs';
 
 // ONE place to change the deploy target.
 // GitHub Pages project site (default): SITE_URL=https://seffyfisher.github.io  BASE_PATH=/shluchim
@@ -19,5 +21,5 @@ export default defineConfig({
   integrations: [sitemap()],
   build: { inlineStylesheets: 'always' },
   // Code blocks follow the site theme (light/dark) via CSS variables; colours applied in global.css.
-  markdown: { shikiConfig: { themes: { light: 'github-light-high-contrast', dark: 'github-dark-high-contrast' }, defaultColor: false } },
+  markdown: { processor: satteri({ mdastPlugins: [satteriChat] }), shikiConfig: { themes: { light: 'github-light-high-contrast', dark: 'github-dark-high-contrast' }, defaultColor: false } },
 });
