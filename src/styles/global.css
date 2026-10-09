@@ -1,11 +1,10 @@
 /* Bots-tales: one token set, light + dark via light-dark(). Flat colours only, no gradients. */
 @font-face {
-  font-family: Rubik;
-  src: url('../fonts/rubik-var.woff2') format('woff2');
+  font-family: 'Miriam Libre';
+  src: url('../fonts/miriam-libre-var.woff2') format('woff2');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
-  /* One subset file: Hebrew + basic Latin + Hebrew/typographic punctuation (variable, wght 400-700). */
 }
 
 :root {
@@ -22,7 +21,7 @@
   --badge-fg: light-dark(#5b4300, #f3d98c);
   --code-bg:  light-dark(#ffffff, #0d1117);
   /* type */
-  --font: Rubik, system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --font: 'Miriam Libre', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
   --step--1: 0.9375rem;
   --step-0: 1.125rem;
   --step-1: 1.3125rem;
