@@ -8,7 +8,7 @@ export const SITE = {
 };
 
 // GitHub repo (owner/name) — used for the "עריכה" links. Change on rename.
-export const REPO = 'seffyfisher/stories';
+export const REPO = 'seffyfisher/Bots-tales';
 
 // Preview mode: SHOW_DRAFTS=1 npm run build  -> drafts are built with a "טיוטה" badge.
 // Default build (and CI) never includes drafts.
