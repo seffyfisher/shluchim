@@ -34,7 +34,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     {masthead ? (
       <header class="site masthead">
         <div class="wrap">
-          <p class="kicker">{SITE.kicker}</p>
+          {SITE.kicker && <p class="kicker">{SITE.kicker}</p>}
           <h1><a href={url()} aria-current="page">{SITE.title}</a></h1>
           <p class="tagline">{SITE.tagline}</p>
         </div>
@@ -43,7 +43,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       <header class="site bar">
         <div class="wrap">
           <a class="name" href={url()}>{SITE.title}</a>
-          <span class="kicker" lang="en" dir="ltr">{SITE.kicker}</span>
+          {SITE.kicker && <span class="kicker" lang="en" dir="ltr">{SITE.kicker}</span>}
         </div>
       </header>
     )}

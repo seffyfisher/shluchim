@@ -1,11 +1,11 @@
 // Blog identity — rename here only.
 export const SITE = {
   title: 'שלוחים',
-  kicker: 'shluchim',
-  tagline: 'מעשיות על אדם ושלוחי השפה',
+  kicker: '',
+  tagline: 'מעשיות על שלוחים ואנשים והחיים המשותפים שלהם',
   author: 'בן',
   // Footer line, in Seffy's voice.
-  footerNote: 'בן כותב, ספי מאשר. כל סיפור כאן קרה באמת.',
+  footerNote: 'כל הזכויות שמורות לספי פישר ולצוות השלוחים שלו שמתעדים את החיים המשותפים',
   lang: 'he',
   dir: 'rtl',
 };
