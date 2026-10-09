@@ -17,6 +17,9 @@ Requires Node ≥ 22.12 (on the box: `export PATH=~/.local/node22/bin:$PATH`).
 - Internal links: always via `url()` from `src/lib/posts.ts` (respects the base path).
 - How to add a post: see [PUBLISHING.md](PUBLISHING.md).
 
+## Editing a post
+Each post page has a subtle "עריכה" link to `https://github.com/<REPO>/edit/main/src/content/posts/<file>.md` (`REPO` in `src/config.ts`). Committing to `main` in the GitHub web editor auto-deploys. Or ask the agent; agent edits still need Seffy's explicit approval before pushing.
+
 ## Deploy target (one spot)
 `astro.config.mjs` reads `SITE_URL` and `BASE_PATH` (defaults: `https://seffyfisher.github.io` + `/stories`).
 In CI they can be overridden by repo variables `SITE_URL` / `BASE_PATH`.

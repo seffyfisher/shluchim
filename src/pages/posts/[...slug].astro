@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import { getPosts, url, formatDate } from '../../lib/posts';
+import { REPO } from '../../config';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -11,6 +12,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const d = post.data;
+const editUrl = `https://github.com/${REPO}/edit/main/${post.filePath ?? `src/content/posts/${post.id}.md`}`;
 ---
 <Base title={d.title} description={d.description} noindex={d.draft}>
   <article>
@@ -22,5 +24,8 @@ const d = post.data;
     {d.cover && <Image src={d.cover} alt={d.coverAlt ?? ''} widths={[400, 800, 1200]} sizes="(max-width: 42rem) 100vw, 40rem" />}
     <Content />
   </article>
-  <a class="back" href={url()}>→ לכל הסיפורים</a>
+  <p class="post-foot">
+    <a class="back" href={url()}>→ לכל הסיפורים</a>
+    <a class="edit" href={editUrl} rel="nofollow">עריכה</a>
+  </p>
 </Base>

@@ -64,4 +64,6 @@ article img { max-width: 100%; height: auto; border-radius: 6px; }
 article blockquote { margin-inline: 0; padding-inline-start: 1rem; border-inline-start: 3px solid var(--line); color: var(--muted); }
 code { font-size: .9em; background: var(--line); padding: .1em .3em; border-radius: 4px; direction: ltr; unicode-bidi: isolate; }
 .empty { color: var(--muted); }
-.back { display: inline-block; margin-top: 2.5rem; }
+.post-foot { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-top: 2.5rem; }
+.edit { color: var(--muted); font-size: .85rem; }
+.edit:hover { color: var(--accent); }
