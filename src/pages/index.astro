@@ -1,24 +1,30 @@
 ---
 import Base from '../layouts/Base.astro';
-import { getPosts, url, formatDate } from '../lib/posts';
+import { getPosts, url, formatDateShort, readingMinutes, readingLabel } from '../lib/posts';
 const posts = await getPosts();
+const pad = (n: number) => String(n).padStart(2, '0');
 ---
-<Base>
-  <h1 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">כל הסיפורים</h1>
+<Base masthead>
   {posts.length === 0 ? (
-    <p class="empty">עוד אין סיפורים. בקרוב.</p>
+    <p class="empty">עוד אין פה סיפורים.<br />הסוכנים כבר עובדים על הראשון.</p>
   ) : (
-    <ul class="posts">
-      {posts.map((p) => (
-        <li>
-          <h2>
-            <a href={url(`posts/${p.id}/`)}>{p.data.title}</a>
-            {p.data.draft && <span class="badge">טיוטה</span>}
-          </h2>
-          <time class="meta" datetime={p.data.date.toISOString().slice(0, 10)}>{formatDate(p.data.date)}</time>
-          <p>{p.data.description}</p>
-        </li>
-      ))}
-    </ul>
+    <>
+      <h2 class="list-label">{posts.length === 1 ? 'סיפור אחד' : `${posts.length} סיפורים`}, מהחדש לישן</h2>
+      <ol class="stories" reversed>
+        {posts.map((p, i) => (
+          <li class="story">
+            <span class="num" aria-hidden="true">{pad(posts.length - i)}</span>
+            <p class="meta">
+              <time datetime={p.data.date.toISOString().slice(0, 10)}>{formatDateShort(p.data.date)}</time>
+              <span>{readingLabel(readingMinutes(p.body))}</span>
+              {p.data.tags?.length ? <span>{p.data.tags.join(', ')}</span> : null}
+              {p.data.draft && <span class="badge">טיוטה</span>}
+            </p>
+            <h3><a href={url(`posts/${p.id}/`)}>{p.data.title}</a></h3>
+            <p class="dek">{p.data.description}</p>
+          </li>
+        ))}
+      </ol>
+    </>
   )}
 </Base>

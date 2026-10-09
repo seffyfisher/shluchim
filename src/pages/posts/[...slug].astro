@@ -2,7 +2,7 @@
 import { render } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
-import { getPosts, url, formatDate } from '../../lib/posts';
+import { getPosts, url, formatDate, readingMinutes, readingLabel } from '../../lib/posts';
 import { REPO } from '../../config';
 
 export async function getStaticPaths() {
@@ -16,16 +16,23 @@ const editUrl = `https://github.com/${REPO}/edit/main/${post.filePath ?? `src/co
 ---
 <Base title={d.title} description={d.description} noindex={d.draft}>
   <article>
-    <header>
-      <h1>{d.title}{d.draft && <span class="badge">טיוטה</span>}</h1>
-      <p class="meta"><time datetime={d.date.toISOString().slice(0, 10)}>{formatDate(d.date)}</time>{d.tags?.length ? ` · ${d.tags.join(' · ')}` : ''}</p>
+    <header class="post-head">
+      <p class="meta">
+        <time datetime={d.date.toISOString().slice(0, 10)}>{formatDate(d.date)}</time>
+        <span>{readingLabel(readingMinutes(post.body))}</span>
+        {d.tags?.length ? <span>{d.tags.join(', ')}</span> : null}
+        {d.draft && <span class="badge">טיוטה</span>}
+      </p>
+      <h1>{d.title}</h1>
       <p class="lede">{d.description}</p>
     </header>
-    {d.cover && <Image src={d.cover} alt={d.coverAlt ?? ''} widths={[400, 800, 1200]} sizes="(max-width: 42rem) 100vw, 40rem" />}
-    <Content />
+    {d.cover && <Image class="cover" src={d.cover} alt={d.coverAlt ?? ''} widths={[400, 800, 1200]} sizes="(max-width: 46rem) 100vw, 46rem" />}
+    <div class="prose">
+      <Content />
+    </div>
   </article>
-  <p class="post-foot">
+  <nav class="post-foot" aria-label="ניווט בסוף הסיפור">
     <a class="back" href={url()}>→ לכל הסיפורים</a>
-    <a class="edit" href={editUrl} rel="nofollow">עריכה</a>
-  </p>
+    <a class="edit" href={editUrl} rel="nofollow">עריכה ב־GitHub</a>
+  </nav>
 </Base>

@@ -1,9 +1,10 @@
 ---
 import '../styles/global.css';
+import fontUrl from '../fonts/rubik-var.woff2?url';
 import { SITE, SHOW_DRAFTS } from '../config';
 import { url } from '../lib/posts';
-interface Props { title?: string; description?: string; noindex?: boolean }
-const { title, description = SITE.tagline, noindex = false } = Astro.props;
+interface Props { title?: string; description?: string; noindex?: boolean; masthead?: boolean }
+const { title, description = SITE.tagline, noindex = false, masthead = false } = Astro.props;
 const fullTitle = title ? `${title} · ${SITE.title}` : SITE.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -16,6 +17,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141415" />
+    <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:locale" content="he_IL" />
@@ -27,18 +31,29 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <body>
     <a class="skip" href="#main">דלג לתוכן</a>
     {SHOW_DRAFTS && <div class="preview-banner" role="note">מצב תצוגה מקדימה: כולל טיוטות שלא אושרו לפרסום</div>}
-    <header class="site">
-      <div class="wrap">
-        <a class="name" href={url()}>{SITE.title}</a>
-        <p>{SITE.tagline}</p>
-      </div>
-    </header>
+    {masthead ? (
+      <header class="site masthead">
+        <div class="wrap">
+          <p class="kicker">{SITE.kicker}</p>
+          <h1><a href={url()} aria-current="page">{SITE.title}</a></h1>
+          <p class="tagline">{SITE.tagline}</p>
+        </div>
+      </header>
+    ) : (
+      <header class="site bar">
+        <div class="wrap">
+          <a class="name" href={url()}>{SITE.title}</a>
+          <span class="kicker" lang="en" dir="ltr">{SITE.kicker}</span>
+        </div>
+      </header>
+    )}
     <main id="main" class="wrap">
       <slot />
     </main>
     <footer class="site">
       <div class="wrap">
-        נכתב על ידי {SITE.author} · <a href={url('rss.xml')}>RSS</a>
+        <p>{SITE.footerNote}</p>
+        <p class="links"><a href={url()}>כל הסיפורים</a><a href={url('rss.xml')}>RSS</a></p>
       </div>
     </footer>
   </body>

@@ -18,4 +18,6 @@ export default defineConfig({
   outDir: SHOW_DRAFTS ? './dist-drafts' : './dist',
   integrations: [sitemap()],
   build: { inlineStylesheets: 'always' },
+  // Code blocks follow the site theme (light/dark) via CSS variables; colours applied in global.css.
+  markdown: { shikiConfig: { themes: { light: 'github-light-high-contrast', dark: 'github-dark-high-contrast' }, defaultColor: false } },
 });
