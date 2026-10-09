@@ -1,9 +1,9 @@
 backend:
   name: github
-  repo: seffyfisher/Bots-tales
+  repo: seffyfisher/shluchim
   branch: main
 media_folder: public/images
-public_folder: /Bots-tales/images
+public_folder: /shluchim/images
 collections:
   - name: posts
     label: פוסטים

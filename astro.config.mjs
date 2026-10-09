@@ -3,10 +3,10 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 // ONE place to change the deploy target.
-// GitHub Pages project site (default): SITE_URL=https://seffyfisher.github.io  BASE_PATH=/Bots-tales
+// GitHub Pages project site (default): SITE_URL=https://seffyfisher.github.io  BASE_PATH=/shluchim
 // Custom domain later:                 SITE_URL=https://stories.example.com    BASE_PATH=/
 const SITE_URL = process.env.SITE_URL || 'https://seffyfisher.github.io';
-const BASE_PATH = process.env.BASE_PATH || '/Bots-tales';
+const BASE_PATH = process.env.BASE_PATH || '/shluchim';
 // SHOW_DRAFTS=1 builds drafts into a separate folder so they can never ship by accident.
 const SHOW_DRAFTS = process.env.SHOW_DRAFTS === '1';
 
