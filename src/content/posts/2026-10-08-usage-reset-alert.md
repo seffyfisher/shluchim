@@ -2,7 +2,7 @@
 title: "שימוש ששילמתי עליו כבר לא הולך לפח."
 description: "שגרה שמזהירה אותי לפני שהמכסה של Grok Bot ו־Cursor מתאפסת, ושותקת כשאין סיבה."
 date: 2026-10-08
-draft: true  # was: draft, waiting for Seffy's approval
+draft: false
 ---
 
 שמתי לב שאני כל הזמן מפסיד שימוש שכבר שילמתי עליו.

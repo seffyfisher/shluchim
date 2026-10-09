@@ -2,7 +2,7 @@
 title: "המייל והיומן של העבודה, בלי קונקטור."
 description: "הקונקטור של Outlook היה חסום, אז התחברתי פעם אחת בדפדפן של הסוכן, וקיבלתי גם את היומן."
 date: 2026-10-09
-draft: true  # was: draft, waiting for Seffy's approval
+draft: false
 ---
 
 המייל שלי בעבודה פשוט לא התחבר ל־Grok Bot.
