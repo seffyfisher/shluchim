@@ -160,5 +160,23 @@
     "avatar": "shluchim/chef.webp",
     "animated": true,
     "still": "shluchim/chef-still.webp"
+  },
+  {
+    "id": "shinlamed",
+    "name": "שינלמד",
+    "role": "שותף ליצירה ולאמנות שלי.",
+    "category": "אישי",
+    "avatar": "shluchim/shinlamed.webp",
+    "animated": false,
+    "still": null
+  },
+  {
+    "id": "shlomby",
+    "name": "שלומבי",
+    "role": "מאמן כושר אישי, עם תוכנית ותזכורות.",
+    "category": "אישי",
+    "avatar": "shluchim/shlomby.webp",
+    "animated": true,
+    "still": "shluchim/shlomby-still.webp"
   }
 ]
