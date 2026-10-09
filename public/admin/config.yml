@@ -1,0 +1,24 @@
+backend:
+  name: github
+  repo: seffyfisher/Bots-tales
+  branch: main
+media_folder: public/images
+public_folder: /Bots-tales/images
+collections:
+  - name: posts
+    label: פוסטים
+    label_singular: פוסט
+    folder: src/content/posts
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}} ({{date}})"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: כותרת, widget: string }
+      - { name: description, label: תקציר, widget: string }
+      - { name: date, label: תאריך, widget: datetime, time_format: false, date_format: YYYY-MM-DD, format: YYYY-MM-DD }
+      - { name: draft, label: טיוטה, widget: boolean, default: true, hint: "להשאיר מסומן עד אישור של ספי" }
+      - { name: tags, label: תגיות, widget: list, required: false }
+      - { name: body, label: תוכן, widget: markdown }
