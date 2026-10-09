@@ -164,3 +164,5 @@ footer.site .links a:hover { color: var(--accent); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
 .post-list h3, ol h3, ul h3 { font-family: 'Noa Shalev', var(--font); font-weight: 400; }
+
+.prose h2, .prose h3, a.name { font-family: 'Noa Shalev', var(--font); font-weight: 400; }
