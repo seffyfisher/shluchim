@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/posts';
+import shluchim from '../data/shluchim.json';
+
+// Group by category, keeping the order of the data file.
+const groups = [...new Set(shluchim.map((s) => s.category))].map((c) => ({ name: c, items: shluchim.filter((s) => s.category === c) }));
+const EAGER = 4; // first cards are above the fold on mobile
+let i = 0;
+---
+<Base title="השלוחים" description="כל השלוחים של ספי: מי הם ומה כל אחד עושה.">
+  <header class="page-head">
+    <h1>השלוחים</h1>
+    <p class="lede">שלוח זה עוזר AI שעושה בשבילי עבודה אמיתית.<br />הנה כל הצוות, ומה כל אחד עושה.</p>
+    <p class="meta"><span>{shluchim.length} שלוחים</span></p>
+  </header>
+  {groups.map((g) => (
+    <section class="roster-group" aria-labelledby={`g-${g.name}`}>
+      <h2 class="list-label" id={`g-${g.name}`}>{g.name}:</h2>
+      <ul class="roster">
+        {g.items.map((s) => {
+          const eager = i++ < EAGER;
+          return (
+            <li class="shaliach">
+              <picture>
+                {s.still && <source media="(prefers-reduced-motion: reduce)" srcset={url(s.still!)} type="image/webp" />}
+                <img class="avatar" src={url(s.avatar)} alt="" width="112" height="112"
+                  loading={eager ? 'eager' : 'lazy'} decoding="async" />
+              </picture>
+              <h3>{s.name}</h3>
+              <p>{s.role}</p>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  ))}
+  <nav class="post-foot" aria-label="ניווט">
+    <a class="back" href={url()}>→ לכל הסיפורים</a>
+  </nav>
+</Base>

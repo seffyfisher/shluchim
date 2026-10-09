@@ -16,16 +16,16 @@
 :root {
   color-scheme: light dark;
   /* colour tokens: light, dark */
-  --bg:       light-dark(#fafafa, #141415);
-  --surface:  light-dark(#f0f0ef, #1e1e20);
-  --fg:       light-dark(#18181a, #ececec);
-  --muted:    light-dark(#5b5b61, #a4a4ab);
-  --line:     light-dark(#e2e2e0, #2e2e32);
-  --rule:     light-dark(#18181a, #ececec);
-  --accent:   light-dark(#0b6352, #6ccab4);
-  --badge-bg: light-dark(#f6e7b4, #3d3112);
-  --badge-fg: light-dark(#5b4300, #f3d98c);
-  --code-bg:  light-dark(#ffffff, #0d1117);
+  --bg:       light-dark(#fafafa, #141414);
+  --surface:  light-dark(#f0f0f0, #1f1f1f);
+  --fg:       light-dark(#171717, #ededed);
+  --muted:    light-dark(#595959, #a3a3a3);
+  --line:     light-dark(#e0e0e0, #2e2e2e);
+  --rule:     light-dark(#171717, #ededed);
+  --accent:   var(--fg); /* black & white only (Seffy rule): colour comes only from bot avatars */
+  --badge-bg: light-dark(#e3e3e3, #333333);
+  --badge-fg: var(--fg);
+  --code-bg:  light-dark(#ffffff, #0d0d0d);
   /* type */
   --font: 'Miriam Libre', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
   --step--1: 0.9375rem;
@@ -142,7 +142,7 @@ code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-si
 .prose pre { direction: ltr; text-align: left; background: var(--code-bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.1rem; overflow-x: auto; font-size: .9rem; line-height: 1.6; white-space: pre; }
 .prose pre code { background: none; padding: 0; font-size: inherit; }
 .prose pre.astro-code { background-color: var(--code-bg); }
-.astro-code, .astro-code span { color: light-dark(var(--shiki-light), var(--shiki-dark)); }
+.astro-code, .astro-code span { color: var(--fg); } /* monochrome code */
 .prose table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; font-size: .95em; line-height: 1.5; }
 .prose th, .prose td { padding: .5em .9em; border-bottom: 1px solid var(--line); text-align: start; vertical-align: top; }
 .prose th { font-weight: 600; border-bottom: 2px solid var(--rule); white-space: nowrap; }
@@ -157,7 +157,7 @@ footer.site { border-top: 1px solid var(--line); padding-block: 2rem 2.5rem; col
 footer.site p { margin: 0; }
 footer.site .links { display: flex; gap: 1.5rem; margin-top: .25rem; }
 footer.site .links a { color: var(--muted); display: inline-flex; align-items: center; min-height: 2.75rem; }
-footer.site .links a:hover { color: var(--accent); }
+footer.site .links a:hover { color: var(--fg); }
 
 .preview-banner { background: var(--badge-bg); color: var(--badge-fg); text-align: center; font-weight: 600; padding: .4rem 1rem; font-size: .95rem; }
 
@@ -176,3 +176,23 @@ footer.site .links a:hover { color: var(--accent); }
 .chat-bubble { margin: 0; padding: .6rem .9rem; font-size: var(--step--1); line-height: 1.6; border-radius: 1rem; overflow-wrap: anywhere; }
 .chat-user .chat-bubble { background: color-mix(in srgb, var(--accent) 14%, var(--bg)); color: var(--fg); border-start-start-radius: .3rem; }
 .chat-bot .chat-bubble { background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-start-end-radius: .3rem; }
+
+/* ---------- site nav (header) ---------- */
+.site-nav { display: flex; gap: 1.25rem; font-size: var(--step--1); }
+.site-nav a { color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; min-height: 2.75rem; }
+.site-nav a:hover { color: var(--fg); text-decoration: underline; }
+.site-nav a[aria-current="page"] { color: var(--fg); font-weight: 600; text-decoration: underline; text-decoration-thickness: 2px; }
+.masthead .site-nav { margin-top: 1rem; }
+
+/* ---------- השלוחים (team roster) ---------- */
+.page-head { margin-bottom: 2.5rem; }
+.page-head h1 { font-family: 'Noa Shalev', var(--font); font-size: calc(var(--step-3) * 1.1); font-weight: 400; line-height: 1.15; margin-block: 0 .75rem; }
+.page-head .lede { margin-bottom: .75rem; }
+.roster-group + .roster-group { margin-top: 3rem; }
+.roster { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1.25rem; padding-top: 1.5rem; }
+@media (min-width: 40rem) { .roster { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.shaliach { display: flex; flex-direction: column; align-items: flex-start; gap: .35rem; min-width: 0; }
+.avatar { display: block; width: 6rem; height: 6rem; border-radius: 22%; background: var(--surface); object-fit: cover; }
+@media (min-width: 40rem) { .avatar { width: 7rem; height: 7rem; } }
+.roster .shaliach h3 { font-family: var(--font); font-weight: 600; font-size: var(--step-1); margin-top: .5rem; overflow-wrap: anywhere; }
+.shaliach p { margin: 0; color: var(--muted); font-size: var(--step--1); line-height: 1.55; }

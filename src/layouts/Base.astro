@@ -18,7 +18,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="canonical" href={canonical} />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141415" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141414" />
     <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
@@ -37,6 +37,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           {SITE.kicker && <p class="kicker">{SITE.kicker}</p>}
           <h1><a href={url()} aria-current="page">{SITE.displayTitle ?? SITE.title}</a></h1>
           <p class="tagline">{SITE.tagline}</p>
+          <nav class="site-nav" aria-label="ראשי"><a href={url()} aria-current={Astro.url.pathname === url() ? 'page' : undefined}>סיפורים</a><a href={url('team/')} aria-current={Astro.url.pathname.startsWith(url('team/')) ? 'page' : undefined}>השלוחים</a></nav>
         </div>
       </header>
     ) : (
@@ -44,6 +45,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         <div class="wrap">
           <a class="name" href={url()}>{SITE.title}</a>
           {SITE.kicker && <span class="kicker" lang="en" dir="ltr">{SITE.kicker}</span>}
+          <nav class="site-nav" aria-label="ראשי"><a href={url()} aria-current={Astro.url.pathname === url() ? 'page' : undefined}>סיפורים</a><a href={url('team/')} aria-current={Astro.url.pathname.startsWith(url('team/')) ? 'page' : undefined}>השלוחים</a></nav>
         </div>
       </header>
     )}
@@ -53,7 +55,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <footer class="site">
       <div class="wrap">
         <p>{SITE.footerNote}</p>
-        <p class="links"><a href={url()}>כל הסיפורים</a><a href={url('rss.xml')}>RSS</a></p>
+        <p class="links"><a href={url()}>כל הסיפורים</a><a href={url('team/')}>השלוחים</a><a href={url('rss.xml')}>RSS</a></p>
       </div>
     </footer>
   </body>

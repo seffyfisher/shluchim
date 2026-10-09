@@ -1,0 +1,164 @@
+[
+  {
+    "id": "basher",
+    "name": "באשר",
+    "role": "מנהל הצוות. מחליט איזה שלוח לוקח כל משימה.",
+    "category": "ניהול וכלים",
+    "avatar": "shluchim/basher.webp",
+    "animated": true,
+    "still": "shluchim/basher-still.webp"
+  },
+  {
+    "id": "nitza",
+    "name": "ניצה",
+    "role": "המעצבת הראשית של עברית: מסכים, זרימות ובאנרים.",
+    "category": "עיצוב ופיתוח",
+    "avatar": "shluchim/nitza.webp",
+    "animated": true,
+    "still": "shluchim/nitza-still.webp"
+  },
+  {
+    "id": "kochava",
+    "name": "כוכבה",
+    "role": "מפתחת את האתר של עברית, מהרעיון ועד הקוד.",
+    "category": "עיצוב ופיתוח",
+    "avatar": "shluchim/kochava.webp",
+    "animated": true,
+    "still": "shluchim/kochava-still.webp"
+  },
+  {
+    "id": "dima",
+    "name": "דימה",
+    "role": "שובר את האתר של עברית לפני שהלקוחות נתקלים בבאג.",
+    "category": "עיצוב ופיתוח",
+    "avatar": "shluchim/dima.webp",
+    "animated": true,
+    "still": "shluchim/dima-still.webp"
+  },
+  {
+    "id": "motion-god",
+    "name": "Motion God",
+    "role": "מנסה תנועה ואנימציה עד שהיא מרגישה בדיוק נכון.",
+    "category": "עיצוב ופיתוח",
+    "avatar": "shluchim/motion-god.webp",
+    "animated": false,
+    "still": null
+  },
+  {
+    "id": "hashraot",
+    "name": "השראות",
+    "role": "מביא השראה עיצובית טרייה, כל שבוע.",
+    "category": "עיצוב ופיתוח",
+    "avatar": "shluchim/hashraot.webp",
+    "animated": false,
+    "still": null
+  },
+  {
+    "id": "nightly-audit",
+    "name": "Nightly Audit Engineer",
+    "role": "עובר על הקוד בלילה ומנקה אזור אחד בכל פעם.",
+    "category": "עיצוב ופיתוח",
+    "avatar": "shluchim/nightly-audit.webp",
+    "animated": false,
+    "still": null
+  },
+  {
+    "id": "anali",
+    "name": "אנאלי",
+    "role": "הופכת נתוני גלישה להחלטות על האתר.",
+    "category": "עבודה בעברית",
+    "avatar": "shluchim/anali.webp",
+    "animated": true,
+    "still": "shluchim/anali-still.webp"
+  },
+  {
+    "id": "clarity",
+    "name": "Clarity",
+    "role": "צופה בהקלטות גלישה ומוצא איפה גולשים נתקעים.",
+    "category": "עבודה בעברית",
+    "avatar": "shluchim/clarity.webp",
+    "animated": false,
+    "still": null
+  },
+  {
+    "id": "shaltiel",
+    "name": "שאלתיאל",
+    "role": "מקשיב ללקוחות של עברית ומסכם מה באמת מציק להם.",
+    "category": "עבודה בעברית",
+    "avatar": "shluchim/shaltiel.webp",
+    "animated": true,
+    "still": "shluchim/shaltiel-still.webp"
+  },
+  {
+    "id": "shon",
+    "name": "שון",
+    "role": "יועץ אסטרטגי להחלטות הגדולות של החברה.",
+    "category": "עבודה בעברית",
+    "avatar": "shluchim/shon.webp",
+    "animated": true,
+    "still": "shluchim/shon-still.webp"
+  },
+  {
+    "id": "teacher",
+    "name": "מורה Grok Bot",
+    "role": "מלמד אותי לעבוד נכון עם השלוחים.",
+    "category": "ניהול וכלים",
+    "avatar": "shluchim/teacher.webp",
+    "animated": false,
+    "still": null
+  },
+  {
+    "id": "codex",
+    "name": "קודקס",
+    "role": "מריץ את Codex על משימות קוד ותמונות.",
+    "category": "ניהול וכלים",
+    "avatar": "shluchim/codex.webp",
+    "animated": false,
+    "still": null
+  },
+  {
+    "id": "claudi",
+    "name": "קלודי",
+    "role": "קיצור דרך ל־Claude. מריץ ומחזיר תוצאות.",
+    "category": "ניהול וכלים",
+    "avatar": "shluchim/claudi.webp",
+    "animated": false,
+    "still": null
+  },
+  {
+    "id": "timmy",
+    "name": "Timmy",
+    "role": "מעביר הודעות בין השלוחים שלי לשלוחים של הצוות.",
+    "category": "ניהול וכלים",
+    "avatar": "shluchim/timmy.webp",
+    "animated": false,
+    "still": null
+  },
+  {
+    "id": "bridge",
+    "name": "Bridge",
+    "role": "מגשר בין השלוחים לבין ChatGPT ו־Claude.",
+    "category": "ניהול וכלים",
+    "avatar": "shluchim/bridge.webp",
+    "animated": false,
+    "still": null
+  },
+  {
+    "id": "dial-bot",
+    "name": "dial bot",
+    "role": "מתקשר בשמי ומדווח מה היה בשיחה.",
+    "category": "ניהול וכלים",
+    "avatar": "shluchim/dial-bot.webp",
+    "animated": false,
+    "still": null
+  },
+  {
+    "id": "chef",
+    "name": "Chef",
+    "role": "מבשל איתי, ממציא מה לאכול השבוע.",
+    "category": "אישי",
+    "avatar": "shluchim/chef.webp",
+    "animated": true,
+    "still": "shluchim/chef-still.webp"
+  }
+]
