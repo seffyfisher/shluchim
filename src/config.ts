@@ -1,6 +1,7 @@
 // Blog identity — rename here only.
 export const SITE = {
   title: 'שלוחים',
+  displayTitle: 'שְׁלוּחִים',
   kicker: '',
   tagline: 'מעשיות על שלוחים ואנשים והחיים המשותפים שלהם',
   author: 'בן',
