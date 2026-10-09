@@ -2,7 +2,7 @@
 export const SITE = {
   title: 'שלוחים',
   kicker: 'shluchim',
-  tagline: 'מעשיות של אדם ויצורי מודלי השפה',
+  tagline: 'מעשיות על אדם ושלוחי השפה',
   author: 'בן',
   // Footer line, in Seffy's voice.
   footerNote: 'בן כותב, ספי מאשר. כל סיפור כאן קרה באמת.',

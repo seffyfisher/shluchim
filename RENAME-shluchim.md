@@ -4,7 +4,7 @@
 |---|---|---|
 | src/config.ts | title: 'סיפורי הצלחה' | title: 'שלוחים' |
 | src/config.ts | kicker: 'Bots-tales' | kicker: 'shluchim' |
-| src/config.ts | tagline: 'סוכני AI שעושים עבודה אמיתית, סיפור אחד בכל פעם.' | tagline: 'מעשיות של אדם ויצורי מודלי השפה' |
+| src/config.ts | tagline: 'סוכני AI שעושים עבודה אמיתית, סיפור אחד בכל פעם.' | tagline: 'מעשיות על אדם ושלוחי השפה' |
 | src/pages/index.astro | הסוכנים כבר עובדים על הראשון. | השלוחים כבר עובדים על הראשון. |
 | src/content/posts/2026-10-08-usage-reset-alert.md | קודם הוא שלח סוכן דפדפן | קודם הוא שלח שלוח דפדפן |
 | src/content/posts/2026-10-08-usage-reset-alert.md | הסוכן קרא משם | השלוח קרא משם |
