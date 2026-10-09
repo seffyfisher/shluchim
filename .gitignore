@@ -1,0 +1,6 @@
+node_modules/
+dist/
+dist-drafts/
+.astro/
+preview-shots/
+.DS_Store

@@ -1,0 +1,26 @@
+---
+import { render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { getPosts, url, formatDate } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+---
+<Base title={d.title} description={d.description} noindex={d.draft}>
+  <article>
+    <header>
+      <h1>{d.title}{d.draft && <span class="badge">טיוטה</span>}</h1>
+      <p class="meta"><time datetime={d.date.toISOString().slice(0, 10)}>{formatDate(d.date)}</time>{d.tags?.length ? ` · ${d.tags.join(' · ')}` : ''}</p>
+      <p class="lede">{d.description}</p>
+    </header>
+    {d.cover && <Image src={d.cover} alt={d.coverAlt ?? ''} widths={[400, 800, 1200]} sizes="(max-width: 42rem) 100vw, 40rem" />}
+    <Content />
+  </article>
+  <a class="back" href={url()}>→ לכל הסיפורים</a>
+</Base>
