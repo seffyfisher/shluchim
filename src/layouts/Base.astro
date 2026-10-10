@@ -42,7 +42,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           {SITE.kicker && <p class="kicker">{SITE.kicker}</p>}
           <h1><a href={url()} aria-current="page" aria-label={SITE.title} title={SITE.title}>{(() => { const t = SITE.displayTitle ?? SITE.title; const cut = [...t].findIndex((c, i, a) => i > 0 && a.slice(0, i).join('').normalize('NFD').replace(/[\u0591-\u05C7]/g, '') === 'של' && !/[\u0591-\u05C7]/.test(c)); return cut > 0 ? <><span class="t-a" aria-hidden="true">{[...t].slice(0, cut).join('')}</span><span class="t-b" aria-hidden="true">{[...t].slice(cut).join('')}</span></> : t; })()}</a></h1>
           <p class="tagline">{SITE.tagline}</p>
-          <nav class="site-nav" aria-label="ראשי"><a href={url()} aria-current={Astro.url.pathname === url() ? 'page' : undefined}>סיפורים</a><a href={url('team/')} aria-current={Astro.url.pathname.startsWith(url('team/')) ? 'page' : undefined}>השלוחים</a><a href={url('about/')} aria-current={Astro.url.pathname.startsWith(url('about/')) ? 'page' : undefined}>אודות</a></nav>
+          <nav class="site-nav" aria-label="ראשי"><a href={url()} aria-current={Astro.url.pathname === url() ? 'page' : undefined}>סיפורים</a><a href={url('team/')} aria-current={Astro.url.pathname.startsWith(url('team/')) ? 'page' : undefined}>השלוחים</a><a href={url('about/')} aria-current={Astro.url.pathname.startsWith(url('about/')) ? 'page' : undefined}>אודות</a><a class="lang" href={url('en/')} lang="en" hreflang="en">EN</a></nav>
         </div>
       </header>
     ) : (
@@ -50,7 +50,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         <div class="wrap">
           <a class="name" href={url()}>{SITE.title}</a>
           {SITE.kicker && <span class="kicker" lang="en" dir="ltr">{SITE.kicker}</span>}
-          <nav class="site-nav" aria-label="ראשי"><a href={url()} aria-current={Astro.url.pathname === url() ? 'page' : undefined}>סיפורים</a><a href={url('team/')} aria-current={Astro.url.pathname.startsWith(url('team/')) ? 'page' : undefined}>השלוחים</a><a href={url('about/')} aria-current={Astro.url.pathname.startsWith(url('about/')) ? 'page' : undefined}>אודות</a></nav>
+          <nav class="site-nav" aria-label="ראשי"><a href={url()} aria-current={Astro.url.pathname === url() ? 'page' : undefined}>סיפורים</a><a href={url('team/')} aria-current={Astro.url.pathname.startsWith(url('team/')) ? 'page' : undefined}>השלוחים</a><a href={url('about/')} aria-current={Astro.url.pathname.startsWith(url('about/')) ? 'page' : undefined}>אודות</a><a class="lang" href={url('en/')} lang="en" hreflang="en">EN</a></nav>
         </div>
       </header>
     )}
