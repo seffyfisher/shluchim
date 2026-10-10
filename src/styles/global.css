@@ -200,3 +200,9 @@ footer.site .links a:hover { color: var(--fg); }
 
 /* Masthead title two-tone: "של" in fg, the rest a touch lighter. */
 .masthead h1 .t-b { color: light-dark(#555555, #b0b0b0); }
+
+/* About page: credits (last section) small and muted. */
+.about .prose h2:has(+ small), .about .prose h2:last-of-type:has(~ small) { font-size: var(--step-0); margin-top: 3rem; color: var(--muted); }
+.about .prose small { display: block; font-size: .8rem; line-height: 1.6; color: var(--muted); }
+.about .prose small p, .about .prose small li { font-size: inherit; }
+.about .prose h1 { font-family: 'Noa Shalev', var(--font); font-weight: 400; font-size: calc(var(--step-3) * 1.1); line-height: 1.15; margin-block: 0 1.5rem; }

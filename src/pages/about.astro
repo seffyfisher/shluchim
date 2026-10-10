@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { getEntry, render } from 'astro:content';
+const page = (await getEntry('pages', 'about'))!;
+const { Content } = await render(page);
+---
+<Base title={page.data.title} description={page.data.description}>
+  <article class="about">
+    {/* Reserved: Seffy's animated avatar goes here later (no placeholder for now). */}
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Base>

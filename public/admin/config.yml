@@ -22,3 +22,14 @@ collections:
       - { name: draft, label: טיוטה, widget: boolean, default: true, hint: "להשאיר מסומן עד אישור של ספי" }
       - { name: tags, label: תגיות, widget: list, required: false }
       - { name: body, label: תוכן, widget: markdown }
+  - name: pages
+    label: עמודים
+    files:
+      - name: about
+        label: אודות
+        file: src/content/pages/about.md
+        format: frontmatter
+        fields:
+          - { name: title, label: כותרת, widget: string }
+          - { name: description, label: תקציר, widget: string }
+          - { name: body, label: תוכן, widget: markdown }

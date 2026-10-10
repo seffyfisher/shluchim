@@ -8,11 +8,11 @@ const groups = [...new Set(shluchim.map((s) => s.category))].map((c) => ({ name:
 const EAGER = 4; // first cards are above the fold on mobile
 let i = 0;
 ---
-<Base title="השלוחים" description="כל השלוחים של ספי: מי הם ומה כל אחד עושה.">
+<Base title="השְׁלוּחִים" description="כל השְׁלוּחִים של ספי: מי הם ומה כל אחד עושה.">
   <header class="page-head">
-    <h1>השלוחים</h1>
+    <h1>השְׁלוּחִים</h1>
     <p class="lede">שלוח זה עוזר AI שעושה בשבילי עבודה אמיתית.<br />הנה כל הצוות, ומה כל אחד עושה.</p>
-    <p class="meta"><span>{shluchim.length} שלוחים</span></p>
+    <p class="meta"><span>{shluchim.length} שְׁלוּחִים</span></p>
   </header>
   {groups.map((g) => (
     <section class="roster-group" aria-labelledby={`g-${g.name}`}>
