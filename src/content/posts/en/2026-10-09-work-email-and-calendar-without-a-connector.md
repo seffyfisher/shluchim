@@ -17,7 +17,7 @@ like reaching out to AI narration vendors for audiobooks.
 
 ## How it worked:
 
-On October 9, at around one in the morning, Basher checked the domain's (our site's address) mail records.
+On October 9, at around one in the morning, Basher checked the mail records for our site's domain.
 He confirmed it was Microsoft 365.
 
 He ruled out the remote computer route.

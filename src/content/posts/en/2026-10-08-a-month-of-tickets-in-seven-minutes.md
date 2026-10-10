@@ -78,7 +78,7 @@ The shaliach opened two bugs in Linear (task tracker), E-369 and E-370, using th
 They were assigned to a developer, with evidence and a request to reproduce.
 
 A checkout failure with a kibbutz address went to Nitza.
-She reproduced it against QA, and suggested a copy fix (the site's text).
+She reproduced it against QA, and suggested a fix to the site's copy.
 
 
 ## Why this is good:
@@ -86,7 +86,7 @@ She reproduced it against QA, and suggested a copy fix (the site's text).
 One picture of the month: what's missing, what's weak and what's rising.
 
 Ready drafts, ranked by impact.
-And two real production bugs (the live site), with proof.
+And two real bugs on the live site, with proof.
 
 All from the tickets,
 without me digging by hand even once.

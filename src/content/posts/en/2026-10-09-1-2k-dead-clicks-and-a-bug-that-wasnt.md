@@ -48,7 +48,7 @@ And the UserWay accessibility button (an accessibility plugin for the site) can 
 I asked for Nitza, the UX (user experience) shaliach, to look at what other sites do.
 
 Dima researched GOV.UK and WCAG 2.5.8, the accessibility standard for target size.
-Also Apple's and Material's (Google's design language) size guidelines,
+Also the size guidelines from Apple and from Material, Google's design language,
 Shopify's and Amazon's implied consent, and the checkout at Steimatzky, a big Israeli bookstore chain.
 
 Nitza built a live mock in RTL (right-to-left),
