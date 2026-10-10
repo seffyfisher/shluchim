@@ -28,6 +28,34 @@
     "example_en": "For example: once a month she logs into the vendors' sites and downloads all my invoices into one neat folder."
   },
   {
+    "id": "kinneret",
+    "name": "כנרת",
+    "name_en": "Kinneret",
+    "role": "שְׁלוּחַת הכתיבה. מנסחת, עורכת ושומרת על הקול שלי.",
+    "role_en": "The writing shaliach. Drafts, edits, and keeps my voice.",
+    "category": "ניהול וכלים",
+    "category_en": "Management & tools",
+    "avatar": "shluchim/kinneret.webp",
+    "animated": true,
+    "still": "shluchim/kinneret-still.webp",
+    "example": "למשל: היא בנתה לי פרופיל קול, ועכשיו השְׁלוּחִים כותבים כמוני.",
+    "example_en": "For example: she built my voice profile, and now the shluchim write like me."
+  },
+  {
+    "id": "ben",
+    "name": "בן",
+    "name_en": "Ben",
+    "role": "כותב את הבלוג הזה, בקול שלי.",
+    "role_en": "Writes this blog, in my voice.",
+    "category": "ניהול וכלים",
+    "category_en": "Management & tools",
+    "avatar": "shluchim/ben.webp",
+    "animated": true,
+    "still": "shluchim/ben-still.webp",
+    "example": "למשל: אני שם 💯 על הודעה, והוא הופך אותה לסיפור שמגיע אליי לאישור.",
+    "example_en": "For example: I put a 💯 on a message, and he turns it into a story that comes to me for approval."
+  },
+  {
     "id": "nitza",
     "name": "ניצה",
     "name_en": "Nitza",
