@@ -29,3 +29,8 @@ test('chat-he block pairs by order', async () => {
   const h = renderChat('seffy: Go.\nבאשר: ok', 'en', pairs.get('seffy: Go.\nבאשר: ok'));
   assert.equal((h.match(/chat-orig"/g) || []).length, 2); assert.match(h, /יאללה/); assert.match(h, /אוקיי/);
 });
+test('chat-he pairs only with the chat block right above it', async () => {
+  const { pairHebrew } = await import('./remark-chat.mjs');
+  const src = '```chat\nבאשר: one\n```\n\ntext\n\n```chat\nseffy: two\n```\n\n```chat-he\nseffy: שתיים\n```\n';
+  const pairs = pairHebrew(src); assert.deepEqual([...pairs.keys()], ['seffy: two']);
+});

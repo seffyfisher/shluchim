@@ -55,8 +55,7 @@ const returnTo = new URL(Astro.url.pathname, Astro.site).href;
     <div class="fb-more">
       <div class="fb-field">
         <label class="lbl" for={`fb-name-${kind}`}>שם <span class="opt">(לא חובה)</span></label>
-        <p class="hint" id={`fb-name-hint-${kind}`}>איך לקרוא לכם, אם בא לכם.</p>
-        <input id={`fb-name-${kind}`} type="text" name="name" autocomplete="name" maxlength="60" aria-describedby={`fb-name-hint-${kind}`} />
+        <input id={`fb-name-${kind}`} type="text" name="name" autocomplete="name" maxlength="60" />
       </div>
     </div>
     <div class="fb-more">

@@ -56,7 +56,7 @@ export function renderChat(src, lang = 'he', heSrc = null) {
 /** Pairs each ```chat block with the ```chat-he block that directly follows it (by chat source text). */
 export function pairHebrew(source = '') {
   const map = new Map();
-  const re = /```chat\n([\s\S]*?)\n```\s*\n```chat-he\n([\s\S]*?)\n```/g;
+  const re = /```chat\n((?:(?!```)[\s\S])*?)\n```[ \t]*\n\s*```chat-he\n((?:(?!```)[\s\S])*?)\n```/g;
   for (const m of source.matchAll(re)) map.set(m[1].replace(/\s+$/, ''), m[2]);
   return map;
 }

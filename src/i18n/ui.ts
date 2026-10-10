@@ -17,7 +17,7 @@ export const UI = {
   },
   en: {
     skip: 'Skip to content', preview: "Preview mode: includes drafts that aren't approved for publishing yet", navMain: 'Main',
-    stories: 'Stories', team: 'The Shluchim', about: 'About', allStories: 'All stories', back: '← All stories',
+    stories: 'Stories', team: 'Team', about: 'About', allStories: 'All stories', back: '← All stories',
     edit: 'Edit on GitHub', draft: 'Draft', postNav: 'Story navigation', nav: 'Navigation', chat: 'Conversation',
     switchTo: 'עברית', switchHint: 'לקריאה בעברית',
   },
