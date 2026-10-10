@@ -14,7 +14,7 @@ npm i -g supabase            # or: brew install supabase/tap/supabase
 supabase login               # or: export SUPABASE_ACCESS_TOKEN=sbp_...
 cd <repo>                    # this repo root (contains supabase/)
 supabase link --project-ref <PROJECT_REF>        # asks for the DB password
-supabase db push                                  # applies migrations/001_feedback.sql
+supabase db push                                  # applies migrations/ (001_feedback, 002_hardening)
 supabase secrets set FEEDBACK_IP_SALT="$(openssl rand -hex 32)"
 supabase functions deploy feedback --no-verify-jwt   # a form POST cannot send a JWT
 ```
@@ -47,3 +47,9 @@ A quote shows `name` only if a name was given and `quote_ok`, otherwise it's ano
 
 ## Retention (suggested)
 Delete emails after 90 days, rejected rows after 30 days, and attempts after 1 day. The SQL is at the bottom of the migration. Schedule it with `pg_cron` or have the Grok Bot routine run it.
+
+## Deployed (2026-10-10)
+- Project ref `tyzswuffvhxnmtaoaskz`. Endpoint: `https://tyzswuffvhxnmtaoaskz.supabase.co/functions/v1/feedback` (set in `src/config.ts`).
+- `supabase db push` couldn't reach the pooler from the build box (connection timeout), so 001 and 002 were applied through the Management API (`POST /v1/projects/{ref}/database/query`) and recorded in `supabase_migrations.schema_migrations`.
+- Security audit: `/workspace/blog-feedback-spec/security-audit.md`. Routine query: `routine-pending-query.md`.
+- The rate limit uses `cf-connecting-ip`, which Supabase's edge sets and clients can't spoof.

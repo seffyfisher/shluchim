@@ -22,5 +22,5 @@ export const REPO = 'seffyfisher/shluchim';
 export const SHOW_DRAFTS = process.env.SHOW_DRAFTS === '1';
 
 // Feedback block (Supabase Edge Function URL, e.g. https://<ref>.supabase.co/functions/v1/feedback).
-// Empty = the block is not rendered at all (safe default for main). Env FEEDBACK_ENDPOINT overrides for previews.
-export const FEEDBACK_ENDPOINT: string = process.env.FEEDBACK_ENDPOINT || '';
+// Empty = the block is not rendered at all. Env FEEDBACK_ENDPOINT overrides for previews.
+export const FEEDBACK_ENDPOINT: string = process.env.FEEDBACK_ENDPOINT || 'https://tyzswuffvhxnmtaoaskz.supabase.co/functions/v1/feedback';

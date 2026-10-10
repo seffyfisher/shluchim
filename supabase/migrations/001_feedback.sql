@@ -31,6 +31,10 @@ create index if not exists feedback_attempts_ip_idx on public.feedback_attempts 
 alter table public.feedback_attempts enable row level security;
 revoke all on public.feedback_attempts from anon, authenticated;
 
+-- service_role needs explicit grants on this project (no default grants for SQL-created tables).
+grant select, insert, update, delete on public.feedback, public.feedback_attempts to service_role;
+grant usage, select on all sequences in schema public to service_role;
+
 -- LATER (public quotes, not used at launch): a view exposing only approved + consented text, never email/ip.
 -- The name is shown only when consent was given; otherwise anonymous. Read it at BUILD time with the service key,
 -- or grant select on the view to anon if a public endpoint is ever wanted.
@@ -42,6 +46,7 @@ with (security_invoker = true) as
   from public.feedback
   where status = 'approved' and quote_ok and message is not null and message <> '';
 revoke all on public.feedback_public_quotes from anon, authenticated;
+grant select on public.feedback_public_quotes to service_role;
 
 -- Retention (run daily via pg_cron if enabled, or manually):
 --   update public.feedback set email = null where email is not null and created_at < now() - interval '90 days';

@@ -53,3 +53,12 @@ Deno.test("name trimmed to 60", () => {
   if (!v.ok) throw new Error("should be ok"); eq(v.row.name!.length, 60);
 });
 Deno.test("GET → 405", async () => { eq((await handle(new Request("http://x"), mem().store, "s")).status, 405); });
+
+Deno.test("oversized body → error, nothing stored", async () => {
+  const m = mem(); const r = await handle(post({ ...ok, message: "x".repeat(20000) }), m.store, "s");
+  eq(r.headers.get("location")!.endsWith("#feedback-error"), true); eq(m.rows.length, 0);
+});
+Deno.test("SQL-ish input stored verbatim as data", async () => {
+  const m = mem(); await handle(post({ ...ok, message: "'); drop table feedback;--" }), m.store, "s");
+  eq(m.rows[0].message, "'); drop table feedback;--");
+});

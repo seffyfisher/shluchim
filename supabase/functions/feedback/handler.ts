@@ -7,6 +7,7 @@
 export const ALLOWED_PREFIX = "https://seffyfisher.github.io/shluchim/";
 export const RATE_LIMIT = 5; // per IP ...
 export const RATE_WINDOW_MS = 10 * 60 * 1000; // ... per 10 minutes (matches the copy "בעוד 10 דקות")
+export const MAX_BODY = 16 * 1024; // bytes; a full legit form is < 5 KB
 const EMAIL_RE = /^[^\s@<>"]{1,64}@[^\s@<>"]+\.[^\s@<>"]{2,}$/;
 
 export type Outcome = "thanks" | "error" | "slow";
@@ -40,8 +41,9 @@ export async function sha256(s: string): Promise<string> {
 }
 
 export function clientIp(req: Request): string {
+  // Supabase's edge (Cloudflare) sets cf-connecting-ip and overwrites x-forwarded-for, so clients can't spoof it.
   const xff = req.headers.get("x-forwarded-for");
-  return (xff?.split(",")[0] || req.headers.get("cf-connecting-ip") || req.headers.get("x-real-ip") || "unknown").trim();
+  return (req.headers.get("cf-connecting-ip") || xff?.split(",")[0] || "unknown").trim();
 }
 
 type Parsed = { ok: true; row: Omit<FeedbackRow, "ip_hash" | "user_agent"> } | { ok: false };
@@ -82,9 +84,15 @@ function respond(req: Request, returnTo: string, outcome: Outcome): Response {
 export async function handle(req: Request, store: Store, salt: string): Promise<Response> {
   if (req.method !== "POST") return new Response("Method Not Allowed", { status: 405, headers: { allow: "POST" } });
   let form: URLSearchParams;
+  const declared = Number(req.headers.get("content-length") || "0");
+  if (declared > MAX_BODY) return respond(req, ALLOWED_PREFIX, "error");
   try {
     const ct = req.headers.get("content-type") || "";
-    if (ct.includes("application/x-www-form-urlencoded")) form = new URLSearchParams(await req.text());
+    if (ct.includes("application/x-www-form-urlencoded")) {
+      const text = await req.text();
+      if (text.length > MAX_BODY) return respond(req, ALLOWED_PREFIX, "error");
+      form = new URLSearchParams(text);
+    }
     else if (ct.includes("multipart/form-data")) {
       const fd = await req.formData(); form = new URLSearchParams();
       for (const [k, v] of fd) if (typeof v === "string") form.append(k, v);
