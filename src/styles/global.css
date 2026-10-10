@@ -214,10 +214,22 @@ footer.site .links a:hover { color: var(--fg); }
 .about .prose small a { color: var(--muted); }
 .avatar-col { position: relative; }
 .about-av { position: sticky; top: calc(50vh - var(--av) / 2); width: var(--av); aspect-ratio: 1; margin: 0; }
-.avatar-sprite { position: absolute; inset: 0; background: var(--sheet) 0 0 / 1000% 600% no-repeat; }
-.avatar-still { display: none; }
+.avatar-sprite { display: none; position: absolute; inset: 0; overflow: hidden; }
+.av-y, .av-x { position: absolute; top: 0; left: 0; width: 1000%; height: 600%; }
+.av-y { width: 100%; height: 100%; }
+.av-x { width: 1000%; height: 600%; background: var(--sheet) 0 0 / 100% 100% no-repeat; }
+/* Pure-CSS scroll scrub: frame = f(scroll), 60 frames in a 10x6 grid, ~1 cycle per 2 viewport heights (3 cycles over the page). */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .avatar-sprite { display: block; }
+    .avatar-sprite + .avatar-still { display: none; }
+    .av-y { animation-name: av-y; animation-duration: auto; animation-fill-mode: both; animation-timing-function: steps(6, jump-end); animation-iteration-count: 3; animation-timeline: scroll(root); }
+    .av-x { animation-name: av-x; animation-duration: auto; animation-fill-mode: both; animation-timing-function: steps(10, jump-end); animation-iteration-count: 18; animation-timeline: scroll(root); }
+  }
+}
+@keyframes av-y { from { transform: translateY(0); } to { transform: translateY(-600%); } }
+@keyframes av-x { from { transform: translateX(0); } to { transform: translateX(-100%); } }
 .avatar-still img { display: block; width: 100%; height: 100%; }
-@media (prefers-reduced-motion: reduce) { .avatar-sprite { display: none; } .avatar-still { display: block; } }
 @media (max-width: 63.99rem) {
   .about { --av: 76px; display: block; }
   .avatar-col { position: static; }

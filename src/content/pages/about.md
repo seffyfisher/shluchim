@@ -180,7 +180,7 @@ Codex, Claude Code,Instinct,Gemini,copilot ואפילו Manus בתוך טלגר�
 
 טכנולוגיה:
 
-- האתר בנוי ב־[Astro](https://astro.build/), אתר סטטי בלי JavaScript בצד הלקוח.
+- האתר בנוי ב־[Astro](https://astro.build/).
 - מתארח ב־GitHub Pages, וכל עדכון ל־main עולה אוטומטית דרך GitHub Actions.
 
 </small>

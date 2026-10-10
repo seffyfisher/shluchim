@@ -13,7 +13,7 @@ const { Content } = await render(page);
     </article>
     <aside class="avatar-col" aria-hidden="true">
       <figure class="about-av">
-        <div class="avatar-sprite" id="av"></div>
+        <div class="avatar-sprite" id="av"><div class="av-y"><div class="av-x"></div></div></div>
         <picture class="avatar-still">
           <source media="(max-width: 63.99rem)" srcset={url('about/still-sm.webp')} />
           <img src={url('about/still-lg.webp')} alt="" width="480" height="480" />
@@ -21,5 +21,4 @@ const { Content } = await render(page);
       </figure>
     </aside>
   </div>
-  <script is:inline>(()=>{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const e=document.getElementById('av');let r=0,l=-1;const d=()=>{r=0;const f=Math.floor(scrollY/innerHeight*30)%60;if(f!==l){l=f;e.style.backgroundPosition=f%10*100/9+'% '+(f/10|0)*20+'%';e.dataset.f=f}};addEventListener('scroll',()=>{r||(r=requestAnimationFrame(d))},{passive:true});d()})()</script>
 </Base>
