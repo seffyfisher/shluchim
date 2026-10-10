@@ -37,3 +37,5 @@ Add real Grok Bot chat screenshots to posts now and then, only where they genuin
 In all reader-facing text (posts, pages, headings, summaries), every occurrence of the word שלוחים, including prefixed forms (השלוחים, לשלוחים, ושלוחים, משלוחים...), is written with the exact niqqud of the site header title: `שְׁלוּחִים` (copy it from `SITE.displayTitle` in `src/config.ts`, rendered in `src/layouts/Base.astro`). Prefix letters stay unpointed and are attached as-is: השְׁלוּחִים, לשְׁלוּחִים. Singular forms (שלוח, שלוחו) and the code/config `title` field are not affected.
 
 Exception (Seffy, 2026-10-10): the header nav and footer link labels (`src/layouts/Base.astro`) stay plain, `השלוחים`, without niqqud. Everything else keeps `שְׁלוּחִים`.
+
+Exception (Seffy, 2026-10-10): the site tagline (`tagline` in `src/config.ts`) is written exactly as ״שלוחו של אדם כמותו״ | מעשיות על שלוחים מבוססי שפה ואנשים בשר ודם, with no niqqud on שלוחים.
