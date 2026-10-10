@@ -20,3 +20,7 @@ export const REPO = 'seffyfisher/shluchim';
 // Preview mode: SHOW_DRAFTS=1 npm run build  -> drafts are built with a "טיוטה" badge.
 // Default build (and CI) never includes drafts.
 export const SHOW_DRAFTS = process.env.SHOW_DRAFTS === '1';
+
+// Feedback block (Supabase Edge Function URL, e.g. https://<ref>.supabase.co/functions/v1/feedback).
+// Empty = the block is not rendered at all (safe default for main). Env FEEDBACK_ENDPOINT overrides for previews.
+export const FEEDBACK_ENDPOINT: string = process.env.FEEDBACK_ENDPOINT || '';

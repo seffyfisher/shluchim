@@ -1,0 +1,78 @@
+---
+// Feedback block, ported from Nitza's handoff (06-handoff/feedback.css + markup). ZERO client JS:
+// plain form POST -> Supabase Edge Function -> 303 back to return_to#feedback-{thanks|error|slow} -> CSS :target.
+import '../styles/feedback.css';
+import { FEEDBACK_ENDPOINT } from '../config';
+interface Props { placement: 'post' | 'about' | 'home' }
+const { placement: kind } = Astro.props;
+const COPY = {
+  post: { h: 'נו, עזר לכם?', lede: 'שתי מילים מספיקות. אני קורא הכל.', legend: 'הסיפור הזה…' },
+  about: { h: 'רוצים להגיד לי משהו?', lede: 'על הבלוג, על השלוחים, או סתם שלום. אני קורא הכל.', legend: 'הבלוג הזה…' },
+  home: { h: 'איך הבלוג בעיניכם?', lede: 'שתי מילים מספיקות. אני קורא הכל.', legend: 'הבלוג הזה…' },
+} as const;
+const c = COPY[kind];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const path = Astro.url.pathname.startsWith(base) ? Astro.url.pathname.slice(base.length) || '/' : Astro.url.pathname;
+const returnTo = new URL(Astro.url.pathname, Astro.site).href;
+---
+{FEEDBACK_ENDPOINT && (
+<section class="fb" id="feedback" aria-labelledby={`fb-h-${kind}`}>
+  <div class="fb-note" id="feedback-thanks" role="status" tabindex="-1">
+    <h2>תודה! קיבלתי.</h2>
+    <p>אני קורא כל תגובה בעצמי.<br />אם השארתם אימייל, אולי גם אחזור אליכם.</p>
+    <a class="again" href="#feedback">רוצים להוסיף עוד משהו?</a>
+  </div>
+  <div class="fb-head">
+    <h2 id={`fb-h-${kind}`}>{c.h}</h2>
+    <p class="fb-lede">{c.lede}</p>
+  </div>
+  <div class="fb-note bad" id="feedback-error" role="alert" tabindex="-1">
+    <h3>אופס, זה לא נשלח.</h3>
+    <p>משהו נתקע אצלנו, לא אצלכם, וההודעה לא נשמרה. נסו שוב עוד רגע.</p>
+  </div>
+  <div class="fb-note bad" id="feedback-slow" role="alert" tabindex="-1">
+    <h3>וואו, הרבה הודעות ברצף.</h3>
+    <p>כדי לעצור ספאם, נסו שוב בעוד 10 דקות. ההודעה הזאת לא נשמרה.</p>
+  </div>
+  <form class="fb-form" method="post" action={FEEDBACK_ENDPOINT} accept-charset="utf-8">
+    <input type="hidden" name="page" value={path} />
+    <input type="hidden" name="return_to" value={returnTo} />
+    <fieldset class="fb-react" aria-describedby={`fb-react-err-${kind}`}>
+      <legend>{c.legend}</legend>
+      <div class="fb-chips">
+        <label class="chip"><input type="radio" name="reaction" value="helped" required /><span class="mark" aria-hidden="true"></span>עזר לי</label>
+        <label class="chip"><input type="radio" name="reaction" value="not_really" required /><span class="mark" aria-hidden="true"></span>לא ממש</label>
+      </div>
+      <p class="err" id={`fb-react-err-${kind}`}>בחרו אחת מהשתיים, ואז אפשר לשלוח.</p>
+    </fieldset>
+    <div class="fb-more">
+      <div class="fb-field">
+        <label class="lbl" for={`fb-msg-${kind}`}>רוצים להוסיף מילה? <span class="opt">(לא חובה)</span></label>
+        <p class="hint" id={`fb-msg-hint-${kind}`}>מה עבד, מה חסר, או רעיון לסיפור הבא. עד 1,000 תווים.</p>
+        <textarea id={`fb-msg-${kind}`} name="message" maxlength="1000" rows="4" placeholder=" " aria-describedby={`fb-msg-hint-${kind}`}></textarea>
+      </div>
+    </div>
+    <div class="fb-more">
+      <div class="fb-field">
+        <label class="lbl" for={`fb-name-${kind}`}>שם <span class="opt">(לא חובה)</span></label>
+        <p class="hint" id={`fb-name-hint-${kind}`}>איך לקרוא לכם, אם בא לכם.</p>
+        <input id={`fb-name-${kind}`} type="text" name="name" autocomplete="name" maxlength="60" aria-describedby={`fb-name-hint-${kind}`} />
+      </div>
+    </div>
+    <div class="fb-more">
+      <div class="fb-field email">
+        <label class="lbl" for={`fb-email-${kind}`}>אימייל <span class="opt">(לא חובה)</span></label>
+        <p class="hint" id={`fb-email-hint-${kind}`}>רק אם בא לכם שאחזור אליכם.</p>
+        <input id={`fb-email-${kind}`} type="email" name="email" autocomplete="email" inputmode="email" dir="ltr" spellcheck="false" aria-describedby={`fb-email-hint-${kind} fb-email-err-${kind} fb-privacy-${kind}`} />
+        <p class="err" id={`fb-email-err-${kind}`}>האימייל הזה לא נראה תקין. בדקו אותו, או השאירו ריק.</p>
+      </div>
+    </div>
+    <label class="fb-more consent"><input type="checkbox" name="quote_ok" value="yes" /><span>אפשר לצטט אותי באתר. אם כתבתם שם, הוא יופיע ליד הציטוט.</span></label>
+    <div class="hp" aria-hidden="true"><label for={`fb-hp-${kind}`}>לא למלא</label><input id={`fb-hp-${kind}`} type="text" name="website" tabindex="-1" autocomplete="off" /></div>
+    <p class="privacy fb-more" id={`fb-privacy-${kind}`}>האימייל לעולם לא מוצג בפומבי, ומשמש רק כדי לחזור אליכם. ההודעה מגיעה רק אליי. ציטוט עולה לאתר רק אם סימנתם וגם אישרתי, עם השם שכתבתם או בלי שם בכלל.</p>
+    <div class="fb-actions">
+      <button type="submit"><span class="spin" aria-hidden="true"></span><span class="b-idle">שליחה</span></button>
+    </div>
+  </form>
+</section>
+)}

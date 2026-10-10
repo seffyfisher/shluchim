@@ -1,0 +1,66 @@
+/* Feedback block (spec mock). Tokens come from the site's global.css: --fg --bg --muted --line --surface --radius --font. Zero JS. */
+.fb { --fb-rule: light-dark(#d9d9d9, #3a3a3a); --fb-fill: light-dark(#e3e3e3, #333333); --fb-fill-hover: light-dark(#ebebeb, #2a2a2a); --fb-edge: light-dark(#8c8c8c, #767676); --fb-focus: light-dark(#595959, #a3a3a3); margin-block: clamp(2.5rem, 6vw, 4rem) 0; padding-block: 1.75rem 2rem; border-block: 2px solid var(--fb-rule); max-width: 40rem; }
+.fb h2 { font-family: 'Noa Shalev', var(--font); font-weight: 400; font-size: var(--step-2); line-height: 1.2; margin: 0; }
+.fb-lede { margin: .35rem 0 0; color: var(--muted); }
+.fb-form { margin-top: 1.25rem; display: grid; gap: 1.25rem; }
+.fb fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.fb legend { padding: 0; font-weight: 600; margin-bottom: .6rem; }
+.fb-chips { display: flex; flex-wrap: wrap; gap: .6rem; }
+/* chips = real radios, visually hidden input, label is the 44px target */
+.chip { position: relative; display: inline-flex; align-items: center; gap: .5rem; min-height: 2.75rem; padding-inline: 1.1rem; border: 1px solid var(--fb-edge); border-radius: 999px; cursor: pointer; user-select: none; }
+.chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.chip .mark { width: .9rem; height: .9rem; border: 1px solid currentColor; border-radius: 50%; flex: none; }
+.chip:hover { background: var(--fb-fill-hover); }
+.chip:has(input:checked) { background: var(--fb-fill); color: var(--fg); font-weight: 600; border-color: var(--fb-focus); }
+.chip:has(input:checked) .mark { background: currentColor; box-shadow: inset 0 0 0 2px var(--fb-fill); }
+.chip:has(input:focus-visible) { outline: 2px solid var(--fb-focus); outline-offset: 3px; }
+.fb-field { display: grid; gap: .3rem; }
+.fb label.lbl { font-weight: 600; }
+.fb .opt { font-weight: 400; color: var(--muted); }
+.fb .hint { margin: 0; font-size: var(--step--1); color: var(--muted); line-height: 1.5; }
+.fb textarea, .fb input[type=email], .fb input[name=name] { font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--fb-edge); border-radius: var(--radius); padding: .65rem .8rem; min-height: 2.75rem; width: 100%; box-sizing: border-box; }
+.fb textarea { min-height: 7rem; resize: vertical; line-height: 1.6; }
+.fb input[type=email] { direction: ltr; text-align: left; }
+.fb input[type=email]::placeholder { text-align: right; }
+.fb :is(textarea, input[type=email], input[name=name]):focus-visible { outline: 2px solid var(--fb-focus); outline-offset: 0; border-color: var(--fb-focus); }
+.fb .err { display: none; margin: 0; font-size: var(--step--1); font-weight: 600; }
+.fb .err::before { content: '!'; display: inline-grid; place-items: center; width: 1.1rem; height: 1.1rem; margin-inline-end: .4rem; border-radius: 50%; background: var(--muted); color: var(--bg); font-size: .75rem; }
+/* validation: pure CSS via :user-invalid (only after interaction / submit attempt) */
+.fb-field:has(:user-invalid) .err, .fb-react:has(:user-invalid) .err, .fb.is-invalid .email .err { display: block; }
+.fb-field:has(:user-invalid) :is(textarea, input), .fb.is-invalid .email input { border: 2px solid var(--fb-focus); }
+.fb-react:has(:user-invalid) .chip { border-style: dashed; border-width: 2px; }
+.fb .privacy { margin: 0; font-size: var(--step--1); color: var(--muted); line-height: 1.5; }
+.fb-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.fb button { font: inherit; font-weight: 600; min-height: 2.75rem; padding-inline: 1.5rem; border: 0; border-radius: var(--radius); background: var(--fb-fill); color: var(--fg); box-shadow: inset 0 0 0 1px var(--fb-edge); cursor: pointer; display: inline-flex; align-items: center; gap: .6rem; }
+.fb button:hover { background: var(--fb-fill-hover); text-decoration: underline; text-underline-offset: .25em; }
+.fb button:focus-visible { outline: 2px solid var(--fb-focus); outline-offset: 3px; }
+/* honeypot: off-screen, not display:none (some bots skip hidden fields) */
+.fb .hp { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* progressive disclosure: text + email appear after a reaction or typing. Without :has, everything just shows. */
+@supports selector(:has(*)) {
+  .fb-form:not(:has(:checked)):not(:has(textarea:not(:placeholder-shown))) .fb-more { display: none; }
+  .fb.is-empty .fb-more { display: none !important; }
+}
+.fb.is-empty .fb-more { display: none; }
+/* sending (optional JS adds aria-busy on the form; mock uses .is-sending) */
+.fb-form[aria-busy=true] button, .fb.is-sending button { opacity: 1; cursor: progress; text-decoration: none; }
+.fb .spin { display: none; width: 1rem; height: 1rem; border: 2px solid currentColor; border-inline-end-color: transparent; border-radius: 50%; }
+.fb-form[aria-busy=true] .spin, .fb.is-sending .spin { display: inline-block; animation: fb-spin .8s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .fb .spin { animation: none; border-inline-end-color: currentColor; opacity: .5; } }
+@keyframes fb-spin { to { rotate: 360deg; } }
+/* server outcomes via redirect + :target (zero JS) */
+.fb-note { display: none; padding: 1rem 1.1rem; border-radius: var(--radius); margin-top: 1.25rem; }
+.fb-note:focus { outline: none; }
+.fb-note h3 { margin: 0 0 .25rem; font-size: var(--step-0); }
+.fb-note p { margin: 0; }
+.fb-note.bad { border: 2px solid var(--fb-edge); }
+.fb-note:target, .fb.is-error #feedback-error, .fb.is-limited #feedback-slow { display: block; }
+#feedback-thanks { padding: 0; border-radius: 0; margin-top: 0; }
+#feedback-thanks h2 { margin-bottom: .5rem; }
+#feedback-thanks .again { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--fg); }
+.fb:has(#feedback-thanks:target) :is(.fb-head, .fb-form), .fb.is-success :is(.fb-head, .fb-form) { display: none; }
+.fb.is-success #feedback-thanks { display: block; }
+#feedback-thanks:focus { outline: none; }
+.fb .consent { display: flex; align-items: flex-start; gap: .6rem; min-height: 2.75rem; cursor: pointer; line-height: 1.5; padding-block: .6rem; box-sizing: border-box; }
+.fb .consent input { width: 1.25rem; height: 1.25rem; margin: .1rem 0 0; accent-color: var(--fb-focus); flex: none; }
+.fb .consent input:focus-visible { outline: 2px solid var(--fb-focus); outline-offset: 2px; }
