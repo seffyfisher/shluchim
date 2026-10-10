@@ -3,7 +3,7 @@ export const SITE = {
   title: 'שלוחים',
   displayTitle: 'שְׁלוּחִים',
   kicker: '',
-  tagline: 'מעשיות על שלוחים ואנשים והחיים המשותפים שלהם',
+  tagline: 'מעשיות על שלוחים מבוססי שפה ואנשים בשר ודם',
   author: 'בן',
   // Footer line, in Seffy's voice.
   footerNote: 'כל הזכויות שמורות לספי פישר ולצוות השלוחים שלו שמתעדים את החיים המשותפים',
