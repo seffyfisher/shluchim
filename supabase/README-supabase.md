@@ -46,7 +46,7 @@ POST `application/x-www-form-urlencoded`: `page`, `return_to`, `reaction` (`help
 A quote shows `name` only if a name was given and `quote_ok`, otherwise it's anonymous. Email is never shown. Read `feedback_public_quotes` at build time with a server-side key (never in the client).
 
 ## Retention (suggested)
-Delete emails after 90 days, rejected rows after 30 days, and attempts after 1 day. The SQL is at the bottom of the migration. Schedule it with `pg_cron` or have the Grok Bot routine run it.
+Live: pg_cron job `feedback-retention-daily` (01:15 UTC daily) deletes emails after 90 days, rejected rows after 30 days and attempts after 1 day. See `migrations/003_retention_cron.sql`.
 
 ## Deployed (2026-10-10)
 - Project ref `tyzswuffvhxnmtaoaskz`. Endpoint: `https://tyzswuffvhxnmtaoaskz.supabase.co/functions/v1/feedback` (set in `src/config.ts`).
