@@ -201,8 +201,30 @@ footer.site .links a:hover { color: var(--fg); }
 /* Masthead title two-tone: "של" in fg, the rest a touch lighter. */
 .masthead h1 .t-b { color: light-dark(#555555, #b0b0b0); }
 
-/* About page: credits (last section) small and muted. */
-.about .prose h2:has(+ small), .about .prose h2:last-of-type:has(~ small) { font-size: var(--step-0); margin-top: 3rem; color: var(--muted); }
-.about .prose small { display: block; font-size: .8rem; line-height: 1.6; color: var(--muted); }
+/* ---------- About page ---------- */
+.page-about main.wrap { max-width: 72rem; }
+.about { --av: clamp(13rem, 18vw, 15rem); display: grid; grid-template-columns: minmax(0, 65ch) var(--av); justify-content: space-between; column-gap: clamp(2rem, 5vw, 5rem); }
+.about .prose h1 { font-family: 'Noa Shalev', var(--font); font-weight: 400; font-size: calc(var(--step-3) * 1.1); line-height: 1.15; margin-block: 0 2rem; padding-bottom: 1.75rem; border-bottom: 2px solid var(--rule); }
+.about .prose h2 { font-family: 'Noa Shalev', var(--font); font-weight: 400; font-size: calc(var(--step-2) * 1.1); }
+.about .prose a[href^="mailto"] { unicode-bidi: isolate; }
+.about .prose h2:has(+ small) { font-family: var(--font); font-weight: 600; font-size: var(--step-1); color: var(--muted); margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--line); margin-bottom: .75rem; }
+.about .prose small { display: block; font-size: var(--step--1); line-height: 1.6; color: var(--muted); }
+.about .prose small > * { margin-block: 0 .6em; }
 .about .prose small p, .about .prose small li { font-size: inherit; }
-.about .prose h1 { font-family: 'Noa Shalev', var(--font); font-weight: 400; font-size: calc(var(--step-3) * 1.1); line-height: 1.15; margin-block: 0 1.5rem; }
+.about .prose small a { color: var(--muted); }
+.avatar-col { position: relative; }
+.about-av { position: sticky; top: calc(50vh - var(--av) / 2); width: var(--av); aspect-ratio: 1; margin: 0; }
+.avatar-sprite { position: absolute; inset: 0; background: var(--sheet) 0 0 / 1000% 600% no-repeat; }
+.avatar-still { display: none; }
+.avatar-still img { display: block; width: 100%; height: 100%; }
+@media (prefers-reduced-motion: reduce) { .avatar-sprite { display: none; } .avatar-still { display: block; } }
+@media (max-width: 63.99rem) {
+  .about { --av: 76px; display: block; }
+  .avatar-col { position: static; }
+  .page-about { padding-top: calc(76px + .75rem + 1px); }
+  .page-about header.site.bar { position: fixed; top: 0; inset-inline: 0; z-index: 4; background: var(--bg); }
+  .page-about header.site.bar .wrap { min-height: calc(76px + .75rem); padding-inline-end: calc(76px + 1.25rem + var(--gutter)); flex-direction: column; align-items: flex-start; justify-content: center; gap: 0; }
+  .page-about .site-nav a { min-height: 2.25rem; }
+  .about-av { position: fixed; top: .375rem; inset-inline-end: var(--gutter); z-index: 5; }
+  .page-about .skip:focus { z-index: 6; }
+}
