@@ -22,3 +22,10 @@ test('english chat is ltr with a Hebrew-original details', () => {
 test('hebrew chat output unchanged', () => {
   assert.equal(renderChat('seffy: hi'), '<div class="chat" dir="rtl" role="group" aria-label="שיחה"><div class="chat-msg chat-user"><span class="chat-who">ספי</span><p class="chat-bubble">hi</p></div></div>');
 });
+test('chat-he block pairs by order', async () => {
+  const { pairHebrew } = await import('./remark-chat.mjs');
+  const src = 'x\n```chat\nseffy: Go.\nבאשר: ok\n```\n\n```chat-he\nseffy: יאללה.\nבאשר: אוקיי\n```\n';
+  const pairs = pairHebrew(src); assert.equal(pairs.size, 1);
+  const h = renderChat('seffy: Go.\nבאשר: ok', 'en', pairs.get('seffy: Go.\nבאשר: ok'));
+  assert.equal((h.match(/chat-orig"/g) || []).length, 2); assert.match(h, /יאללה/); assert.match(h, /אוקיי/);
+});

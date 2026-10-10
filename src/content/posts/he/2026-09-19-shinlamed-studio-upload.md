@@ -24,12 +24,59 @@ translationKey: "2026-09-19-shinlamed-studio-upload"
 באמצע היו שני תיקוני כיוון,
 לפנים בוכות ולפנים עם בלוט.
 
-ארבע עבודות ויניל עלו עם הכותרת unnamed,
+ארבע עבודות ויניל עלו קודם בלי שם, unnamed (על זה בהמשך),
 ועוד אחת עלתה קודם באותו יום.
 סך הכול חמש עבודות חיות באתר.
 
 זה לקח בערך חצי שעה ו־15 עד 25 הודעות,
 כולל כל הניסיונות ליישר.
+
+## לפני ואחרי:
+
+הצילומים שלי היו גרועים.
+צילום טלפון על הקיר, עקום, אפור, עם צל בפינה.
+חלק מהעבודות אפילו שוכבות על הצד.
+
+וזה בסדר.
+אני מביא גם תמונה גרועה.
+
+שינלמד מנקה את הרקע, מיישר, חותך ומתקן צבע,
+ומעלה לאתר עם כותרת וטקסט.
+
+![goblin hat tip, לפני ואחרי](/shluchim/images/posts/shinlamed-01-goblin-hat-tip.webp)
+
+**[goblin hat tip](https://shinlamed.com/project/goblin-hat-tip-3/).**
+צולם על הצד, על קיר אפור.
+עלה ישר, על רקע לבן, עם כותרת וטקסט.
+
+![spiked punch, לפני ואחרי](/shluchim/images/posts/shinlamed-02-spiked-punch.webp)
+
+![ring a bell?, לפני ואחרי](/shluchim/images/posts/shinlamed-03-ring-a-bell.webp)
+
+
+## והחלק הכנה:
+
+לא הכול יצא מושלם בפעם הראשונה.
+
+ארבע עבודות עלו בלי שם,
+unnamed, ובלי מילה של טקסט.
+שמתי לב לזה רק אחרי כמה שבועות.
+
+ביקשתי מכנרת, שלוחת הכתיבה, להציע שמות.
+היא הביאה שלוש אפשרויות לכל עבודה,
+ואני אישרתי את הבחירה הראשונה שלה.
+
+שינלמד עדכן את האתר בשידור חי:
+[spiked punch](https://shinlamed.com/project/spiked-punch-4/),
+[crying foul](https://shinlamed.com/project/crying-foul-5/),
+[heads up](https://shinlamed.com/project/heads-up-6/),
+ו־[ring a bell?](https://shinlamed.com/project/ring-a-bell-7/).
+
+כל אחת קיבלה את הטקסט ״hand cut vinyl״.
+הקישורים הישנים מפנים לחדשים, אז שום דבר לא נשבר.
+
+ועל הדרך הוא ניקה כתם שחור שנשאר מחוץ לעבודה בשתיים מהן,
+וחתך את השוליים הלבנים שנשארו למטה ב־ring a bell?.
 
 
 ## מה יצא:

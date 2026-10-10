@@ -16,9 +16,9 @@ export const UI = {
     switchTo: 'EN', switchHint: 'Read this in English',
   },
   en: {
-    skip: 'Skip to content', preview: 'Preview mode: includes drafts that are not approved for publishing', navMain: 'Main',
-    stories: 'Stories', team: 'Team', about: 'About', allStories: 'All stories', back: '← All stories',
-    edit: 'Edit on GitHub', draft: 'Draft', postNav: 'End of story navigation', nav: 'Navigation', chat: 'Conversation',
+    skip: 'Skip to content', preview: "Preview mode: includes drafts that aren't approved for publishing yet", navMain: 'Main',
+    stories: 'Stories', team: 'The Shluchim', about: 'About', allStories: 'All stories', back: '← All stories',
+    edit: 'Edit on GitHub', draft: 'Draft', postNav: 'Story navigation', nav: 'Navigation', chat: 'Conversation',
     switchTo: 'עברית', switchHint: 'לקריאה בעברית',
   },
 } satisfies Record<Lang, Record<string, string>>;

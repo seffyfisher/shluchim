@@ -14,7 +14,7 @@ export const SITE = {
 // Reading time: Hebrew words per minute (build time only, no client JS).
 export const READING_WPM = 180;
 
-// English identity (served under /en/). Wording is a proposal from english-plan.md, pending Seffy's approval.
+// English identity (served under /en/). Tagline + explainer approved by Seffy; other strings from the approved handoff (site-strings.json).
 export const SITE_EN = {
   title: 'Shluchim',
   displayTitle: 'Shluchim',
@@ -23,7 +23,7 @@ export const SITE_EN = {
   // One-line explanation of the name, shown under the English masthead.
   explainer: "Shluchim is Hebrew for 'emissaries': the AI helpers who do real work for me.",
   author: 'Ben',
-  footerNote: 'All rights reserved to Seffy Fisher and his team of shluchim, who document the life we share.',
+  footerNote: 'All rights reserved to Seffy Fisher and his team of shluchim, who document the life they share.',
   lang: 'en',
   dir: 'ltr',
 };

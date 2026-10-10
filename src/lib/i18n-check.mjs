@@ -1,6 +1,6 @@
 // Build-time translation check (warns, never fails the build).
 // - A published Hebrew post with no English counterpart (same translationKey, or same file name) -> warning.
-// - Niqqud in an English post outside "original:" chat lines -> warning (niqqud is Hebrew-only).
+// - Niqqud in an English post outside "original:" lines / ```chat-he blocks -> warning (niqqud is Hebrew-only).
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -18,7 +18,7 @@ export function checkTranslations(root) {
   const en = read(join(root, 'src/content/posts/en'));
   const enKeys = new Set(en.filter((p) => !p.draft).map((p) => p.key)); // drafts don't count as translated
   const missing = he.filter((p) => !enKeys.has(p.key)).map((p) => p.f);
-  const nikud = en.filter((p) => p.src.split('\n').some((l) => !/^\s*(original|מקור):/i.test(l) && /[\u0591-\u05C7]/.test(l))).map((p) => p.f);
+  const nikud = en.filter((p) => p.src.replace(/```chat-he\n[\s\S]*?\n```/g, '').split('\n').some((l) => !/^\s*(original|מקור):/i.test(l) && /[\u0591-\u05C7]/.test(l))).map((p) => p.f);
   return { missing, nikud, total: he.length };
 }
 
@@ -32,3 +32,16 @@ export const i18nCheck = () => ({
     },
   },
 });
+
+/** he<->en URL pairs (published only) for sitemap alternates. English slugs may differ; pairs come from translationKey. */
+export function urlPairs(root, siteBase) {
+  const he = read(join(root, 'src/content/posts/he')).filter((p) => !p.draft);
+  const en = read(join(root, 'src/content/posts/en')).filter((p) => !p.draft);
+  const slug = (f) => f.replace(/\.md$/, '');
+  const pairs = [['', 'en/'], ['team/', 'en/team/']];
+  if (existsSync(join(root, 'src/content/pages/en/about.md'))) pairs.push(['about/', 'en/about/']);
+  for (const e of en) { const h = he.find((x) => x.key === e.key); if (h) pairs.push([`posts/${slug(h.f)}/`, `en/posts/${slug(e.f)}/`]); }
+  const map = new Map();
+  for (const [h, e] of pairs) { const links = [{ lang: 'he-IL', url: siteBase + h }, { lang: 'en', url: siteBase + e }]; map.set(siteBase + h, links); map.set(siteBase + e, links); }
+  return map;
+}
