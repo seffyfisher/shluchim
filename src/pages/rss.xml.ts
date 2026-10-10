@@ -1,20 +1,4 @@
-import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
-import { SITE } from '../config';
-import { getPosts, url } from '../lib/posts';
+import { feed } from '../lib/feed';
 
-export async function GET(context: APIContext) {
-  const posts = await getPosts();
-  return rss({
-    title: SITE.title,
-    description: SITE.tagline,
-    site: context.site!,
-    items: posts.map((p) => ({
-      title: p.data.title,
-      description: p.data.description,
-      pubDate: p.data.date,
-      link: url(`posts/${p.id}/`),
-    })),
-    customData: '<language>he</language>',
-  });
-}
+export const GET = (context: APIContext) => feed('he', context);

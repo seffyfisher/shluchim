@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import FeedbackBlock from './FeedbackBlock.astro';
+import { getPosts, postUrl, formatDateShort, readingMinutes, readingLabel } from '../lib/posts';
+import { lurl, t, type Lang } from '../i18n/ui';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = t(lang);
+const posts = await getPosts(lang);
+const pad = (n: number) => String(n).padStart(2, '0');
+const he = lang === 'he';
+---
+<Base masthead noindex={!he && posts.length === 0} lang={lang} alternates={{ he: lurl('he'), en: lurl('en') }}>
+  {posts.length === 0 ? (
+    he
+      ? <p class="empty">עוד אין פה סיפורים.<br />השְׁלוּחִים כבר עובדים על הראשון.</p>
+      : <p class="empty">The English translations are on their way.<br />Meanwhile, the stories are all <a href={lurl('he')} hreflang="he" lang="he">in Hebrew</a>.</p>
+  ) : (
+    <>
+      <h2 class="list-label">{he
+        ? `${posts.length === 1 ? 'סיפור אחד' : `${posts.length} סיפורים`}, מהחדש לישן`
+        : `${posts.length === 1 ? 'One story' : `${posts.length} stories`}, newest first`}</h2>
+      <ol class="stories" reversed>
+        {posts.map((p, i) => (
+          <li class="story">
+            <span class="num" aria-hidden="true">{pad(posts.length - i)}</span>
+            <p class="meta">
+              <time datetime={p.data.date.toISOString().slice(0, 10)}>{formatDateShort(p.data.date, lang)}</time>
+              <span>{readingLabel(readingMinutes(p.body, lang), lang)}</span>
+              {p.data.tags?.length ? <span>{p.data.tags.join(', ')}</span> : null}
+              {p.data.draft && <span class="badge">{ui.draft}</span>}
+            </p>
+            <h3><a href={postUrl(p)}>{p.data.title}</a></h3>
+            <p class="dek">{p.data.description}</p>
+          </li>
+        ))}
+      </ol>
+    </>
+  )}
+  {/* Feedback copy and backend replies are Hebrew-only, so the block is hidden on /en/ for now. */}
+  {he && <FeedbackBlock placement="home" />}
+</Base>

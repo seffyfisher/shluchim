@@ -4,11 +4,18 @@ backend:
   branch: main
 media_folder: public/images
 public_folder: /shluchim/images
+# Multilingual mode (Sveltia CMS / Decap-compatible): Hebrew + English side by side in one editor.
+# multiple_folders -> src/content/posts/he/<slug>.md and src/content/posts/en/<slug>.md (same file name = a pair).
+i18n:
+  structure: multiple_folders
+  locales: [he, en]
+  default_locale: he
 collections:
   - name: posts
     label: פוסטים
     label_singular: פוסט
     folder: src/content/posts
+    i18n: true
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     extension: md
@@ -16,20 +23,23 @@ collections:
     summary: "{{title}} ({{date}})"
     sortable_fields: [date, title]
     fields:
-      - { name: title, label: כותרת, widget: string }
-      - { name: description, label: תקציר, widget: string }
-      - { name: date, label: תאריך, widget: datetime, time_format: false, date_format: YYYY-MM-DD, format: YYYY-MM-DD }
-      - { name: draft, label: טיוטה, widget: boolean, default: true, hint: "להשאיר מסומן עד אישור של ספי" }
-      - { name: tags, label: תגיות, widget: list, required: false }
-      - { name: body, label: תוכן, widget: markdown }
+      - { name: title, label: כותרת, widget: string, i18n: true }
+      - { name: description, label: תקציר, widget: string, i18n: true, hint: "באנגלית: 150–160 תווים, כתוב מחדש לקוראים מחו״ל" }
+      - { name: date, label: תאריך, widget: datetime, time_format: false, date_format: YYYY-MM-DD, format: YYYY-MM-DD, i18n: duplicate, hint: "תאריך ההודעה המקורית של ספי. זהה בשתי השפות" }
+      - { name: draft, label: טיוטה, widget: boolean, default: true, i18n: true, hint: "להשאיר מסומן עד אישור של ספי (בכל שפה בנפרד)" }
+      - { name: tags, label: תגיות, widget: list, required: false, i18n: true }
+      - { name: translationKey, label: מזהה תרגום, widget: string, required: false, i18n: duplicate, hint: "אופציונלי. ריק = שם הקובץ. מקשר בין העברית לאנגלית" }
+      - { name: body, label: תוכן, widget: markdown, i18n: true, hint: "באנגלית: בבועות צ׳אט אפשר להוסיף שורה original: עם הטקסט העברי המקורי. בלי ניקוד באנגלית" }
   - name: pages
     label: עמודים
+    i18n: true
     files:
       - name: about
         label: אודות
-        file: src/content/pages/about.md
+        file: src/content/pages/{{locale}}/about.md
         format: frontmatter
+        i18n: true
         fields:
-          - { name: title, label: כותרת, widget: string }
-          - { name: description, label: תקציר, widget: string }
-          - { name: body, label: תוכן, widget: markdown }
+          - { name: title, label: כותרת, widget: string, i18n: true }
+          - { name: description, label: תקציר, widget: string, i18n: true }
+          - { name: body, label: תוכן, widget: markdown, i18n: true }

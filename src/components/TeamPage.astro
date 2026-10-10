@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import { lurl, type Lang } from '../i18n/ui';
+import shluchim from '../data/shluchim.json';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const he = lang === 'he';
+const url = (p: string) => lurl('he', p); // assets are shared, always at the root
+// Per-language view of the data file. English fields: name_en, role_en, category_en, example_en.
+const people = shluchim.map((s) => he
+  ? { ...s }
+  : { ...s, name: s.name_en || s.name, role: s.role_en ?? '', category: s.category_en || s.category, example: s.example_en ?? '' });
+// Group by category, keeping the order of the data file.
+const groups = [...new Set(people.map((s) => s.category))].map((c) => ({ name: c, items: people.filter((s) => s.category === c) }));
+const EAGER = 4; // first cards are above the fold on mobile
+let i = 0;
+const slug = (c: string) => c.toLowerCase().replace(/\s+/g, '-');
+---
+<Base lang={lang} alternates={{ he: lurl('he', 'team/'), en: lurl('en', 'team/') }}
+  title={he ? 'השְׁלוּחִים' : 'The Shluchim'}
+  description={he ? 'כל השְׁלוּחִים של ספי: מי הם ומה כל אחד עושה.' : 'All of Seffy’s shluchim (Hebrew for “emissaries”): who they are and what each one does.'}>
+  <header class="page-head">
+    {he ? <h1>השְׁלוּחִים</h1> : <h1>The Shluchim</h1>}
+    {he
+      ? <p class="lede">שלוח זה עוזר AI שעושה בשבילי עבודה אמיתית.<br />הנה כל הצוות, ומה כל אחד עושה.</p>
+      : <p class="lede">A shaliach (plural: shluchim) is an AI helper that does real work for me.<br />Here is the whole team. Their names are Hebrew.</p>}
+    <p class="meta"><span>{he ? `${people.length} שְׁלוּחִים` : `${people.length} shluchim`}</span></p>
+  </header>
+  {groups.map((g) => (
+    <section class="roster-group" aria-labelledby={`g-${he ? g.name : slug(g.name)}`}>
+      <h2 class="list-label" id={`g-${he ? g.name : slug(g.name)}`}>{g.name}:</h2>
+      <ul class="roster">
+        {g.items.map((s) => {
+          const eager = i++ < EAGER;
+          return (
+            <li class="shaliach">
+              <picture>
+                {s.still && <source media="(prefers-reduced-motion: reduce)" srcset={url(s.still!)} type="image/webp" />}
+                <img class="avatar" src={url(s.avatar)} alt="" width="112" height="112"
+                  loading={eager ? 'eager' : 'lazy'} decoding="async" />
+              </picture>
+              <h3>{s.name}</h3>
+              {s.role && <p>{s.role}</p>}
+              {s.example && <p class="example">{s.example}</p>}
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  ))}
+  <nav class="post-foot" aria-label={he ? 'ניווט' : 'Navigation'}>
+    <a class="back" href={lurl(lang)}>{he ? '→ לכל הסיפורים' : '← All stories'}</a>
+  </nav>
+</Base>

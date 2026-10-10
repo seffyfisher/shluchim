@@ -1,26 +1,4 @@
 ---
-import FeedbackBlock from '../components/FeedbackBlock.astro';
-import Base from '../layouts/Base.astro';
-import { getEntry, render } from 'astro:content';
-import { url } from '../lib/posts';
-const page = (await getEntry('pages', 'about'))!;
-const { Content } = await render(page);
+import AboutPage from '../components/AboutPage.astro';
 ---
-<Base title={page.data.title} description={page.data.description} bodyClass="page-about">
-  <style slot="head" set:html={`.page-about{--sheet:url(${url('about/yawn-lg.webp')})}@media (max-width:63.99rem){.page-about{--sheet:url(${url('about/yawn-sm.webp')})}}`}></style>
-  <div class="about">
-    <article class="prose">
-      <Content />
-    </article>
-    <FeedbackBlock placement="about" />
-    <aside class="avatar-col" aria-hidden="true">
-      <figure class="about-av">
-        <div class="avatar-sprite" id="av"><div class="av-y"><div class="av-x"></div></div></div>
-        <picture class="avatar-still">
-          <source media="(max-width: 63.99rem)" srcset={url('about/still-sm.webp')} />
-          <img src={url('about/still-lg.webp')} alt="" width="480" height="480" />
-        </picture>
-      </figure>
-    </aside>
-  </div>
-</Base>
+<AboutPage lang="he" />

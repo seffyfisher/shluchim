@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import FeedbackBlock from './FeedbackBlock.astro';
+import { getCollection, render } from 'astro:content';
+import { lurl, type Lang } from '../i18n/ui';
+import { ABOUT_AVATAR } from '../config';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const url = (p: string) => lurl('he', p); // shared assets
+const av = ABOUT_AVATAR[lang];
+// English about lives at src/content/pages/en/about.md. Until it exists, /en/about/ is a minimal placeholder.
+const pages = await getCollection('pages');
+const page = pages.find((p) => p.id === `${lang}/about`);
+const enExists = pages.some((p) => p.id === 'en/about');
+const hePage = pages.find((p) => p.id === 'he/about')!;
+const rendered = page ? await render(page) : null;
+const Content = rendered?.Content;
+const title = page?.data.title ?? 'About';
+const description = page?.data.description ?? 'Why this blog exists, and a bit about the person who works with the shluchim.';
+---
+<Base noindex={!page} title={title} description={description} bodyClass="page-about" lang={lang} alternates={{ he: lurl('he', 'about/'), ...(lang === 'en' || enExists ? { en: lurl('en', 'about/') } : {}) }}>
+  <style slot="head" set:html={`.page-about{--sheet:url(${url(av.sheetLg)})}@media (max-width:63.99rem){.page-about{--sheet:url(${url(av.sheetSm)})}}`}></style>
+  <div class="about">
+    <article class="prose">
+      {Content ? <Content /> : (
+        <>
+          <h1>About</h1>
+          <p>Hi, I’m Seffy Fisher. This blog shows, as practically as possible, how I work with AI helpers I call <i>shluchim</i>, Hebrew for “emissaries”.</p>
+          <p>The English version of this page is on its way. Meanwhile, here is <a href={lurl('he', 'about/')} hreflang="he" lang="he">{hePage.data.title}</a> in Hebrew.</p>
+        </>
+      )}
+    </article>
+    {lang === 'he' && <FeedbackBlock placement="about" />}
+    <aside class="avatar-col" aria-hidden="true">
+      <figure class="about-av">
+        <div class="avatar-sprite" id="av"><div class="av-y"><div class="av-x"></div></div></div>
+        <picture class="avatar-still">
+          <source media="(max-width: 63.99rem)" srcset={url(av.stillSm)} />
+          <img src={url(av.stillLg)} alt="" width="480" height="480" />
+        </picture>
+      </figure>
+    </aside>
+  </div>
+</Base>

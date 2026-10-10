@@ -243,3 +243,32 @@ footer.site .links a:hover { color: var(--fg); }
   .about-av { position: fixed; top: .375rem; inset-inline-end: var(--gutter); z-index: 5; }
   .page-about .skip:focus { z-index: 6; }
 }
+
+/* ---------- English (/en/) ---------- */
+/* Young Serif (OFL, public/fonts/YoungSerif-OFL.txt) for English display headings; Noa Shalev has no Latin. */
+@font-face {
+  font-family: 'Young Serif';
+  src: url('/shluchim/fonts/young-serif-400.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+:root:lang(en) :is(.masthead h1, .post-head h1, .page-head h1, .prose h2, .prose h3, a.name, ol h3, ul h3:not(.roster .shaliach h3), .about .prose h1, .about .prose h2:not(:has(+ small))) {
+  font-family: 'Young Serif', Georgia, serif;
+  letter-spacing: -.01em;
+}
+:root:lang(en) .masthead h1 { font-size: calc(var(--step-3) * 1.05); }
+.masthead .explainer { margin: .35rem 0 0; color: var(--muted); font-size: var(--fs-desc); line-height: 1.5; max-width: 40ch; }
+.empty a { color: inherit; }
+
+/* Language switcher: a plain link to the counterpart page (no JS). Sits at the end of the nav. */
+.site-nav .lang-switch { margin-inline-start: auto; border: 1px solid var(--line); border-radius: 999px; padding-inline: .8rem; min-height: 2.25rem; align-self: center; color: var(--fg); }
+.site-nav .lang-switch:hover { border-color: var(--fg); text-decoration: none; }
+
+/* "Hebrew original" under an English chat bubble: native <details>, CSS only. */
+.chat-orig { margin: .3rem .5rem 0; font-size: .8rem; color: var(--muted); max-width: 100%; }
+.chat-orig summary { cursor: pointer; list-style-position: inside; padding-block: .35rem; min-height: 1.5rem; }
+.chat-orig summary:hover { color: var(--fg); }
+.chat-orig p { margin: .25rem 0 0; padding: .5rem .8rem; width: fit-content; max-width: 100%; background: var(--surface); border-radius: .75rem; font-size: var(--step--1); line-height: 1.6; color: var(--fg); }
+.chat-bot .chat-orig p { margin-inline-start: auto; }
+:root:lang(en) .site-nav { gap: clamp(.75rem, 3vw, 1.25rem); }
+:root:lang(en) .site-nav a { white-space: nowrap; }

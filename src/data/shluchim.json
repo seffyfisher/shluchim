@@ -2,101 +2,141 @@
   {
     "id": "basher",
     "name": "באשר",
+    "name_en": "Basher",
     "role": "מנהל הצוות. מחליט איזה שלוח לוקח כל משימה.",
+    "role_en": "",
     "category": "ניהול וכלים",
+    "category_en": "Management and tools",
     "avatar": "shluchim/basher.webp",
     "animated": true,
     "still": "shluchim/basher-still.webp",
-    "example": "למשל: אני כותב ״צריך באנר לסייל״, והוא מעביר את זה לניצה עם הסבר מסודר."
+    "example": "למשל: אני כותב ״צריך באנר לסייל״, והוא מעביר את זה לניצה עם הסבר מסודר.",
+    "example_en": ""
   },
   {
     "id": "hiba",
     "name": "היבא",
+    "name_en": "Hiba",
     "role": "מורידה את החשבוניות החודשיות מהספקים.",
+    "role_en": "",
     "category": "ניהול וכלים",
+    "category_en": "Management and tools",
     "avatar": "shluchim/hiba.webp",
     "animated": true,
     "still": "shluchim/hiba-still.webp",
-    "example": "למשל: פעם בחודש היא נכנסת לאתרי הספקים ומורידה לי את כל החשבוניות, מסודרות בתיקייה."
+    "example": "למשל: פעם בחודש היא נכנסת לאתרי הספקים ומורידה לי את כל החשבוניות, מסודרות בתיקייה.",
+    "example_en": ""
   },
   {
     "id": "nitza",
     "name": "ניצה",
+    "name_en": "Nitza",
     "role": "המעצבת הראשית של עברית: מסכים, זרימות ובאנרים.",
+    "role_en": "",
     "category": "עיצוב ופיתוח",
+    "category_en": "Design and development",
     "avatar": "shluchim/nitza.webp",
     "animated": true,
     "still": "shluchim/nitza-still.webp",
-    "example": "למשל: היא מעצבת איתי מסך חדש לאפליקציה, משלוש גרסאות ועד אחת שבאמת עובדת."
+    "example": "למשל: היא מעצבת איתי מסך חדש לאפליקציה, משלוש גרסאות ועד אחת שבאמת עובדת.",
+    "example_en": ""
   },
   {
     "id": "kochava",
     "name": "כוכבה",
+    "name_en": "Kochava",
     "role": "מפתחת את האתר של עברית, מהרעיון ועד הקוד.",
+    "role_en": "",
     "category": "עיצוב ופיתוח",
+    "category_en": "Design and development",
     "avatar": "shluchim/kochava.webp",
     "animated": true,
     "still": "shluchim/kochava-still.webp",
-    "example": "למשל: היא לוקחת עיצוב מוכן של עמוד באתר והופכת אותו לקוד, עד שהוא מוכן לבדיקה."
+    "example": "למשל: היא לוקחת עיצוב מוכן של עמוד באתר והופכת אותו לקוד, עד שהוא מוכן לבדיקה.",
+    "example_en": ""
   },
   {
     "id": "dima",
     "name": "דימה",
+    "name_en": "Dima",
     "role": "שובר את האתר של עברית לפני שהלקוחות נתקלים בבאג.",
+    "role_en": "",
     "category": "עיצוב ופיתוח",
+    "category_en": "Design and development",
     "avatar": "shluchim/dima.webp",
     "animated": true,
     "still": "shluchim/dima-still.webp",
-    "example": "למשל: הוא עובר על הרכישה באתר כמו לקוח, ומביא טיוטת טיקט על כל מה שנשבר."
+    "example": "למשל: הוא עובר על הרכישה באתר כמו לקוח, ומביא טיוטת טיקט על כל מה שנשבר.",
+    "example_en": ""
   },
   {
     "id": "anali",
     "name": "אנאלי",
+    "name_en": "Anali",
     "role": "הופכת נתוני גלישה להחלטות על האתר.",
+    "role_en": "",
     "category": "עבודה בעברית",
+    "category_en": "Work at Evrit",
     "avatar": "shluchim/anali.webp",
     "animated": true,
     "still": "shluchim/anali-still.webp",
-    "example": "למשל: היא בודקת למה אנשים נוטשים בעגלה, ומציעה ניסוי אחד שאפשר להריץ השבוע."
+    "example": "למשל: היא בודקת למה אנשים נוטשים בעגלה, ומציעה ניסוי אחד שאפשר להריץ השבוע.",
+    "example_en": ""
   },
   {
     "id": "shaltiel",
     "name": "שאלתיאל",
+    "name_en": "Shaltiel",
     "role": "מקשיב ללקוחות של עברית ומסכם מה באמת מציק להם.",
+    "role_en": "",
     "category": "עבודה בעברית",
+    "category_en": "Work at Evrit",
     "avatar": "shluchim/shaltiel.webp",
     "animated": true,
     "still": "shluchim/shaltiel-still.webp",
-    "example": "למשל: הוא קורא את כל הפניות של השבוע ומסכם בכמה שורות מה הכי מציק ללקוחות."
+    "example": "למשל: הוא קורא את כל הפניות של השבוע ומסכם בכמה שורות מה הכי מציק ללקוחות.",
+    "example_en": ""
   },
   {
     "id": "shon",
     "name": "שון",
+    "name_en": "Shon",
     "role": "יועץ אסטרטגי להחלטות הגדולות של החברה.",
+    "role_en": "",
     "category": "עבודה בעברית",
+    "category_en": "Work at Evrit",
     "avatar": "shluchim/shon.webp",
     "animated": true,
     "still": "shluchim/shon-still.webp",
-    "example": "למשל: הוא יושב איתי על התוכנית לשנה הבאה, ושואל את השאלות הקשות לפני שאני מתחייב."
+    "example": "למשל: הוא יושב איתי על התוכנית לשנה הבאה, ושואל את השאלות הקשות לפני שאני מתחייב.",
+    "example_en": ""
   },
   {
     "id": "chef",
     "name": "שף",
+    "name_en": "Chef",
     "role": "מבשל איתי, ממציא מה לאכול השבוע.",
+    "role_en": "",
     "category": "אישי",
+    "category_en": "Personal",
     "avatar": "shluchim/chef.webp",
     "animated": true,
     "still": "shluchim/chef-still.webp",
-    "example": "למשל: הוא בונה איתי תפריט לארוחות הערב של השבוע, ממה שיש במקרר ובעונה."
+    "example": "למשל: הוא בונה איתי תפריט לארוחות הערב של השבוע, ממה שיש במקרר ובעונה.",
+    "example_en": ""
   },
   {
     "id": "shlomby",
     "name": "שלומבי",
+    "name_en": "Shlomby",
     "role": "מאמן כושר אישי, עם תוכנית ותזכורות.",
+    "role_en": "",
     "category": "אישי",
+    "category_en": "Personal",
     "avatar": "shluchim/shlomby.webp",
     "animated": true,
     "still": "shluchim/shlomby-still.webp",
-    "example": "למשל: הוא שולח לי בבוקר את האימון של היום, ובודק בערב איך הלך."
+    "example": "למשל: הוא שולח לי בבוקר את האימון של היום, ובודק בערב איך הלך.",
+    "example_en": ""
   }
 ]

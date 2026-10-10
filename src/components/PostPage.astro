@@ -1,0 +1,41 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import FeedbackBlock from './FeedbackBlock.astro';
+import { langOf, postUrl, getTranslation, formatDate, readingMinutes, readingLabel } from '../lib/posts';
+import { lurl, t } from '../i18n/ui';
+import { REPO } from '../config';
+interface Props { post: CollectionEntry<'posts'> }
+const { post } = Astro.props;
+const lang = langOf(post);
+const ui = t(lang);
+const { Content } = await render(post);
+const d = post.data;
+const tr = await getTranslation(post);
+const alternates = tr ? { [langOf(tr)]: postUrl(tr) } : {};
+const editUrl = `https://github.com/${REPO}/edit/main/${post.filePath ?? `src/content/posts/${post.id}.md`}`;
+---
+<Base title={d.title} description={d.description} noindex={d.draft} lang={lang} alternates={alternates}>
+  <article>
+    <header class="post-head">
+      <p class="meta">
+        <time datetime={d.date.toISOString().slice(0, 10)}>{formatDate(d.date, lang)}</time>
+        <span>{readingLabel(readingMinutes(post.body, lang), lang)}</span>
+        {d.tags?.length ? <span>{d.tags.join(', ')}</span> : null}
+        {d.draft && <span class="badge">{ui.draft}</span>}
+      </p>
+      <h1>{d.title}</h1>
+      <p class="lede">{d.description}</p>
+    </header>
+    {d.cover && <Image class="cover" src={d.cover} alt={d.coverAlt ?? ''} widths={[400, 800, 1200]} sizes="(max-width: 46rem) 100vw, 46rem" />}
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+  {lang === 'he' && <FeedbackBlock placement="post" />}
+  <nav class="post-foot" aria-label={ui.postNav}>
+    <a class="back" href={lurl(lang)}>{ui.back}</a>
+    <a class="edit" href={editUrl} rel="nofollow">{ui.edit}</a>
+  </nav>
+</Base>

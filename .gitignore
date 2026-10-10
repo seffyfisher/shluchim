@@ -6,3 +6,4 @@ preview-shots/
 .DS_Store
 noa-shots/
 dist-fb/
+node_modules
