@@ -9,3 +9,7 @@ test('renders bubbles, escapes html', () => {
   const h = renderChat('seffy: <x>\nבאשר: ok');
   assert.match(h, /chat-user/); assert.match(h, /chat-bot/); assert.match(h, /&lt;x&gt;/);
 });
+test('shows the שלוח speaker name', () => {
+  const h = renderChat('seffy: hi\nבן: רעיון מעולה.\nבאשר: ok');
+  assert.match(h, /chat-who">בן</); assert.match(h, /chat-who">באשר</); assert.match(h, /chat-user[^]*chat-who">ספי</);
+});

@@ -17,7 +17,7 @@ export function parseChat(src) {
 export function renderChat(src) {
   const items = parseChat(src).map(({ who, text }) => {
     const user = USER.has(who.toLowerCase());
-    const label = user ? 'ספי' : 'שלוח';
+    const label = user ? 'ספי' : esc(who);
     return `<div class="chat-msg ${user ? 'chat-user' : 'chat-bot'}"><span class="chat-who">${label}</span><p class="chat-bubble">${esc(text).replace(/\n/g, '<br>')}</p></div>`;
   });
   return `<div class="chat" dir="rtl" role="group" aria-label="שיחה">${items.join('')}</div>`;
