@@ -197,3 +197,6 @@ footer.site .links a:hover { color: var(--fg); }
 .roster .shaliach h3 { font-family: var(--font); font-weight: 600; font-size: var(--step-1); margin-top: .5rem; overflow-wrap: anywhere; }
 .shaliach p { margin: 0; color: var(--muted); font-size: var(--step--1); line-height: 1.55; }
 .shaliach p.example { font-size: .8rem; padding-top: .35rem; border-top: 1px dashed var(--line); margin-top: .15rem; }
+
+/* Masthead title two-tone: "של" in fg, the rest a touch lighter. */
+.masthead h1 .t-b { color: light-dark(#555555, #b0b0b0); }

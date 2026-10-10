@@ -35,7 +35,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       <header class="site masthead">
         <div class="wrap">
           {SITE.kicker && <p class="kicker">{SITE.kicker}</p>}
-          <h1><a href={url()} aria-current="page">{SITE.displayTitle ?? SITE.title}</a></h1>
+          <h1><a href={url()} aria-current="page" aria-label={SITE.title} title={SITE.title}>{(() => { const t = SITE.displayTitle ?? SITE.title; const cut = [...t].findIndex((c, i, a) => i > 0 && a.slice(0, i).join('').normalize('NFD').replace(/[\u0591-\u05C7]/g, '') === 'של' && !/[\u0591-\u05C7]/.test(c)); return cut > 0 ? <><span class="t-a" aria-hidden="true">{[...t].slice(0, cut).join('')}</span><span class="t-b" aria-hidden="true">{[...t].slice(cut).join('')}</span></> : t; })()}</a></h1>
           <p class="tagline">{SITE.tagline}</p>
           <nav class="site-nav" aria-label="ראשי"><a href={url()} aria-current={Astro.url.pathname === url() ? 'page' : undefined}>סיפורים</a><a href={url('team/')} aria-current={Astro.url.pathname.startsWith(url('team/')) ? 'page' : undefined}>השלוחים</a></nav>
         </div>
