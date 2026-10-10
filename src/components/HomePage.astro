@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import FeedbackBlock from './FeedbackBlock.astro';
-import { getPosts, postUrl, formatDateShort, readingMinutes, readingLabel } from '../lib/posts';
+import { getPosts, postUrl, formatDateShort } from '../lib/posts';
 import { lurl, t, type Lang } from '../i18n/ui';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -26,7 +26,6 @@ const he = lang === 'he';
             <span class="num" aria-hidden="true">{pad(posts.length - i)}</span>
             <p class="meta">
               <time datetime={p.data.date.toISOString().slice(0, 10)}>{formatDateShort(p.data.date, lang)}</time>
-              <span>{readingLabel(readingMinutes(p.body, lang), lang)}</span>
               {p.data.tags?.length ? <span>{p.data.tags.join(', ')}</span> : null}
               {p.data.draft && <span class="badge">{ui.draft}</span>}
             </p>
