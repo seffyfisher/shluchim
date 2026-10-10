@@ -192,7 +192,8 @@ footer.site .links a:hover { color: var(--fg); }
 .roster { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1.25rem; padding-top: 1.5rem; }
 @media (min-width: 40rem) { .roster { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .shaliach { display: flex; flex-direction: column; align-items: flex-start; gap: .35rem; min-width: 0; }
-.avatar { display: block; width: 6rem; height: 6rem; border-radius: 22%; background: var(--surface); object-fit: cover; }
+.avatar { display: block; width: 6rem; height: 6rem; object-fit: contain; background: none; border: 0; border-radius: 0; box-shadow: none; }
 @media (min-width: 40rem) { .avatar { width: 7rem; height: 7rem; } }
 .roster .shaliach h3 { font-family: var(--font); font-weight: 600; font-size: var(--step-1); margin-top: .5rem; overflow-wrap: anywhere; }
 .shaliach p { margin: 0; color: var(--muted); font-size: var(--step--1); line-height: 1.55; }
+.shaliach p.example { font-size: .8rem; padding-top: .35rem; border-top: 1px dashed var(--line); margin-top: .15rem; }

@@ -29,6 +29,7 @@ let i = 0;
               </picture>
               <h3>{s.name}</h3>
               <p>{s.role}</p>
+              {s.example && <p class="example">{s.example}</p>}
             </li>
           );
         })}
