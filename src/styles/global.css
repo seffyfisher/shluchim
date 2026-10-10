@@ -301,7 +301,7 @@ footer.site .links a:hover { color: var(--fg); }
 
 /* Homepage intro + "start here", team intro */
 .intro { margin-bottom: 3rem; max-width: 60ch; }
-.intro > p { margin: 0 0 .9rem; font-size: var(--step-1); line-height: 1.55; }
+.intro > p { margin: 0 0 .3rem; font-size: var(--step--1); line-height: 1.45; } /* same size as the post date (.meta) */
 .start-here { margin-top: 2rem; }
 .start-here ol { margin: 1rem 0 0; padding-inline-start: 1.4rem; display: grid; gap: .6rem; }
 .start-here li { line-height: 1.6; }
