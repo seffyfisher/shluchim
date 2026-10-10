@@ -311,3 +311,12 @@ footer.site .links a:hover { color: var(--fg); }
 .team-intro .lede { color: var(--fg); font-weight: 600; }
 .team-intro .gloss { color: var(--muted); font-size: var(--step-0); font-weight: 400; }
 .team-intro .team-def { color: var(--muted); margin-top: 1.5rem; }
+
+/* About: archival photos (ספר השלוחים). Paper mat + hairline frame, black & white UI around colour originals. */
+.prose figure.archival { margin: 2.25rem 0 2.5rem; max-width: 40rem; }
+.archival .paper { display: block; padding: .6rem; background: light-dark(#fff, #1c1c1c); border: 1px solid var(--line); box-shadow: 0 1px 0 var(--line), 0 6px 18px -12px rgb(0 0 0 / .35); rotate: -.4deg; }
+.archival img { display: block; width: 100%; height: auto; }
+.archival figcaption { margin-top: .75rem; line-height: 1.5; }
+.prose figure.archival-cover { max-width: 16.25rem; }
+.archival-cover .paper { rotate: .6deg; }
+@media (prefers-reduced-motion: reduce) { .archival .paper { rotate: none; } }

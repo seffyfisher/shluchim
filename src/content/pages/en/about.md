@@ -18,6 +18,11 @@ Hi, I'm Seffy Fisher.
 I grew up in Herzliya, Israel, in an ultra-Orthodox Chabad family.
 (Chabad is a Hasidic movement, famous for sending emissaries all over the world. Hold that thought.)
 
+```photo
+family
+```
+
+
 At age 3, in cheder, the traditional Jewish kindergarten, I licked a page of letters.
 Today I get that this is where my love for letters, words and language started.
 
@@ -69,6 +74,11 @@ They're woven into everything I say, to the shluchim too.
 You see it most in the names I chose.
 Shluchim, Hebrew for "emissaries", from Chabad's shlichus, the mission of sending emissaries out into the world.
 And the blog's stories are "maasiyos", tales, like the tales of Rabbi Nachman of Breslov.
+
+```photo
+cover
+```
+
 
 Shinlamed is named after the Hebrew letters shin and lamed.
 Basher, from "ba'asher hu sham", "where he is", a biblical phrase about meeting someone exactly where they are.
