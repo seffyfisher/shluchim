@@ -243,25 +243,21 @@ footer.site .links a:hover { color: var(--fg); }
   .page-about .skip:focus { z-index: 6; }
 }
 
-/* About bubble (zero JS): two stacked transparent checkboxes over the character.
-   1st click checks .av-t1 -> bubble shows text 1 and .av-t2 becomes the click target.
-   2nd click checks .av-t2 -> text 2; both inputs are then hidden, so further clicks do nothing. */
-.av-t { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
-.av-t2, .av-t1:checked, .av-t2:checked { visibility: hidden; }
-.av-t1:checked ~ .av-t2:not(:checked) { visibility: visible; }
+/* About bubble (zero JS), loops forever: three radios (state 0 = hidden, 1 = text 1, 2 = text 2) stacked over the
+   character. Only the radio for the NEXT state takes the pointer, so each click advances 0->1->2->0.
+   Keyboard: Tab reaches the checked radio; arrow keys move through the group and wrap, the same cycle. */
+.av-g { position: absolute; inset: 0; z-index: 2; }
+.av-t { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; pointer-events: none; }
+.av-s0:checked ~ .av-s1, .av-s1:checked ~ .av-s2, .av-g:has(.av-s2:checked) .av-s0 { pointer-events: auto; z-index: 1; }
 .about-av:has(.av-t:focus-visible) { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
 .av-bubble { display: none; position: absolute; top: calc(100% + .9rem); inset-inline-start: 50%; translate: 50% 0; z-index: 3; margin: 0; padding: .45rem .9rem; white-space: nowrap; font-weight: 600; font-size: var(--step-0); line-height: 1.4; color: var(--fg); background: var(--bg); border: 1px solid light-dark(#8c8c8c, #767676); border-radius: 1rem; }
 :dir(ltr) .av-bubble, [dir=ltr] .av-bubble { translate: -50% 0; }
 .av-bubble::before { content: ''; position: absolute; top: calc(-.4rem - 1px); inset-inline-start: calc(50% - .45rem); width: .8rem; height: .8rem; background: var(--bg); border-inline-start: 1px solid light-dark(#8c8c8c, #767676); border-top: 1px solid light-dark(#8c8c8c, #767676); rotate: 45deg; }
 [dir=rtl] .av-bubble::before { rotate: -45deg; }
 .av-bubble .b2 { display: none; }
-.av-t1:checked ~ .av-bubble, .av-t2:checked ~ .av-bubble { display: block; }
-/* Final state is sticky: once .av-t2 is checked, both inputs are inert and a cover swallows every further click/tap,
-   and the bubble depends on .av-t2 alone, so nothing can bring back text 1 or hide it. */
-.about-av:has(.av-t2:checked) .av-t { visibility: hidden; pointer-events: none; }
-.about-av:has(.av-t2:checked)::after { content: ''; position: absolute; inset: 0; z-index: 4; cursor: default; }
-.av-t2:checked ~ .av-bubble .b1 { display: none; }
-.av-t2:checked ~ .av-bubble .b2 { display: inline; }
+.about-av:has(.av-s1:checked, .av-s2:checked) .av-bubble { display: block; }
+.about-av:has(.av-s2:checked) .av-bubble .b1 { display: none; }
+.about-av:has(.av-s2:checked) .av-bubble .b2 { display: inline; }
 @media (max-width: 63.99rem) {
   /* character is fixed top-right (inline-end): bubble hangs below it, aligned to its inline-end edge */
   .av-bubble { inset-inline-start: auto; inset-inline-end: 0; translate: none; top: calc(100% + .7rem); font-size: var(--step--1); }
