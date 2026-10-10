@@ -2,18 +2,22 @@
   "_note": "About page photos. Captions and alt text are DRAFTS for Ben's review: edit only here. Placement: a ```photo <id>``` block in src/content/pages/{he,en}/about.md.",
   "family": {
     "src": "/shluchim/images/about/sefer-hashluchim-fisher.webp",
-    "width": 1576, "height": 903, "display": 640,
-    "caption_he": "עמוד מתוך ספר השְׁלוּחִים.\nאבא, הרב דוד פישר מבית חב״ד הרצליה, אמא סלביי, ואני, יוסף יצחק, עם הכיפה הכחולה.",
-    "caption_en": "A page from Sefer HaShluchim, the book of Chabad's emissaries.\nMy dad, Rabbi David Fisher of Chabad House Herzliya, my mom Slavei, and me, Yosef Yitzchak, in the blue kippah.",
-    "alt_he": "תמונה משפחתית מודפסת וישנה, עם קמטים וקרעים בנייר: אישה עם שיער כהה מחזיקה פעוט עם כיפה כחולה, ולידה גבר עם זקן, כובע שחור וחליפה שחורה. בצד מודפס: הרב דוד פישר, בית חב״ד הרצליה, זוגתו סלביי ובנם יוסף יצחק.",
-    "alt_en": "An old printed family photo with creases and tears in the paper: a dark-haired woman holds a toddler in a blue kippah, next to a bearded man in a black hat and black suit. Printed beside them, in Hebrew: Rabbi David Fisher, Chabad House Herzliya, his wife Slavei and their son Yosef Yitzchak."
+    "width": 1576,
+    "height": 903,
+    "display": 640,
+    "caption_he": "עמוד מתוך ספר השְׁלוּחִים.\nאבא, הרב דוד פישר מבית חב״ד הרצליה, אמא סלביה, ואני, יוסף יצחק, עם הכיפה הכחולה.",
+    "caption_en": "A page from the Book of Shluchim.\nMy father, Rabbi David Fisher of Chabad House Herzliya, my mother Sylvia, and me, Yosef Yitzchak, in the blue kippah.",
+    "alt_he": "תמונה משפחתית מודפסת וישנה, עם קמטים וקרעים בנייר: אישה עם שיער כהה מחזיקה פעוט עם כיפה כחולה, ולידה גבר עם זקן, כובע שחור וחליפה שחורה. בצד מודפס כיתוב עם השמות: הרב דוד פישר מבית חב״ד הרצליה, אשתו סלביה ובנם יוסף יצחק.",
+    "alt_en": "An old printed family photo with creases and tears in the paper: a dark-haired woman holds a toddler in a blue kippah, next to a bearded man in a black hat and black suit. A caption printed beside them, in Hebrew, gives their names: Rabbi David Fisher of Chabad House Herzliya, his wife Sylvia and their son Yosef Yitzchak."
   },
   "cover": {
     "src": "/shluchim/images/about/sefer-hashluchim-cover.webp",
-    "width": 760, "height": 1110, "display": 260,
-    "caption_he": "ספר השְׁלוּחִים.\nמשם הגיע השם של השְׁלוּחִים שלי.",
-    "caption_en": "Sefer HaShluchim, the book of the shluchim.\nThat's where my shluchim got their name.",
+    "width": 760,
+    "height": 1110,
+    "display": 260,
+    "caption_he": "ספר השְׁלוּחִים.\nהספר שבו המשפחה שלי מופיעה.",
+    "caption_en": "The Book of Shluchim.\nThe book my family appears in.",
     "alt_he": "כריכה כחולה ובלויה של ספר, ועליה באותיות זהב: ספר השלוחים.",
-    "alt_en": "A worn blue book cover with gold Hebrew lettering: Sefer HaShluchim."
+    "alt_en": "A worn blue book cover with gold Hebrew lettering: Sefer HaShluchim, the Book of Shluchim."
   }
 }
