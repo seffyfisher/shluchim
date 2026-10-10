@@ -18,7 +18,7 @@ I told Nitza: first, research proven processes.
 
 Within two days, October 7 to 8, 2026, the workflow was up.
 And the first real run went through it:
-a redesign of the ticket bundles page, all the way to a handoff package for Kochava.
+a redesign of the ticket bundles page, all the way to a handoff package (a structured transfer document) for Kochava.
 
 At the end I said:
 
@@ -40,14 +40,14 @@ The stages we set:
 
 1. Brief.
 2. Mood board.
-3. Lo-fi in Figma, 3 directions in black and white.
-4. Hi-fi as a live prototype, with e-vrit's design system.
+3. Lo-fi (a rough sketch) in Figma, 3 directions in black and white.
+4. Hi-fi (a finished design) as a live prototype, with e-vrit's design system.
 5. A multi-model review.
 6. Up to 2 or 3 revision rounds, with a quality gate.
 7. Handoff to Kochava.
 
 The review works like this:
-Codex, Claude and Gemini, each in three runs, against a shared rubric.
+Codex, Claude and Gemini, each in three runs, against a shared rubric (a scoring criteria table).
 
 The rubric checks hierarchy, readability in Hebrew, brand fidelity,
 accessibility, and clarity of the main action.
@@ -58,7 +58,7 @@ There are persona questions too.
 
 A Replicate shaliach was added for the mood boards.
 And design skills were added:
-Emil Kowalski, Figma, Anthropic, Addy Osmani, and OneRedOak adapted for RTL and dark mode.
+Emil Kowalski, Figma, Anthropic, Addy Osmani, and OneRedOak adapted for RTL (right-to-left writing) and dark mode.
 
 It was all saved as a reusable skill, spec-driven-design.
 
@@ -128,7 +128,7 @@ My live fixes were saved as permanent taste rules:
 
 Now there's a handoff package for Kochava,
 to build it in a separate redesign branch,
-including measurement requirements before an A/B test.
+including measurement requirements before an A/B test (a trial between two versions).
 
 
 ![Before: the live ticket bundles page on mobile, four colorful bundles in a long list.](/shluchim/images/posts/tickets-before-390.webp)

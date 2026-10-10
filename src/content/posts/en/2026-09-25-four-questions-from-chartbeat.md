@@ -13,7 +13,7 @@ They do real-time monitoring, something I don't have today.
 They sent 4 sales questions,
 including monthly pageview volume, meaning how many pageviews we get a month.
 
-I wanted a paste-ready reply, with a real number from GA4.
+I wanted a paste-ready reply, with a real number from GA4 (Google Analytics 4).
 Not a guess.
 
 
@@ -21,17 +21,17 @@ Not a guess.
 
 Basher and the analytics shaliach pulled the data from GA4.
 (Shluchim, singular shaliach, is Hebrew for "emissaries". It's what I call my AI agents.)
-From the e-vrit site's GA4 property.
+From the e-vrit site's GA4 property (the Analytics property).
 
 August 2026:
-about 4.91 million pageviews, and 1.61 million sessions.
+about 4.91 million pageviews, and 1.61 million sessions (site visits).
 
 The last 30 days:
 about 5.12 million pageviews.
 
 Then came a full reply to all four questions.
 Our interest in real-time, the volume, and who'll evaluate the tool.
-Plus what works and what we're missing today in GA4 and Clarity.
+Plus what works and what we're missing today in GA4 and Clarity (a tool that records site browsing).
 
 
 ## What came out:

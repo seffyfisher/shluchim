@@ -28,7 +28,7 @@ It runs on Wednesday and Thursday at 10:20,
 a day or two before the weekly reset, and also close to the monthly one.
 
 Each run checks in the browser how much is left.
-If a lot is left, it writes to me and suggests tasks from the backlog worth running.
+If a lot is left, it writes to me and suggests tasks from the backlog (the task queue) worth running.
 If not, it stays quiet.
 
 

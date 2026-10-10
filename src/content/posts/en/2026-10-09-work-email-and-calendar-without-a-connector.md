@@ -9,7 +9,7 @@ translationKey: "2026-10-09-work-outlook-browser"
 
 My work email simply wouldn't connect to Grok Bot.
 
-My workplace blocked the official Outlook connector.
+My workplace blocked the official Outlook connector (a built-in connection between systems).
 So my shluchim couldn't send anything from my work email,
 like reaching out to AI narration vendors for audiobooks.
 (Shluchim, singular shaliach, is Hebrew for "emissaries". It's what I call my AI agents.)
@@ -17,16 +17,16 @@ like reaching out to AI narration vendors for audiobooks.
 
 ## How it worked:
 
-On October 9, at around one in the morning, Basher checked the domain's mail records.
+On October 9, at around one in the morning, Basher checked the domain's (our site's address) mail records.
 He confirmed it was Microsoft 365.
 
 He ruled out the remote computer route.
 That needs approval for every command, and has no access to my browser.
 
 Instead, he opened Outlook on the web in his cloud browser,
-and handed me the screen for a single sign-in with MFA.
+and handed me the screen for a single sign-in with MFA (multi-factor authentication).
 
-I didn't give anyone a password, and the session was saved.
+I didn't give anyone a password, and the session (the active connection) was saved.
 Basher saved the setup to shared memory,
 so every shaliach now knows how to use "work email".
 

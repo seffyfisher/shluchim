@@ -47,10 +47,10 @@ seffy: Can you change your computer's access so it connects from Israel? Otherwi
 seffy: תוכל לשנות את הגישה של המחשב שלך שיגש מישראל כי אחרת אנחנו נחסמים
 ```
 
-We tried a free VPN and Wolt, and gave up.
+We tried a free VPN (a connection that masks where you're browsing from) and Wolt, and gave up.
 
 On September 24, I turned on the option in Grok Bot to route traffic through my own computer.
-Chef got an Israeli IP, and filled a Rami Levy cart with the whole list.
+Chef got an Israeli IP (network address), and filled a Rami Levy cart with the whole list.
 
 19 items plus cottage cheese,
 including delivery, as a guest, without paying.
@@ -60,7 +60,7 @@ Meanwhile, the pantry items went into an iHerb order.
 
 ## What came out:
 
-A rule and a skill shared by all the shluchim.
+A rule and a skill (a reusable capability) shared by all the shluchim.
 When shopping in Israel, if a site blocks us, retry through my network.
 And if that fails too, ask me to check that the app is open.
 

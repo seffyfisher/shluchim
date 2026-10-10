@@ -86,7 +86,7 @@ and trimmed the leftover white margin at the bottom of ring a bell?.
 I didn't sit at a computer uploading by hand.
 
 I handed over photos and approved previews.
-The site updated after a deploy from main.
+The site updated after a deploy (going live) from main.
 
 
 ## What to take from this:

@@ -26,7 +26,7 @@ It goes out once, in Hebrew, and deletes itself.
 Basher handed over two reminders for October 7, and deleted his own copies.
 
 At 08:49, a reminder to talk to the head of the dev team about switching tools:
-pnpm and Biome.
+pnpm and Biome (two development tools).
 
 At 09:08, a reminder to check my email and see whether the credit card company had answered about a refund.
 They had already replied that the refund would show up within 3 business days.

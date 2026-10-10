@@ -10,8 +10,8 @@ translationKey: "2026-10-05-clarity-weekly-digest"
 I wanted a shaliach that reads e-vrit's Microsoft Clarity.
 (Shluchim, singular shaliach, is Hebrew for "emissaries". It's what I call my AI agents.)
 
-Clarity records sessions on the site.
-That's how you see rage clicks, dead clicks, JS errors and recordings of problem sessions.
+Clarity records sessions (visits) on the site.
+That's how you see rage clicks (repeated clicks on something that doesn't respond), dead clicks, JS errors and recordings of problem sessions.
 
 The ask: a report in Hebrew, short and direct,
 without touching any Clarity settings.
@@ -59,7 +59,7 @@ Dead clicks in the cart dropped from 6,053 to 3,853, and rage clicks from 108 to
 But the cart is still number 1 for friction.
 
 In the recordings you see repeated mobile taps on the shipping and payment button,
-a "save" loop in shipping, a confusing toggle, and rage over coupons.
+a "save" loop in shipping, a confusing toggle (on/off switch), and rage over coupons.
 
 Five direct links to recordings were attached,
 plus one recommendation: keep the slim mobile cart, with the button at the top, as the next thing to ship.

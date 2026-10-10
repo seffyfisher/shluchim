@@ -10,7 +10,7 @@ translationKey: "2026-10-07-bar2go-pickup-points"
 At our checkout, anyone who picks "delivery to a pickup point" can't see where the points are.
 There's just a name, and a line saying you'll choose later.
 
-That task had been sitting in our Linear.
+That task had been sitting in our Linear (task tracker).
 
 
 ## Research first:
@@ -32,7 +32,7 @@ A narrow change.
 Under the pickup points text there's now a link:
 "📍 See the list of available pickup points >".
 
-It opens Bar2Go's map in a popup, inside an iframe.
+It opens Bar2Go's map in a popup, inside an iframe (a frame that shows a site inside a site).
 If the popup is blocked, it opens in a new tab.
 
 The rest of the checkout wasn't touched.
@@ -40,7 +40,7 @@ The rest of the checkout wasn't touched.
 
 ## The checks:
 
-QA, and mobile screenshots.
+QA (quality assurance), and mobile screenshots.
 
 The task in Linear was updated with the screenshots, per the template.
 And a pull request was opened, for the head of the dev team to review.

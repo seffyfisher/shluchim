@@ -16,7 +16,7 @@ I asked Basher to turn each one into a smooth animated profile picture.
 
 ## How it worked:
 
-Basher cut each grid into frames,
+Basher cut each grid into frames (individual images),
 and removed the white background so it was transparent.
 
 Then he aligned the head so it wouldn't jump.
@@ -51,13 +51,13 @@ So we compressed them to about 2 MB.
 Chef's chewing still looked like something dissolving.
 
 Basically, a gradual transition between frozen images doesn't create real motion.
-For real motion you need a video model, or motion interpolation.
+For real motion you need a video model, or motion interpolation (filling in motion between images).
 
 
 ## The best moment:
 
 Shlomby got a 360° spin, in 16 frames,
-in a loop without a single seam.
+in a loop (a repeating cycle) without a single seam.
 
 I gave him a 💯.
 

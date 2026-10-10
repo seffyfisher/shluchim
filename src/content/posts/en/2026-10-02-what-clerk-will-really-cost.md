@@ -22,7 +22,7 @@ Basher and the analytics shaliach pulled Clerk's pricing.
 (Shluchim, singular shaliach, is Hebrew for "emissaries". It's what I call my AI agents.)
 Clerk charges by MRU, monthly retained users.
 
-In parallel, they pulled data from GA4, for both the store and the reader.
+In parallel, they pulled data from GA4 (Google Analytics 4), for both the store and the reader.
 
 And then they showed the gap.
 Based on login events alone, it comes to about $25 a month.

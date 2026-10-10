@@ -20,7 +20,7 @@ So I asked Basher for a reproduction.
 
 ## The reproduction:
 
-Dima, the QA shaliach, ran 8 Playwright runs on the live site.
+Dima, the QA (quality assurance) shaliach, ran 8 Playwright runs on the live site.
 Playwright is an automated browser that clicks like a user.
 
 iPhone, Android and desktop.
@@ -40,18 +40,18 @@ Everything competes for the same tap.
 
 Three policy links cover about 68% of the text.
 The checkbox itself is just 24px.
-And the UserWay accessibility button can cover it.
+And the UserWay accessibility button (an accessibility plugin for the site) can cover it.
 
 
 ## What others do:
 
-I asked for Nitza, the UX shaliach, to look at what other sites do.
+I asked for Nitza, the UX (user experience) shaliach, to look at what other sites do.
 
 Dima researched GOV.UK and WCAG 2.5.8, the accessibility standard for target size.
-Also Apple's and Material's size guidelines,
+Also Apple's and Material's (Google's design language) size guidelines,
 Shopify's and Amazon's implied consent, and the checkout at Steimatzky, a big Israeli bookstore chain.
 
-Nitza built a live mock in RTL,
+Nitza built a live mock in RTL (right-to-left),
 measured everything in Playwright, and proposed three options.
 
 

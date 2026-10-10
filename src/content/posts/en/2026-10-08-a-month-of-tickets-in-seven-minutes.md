@@ -18,7 +18,7 @@ Which answers are weak, and what's worth highlighting.
 
 Since October 4, a daily routine has run at 10:27.
 
-It reads yesterday's Glassix tickets,
+It reads yesterday's Glassix (our ticketing system) tickets,
 and cross-checks them against the roughly 239 articles in the help center.
 
 Then it writes draft Q&As in Hebrew.
@@ -53,7 +53,7 @@ It was all merged into one file of 16 drafts.
 Six of them cover about 2,700 tickets a month,
 and can be published with almost no policy decisions.
 
-Bugs that an FAQ can't solve were split out.
+Bugs that an FAQ (frequently asked questions) can't solve were split out.
 
 The shaliach also corrected its own wrong guess about one-click purchase in the app.
 It did that after checking a live article.
@@ -72,13 +72,13 @@ It's quoted in 146 tickets, not 37.
 There are 16 explicit complaints, and it's still live.
 
 A second bug wasn't in an email at all.
-The "order received" SMS links to the QA server.
+The "order received" SMS links to the QA server (the test server).
 
-The shaliach opened two bugs in Linear, E-369 and E-370, using the BUG template.
+The shaliach opened two bugs in Linear (task tracker), E-369 and E-370, using the BUG template.
 They were assigned to a developer, with evidence and a request to reproduce.
 
 A checkout failure with a kibbutz address went to Nitza.
-She reproduced it against QA, and suggested a copy fix.
+She reproduced it against QA, and suggested a copy fix (the site's text).
 
 
 ## Why this is good:
@@ -86,7 +86,7 @@ She reproduced it against QA, and suggested a copy fix.
 One picture of the month: what's missing, what's weak and what's rising.
 
 Ready drafts, ranked by impact.
-And two real production bugs, with proof.
+And two real production bugs (the live site), with proof.
 
 All from the tickets,
 without me digging by hand even once.
@@ -94,7 +94,7 @@ without me digging by hand even once.
 The shluchim involved:
 the customer service shaliach for the analysis, the drafts and Linear,
 the Glassix puller for the daily pulls,
-and Nitza for the UX reproduction and the recommendation.
+and Nitza for the UX (user experience) reproduction and the recommendation.
 
 
 ## What to take from this:

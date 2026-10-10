@@ -22,7 +22,7 @@ The "Work Now" check-in passed it to Basher, who runs my shluchim.
 Basher didn't do the work himself.
 He passed it to the customer service shaliach.
 
-Back came a gap report, and 8 draft FAQs in Hebrew.
+Back came a gap report, and 8 draft FAQs (frequently asked questions) in Hebrew.
 
 The highlights:
 "I paid and the book won't open" was weakly covered,

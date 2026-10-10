@@ -10,8 +10,8 @@ translationKey: "2026-09-11-product-page-beach"
 I was at the beach, at a birthday party.
 Sun on my head.
 
-From my phone, I was trying to make sense of something weird in GA4.
-A source called product_page, with around 20,000 sessions a week.
+From my phone, I was trying to make sense of something weird in GA4 (Google Analytics 4).
+A source called product_page, with around 20,000 sessions (site visits) a week.
 
 ```chat
 seffy: There's a campaign in Analytics coming from a source called product_page, with source and campaign "not set", and I can't track it down.
@@ -29,11 +29,11 @@ It wasn't.
 
 ## What was going on:
 
-The store was pushing a field called source into the dataLayer, with values like product_page.
+The store was pushing a field called source into the dataLayer (the site's data layer), with values like product_page.
 In other words, every product page was announcing a "source".
 
 GA4 treats that name as a traffic source.
-So the Acquisition report quietly filled up with a lie.
+So the Acquisition (traffic sources) report quietly filled up with a lie.
 
 
 ## How it worked:
@@ -42,7 +42,7 @@ From my phone at the beach, I got my shluchim moving.
 (Shluchim, singular shaliach, is Hebrew for "emissaries". It's what I call my AI agents.)
 
 The analytics shaliach diagnosed it and wrote a handoff, a proper written brief for the next one.
-A cloud shaliach opened a PR on the site,
+A cloud shaliach opened a PR (pull request) on the site,
 and the QA shaliach checked that the fix made sense.
 
 We renamed the parameter from source to source_ui,
