@@ -298,3 +298,16 @@ footer.site .links a:hover { color: var(--fg); }
 .site-nav a + a::before { content: ''; position: absolute; inset-inline-start: calc(-.45rem - 1px); top: 50%; height: .95em; translate: 0 -58%; border-inline-start: 1px solid var(--muted); pointer-events: none; }
 .site-nav .lang { letter-spacing: .04em; min-width: 2.75rem; justify-content: center; }
 @media (max-width: 63.99rem) { .page-about .site-nav a { min-height: 2.75rem; } .page-about header.site.bar .name { padding-block: 0; } }
+
+/* Homepage intro + "start here", team intro */
+.intro { margin-bottom: 3rem; max-width: 60ch; }
+.intro > p { margin: 0 0 .9rem; font-size: var(--step-1); line-height: 1.55; }
+.start-here { margin-top: 2rem; }
+.start-here ol { margin: 1rem 0 0; padding-inline-start: 1.4rem; display: grid; gap: .6rem; }
+.start-here li { line-height: 1.6; }
+.start-here a { font-weight: 600; white-space: nowrap; }
+.team-intro { max-width: 60ch; }
+.team-intro p { margin: 0 0 .9rem; line-height: 1.65; }
+.team-intro .lede { color: var(--fg); font-weight: 600; }
+.team-intro .gloss { color: var(--muted); font-size: var(--step-0); font-weight: 400; }
+.team-intro .team-def { color: var(--muted); margin-top: 1.5rem; }

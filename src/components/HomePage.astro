@@ -11,6 +11,39 @@ const pad = (n: number) => String(n).padStart(2, '0');
 const he = lang === 'he';
 ---
 <Base masthead noindex={!he && posts.length === 0} lang={lang} alternates={{ he: lurl('he'), en: lurl('en') }}>
+  <section class="intro" aria-label={he ? 'פתיח' : 'Intro'}>
+    {he ? (
+      <>
+        <p>פה אני והשְׁלוּחִים, עוזרי הAI שלי, מתעדים כל הצלחה שלנו.</p>
+        <p>כל סיפור מראה מה ביקשתי, מה נעשה, אילו שְׁלוּחִים השתתפו ומה יצא.</p>
+        <p>בלי פלאף, כמו חבר שאומר לך: בוא שב לידי ותראה מה אני עושה.</p>
+      </>
+    ) : (
+      <>
+        <p>This is where my shluchim and I document every win we have.<br />(Shluchim, singular shaliach, is Hebrew for "emissaries". It's what I call my AI agents.)</p>
+        <p>Each story shows what I asked for, what got done, which shluchim took part, and how it turned out.</p>
+        <p>No fluff. Just a friend saying: come sit next to me and see what I'm doing.</p>
+      </>
+    )}
+    <nav class="start-here" aria-labelledby="start-here">
+      <h2 class="list-label" id="start-here">{he ? 'להתחיל כאן:' : 'Start here:'}</h2>
+      <ol>
+        {he ? (
+          <>
+            <li>קודם, מי אני ולמה הבלוג הזה קיים. <a href={lurl('he', 'about/')}>לעמוד האודות</a></li>
+            <li>אחר כך, להכיר קצת את השְׁלוּחִים: מי הם, ומה כל אחד עושה. <a href={lurl('he', 'team/')}>לעמוד השְׁלוּחִים</a></li>
+            <li>ומשם, לסיפורים עצמם. <a href={`${lurl('he')}#stories`}>לכל הסיפורים</a></li>
+          </>
+        ) : (
+          <>
+            <li>First, who I am and why this blog exists. <a href={lurl('en', 'about/')}>About me</a></li>
+            <li>Then, get to know the shluchim a little: who they are, and what each one does. <a href={lurl('en', 'team/')}>Meet the shluchim</a></li>
+            <li>And from there, the stories themselves. <a href={`${lurl('en')}#stories`}>All stories</a></li>
+          </>
+        )}
+      </ol>
+    </nav>
+  </section>
   {posts.length === 0 ? (
     he
       ? <p class="empty">עוד אין פה סיפורים.<br />השְׁלוּחִים כבר עובדים על הראשון.</p>

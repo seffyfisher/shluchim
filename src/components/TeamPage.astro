@@ -21,9 +21,27 @@ const slug = (c: string) => c.toLowerCase().replace(/\s+/g, '-');
   description={he ? 'כל השְׁלוּחִים של ספי: מי הם ומה כל אחד עושה.' : "All of Seffy's shluchim: who they are and what each one does."}>
   <header class="page-head">
     {he ? <h1>השְׁלוּחִים</h1> : <h1>The Shluchim</h1>}
-    {he
-      ? <p class="lede">שָׁלוּחַ זה עוזר AI שעושה בשבילי עבודה אמיתית.<br />הנה כל הצוות, ומה כל אחד עושה.</p>
-      : <p class="lede">A shaliach (Hebrew for "emissary", plural shluchim) is an AI agent that does real work for me.<br />Here's the whole team, and what each one does.</p>}
+    {he ? (
+      <div class="team-intro">
+        <p class="lede">למה הרבה שְׁלוּחִים, ולא אחד שעושה הכול?</p>
+        <p>בהתחלה גם לי לקח זמן להבין את הפער, ולמה צריך את זה.</p>
+        <p>אבל זה פשוט חיקוי משמעותי של המציאות.<br />כמו בווטסאפ, כשמתכתבים עם אנשים שונים.<br />מישהו שמומחה ועובד איתך על טקסטים, מישהי שמעצבת, ובחור אחר שמומחה באנליטיקס.<br />זה משנה הכול. זה הרבה הרבה יותר טבעי לעבודה.</p>
+        <p>לכל שָׁלוּחַ יש שם, פרצוף וצ׳אט משלו.<br />ויש מנהל, באשר, שדרכו מנהלים הכול מהמרכז, והוא יוצר קשר עם כל אחד בנפרד.</p>
+        <p>גם בצד הטכני יש בזה חוכמה: לא מעמיסים את כל ההקשר על מקום אחד.</p>
+        <p>ואפילו בדיעבד, כשאני מחפש משהו, אני אומר לעצמי: זה קשור לבדיקות תוכנה.<br />וזה ישר הולך ל־QA (בדיקות איכות) שלי, ולא סתם לשָׁלוּחַ שכותב קוד.</p>
+        <p class="team-def">שָׁלוּחַ זה עוזר AI שעושה בשבילי עבודה אמיתית.<br />הנה כל הצוות, ומה כל אחד עושה.</p>
+      </div>
+    ) : (
+      <div class="team-intro">
+        <p class="lede">Why lots of shluchim, and not one that does everything?<br /><span class="gloss">(Shluchim, singular shaliach, is Hebrew for "emissaries". It's what I call my AI agents.)</span></p>
+        <p>At first it took me a while to get the difference too, and why you'd need it.</p>
+        <p>But it's simply a meaningful imitation of real life.<br />Like on WhatsApp, when you're chatting with different people.<br />Someone who's an expert and works with you on texts, someone who designs, and another guy who's an analytics expert.<br />It changes everything. It's a much, much more natural way to work.</p>
+        <p>Each shaliach has a name, a face, and a chat of its own.<br />And there's a manager, Basher, who runs everything from the center and stays in touch with each one separately.</p>
+        <p>There's something smart about it on the technical side too: you don't pile all the context into one place.</p>
+        <p>And even later on, when I'm looking for something, I tell myself: this has to do with software testing.<br />So it goes straight to my QA shaliach (QA = quality assurance, software testing), and not just to some shaliach that writes code.</p>
+        <p class="team-def">Here's the whole team, and what each one does.</p>
+      </div>
+    )}
     <p class="meta"><span>{he ? `${people.length} שְׁלוּחִים` : `${people.length} shluchim`}</span></p>
   </header>
   {groups.map((g) => (
