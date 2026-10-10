@@ -102,9 +102,8 @@ main { padding-block: 2.5rem 4rem; }
 .story .num { grid-area: num; color: var(--accent); font-weight: 600; font-size: var(--step--1); line-height: 1.6; font-variant-numeric: tabular-nums; }
 .story .meta { grid-area: meta; }
 .story h3 { grid-area: title; font-size: var(--step-2); margin-top: .35rem; }
-.story h3 a { color: var(--fg); text-decoration: underline; text-decoration-color: var(--line); text-decoration-thickness: 2px; text-underline-offset: 0.3em; }
+.story h3 a { color: var(--fg); text-decoration: none; }
 .story h3 a::after { content: ''; position: absolute; inset: 0; } /* whole row is the link target */
-.story:hover h3 a { text-decoration-color: var(--accent); }
 .story h3 a:focus-visible { outline: none; }
 .story:has(a:focus-visible) { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
 .story .dek { grid-area: dek; margin: .5rem 0 0; color: var(--muted); font-size: var(--fs-desc); max-width: 60ch; }
@@ -256,7 +255,11 @@ footer.site .links a:hover { color: var(--fg); }
 .av-bubble::before { content: ''; position: absolute; top: calc(-.4rem - 1px); inset-inline-start: calc(50% - .45rem); width: .8rem; height: .8rem; background: var(--bg); border-inline-start: 1px solid light-dark(#8c8c8c, #767676); border-top: 1px solid light-dark(#8c8c8c, #767676); rotate: 45deg; }
 [dir=rtl] .av-bubble::before { rotate: -45deg; }
 .av-bubble .b2 { display: none; }
-.av-t1:checked ~ .av-bubble { display: block; }
+.av-t1:checked ~ .av-bubble, .av-t2:checked ~ .av-bubble { display: block; }
+/* Final state is sticky: once .av-t2 is checked, both inputs are inert and a cover swallows every further click/tap,
+   and the bubble depends on .av-t2 alone, so nothing can bring back text 1 or hide it. */
+.about-av:has(.av-t2:checked) .av-t { visibility: hidden; pointer-events: none; }
+.about-av:has(.av-t2:checked)::after { content: ''; position: absolute; inset: 0; z-index: 4; cursor: default; }
 .av-t2:checked ~ .av-bubble .b1 { display: none; }
 .av-t2:checked ~ .av-bubble .b2 { display: inline; }
 @media (max-width: 63.99rem) {
