@@ -13,7 +13,7 @@ export const UI = {
     skip: 'דלג לתוכן', preview: 'מצב תצוגה מקדימה: כולל טיוטות שלא אושרו לפרסום', navMain: 'ראשי',
     stories: 'סיפורים', team: 'השלוחים', about: 'אודות', allStories: 'כל הסיפורים', back: '→ לכל הסיפורים',
     edit: 'עריכה ב־GitHub', draft: 'טיוטה', postNav: 'ניווט בסוף הסיפור', nav: 'ניווט', chat: 'שיחה',
-    switchTo: 'English', switchHint: 'Read this in English',
+    switchTo: 'EN', switchHint: 'Read this in English',
   },
   en: {
     skip: 'Skip to content', preview: 'Preview mode: includes drafts that are not approved for publishing', navMain: 'Main',

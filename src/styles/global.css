@@ -260,9 +260,6 @@ footer.site .links a:hover { color: var(--fg); }
 .masthead .explainer { margin: .35rem 0 0; color: var(--muted); font-size: var(--fs-desc); line-height: 1.5; max-width: 40ch; }
 .empty a { color: inherit; }
 
-/* Language switcher: a plain link to the counterpart page (no JS). Sits at the end of the nav. */
-.site-nav .lang-switch { margin-inline-start: auto; border: 1px solid var(--line); border-radius: 999px; padding-inline: .8rem; min-height: 2.25rem; align-self: center; color: var(--fg); }
-.site-nav .lang-switch:hover { border-color: var(--fg); text-decoration: none; }
 
 /* "Hebrew original" under an English chat bubble: native <details>, CSS only. */
 .chat-orig { margin: .3rem .5rem 0; font-size: .8rem; color: var(--muted); max-width: 100%; }
@@ -270,5 +267,13 @@ footer.site .links a:hover { color: var(--fg); }
 .chat-orig summary:hover { color: var(--fg); }
 .chat-orig p { margin: .25rem 0 0; padding: .5rem .8rem; width: fit-content; max-width: 100%; background: var(--surface); border-radius: .75rem; font-size: var(--step--1); line-height: 1.6; color: var(--fg); }
 .chat-bot .chat-orig p { margin-inline-start: auto; }
-:root:lang(en) .site-nav { gap: clamp(.75rem, 3vw, 1.25rem); }
 :root:lang(en) .site-nav a { white-space: nowrap; }
+
+/* ---------- Nav D1 (2026-10-10-blog-nav): thin muted dividers between items, EN slot at the end ---------- */
+.site-nav { gap: .9rem; align-items: center; }
+.site-nav a { padding-inline: .35rem; position: relative; display: inline-flex; }
+.site-nav a:first-child { margin-inline-start: -.35rem; }
+/* divider sits in the gap, outside the link box, so focus rings and taps don't include it */
+.site-nav a + a::before { content: ''; position: absolute; inset-inline-start: calc(-.45rem - 1px); top: 50%; height: .95em; translate: 0 -58%; border-inline-start: 1px solid var(--muted); pointer-events: none; }
+.site-nav .lang { letter-spacing: .04em; min-width: 2.75rem; justify-content: center; }
+@media (max-width: 63.99rem) { .page-about .site-nav a { min-height: 2.75rem; } .page-about header.site.bar .name { padding-block: 0; } }

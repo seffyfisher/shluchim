@@ -33,7 +33,7 @@ export const SITES = { he: { ...SITE, explainer: '' }, en: SITE_EN } as const;
 // Pre-launch: the Hebrew pages show no language switcher until Seffy approves the English launch,
 // so the Hebrew site stays visually unchanged. English pages always link back to Hebrew.
 // Flip to true at launch.
-export const SHOW_SWITCHER_ON_HE = false;
+export const SHOW_SWITCHER_ON_HE = true; // launched 2026-10-10 (nav D1 EN slot)
 
 // GitHub repo (owner/name) — used for the "עריכה" links. Change on rename.
 export const REPO = 'seffyfisher/shluchim';
