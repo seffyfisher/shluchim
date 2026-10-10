@@ -17,7 +17,7 @@ const he = lang === 'he';
       : <p class="empty">The English translations are on their way.<br />Meanwhile, the stories are all <a href={lurl('he')} hreflang="he" lang="he">in Hebrew</a>.</p>
   ) : (
     <>
-      <h2 class="list-label">{he
+      <h2 class="list-label" id="stories">{he
         ? `${posts.length === 1 ? 'סיפור אחד' : `${posts.length} סיפורים`}, מהחדש לישן`
         : `${posts.length === 1 ? 'One story' : `${posts.length} stories`}, newest first`}</h2>
       <ol class="stories" reversed>
