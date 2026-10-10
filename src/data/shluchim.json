@@ -166,5 +166,17 @@
     "still": "shluchim/shlomby-still.webp",
     "example": "למשל: הוא שולח לי בבוקר את האימון של היום, ובודק בערב איך הלך.",
     "example_en": "For example: he sends me the day's workout in the morning, and checks in the evening how it went."
+  },
+  {
+    "id": "eran",
+    "name": "ערן",
+    "name_en": "Eran",
+    "role": "שותף אישי להתבוננות ולעזרה עצמית.",
+    "role_en": "A personal companion for reflection and self-help.",
+    "category": "אישי",
+    "category_en": "Personal",
+    "avatar": "shluchim/eran.webp",
+    "animated": true,
+    "still": "shluchim/eran-still.webp"
   }
 ]
