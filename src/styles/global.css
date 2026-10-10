@@ -244,6 +244,28 @@ footer.site .links a:hover { color: var(--fg); }
   .page-about .skip:focus { z-index: 6; }
 }
 
+/* About bubble (zero JS): two stacked transparent checkboxes over the character.
+   1st click checks .av-t1 -> bubble shows text 1 and .av-t2 becomes the click target.
+   2nd click checks .av-t2 -> text 2; both inputs are then hidden, so further clicks do nothing. */
+.av-t { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.av-t2, .av-t1:checked, .av-t2:checked { visibility: hidden; }
+.av-t1:checked ~ .av-t2:not(:checked) { visibility: visible; }
+.about-av:has(.av-t:focus-visible) { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+.av-bubble { display: none; position: absolute; top: calc(100% + .9rem); inset-inline-start: 50%; translate: 50% 0; z-index: 3; margin: 0; padding: .45rem .9rem; white-space: nowrap; font-weight: 600; font-size: var(--step-0); line-height: 1.4; color: var(--fg); background: var(--bg); border: 2px solid light-dark(#8c8c8c, #767676); border-radius: 1rem; }
+:dir(ltr) .av-bubble, [dir=ltr] .av-bubble { translate: -50% 0; }
+.av-bubble::before { content: ''; position: absolute; top: -.5rem; inset-inline-start: calc(50% - .45rem); width: .8rem; height: .8rem; background: var(--bg); border-inline-start: 2px solid light-dark(#8c8c8c, #767676); border-top: 2px solid light-dark(#8c8c8c, #767676); rotate: 45deg; }
+[dir=rtl] .av-bubble::before { rotate: -45deg; }
+.av-bubble .b2 { display: none; }
+.av-t1:checked ~ .av-bubble { display: block; }
+.av-t2:checked ~ .av-bubble .b1 { display: none; }
+.av-t2:checked ~ .av-bubble .b2 { display: inline; }
+@media (max-width: 63.99rem) {
+  /* character is fixed top-right (inline-end): bubble hangs below it, aligned to its inline-end edge */
+  .av-bubble { inset-inline-start: auto; inset-inline-end: 0; translate: none; top: calc(100% + .7rem); font-size: var(--step--1); }
+  :dir(ltr) .av-bubble, [dir=ltr] .av-bubble { translate: none; }
+  .av-bubble::before { inset-inline-start: auto; inset-inline-end: calc(38px - .45rem); }
+}
+
 /* ---------- English (/en/) ---------- */
 /* Young Serif (OFL, public/fonts/YoungSerif-OFL.txt) for English display headings; Noa Shalev has no Latin. */
 @font-face {

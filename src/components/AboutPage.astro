@@ -8,6 +8,9 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const url = (p: string) => lurl('he', p); // shared assets
 const av = ABOUT_AVATAR[lang];
+const bubble = lang === 'he'
+  ? { t1: 'מה ניהיה?', t2: 'נו, מה?', a1: 'לדבר עם הדמות', a2: 'לשאול שוב' }
+  : { t1: 'What’s going on?', t2: 'Well, what?', a1: 'Talk to the character', a2: 'Ask again' };
 // English about lives at src/content/pages/en/about.md. Until it exists, /en/about/ is a minimal placeholder.
 const pages = await getCollection('pages');
 const page = pages.find((p) => p.id === `${lang}/about`);
@@ -31,13 +34,17 @@ const description = page?.data.description ?? 'Why this blog exists, and a bit a
       )}
     </article>
     {lang === 'he' && <FeedbackBlock placement="about" />}
-    <aside class="avatar-col" aria-hidden="true">
+    <aside class="avatar-col">
       <figure class="about-av">
-        <div class="avatar-sprite" id="av"><div class="av-y"><div class="av-x"></div></div></div>
-        <picture class="avatar-still">
+        <div class="avatar-sprite" id="av" aria-hidden="true"><div class="av-y"><div class="av-x"></div></div></div>
+        <picture class="avatar-still" aria-hidden="true">
           <source media="(max-width: 63.99rem)" srcset={url(av.stillSm)} />
           <img src={url(av.stillLg)} alt="" width="480" height="480" />
         </picture>
+        {/* Zero-JS speech bubble: 1st click -> bubble text 1, 2nd click -> text 2, then inert (see global.css "About bubble"). */}
+        <input type="checkbox" class="av-t av-t1" id="av-t1" aria-label={bubble.a1} aria-controls="av-bubble" />
+        <input type="checkbox" class="av-t av-t2" id="av-t2" aria-label={bubble.a2} aria-controls="av-bubble" />
+        <p class="av-bubble" id="av-bubble" role="status"><span class="b1">{bubble.t1}</span><span class="b2">{bubble.t2}</span></p>
       </figure>
     </aside>
   </div>
