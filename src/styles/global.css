@@ -215,7 +215,7 @@ footer.site .links a:hover { color: var(--fg); }
 .about .prose small p, .about .prose small li { font-size: inherit; }
 .about .prose small a { color: var(--muted); }
 .avatar-col { position: relative; }
-.about-av { position: sticky; top: 1.5rem; width: var(--av); aspect-ratio: 1; margin: 0; transform: scaleX(-1); /* mirrored so the character looks toward the text */ }
+.about-av { position: sticky; top: 1.5rem; width: var(--av); aspect-ratio: 1; margin: 0; }
 .avatar-sprite { display: none; position: absolute; inset: 0; overflow: hidden; }
 .av-y, .av-x { position: absolute; top: 0; left: 0; width: 1000%; height: 600%; }
 .av-y { width: 100%; height: 100%; }
