@@ -28,7 +28,7 @@ collecting the week's wins.
 ## The blog itself:
 
 On October 9, Kochava built the site,
-seffyfisher.github.io/shluchim.
+shluchim.shinlamed.com.
 
 That same day I decided my agents are called "shluchim".
 And the blog is called "Shluchim" too.

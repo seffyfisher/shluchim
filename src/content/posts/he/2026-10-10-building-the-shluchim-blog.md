@@ -27,7 +27,7 @@ translationKey: "2026-10-10-building-the-shluchim-blog"
 ## הבלוג עצמו:
 
 ב־9.10 כוכבה בנתה את האתר,
-seffyfisher.github.io/shluchim.
+shluchim.shinlamed.com.
 
 באותו יום החלטתי שהשְׁלוּחִים שלי נקראים ״שְׁלוּחִים״.
 וגם הבלוג נקרא ״שְׁלוּחִים״.
