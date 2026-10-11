@@ -7,7 +7,8 @@ This file is the single reference. The rules at the bottom of `AGENTS.md` point 
 
 - **מה יש עכשיו:** לכל עמוד כותרת ותיאור לחיפוש (`seoTitle`, `seoDescription`) שנפרדים מהטקסט שהקורא רואה, נתונים מובנים (JSON-LD) לגוגל ולמנועי AI, כרטיס שיתוף, סייטמאפ עם hreflang ו־lastmod, עמודי נושא (גרוקבוט, בינה מלאכותית בעבודה וביומיום, עבודת צוות), "עוד סיפורים" בסוף כל פוסט, `robots.txt` ו־`llms.txt`.
 - **מה שומר על זה:** כל build בודק את זה. `npm run seo:check` נכשל אם משהו נשבר, ו־workflow בשם "SEO guard" ב־GitHub מסמן אדום (בלי לחסום פרסום).
-- **מה רק ספי יכול לעשות:** לאמת את האתר ב־Google Search Console וב־Bing Webmaster Tools, לשלוח את הסייטמאפ, ולהפיץ קישורים מחוץ לאתר. הצעדים בסעיף "Manual steps" למטה. בלי זה, האתר פשוט לא מאונדקס.
+- **מה רק ספי יכול לעשות:** לאמת את האתר ב־Google Search Console וב־Bing Webmaster Tools, לשלוח את הסייטמאפ (וגם ל־Brave, שלפי דיווחים Claude נשען עליו), ולהפיץ קישורים מחוץ לאתר. הצעדים בסעיף "Manual steps" למטה. בלי זה, האתר פשוט לא מאונדקס.
+- **מה המחקר ברשת שינה (11.10):** נוסף ping אוטומטי ל־Bing אחרי כל פרסום (IndexNow, מופעל רק אם מגדירים מפתח), נוסף דוח ה־AI של Bing כמדד הראשון והיחיד שמראה ציטוטים ב־Copilot, ונוספו כללי כתיבה למנועי תשובות (התוצאה והמספר בפסקה הראשונה, קישור למקור ראשוני, טבלה להשוואה). לא נמצא שום דבר שמצדיק עוד סכמות או עוד קבצי `llms.txt`.
 - **החלטה פתוחה לספי:** בטקסט שהקורא רואה, בעברית, נשארנו עם הכלל "בלי סוכנים/בוטים". את המונחים האלה שמנו רק במקומות שהקורא לא רואה (`keywords` ב־JSON-LD, `llms.txt`). אם רוצים לדרג גם על ״סוכני AI״ בעברית, צריך להרשות משפט אחד גלוי. ראו "Hebrew vocabulary" למטה.
 
 ## What we found (2026-10-11)
@@ -17,6 +18,21 @@ This file is the single reference. The rules at the bottom of `AGENTS.md` point 
 - None of the target terms existed in the Hebrew copy (`בינה מלאכותית`, `גרוקבוט` appeared zero times) before this work.
 - Grok Bot is new (beta from August 2026) and Hebrew content about it is close to nonexistent. This is the best opening: first-hand Hebrew and English stories about a product people are just starting to search for.
 - Head terms (`בינה מלאכותית`, `AI agents`, `practical AI`) are owned by large publishers. Do not expect to rank for them in the near term. What can rank is long-tail, first-hand material: "GA4 product_page traffic source", "Clerk pricing MRU", "Outlook connector blocked Grok Bot", "גרוקבוט מייל ויומן", and the topic hubs for the mid-tail.
+
+## What the research says (read 2026-10-11)
+
+Google's, OpenAI's and most other primary pages could not be opened from this environment, so most of this rests on secondary coverage. Evidence levels are marked.
+
+- **Solid.** Anthropic's own help page (read directly) lists three crawlers: `ClaudeBot` (training), `Claude-User` (fetches a page when a person asks) and `Claude-SearchBot` (indexes for search results). Blocking the last two can reduce visibility. All honor `robots.txt`.
+- **Consistent across secondary sources.** Google's position on AI Overviews and AI Mode is that ordinary SEO applies: the page must be indexed and eligible for a snippet. Reports of its new guide say `llms.txt`, special markup and AI-specific rewrites are not needed. Nothing here argued for more schema or more machine-only files, so none were added.
+- **Directional, from vendor studies with conflicting numbers.**
+  - Referring domains was the strongest predictor of ChatGPT citations in one 216,000-page study. Third-party mentions (Reddit, Wikipedia, directories) carry weight.
+  - The engines disagree: one study found about 11% domain overlap between ChatGPT and Perplexity. Do not tune for one engine.
+  - The first third of a page earned a large share of citations (44% in one study), tables were cited more often, and Perplexity favored recent pages.
+  - The Princeton GEO paper (KDD 2024), as summarized by others: adding statistics, citations of authoritative sources and expert quotes raised visibility in generated answers by up to about 40% in controlled tests. Keyword stuffing did not help.
+- **Reported, not confirmed.** Claude's web search is widely reported to run on Brave's index (Anthropic has not said so publicly). ChatGPT is widely assumed to lean on Bing, and no source seen confirmed it. Bing's AI Performance report (public preview since February 2026) shows Copilot citations and the queries behind them for verified sites. Agencies claim engines behave differently in Hebrew, with no independent data.
+
+What it changed here: the opt-in IndexNow ping, the Bing AI Performance report as a metric, Brave in the manual steps, and the writing guidance below. Our posts already have what the research favors (real numbers, real chat quotes, screenshots), so the lever that is left is mostly off-site.
 
 ## Where things live
 
@@ -46,6 +62,16 @@ Do this in both languages. Write each language on its own, do not translate word
 5. First paragraph of the post should answer the question the title asks. Headings that say what the section is (`איך זה עבד`, `מה כדאי לקחת מזה`) already work well for AI engines that lift passages. Keep them.
 6. Images keep a meaningful `alt`. Screenshots of real chats are good, they are the first-hand evidence these engines prefer.
 7. After the post ships (manual): Search Console, URL Inspection, paste the new URL, Request indexing.
+
+### Writing for answer engines (guidance, not enforced by the guard)
+
+- The first paragraph says what came out, with the real number. The first third of a page is what gets quoted.
+- Keep what the research favors and we already have: concrete numbers, real chat quotes as text, screenshots with alt text.
+- Link to the primary source when a post leans on one (the official help page, the vendor docs, the original post). The "מקורות" section of the Grok Bot email post is the model.
+- A comparison goes in a Markdown table, not in prose.
+- Set `updated` when a post changes in a way that matters. Some engines favor recent pages.
+- Write both languages and promote the English URL abroad. Most engines quote English sources more.
+- No keyword stuffing, and no FAQ blocks of invented questions.
 
 ### Hebrew vocabulary (standing rule, `PUBLISHING.md`)
 
@@ -77,21 +103,24 @@ When it fails, the message names the file and the fix. Do not silence the guard 
 ## Manual steps (cannot be done from the repo)
 
 1. **Google Search Console.** Add a URL-prefix property for `https://seffyfisher.github.io/shluchim/`. Choose the "HTML tag" method and copy the `content` value. Set it as the repo variable `GOOGLE_SITE_VERIFICATION` (Settings, Secrets and variables, Actions, Variables), or paste it into `VERIFY.google` in `src/config.ts`, deploy, then press Verify. Then Sitemaps, add `sitemap-index.xml`. Then URL Inspection on the homepage and the topic hubs, Request indexing.
-2. **Bing Webmaster Tools.** Import the site from Search Console (fastest), or use the same method with `BING_SITE_VERIFICATION`. Submit the sitemap. Bing's index is reported to feed some AI assistants, so this may matter for GEO as well (not confirmed, treat it as a bonus).
+2. **Bing Webmaster Tools.** Import the site from Search Console (fastest), or use the same method with `BING_SITE_VERIFICATION`. Submit the sitemap. Bing's index is widely assumed to feed Copilot and ChatGPT search (not confirmed). Once verified, open the AI Performance report: it is the one first-party view of AI citations.
 3. **`robots.txt` and the domain.** Crawlers only read `robots.txt` at the root of a host, which on `seffyfisher.github.io/shluchim/` is not ours. With no root file everything is allowed, which is what we want, but the sitemap cannot be announced there, so step 1 and 2 are required, not optional. A custom domain fixes this and also gives the blog its own authority and a clean brand: see "Deploy target" in `README.md`. After switching, check that GitHub redirects the old URLs and that every canonical points to the new domain.
 4. **Off-site mentions and links.** This is the largest lever for both Google and AI answers, and the repo cannot do it. Share each new post where the audience already is: Hebrew and English AI and Grok Bot communities, LinkedIn, Facebook groups, X. For the English posts consider a cross-post that sets a canonical link back to the original. Mentions on third-party pages are what answer engines tend to cite.
 5. **Add public profiles** (LinkedIn, X, GitHub) to `PERSON.sameAs` in `src/config.ts`. It helps search and AI engines tie the blog to one person. Only profiles Seffy is happy to link publicly.
-6. **Optional: IndexNow** (Bing, Yandex) to ping new URLs on publish. Needs a key file and an outbound call from CI. Not set up, because it sends data to a third party and Seffy should decide.
+6. **Brave Search.** Claude's web search is widely reported to use Brave's index. Brave has no full webmaster console. Community posts point to `https://search.brave.com/submit-url` for submitting a URL (not confirmed against Brave's own docs). Submit the homepage and the Grok Bot hubs.
+7. **IndexNow (opt-in).** Pings Bing, Yandex, Naver and Seznam (not Google, not Brave) with the stories that changed, right after a deploy. Only public URLs are sent. To switch it on: pick a key (8 to 128 characters of a-z, A-Z, 0-9 and `-`), add `public/<key>.txt` containing exactly the key, set the repo variable `INDEXNOW_KEY` to the key. The `indexnow` job in `deploy.yml` then runs after each push to `main`. Try it first with `INDEXNOW_KEY=<key> node scripts/indexnow.mjs --dry --before <sha>`. The key file sits under `/shluchim/`, so every submitted URL is inside its directory, which is the strictest reading of the protocol (Yandex documents that rule; the official page could not be opened here).
+8. **Search Console's AI report.** Google announced generative AI performance reports in Search Console in June 2026, rolling out to a subset of sites. Check whether the property has it.
 
 ## Measuring
 
-- Search Console, Performance: filter queries by `גרוקבוט`, `Grok Bot`, `בינה מלאכותית`, `AI agents`; compare weekly. Expect weeks, not days.
-- Once a month, ask ChatGPT, Perplexity, Gemini and Claude the same five questions (for example "what are AI agents doing in everyday work, real stories", "גרוקבוט מייל ויומן בלי קונקטור") and record whether the blog is cited. This is manual, and it is the only honest GEO metric available.
+- Bing Webmaster Tools, AI Performance report: citations in Copilot and Bing's AI summaries, and the grounding queries behind them. No click data and no API yet, and the numbers are volatile (one analysis found a single page holding 69% of citations). Check it monthly.
+- Search Console, Performance: filter queries by `גרוקבוט`, `Grok Bot`, `בינה מלאכותית`, `AI agents`, compare weekly, and look for the generative AI report if it is available. Expect weeks, not days.
+- Once a month, ask ChatGPT, Perplexity, Gemini and Claude the same five questions (for example "what are AI agents doing in everyday work, real stories", "גרוקבוט מייל ויומן בלי קונקטור") and note whether the blog is cited. Manual, and the only way to see the engines that publish no report.
 
 ## Honest limits
 
 - No on-site change makes a brand-new blog on `github.io` rank for `בינה מלאכותית`. This setup gets pages indexed correctly, understood, and eligible for long-tail and Grok Bot queries.
-- `llms.txt` is generated and kept because it is cheap. As of this work, coverage reports that Google's own guidance says Search ignores it and that no AI vendor has confirmed using it. We did not verify that against primary sources. Do not expect a measurable effect.
+- `llms.txt` is generated and kept because it is cheap. Coverage of Google's guide says Search ignores it, and no AI vendor has confirmed using it. We could not open the primary pages to check. Do not expect a measurable effect, and do not add more machine-only files on the strength of it.
 - Structured data makes pages eligible for rich results such as breadcrumbs. It does not raise rankings by itself. JSON-LD `keywords` is ignored by Google.
 - `lastmod` is the post date (or `updated`). It is only as accurate as those fields, so set `updated` when a post changes in a way that matters.
 

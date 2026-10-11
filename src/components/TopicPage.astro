@@ -22,8 +22,8 @@ const jsonLd = [
   breadcrumbNode([{ name: SITES[lang].title, url: abs(lurl(lang)) }, { name: topic.label, url: pageUrl }]),
 ];
 const count = he
-  ? (posts.length === 1 ? 'סיפור אחד' : `${posts.length} סיפורים`)
-  : (posts.length === 1 ? 'One story' : `${posts.length} stories`);
+  ? `${posts.length === 1 ? 'סיפור אחד' : `${posts.length} סיפורים`}, מהחדש לישן`
+  : `${posts.length === 1 ? 'One story' : `${posts.length} stories`}, newest first`;
 ---
 <Base lang={lang} noindex={posts.length === 0} title={topic.title} seoTitle={withBrand(topic.seoTitle, SITES[lang].title)} seoDescription={topic.seoDescription} description={topic.seoDescription}
   alternates={{ he: lurl('he', `topics/${slug}/`), en: lurl('en', `topics/${slug}/`) }} jsonLd={jsonLd}>
@@ -32,8 +32,8 @@ const count = he
     <div class="topic-intro">
       {topic.intro.map((p, i) => <p class={i === 0 ? 'lede' : undefined}>{p}</p>)}
     </div>
-    <p class="meta"><span>{count}</span></p>
   </header>
+  <h2 class="list-label" id="topic-stories">{count}</h2>
   <StoryList posts={posts} lang={lang} />
   <nav class="topic-nav" aria-labelledby="topic-nav-h">
     <h2 class="list-label" id="topic-nav-h">{ui.topicNav}</h2>
