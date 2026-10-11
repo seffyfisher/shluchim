@@ -39,7 +39,7 @@ const aboutCard = he
   </section>
   <div class="cards">
     <article class="card">
-      <p class="kick">{he ? 'הכירו שָׁלוּחַ' : 'Meet a shaliach'}</p>
+      <p class="kick">{he ? 'מִיהוּ שָׁלוּחַ?' : 'Who is a shaliach?'}</p>
       <picture>
         {s.still && <source media="(prefers-reduced-motion: reduce)" srcset={lurl('he', s.still)} type="image/webp" />}
         <img class="avatar" src={lurl('he', s.avatar)} alt="" width="112" height="112" loading="lazy" decoding="async" />
