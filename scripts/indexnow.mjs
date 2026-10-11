@@ -9,8 +9,8 @@ import { urlsFor, payload } from '../src/lib/indexnow.mjs';
 const args = process.argv.slice(2);
 const dry = args.includes('--dry');
 const key = process.env.INDEXNOW_KEY || '';
-const origin = (process.env.SITE_URL || 'https://seffyfisher.github.io').replace(/\/$/, '');
-const base = (process.env.BASE_PATH || '/shluchim').replace(/\/$/, '');
+const origin = (process.env.SITE_URL || 'https://shluchim.shinlamed.com').replace(/\/$/, '');
+const base = (process.env.BASE_PATH || '/').replace(/\/$/, '');
 let before = args[args.indexOf('--before') + 1] || process.env.BEFORE || '';
 if (!before || /^0+$/.test(before)) before = 'HEAD~1';
 

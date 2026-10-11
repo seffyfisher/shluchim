@@ -72,7 +72,7 @@ The three links get their own row, below.
 On mobile they open a bottom sheet, so the cart never gets lost.
 And it all fits on one line even at 360px.
 
-![Option A on mobile: a consent row with a circle to check, and below it three policy links on one line above the payment button.](/shluchim/images/posts/terms-checkbox-390.webp)
+![Option A on mobile: a consent row with a circle to check, and below it three policy links on one line above the payment button.](/images/posts/terms-checkbox-390.webp)
 
 About one workday,
 from "bug?" to a verified "not a bug", and a measured fix.

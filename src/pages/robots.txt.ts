@@ -1,9 +1,8 @@
 import type { APIContext } from 'astro';
 import { lurl } from '../i18n/ui';
 
-// Crawlers only read robots.txt at the ROOT of a host. On the GitHub Pages project site this file is served at
-// /shluchim/robots.txt, which they ignore (no robots.txt at the root = everything allowed, which is what we want).
-// It starts to matter when the site moves to its own domain (SITE_URL=https://... BASE_PATH=/): then it is the root file.
+// Crawlers only read robots.txt at the ROOT of a host. The site is on its own domain (BASE_PATH=/), so this is the root file.
+// (On a sub-path such as the old github.io project site it would be ignored: no root file = everything allowed.)
 // Policy: search engines, AI search/answer engines and AI assistants are all welcome. Do not add Disallow rules for
 // them without Seffy's explicit decision (see SEO-GEO.md).
 export const GET = ({ site }: APIContext) => {

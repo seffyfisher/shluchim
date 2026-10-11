@@ -26,7 +26,7 @@ Kinneret, the writing shaliach, built the profile in two layers.
 A raw layer, and a polished layer.
 
 
-![My request to build the "My Voice Builder" skill, and the reply explaining how it collects texts, builds a two-layer profile and runs blind tests.](/shluchim/images/posts/voice-profile-skill-request.webp)
+![My request to build the "My Voice Builder" skill, and the reply explaining how it collects texts, builds a two-layer profile and runs blind tests.](/images/posts/voice-profile-skill-request.webp)
 
 
 ## Four blind rounds:
@@ -66,7 +66,7 @@ seffy: לקחת את השפה שלי והטון ורק לעזור לקריאות
 ```
 
 
-![My approval in the final round: it's all great and it's my language, just add air, line breaks, punctuation and a period at the end of a sentence.](/shluchim/images/posts/voice-profile-approval.webp)
+![My approval in the final round: it's all great and it's my language, just add air, line breaks, punctuation and a period at the end of a sentence.](/images/posts/voice-profile-approval.webp)
 
 
 ## What came out:

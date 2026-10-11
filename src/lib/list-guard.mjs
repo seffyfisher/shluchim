@@ -38,7 +38,7 @@ export const listGuard = () => ({
   hooks: {
     'astro:build:done': ({ dir, logger }) => {
       if (process.env.SHOW_DRAFTS === '1') return;
-      const base = (process.env.BASE_PATH || '/shluchim').replace(/\/?$/, '/');
+      const base = (process.env.BASE_PATH || '/').replace(/\/?$/, '/');
       const { errs, count } = checkLists(process.cwd(), fileURLToPath(dir), base);
       if (errs.length) throw new Error(`Homepage list guard failed:\n  ${errs.join('\n  ')}`);
       logger.info(`homepage lists OK: ${count} posts, HE and EN in the same order`);

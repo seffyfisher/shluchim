@@ -1,7 +1,7 @@
 {
   "_note": "About page photos. Captions and alt text are DRAFTS for Ben's review: edit only here. Placement: a ```photo <id>``` block in src/content/pages/{he,en}/about.md.",
   "family": {
-    "src": "/shluchim/images/about/sefer-hashluchim-fisher.webp",
+    "src": "/images/about/sefer-hashluchim-fisher.webp",
     "width": 1576,
     "height": 903,
     "display": 640,
@@ -11,7 +11,7 @@
     "alt_en": "An old printed family photo with creases and tears in the paper: a dark-haired woman holds a toddler in a blue kippah, next to a bearded man in a black hat and black suit. A caption printed beside them, in Hebrew, gives their names: Rabbi David Fisher of Chabad House Herzliya, his wife Sylvia and their son Yosef Yitzchak."
   },
   "cover": {
-    "src": "/shluchim/images/about/sefer-hashluchim-cover.webp",
+    "src": "/images/about/sefer-hashluchim-cover.webp",
     "width": 760,
     "height": 1110,
     "display": 260,
@@ -21,7 +21,7 @@
     "alt_en": "A worn blue book cover with gold Hebrew lettering: Sefer HaShluchim, the Book of Shluchim."
   },
   "cypress": {
-    "src": "/shluchim/images/about/kfar-yuval-cypresses.webp",
+    "src": "/images/about/kfar-yuval-cypresses.webp",
     "width": 1081,
     "height": 616,
     "display": 540,

@@ -7,7 +7,7 @@ const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<
 export const satteriImgSize = {
   name: 'img-size',
   image(node, ctx) {
-    const m = /^\/shluchim\/(images\/.+)$/.exec(node.url || '');
+    const m = /^\/(images\/.+)$/.exec(node.url || '');
     if (!m) return;
     let d; try { d = imageSize(readFileSync(new URL('../../public/' + m[1], import.meta.url))); } catch { return; }
     if (!d) return;

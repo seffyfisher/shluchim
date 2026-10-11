@@ -3,7 +3,7 @@ backend:
   repo: seffyfisher/shluchim
   branch: main
 media_folder: public/images
-public_folder: /shluchim/images
+public_folder: /images
 # Multilingual mode (Sveltia CMS / Decap-compatible): Hebrew + English side by side in one editor.
 # multiple_folders -> src/content/posts/he/<slug>.md and src/content/posts/en/<slug>.md (same file name = a pair).
 i18n:
