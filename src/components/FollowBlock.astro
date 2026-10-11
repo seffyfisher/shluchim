@@ -16,13 +16,13 @@ const ui = t(lang);
 const prompt = followPrompt(lang, { feedUrl: new URL(lurl(lang, 'rss.xml'), Astro.site).href });
 const id = `follow-${placement}`; // one block per placement per page, so ids stay unique
 ---
-<section class={`follow follow-${placement}`} aria-labelledby={`${id}-q`}>
+<div class={`follow follow-${placement}`} role="group" aria-labelledby={`${id}-q`}>
   <p class="follow-q" id={`${id}-q`}>{ui.followQ}</p>
   <button type="button" class="follow-btn follow-copy" data-prompt={prompt} data-label={ui.followLabel}>
     <span class="idle">{ui.followCopy}</span><span class="done">{ui.followCopied}</span>
   </button>
   <p class="follow-status" role="status" data-ok={ui.followDone} data-fail={ui.followCopyFail}></p>
-</section>
+</div>
 <script>
   for (const btn of document.querySelectorAll<HTMLButtonElement>('.follow-copy')) {
     const box = btn.closest('.follow')!;
@@ -36,7 +36,7 @@ const id = `follow-${placement}`; // one block per placement per page, so ids st
       if (!ok) { // clipboard refused (some in-app browsers): show the text, selected, so it can be copied by hand
         const ta = document.createElement('textarea');
         ta.className = 'follow-manual'; ta.readOnly = true; ta.rows = 8; ta.value = prompt; ta.setAttribute('aria-label', btn.dataset.label!);
-        status.after(ta); ta.focus(); ta.select();
+        status.after(ta); ta.focus(); ta.select(); ta.scrollTop = 0; // select() scrolls to the end; start the reader at the top
       }
       btn.toggleAttribute('data-done', ok);
       status.toggleAttribute('data-failed', !ok);
