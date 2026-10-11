@@ -1,0 +1,13 @@
+---
+import TopicPage from '../../components/TopicPage.astro';
+import { TOPIC_SLUGS } from '../../data/topics.mjs';
+import { getTopicPosts } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const slugs = [];
+  for (const slug of TOPIC_SLUGS) if ((await getTopicPosts(slug, 'he')).length) slugs.push(slug);
+  return slugs.map((slug) => ({ params: { slug } }));
+}
+const { slug } = Astro.params;
+---
+<TopicPage lang="he" slug={slug as any} />

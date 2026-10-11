@@ -1,6 +1,7 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { SHOW_DRAFTS } from '../config';
 import { LANG_META, lurl, type Lang } from '../i18n/ui';
+import { TOPICS } from '../data/topics.mjs';
 
 type Entry = CollectionEntry<'posts'> | CollectionEntry<'pages'>;
 /** Language of an entry: from its folder (he/ or en/). */
@@ -26,6 +27,27 @@ export async function getPosts(lang: Lang = 'he') {
 }
 
 export const postUrl = (p: CollectionEntry<'posts'>) => lurl(langOf(p), `posts/${slugOf(p)}/`);
+
+type TopicSlug = keyof typeof TOPICS;
+/** Topics of a post: name (`label`), short meta-line form (`chip`) and hub URL, in the post's language. */
+export const topicsOf = (p: CollectionEntry<'posts'>, lang: Lang = langOf(p)) =>
+  ((p.data.topics ?? []) as TopicSlug[]).map((slug) => ({ slug, label: TOPICS[slug][lang].label, chip: TOPICS[slug][lang].chip, href: lurl(lang, `topics/${slug}/`) }));
+
+/** Posts of one topic, newest first (same list rules as getPosts). */
+export async function getTopicPosts(slug: string, lang: Lang) {
+  return (await getPosts(lang)).filter((p) => (p.data.topics as string[] | undefined)?.includes(slug));
+}
+
+/** Up to `n` other stories: most shared topics first, then newest. Always fills up from the newest posts. */
+export function relatedPosts(all: CollectionEntry<'posts'>[], current: CollectionEntry<'posts'>, n = 3) {
+  const mine = new Set(current.data.topics ?? []);
+  return all
+    .filter((p) => p.id !== current.id)
+    .map((p) => ({ p, shared: (p.data.topics ?? []).filter((x) => mine.has(x)).length }))
+    .sort((a, b) => b.shared - a.shared || b.p.data.date.valueOf() - a.p.data.date.valueOf())
+    .slice(0, n)
+    .map((x) => x.p);
+}
 
 /** The published (or, in preview, draft) counterpart of a post in the other language, if any. */
 export async function getTranslation(p: CollectionEntry<'posts'>) {

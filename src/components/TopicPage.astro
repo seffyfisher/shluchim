@@ -1,0 +1,45 @@
+---
+// Topic hub: /topics/<slug>/ (he) and /en/topics/<slug>/ (en). A short intro and every story on the topic.
+import Base from '../layouts/Base.astro';
+import StoryList from './StoryList.astro';
+import { getTopicPosts, postUrl } from '../lib/posts';
+import { TOPICS, TOPIC_SLUGS } from '../data/topics.mjs';
+import { lurl, t, type Lang } from '../i18n/ui';
+import { SITES } from '../config';
+import { pageNode, breadcrumbNode, nodeIds, withBrand } from '../lib/seo';
+interface Props { lang: Lang; slug: keyof typeof TOPICS }
+const { lang, slug } = Astro.props;
+const he = lang === 'he';
+const ui = t(lang);
+const topic = TOPICS[slug][lang];
+const posts = await getTopicPosts(slug, lang);
+const others = TOPIC_SLUGS.filter((s) => s !== slug) as (keyof typeof TOPICS)[];
+const abs = (p: string) => new URL(p, Astro.site).href;
+const pageUrl = abs(lurl(lang, `topics/${slug}/`));
+const ids = nodeIds(abs(lurl('he')), abs(lurl(lang)));
+const jsonLd = [
+  pageNode({ type: 'CollectionPage', url: pageUrl, name: topic.title, description: topic.seoDescription, lang, websiteId: ids.website, list: posts.map((p) => ({ name: p.data.title, url: abs(postUrl(p)) })) }),
+  breadcrumbNode([{ name: SITES[lang].title, url: abs(lurl(lang)) }, { name: topic.label, url: pageUrl }]),
+];
+const count = he
+  ? (posts.length === 1 ? 'סיפור אחד' : `${posts.length} סיפורים`)
+  : (posts.length === 1 ? 'One story' : `${posts.length} stories`);
+---
+<Base lang={lang} noindex={posts.length === 0} title={topic.title} seoTitle={withBrand(topic.seoTitle, SITES[lang].title)} seoDescription={topic.seoDescription} description={topic.seoDescription}
+  alternates={{ he: lurl('he', `topics/${slug}/`), en: lurl('en', `topics/${slug}/`) }} jsonLd={jsonLd}>
+  <header class="page-head">
+    <h1>{topic.title}</h1>
+    <div class="topic-intro">
+      {topic.intro.map((p, i) => <p class={i === 0 ? 'lede' : undefined}>{p}</p>)}
+    </div>
+    <p class="meta"><span>{count}</span></p>
+  </header>
+  <StoryList posts={posts} lang={lang} />
+  <nav class="topic-nav" aria-labelledby="topic-nav-h">
+    <h2 class="list-label" id="topic-nav-h">{ui.topicNav}</h2>
+    <ul>{others.map((s) => <li><a href={lurl(lang, `topics/${s}/`)}>{TOPICS[s][lang].label}</a></li>)}</ul>
+  </nav>
+  <nav class="post-foot" aria-label={ui.nav}>
+    <a class="back" href={lurl(lang)}>{ui.back}</a>
+  </nav>
+</Base>

@@ -3,7 +3,8 @@ import Base from '../layouts/Base.astro';
 import FeedbackBlock from './FeedbackBlock.astro';
 import { getCollection, render } from 'astro:content';
 import { lurl, type Lang } from '../i18n/ui';
-import { ABOUT_AVATAR } from '../config';
+import { ABOUT_AVATAR, SITES } from '../config';
+import { pageNode, breadcrumbNode, nodeIds, withBrand } from '../lib/seo';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const url = (p: string) => lurl('he', p); // shared assets
@@ -20,8 +21,18 @@ const rendered = page ? await render(page) : null;
 const Content = rendered?.Content;
 const title = page?.data.title ?? 'About';
 const description = page?.data.description ?? 'Why this blog exists, and a bit about the person who works with the shluchim.';
+// SEO: search copy and an AboutPage node whose main entity is the author (Person) declared on every page.
+const abs = (p: string) => new URL(p, Astro.site).href;
+const ids = nodeIds(abs(lurl('he')), abs(lurl(lang)));
+const seoTitle = page?.data.seoTitle ? withBrand(page.data.seoTitle, SITES[lang].title) : undefined;
+const seoDescription = page?.data.seoDescription ?? description;
+const pageUrl = abs(lurl(lang, 'about/'));
+const jsonLd = [
+  pageNode({ type: 'AboutPage', url: pageUrl, name: title, description: seoDescription, lang, websiteId: ids.website, mainEntityId: ids.person }),
+  breadcrumbNode([{ name: SITES[lang].title, url: abs(lurl(lang)) }, { name: title, url: pageUrl }]),
+];
 ---
-<Base noindex={!page} title={title} description={description} bodyClass="page-about" lang={lang} alternates={{ he: lurl('he', 'about/'), ...(lang === 'en' || enExists ? { en: lurl('en', 'about/') } : {}) }}>
+<Base noindex={!page} title={title} description={description} seoTitle={seoTitle} seoDescription={seoDescription} jsonLd={jsonLd} bodyClass="page-about" lang={lang} alternates={{ he: lurl('he', 'about/'), ...(lang === 'en' || enExists ? { en: lurl('en', 'about/') } : {}) }}>
   <style slot="head" set:html={`.page-about{--sheet:url(${url(av.sheetLg)})}@media (max-width:63.99rem){.page-about{--sheet:url(${url(av.sheetSm)})}}`}></style>
   <div class="about">
     <article class="prose">

@@ -1,0 +1,28 @@
+---
+// The numbered story list, shared by the homepage and the topic hubs.
+import type { CollectionEntry } from 'astro:content';
+import { postUrl, formatDateShort, topicsOf } from '../lib/posts';
+import { t, type Lang } from '../i18n/ui';
+interface Props { posts: CollectionEntry<'posts'>[]; lang: Lang }
+const { posts, lang } = Astro.props;
+const ui = t(lang);
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+<ol class="stories" reversed>
+  {posts.map((p, i) => {
+    const topics = topicsOf(p, lang);
+    return (
+      <li class="story">
+        <span class="num" aria-hidden="true">{pad(posts.length - i)}</span>
+        <p class="meta">
+          <time datetime={p.data.date.toISOString().slice(0, 10)}>{formatDateShort(p.data.date, lang)}</time>
+          {topics.length ? <span>{topics.map((tp, k) => <>{k > 0 && ', '}<a href={tp.href}>{tp.chip}</a></>)}</span> : null}
+          {p.data.tags?.length ? <span>{p.data.tags.join(', ')}</span> : null}
+          {p.data.draft && <span class="badge">{ui.draft}</span>}
+        </p>
+        <h3><a href={postUrl(p)}>{p.data.title}</a></h3>
+        <p class="dek">{p.data.description}</p>
+      </li>
+    );
+  })}
+</ol>
