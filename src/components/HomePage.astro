@@ -60,7 +60,7 @@ const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = 
     <article class="card">
       <p class="kick">{aboutCard.kick}</p>
       <h2>{aboutCard.title}</h2>
-      {aboutCard.text.map((line) => <p class="about-line">{line.map((part) => typeof part === 'string' ? part : <a href={part.href} rel="noopener">{part.t}</a>)}</p>)}
+      {aboutCard.text.map((line) => <p class="about-line">{line.map((part) => typeof part === 'string' ? part : <a href={part.href} target="_blank" rel="noopener">{part.t}</a>)}</p>)}
       <a class="btn" href={lurl(lang, 'about/')}>{aboutCard.btn}</a>
     </article>
   </div>
