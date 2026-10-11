@@ -9,8 +9,12 @@
    date: 2026-10-09
    draft: true
    tags: ["אופציונלי"]
+   seoTitle: "מה שאנשים היו מקלידים, עד כ־50 תווים"
+   seoDescription: "70 עד 160 תווים. התשובה והמספר האמיתי כבר במשפט הראשון."
+   topics: ["ai-at-work"]
    ---
    ```
+   `seoTitle`, `seoDescription` ו־`topics` חובה בכל פוסט, בעברית ובאנגלית. הם קובעים מה מופיע בגוגל ובמנועי AI, ולא משנים את מה שהקורא רואה בעמוד. הכללים: [SEO-GEO.md](SEO-GEO.md). `npm run seo:check` חייב לעבור לפני פרסום.
 3. `draft: true` נשאר עד אישור מפורש של ספי. בלי יוצא מן הכלל.
 4. טקסט שנכתב בשם ספי (גוף ראשון) כפוף ל־`/workspace/voice/seffy-voice-profile.md`.
 5. תצוגה מקדימה לספי: `export PATH=~/.local/node22/bin:$PATH && npm run build:drafts && npm run preview:drafts`
@@ -43,7 +47,7 @@ Exception (Seffy, 2026-10-10): the site tagline (`tagline` in `src/config.ts`) i
 ## English translations (/en/)
 - Hebrew posts: `src/content/posts/he/<slug>.md` (URL unchanged: `/shluchim/posts/<slug>/`).
 - English posts: `src/content/posts/en/<same file name>.md` -> `/shluchim/en/posts/<slug>/`. Same file name as the Hebrew one (the CMS, the sitemap alternates and the switcher pair them by it).
-- Frontmatter: `title`, `description` (150–160 chars, rewritten for readers abroad), `date` (SAME as the Hebrew post), `draft: true` until Seffy approves, `lang: en`, `translationKey: "<Hebrew file name without .md>"`.
+- Frontmatter: `title`, `description` (150–160 chars, rewritten for readers abroad), `seoTitle`, `seoDescription` (70–160 chars) and `topics` (same topics as the Hebrew post), `date` (SAME as the Hebrew post), `draft: true` until Seffy approves, `lang: en`, `translationKey: "<Hebrew file name without .md>"`. Search-copy rules: [SEO-GEO.md](SEO-GEO.md).
 - Chat bubbles: translate the text; add a line `original: <Hebrew text>` right after a message to show a collapsible "Hebrew original" under it.
 - No niqqud in English text (only on `original:` lines). The build warns about it, and about Hebrew posts with no English pair.
 - About in English: `src/content/pages/en/about.md` (`title`, `description`, `lang: en`, `translationKey: about`). Team: `name_en`, `role_en`, `category_en`, `example_en` in `src/data/shluchim.json`.

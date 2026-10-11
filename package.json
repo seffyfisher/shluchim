@@ -11,7 +11,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "test": "node --test src/lib/remark-chat.test.mjs",
+    "test": "node --experimental-strip-types --no-warnings --test src/lib/remark-chat.test.mjs src/lib/seo.test.mjs src/lib/seo-check.test.mjs src/lib/indexnow.test.mjs",
+    "seo:check": "SEO_STRICT=1 astro build",
     "build:drafts": "SHOW_DRAFTS=1 astro build",
     "preview:drafts": "SHOW_DRAFTS=1 astro preview"
   },

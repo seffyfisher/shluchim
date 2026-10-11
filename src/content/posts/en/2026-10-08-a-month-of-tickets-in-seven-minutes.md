@@ -1,6 +1,9 @@
 ---
 title: "A whole month of tickets, in seven minutes."
 description: "A monthly summary of 9,001 support tickets against our help center: 16 draft FAQs and two real production bugs."
+seoTitle: "9,001 support tickets summarized in 7 minutes"
+seoDescription: "An AI agent summarized 30 days and 9,001 support tickets in about 7 minutes: 16 draft FAQs, ranked topics and two real production bugs."
+topics: ["ai-at-work"]
 date: 2026-10-08
 draft: false
 lang: en

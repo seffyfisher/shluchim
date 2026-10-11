@@ -1,6 +1,9 @@
 ---
 title: "ארבע שאלות מ־Chartbeat, ותשובות עם מספרים אמיתיים."
 description: "מענה מוכן להדבקה לספק, עם נפחי pageviews שנמשכו מ־GA4 באותו בוקר."
+seoTitle: "מענה לספק עם נתוני GA4 אמיתיים, בעזרת AI"
+seoDescription: "Chartbeat שלחו ארבע שאלות מכירה. שלוח האנליטיקס משך מ־GA4 נתוני pageviews אמיתיים וכתב מענה מוכן להדבקה, באותו בוקר."
+topics: ["ai-at-work"]
 date: 2026-09-25
 draft: false
 lang: he

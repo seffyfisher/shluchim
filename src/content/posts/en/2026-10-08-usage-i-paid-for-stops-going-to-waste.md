@@ -1,6 +1,9 @@
 ---
 title: "Usage I paid for no longer goes to waste."
 description: "A routine that warns me before my Grok Bot and Cursor quotas reset, and stays quiet when there's no reason to speak."
+seoTitle: "Grok Bot usage alerts before your quota resets"
+seoDescription: "A routine that warns me before my Grok Bot and Cursor usage quotas reset, and stays quiet otherwise, so paid usage stops going to waste."
+topics: ["grok-bot", "everyday-ai"]
 date: 2026-10-08
 draft: false
 lang: en

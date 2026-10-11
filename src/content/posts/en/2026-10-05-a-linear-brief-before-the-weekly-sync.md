@@ -1,6 +1,9 @@
 ---
 title: "A Linear brief before the weekly sync."
 description: "A routine that writes a Hebrew brief from Linear every Monday at 10:00, and caught 7 stuck tasks on its very first run."
+seoTitle: "A weekly Linear brief written by an AI agent"
+seoDescription: "An AI routine writes a Hebrew team brief from Linear every Monday at 10:00. On its first run it flagged 7 archived tasks still marked active."
+topics: ["ai-at-work"]
 date: 2026-10-03
 draft: false
 lang: en

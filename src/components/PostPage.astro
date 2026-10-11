@@ -1,11 +1,12 @@
 ---
 import { render, type CollectionEntry } from 'astro:content';
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import FeedbackBlock from './FeedbackBlock.astro';
-import { langOf, postUrl, getTranslation, formatDate, readingMinutes, readingLabel } from '../lib/posts';
+import { langOf, postUrl, getPosts, getTranslation, formatDate, formatDateShort, readingMinutes, readingLabel, topicsOf, relatedPosts } from '../lib/posts';
 import { lurl, t } from '../i18n/ui';
-import { REPO } from '../config';
+import { REPO, SITES, SEO_KEYWORDS, OG_IMAGE } from '../config';
+import { blogPostingNode, breadcrumbNode, nodeIds, withBrand, isoDate, wordCount } from '../lib/seo';
 interface Props { post: CollectionEntry<'posts'> }
 const { post } = Astro.props;
 const lang = langOf(post);
@@ -15,13 +16,40 @@ const d = post.data;
 const tr = await getTranslation(post);
 const alternates = tr ? { [langOf(tr)]: postUrl(tr) } : {};
 const editUrl = `https://github.com/${REPO}/edit/main/${post.filePath ?? `src/content/posts/${post.id}.md`}`;
+
+const topics = topicsOf(post, lang);
+const related = relatedPosts(await getPosts(lang), post);
+
+// SEO: <title> / meta description come from seoTitle / seoDescription when set; the page itself keeps title + description.
+const abs = (p: string) => new URL(p, Astro.site).href;
+const pageUrl = abs(postUrl(post));
+const seoTitle = d.seoTitle ? withBrand(d.seoTitle, SITES[lang].title) : undefined;
+const seoDescription = d.seoDescription ?? d.description;
+const modified = d.updated ?? d.date;
+const cover = d.cover ? await getImage({ src: d.cover, width: 1200, format: 'jpg' }) : undefined;
+const ids = nodeIds(abs(lurl('he')), abs(lurl(lang)));
+const keywords = [...new Set([...topics.map((x) => x.label), ...(d.tags ?? []), ...SEO_KEYWORDS[lang]])];
+const jsonLd = [
+  blogPostingNode({
+    url: pageUrl, headline: d.title, description: seoDescription, lang, published: isoDate(d.date), modified: isoDate(modified),
+    image: cover ? abs(cover.src) : abs(lurl('he', OG_IMAGE.file[lang])), blogId: ids.blog, personId: ids.person, keywords, section: topics[0]?.label, words: wordCount(post.body),
+  }),
+  breadcrumbNode([
+    { name: SITES[lang].title, url: abs(lurl(lang)) },
+    ...(topics[0] ? [{ name: topics[0].label, url: abs(topics[0].href) }] : []),
+    { name: d.title, url: pageUrl },
+  ]),
+];
 ---
-<Base title={d.title} description={d.description} noindex={d.draft} lang={lang} alternates={alternates}>
+<Base title={d.title} description={d.description} seoTitle={seoTitle} seoDescription={seoDescription} noindex={d.draft} lang={lang} alternates={alternates}
+  ogType="article" published={d.date} modified={modified} section={topics[0]?.label} tags={topics.map((x) => x.label)}
+  image={cover?.src} imageAlt={d.coverAlt} jsonLd={jsonLd}>
   <article>
     <header class="post-head">
       <p class="meta">
         <time datetime={d.date.toISOString().slice(0, 10)}>{formatDate(d.date, lang)}</time>
         <span>{readingLabel(readingMinutes(post.body, lang), lang)}</span>
+        {topics.length ? <span>{topics.map((tp, k) => <>{k > 0 && ', '}<a href={tp.href}>{tp.chip}</a></>)}</span> : null}
         {d.tags?.length ? <span>{d.tags.join(', ')}</span> : null}
         {d.draft && <span class="badge">{ui.draft}</span>}
       </p>
@@ -33,6 +61,19 @@ const editUrl = `https://github.com/${REPO}/edit/main/${post.filePath ?? `src/co
       <Content />
     </div>
   </article>
+  {related.length > 0 && (
+    <aside class="related" aria-labelledby="related-h">
+      <h2 class="list-label" id="related-h">{ui.related}</h2>
+      <ul>
+        {related.map((r) => (
+          <li>
+            <h3><a href={postUrl(r)}>{r.data.title}</a></h3>
+            <p class="meta"><time datetime={r.data.date.toISOString().slice(0, 10)}>{formatDateShort(r.data.date, lang)}</time></p>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )}
   {lang === 'he' && <FeedbackBlock placement="post" />}
   <nav class="post-foot" aria-label={ui.postNav}>
     <a class="back" href={lurl(lang)}>{ui.back}</a>

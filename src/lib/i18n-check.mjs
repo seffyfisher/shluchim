@@ -3,6 +3,8 @@
 // - Niqqud in an English post outside "original:" lines / ```chat-he blocks -> warning (niqqud is Hebrew-only).
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { TOPIC_SLUGS } from '../data/topics.mjs';
+import { parseFrontmatter } from './frontmatter.mjs';
 
 const fm = (src) => {
   const m = /^---\n([\s\S]*?)\n---/.exec(src);
@@ -10,7 +12,7 @@ const fm = (src) => {
   return { draft: get('draft'), key: get('translationKey') };
 };
 const read = (dir) => existsSync(dir)
-  ? readdirSync(dir).filter((f) => f.endsWith('.md')).map((f) => { const src = readFileSync(join(dir, f), 'utf8'); const d = fm(src); return { f, src, key: d.key || f.replace(/\.md$/, ''), draft: d.draft !== 'false' }; })
+  ? readdirSync(dir).filter((f) => f.endsWith('.md')).map((f) => { const src = readFileSync(join(dir, f), 'utf8'); const d = fm(src); const pf = parseFrontmatter(src).data; return { f, src, key: d.key || f.replace(/\.md$/, ''), draft: d.draft !== 'false', date: String(pf.date ?? '').slice(0, 10) || undefined, updated: String(pf.updated ?? '').slice(0, 10) || undefined, topics: Array.isArray(pf.topics) ? pf.topics : [] }; })
   : [];
 
 export function checkTranslations(root) {
@@ -39,9 +41,24 @@ export function urlPairs(root, siteBase) {
   const en = read(join(root, 'src/content/posts/en')).filter((p) => !p.draft);
   const slug = (f) => f.replace(/\.md$/, '');
   const pairs = [['', 'en/'], ['team/', 'en/team/']];
+  for (const slug of TOPIC_SLUGS) if (he.some((p) => p.topics.includes(slug)) && en.some((p) => p.topics.includes(slug))) pairs.push([`topics/${slug}/`, `en/topics/${slug}/`]);
   if (existsSync(join(root, 'src/content/pages/en/about.md'))) pairs.push(['about/', 'en/about/']);
   for (const e of en) { const h = he.find((x) => x.key === e.key); if (h) pairs.push([`posts/${slug(h.f)}/`, `en/posts/${slug(e.f)}/`]); }
   const map = new Map();
-  for (const [h, e] of pairs) { const links = [{ lang: 'he-IL', url: siteBase + h }, { lang: 'en', url: siteBase + e }]; map.set(siteBase + h, links); map.set(siteBase + e, links); }
+  for (const [h, e] of pairs) { const links = [{ lang: 'he', url: siteBase + h }, { lang: 'en', url: siteBase + e }, { lang: 'x-default', url: siteBase + e }]; map.set(siteBase + h, links); map.set(siteBase + e, links); }
+  return map;
+}
+
+/** Sitemap <lastmod>: a post's `updated` (else `date`); index and topic pages take their newest story. Only dates we really know. */
+export function lastmods(root, siteBase) {
+  const map = new Map();
+  const when = (p) => [p.date, p.updated].filter(Boolean).sort().pop();
+  const newest = (ps) => ps.map(when).filter(Boolean).sort().pop();
+  for (const [lang, prefix] of [['he', ''], ['en', 'en/']]) {
+    const posts = read(join(root, `src/content/posts/${lang}`)).filter((p) => !p.draft && p.f !== 'example-draft.md');
+    for (const p of posts) map.set(`${siteBase}${prefix}posts/${p.f.replace(/\.md$/, '')}/`, when(p));
+    if (posts.length) map.set(`${siteBase}${prefix}`, newest(posts));
+    for (const slug of TOPIC_SLUGS) { const ps = posts.filter((p) => p.topics.includes(slug)); if (ps.length) map.set(`${siteBase}${prefix}topics/${slug}/`, newest(ps)); }
+  }
   return map;
 }

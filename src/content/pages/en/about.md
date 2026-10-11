@@ -1,6 +1,8 @@
 ---
 title: About
 description: "Why this blog exists, and a bit about the guy who works with the shluchim."
+seoTitle: "About Seffy Fisher and his AI agents (shluchim)"
+seoDescription: "Who Seffy Fisher is, why this blog exists, and how his AI agents, called shluchim, got their name. Practical, everyday AI with Grok Bot, no fluff."
 draft: false
 lang: en
 translationKey: "about"

@@ -1,6 +1,9 @@
 ---
 title: "A weekly Clarity digest that stays quiet when there's nothing to say."
 description: "Every Monday my Clarity AI agent reports rage clicks, dead clicks and problem session recordings, but only when something actually matters."
+seoTitle: "A weekly Microsoft Clarity report from an AI agent"
+seoDescription: "Every Monday my AI agent reports rage clicks, dead clicks and problem session recordings from Microsoft Clarity, and stays quiet when nothing matters."
+topics: ["ai-at-work"]
 date: 2026-09-28
 draft: false
 lang: en

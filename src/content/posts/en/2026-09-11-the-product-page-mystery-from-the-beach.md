@@ -1,6 +1,9 @@
 ---
 title: "From my phone, at the beach: a GA4 mystery dressed up as a campaign."
 description: "A fake traffic source in GA4 was logging 20,000 sessions a week. My AI agents tracked it down and fixed it while I stayed on the beach."
+seoTitle: "A fake GA4 traffic source, fixed by AI agents"
+seoDescription: "A fake product_page traffic source in GA4 logged 20,000 sessions a week. The cause was a dataLayer field named source. AI agents fixed it from my phone."
+topics: ["ai-at-work", "agent-teamwork"]
 date: 2026-09-09
 draft: false
 lang: en

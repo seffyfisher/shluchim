@@ -2,6 +2,8 @@
 import Base from '../layouts/Base.astro';
 import { lurl, type Lang } from '../i18n/ui';
 import shluchim from '../data/shluchim.json';
+import { SITES } from '../config';
+import { pageNode, breadcrumbNode, nodeIds, withBrand } from '../lib/seo';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const he = lang === 'he';
@@ -15,10 +17,25 @@ const groups = [...new Set(people.map((s) => s.category))].map((c) => ({ name: c
 const EAGER = 4; // first cards are above the fold on mobile
 let i = 0;
 const slug = (c: string) => c.toLowerCase().replace(/\s+/g, '-');
+// SEO: search copy + CollectionPage node.
+const n = people.length;
+const seoTitle = withBrand(he ? `צוות השְׁלוּחִים: ${n} עוזרי AI ומה כל אחד עושה` : `The team: ${n} AI agents and what each one does`, SITES[lang].title);
+const seoDescription = he
+  ? `הצוות המלא של ספי: ${n} עוזרי AI. מנהל צוות, עיצוב, פיתוח, אנליטיקס ועוד. מי הם ומה כל אחד עושה, עם דוגמה לכל אחד.`
+  : `Meet Seffy's full team of ${n} AI agents: a team manager, design, development, analytics and more. Who they are and what each one does.`;
+const abs = (p: string) => new URL(p, Astro.site).href;
+const ids = nodeIds(abs(lurl('he')), abs(lurl(lang)));
+const pageUrl = abs(lurl(lang, 'team/'));
+const pageName = he ? 'השְׁלוּחִים' : 'The Shluchim';
+const jsonLd = [
+  pageNode({ type: 'CollectionPage', url: pageUrl, name: pageName, description: seoDescription, lang, websiteId: ids.website }),
+  breadcrumbNode([{ name: SITES[lang].title, url: abs(lurl(lang)) }, { name: pageName, url: pageUrl }]),
+];
 ---
 <Base lang={lang} alternates={{ he: lurl('he', 'team/'), en: lurl('en', 'team/') }}
-  title={he ? 'השְׁלוּחִים' : 'The Shluchim'}
-  description={he ? 'כל השְׁלוּחִים של ספי: מי הם ומה כל אחד עושה.' : "All of Seffy's shluchim: who they are and what each one does."}>
+  title={pageName}
+  description={he ? 'כל השְׁלוּחִים של ספי: מי הם ומה כל אחד עושה.' : "All of Seffy's shluchim: who they are and what each one does."}
+  seoTitle={seoTitle} seoDescription={seoDescription} jsonLd={jsonLd}>
   <header class="page-head">
     {he ? <h1>השְׁלוּחִים</h1> : <h1>The Shluchim</h1>}
     {he ? (

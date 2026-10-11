@@ -21,6 +21,9 @@ jobs:
       # Optional repo variables (Settings → Variables). Empty = defaults in astro.config.mjs.
       SITE_URL: ${{ vars.SITE_URL }}
       BASE_PATH: ${{ vars.BASE_PATH }}
+      # Search Console / Bing Webmaster ownership tags (see SEO-GEO.md). Empty = no tag.
+      GOOGLE_SITE_VERIFICATION: ${{ vars.GOOGLE_SITE_VERIFICATION }}
+      BING_SITE_VERIFICATION: ${{ vars.BING_SITE_VERIFICATION }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -42,3 +45,26 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Opt-in (SEO-GEO.md, "IndexNow"): after a push to main deploys, tell Bing and friends about the stories that changed.
+  # Skipped unless the repo variable INDEXNOW_KEY is set. A failure here never affects the published site.
+  indexnow:
+    needs: deploy
+    if: ${{ github.event_name == 'push' && vars.INDEXNOW_KEY != '' }}
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    permissions:
+      contents: read
+    env:
+      INDEXNOW_KEY: ${{ vars.INDEXNOW_KEY }}
+      SITE_URL: ${{ vars.SITE_URL }}
+      BASE_PATH: ${{ vars.BASE_PATH }}
+      BEFORE: ${{ github.event.before }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/indexnow.mjs

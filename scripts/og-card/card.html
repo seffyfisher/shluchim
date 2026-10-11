@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="he"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Noa';src:url('../../public/fonts/noa-shalev-regular-AlefAlefAlef.woff2') format('woff2');}
+@font-face{font-family:'Miriam';src:url('../../src/fonts/miriam-libre-var.woff2') format('woff2');font-weight:400 700;}
+@font-face{font-family:'Young';src:url('../../public/fonts/young-serif-400.woff2') format('woff2');}
+*{box-sizing:border-box;margin:0}
+body{width:1200px;height:630px;background:#fafafa;color:#171717;font-family:'Miriam',Arial,sans-serif;position:relative;overflow:hidden}
+.frame{position:absolute;inset:0;padding:64px 72px 0}
+.brand{font-size:150px;line-height:1.05;font-weight:400}
+body.he .brand{font-family:'Noa',serif}
+body.en .brand{font-family:'Young',Georgia,serif;font-size:128px;letter-spacing:-.01em}
+.head{font-size:50px;font-weight:700;line-height:1.25;margin-top:18px;max-width:1000px}
+.sub{font-size:30px;color:#595959;margin-top:14px;line-height:1.4;max-width:980px}
+.row{position:absolute;bottom:0;left:0;right:0;height:196px;border-top:2px solid #171717;display:flex;align-items:center;justify-content:center;gap:22px;padding-inline:60px}
+.row img{width:128px;height:128px;object-fit:contain;display:block}
+body.he{direction:rtl}body.en{direction:ltr}
+</style></head>
+<body class="he">
+<div class="frame">
+  <div class="brand" id="brand"></div>
+  <div class="head" id="head"></div>
+  <div class="sub" id="sub"></div>
+</div>
+<div class="row" id="row"></div>
+<script>
+const q=new URLSearchParams(location.search);const lang=q.get('lang')||'he';
+document.body.className=lang;document.documentElement.lang=lang;
+const T={he:{b:'שְׁלוּחִים',h:'סיפורים על בינה מלאכותית בעבודה אמיתית',s:'עוזרי AI שעושים עבודה אמיתית בשביל ספי, עם גרוקבוט (Grok Bot)'},
+en:{b:'Shluchim',h:'Practical, everyday AI agent stories',s:'AI agents doing real work for Seffy, built on Grok Bot'}}[lang];
+brand.textContent=T.b;head.textContent=T.h;sub.textContent=T.s;
+for(const n of ['basher','nitza','kochava','dima','anali','chef','shlomby']){const i=new Image();i.src='../../public/shluchim/'+n+'-still.webp';row.appendChild(i);}
+</script></body></html>
