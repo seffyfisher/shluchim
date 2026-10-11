@@ -361,6 +361,10 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 
 /* ---------- Home: two cards above the story list (the cards are the section nav, so the masthead only keeps the language link) ---------- */
 .masthead .lang-row { margin: 0 0 .75rem; justify-content: flex-end; }
+/* The language link is a pill button (same look as .card .btn), so it reads as a control and not as loose text. */
+.masthead .lang-row .lang { margin-inline-start: 0; padding-inline: 1.1rem; border: 1px solid var(--fg); border-radius: 999px; color: var(--fg); font-size: var(--step--1); font-weight: 600; text-decoration: none; }
+.masthead .lang-row .lang:hover { background: var(--fg); color: var(--bg); text-decoration: none; }
+.masthead .lang-row .lang:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
 .cards { display: grid; gap: 1rem; margin-bottom: 3rem; }
 @media (min-width: 48rem) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .card { display: flex; flex-direction: column; align-items: flex-start; gap: .5rem; min-width: 0; padding: 1.25rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }

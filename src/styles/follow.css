@@ -25,7 +25,6 @@
 .follow-manual:focus-visible { outline: 2px solid var(--fg); outline-offset: 0; }
 
 /* placements */
-.follow-home { max-width: none; margin-bottom: 3rem; }
 .follow-post { margin-top: clamp(2rem, 5vw, 3rem); }
 /* footer: no top rule (the footer has its own), one quiet row above the footer note */
 .follow-footer { max-width: none; margin-bottom: 1rem; padding-block: 0 1rem; border-top: 0; color: var(--fg); }
