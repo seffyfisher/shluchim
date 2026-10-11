@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import StoryList from './StoryList.astro';
-import FollowBlock from './FollowBlock.astro';
 import shluchim from '../data/shluchim.json';
 import { getPosts } from '../lib/posts';
 import { lurl, t, type Lang } from '../i18n/ui';
@@ -16,10 +15,16 @@ const seo = SEO_HOME[lang];
 const FEATURED_SHALIACH = 'basher';
 const s = shluchim.find((x) => x.id === FEATURED_SHALIACH)!;
 const shaliach = he ? { name: s.name, role: s.role, example: s.example } : { name: s.name_en, role: s.role_en, example: s.example_en };
-// The about card is one short paragraph in small type (Seffy's own wording; the English follows the About page's first hook).
-const aboutCard = he
-  ? { kick: 'האדם מאחורי הבלוג', title: 'מי אני', text: 'קוראים לי ספי פישר. בגיל 3, בחיידר, ליקקתי דף של אותיות. אבל היום אני מבין שמשם זה התחיל, האהבה שלי לאותיות מילים ושפה.', btn: 'עוד עליי' }
-  : { kick: 'The person behind the blog', title: 'Who I am', text: 'My name is Seffy Fisher. At age 3, in cheder, the traditional Jewish kindergarten, I licked a page of letters. Today I get that this is where my love for letters, words and language started.', btn: 'More about me' };
+// The about card is four short lines in small type (Seffy's own Hebrew wording, 2026-10-11; the English is a translation, one paragraph per line).
+// A line is a list of parts: plain text, or a link (L). Links: visual artist -> shinlamed.com, "Evrit" (the company) -> e-vrit.co.il, father of two -> the Hebrew Wikipedia article on parenthood.
+type Part = string | { t: string; href: string };
+const L = (t: string, href: string) => ({ t, href });
+const ART = 'https://shinlamed.com';
+const EVRIT = 'https://e-vrit.co.il';
+const PARENTHOOD = 'https://he.wikipedia.org/wiki/%D7%94%D7%95%D7%A8%D7%95%D7%AA';
+const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = he
+  ? { kick: 'האדם מאחורי הבלוג', title: 'מי אני', text: [['קוראים לי ספי פישר.'], ['אני ', L('אמן חזותי', ART), ', CTO של ׳', L('עברית', EVRIT), '׳, ', L('אבא לשניים', PARENTHOOD), ', ומופרע קשב עם בעיות ויסות רגשי.'], ['וכמו כולם, מנסה ללמוד להתמודד עם השינויים שה־AI מביא.'], ['הבלוג הזה הוא הדרך שלי לעשות את זה בקול רם.']], btn: 'עוד עליי' }
+  : { kick: 'The person behind the blog', title: 'Who I am', text: [['My name is Seffy Fisher.'], ["I'm a ", L('visual artist', ART), ', a CTO of \u2018', L('Hebrew', EVRIT), '\u2019, a ', L('father of two', PARENTHOOD), ', and a person with ADHD and emotional regulation problems.'], ["Like everyone, I'm trying to learn to cope with the changes AI brings."], ['This blog is my way of doing that out loud.']], btn: 'More about me' };
 ---
 <Base masthead noindex={!he && posts.length === 0} lang={lang} alternates={{ he: lurl('he'), en: lurl('en') }} seoTitle={seo.title} seoDescription={seo.description}>
   <section class="intro" aria-label={he ? 'פתיח' : 'Intro'}>
@@ -40,10 +45,13 @@ const aboutCard = he
   <div class="cards">
     <article class="card">
       <p class="kick">{he ? 'מִיהוּ שָׁלוּחַ?' : 'Who is a shaliach?'}</p>
-      <picture>
-        {s.still && <source media="(prefers-reduced-motion: reduce)" srcset={lurl('he', s.still)} type="image/webp" />}
-        <img class="avatar" src={lurl('he', s.avatar)} alt="" width="112" height="112" loading="lazy" decoding="async" />
-      </picture>
+      {/* The picture links to the team page too. The "Meet the shluchim" button below is the named link, so this one stays out of the tab order and the screen reader list. */}
+      <a href={lurl(lang, 'team/')} tabindex="-1" aria-hidden="true">
+        <picture>
+          {s.still && <source media="(prefers-reduced-motion: reduce)" srcset={lurl('he', s.still)} type="image/webp" />}
+          <img class="avatar" src={lurl('he', s.avatar)} alt="" width="112" height="112" loading="lazy" decoding="async" />
+        </picture>
+      </a>
       <h2>{shaliach.name}</h2>
       <p>{shaliach.role}</p>
       <p class="example">{shaliach.example}</p>
@@ -52,11 +60,10 @@ const aboutCard = he
     <article class="card">
       <p class="kick">{aboutCard.kick}</p>
       <h2>{aboutCard.title}</h2>
-      <p class="about">{aboutCard.text}</p>
+      {aboutCard.text.map((line) => <p class="about-line">{line.map((part) => typeof part === 'string' ? part : <a href={part.href} target="_blank" rel="noopener">{part.t}</a>)}</p>)}
       <a class="btn" href={lurl(lang, 'about/')}>{aboutCard.btn}</a>
     </article>
   </div>
-  <FollowBlock lang={lang} placement="home" />
   {posts.length === 0 ? (
     he
       ? <p class="empty">עוד אין פה סיפורים.<br />השְׁלוּחִים כבר עובדים על הראשון.</p>
