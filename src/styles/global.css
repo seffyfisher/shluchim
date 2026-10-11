@@ -12,6 +12,27 @@
   font-style: normal;
   font-display: swap;
 }
+/* Metric-matched fallbacks (CLS): Arial-compatible system fonts scaled to the web fonts' average glyph widths over the
+   site's own text, with the web fonts' vertical metrics, so the font swap doesn't reflow the page. Re-derive the
+   size-adjust values if a font file changes. Where no Arial-compatible font exists the stack falls through unchanged. */
+@font-face {
+  font-family: 'Miriam Libre Fallback'; /* Hebrew letters, spaces, punctuation */
+  src: local('Arial'), local('ArialMT'), local('Arimo'), local('Liberation Sans');
+  size-adjust: 96.6%; ascent-override: 100.3%; descent-override: 35.6%; line-gap-override: 0%;
+  unicode-range: U+20-2F, U+3A-40, U+5B-60, U+7B-7E, U+A0-BF, U+590-5FF, U+2000-206F, U+20AA;
+}
+@font-face {
+  font-family: 'Miriam Libre Fallback'; /* Latin letters + digits are wider in Miriam Libre than in Arial */
+  src: local('Arial'), local('ArialMT'), local('Arimo'), local('Liberation Sans');
+  size-adjust: 110.4%; ascent-override: 87.8%; descent-override: 31.2%; line-gap-override: 0%;
+  unicode-range: U+30-39, U+41-5A, U+61-7A;
+}
+@font-face {
+  font-family: 'Noa Shalev Fallback'; /* unicode-range = Noa Shalev's own cmap: it has no Latin letters, those stay on Miriam */
+  src: local('Arial'), local('ArialMT'), local('Arimo'), local('Liberation Sans');
+  size-adjust: 105.6%; ascent-override: 75.8%; descent-override: 18.9%; line-gap-override: 26.7%;
+  unicode-range: U+20-25, U+27-40, U+5B-5F, U+7B-7E, U+A0, U+A9, U+B0, U+B7, U+D7, U+5B0-5BC, U+5BE-5BF, U+5C1-5C2, U+5C7, U+5D0-5EA, U+5F3-5F4, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+20AA, U+20AC, U+20BF, U+2190, U+2192, U+2212;
+}
 
 :root {
   color-scheme: light dark;
@@ -27,7 +48,8 @@
   --badge-fg: var(--fg);
   --code-bg:  light-dark(#ffffff, #0d0d0d);
   /* type */
-  --font: 'Miriam Libre', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --font: 'Miriam Libre', 'Miriam Libre Fallback', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --font-display: 'Noa Shalev', 'Noa Shalev Fallback', var(--font); /* Hebrew display headings */
   --step--1: 0.9375rem;
   --step-0: 1.125rem;
   --step-1: 1.3125rem;
@@ -69,7 +91,7 @@ p, li { text-wrap: pretty; }
 /* ---------- header ---------- */
 .kicker { color: var(--accent); font-weight: 500; font-size: var(--step--1); margin: 0; }
 .masthead { padding-block: clamp(2.5rem, 7vw, 4.5rem) 0; }
-.masthead h1 { font-family: 'Noa Shalev', var(--font); font-size: calc(var(--step-3) * 1.15); font-weight: 400; line-height: 1.1; margin-block: .25rem .75rem; }
+.masthead h1 { font-family: var(--font-display); font-size: calc(var(--step-3) * 1.15); font-weight: 400; line-height: 1.1; margin-block: .25rem .75rem; }
 .masthead h1 a { color: var(--fg); text-decoration: none; }
 .masthead .tagline { margin: 0; color: var(--muted); font-size: var(--fs-desc); line-height: 1.5; max-width: 40ch; }
 .bar { border-bottom: 1px solid var(--line); }
@@ -116,7 +138,7 @@ main { padding-block: 2.5rem 4rem; }
 
 /* ---------- post ---------- */
 .post-head { padding-bottom: 1.75rem; margin-bottom: 2rem; border-bottom: 2px solid var(--rule); }
-.post-head h1 { font-family: 'Noa Shalev', var(--font); font-size: calc(var(--step-3) * 1.1); font-weight: 400; line-height: 1.15; margin-block: .5rem .75rem; }
+.post-head h1 { font-family: var(--font-display); font-size: calc(var(--step-3) * 1.1); font-weight: 400; line-height: 1.15; margin-block: .5rem .75rem; }
 .lede { margin: 0; color: var(--muted); font-size: var(--step-1); line-height: 1.55; max-width: 52ch; }
 .cover { display: block; width: 100%; height: auto; border-radius: var(--radius); margin-bottom: 2rem; background: var(--surface); }
 
@@ -163,9 +185,9 @@ footer.site .links a:hover { color: var(--fg); }
 
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
-.post-list h3, ol h3, ul h3 { font-family: 'Noa Shalev', var(--font); font-weight: 400; }
+.post-list h3, ol h3, ul h3 { font-family: var(--font-display); font-weight: 400; }
 
-.prose h2, .prose h3, a.name { font-family: 'Noa Shalev', var(--font); font-weight: 400; }
+.prose h2, .prose h3, a.name { font-family: var(--font-display); font-weight: 400; }
 
 /* Chat bubbles (```chat blocks, rendered at build time) */
 .chat { display: flex; flex-direction: column; gap: .75rem; margin: 1.75rem 0; font-family: var(--font); }
@@ -186,7 +208,7 @@ footer.site .links a:hover { color: var(--fg); }
 
 /* ---------- השלוחים (team roster) ---------- */
 .page-head { margin-bottom: 2.5rem; }
-.page-head h1 { font-family: 'Noa Shalev', var(--font); font-size: calc(var(--step-3) * 1.1); font-weight: 400; line-height: 1.15; margin-block: 0 .75rem; }
+.page-head h1 { font-family: var(--font-display); font-size: calc(var(--step-3) * 1.1); font-weight: 400; line-height: 1.15; margin-block: 0 .75rem; }
 .page-head .lede { margin-bottom: .75rem; }
 .roster-group + .roster-group { margin-top: 3rem; }
 .roster { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1.25rem; padding-top: 1.5rem; }
@@ -205,8 +227,8 @@ footer.site .links a:hover { color: var(--fg); }
 .page-about main.wrap { max-width: 72rem; }
 .about { --av: clamp(11rem, 15vw, 13rem); display: grid; grid-template-columns: var(--av) minmax(0, 65ch); justify-content: center; align-items: start; column-gap: clamp(1.5rem, 3vw, 2.5rem); }
 .about .avatar-col { order: -1; align-self: stretch; }
-.about .prose h1 { font-family: 'Noa Shalev', var(--font); font-weight: 400; font-size: calc(var(--step-3) * 1.1); line-height: 1.15; margin-block: 0 2rem; padding-bottom: 1.75rem; border-bottom: 2px solid var(--rule); }
-.about .prose h2 { font-family: 'Noa Shalev', var(--font); font-weight: 400; font-size: calc(var(--step-2) * 1.1); }
+.about .prose h1 { font-family: var(--font-display); font-weight: 400; font-size: calc(var(--step-3) * 1.1); line-height: 1.15; margin-block: 0 2rem; padding-bottom: 1.75rem; border-bottom: 2px solid var(--rule); }
+.about .prose h2 { font-family: var(--font-display); font-weight: 400; font-size: calc(var(--step-2) * 1.1); }
 .about .prose a[href^="mailto"] { unicode-bidi: isolate; }
 .about .prose h2:has(+ small) { font-family: var(--font); font-weight: 600; font-size: var(--step-1); color: var(--muted); margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--line); margin-bottom: .75rem; }
 .about .prose small { display: block; font-size: var(--step--1); line-height: 1.6; color: var(--muted); }
