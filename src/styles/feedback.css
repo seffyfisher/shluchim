@@ -7,6 +7,7 @@
 .fb-rate button { font: inherit; font-weight: 600; min-height: 2.75rem; padding-inline: 1.25rem; border: 1px solid var(--fb-edge); border-radius: 999px; background: transparent; color: var(--fg); cursor: pointer; }
 .fb-rate button:hover { background: var(--fb-fill-hover); }
 .fb-rate button:focus-visible, .fb-extra summary:focus-visible { outline: 2px solid var(--fb-focus); outline-offset: 3px; }
+.fb-fine { flex-basis: 100%; margin: .15rem 0 0; font-size: .8rem; line-height: 1.5; color: var(--muted); }
 .fb-hint { display: none; flex-basis: 100%; order: -1; margin: 0; font-size: var(--step--1); color: var(--muted); }
 /* the optional part: closed by default, one quiet line */
 .fb-extra { order: 2; }

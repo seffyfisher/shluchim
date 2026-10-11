@@ -29,10 +29,12 @@ const returnTo = new URL(Astro.url.pathname, Astro.site).href;
   <form class="fb-form" method="post" action={FEEDBACK_ENDPOINT} accept-charset="utf-8">
     <input type="hidden" name="page" value={path} />
     <input type="hidden" name="return_to" value={returnTo} />
+    <input type="hidden" name="quote_ok" value="yes" /> {/* submitting = consent (see .fb-fine); nothing is public until Seffy sets status to approved */}
     <div class="fb-rate" role="group" aria-labelledby={`fb-h-${kind}`}>
-      <button type="submit" name="reaction" value="helped">חידש לי</button>
-      <button type="submit" name="reaction" value="not_really">לא התחברתי</button>
+      <button type="submit" name="reaction" value="helped" aria-describedby={`fb-fine-${kind}`}>חידש לי</button>
+      <button type="submit" name="reaction" value="not_really" aria-describedby={`fb-fine-${kind}`}>לא התחברתי</button>
       <p class="fb-hint">הלחיצה שולחת גם את מה שכתבתם.</p>
+      <p class="fb-fine" id={`fb-fine-${kind}`}>בשליחת הטופס אתם מאשרים פרסום של מה שכתבתם באתר, בלי שם או פרטים אישיים אחרים.</p>
     </div>
     <details class="fb-extra">
       <summary>אפשר גם להוסיף מילה</summary>
@@ -45,7 +47,7 @@ const returnTo = new URL(Astro.url.pathname, Astro.site).href;
         <input id={`fb-email-${kind}`} type="email" name="email" autocomplete="email" inputmode="email" dir="ltr" spellcheck="false" aria-describedby={`fb-email-err-${kind} fb-privacy-${kind}`} />
         <p class="err" id={`fb-email-err-${kind}`}>האימייל הזה לא נראה תקין. בדקו אותו, או השאירו ריק.</p>
       </div>
-      <p class="privacy" id={`fb-privacy-${kind}`}>האימייל לא מוצג בפומבי, וההודעה מגיעה רק אליי.</p>
+      <p class="privacy" id={`fb-privacy-${kind}`}>האימייל לא מוצג בפומבי, ומשמש רק כדי לחזור אליכם.</p>
     </details>
     <div class="hp" aria-hidden="true"><label for={`fb-hp-${kind}`}>לא למלא</label><input id={`fb-hp-${kind}`} type="text" name="website" tabindex="-1" autocomplete="off" /></div>
   </form>
