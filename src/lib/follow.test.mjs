@@ -43,3 +43,10 @@ test('follow* UI strings exist in both languages and obey the vocabulary rules',
     assert.doesNotMatch(UI.en[k], NIQQUD, `en.${k}`);
   }
 });
+
+test('the Hebrew confirmation lists the assistants in parentheses with no-break spaces (a line break inside flips the comma in RTL)', () => {
+  const m = /\(([^)]*)\)/.exec(UI.he.followDone);
+  assert.ok(m, 'parenthesised list present');
+  assert.match(m[1], /ChatGPT/); assert.match(m[1], /Claude/); assert.match(m[1], /גרוקבוט/);
+  assert.ok(!m[1].includes(' '), 'no breakable spaces inside the parentheses');
+});

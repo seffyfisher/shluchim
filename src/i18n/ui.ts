@@ -18,7 +18,8 @@ export const UI = {
     // "Follow with your AI" block (FollowBlock.astro): a question and one button. The prompt itself lives in src/lib/follow.ts.
     followQ: 'רוצה לדעת שעולה פוסט חדש?',
     followCopy: 'תגיד את זה לשְׁלוּחִים שלך', followCopied: 'הועתק!',
-    followDone: 'עכשיו תדביק את זה אצל השְׁלוּחִים שלך.',
+    // the list in parentheses uses no-break spaces (\u00A0): a line break inside it flips the comma to the wrong side of "ChatGPT" in an RTL line
+    followDone: 'עכשיו תדביק את זה אצל השְׁלוּחִים שלך (ChatGPT,\u00A0Claude,\u00A0גרוקבוט\u00A0ועוד).',
     followCopyFail: 'ההעתקה האוטומטית לא עבדה. הטקסט מסומן: מעתיקים ידנית ומדביקים אצל השְׁלוּחִים שלך.',
     followLabel: 'הפרומפט להעתקה',
   },
