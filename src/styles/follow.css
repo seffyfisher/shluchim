@@ -17,7 +17,7 @@
 @media (scripting: none) { .follow { display: none; } }
 
 /* the feedback under the button ("copied, now paste it to your shluchim"); empty = out of the layout but still a live region */
-.follow-status { flex-basis: 100%; margin: 0; padding-block: .25rem .5rem; font-size: var(--step--1); font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; } /* anywhere: only bites when text zoom makes the unbreakable (...) list wider than the screen */
+.follow-status { flex-basis: 100%; margin: 0; padding-block: .25rem .5rem; font-size: var(--step--1); font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; } /* anywhere: a long word never forces sideways scroll (big text, narrow phone) */
 .follow-status:empty { position: absolute; inline-size: 1px; block-size: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .follow-status:not(:empty, [data-failed])::before { content: '\2713'; margin-inline-end: .45rem; }
 /* only when the clipboard refused: the prompt, selected, to copy by hand */
