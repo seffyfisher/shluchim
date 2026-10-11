@@ -46,6 +46,10 @@ export const SHOW_DRAFTS = process.env.SHOW_DRAFTS === '1';
 // Empty = the block is not rendered at all. Env FEEDBACK_ENDPOINT overrides for previews.
 export const FEEDBACK_ENDPOINT: string = process.env.FEEDBACK_ENDPOINT || 'https://tyzswuffvhxnmtaoaskz.supabase.co/functions/v1/feedback';
 
+// Google Analytics 4 measurement ID (public by design). Loaded after the page has finished loading and the browser is idle
+// (src/lib/analytics.ts), so it does not touch Core Web Vitals. Empty = no analytics. Never in draft previews or `astro dev`.
+export const GA_MEASUREMENT_ID: string = process.env.GA_MEASUREMENT_ID ?? 'G-73TB9SVD19';
+
 // About-page character (sprite sheet + stills), per language.
 // he: left-facing set (public/about/, from main). en: the original right-facing set (public/about/en/), for LTR.
 // `mirror` is a reserved per-language flag (false for both; nothing flips the character with CSS).
