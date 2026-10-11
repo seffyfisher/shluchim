@@ -105,11 +105,11 @@ const switchHref = alternates[o] ?? lurl(o);
     {masthead ? (
       <header class="site masthead">
         <div class="wrap">
+          {showSwitch && <div class="site-nav lang-row"><a class="lang" href={switchHref} hreflang={o} lang={o} title={ui.switchHint}>{ui.switchTo}</a></div>}
           {SITE.kicker && <p class="kicker">{SITE.kicker}</p>}
           <h1><a href={url()} aria-current="page" aria-label={SITE.title} title={SITE.title}>{lang !== 'he' ? SITE.displayTitle : (() => { const t = SITE.displayTitle ?? SITE.title; const cut = [...t].findIndex((c, i, a) => i > 0 && a.slice(0, i).join('').normalize('NFD').replace(/[\u0591-\u05C7]/g, '') === 'של' && !/[\u0591-\u05C7]/.test(c)); return cut > 0 ? <><span class="t-a" aria-hidden="true">{[...t].slice(0, cut).join('')}</span><span class="t-b" aria-hidden="true">{[...t].slice(cut).join('')}</span></> : t; })()}</a></h1>
           <p class="tagline">{SITE.tagline}</p>
           {SITE.explainer && <p class="explainer">{SITE.explainer}</p>}
-          <nav class="site-nav" aria-label={ui.navMain}><a href={url()} aria-current={Astro.url.pathname === url() ? 'page' : undefined}>{ui.stories}</a><a href={url('team/')} aria-current={Astro.url.pathname.startsWith(url('team/')) ? 'page' : undefined}>{ui.team}</a><a href={url('about/')} aria-current={Astro.url.pathname.startsWith(url('about/')) ? 'page' : undefined}>{ui.about}</a>{showSwitch && <a class="lang" href={switchHref} hreflang={o} lang={o} title={ui.switchHint}>{ui.switchTo}</a>}</nav>
         </div>
       </header>
     ) : (

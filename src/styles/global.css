@@ -326,10 +326,6 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 /* Homepage intro + "start here", team intro */
 .intro { margin-bottom: 3rem; max-width: 60ch; }
 .intro > p { margin: 0 0 .3rem; font-size: var(--step--1); line-height: 1.45; } /* same size as the post date (.meta) */
-.start-here { margin-top: 2rem; }
-.start-here ol { margin: 1rem 0 0; padding-inline-start: 1.4rem; display: grid; gap: .6rem; }
-.start-here li { line-height: 1.6; }
-.start-here a { font-weight: 600; white-space: nowrap; }
 .team-intro { max-width: 60ch; }
 .team-intro p { margin: 0 0 .9rem; line-height: 1.65; }
 .team-intro .lede { color: var(--fg); font-weight: 600; }
@@ -362,3 +358,19 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 .topic-nav { margin-top: 3rem; }
 .topic-nav ul { display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; padding-top: .5rem; }
 .topic-nav a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+
+/* ---------- Home: three cards above the story list (the cards are the section nav, so the masthead only keeps the language link) ---------- */
+.masthead .lang-row { margin: 0 0 .75rem; justify-content: flex-end; }
+.cards { display: grid; gap: 1rem; margin-bottom: 3rem; }
+@media (min-width: 48rem) { .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.card { display: flex; flex-direction: column; align-items: flex-start; gap: .5rem; min-width: 0; padding: 1.25rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.card p { margin: 0; color: var(--muted); font-size: var(--step--1); line-height: 1.55; }
+.card .kick { font-size: .8rem; }
+.card h2 { font-family: var(--font); font-weight: 600; font-size: var(--step-1); line-height: 1.3; margin: 0; overflow-wrap: anywhere; }
+.card h2 a { color: inherit; text-decoration: none; }
+.card h2 a:hover { text-decoration: underline; }
+.card .example { font-size: .8rem; padding-top: .35rem; border-top: 1px dashed var(--line); }
+.card .more { color: var(--fg); font-size: var(--step--1); display: inline-flex; align-items: center; gap: .35rem; min-height: 2.75rem; }
+.card .btn { margin-top: auto; display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: 1.1rem; border: 1px solid var(--fg); border-radius: 999px; color: var(--fg); font-size: var(--step--1); font-weight: 600; text-decoration: none; }
+.card .btn:hover { background: var(--fg); color: var(--bg); }
+.card :is(.btn, .more, h2 a):focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }

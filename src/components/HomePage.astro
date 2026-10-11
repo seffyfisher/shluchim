@@ -1,8 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
-import FeedbackBlock from './FeedbackBlock.astro';
 import StoryList from './StoryList.astro';
-import { getPosts } from '../lib/posts';
+import shluchim from '../data/shluchim.json';
+import { getPosts, postUrl, formatDateShort } from '../lib/posts';
 import { lurl, t, type Lang } from '../i18n/ui';
 import { SEO_HOME } from '../config';
 interface Props { lang: Lang }
@@ -11,6 +11,15 @@ const ui = t(lang);
 const posts = await getPosts(lang);
 const he = lang === 'he';
 const seo = SEO_HOME[lang];
+// Cards above the story list. The shaliach is fixed (not random: random needs JS); the story is the newest one.
+const FEATURED_SHALIACH = 'basher';
+const s = shluchim.find((x) => x.id === FEATURED_SHALIACH)!;
+const shaliach = he ? { name: s.name, role: s.role, example: s.example } : { name: s.name_en, role: s.role_en, example: s.example_en };
+const latest = posts[0];
+// The about card quotes the About page verbatim (src/content/pages/{he,en}/about.md): its greeting and its first hook.
+const aboutCard = he
+  ? { kick: 'מי אני', title: 'היי, קוראים ספי פישר.', hook: 'בגיל 3, בחיידר, ליקקתי דף של אותיות.', btn: 'עוד עליי' }
+  : { kick: 'Who I am', title: "Hi, I'm Seffy Fisher.", hook: 'At age 3, in cheder, the traditional Jewish kindergarten, I licked a page of letters.', btn: 'More about me' };
 ---
 <Base masthead noindex={!he && posts.length === 0} lang={lang} alternates={{ he: lurl('he'), en: lurl('en') }} seoTitle={seo.title} seoDescription={seo.description}>
   <section class="intro" aria-label={he ? 'פתיח' : 'Intro'}>
@@ -27,25 +36,35 @@ const seo = SEO_HOME[lang];
         <p>No fluff. Just a friend saying: come sit next to me and see what I'm doing.</p>
       </>
     )}
-    <nav class="start-here" aria-labelledby="start-here">
-      <h2 class="list-label" id="start-here">{he ? 'להתחיל כאן:' : 'Start here:'}</h2>
-      <ol>
-        {he ? (
-          <>
-            <li>קודם, מי אני ולמה הבלוג הזה קיים. <a href={lurl('he', 'about/')}>לעמוד האודות</a></li>
-            <li>אחר כך, להכיר קצת את השְׁלוּחִים: מי הם, ומה כל אחד עושה. <a href={lurl('he', 'team/')}>לעמוד השְׁלוּחִים</a></li>
-            <li>ומשם, לסיפורים עצמם. <a href={`${lurl('he')}#stories`}>לכל הסיפורים</a></li>
-          </>
-        ) : (
-          <>
-            <li>First, who I am and why this blog exists. <a href={lurl('en', 'about/')}>About me</a></li>
-            <li>Then, get to know the shluchim a little: who they are, and what each one does. <a href={lurl('en', 'team/')}>Meet the shluchim</a></li>
-            <li>And from there, the stories themselves. <a href={`${lurl('en')}#stories`}>All stories</a></li>
-          </>
-        )}
-      </ol>
-    </nav>
   </section>
+  <div class="cards">
+    <article class="card">
+      <p class="kick">{he ? 'הכירו שָׁלוּחַ' : 'Meet a shaliach'}</p>
+      <picture>
+        {s.still && <source media="(prefers-reduced-motion: reduce)" srcset={lurl('he', s.still)} type="image/webp" />}
+        <img class="avatar" src={lurl('he', s.avatar)} alt="" width="112" height="112" loading="lazy" decoding="async" />
+      </picture>
+      <h2>{shaliach.name}</h2>
+      <p>{shaliach.role}</p>
+      <p class="example">{shaliach.example}</p>
+      <a class="btn" href={lurl(lang, 'team/')}>{he ? 'הכירו את השְׁלוּחִים' : 'Meet the shluchim'}</a>
+    </article>
+    {latest && (
+      <article class="card">
+        <p class="kick">{he ? 'הסיפור האחרון' : 'Latest story'} · <time datetime={latest.data.date.toISOString().slice(0, 10)}>{formatDateShort(latest.data.date, lang)}</time></p>
+        <h2><a href={postUrl(latest)}>{latest.data.title}</a></h2>
+        <p>{latest.data.description}</p>
+        <a class="more" href={postUrl(latest)} aria-label={`${latest.data.title}: ${he ? 'לסיפור המלא' : 'read the full story'}`}>{he ? 'לסיפור המלא' : 'Read the full story'} <span aria-hidden="true">{he ? '←' : '→'}</span></a>
+        <a class="btn" href="#stories">{he ? 'לכל הסיפורים' : 'All stories'}</a>
+      </article>
+    )}
+    <article class="card">
+      <p class="kick">{aboutCard.kick}</p>
+      <h2>{aboutCard.title}</h2>
+      <p>{aboutCard.hook}</p>
+      <a class="btn" href={lurl(lang, 'about/')}>{aboutCard.btn}</a>
+    </article>
+  </div>
   {posts.length === 0 ? (
     he
       ? <p class="empty">עוד אין פה סיפורים.<br />השְׁלוּחִים כבר עובדים על הראשון.</p>
@@ -58,6 +77,4 @@ const seo = SEO_HOME[lang];
       <StoryList posts={posts} lang={lang} />
     </>
   )}
-  {/* Feedback copy and backend replies are Hebrew-only, so the block is hidden on /en/ for now. */}
-  {he && <FeedbackBlock placement="home" />}
 </Base>

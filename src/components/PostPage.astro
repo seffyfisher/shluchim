@@ -61,6 +61,7 @@ const jsonLd = [
       <Content />
     </div>
   </article>
+  {lang === 'he' && <FeedbackBlock placement="post" />}
   {related.length > 0 && (
     <aside class="related" aria-labelledby="related-h">
       <h2 class="list-label" id="related-h">{ui.related}</h2>
@@ -74,7 +75,6 @@ const jsonLd = [
       </ul>
     </aside>
   )}
-  {lang === 'he' && <FeedbackBlock placement="post" />}
   <nav class="post-foot" aria-label={ui.postNav}>
     <a class="back" href={lurl(lang)}>{ui.back}</a>
     <a class="edit" href={editUrl} rel="nofollow">{ui.edit}</a>
