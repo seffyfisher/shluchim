@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import StoryList from './StoryList.astro';
 import FollowBlock from './FollowBlock.astro';
 import shluchim from '../data/shluchim.json';
-import { getPosts, postUrl, formatDateShort } from '../lib/posts';
+import { getPosts } from '../lib/posts';
 import { lurl, t, type Lang } from '../i18n/ui';
 import { SEO_HOME } from '../config';
 interface Props { lang: Lang }
@@ -12,11 +12,10 @@ const ui = t(lang);
 const posts = await getPosts(lang);
 const he = lang === 'he';
 const seo = SEO_HOME[lang];
-// Cards above the story list. The shaliach is fixed (not random: random needs JS); the story is the newest one.
+// Cards above the story list: the featured shaliach and the About card. The shaliach is fixed (not random: random needs JS).
 const FEATURED_SHALIACH = 'basher';
 const s = shluchim.find((x) => x.id === FEATURED_SHALIACH)!;
 const shaliach = he ? { name: s.name, role: s.role, example: s.example } : { name: s.name_en, role: s.role_en, example: s.example_en };
-const latest = posts[0];
 // The about card is one short paragraph in small type (Seffy's own wording; the English follows the About page's first hook).
 const aboutCard = he
   ? { kick: 'האדם מאחורי הבלוג', title: 'מי אני', text: 'קוראים לי ספי פישר. בגיל 3, בחיידר, ליקקתי דף של אותיות. אבל היום אני מבין שמשם זה התחיל, האהבה שלי לאותיות מילים ושפה.', btn: 'עוד עליי' }
@@ -56,15 +55,6 @@ const aboutCard = he
       <p class="about">{aboutCard.text}</p>
       <a class="btn" href={lurl(lang, 'about/')}>{aboutCard.btn}</a>
     </article>
-    {latest && (
-      <article class="card">
-        <p class="kick">{he ? 'הסיפור האחרון' : 'Latest story'} · <time datetime={latest.data.date.toISOString().slice(0, 10)}>{formatDateShort(latest.data.date, lang)}</time></p>
-        <h2><a href={postUrl(latest)}>{latest.data.title}</a></h2>
-        <p>{latest.data.description}</p>
-        <a class="more" href={postUrl(latest)} aria-label={`${latest.data.title}: ${he ? 'לסיפור המלא' : 'read the full story'}`}>{he ? 'לסיפור המלא' : 'Read the full story'} <span aria-hidden="true">{he ? '←' : '→'}</span></a>
-        <a class="btn" href="#stories">{he ? 'לכל הסיפורים' : 'All stories'}</a>
-      </article>
-    )}
   </div>
   <FollowBlock lang={lang} placement="home" />
   {posts.length === 0 ? (
