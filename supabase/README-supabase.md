@@ -37,6 +37,8 @@ export const FEEDBACK_ENDPOINT: string = process.env.FEEDBACK_ENDPOINT || 'https
 While it's empty, the block isn't rendered (that's the main default). For a preview build: `FEEDBACK_ENDPOINT=https://… npm run build`.
 
 ## Contract
+The site's form sends only `page`, `return_to`, `reaction`, `message`, `email` and the honeypot (since 2026-10-11: two submit buttons, everything else behind a closed `<details>`). `name` and `quote_ok` are still accepted here but no longer sent, so new rows have no name and `quote_ok = false`.
+
 POST `application/x-www-form-urlencoded`: `page`, `return_to`, `reaction` (`helped` | `not_really`, required), `message` (≤1000), `name` (optional, trimmed, markup stripped, ≤60), `email` (optional, validated), `quote_ok` (`yes`), `website` (honeypot).
 - Response: `303` to `return_to` + `#feedback-thanks` | `#feedback-error` | `#feedback-slow`. `return_to` must start with `https://seffyfisher.github.io/shluchim/`, otherwise the site root is used.
 - Honeypot filled: fake `#feedback-thanks`, nothing stored. Rate limit: 5 attempts per IP (salted SHA-256) per 10 minutes → `#feedback-slow`.
