@@ -61,7 +61,7 @@ in a loop (a repeating cycle) without a single seam.
 
 I gave him a 💯.
 
-![Shlomby, the fitness shaliach, spinning 360 degrees: a black character with antennas and an orange headband.](/shluchim/images/posts/shlumbi.webp)
+![Shlomby, the fitness shaliach, spinning 360 degrees: a black character with antennas and an orange headband.](/images/posts/shlumbi.webp)
 
 
 ## What to take from this:

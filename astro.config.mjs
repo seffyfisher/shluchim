@@ -9,10 +9,12 @@ import { i18nCheck, urlPairs } from './src/lib/i18n-check.mjs';
 import { listGuard } from './src/lib/list-guard.mjs';
 
 // ONE place to change the deploy target.
-// GitHub Pages project site (default): SITE_URL=https://seffyfisher.github.io  BASE_PATH=/shluchim
-// Custom domain later:                 SITE_URL=https://stories.example.com    BASE_PATH=/
-const SITE_URL = process.env.SITE_URL || 'https://seffyfisher.github.io';
-const BASE_PATH = process.env.BASE_PATH || '/shluchim';
+// Default (live): custom domain on GitHub Pages, served at the root:  SITE_URL=https://shluchim.shinlamed.com  BASE_PATH=/
+// The old project-site URL (https://seffyfisher.github.io/shluchim) redirects to the custom domain.
+// NOTE: root-absolute asset paths (/images/..., /fonts/...) in posts, CSS, about-photos.json, site.webmanifest and
+// public/admin/config.yml assume BASE_PATH=/. Serving from a sub-path again means updating those too.
+const SITE_URL = process.env.SITE_URL || 'https://shluchim.shinlamed.com';
+const BASE_PATH = process.env.BASE_PATH || '/';
 // SHOW_DRAFTS=1 builds drafts into a separate folder so they can never ship by accident.
 const SHOW_DRAFTS = process.env.SHOW_DRAFTS === '1';
 

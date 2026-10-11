@@ -21,7 +21,7 @@ A private address, on the mail.grokbot.com domain.
 And honestly?
 It works amazingly.
 
-![The shluchim opening a giant envelope. One reads, the other is bored as usual.](/shluchim/images/posts/grokbot-email-illus-mailbox.webp)
+![The shluchim opening a giant envelope. One reads, the other is bored as usual.](/images/posts/grokbot-email-illus-mailbox.webp)
 
 
 ## Step one, just ask:
@@ -34,14 +34,14 @@ I looked for a menu, I looked for settings.
 There aren't any.
 The change is in your head: you don't look for a button, you just ask the bot.
 
-![My request to Basher to set up our email, and him starting to check which addresses are available.](/shluchim/images/posts/grokbot-email-ask.webp)
+![My request to Basher to set up our email, and him starting to check which addresses are available.](/images/posts/grokbot-email-ask.webp)
 
 He asked what name I wanted,
 checked that it was free,
 and showed me an approval card.
 Nothing was claimed until I approved.
 
-![Basher letting me know he claimed an address for us, and explaining what it can do.](/shluchim/images/posts/grokbot-email-claimed.webp)
+![Basher letting me know he claimed an address for us, and explaining what it can do.](/images/posts/grokbot-email-claimed.webp)
 
 Worth knowing: the address is permanent.
 You can't change it and you can't delete it, so pick the name carefully.
@@ -78,7 +78,7 @@ And who even gets this?
 Basher found the email.
 And then he told me something I hadn't thought of.
 
-![Basher finding the email with the PDF, and explaining that nobody gets notified when mail arrives. (The chat was in Hebrew.)](/shluchim/images/posts/grokbot-email-found-mail.webp)
+![Basher finding the email with the PDF, and explaining that nobody gets notified when mail arrives. (The chat was in Hebrew.)](/images/posts/grokbot-email-found-mail.webp)
 
 Nobody gets an automatic notification.
 Incoming mail doesn't wake up any shaliach on its own.
@@ -98,7 +98,7 @@ Every email that comes in wakes Basher up.
 
 Basher decides which shaliach handles it.
 
-![Basher routing the envelopes, and each shaliach catching their own.](/shluchim/images/posts/grokbot-email-illus-routing.webp)
+![Basher routing the envelopes, and each shaliach catching their own.](/images/posts/grokbot-email-illus-routing.webp)
 
 He doesn't reply or send anything without my approval.
 And he updates me in one line.
@@ -124,7 +124,7 @@ reach out to businesses for you, and book meetings.
 According to the official help, you can also collect receipts, newsletters and reports,
 and trigger a routine only on emails from specific senders.
 
-![Everyone around the inbox. Someone brings a letter, and the rest are already excited.](/shluchim/images/posts/grokbot-email-illus-inbox.webp)
+![Everyone around the inbox. Someone brings a letter, and the rest are already excited.](/images/posts/grokbot-email-illus-inbox.webp)
 
 
 ## What to take from this:

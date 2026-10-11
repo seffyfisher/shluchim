@@ -27,7 +27,7 @@ export const t = (lang: Lang) => UI[lang];
 export const other = (lang: Lang): Lang => (lang === 'he' ? 'en' : 'he');
 export const isLang = (x: unknown): x is Lang => LOCALES.includes(x as Lang);
 
-/** Locale-aware internal URL that respects BASE_PATH: he -> /shluchim/x/, en -> /shluchim/en/x/. */
+/** Locale-aware internal URL that respects BASE_PATH: he -> /x/, en -> /en/x/. */
 export function lurl(lang: Lang, path = '') {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const p = path.replace(/^\//, '');

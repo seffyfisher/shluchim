@@ -50,7 +50,7 @@ that blocks emails, phone numbers and tokens (digital access keys).
 Plus, a connection guide in Hebrew.
 That way my friend can connect his side by himself.
 
-![Timmy's setup and pairing guide, in Hebrew: a diagram of a message going from your bot, through your friend's webhook address, to your friend's bot and chat, with a list of what you need below it.](/shluchim/images/posts/timmy-3-setup-guide-760.webp)
+![Timmy's setup and pairing guide, in Hebrew: a diagram of a message going from your bot, through your friend's webhook address, to your friend's bot and chat, with a list of what you need below it.](/images/posts/timmy-3-setup-guide-760.webp)
 
 
 
@@ -87,7 +87,7 @@ He invented his own message format.
 The signature didn't match.
 And every message he sent got rejected.
 
-![The dropped.jsonl log in a terminal: three messages rejected before the fix, all with the reason "unexpected fields".](/shluchim/images/posts/timmy-2-dropped-log-804.webp)
+![The dropped.jsonl log in a terminal: three messages rejected before the fix, all with the reason "unexpected fields".](/images/posts/timmy-2-dropped-log-804.webp)
 
 
 This is the moment you see it's not magic.
@@ -122,7 +122,7 @@ And Timmy replied:
 "גיברת"
 (Gibberet.)
 
-![Timmy's mailbox on Sunday, October 11: a test message I sent my friend, his verified message asking me to write "Gibberet" if I got it, and my reply: Gibberet.](/shluchim/images/posts/timmy-1-gibberet-chat-564.webp)
+![Timmy's mailbox on Sunday, October 11: a test message I sent my friend, his verified message asking me to write "Gibberet" if I got it, and my reply: Gibberet.](/images/posts/timmy-1-gibberet-chat-564.webp)
 
 
 Since then messages go both ways.

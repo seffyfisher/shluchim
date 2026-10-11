@@ -31,7 +31,7 @@ Basher saved the setup to shared memory,
 so every shaliach now knows how to use "work email".
 
 
-![How we started connecting my work email: the shaliach offers to open the Outlook sign-in page in its browser and hand me the screen so I can sign in.](/shluchim/images/posts/work-outlook-connect.webp)
+![How we started connecting my work email: the shaliach offers to open the Outlook sign-in page in its browser and hand me the screen so I can sign in.](/images/posts/work-outlook-connect.webp)
 
 
 ## The end-to-end test:
@@ -50,7 +50,7 @@ The next real use was a draft to the head of development, ahead of Sunday's sale
 This time with a signature.
 
 
-![I ask whether he ever sends an email without going through me, and the shaliach replies that no email goes out without my explicit approval.](/shluchim/images/posts/work-outlook-approval.webp)
+![I ask whether he ever sends an email without going through me, and the shaliach replies that no email goes out without my explicit approval.](/images/posts/work-outlook-approval.webp)
 
 
 ## And the calendar came as a gift:

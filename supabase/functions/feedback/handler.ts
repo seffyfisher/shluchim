@@ -4,7 +4,7 @@
 // JSON answer ({status}) when the request sends Accept: application/json.
 // Deploy with --no-verify-jwt (a plain form cannot send a JWT).
 
-export const ALLOWED_PREFIX = "https://seffyfisher.github.io/shluchim/";
+export const ALLOWED_PREFIX = "https://shluchim.shinlamed.com/";
 export const RATE_LIMIT = 5; // per IP ...
 export const RATE_WINDOW_MS = 10 * 60 * 1000; // ... per 10 minutes (matches the copy "בעוד 10 דקות")
 export const MAX_BODY = 16 * 1024; // bytes; a full legit form is < 5 KB

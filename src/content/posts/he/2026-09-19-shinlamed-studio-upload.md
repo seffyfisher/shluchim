@@ -43,15 +43,15 @@ translationKey: "2026-09-19-shinlamed-studio-upload"
 שינלמד מנקה את הרקע, מיישר, חותך ומתקן צבע,
 ומעלה לאתר עם כותרת וטקסט.
 
-![goblin hat tip, לפני ואחרי](/shluchim/images/posts/shinlamed-01-goblin-hat-tip.webp)
+![goblin hat tip, לפני ואחרי](/images/posts/shinlamed-01-goblin-hat-tip.webp)
 
 **[goblin hat tip](https://shinlamed.com/project/goblin-hat-tip-3/).**
 צולם על הצד, על קיר אפור.
 עלה ישר, על רקע לבן, עם כותרת וטקסט.
 
-![spiked punch, לפני ואחרי](/shluchim/images/posts/shinlamed-02-spiked-punch.webp)
+![spiked punch, לפני ואחרי](/images/posts/shinlamed-02-spiked-punch.webp)
 
-![ring a bell?, לפני ואחרי](/shluchim/images/posts/shinlamed-03-ring-a-bell.webp)
+![ring a bell?, לפני ואחרי](/images/posts/shinlamed-03-ring-a-bell.webp)
 
 
 ## והחלק הכנה:

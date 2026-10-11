@@ -20,7 +20,7 @@ translationKey: "2026-10-11-grokbot-email-inbox"
 והאמת?
 זה עובד מדהים.
 
-![השְׁלוּחִים פותחים מעטפה ענקית. אחד קורא, השני משועמם כרגיל.](/shluchim/images/posts/grokbot-email-illus-mailbox.webp)
+![השְׁלוּחִים פותחים מעטפה ענקית. אחד קורא, השני משועמם כרגיל.](/images/posts/grokbot-email-illus-mailbox.webp)
 
 
 ## שלב ראשון, פשוט לבקש:
@@ -33,14 +33,14 @@ translationKey: "2026-10-11-grokbot-email-inbox"
 אין.
 השינוי הוא בראש: לא מחפשים כפתור, פשוט מבקשים מהבוט.
 
-![הבקשה שלי מבאשר לפתוח לנו תיבה (כתבתי באנגלית), והוא מתחיל לבדוק אילו כתובות פנויות.](/shluchim/images/posts/grokbot-email-ask.webp)
+![הבקשה שלי מבאשר לפתוח לנו תיבה (כתבתי באנגלית), והוא מתחיל לבדוק אילו כתובות פנויות.](/images/posts/grokbot-email-ask.webp)
 
 הוא שאל איזה שם אני רוצה,
 בדק שהוא פנוי,
 והציג לי כרטיס אישור.
 שום דבר לא נתפס עד שאישרתי.
 
-![באשר מודיע שתפס לנו כתובת, ומסביר מה אפשר לעשות איתה. גם כאן, באנגלית.](/shluchim/images/posts/grokbot-email-claimed.webp)
+![באשר מודיע שתפס לנו כתובת, ומסביר מה אפשר לעשות איתה. גם כאן, באנגלית.](/images/posts/grokbot-email-claimed.webp)
 
 חשוב לדעת שהכתובת קבועה.
 אי אפשר לשנות אותה ואי אפשר למחוק אותה, אז כדאי לבחור שם בזהירות.
@@ -77,7 +77,7 @@ translationKey: "2026-10-11-grokbot-email-inbox"
 באשר מצא את המייל.
 ואז אמר לי משהו שלא חשבתי עליו.
 
-![באשר מוצא את המייל עם ה־PDF, ומסביר שאף אחד לא מקבל התראה כשמגיע מייל.](/shluchim/images/posts/grokbot-email-found-mail.webp)
+![באשר מוצא את המייל עם ה־PDF, ומסביר שאף אחד לא מקבל התראה כשמגיע מייל.](/images/posts/grokbot-email-found-mail.webp)
 
 אף אחד לא מקבל התראה אוטומטית.
 מייל שנכנס לא מעיר אף שלוח לבד.
@@ -97,7 +97,7 @@ translationKey: "2026-10-11-grokbot-email-inbox"
 
 באשר מחליט איזה שלוח מטפל בו.
 
-![באשר מנתב את המעטפות, וכל שלוח תופס את שלו.](/shluchim/images/posts/grokbot-email-illus-routing.webp)
+![באשר מנתב את המעטפות, וכל שלוח תופס את שלו.](/images/posts/grokbot-email-illus-routing.webp)
 
 הוא לא עונה ולא שולח כלום בלי אישור שלי.
 ומעדכן אותי בשורה אחת.
@@ -124,7 +124,7 @@ translationKey: "2026-10-11-grokbot-email-inbox"
 ולהפעיל routine רק על מיילים משולחים מסוימים.
 
 
-![כולם סביב התיבה. מישהו מביא מכתב, והשאר כבר מתלהבים.](/shluchim/images/posts/grokbot-email-illus-inbox.webp)
+![כולם סביב התיבה. מישהו מביא מכתב, והשאר כבר מתלהבים.](/images/posts/grokbot-email-illus-inbox.webp)
 
 
 ## מה כדאי לקחת מזה:

@@ -126,9 +126,9 @@ Emil Kowalski, Figma, Anthropic, Addy Osmani, וOneRedOak מותאם לRTL (כת
 כולל דרישות מדידה לפני A/B (ניסוי בין שתי גרסאות).
 
 
-![לפני: דף הכרטיסיות החי במובייל, ארבע כרטיסיות צבעוניות ברשימה ארוכה.](/shluchim/images/posts/tickets-before-390.webp)
+![לפני: דף הכרטיסיות החי במובייל, ארבע כרטיסיות צבעוניות ברשימה ארוכה.](/images/posts/tickets-before-390.webp)
 
-![אחרי: הפרוטוטייפ במובייל, עם כותרת ״הספר הבא כבר שלך״ וכרטיסייה מומלצת אחת בראש הדף.](/shluchim/images/posts/tickets-after-390.webp)
+![אחרי: הפרוטוטייפ במובייל, עם כותרת ״הספר הבא כבר שלך״ וכרטיסייה מומלצת אחת בראש הדף.](/images/posts/tickets-after-390.webp)
 
 
 ## למה זה היה מעולה:

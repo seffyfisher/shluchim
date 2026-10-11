@@ -10,7 +10,7 @@ function mem() {
   };
   return { rows, store };
 }
-const RT = "https://seffyfisher.github.io/shluchim/posts/x/";
+const RT = "https://shluchim.shinlamed.com/posts/x/";
 const post = (body: Record<string, string>, ip = "1.2.3.4", accept = "text/html") =>
   new Request("http://x/feedback", { method: "POST", body: new URLSearchParams(body).toString(),
     headers: { "content-type": "application/x-www-form-urlencoded", "x-forwarded-for": ip, accept, "user-agent": "test" } });
@@ -39,9 +39,10 @@ Deno.test("rate limit: 6th within 10 min → slow", async () => {
   eq(last, RT + "#feedback-slow"); eq(m.rows.length, 5);
 });
 Deno.test("open redirect blocked", () => {
-  eq(safeReturnTo("https://evil.com/shluchim/"), "https://seffyfisher.github.io/shluchim/");
-  eq(safeReturnTo("https://seffyfisher.github.io/other/"), "https://seffyfisher.github.io/shluchim/");
-  eq(safeReturnTo("http://seffyfisher.github.io/shluchim/a/"), "https://seffyfisher.github.io/shluchim/");
+  eq(safeReturnTo("https://evil.com/posts/x/"), "https://shluchim.shinlamed.com/");
+  eq(safeReturnTo("https://shluchim.shinlamed.com.evil.com/posts/x/"), "https://shluchim.shinlamed.com/");
+  eq(safeReturnTo("https://seffyfisher.github.io/shluchim/posts/x/"), "https://shluchim.shinlamed.com/");
+  eq(safeReturnTo("http://shluchim.shinlamed.com/posts/x/"), "https://shluchim.shinlamed.com/");
   eq(safeReturnTo(RT + "?q=1#x"), RT);
 });
 Deno.test("JSON variant", async () => {
