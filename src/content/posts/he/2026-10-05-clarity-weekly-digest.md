@@ -1,6 +1,9 @@
 ---
 title: "סיכום Clarity שבועי, ששותק כשאין מה להגיד."
 description: "שלוח Clarity מדווח כל יום שני על לחיצות זעם, לחיצות מתות והקלטות בעייתיות, רק כשיש משהו מהותי."
+seoTitle: "דוח Clarity שבועי מעוזר AI: לחיצות זעם ומתות"
+seoDescription: "כל יום שני עוזר AI מסכם מ־Microsoft Clarity לחיצות זעם, לחיצות מתות והקלטות בעייתיות, ושותק כשאין מה להגיד."
+topics: ["ai-at-work"]
 date: 2026-09-28
 draft: false
 lang: he

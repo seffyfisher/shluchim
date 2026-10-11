@@ -1,6 +1,9 @@
 ---
 title: "כמה יעלה Clerk, בלי לנחש מאירועי login."
 description: "תמחור Clerk לפי MRU, כולל אפליקציית הקורא, הראה שההערכה הראשונה הייתה נמוכה בסדר גודל."
+seoTitle: "תמחור Clerk לפי MRU: למה אירועי login מטעים"
+seoDescription: "Clerk גובה לפי משתמשים פעילים בחודש (MRU). חישוב לפי MRU במקום אירועי login הראה שההערכה הראשונה נמוכה פי 20: כ־$25 לעומת כ־$500 בחודש."
+topics: ["ai-at-work"]
 date: 2026-10-02
 draft: false
 lang: he

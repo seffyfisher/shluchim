@@ -1,6 +1,9 @@
 ---
 title: "Three daily check-ins moved out of the busy chat."
 description: "I split the \"what are you working on\" routine away from Basher, my AI team manager, into a narrow agent called Work Now."
+seoTitle: "Moving daily check-ins to a dedicated AI agent"
+seoDescription: "Three weekday check-ins were cluttering my AI team manager's chat. I moved them to a narrow AI agent called Work Now: same task, less noise."
+topics: ["agent-teamwork"]
 date: 2026-09-21
 draft: false
 lang: en

@@ -1,6 +1,9 @@
 ---
 title: "How to go through social media and pull out pearls."
 description: "Sosia goes into my Facebook reading groups, reads, and pulls out organized quotes and mentions. Within an hour there were 28 quotes for the campaign and 5 real mentions of e-vrit."
+seoTitle: "Mining Facebook groups for customer quotes with AI"
+seoDescription: "An AI agent went through Facebook reading groups and, within an hour, pulled out 28 reader quotes for a campaign and 5 real mentions of e-vrit."
+topics: ["ai-at-work"]
 date: 2026-10-09
 draft: false
 lang: en

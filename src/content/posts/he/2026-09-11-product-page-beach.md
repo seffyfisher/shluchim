@@ -1,6 +1,9 @@
 ---
 title: "מהטלפון בים: חידת GA4 שנראתה כמו קמפיין."
 description: "מקור תנועה מזויף ב־GA4 עם 20 אלף סשנים בשבוע, שתוקן מהחוף בעזרת השְׁלוּחִים."
+seoTitle: "מקור תנועה מזויף ב־GA4: איך AI מצא ותיקן"
+seoDescription: "מקור תנועה בשם product_page ב־GA4 הראה 20 אלף סשנים בשבוע. הסיבה: שדה source ב־dataLayer. עוזרי AI אבחנו ותיקנו, מהטלפון, בחוף."
+topics: ["ai-at-work", "agent-teamwork"]
 date: 2026-09-09
 draft: false
 lang: he

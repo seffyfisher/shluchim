@@ -1,6 +1,9 @@
 ---
 title: "שימוש ששילמתי עליו כבר לא הולך לפח."
 description: "שגרה שמזהירה אותי לפני שהמכסה של Grok Bot ו־Cursor מתאפסת, ושותקת כשאין סיבה."
+seoTitle: "התראה לפני איפוס מכסה של גרוקבוט (Grok Bot)"
+seoDescription: "שגרה שמזהירה אותי לפני שהמכסה של Grok Bot ו־Cursor מתאפסת, ושותקת כשאין סיבה, כדי שהשימוש ששילמתי עליו לא ילך לפח."
+topics: ["grok-bot", "everyday-ai"]
 date: 2026-10-08
 draft: false
 lang: he

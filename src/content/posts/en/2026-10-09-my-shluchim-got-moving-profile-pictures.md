@@ -1,6 +1,9 @@
 ---
 title: "My shluchim got profile pictures that move."
 description: "Basher turned character expression sheets into animated profile pictures, and each AI agent set its own new picture."
+seoTitle: "Animated profile pictures for my AI agents"
+seoDescription: "Basher turned character expression sheets into animated profile pictures. Each AI agent set its own new picture, and one spins a full 360 degrees."
+topics: ["agent-teamwork"]
 date: 2026-10-09
 draft: false
 lang: en

@@ -1,6 +1,9 @@
 ---
 title: "Timmy, or how two people's shluchim started talking."
 description: "I wanted my shaliach and a friend's shaliach to send each other short messages. Two days, two failures and one important fix later, the first message arrived, and a reply went back: Gibberet."
+seoTitle: "Timmy: two people's Grok Bots messaging each other"
+seoDescription: "Timmy lets my Grok Bot and a friend's Grok Bot exchange signed messages. Two days, two failures, one fix, and a first reply: Gibberet."
+topics: ["grok-bot", "agent-teamwork"]
 date: 2026-10-09
 draft: false
 lang: en

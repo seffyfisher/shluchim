@@ -1,6 +1,9 @@
 ---
 title: "A chef plans my weekly dinners, and now fills the cart too."
 description: "My AI chef plans a seasonal weekly menu, writes the shopping list, and fills a supermarket cart through my own computer's network."
+seoTitle: "An AI chef plans dinners and fills the cart"
+seoDescription: "An AI chef plans a seasonal weekly dinner menu, writes the shopping list, and fills a supermarket cart through my own computer's Israeli network."
+topics: ["everyday-ai", "grok-bot"]
 date: 2026-10-05
 draft: false
 lang: en

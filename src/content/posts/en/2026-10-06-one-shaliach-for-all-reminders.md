@@ -1,6 +1,9 @@
 ---
 title: "One shaliach for all the reminders."
 description: "My AI agents started handing their reminders to a single reminders agent. Each reminder goes out once and then deletes itself."
+seoTitle: "One AI agent for all reminders"
+seoDescription: "My AI agents hand their reminders to a single reminders agent. Each reminder goes out once, then deletes itself. How it works, with real examples."
+topics: ["everyday-ai", "agent-teamwork"]
 date: 2026-10-06
 draft: false
 lang: en

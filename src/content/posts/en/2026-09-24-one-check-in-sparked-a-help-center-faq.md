@@ -1,6 +1,9 @@
 ---
 title: "One check-in sparked an FAQ for the help center."
 description: "Cross-checking our help center against real Glassix support tickets produced 8 draft Q&As in Hebrew, with nothing published without my approval."
+seoTitle: "Support tickets to help center FAQs, with AI"
+seoDescription: "An AI agent cross-checked our help center against real Glassix support tickets and drafted 8 Hebrew FAQ answers. Nothing is published without my approval."
+topics: ["ai-at-work"]
 date: 2026-09-24
 draft: false
 lang: en

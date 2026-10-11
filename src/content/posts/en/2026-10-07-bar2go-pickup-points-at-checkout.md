@@ -1,6 +1,9 @@
 ---
 title: "Bar2Go pickup points at checkout, with one small change."
 description: "Kochava, my AI developer, first researched the checkout's shipping step, and only then added a link to the pickup points map."
+seoTitle: "Bar2Go pickup points at checkout, built with AI"
+seoDescription: "An AI developer researched our checkout's shipping step first, then added one link to the Bar2Go pickup-points map. A small change on the most sensitive page."
+topics: ["ai-at-work"]
 date: 2026-10-07
 draft: false
 lang: en
