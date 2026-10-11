@@ -15,6 +15,12 @@ export const UI = {
     edit: 'עריכה ב־GitHub', draft: 'טיוטה', postNav: 'ניווט בסוף הסיפור', nav: 'ניווט', chat: 'שיחה',
     switchTo: 'EN', switchHint: 'Read this in English',
     topics: 'נושאים', related: 'עוד סיפורים', topicNav: 'נושאים נוספים', home: 'סיפורים',
+    // "Follow with your AI" block (FollowBlock.astro): a question and one button. The prompt itself lives in src/lib/follow.ts.
+    followQ: 'רוצה לדעת שעולה פוסט חדש?',
+    followCopy: 'תגיד את זה לשְׁלוּחִים שלך', followCopied: 'הועתק!',
+    followDone: 'עכשיו תדביק את זה אצל השְׁלוּחִים שלך (צ׳אט, קלוד ושות׳).',
+    followCopyFail: 'ההעתקה האוטומטית לא עבדה. הטקסט מסומן: מעתיקים ידנית ומדביקים אצל השְׁלוּחִים שלך.',
+    followLabel: 'הפרומפט להעתקה',
   },
   en: {
     skip: 'Skip to content', preview: "Preview mode: includes drafts that aren't approved for publishing yet", navMain: 'Main',
@@ -22,6 +28,11 @@ export const UI = {
     edit: 'Edit on GitHub', draft: 'Draft', postNav: 'Story navigation', nav: 'Navigation', chat: 'Conversation',
     switchTo: 'עברית', switchHint: 'לקריאה בעברית',
     topics: 'Topics', related: 'More stories', topicNav: 'More topics', home: 'Stories',
+    followQ: 'Want to know when a new post goes up?',
+    followCopy: 'Tell your shluchim', followCopied: 'Copied!',
+    followDone: 'Now paste it to your shluchim: ChatGPT, Claude, or whichever AI assistant you use.',
+    followCopyFail: "Automatic copy didn't work. The text is selected: copy it by hand and paste it to your shluchim.",
+    followLabel: 'The prompt to copy',
   },
 } satisfies Record<Lang, Record<string, string>>;
 

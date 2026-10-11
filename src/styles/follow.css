@@ -1,0 +1,31 @@
+/* "Follow with your AI" (FollowBlock.astro): a question and one button. Tokens come from global.css: --fg --bg --muted --line --radius. Black and white only, flat. */
+.follow { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem 1.25rem; max-width: 40rem; padding-block: .75rem; border-block: 1px solid var(--line); }
+.follow-q { margin: 0; font-weight: 600; font-size: var(--step-0); line-height: 1.4; }
+
+.follow-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding-inline: 1.1rem; border: 1px solid var(--fg); border-radius: 999px; background: var(--fg); color: var(--bg); font: inherit; font-size: var(--step--1); font-weight: 600; line-height: 1.2; text-align: center; cursor: pointer; }
+.follow-btn:hover { background: transparent; color: var(--fg); }
+.follow-btn:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+/* until the copy script runs the button is invisible but keeps its space, so nothing jumps; the script sets data-ready */
+.follow-copy:not([data-ready]) { visibility: hidden; }
+/* both labels share one grid cell, so the button keeps the width of the longer one and does not jump when it flips to "Copied!" */
+.follow-copy { display: inline-grid; place-items: center; }
+.follow-copy > span { grid-area: 1 / 1; }
+.follow-copy .done, .follow-copy[data-done] .idle { visibility: hidden; }
+.follow-copy[data-done] .done { visibility: visible; }
+.follow-copy[data-done] { background: transparent; color: var(--fg); } /* after the click: outlined, the filled one stays the "do this" button */
+/* no scripting, no copy: hide the whole block instead of showing a button that cannot work */
+@media (scripting: none) { .follow { display: none; } }
+
+/* the feedback under the button ("copied, now paste it to your shluchim"); empty = out of the layout but still a live region */
+.follow-status { flex-basis: 100%; margin: 0; padding-block: .25rem .5rem; font-size: var(--step--1); font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; } /* anywhere: a long word never forces sideways scroll (big text, narrow phone) */
+.follow-status:empty { position: absolute; inline-size: 1px; block-size: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.follow-status:not(:empty, [data-failed])::before { content: '\2713'; margin-inline-end: .45rem; }
+/* only when the clipboard refused: the prompt, selected, to copy by hand */
+.follow-manual { display: block; flex-basis: 100%; inline-size: 100%; margin-bottom: .5rem; padding: .75rem .9rem; border: 1px solid light-dark(#8c8c8c, #767676); border-radius: var(--radius); background: var(--bg); color: var(--fg); font: inherit; font-size: var(--step--1); line-height: 1.6; resize: vertical; unicode-bidi: plaintext; }
+.follow-manual:focus-visible { outline: 2px solid var(--fg); outline-offset: 0; }
+
+/* placements */
+.follow-home { max-width: none; margin-bottom: 3rem; }
+.follow-post { margin-top: clamp(2rem, 5vw, 3rem); }
+/* footer: no top rule (the footer has its own), one quiet row above the footer note */
+.follow-footer { max-width: none; margin-bottom: 1rem; padding-block: 0 1rem; border-top: 0; color: var(--fg); }

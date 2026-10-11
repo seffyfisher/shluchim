@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import StoryList from './StoryList.astro';
+import FollowBlock from './FollowBlock.astro';
 import shluchim from '../data/shluchim.json';
 import { getPosts } from '../lib/posts';
 import { lurl, t, type Lang } from '../i18n/ui';
@@ -55,6 +56,7 @@ const aboutCard = he
       <a class="btn" href={lurl(lang, 'about/')}>{aboutCard.btn}</a>
     </article>
   </div>
+  <FollowBlock lang={lang} placement="home" />
   {posts.length === 0 ? (
     he
       ? <p class="empty">עוד אין פה סיפורים.<br />השְׁלוּחִים כבר עובדים על הראשון.</p>
