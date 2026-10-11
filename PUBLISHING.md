@@ -45,10 +45,10 @@ Exception (Seffy, 2026-10-10): the header nav and footer link labels (`src/layou
 Exception (Seffy, 2026-10-10): the site tagline (`tagline` in `src/config.ts`) is written exactly as ״שלוחו של אדם כמותו״ | מעשיות על שלוחים מבוססי שפה ואנשים בשר ודם, with no niqqud on שלוחים.
 
 ## English translations (/en/)
-- Hebrew posts: `src/content/posts/he/<slug>.md` (URL unchanged: `/shluchim/posts/<slug>/`).
-- English posts: `src/content/posts/en/<same file name>.md` -> `/shluchim/en/posts/<slug>/`. Same file name as the Hebrew one (the CMS, the sitemap alternates and the switcher pair them by it).
+- Hebrew posts: `src/content/posts/he/<slug>.md` (URL: `/posts/<slug>/`).
+- English posts: `src/content/posts/en/<same file name>.md` -> `/en/posts/<slug>/`. Same file name as the Hebrew one (the CMS, the sitemap alternates and the switcher pair them by it).
 - Frontmatter: `title`, `description` (150–160 chars, rewritten for readers abroad), `seoTitle`, `seoDescription` (70–160 chars) and `topics` (same topics as the Hebrew post), `date` (SAME as the Hebrew post), `draft: true` until Seffy approves, `lang: en`, `translationKey: "<Hebrew file name without .md>"`. Search-copy rules: [SEO-GEO.md](SEO-GEO.md).
 - Chat bubbles: translate the text; add a line `original: <Hebrew text>` right after a message to show a collapsible "Hebrew original" under it.
 - No niqqud in English text (only on `original:` lines). The build warns about it, and about Hebrew posts with no English pair.
 - About in English: `src/content/pages/en/about.md` (`title`, `description`, `lang: en`, `translationKey: about`). Team: `name_en`, `role_en`, `category_en`, `example_en` in `src/data/shluchim.json`.
-- Preview: `npm run build:drafts && npm run preview:drafts`, then open `/shluchim/en/`.
+- Preview: `npm run build:drafts && npm run preview:drafts`, then open `/en/`.

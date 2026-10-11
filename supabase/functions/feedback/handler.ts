@@ -4,7 +4,10 @@
 // JSON answer ({status}) when the request sends Accept: application/json.
 // Deploy with --no-verify-jwt (a plain form cannot send a JWT).
 
-export const ALLOWED_PREFIX = "https://seffyfisher.github.io/shluchim/";
+// return_to must start with one of these. The first is the default landing page. The old GitHub Pages address stays
+// allowed for a while because it redirects to the new domain; remove it once nothing links there any more.
+export const ALLOWED_PREFIXES = ["https://shluchim.shinlamed.com/", "https://seffyfisher.github.io/shluchim/"];
+export const ALLOWED_PREFIX = ALLOWED_PREFIXES[0];
 export const RATE_LIMIT = 5; // per IP ...
 export const RATE_WINDOW_MS = 10 * 60 * 1000; // ... per 10 minutes (matches the copy "בעוד 10 דקות")
 export const MAX_BODY = 16 * 1024; // bytes; a full legit form is < 5 KB
@@ -26,7 +29,7 @@ export function safeReturnTo(raw: string | null): string {
   try {
     const u = new URL(raw);
     const clean = `${u.origin}${u.pathname}`;
-    if (u.protocol === "https:" && clean.startsWith(ALLOWED_PREFIX) && !u.pathname.includes("..")) return clean;
+    if (u.protocol === "https:" && ALLOWED_PREFIXES.some((p) => clean.startsWith(p)) && !u.pathname.includes("..")) return clean;
   } catch { /* fall through */ }
   return ALLOWED_PREFIX;
 }

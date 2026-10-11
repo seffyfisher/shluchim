@@ -10,7 +10,7 @@ function mem() {
   };
   return { rows, store };
 }
-const RT = "https://seffyfisher.github.io/shluchim/posts/x/";
+const RT = "https://shluchim.shinlamed.com/posts/x/";
 const post = (body: Record<string, string>, ip = "1.2.3.4", accept = "text/html") =>
   new Request("http://x/feedback", { method: "POST", body: new URLSearchParams(body).toString(),
     headers: { "content-type": "application/x-www-form-urlencoded", "x-forwarded-for": ip, accept, "user-agent": "test" } });
@@ -39,10 +39,18 @@ Deno.test("rate limit: 6th within 10 min → slow", async () => {
   eq(last, RT + "#feedback-slow"); eq(m.rows.length, 5);
 });
 Deno.test("open redirect blocked", () => {
-  eq(safeReturnTo("https://evil.com/shluchim/"), "https://seffyfisher.github.io/shluchim/");
-  eq(safeReturnTo("https://seffyfisher.github.io/other/"), "https://seffyfisher.github.io/shluchim/");
-  eq(safeReturnTo("http://seffyfisher.github.io/shluchim/a/"), "https://seffyfisher.github.io/shluchim/");
+  const HOME = "https://shluchim.shinlamed.com/";
+  eq(safeReturnTo("https://evil.com/"), HOME);
+  eq(safeReturnTo("https://shluchim.shinlamed.com.evil.com/"), HOME);
+  eq(safeReturnTo("https://evil.com/shluchim/"), HOME);
+  eq(safeReturnTo("http://shluchim.shinlamed.com/a/"), HOME);
+  eq(safeReturnTo("https://shluchim.shinlamed.com/a/../b/"), "https://shluchim.shinlamed.com/b/"); // the URL parser resolves the dots first, so it stays inside the site
+  eq(safeReturnTo("https://seffyfisher.github.io/shluchim/../x/"), HOME); // ...and an escape from the old prefix falls back to the default
   eq(safeReturnTo(RT + "?q=1#x"), RT);
+});
+Deno.test("the old GitHub Pages address still works during the transition, other paths there do not", () => {
+  eq(safeReturnTo("https://seffyfisher.github.io/shluchim/posts/x/"), "https://seffyfisher.github.io/shluchim/posts/x/");
+  eq(safeReturnTo("https://seffyfisher.github.io/other/"), "https://shluchim.shinlamed.com/");
 });
 Deno.test("JSON variant", async () => {
   const m = mem(); const r = await handle(post(ok, "5.5.5.5", "application/json"), m.store, "s");
