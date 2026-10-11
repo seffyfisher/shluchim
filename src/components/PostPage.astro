@@ -3,6 +3,7 @@ import { render, type CollectionEntry } from 'astro:content';
 import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import FeedbackBlock from './FeedbackBlock.astro';
+import FollowBlock from './FollowBlock.astro';
 import { langOf, postUrl, getPosts, getTranslation, formatDate, formatDateShort, readingMinutes, readingLabel, topicsOf, relatedPosts } from '../lib/posts';
 import { lurl, t } from '../i18n/ui';
 import { REPO, SITES, SEO_KEYWORDS, OG_IMAGE } from '../config';
@@ -62,6 +63,7 @@ const jsonLd = [
     </div>
   </article>
   {lang === 'he' && <FeedbackBlock placement="post" />}
+  <FollowBlock lang={lang} placement="post" />
   {related.length > 0 && (
     <aside class="related" aria-labelledby="related-h">
       <h2 class="list-label" id="related-h">{ui.related}</h2>

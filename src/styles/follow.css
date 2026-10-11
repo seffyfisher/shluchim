@@ -1,0 +1,35 @@
+/* "Follow with your AI" (FollowBlock.astro). Tokens come from global.css: --fg --bg --muted --line --surface --radius. Black and white only, flat. */
+.follow { display: grid; grid-template-columns: minmax(0, 1fr); gap: .75rem; max-width: 40rem; padding: 1.25rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.follow h2 { font-family: var(--font); font-weight: 600; font-size: var(--step-1); line-height: 1.3; margin: 0; }
+.follow-lead { margin: 0; color: var(--muted); font-size: var(--step--1); line-height: 1.6; max-width: 60ch; }
+
+.follow-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.follow-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding-inline: 1.1rem; border: 1px solid var(--fg); border-radius: 999px; background: transparent; color: var(--fg); font: inherit; font-size: var(--step--1); font-weight: 600; line-height: 1.2; text-align: center; text-decoration: none; cursor: pointer; }
+.follow-btn:hover { background: var(--fg); color: var(--bg); text-decoration: none; }
+.follow-btn:focus-visible, .follow-prompt summary:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+/* the copy button is the primary action: filled. It is `hidden` until the copy script runs (display below would otherwise beat [hidden]). */
+.follow-copy { background: var(--fg); color: var(--bg); }
+.follow-copy:hover { background: transparent; color: var(--fg); }
+.follow-copy[hidden] { display: none; }
+.follow-copy .done { display: none; }
+.follow-copy[data-done] .idle { display: none; }
+.follow-copy[data-done] .done { display: inline; }
+
+/* screen-reader announcement; only visible when the automatic copy failed */
+.follow-status:not([data-failed]) { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.follow-status[data-failed] { margin: 0; font-size: var(--step--1); font-weight: 600; }
+.follow-status:empty { display: none; }
+
+/* "what does the prompt say": native <details>, closed by default; the text is a read-only field so Tab, Ctrl+A, Ctrl+C work without JS */
+.follow-prompt summary { display: inline-flex; align-items: center; min-height: 2.75rem; cursor: pointer; color: var(--muted); font-size: var(--step--1); }
+.follow-prompt summary:hover { color: var(--fg); }
+.follow-prompt textarea { display: block; inline-size: 100%; margin-top: .25rem; padding: .75rem .9rem; border: 1px solid light-dark(#8c8c8c, #767676); border-radius: var(--radius); background: var(--bg); color: var(--fg); font: inherit; font-size: var(--step--1); line-height: 1.6; resize: vertical; unicode-bidi: plaintext; user-select: all; -webkit-user-select: all; }
+.follow-prompt textarea:focus-visible { outline: 2px solid var(--fg); outline-offset: 0; }
+@supports (field-sizing: content) { .follow-prompt textarea { field-sizing: content; max-block-size: 26rem; } }
+
+/* placements */
+.follow-home { max-width: none; margin-bottom: 3rem; }
+.follow-post { margin-top: clamp(2rem, 5vw, 3rem); }
+/* footer: no card, one quiet row above the footer links */
+.follow-footer { max-width: none; padding: 0 0 1.25rem; margin-bottom: 1rem; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: none; color: var(--fg); }
+.follow-footer h2 { font-size: var(--step-0); }

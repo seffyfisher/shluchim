@@ -5,6 +5,7 @@ import { SITES, SHOW_DRAFTS, SHOW_SWITCHER_ON_HE, PERSON, SEO_HOME, SEO_KEYWORDS
 import { TOPICS, TOPIC_SLUGS } from '../data/topics.mjs';
 import { LANG_META, lurl, other, t, isLang, type Lang } from '../i18n/ui';
 import { safeJson, personNode, websiteNode, blogNode, nodeIds } from '../lib/seo';
+import FollowBlock from '../components/FollowBlock.astro';
 interface Props {
   title?: string; description?: string; noindex?: boolean; masthead?: boolean; bodyClass?: string;
   lang?: Lang;
@@ -126,6 +127,7 @@ const switchHref = alternates[o] ?? lurl(o);
     </main>
     <footer class="site">
       <div class="wrap">
+        <FollowBlock lang={lang} placement="footer" />
         <p>{SITE.footerNote}</p>
         <nav class="links topics" aria-label={ui.topics}>{TOPIC_SLUGS.map((slug) => <a href={url(`topics/${slug}/`)}>{TOPICS[slug as keyof typeof TOPICS][lang].label}</a>)}</nav>
         <p class="links"><a href={url()}>{ui.allStories}</a><a href={url('team/')}>{ui.team}</a><a href={url('about/')}>{ui.about}</a><a href={url('rss.xml')}>RSS</a></p>

@@ -1,0 +1,53 @@
+---
+// "Follow with your AI": copy a standing prompt (or open it prefilled in ChatGPT / Claude) so the reader's assistant
+// reads this blog's RSS feed and checks it once a week. Three placements: home, end of a story, footer (every page).
+//
+// CSS first (AGENTS.md): the prompt, the ChatGPT/Claude links and the "what does it say" disclosure are plain HTML and work
+// with no JavaScript. The ONE exception is the copy button: writing to the clipboard has no HTML or CSS equivalent, so a
+// ~15-line script reveals the button (it is `hidden` until the script runs, so there is never a dead button).
+import '../styles/follow.css';
+import { lurl, t, type Lang } from '../i18n/ui';
+import { followPrompt, followLinks } from '../lib/follow';
+interface Props { lang: Lang; placement: 'home' | 'post' | 'footer' }
+const { lang, placement } = Astro.props;
+const ui = t(lang);
+const prompt = followPrompt(lang, { feedUrl: new URL(lurl(lang, 'rss.xml'), Astro.site).href });
+const links = followLinks(prompt);
+const id = `follow-${placement}`; // one block per placement per page, so ids stay unique
+---
+<section class={`follow follow-${placement}`} aria-labelledby={`${id}-h`}>
+  <h2 id={`${id}-h`}>{ui.followTitle}</h2>
+  {placement !== 'footer' && <p class="follow-lead">{ui.followLead}</p>}
+  <div class="follow-actions">
+    <button type="button" class="follow-btn follow-copy" data-target={`${id}-text`} hidden>
+      <span class="idle">{ui.followCopy}</span><span class="done">{ui.followCopied}</span>
+    </button>
+    {links.map((l) => (
+      <a class="follow-btn follow-open" href={l.href} target="_blank" rel="noopener" aria-label={`${ui.followOpen.replace('{name}', l.name)} (${ui.followNewTab})`}>{ui.followOpen.replace('{name}', l.name)}</a>
+    ))}
+  </div>
+  <p class="follow-status" role="status" data-ok={ui.followCopied} data-fail={ui.followCopyFail}></p>
+  <details class="follow-prompt">
+    <summary>{ui.followShow}</summary>
+    <textarea id={`${id}-text`} readonly rows="12" aria-label={ui.followLabel} spellcheck="false">{prompt}</textarea>
+  </details>
+</section>
+<script>
+  for (const btn of document.querySelectorAll<HTMLButtonElement>('.follow-copy')) {
+    const box = btn.closest('.follow')!;
+    const field = document.getElementById(btn.dataset.target!) as HTMLTextAreaElement;
+    const status = box.querySelector<HTMLElement>('.follow-status')!;
+    let timer: number | undefined;
+    btn.hidden = false;
+    btn.addEventListener('click', async () => {
+      clearTimeout(timer);
+      let ok = true;
+      try { await navigator.clipboard.writeText(field.value); } catch { ok = false; }
+      if (!ok) { box.querySelector('details')!.open = true; field.focus(); field.select(); } // fall back to a selected text the reader can copy by hand
+      btn.toggleAttribute('data-done', ok);
+      status.toggleAttribute('data-failed', !ok);
+      status.textContent = ok ? status.dataset.ok! : status.dataset.fail!;
+      timer = window.setTimeout(() => { btn.removeAttribute('data-done'); status.removeAttribute('data-failed'); status.textContent = ''; }, ok ? 2500 : 8000);
+    });
+  }
+</script>
