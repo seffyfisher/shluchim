@@ -15,10 +15,10 @@ const seo = SEO_HOME[lang];
 const FEATURED_SHALIACH = 'basher';
 const s = shluchim.find((x) => x.id === FEATURED_SHALIACH)!;
 const shaliach = he ? { name: s.name, role: s.role, example: s.example } : { name: s.name_en, role: s.role_en, example: s.example_en };
-// The about card is one short paragraph in small type (Seffy's own wording; the English follows the About page's first hook).
+// The about card is four short lines in small type (Seffy's own Hebrew wording, 2026-10-11; the English is a translation, one paragraph per line).
 const aboutCard = he
-  ? { kick: 'האדם מאחורי הבלוג', title: 'מי אני', text: 'קוראים לי ספי פישר. בגיל 3, בחיידר, ליקקתי דף של אותיות. אבל היום אני מבין שמשם זה התחיל, האהבה שלי לאותיות מילים ושפה.', btn: 'עוד עליי' }
-  : { kick: 'The person behind the blog', title: 'Who I am', text: 'My name is Seffy Fisher. At age 3, in cheder, the traditional Jewish kindergarten, I licked a page of letters. Today I get that this is where my love for letters, words and language started.', btn: 'More about me' };
+  ? { kick: 'האדם מאחורי הבלוג', title: 'מי אני', text: ['קוראים לי ספי פישר.', 'אני אמן חזותי, CTO של עברית, אבא לשניים, ומופרע קשב עם בעיות ויסות רגשי.', 'וכמו כולם, מנסה ללמוד להתמודד עם השינויים שה־AI מביא.', 'הבלוג הזה הוא הדרך שלי לעשות את זה בקול רם.'], btn: 'עוד עליי' }
+  : { kick: 'The person behind the blog', title: 'Who I am', text: ['My name is Seffy Fisher.', "I'm a visual artist, a CTO of Hebrew, a father of two, and a person with ADHD and emotional regulation problems.", "Like everyone, I'm trying to learn to cope with the changes AI brings.", 'This blog is my way of doing that out loud.'], btn: 'More about me' };
 ---
 <Base masthead noindex={!he && posts.length === 0} lang={lang} alternates={{ he: lurl('he'), en: lurl('en') }} seoTitle={seo.title} seoDescription={seo.description}>
   <section class="intro" aria-label={he ? 'פתיח' : 'Intro'}>
@@ -54,7 +54,7 @@ const aboutCard = he
     <article class="card">
       <p class="kick">{aboutCard.kick}</p>
       <h2>{aboutCard.title}</h2>
-      <p class="about">{aboutCard.text}</p>
+      {aboutCard.text.map((line) => <p class="about-line">{line}</p>)}
       <a class="btn" href={lurl(lang, 'about/')}>{aboutCard.btn}</a>
     </article>
   </div>
