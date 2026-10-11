@@ -1,6 +1,9 @@
 ---
 title: "One email address, and a front door for the whole team."
 description: "Grok Bot now has an inbox of its own. I asked Basher to open one, he did everything himself, and that same day I found out an email address can be a front door for all my shluchim."
+seoTitle: "Grok Bot email address: setup, +tags and routines"
+seoDescription: "I asked Basher to open an inbox for Grok Bot. The address is permanent, +tags split the mail, and new mail wakes no agent unless you set up a routine."
+topics: ["grok-bot", "agent-teamwork"]
 date: 2026-10-11
 draft: false
 lang: en

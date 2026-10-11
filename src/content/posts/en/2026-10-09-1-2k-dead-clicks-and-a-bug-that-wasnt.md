@@ -1,6 +1,9 @@
 ---
 title: "1.2k dead clicks on the terms checkbox, and a bug that wasn't."
 description: "Dima reproduced it, Nitza designed it, and in about one workday we went from \"bug?\" to a measured fix."
+seoTitle: "1.2k dead clicks on a checkbox: bug or not?"
+seoDescription: "Clarity showed 1.2k dead clicks on a checkout terms checkbox. An AI QA agent ran 48 live clicks: not a bug. The real problem was a crowded click target."
+topics: ["ai-at-work"]
 date: 2026-10-08
 draft: false
 lang: en

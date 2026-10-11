@@ -1,6 +1,9 @@
 ---
 title: "From a messy inbox to one shaliach with a tidy file."
 description: "A sensitive family matter got its own dedicated AI agent, with personal facts kept apart from general knowledge."
+seoTitle: "A dedicated AI agent for a sensitive family matter"
+seoDescription: "A sensitive family matter got its own AI agent: documents extracted from email, 11 sourced research files, and personal facts kept apart from general knowledge."
+topics: ["everyday-ai"]
 date: 2026-09-17
 draft: false
 lang: en

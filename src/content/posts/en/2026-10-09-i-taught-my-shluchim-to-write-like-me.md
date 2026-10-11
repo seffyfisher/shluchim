@@ -1,6 +1,9 @@
 ---
 title: "I taught my shluchim to write like me, until I couldn't tell us apart."
 description: "A two-layer voice profile, four blind rounds, and one discovery about my punctuation."
+seoTitle: "Teaching AI agents to write in my voice"
+seoDescription: "I gave my AI agents a two-layer voice profile and ran four blind tests until I couldn't tell their writing from mine. One discovery: how I use punctuation."
+topics: ["agent-teamwork"]
 date: 2026-10-09
 draft: false
 lang: en

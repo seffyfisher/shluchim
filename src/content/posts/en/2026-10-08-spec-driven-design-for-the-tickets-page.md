@@ -1,6 +1,9 @@
 ---
 title: "From idea to engineering in two days: a spec-driven design process for the ticket bundles page."
 description: "Nitza, my AI designer, researched and built a repeatable design process, and its first run took our ticket bundles page all the way to a developer handoff."
+seoTitle: "A spec-driven design process built by an AI agent"
+seoDescription: "An AI designer built a repeatable spec-driven design process in two days, and its first run took our ticket bundles page all the way to developer handoff."
+topics: ["ai-at-work"]
 date: 2026-10-07
 draft: false
 lang: en

@@ -1,6 +1,9 @@
 ---
 title: "Five pieces from my old studio went up on my site in one chat."
 description: "I sent photos to Shinlamed, my website's AI agent, approved previews, and my personal art site finally got updated."
+seoTitle: "An AI agent updates my art website from one chat"
+seoDescription: "I sent phone photos to my website's AI agent. It cleaned backgrounds, I approved previews, and five artworks went live on my personal art site in one chat."
+topics: ["everyday-ai"]
 date: 2026-09-19
 draft: false
 lang: en

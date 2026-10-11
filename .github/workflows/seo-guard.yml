@@ -1,0 +1,31 @@
+name: SEO guard
+
+# Fails (red X) when a change breaks the search / AI-discoverability setup: missing seoTitle/seoDescription,
+# vocabulary rules in the Hebrew search copy, broken JSON-LD, hreflang, canonical, social cards, internal links.
+# It is a separate workflow on purpose: it flags problems but never blocks the deploy to GitHub Pages.
+# Rules and how to fix each problem: SEO-GEO.md.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: ${{ vars.SITE_URL }}
+      BASE_PATH: ${{ vars.BASE_PATH }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run seo:check   # SEO_STRICT=1 astro build: any problem fails the job

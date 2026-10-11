@@ -1,23 +1,50 @@
 ---
 import '../styles/global.css';
 import fontUrl from '../fonts/miriam-libre-var.woff2?url';
-import { SITES, SHOW_DRAFTS, SHOW_SWITCHER_ON_HE } from '../config';
+import { SITES, SHOW_DRAFTS, SHOW_SWITCHER_ON_HE, PERSON, SEO_HOME, SEO_KEYWORDS, OG_IMAGE, VERIFY } from '../config';
+import { TOPICS, TOPIC_SLUGS } from '../data/topics.mjs';
 import { LANG_META, lurl, other, t, isLang, type Lang } from '../i18n/ui';
+import { safeJson, personNode, websiteNode, blogNode, nodeIds } from '../lib/seo';
 interface Props {
   title?: string; description?: string; noindex?: boolean; masthead?: boolean; bodyClass?: string;
   lang?: Lang;
   /** Counterpart pages (full paths incl. base). Only pass a language when that page really exists. */
   alternates?: Partial<Record<Lang, string>>;
+  /** Complete <title> text, brand included. Default: "<title> · <brand>". */
+  seoTitle?: string;
+  /** Meta description + JSON-LD text. Default: `description`. Social cards keep using `description`. */
+  seoDescription?: string;
+  ogType?: 'website' | 'article';
+  /** Share image (site path or absolute URL). Default: the per-language card in public/og/. */
+  image?: string; imageAlt?: string;
+  published?: Date; modified?: Date; section?: string; tags?: string[];
+  /** Page-specific JSON-LD nodes. The Person, WebSite and Blog nodes are always added. */
+  jsonLd?: object[];
 }
 const lang: Lang = Astro.props.lang ?? (isLang(Astro.currentLocale) ? Astro.currentLocale : 'he');
 const SITE = SITES[lang];
 const ui = t(lang);
 const meta = LANG_META[lang];
-const { title, description = SITE.tagline, noindex = false, masthead = false, bodyClass } = Astro.props;
+const { title, description, noindex = false, masthead = false, bodyClass, seoTitle, seoDescription, ogType = 'website', image, imageAlt, published, modified, section, tags, jsonLd = [] } = Astro.props;
 const alternates: Partial<Record<Lang, string>> = { ...(Astro.props.alternates ?? {}), [lang]: Astro.url.pathname };
 const hasAlt = Object.keys(alternates).length > 1;
-const fullTitle = title ? `${title} · ${SITE.title}` : SITE.title;
+const fullTitle = seoTitle ?? (title ? `${title} · ${SITE.title}` : SITE.title);
+const metaDescription = seoDescription ?? description ?? SITE.tagline;
+const shareTitle = title ?? seoTitle ?? SITE.title;
+const shareDescription = description ?? metaDescription;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const abs = (p: string) => new URL(p, Astro.site).href;
+const shareImage = abs(image ?? lurl('he', OG_IMAGE.file[lang]));
+const shareImageAlt = imageAlt ?? OG_IMAGE.alt[lang];
+const robots = noindex || SHOW_DRAFTS ? 'noindex' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1';
+// Structured data: every page carries the author (Person), the site (WebSite) and the Blog, so the graph is self-contained; pages add their own nodes (BlogPosting, breadcrumbs...).
+const { person: personId, website: websiteId, blog: blogId } = nodeIds(abs(lurl('he')), abs(lurl(lang)));
+const graph = [
+  personNode({ id: personId, name: PERSON.name[lang], alternateName: PERSON.name[lang === 'he' ? 'en' : 'he'], url: abs(lurl(lang, 'about/')), description: PERSON.description[lang], sameAs: [...PERSON.sameAs] }),
+  websiteNode({ id: websiteId, url: abs(lurl(lang)), name: SITE.title, alternateName: lang === 'he' ? [SITE.displayTitle, 'Shluchim'] : undefined, description: SEO_HOME[lang].description, lang, publisherId: personId }),
+  blogNode({ id: blogId, url: abs(lurl(lang)), name: SITE.title, description: SEO_HOME[lang].description, lang, websiteId, publisherId: personId, keywords: [...SEO_KEYWORDS[lang]] }),
+  ...jsonLd,
+];
 const url = (p = '') => lurl(lang, p);
 const o = other(lang);
 const showSwitch = lang !== 'he' || SHOW_SWITCHER_ON_HE;
@@ -29,18 +56,39 @@ const switchHref = alternates[o] ?? lurl(o);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonical} />
+    <meta name="robots" content={robots} />
+    <meta name="author" content={PERSON.name[lang]} />
+    {VERIFY.google && <meta name="google-site-verification" content={VERIFY.google} />}
+    {VERIFY.bing && <meta name="msvalidate.01" content={VERIFY.bing} />}
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141414" />
     <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE.title} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={shareTitle} />
+    <meta property="og:description" content={shareDescription} />
+    <meta property="og:image" content={shareImage} />
+    {!image && <meta property="og:image:width" content={String(OG_IMAGE.width)} />}
+    {!image && <meta property="og:image:height" content={String(OG_IMAGE.height)} />}
+    <meta property="og:image:alt" content={shareImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={shareTitle} />
+    <meta name="twitter:description" content={shareDescription} />
+    <meta name="twitter:image" content={shareImage} />
+    <meta name="twitter:image:alt" content={shareImageAlt} />
+    {ogType === 'article' && published && <meta property="article:published_time" content={published.toISOString()} />}
+    {ogType === 'article' && (modified ?? published) && <meta property="article:modified_time" content={(modified ?? published)!.toISOString()} />}
+    {ogType === 'article' && <meta property="article:author" content={abs(lurl(lang, 'about/'))} />}
+    {ogType === 'article' && section && <meta property="article:section" content={section} />}
+    {ogType === 'article' && tags?.map((tag) => <meta property="article:tag" content={tag} />)}
     <meta property="og:locale" content={meta.og} />
     {hasAlt && <meta property="og:locale:alternate" content={LANG_META[o].og} />}
     {hasAlt && (['he', 'en'] as Lang[]).map((l) => <link rel="alternate" hreflang={l} href={new URL(alternates[l]!, Astro.site)} />)}
-    {hasAlt && <link rel="alternate" hreflang="x-default" href={new URL(alternates.he!, Astro.site)} />}
+    {hasAlt && <link rel="alternate" hreflang="x-default" href={new URL(alternates.en ?? alternates.he!, Astro.site)} />}
     <link rel="alternate" type="application/rss+xml" title={SITE.title} href={url('rss.xml')} />
     <link rel="sitemap" href={lurl('he', 'sitemap-index.xml')} />
     <link rel="icon" type="image/gif" href={lurl('he', 'favicon-animated.gif')} />
@@ -49,7 +97,7 @@ const switchHref = alternates[o] ?? lurl(o);
     <link rel="apple-touch-icon" sizes="180x180" href={lurl('he', 'apple-touch-icon.png')} />
     <link rel="manifest" href={lurl('he', 'site.webmanifest')} />
     <slot name="head" />
-    {(noindex || SHOW_DRAFTS) && <meta name="robots" content="noindex" />}
+    <script type="application/ld+json" set:html={safeJson({ '@context': 'https://schema.org', '@graph': graph })} />
   </head>
   <body class={bodyClass}>
     <a class="skip" href="#main">{ui.skip}</a>
@@ -79,6 +127,7 @@ const switchHref = alternates[o] ?? lurl(o);
     <footer class="site">
       <div class="wrap">
         <p>{SITE.footerNote}</p>
+        <nav class="links topics" aria-label={ui.topics}>{TOPIC_SLUGS.map((slug) => <a href={url(`topics/${slug}/`)}>{TOPICS[slug as keyof typeof TOPICS][lang].label}</a>)}</nav>
         <p class="links"><a href={url()}>{ui.allStories}</a><a href={url('team/')}>{ui.team}</a><a href={url('about/')}>{ui.about}</a><a href={url('rss.xml')}>RSS</a></p>
       </div>
     </footer>

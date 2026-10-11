@@ -1,7 +1,7 @@
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import { SITES } from '../config';
-import { getPosts, postUrl } from './posts';
+import { getPosts, postUrl, topicsOf } from './posts';
 import type { Lang } from '../i18n/ui';
 
 /** One RSS feed per language: /rss.xml (Hebrew, unchanged) and /en/rss.xml. */
@@ -17,6 +17,7 @@ export async function feed(lang: Lang, context: APIContext) {
       description: p.data.description,
       pubDate: p.data.date,
       link: postUrl(p),
+      categories: topicsOf(p, lang).map((x) => x.label),
     })),
     customData: `<language>${lang}</language>`,
   });

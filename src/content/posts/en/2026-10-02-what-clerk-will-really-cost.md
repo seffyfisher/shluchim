@@ -1,6 +1,9 @@
 ---
 title: "What Clerk will cost, without guessing from login events."
 description: "Pricing Clerk by monthly retained users, including our reader app, showed our first estimate was an order of magnitude too low."
+seoTitle: "Clerk pricing by MRU: why login events mislead"
+seoDescription: "Clerk charges per monthly retained user. Pricing it that way, not from login events, showed our first estimate was 20x too low: $25 vs about $500 a month."
+topics: ["ai-at-work"]
 date: 2026-10-02
 draft: false
 lang: en

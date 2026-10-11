@@ -1,6 +1,9 @@
 ---
 title: "Four questions from Chartbeat, and answers with real numbers."
 description: "A paste-ready reply to a vendor, with pageview volumes pulled from GA4 that same morning by my analytics AI agent."
+seoTitle: "Answering a vendor's questions with real GA4 data"
+seoDescription: "Chartbeat sent four sales questions. An AI analytics agent pulled real pageview numbers from GA4 and wrote a paste-ready reply the same morning."
+topics: ["ai-at-work"]
 date: 2026-09-25
 draft: false
 lang: en

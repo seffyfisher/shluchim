@@ -1,6 +1,9 @@
 ---
 title: "How the Shluchim blog was born."
 description: "A writing AI agent that documents every win with Grok Bot, a weekly routine that collects them, and a blog that Kochava built."
+seoTitle: "How the Shluchim blog documents Grok Bot wins"
+seoDescription: "A writing AI agent documents every win with Grok Bot, a weekly routine collects them, and a blog built by another agent shows them. How it began."
+topics: ["grok-bot", "agent-teamwork"]
 date: 2026-10-09
 draft: false
 lang: en

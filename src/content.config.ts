@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { TOPIC_SLUGS } from './data/topics.mjs';
 
 // Content is split by language: src/content/posts/{he,en}/<slug>.md and src/content/pages/{he,en}/<name>.md.
 // Entry ids are "<lang>/<slug>". The URL uses only <slug> (Hebrew at the root, English under /en/).
@@ -19,6 +20,13 @@ const posts = defineCollection({
       date: z.coerce.date(),
       draft: z.boolean().default(true),
       tags: z.array(z.string()).optional(),
+      // SEO fields. All optional, and none of them change what the reader sees on the page:
+      // seoTitle -> <title> (brand is appended at build time), seoDescription -> meta description + JSON-LD,
+      // updated -> dateModified / sitemap lastmod (defaults to `date`), topics -> topic hubs + related stories.
+      seoTitle: z.string().optional(),
+      seoDescription: z.string().optional(),
+      updated: z.coerce.date().optional(),
+      topics: z.array(z.enum(TOPIC_SLUGS as [string, ...string[]])).optional(),
       cover: image().optional(),
       coverAlt: z.string().optional(),
       ...i18nFields,
@@ -27,7 +35,7 @@ const posts = defineCollection({
 
 const pages = defineCollection({
   loader: glob({ pattern: '{he,en}/**/*.md', base: './src/content/pages' }),
-  schema: z.object({ title: z.string(), description: z.string(), ...i18nFields }),
+  schema: z.object({ title: z.string(), description: z.string(), seoTitle: z.string().optional(), seoDescription: z.string().optional(), ...i18nFields }),
 });
 
 export const collections = { posts, pages };
