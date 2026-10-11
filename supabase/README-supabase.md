@@ -38,7 +38,7 @@ While it's empty, the block isn't rendered (that's the main default). For a prev
 
 ## Contract
 POST `application/x-www-form-urlencoded`: `page`, `return_to`, `reaction` (`helped` | `not_really`, required), `message` (≤1000), `name` (optional, trimmed, markup stripped, ≤60), `email` (optional, validated), `quote_ok` (`yes`), `website` (honeypot).
-- Response: `303` to `return_to` + `#feedback-thanks` | `#feedback-error` | `#feedback-slow`. `return_to` must start with `https://shluchim.shinlamed.com/` (or, during the transition, `https://seffyfisher.github.io/shluchim/`), otherwise `https://shluchim.shinlamed.com/` is used. After changing `ALLOWED_PREFIXES` in `handler.ts` the function must be redeployed (see Deploy).
+- Response: `303` to `return_to` + `#feedback-thanks` | `#feedback-error` | `#feedback-slow`. `return_to` must start with `https://shluchim.shinlamed.com/`, otherwise the site root is used.
 - Honeypot filled: fake `#feedback-thanks`, nothing stored. Rate limit: 5 attempts per IP (salted SHA-256) per 10 minutes → `#feedback-slow`.
 - With `Accept: application/json`: `{"status":"ok"|"error"|"slow"}` (200 / 400 / 429).
 

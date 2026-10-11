@@ -39,18 +39,11 @@ Deno.test("rate limit: 6th within 10 min → slow", async () => {
   eq(last, RT + "#feedback-slow"); eq(m.rows.length, 5);
 });
 Deno.test("open redirect blocked", () => {
-  const HOME = "https://shluchim.shinlamed.com/";
-  eq(safeReturnTo("https://evil.com/"), HOME);
-  eq(safeReturnTo("https://shluchim.shinlamed.com.evil.com/"), HOME);
-  eq(safeReturnTo("https://evil.com/shluchim/"), HOME);
-  eq(safeReturnTo("http://shluchim.shinlamed.com/a/"), HOME);
-  eq(safeReturnTo("https://shluchim.shinlamed.com/a/../b/"), "https://shluchim.shinlamed.com/b/"); // the URL parser resolves the dots first, so it stays inside the site
-  eq(safeReturnTo("https://seffyfisher.github.io/shluchim/../x/"), HOME); // ...and an escape from the old prefix falls back to the default
+  eq(safeReturnTo("https://evil.com/posts/x/"), "https://shluchim.shinlamed.com/");
+  eq(safeReturnTo("https://shluchim.shinlamed.com.evil.com/posts/x/"), "https://shluchim.shinlamed.com/");
+  eq(safeReturnTo("https://seffyfisher.github.io/shluchim/posts/x/"), "https://shluchim.shinlamed.com/");
+  eq(safeReturnTo("http://shluchim.shinlamed.com/posts/x/"), "https://shluchim.shinlamed.com/");
   eq(safeReturnTo(RT + "?q=1#x"), RT);
-});
-Deno.test("the old GitHub Pages address still works during the transition, other paths there do not", () => {
-  eq(safeReturnTo("https://seffyfisher.github.io/shluchim/posts/x/"), "https://seffyfisher.github.io/shluchim/posts/x/");
-  eq(safeReturnTo("https://seffyfisher.github.io/other/"), "https://shluchim.shinlamed.com/");
 });
 Deno.test("JSON variant", async () => {
   const m = mem(); const r = await handle(post(ok, "5.5.5.5", "application/json"), m.store, "s");
