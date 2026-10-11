@@ -18,8 +18,8 @@ const shaliach = he ? { name: s.name, role: s.role, example: s.example } : { nam
 const latest = posts[0];
 // The about card is one short paragraph in small type (Seffy's own wording; the English follows the About page's first hook).
 const aboutCard = he
-  ? { kick: 'מי אני', text: 'קוראים לי ספי פישר. בגיל 3, בחיידר, ליקקתי דף של אותיות. אבל היום אני מבין שמשם זה התחיל, האהבה שלי לאותיות מילים ושפה.', btn: 'עוד עליי' }
-  : { kick: 'Who I am', text: 'My name is Seffy Fisher. At age 3, in cheder, the traditional Jewish kindergarten, I licked a page of letters. Today I get that this is where my love for letters, words and language started.', btn: 'More about me' };
+  ? { title: 'מי אני', text: 'קוראים לי ספי פישר. בגיל 3, בחיידר, ליקקתי דף של אותיות. אבל היום אני מבין שמשם זה התחיל, האהבה שלי לאותיות מילים ושפה.', btn: 'עוד עליי' }
+  : { title: 'Who I am', text: 'My name is Seffy Fisher. At age 3, in cheder, the traditional Jewish kindergarten, I licked a page of letters. Today I get that this is where my love for letters, words and language started.', btn: 'More about me' };
 ---
 <Base masthead noindex={!he && posts.length === 0} lang={lang} alternates={{ he: lurl('he'), en: lurl('en') }} seoTitle={seo.title} seoDescription={seo.description}>
   <section class="intro" aria-label={he ? 'פתיח' : 'Intro'}>
@@ -50,7 +50,7 @@ const aboutCard = he
       <a class="btn" href={lurl(lang, 'team/')}>{he ? 'הכירו את השְׁלוּחִים' : 'Meet the shluchim'}</a>
     </article>
     <article class="card">
-      <p class="kick">{aboutCard.kick}</p>
+      <h2>{aboutCard.title}</h2>
       <p class="about">{aboutCard.text}</p>
       <a class="btn" href={lurl(lang, 'about/')}>{aboutCard.btn}</a>
     </article>
