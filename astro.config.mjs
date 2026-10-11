@@ -7,13 +7,11 @@ import { satteriImgSize } from './src/lib/remark-img-size.mjs';
 import { satteriPhoto } from './src/lib/remark-photo.mjs';
 import { i18nCheck, urlPairs, lastmods } from './src/lib/i18n-check.mjs';
 import { seoCheck } from './src/lib/seo-check.mjs';
+import { SITE_URL, BASE_PATH } from './src/lib/site-env.mjs';
 import { listGuard } from './src/lib/list-guard.mjs';
 
-// ONE place to change the deploy target.
-// GitHub Pages project site (default): SITE_URL=https://seffyfisher.github.io  BASE_PATH=/shluchim
-// Custom domain later:                 SITE_URL=https://stories.example.com    BASE_PATH=/
-const SITE_URL = process.env.SITE_URL || 'https://seffyfisher.github.io';
-const BASE_PATH = process.env.BASE_PATH || '/shluchim';
+// Deploy target: defaults live in src/lib/site-env.mjs (custom domain https://shluchim.shinlamed.com, served at the root).
+// CI can override with the repo variables SITE_URL / BASE_PATH.
 // SHOW_DRAFTS=1 builds drafts into a separate folder so they can never ship by accident.
 const SHOW_DRAFTS = process.env.SHOW_DRAFTS === '1';
 

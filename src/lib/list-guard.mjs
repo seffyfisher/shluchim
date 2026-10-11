@@ -1,6 +1,7 @@
 // Build-time guard: every published (non-draft) post must appear in its language's homepage list,
 // and the HE and EN lists must have the same count and the same order (paired by translationKey).
 // Fails the build otherwise. Skipped for SHOW_DRAFTS preview builds.
+import { BASE_PATH } from './site-env.mjs';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -38,7 +39,7 @@ export const listGuard = () => ({
   hooks: {
     'astro:build:done': ({ dir, logger }) => {
       if (process.env.SHOW_DRAFTS === '1') return;
-      const base = (process.env.BASE_PATH || '/shluchim').replace(/\/?$/, '/');
+      const base = BASE_PATH.replace(/\/?$/, '/');
       const { errs, count } = checkLists(process.cwd(), fileURLToPath(dir), base);
       if (errs.length) throw new Error(`Homepage list guard failed:\n  ${errs.join('\n  ')}`);
       logger.info(`homepage lists OK: ${count} posts, HE and EN in the same order`);

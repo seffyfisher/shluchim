@@ -5,12 +5,13 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { urlsFor, payload } from '../src/lib/indexnow.mjs';
+import { SITE_URL, BASE } from '../src/lib/site-env.mjs';
 
 const args = process.argv.slice(2);
 const dry = args.includes('--dry');
 const key = process.env.INDEXNOW_KEY || '';
-const origin = (process.env.SITE_URL || 'https://seffyfisher.github.io').replace(/\/$/, '');
-const base = (process.env.BASE_PATH || '/shluchim').replace(/\/$/, '');
+const origin = SITE_URL; // defaults and overrides: src/lib/site-env.mjs
+const base = BASE;
 let before = args[args.indexOf('--before') + 1] || process.env.BEFORE || '';
 if (!before || /^0+$/.test(before)) before = 'HEAD~1';
 

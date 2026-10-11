@@ -48,15 +48,15 @@ I just bring the bad photo.
 Shinlamed cleans the background, straightens, crops and fixes the color,
 then uploads it to the site with a title and text.
 
-![goblin hat tip, before and after](/shluchim/images/posts/shinlamed-01-goblin-hat-tip.webp)
+![goblin hat tip, before and after](/images/posts/shinlamed-01-goblin-hat-tip.webp)
 
 **[goblin hat tip](https://shinlamed.com/project/goblin-hat-tip-3/).**
 Shot sideways on a gray wall.
 It went up straight, on white, with a title and text.
 
-![spiked punch, before and after](/shluchim/images/posts/shinlamed-02-spiked-punch.webp)
+![spiked punch, before and after](/images/posts/shinlamed-02-spiked-punch.webp)
 
-![ring a bell?, before and after](/shluchim/images/posts/shinlamed-03-ring-a-bell.webp)
+![ring a bell?, before and after](/images/posts/shinlamed-03-ring-a-bell.webp)
 
 
 ## The honest part:
