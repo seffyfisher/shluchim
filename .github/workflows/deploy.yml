@@ -21,6 +21,9 @@ jobs:
       # Optional repo variables (Settings → Variables). Empty = defaults in astro.config.mjs.
       SITE_URL: ${{ vars.SITE_URL }}
       BASE_PATH: ${{ vars.BASE_PATH }}
+      # Search Console / Bing Webmaster ownership tags (see SEO-GEO.md). Empty = no tag.
+      GOOGLE_SITE_VERIFICATION: ${{ vars.GOOGLE_SITE_VERIFICATION }}
+      BING_SITE_VERIFICATION: ${{ vars.BING_SITE_VERIFICATION }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
