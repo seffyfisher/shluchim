@@ -1,12 +1,12 @@
 ---
-// "Follow with your AI": one button copies a standing prompt, the reader pastes it into ChatGPT, Claude, Grok Bot or any other
-// assistant, and that assistant reads this blog's RSS feed and checks it once a week. Three placements: home, end of a story,
-// footer (every page).
+// "Follow with your AI", minimal: a question ("want to know when a new post goes up?") and one button. The button copies a standing
+// prompt and says so; the reader then gives it to their own AI assistant ("their shluchim"), which reads this blog's RSS feed and
+// checks it once a week. Same block in three places: home, end of a story, footer (every page). The prompt itself is never shown.
 //
-// CSS first (AGENTS.md): the block, the prompt (readable and selectable inside a <details>) and the layout are plain HTML and CSS.
-// The ONE exception is the copy button: writing to the clipboard has no HTML or CSS equivalent, so a ~15-line script reveals the
-// button (it is `hidden` until the script runs, so there is never a dead button). Without JavaScript a <noscript> note points
-// to the <details>, where the text can be copied by hand.
+// CSS first (AGENTS.md): the layout and the feedback states are HTML and CSS. The ONE exception is the copy: writing to the
+// clipboard has no HTML or CSS equivalent, so a ~20-line script does it. Until it runs the button is invisible but keeps its
+// space (no layout jump), and with scripting off (`@media (scripting: none)`, see follow.css) the whole block is hidden, so
+// nobody is shown a button that cannot work.
 import '../styles/follow.css';
 import { lurl, t, type Lang } from '../i18n/ui';
 import { followPrompt } from '../lib/follow';
@@ -16,31 +16,28 @@ const ui = t(lang);
 const prompt = followPrompt(lang, { feedUrl: new URL(lurl(lang, 'rss.xml'), Astro.site).href });
 const id = `follow-${placement}`; // one block per placement per page, so ids stay unique
 ---
-<section class={`follow follow-${placement}`} aria-labelledby={`${id}-h`}>
-  <h2 id={`${id}-h`}>{ui.followTitle}</h2>
-  {placement !== 'footer' && <p class="follow-lead">{ui.followLead}</p>}
-  <div class="follow-actions">
-    <button type="button" class="follow-btn follow-copy" data-target={`${id}-text`} hidden>
-      <span class="idle">{ui.followCopy}</span><span class="done">{ui.followCopied}</span>
-    </button>
-    <noscript><p class="follow-nojs">{ui.followNoJs}</p></noscript>
-  </div>
+<section class={`follow follow-${placement}`} aria-labelledby={`${id}-q`}>
+  <p class="follow-q" id={`${id}-q`}>{ui.followQ}</p>
+  <button type="button" class="follow-btn follow-copy" data-prompt={prompt} data-label={ui.followLabel}>
+    <span class="idle">{ui.followCopy}</span><span class="done">{ui.followCopied}</span>
+  </button>
   <p class="follow-status" role="status" data-ok={ui.followDone} data-fail={ui.followCopyFail}></p>
-  <details class="follow-prompt">
-    <summary>{ui.followShow}</summary>
-    <textarea id={`${id}-text`} readonly rows="12" aria-label={ui.followLabel} spellcheck="false">{prompt}</textarea>
-  </details>
 </section>
 <script>
   for (const btn of document.querySelectorAll<HTMLButtonElement>('.follow-copy')) {
     const box = btn.closest('.follow')!;
-    const field = document.getElementById(btn.dataset.target!) as HTMLTextAreaElement;
     const status = box.querySelector<HTMLElement>('.follow-status')!;
-    btn.hidden = false;
+    btn.dataset.ready = '';
     btn.addEventListener('click', async () => {
+      const prompt = btn.dataset.prompt!;
       let ok = true;
-      try { await navigator.clipboard.writeText(field.value); } catch { ok = false; }
-      if (!ok) { box.querySelector('details')!.open = true; field.focus(); field.select(); } // fall back to selected text the reader can copy by hand
+      try { await navigator.clipboard.writeText(prompt); } catch { ok = false; }
+      box.querySelector('.follow-manual')?.remove();
+      if (!ok) { // clipboard refused (some in-app browsers): show the text, selected, so it can be copied by hand
+        const ta = document.createElement('textarea');
+        ta.className = 'follow-manual'; ta.readOnly = true; ta.rows = 8; ta.value = prompt; ta.setAttribute('aria-label', btn.dataset.label!);
+        status.after(ta); ta.focus(); ta.select();
+      }
       btn.toggleAttribute('data-done', ok);
       status.toggleAttribute('data-failed', !ok);
       status.textContent = ok ? status.dataset.ok! : status.dataset.fail!;

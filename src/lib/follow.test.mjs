@@ -36,7 +36,7 @@ test('the prompt is short enough to read before pasting', () => {
 test('follow* UI strings exist in both languages and obey the vocabulary rules', () => {
   const keys = (l) => Object.keys(UI[l]).filter((k) => k.startsWith('follow')).sort();
   assert.deepEqual(keys('he'), keys('en'));
-  assert.ok(keys('he').length > 5);
+  assert.ok(keys('he').length >= 5);
   for (const k of keys('he')) {
     assert.doesNotMatch(UI.he[k], /סוכנ|(?<!גרוק)בוט/, `he.${k}`);
     assert.doesNotMatch(UI.he[k], /שלוחים/, `he.${k} needs niqqud`);
