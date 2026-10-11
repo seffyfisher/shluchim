@@ -7,15 +7,11 @@ import { satteriImgSize } from './src/lib/remark-img-size.mjs';
 import { satteriPhoto } from './src/lib/remark-photo.mjs';
 import { i18nCheck, urlPairs, lastmods } from './src/lib/i18n-check.mjs';
 import { seoCheck } from './src/lib/seo-check.mjs';
+import { SITE_URL, BASE_PATH } from './src/lib/site-env.mjs';
 import { listGuard } from './src/lib/list-guard.mjs';
 
-// ONE place to change the deploy target.
-// Default (live): custom domain on GitHub Pages, served at the root:  SITE_URL=https://shluchim.shinlamed.com  BASE_PATH=/
-// The old project-site URL (https://seffyfisher.github.io/shluchim) redirects to the custom domain.
-// NOTE: root-absolute asset paths (/images/..., /fonts/...) in posts, CSS, about-photos.json, site.webmanifest and
-// public/admin/config.yml assume BASE_PATH=/. Serving from a sub-path again means updating those too.
-const SITE_URL = process.env.SITE_URL || 'https://shluchim.shinlamed.com';
-const BASE_PATH = process.env.BASE_PATH || '/';
+// Deploy target: defaults live in src/lib/site-env.mjs (custom domain https://shluchim.shinlamed.com, served at the root).
+// CI can override with the repo variables SITE_URL / BASE_PATH.
 // SHOW_DRAFTS=1 builds drafts into a separate folder so they can never ship by accident.
 const SHOW_DRAFTS = process.env.SHOW_DRAFTS === '1';
 

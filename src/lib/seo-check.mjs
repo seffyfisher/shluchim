@@ -92,7 +92,7 @@ const attrs = (tag) => {
 const tagsOf = (html, name) => [...html.matchAll(new RegExp(`<${name}\\b([^>]*)>`, 'gi'))].map((m) => attrs(m[1]));
 const walk = (dir) => readdirSync(dir).flatMap((f) => { const p = join(dir, f); return statSync(p).isDirectory() ? walk(p) : [p]; });
 
-/** Audit the built site in `dist`. `site` = origin (no trailing slash), `base` = '/shluchim' or ''. */
+/** Audit the built site in `dist`. `site` = origin (no trailing slash), `base` = '' for a root deployment or '/shluchim'-style for a sub-path. */
 export function auditDist(dist, site, base) {
   const errors = [];
   const warnings = [];
@@ -169,7 +169,8 @@ export function auditDist(dist, site, base) {
       for (const a of tagsOf(html, tag)) {
         const v = a[attr];
         if (!v || attr === 'srcset') continue;
-        if (base && v.startsWith(base + '/') && !exists(v)) err(`broken internal ${tag} ${attr}: ${v}`);
+        const internal = v.startsWith('/') && !v.startsWith('//') && (!base || v === base || v.startsWith(base + '/'));
+        if (internal && !exists(v)) err(`broken internal ${tag} ${attr}: ${v}`);
       }
     }
   }
