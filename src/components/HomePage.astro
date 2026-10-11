@@ -16,10 +16,10 @@ const FEATURED_SHALIACH = 'basher';
 const s = shluchim.find((x) => x.id === FEATURED_SHALIACH)!;
 const shaliach = he ? { name: s.name, role: s.role, example: s.example } : { name: s.name_en, role: s.role_en, example: s.example_en };
 const latest = posts[0];
-// The about card quotes the About page verbatim (src/content/pages/{he,en}/about.md): its greeting and its first hook.
+// The about card is one short paragraph in small type (Seffy's own wording; the English follows the About page's first hook).
 const aboutCard = he
-  ? { kick: 'מי אני', title: 'היי, קוראים ספי פישר.', hook: 'בגיל 3, בחיידר, ליקקתי דף של אותיות.', btn: 'עוד עליי' }
-  : { kick: 'Who I am', title: "Hi, I'm Seffy Fisher.", hook: 'At age 3, in cheder, the traditional Jewish kindergarten, I licked a page of letters.', btn: 'More about me' };
+  ? { kick: 'מי אני', text: 'קוראים לי ספי פישר. בגיל 3, בחיידר, ליקקתי דף של אותיות. אבל היום אני מבין שמשם זה התחיל, האהבה שלי לאותיות מילים ושפה.', btn: 'עוד עליי' }
+  : { kick: 'Who I am', text: 'My name is Seffy Fisher. At age 3, in cheder, the traditional Jewish kindergarten, I licked a page of letters. Today I get that this is where my love for letters, words and language started.', btn: 'More about me' };
 ---
 <Base masthead noindex={!he && posts.length === 0} lang={lang} alternates={{ he: lurl('he'), en: lurl('en') }} seoTitle={seo.title} seoDescription={seo.description}>
   <section class="intro" aria-label={he ? 'פתיח' : 'Intro'}>
@@ -49,6 +49,11 @@ const aboutCard = he
       <p class="example">{shaliach.example}</p>
       <a class="btn" href={lurl(lang, 'team/')}>{he ? 'הכירו את השְׁלוּחִים' : 'Meet the shluchim'}</a>
     </article>
+    <article class="card">
+      <p class="kick">{aboutCard.kick}</p>
+      <p class="about">{aboutCard.text}</p>
+      <a class="btn" href={lurl(lang, 'about/')}>{aboutCard.btn}</a>
+    </article>
     {latest && (
       <article class="card">
         <p class="kick">{he ? 'הסיפור האחרון' : 'Latest story'} · <time datetime={latest.data.date.toISOString().slice(0, 10)}>{formatDateShort(latest.data.date, lang)}</time></p>
@@ -58,12 +63,6 @@ const aboutCard = he
         <a class="btn" href="#stories">{he ? 'לכל הסיפורים' : 'All stories'}</a>
       </article>
     )}
-    <article class="card">
-      <p class="kick">{aboutCard.kick}</p>
-      <h2>{aboutCard.title}</h2>
-      <p>{aboutCard.hook}</p>
-      <a class="btn" href={lurl(lang, 'about/')}>{aboutCard.btn}</a>
-    </article>
   </div>
   {posts.length === 0 ? (
     he
