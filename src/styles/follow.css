@@ -5,20 +5,22 @@
 
 .follow-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
 .follow-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding-inline: 1.1rem; border: 1px solid var(--fg); border-radius: 999px; background: transparent; color: var(--fg); font: inherit; font-size: var(--step--1); font-weight: 600; line-height: 1.2; text-align: center; text-decoration: none; cursor: pointer; }
-.follow-btn:hover { background: var(--fg); color: var(--bg); text-decoration: none; }
+.follow-btn:hover { background: var(--fg); color: var(--bg); }
 .follow-btn:focus-visible, .follow-prompt summary:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
 /* the copy button is the primary action: filled. It is `hidden` until the copy script runs (display below would otherwise beat [hidden]). */
 .follow-copy { background: var(--fg); color: var(--bg); }
 .follow-copy:hover { background: transparent; color: var(--fg); }
+.follow-copy[data-done] { background: transparent; color: var(--fg); } /* after the click: outlined, so the filled one stays the "do this" button */
 .follow-copy[hidden] { display: none; }
 .follow-copy .done { display: none; }
 .follow-copy[data-done] .idle { display: none; }
 .follow-copy[data-done] .done { display: inline; }
 
-/* screen-reader announcement; only visible when the automatic copy failed */
-.follow-status:not([data-failed]) { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.follow-status[data-failed] { margin: 0; font-size: var(--step--1); font-weight: 600; }
-.follow-status:empty { display: none; }
+/* the message under the button: "we copied it for you" (or the manual-copy fallback). Empty = out of the layout but still a live region. */
+.follow-status { margin: 0; font-size: var(--step--1); font-weight: 600; line-height: 1.5; max-width: 60ch; }
+.follow-status:empty { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.follow-status:not(:empty, [data-failed])::before { content: '\2713'; margin-inline-end: .45rem; }
+.follow-nojs { margin: 0; color: var(--muted); font-size: var(--step--1); line-height: 1.5; max-width: 60ch; }
 
 /* "what does the prompt say": native <details>, closed by default; the text is a read-only field so Tab, Ctrl+A, Ctrl+C work without JS */
 .follow-prompt summary { display: inline-flex; align-items: center; min-height: 2.75rem; cursor: pointer; color: var(--muted); font-size: var(--step--1); }

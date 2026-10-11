@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert';
-import { followPrompt, followLinks, FOLLOW_TARGETS } from './follow.ts';
+import { followPrompt } from './follow.ts';
+import { UI } from '../i18n/ui.ts';
 
 const FEED = { he: 'https://shluchim.shinlamed.com/rss.xml', en: 'https://shluchim.shinlamed.com/en/rss.xml' };
 const NIQQUD = /[֑-ׇ]/;
@@ -28,14 +29,17 @@ test('reader-facing vocabulary rules hold: Hebrew has no סוכנים/בוטים
   assert.doesNotMatch(followPrompt('en', { feedUrl: FEED.en }), NIQQUD);
 });
 
-test('deep links round-trip the exact prompt and stay far below common URL length limits', () => {
-  for (const lang of ['he', 'en']) {
-    const p = followPrompt(lang, { feedUrl: FEED[lang] });
-    const links = followLinks(p);
-    assert.equal(links.length, FOLLOW_TARGETS.length);
-    for (const l of links) {
-      assert.equal(decodeURIComponent(new URL(l.href).searchParams.get('q')), p, `${lang}/${l.id} round-trips`);
-      assert.ok(l.href.length < 5000, `${lang}/${l.id} URL is ${l.href.length} chars (keep well under 8 KB)`);
-    }
+test('the prompt is short enough to read before pasting', () => {
+  for (const lang of ['he', 'en']) assert.ok(followPrompt(lang, { feedUrl: FEED[lang] }).length < 1200, `${lang} prompt is getting long`);
+});
+
+test('follow* UI strings exist in both languages and obey the vocabulary rules', () => {
+  const keys = (l) => Object.keys(UI[l]).filter((k) => k.startsWith('follow')).sort();
+  assert.deepEqual(keys('he'), keys('en'));
+  assert.ok(keys('he').length > 5);
+  for (const k of keys('he')) {
+    assert.doesNotMatch(UI.he[k], /סוכנ|(?<!גרוק)בוט/, `he.${k}`);
+    assert.doesNotMatch(UI.he[k], /שלוחים/, `he.${k} needs niqqud`);
+    assert.doesNotMatch(UI.en[k], NIQQUD, `en.${k}`);
   }
 });

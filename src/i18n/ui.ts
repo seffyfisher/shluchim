@@ -17,10 +17,11 @@ export const UI = {
     topics: 'נושאים', related: 'עוד סיפורים', topicNav: 'נושאים נוספים', home: 'סיפורים',
     // "Follow with your AI" block (FollowBlock.astro). The prompt itself lives in src/lib/follow.ts.
     followTitle: 'תנו ל־AI שלכם לעקוב אחרי הבלוג',
-    followLead: 'מעתיקים פרומפט אחד ומדביקים ב־ChatGPT, ב־Claude, בגרוקבוט או בכל עוזר AI אחר. פעם בשבוע הוא בודק את ה־RSS ואומר לכם אם יצא סיפור חדש. בלי אימייל ובלי הרשמה.',
+    followLead: 'לוחצים על הכפתור ומדביקים את הפרומפט ב־ChatGPT, ב־Claude, בגרוקבוט או בכל עוזר AI אחר. פעם בשבוע הוא בודק את ה־RSS ואומר לכם אם יצא סיפור חדש. בלי אימייל ובלי הרשמה.',
     followCopy: 'העתקת הפרומפט', followCopied: 'הועתק!',
     followCopyFail: 'ההעתקה האוטומטית לא עבדה. הטקסט מסומן, אפשר להעתיק ידנית.',
-    followOpen: 'פתיחה ב־{name}', followNewTab: 'בלשונית חדשה',
+    followDone: 'העתקנו בשבילכם את הפרומפט. עכשיו פותחים את עוזר ה־AI שלכם, מדביקים ושולחים.',
+    followNoJs: 'כדי להעתיק בלחיצה צריך JavaScript. בלעדיו, פותחים את "מה כתוב בפרומפט?" ומעתיקים את הטקסט משם.',
     followShow: 'מה כתוב בפרומפט?', followLabel: 'הפרומפט לעוזר ה־AI',
   },
   en: {
@@ -30,10 +31,11 @@ export const UI = {
     switchTo: 'עברית', switchHint: 'לקריאה בעברית',
     topics: 'Topics', related: 'More stories', topicNav: 'More topics', home: 'Stories',
     followTitle: 'Let your AI follow this blog for you',
-    followLead: "Copy one prompt into ChatGPT, Claude, Grok Bot or any other AI assistant. Once a week it checks the RSS feed and tells you if there's a new story. No email, no signup.",
+    followLead: "Press the button, then paste the prompt into ChatGPT, Claude, Grok Bot or any other AI assistant. Once a week it checks the RSS feed and tells you if there's a new story. No email, no signup.",
     followCopy: 'Copy the prompt', followCopied: 'Copied!',
     followCopyFail: "Automatic copy didn't work. The text is selected, so you can copy it by hand.",
-    followOpen: 'Open in {name}', followNewTab: 'opens in a new tab',
+    followDone: 'We copied the prompt for you. Now open your AI assistant, paste it and hit send.',
+    followNoJs: 'One-click copy needs JavaScript. Without it, open "What does the prompt say?" and copy the text from there.',
     followShow: 'What does the prompt say?', followLabel: 'The prompt for your AI assistant',
   },
 } satisfies Record<Lang, Record<string, string>>;
