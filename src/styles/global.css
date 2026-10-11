@@ -320,3 +320,5 @@ footer.site .links a:hover { color: var(--fg); }
 .prose figure.archival-cover { max-width: 16.25rem; }
 .archival-cover .paper { rotate: .6deg; }
 @media (prefers-reduced-motion: reduce) { .archival .paper { rotate: none; } }
+.prose figure.archival-cypress { max-width: calc(540px + 1.2rem + 2px); } /* image at most half its pixels: stays crisp */
+.archival-cypress .paper { rotate: .3deg; }

@@ -19,5 +19,15 @@
     "caption_en": "The Book of Shluchim.\nThe book my family appears in.",
     "alt_he": "כריכה כחולה ובלויה של ספר, ועליה באותיות זהב: ספר השלוחים.",
     "alt_en": "A worn blue book cover with gold Hebrew lettering: Sefer HaShluchim, the Book of Shluchim."
+  },
+  "cypress": {
+    "src": "/shluchim/images/about/kfar-yuval-cypresses.webp",
+    "width": 1081,
+    "height": 616,
+    "display": 540,
+    "caption_he": "הברושים של כפר יובל על הגבול",
+    "caption_en": "The cypresses of Kfar Yuval, on the border",
+    "alt_he": "שורה של ברושים גבוהים ודקים בשדה יבש, מאחוריהם בתים עם גגות אדומים ועצים, ובאופק רכס הרים מעורפל תחת שמיים כחולים עם עננים.",
+    "alt_en": "A row of tall, slender cypress trees in a dry field, with red-roofed houses and trees behind them and a hazy mountain ridge on the horizon under a blue sky with clouds."
   }
 }
