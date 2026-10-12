@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import fontUrl from '../fonts/miriam-libre-var.woff2?url';
+import heDisplayFontUrl from '../fonts/noa-shalev-regular-AlefAlefAlef.woff2?url';
+import enDisplayFontUrl from '../fonts/young-serif-400.woff2?url';
 import { SITES, SHOW_DRAFTS, SHOW_SWITCHER_ON_HE, PERSON, SEO_HOME, SEO_KEYWORDS, OG_IMAGE, VERIFY, GA_MEASUREMENT_ID } from '../config';
 import { TOPICS, TOPIC_SLUGS } from '../data/topics.mjs';
 import { LANG_META, lurl, other, t, isLang, type Lang } from '../i18n/ui';
@@ -72,6 +74,7 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141414" />
     <script is:inline>try { const saved = localStorage.getItem('shluchim-theme'); if (saved === 'light' || saved === 'dark') { document.documentElement.dataset.theme = saved; document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => meta.setAttribute('content', saved === 'dark' ? '#141414' : '#fafafa')); } } catch { /* storage may be disabled */ }</script>
     <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={lang === 'he' ? heDisplayFontUrl : enDisplayFontUrl} as="font" type="font/woff2" crossorigin />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={SITE.title} />
     <meta property="og:url" content={canonical} />
@@ -113,7 +116,7 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
         <div class="wrap">
           <div class="site-nav lang-row">{showSwitch && <a class="lang" href={switchHref} hreflang={o} lang={o} title={ui.switchHint}>{ui.switchTo}</a>}<ThemeToggle lang={lang} /></div>
           {SITE.kicker && <p class="kicker">{SITE.kicker}</p>}
-          <h1><a href={url()} aria-current="page" aria-label={SITE.title} title={SITE.title}>{lang !== 'he' ? SITE.displayTitle : (() => { const t = SITE.displayTitle ?? SITE.title; const cut = [...t].findIndex((c, i, a) => i > 0 && a.slice(0, i).join('').normalize('NFD').replace(/[\u0591-\u05C7]/g, '') === 'של' && !/[\u0591-\u05C7]/.test(c)); return cut > 0 ? <><span class="t-a" aria-hidden="true">{[...t].slice(0, cut).join('')}</span><span class="t-b" aria-hidden="true">{[...t].slice(cut).join('')}</span></> : t; })()}</a></h1>
+          <h1><a href={url()} aria-current="page" aria-label={SITE.displayTitle ?? SITE.title} title={SITE.title}>{lang !== 'he' ? SITE.displayTitle : (() => { const t = SITE.displayTitle ?? SITE.title; const cut = [...t].findIndex((c, i, a) => i > 0 && a.slice(0, i).join('').normalize('NFD').replace(/[\u0591-\u05C7]/g, '') === 'של' && !/[\u0591-\u05C7]/.test(c)); return cut > 0 ? <><span class="t-a" aria-hidden="true">{[...t].slice(0, cut).join('')}</span><span class="t-b" aria-hidden="true">{[...t].slice(cut).join('')}</span></> : t; })()}</a></h1>
           <p class="tagline">{SITE.tagline}</p>
           {SITE.explainer && <p class="explainer">{SITE.explainer}</p>}
         </div>

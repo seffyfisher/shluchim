@@ -47,7 +47,8 @@ export const SHOW_DRAFTS = process.env.SHOW_DRAFTS === '1';
 export const FEEDBACK_ENDPOINT: string = process.env.FEEDBACK_ENDPOINT || 'https://tyzswuffvhxnmtaoaskz.supabase.co/functions/v1/feedback';
 
 // Google Analytics 4 measurement ID (public by design). Loaded after the page has finished loading and the browser is idle
-// (src/lib/analytics.ts), so it does not touch Core Web Vitals. Empty = no analytics. Never in draft previews or `astro dev`.
+// (src/lib/analytics.ts), at low download priority, with advertising features disabled. Google's execution still has a cost.
+// Empty = no analytics. Never in draft previews or `astro dev`.
 export const GA_MEASUREMENT_ID: string = process.env.GA_MEASUREMENT_ID ?? 'G-73TB9SVD19';
 
 // About-page character (sprite sheet + stills), per language.

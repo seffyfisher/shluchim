@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Noa Shalev';
-  src: url('/fonts/noa-shalev-regular-AlefAlefAlef.woff2') format('woff2');
+  src: url('../fonts/noa-shalev-regular-AlefAlefAlef.woff2') format('woff2');
   font-weight: 400;
   font-display: swap;
 }
@@ -299,7 +299,7 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 /* Young Serif (OFL, public/fonts/YoungSerif-OFL.txt) for English display headings; Noa Shalev has no Latin. */
 @font-face {
   font-family: 'Young Serif';
-  src: url('/fonts/young-serif-400.woff2') format('woff2');
+  src: url('../fonts/young-serif-400.woff2') format('woff2');
   font-weight: 400;
   font-display: swap;
 }
