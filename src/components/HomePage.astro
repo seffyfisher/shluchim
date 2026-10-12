@@ -2,13 +2,14 @@
 import Base from '../layouts/Base.astro';
 import StoryList from './StoryList.astro';
 import shluchim from '../data/shluchim.json';
-import { getPosts } from '../lib/posts';
+import { getHomePosts } from '../lib/posts';
 import { lurl, t, type Lang } from '../i18n/ui';
 import { SEO_HOME } from '../config';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const ui = t(lang);
-const posts = await getPosts(lang);
+const posts = await getHomePosts(lang);
+const hasFeatured = posts.some((post) => post.data.featured);
 const he = lang === 'he';
 const seo = SEO_HOME[lang];
 // Cards above the story list: the featured shaliach and the About card. The shaliach is fixed (not random: random needs JS).
@@ -71,8 +72,8 @@ const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = 
   ) : (
     <>
       <h2 class="list-label" id="stories">{he
-        ? `${posts.length === 1 ? 'מעשיה אחת' : `${posts.length} מעשיות`}, מהחדשה לישנה`
-        : `${posts.length === 1 ? 'One story' : `${posts.length} stories`}, newest first`}</h2>
+        ? `${posts.length === 1 ? 'מעשיה אחת' : `${posts.length} מעשיות`}${hasFeatured ? '' : ', מהחדשה לישנה'}`
+        : `${posts.length === 1 ? 'One story' : `${posts.length} stories`}${hasFeatured ? '' : ', newest first'}`}</h2>
       <StoryList posts={posts} lang={lang} />
     </>
   )}

@@ -2,6 +2,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import { SHOW_DRAFTS } from '../config';
 import { LANG_META, lurl, type Lang } from '../i18n/ui';
 import { TOPICS } from '../data/topics.mjs';
+import { featuredFirst } from './home-posts';
 
 type Entry = CollectionEntry<'posts'> | CollectionEntry<'pages'>;
 /** Language of an entry: from its folder (he/ or en/). */
@@ -13,17 +14,25 @@ export const keyOf = (e: Entry) => e.data.translationKey ?? slugOf(e);
 
 /**
  * Published posts of one language, newest first. Drafts only when SHOW_DRAFTS=1.
- * English posts take their `date` from the Hebrew counterpart (same translationKey) at build time, so the two
+ * English posts take their `date` and `featured` from the Hebrew counterpart (same translationKey) at build time, so the two
  * lists can never drift; the English frontmatter date is only a fallback when there is no Hebrew pair.
  * Same-day ties break by translationKey descending, identically in both languages.
  */
 export async function getPosts(lang: Lang = 'he') {
   const all = await getCollection('posts');
-  const heDate = new Map(all.filter((p) => langOf(p) === 'he').map((p) => [keyOf(p), p.data.date] as const));
+  const heData = new Map(all.filter((p) => langOf(p) === 'he').map((p) => [keyOf(p), p.data] as const));
   const posts = all
     .filter((p) => langOf(p) === lang && (p.data.draft !== true || (SHOW_DRAFTS && slugOf(p) !== 'example-draft')))
-    .map((p) => (lang === 'he' || !heDate.has(keyOf(p)) ? p : { ...p, data: { ...p.data, date: heDate.get(keyOf(p))! } }));
+    .map((p) => {
+      const original = heData.get(keyOf(p));
+      return lang === 'he' || !original ? p : { ...p, data: { ...p.data, date: original.date, featured: original.featured } };
+    });
   return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf() || (keyOf(a) < keyOf(b) ? 1 : keyOf(a) > keyOf(b) ? -1 : 0));
+}
+
+/** Homepage: featured stories first, newest first within both groups. */
+export async function getHomePosts(lang: Lang = 'he') {
+  return featuredFirst(await getPosts(lang));
 }
 
 export const postUrl = (p: CollectionEntry<'posts'>) => lurl(langOf(p), `posts/${slugOf(p)}/`);

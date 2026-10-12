@@ -11,8 +11,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "test": "node --experimental-strip-types --no-warnings --test src/lib/remark-chat.test.mjs src/lib/seo.test.mjs src/lib/seo-check.test.mjs src/lib/indexnow.test.mjs src/lib/follow.test.mjs src/lib/analytics.test.mjs",
+    "test": "node --experimental-strip-types --no-warnings --test src/lib/remark-chat.test.mjs src/lib/seo.test.mjs src/lib/seo-check.test.mjs src/lib/indexnow.test.mjs src/lib/follow.test.mjs src/lib/analytics.test.mjs src/lib/home-posts.test.mjs src/lib/list-guard.test.mjs",
     "seo:check": "SEO_STRICT=1 astro build",
+    "test:featured:rendering": "node scripts/check-featured-rendering.mjs",
     "build:drafts": "SHOW_DRAFTS=1 astro build",
     "preview:drafts": "SHOW_DRAFTS=1 astro preview"
   },

@@ -40,6 +40,15 @@
 The post date is the date of Seffy's ORIGINAL message where the story happened (the original ask), not the date he approved or asked to publish. Never give batch-published posts consecutive dates.
 `date` in the frontmatter must always be that original-request date, and Ben supplies it with each post. Keep the slug (file name) unchanged when a date is corrected, so links don't break.
 
+## פוסטים נעוצים בעמוד הבית / Pinned homepage posts
+
+- כדי לנעוץ פוסט, הוסף `featured: true` ל־frontmatter של הפוסט **העברי**, או הפעל ״נעוץ בעמוד הבית״ בעורך. באנגלית הסימון נלקח מהפוסט העברי לפי `translationKey`, כמו התאריך. ה־CMS מעתיק את השדה לשתי השפות; הסימון בעברית הוא הקובע.
+- פוסטים נעוצים מופיעים ראשונים בעמוד הבית, לפי תאריך פרסום מהחדש לישן. אחריהם מופיעים יתר הפוסטים באותו סדר תאריכים רגיל. כל פוסט מופיע פעם אחת, באותו עיצוב, ללא כותרת או תג נפרדים.
+- להסרת נעיצה, שנה ל־`featured: false` או הסר את השדה. ברירת המחדל היא `false`. `draft: true` עדיין מונע פרסום; נעיצה אינה עוקפת אישור של ספי.
+- הנעיצה אינה משנה תאריכים, כתובות, עמודי נושא, המלצות או סדר RSS. אין צורך לשנות `date` כדי להעלות פוסט לראש עמוד הבית.
+- Set `featured: true` on the Hebrew post to pin both translations on the homepage. Featured posts sort newest first, followed by the remaining newest-first history, with no duplicates or special heading/badge. Omitted/false unpins; drafts remain unpublished. A standalone English post without a Hebrew counterpart uses its own setting.
+- Verification: `npm test`, `npm run seo:check`, then `npm run test:featured:rendering`. The last command builds isolated temporary post fixtures, checks both languages and unchanged RSS/topic pages, and leaves an inspectable example under `preview-shots/featured/site/`. It does not change or publish the real post selections.
+
 ## Real chat screenshots (standing rule from Seffy, 2026-10-10)
 Add real Grok Bot chat screenshots to posts now and then, only where they genuinely help the content. Follow the skill "Grok Bot chat screenshots" (/home/box/agent-data/workflows/grok-bot-chat-screenshots/SKILL.md): sharp, tight crops, privacy-safe, and Seffy approves every shot before it goes into a published post.
 

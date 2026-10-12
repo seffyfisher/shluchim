@@ -22,6 +22,8 @@ const posts = defineCollection({
       description: z.string(),
       date: z.coerce.date(),
       draft: z.boolean().default(true),
+      // Homepage only. Set on HE; its EN translation inherits the same choice.
+      featured: z.boolean().default(false),
       tags: z.array(z.string()).optional(),
       // SEO fields. All optional, and none of them change what the reader sees on the page:
       // seoTitle -> <title> (brand is appended at build time), seoDescription -> meta description + JSON-LD,

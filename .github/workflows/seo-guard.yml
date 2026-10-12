@@ -29,3 +29,4 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run seo:check   # SEO_STRICT=1 astro build: any problem fails the job
+      - run: npm run test:featured:rendering  # Real HE/EN pinning fixtures; preserves RSS/topics and adds no browser JS.
