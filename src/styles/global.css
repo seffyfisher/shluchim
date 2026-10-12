@@ -413,7 +413,3 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 
 /* Native audio player in posts (no JS): full column width, neutral, follows light/dark. */
 .prose audio { display: block; width: 100%; max-width: 40rem; height: 3rem; margin: 1.75rem 0; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color-scheme: light dark; }
-
-/* Link from the homepage to the human creators page. */
-.friends-invite { margin: -1.5rem 0 2.5rem; }
-.friends-invite a { display: inline-flex; align-items: center; min-height: 2.75rem; }

@@ -33,19 +33,6 @@ const jsonLd = [
     <p class="page-subtitle">{he ? 'אדמורי שלוחים' : 'The rebbes of Shluchim'}</p>
     <p>{he ? 'לאדם וחוה היה בן ושמו שת, הבן השלישי שסופר עליו אחרי קין והבל. לשת נולד בן בשם אנוש, ומאנוש התפתחה האנושות וכן האנשים היקרים האלה מטה' : 'Adam and Eve had a son named Seth, the third son mentioned after Cain and Abel. Seth had a son named Enosh, from whom humanity developed, as did the dear people below.'}</p>
     </div>
-    <div class="human-mark" aria-hidden="true">
-      <svg viewBox="0 0 320 320" fill="none">
-        <path class="mark-line" d="M61 164 152 65 264 142 176 259 61 164 264 142M152 65 176 259" />
-        <circle class="mark-orbit" cx="160" cy="160" r="137" />
-        <circle class="mark-orbit" cx="160" cy="160" r="107" />
-        <circle class="mark-node" cx="61" cy="164" r="15" />
-        <circle class="mark-node" cx="152" cy="65" r="22" />
-        <circle class="mark-node" cx="264" cy="142" r="13" />
-        <circle class="mark-node" cx="176" cy="259" r="18" />
-        <path class="mark-spark" d="M161 124V158M144 141H178" />
-      </svg>
-      <p>{he ? 'אנשים. רעיונות. חיבורים.' : 'People. Ideas. Connections.'}</p>
-    </div>
   </header>
   <nav class="people-index" aria-label={he ? 'קפיצה לאדם בדף' : 'Jump to a person'}>
     <div class="index-heading"><span>{he ? 'על הדף' : 'On this page'}</span><span>{he ? `${friends.length} בני אנוש` : `${friends.length} humans`}</span></div>
@@ -83,20 +70,13 @@ const jsonLd = [
 </Base>
 <style>
   :global(.page-friends .wrap) { max-width: 64rem; }
-  .human-intro { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2rem; margin-bottom: 3rem; }
+  .human-intro { margin-bottom: 3rem; }
   .eyebrow { color: var(--muted); font-size: var(--step--1); margin: 0 0 1.25rem; }
   .human-intro h1 { font-size: clamp(2.75rem, 6vw, 5rem); line-height: 1.12; letter-spacing: -.025em; margin-bottom: .75rem; }
   .human-intro h1 span { display: block; }
   .human-intro h1 .title-second { font-size: .76em; }
   .human-intro .page-subtitle { font-family: var(--font-display); font-size: var(--step-2); color: var(--fg); margin: 0 0 1.5rem; }
   .intro-copy > p:last-child { max-width: 48ch; margin-bottom: 0; }
-  .human-mark { display: none; }
-  .human-mark svg { width: 100%; height: auto; overflow: visible; }
-  .mark-line { stroke: var(--muted); stroke-width: 1; }
-  .mark-orbit { stroke: var(--line); stroke-width: 1; }
-  .mark-node { fill: var(--fg); stroke: var(--bg); stroke-width: 7; }
-  .mark-spark { stroke: var(--fg); stroke-width: 2; }
-  .human-mark p { color: var(--muted); font-size: var(--step--1); text-align: center; }
   .people-index { padding-block: 1.25rem; border-block: 1px solid var(--rule); margin-bottom: 3rem; }
   .index-heading { display: flex; justify-content: space-between; gap: 1rem; color: var(--muted); font-size: .8125rem; margin-bottom: .75rem; }
   .people-index ul { display: flex; flex-wrap: wrap; gap: .1rem .3rem; margin: 0; padding: 0; list-style: none; }
@@ -123,8 +103,6 @@ const jsonLd = [
   .connections li { margin-block: .75rem; }
   :global(:root:lang(en)) .friend h2 { font-family: var(--font-display-en, var(--font)); }
   @media (min-width: 48rem) {
-    .human-intro { grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); gap: 3rem; align-items: center; }
-    .human-mark { display: block; }
     .friends { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 25rem) { .human-intro h1 { font-size: 2.65rem; } }
