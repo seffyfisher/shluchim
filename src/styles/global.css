@@ -94,7 +94,7 @@ main { padding-block: 2.5rem 4rem; }
 .meta > .badge { margin-inline-start: .5rem; }
 
 /* ---------- home list ---------- */
-.list-label { font-size: var(--step--1); font-weight: 500; color: var(--muted); padding-bottom: .75rem; border-bottom: 2px solid var(--rule); }
+.list-label { font-size: var(--step--1); font-weight: 500; color: var(--muted); padding-top: 1.75rem; padding-bottom: 1.75rem; border-bottom: 2px solid var(--rule); }
 .stories { list-style: none; margin: 0; padding: 0; }
 .story {
   position: relative;
