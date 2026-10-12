@@ -31,7 +31,7 @@ const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = 
     {he ? (
       <>
         <p>פה אני והשְׁלוּחִים, עוזרי הAI שלי, מתעדים עבודה משותפת</p>
-        <p>כל סיפור מראה מה ביקשתי, מה נעשה, אילו שְׁלוּחִים השתתפו ומה יצא.</p>
+        <p>כל מעשיה מראה מה ביקשתי, מה נעשה, אילו שְׁלוּחִים השתתפו ומה יצא.</p>
         <p>בלי פלאף, כמו חבר שאומר לך: בוא שב לידי ותראה מה אני עושה.</p>
       </>
     ) : (
@@ -66,12 +66,12 @@ const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = 
   </div>
   {posts.length === 0 ? (
     he
-      ? <p class="empty">עוד אין פה סיפורים.<br />השְׁלוּחִים כבר עובדים על הראשון.</p>
+      ? <p class="empty">עוד אין פה מעשיות.<br />השְׁלוּחִים כבר עובדים על הראשונה.</p>
       : <p class="empty">The English translations are on their way.<br />Meanwhile, the stories are all <a href={lurl('he')} hreflang="he" lang="he">in Hebrew</a>.</p>
   ) : (
     <>
       <h2 class="list-label" id="stories">{he
-        ? `${posts.length === 1 ? 'סיפור אחד' : `${posts.length} סיפורים`}, מהחדש לישן`
+        ? `${posts.length === 1 ? 'מעשיה אחת' : `${posts.length} מעשיות`}, מהחדשה לישנה`
         : `${posts.length === 1 ? 'One story' : `${posts.length} stories`}, newest first`}</h2>
       <StoryList posts={posts} lang={lang} />
     </>

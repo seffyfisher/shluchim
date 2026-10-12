@@ -22,7 +22,7 @@ const jsonLd = [
   breadcrumbNode([{ name: SITES[lang].title, url: abs(lurl(lang)) }, { name: topic.label, url: pageUrl }]),
 ];
 const count = he
-  ? `${posts.length === 1 ? 'סיפור אחד' : `${posts.length} סיפורים`}, מהחדש לישן`
+  ? `${posts.length === 1 ? 'מעשיה אחת' : `${posts.length} מעשיות`}, מהחדשה לישנה`
   : `${posts.length === 1 ? 'One story' : `${posts.length} stories`}, newest first`;
 ---
 <Base lang={lang} noindex={posts.length === 0} title={topic.title} seoTitle={withBrand(topic.seoTitle, SITES[lang].title)} seoDescription={topic.seoDescription} description={topic.seoDescription}

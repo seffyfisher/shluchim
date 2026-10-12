@@ -11,10 +11,10 @@ export const LANG_META: Record<Lang, { dir: 'rtl' | 'ltr'; og: string; label: st
 export const UI = {
   he: {
     skip: 'דלג לתוכן', preview: 'מצב תצוגה מקדימה: כולל טיוטות שלא אושרו לפרסום', navMain: 'ראשי',
-    stories: 'סיפורים', team: 'השלוחים', about: 'אודות', allStories: 'כל הסיפורים', back: '→ לכל הסיפורים',
-    edit: 'עריכה ב־GitHub', draft: 'טיוטה', postNav: 'ניווט בסוף הסיפור', nav: 'ניווט', chat: 'שיחה',
+    stories: 'מעשיות', team: 'השלוחים', about: 'אודות', allStories: 'כל המעשיות', back: '→ לכל המעשיות',
+    edit: 'עריכה ב־GitHub', draft: 'טיוטה', postNav: 'ניווט בסוף המעשיה', nav: 'ניווט', chat: 'שיחה',
     switchTo: 'EN', switchHint: 'Read this in English',
-    topics: 'נושאים', related: 'עוד סיפורים', topicNav: 'נושאים נוספים', home: 'סיפורים',
+    topics: 'נושאים', related: 'עוד מעשיות', topicNav: 'נושאים נוספים', home: 'מעשיות',
     // "Follow with your AI" block (FollowBlock.astro): a question and one button. The prompt itself lives in src/lib/follow.ts.
     followQ: 'רוצה לדעת שעולה פוסט חדש?',
     followCopy: 'תגיד את זה לשְׁלוּחִים שלך', followCopied: 'הועתק!',

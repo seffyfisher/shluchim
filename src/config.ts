@@ -76,8 +76,8 @@ export const PERSON = {
 // "בינה מלאכותית", "עוזרי AI" and the product name Grok Bot (גרוקבוט).
 export const SEO_HOME = {
   he: {
-    title: 'שלוחים: סיפורים על בינה מלאכותית בעבודה אמיתית',
-    description: 'סיפורים אמיתיים על בינה מלאכותית בעבודה וביומיום: עוזרי AI שמנתחים נתונים, מעצבים ומתזמנים, עם גרוקבוט (Grok Bot). מה ביקשתי, מה נעשה ומה יצא.',
+    title: 'שלוחים: מעשיות על בינה מלאכותית בעבודה אמיתית',
+    description: 'מעשיות אמיתיות על בינה מלאכותית בעבודה וביומיום: עוזרי AI שמנתחים נתונים, מעצבים ומתזמנים, עם גרוקבוט (Grok Bot). מה ביקשתי, מה נעשה ומה יצא.',
   },
   en: {
     title: 'Shluchim: practical, everyday AI agent stories',
@@ -88,7 +88,7 @@ export const SEO_HOME = {
 // Machine-readable keywords (JSON-LD `keywords`, llms.txt). Not rendered on the page, so the Hebrew list can name the
 // search terms people actually use without touching the reader-facing vocabulary rule.
 export const SEO_KEYWORDS = {
-  he: ['בינה מלאכותית', 'סיפורים על בינה מלאכותית', 'AI פרקטי', 'AI ביומיום', 'סוכני AI', 'עוזרי AI', 'גרוקבוט', 'Grok Bot', 'שלוחים'],
+  he: ['בינה מלאכותית', 'מעשיות על בינה מלאכותית', 'AI פרקטי', 'AI ביומיום', 'סוכני AI', 'עוזרי AI', 'גרוקבוט', 'Grok Bot', 'שלוחים'],
   en: ['AI agents', 'practical AI', 'everyday AI', 'stories about AI', 'AI bots', 'Grok Bot', 'AI assistants at work', 'shluchim'],
 } as const;
 
@@ -98,7 +98,7 @@ export const OG_IMAGE = {
   height: 630,
   file: { he: 'og/shluchim-he.jpg', en: 'og/shluchim-en.jpg' },
   alt: {
-    he: 'שְׁלוּחִים: סיפורים על בינה מלאכותית בעבודה אמיתית, עם דמויות עוזרי ה־AI של ספי',
+    he: 'שְׁלוּחִים: מעשיות על בינה מלאכותית בעבודה אמיתית, עם דמויות עוזרי ה־AI של ספי',
     en: "Shluchim: stories of practical AI at work, with the cast of Seffy's AI agents",
   },
 } as const;

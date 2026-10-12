@@ -44,7 +44,7 @@ ${en.map(line).join('\n')}
 
 ${topicLines('he').join('\n')}
 
-## סיפורים (עברית)
+## מעשיות (עברית)
 
 ${he.map(line).join('\n')}
 
