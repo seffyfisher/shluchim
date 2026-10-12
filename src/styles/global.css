@@ -379,3 +379,6 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 .card .btn { margin-top: auto; display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: 1.1rem; border: 1px solid var(--fg); border-radius: 999px; color: var(--fg); font-size: var(--step--1); font-weight: 600; text-decoration: none; }
 .card .btn:hover { background: var(--fg); color: var(--bg); }
 .card .btn:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+
+/* Native audio player in posts (no JS): full column width, neutral, follows light/dark. */
+.prose audio { display: block; width: 100%; max-width: 40rem; height: 3rem; margin: 1.75rem 0; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color-scheme: light dark; }
