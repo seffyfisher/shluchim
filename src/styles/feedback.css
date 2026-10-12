@@ -44,3 +44,7 @@
 .fb-dlg form { margin: 0; }
 .fb-dlg-x { font: inherit; font-weight: 600; min-height: 2.75rem; padding-inline: 1.5rem; border: 1px solid var(--fg); border-radius: 999px; background: var(--fg); color: var(--bg); cursor: pointer; }
 .fb-dlg-x:focus-visible { outline: 2px solid var(--fb-focus); outline-offset: 3px; }
+
+/* v4: nothing beyond the two reactions shows until one is picked (pure CSS). display:none = not focusable while hidden.
+   The pointer-pick focus handler still works: focus() recalculates style after the radio is already checked. */
+@supports selector(:has(*)) { .fb-form:not(:has(.fb-rate input:checked)) :is(.fb-msg, .fb-send) { display: none; } }
