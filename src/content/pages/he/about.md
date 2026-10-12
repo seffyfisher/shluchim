@@ -195,7 +195,7 @@ Codex, Claude Code,Instinct,Gemini,copilot ואפילו Manus בתוך טלגר�
 גופנים:
 
 - כותרות: נעה שלו (Noa Shalev), מאת נעה שלו, בהוצאת [אלף אלף אלף](https://alefalefalef.co.il/). רישיון חינמי לפי [תנאי השימוש של אלף אלף אלף](https://alefalefalef.co.il/eula/?licenses=free).
-- טקסט: מרים ליברה (Miriam Libre), [The Miriam Libre Project Authors](https://github.com/simoncozens/Miriam-Libre/), ברישיון SIL Open Font License 1.1.
+- טקסט: גופן ממשק המשתמש של מערכת ההפעלה, המשתנה בהתאם למכשיר.
 
 טכנולוגיה:
 

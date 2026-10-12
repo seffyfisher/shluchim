@@ -4,36 +4,15 @@
   font-weight: 400;
   font-display: swap;
 }
-/* shluchim: one token set, light + dark via light-dark(). Flat colours only, no gradients. */
+/* Noa's metric-matched fallback limits reflow while the display font loads. */
 @font-face {
-  font-family: 'Miriam Libre';
-  src: url('../fonts/miriam-libre-var.woff2') format('woff2');
-  font-weight: 400 700;
-  font-style: normal;
-  font-display: swap;
-}
-/* Metric-matched fallbacks (CLS): Arial-compatible system fonts scaled to the web fonts' average glyph widths over the
-   site's own text, with the web fonts' vertical metrics, so the font swap doesn't reflow the page. Re-derive the
-   size-adjust values if a font file changes. Where no Arial-compatible font exists the stack falls through unchanged. */
-@font-face {
-  font-family: 'Miriam Libre Fallback'; /* Hebrew letters, spaces, punctuation */
-  src: local('Arial'), local('ArialMT'), local('Arimo'), local('Liberation Sans');
-  size-adjust: 96.6%; ascent-override: 100.3%; descent-override: 35.6%; line-gap-override: 0%;
-  unicode-range: U+20-2F, U+3A-40, U+5B-60, U+7B-7E, U+A0-BF, U+590-5FF, U+2000-206F, U+20AA;
-}
-@font-face {
-  font-family: 'Miriam Libre Fallback'; /* Latin letters + digits are wider in Miriam Libre than in Arial */
-  src: local('Arial'), local('ArialMT'), local('Arimo'), local('Liberation Sans');
-  size-adjust: 110.4%; ascent-override: 87.8%; descent-override: 31.2%; line-gap-override: 0%;
-  unicode-range: U+30-39, U+41-5A, U+61-7A;
-}
-@font-face {
-  font-family: 'Noa Shalev Fallback'; /* unicode-range = Noa Shalev's own cmap: it has no Latin letters, those stay on Miriam */
+  font-family: 'Noa Shalev Fallback'; /* Noa's own cmap; Latin text uses the system font. */
   src: local('Arial'), local('ArialMT'), local('Arimo'), local('Liberation Sans');
   size-adjust: 105.6%; ascent-override: 75.8%; descent-override: 18.9%; line-gap-override: 26.7%;
   unicode-range: U+20-25, U+27-40, U+5B-5F, U+7B-7E, U+A0, U+A9, U+B0, U+B7, U+D7, U+5B0-5BC, U+5BE-5BF, U+5C1-5C2, U+5C7, U+5D0-5EA, U+5F3-5F4, U+2013-2014, U+2018-201A, U+201C-201E, U+2022, U+2026, U+20AA, U+20AC, U+20BF, U+2190, U+2192, U+2212;
 }
 
+/* shluchim: one token set, light + dark via light-dark(). Flat colours only, no gradients. */
 :root {
   color-scheme: light dark;
   /* colour tokens: light, dark */
@@ -48,7 +27,7 @@
   --badge-fg: var(--fg);
   --code-bg:  light-dark(#ffffff, #0d0d0d);
   /* type */
-  --font: 'Miriam Libre', 'Miriam Libre Fallback', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --font: system-ui, sans-serif;
   --font-display: 'Noa Shalev', 'Noa Shalev Fallback', var(--font); /* Hebrew display headings */
   --step--1: 0.9375rem;
   --step-0: 1.125rem;
