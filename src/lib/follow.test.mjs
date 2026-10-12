@@ -44,9 +44,10 @@ test('follow* UI strings exist in both languages and obey the vocabulary rules',
   }
 });
 
-test('the Hebrew confirmation names the assistants in parentheses, in Hebrew (Latin names inside an RTL line flip the comma when it wraps)', () => {
-  const m = /\(([^)]*)\)/.exec(UI.he.followDone);
-  assert.ok(m, 'parenthesised list present');
-  assert.equal(m[1], 'צ׳אט, קלוד ושות׳');
-  assert.doesNotMatch(m[1], /[A-Za-z]/, 'no Latin letters inside the parentheses');
+test('copy confirmation keeps the assistants in readable order in both languages', () => {
+  assert.match(UI.he.followDoneStart, /\($/);
+  assert.match(UI.he.followDoneEnd, /\)\.$/);
+  assert.equal(UI.he.followDoneJoin, ', ');
+  assert.match(UI.en.followDoneStart, /shluchim: $/);
+  assert.equal(UI.en.followDoneJoin, ', ');
 });
