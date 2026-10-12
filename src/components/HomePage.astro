@@ -52,7 +52,7 @@ const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = 
           <img class="avatar" src={lurl('he', s.avatar)} alt="" width="112" height="112" loading="lazy" decoding="async" />
         </picture>
       </a>
-      <h2>{shaliach.name}</h2>
+      <h2>{he ? `למשל ${shaliach.name}` : shaliach.name}</h2>
       <p>{shaliach.role}</p>
       <p class="example">{shaliach.example}</p>
       <a class="btn" href={lurl(lang, 'team/')}>{he ? 'הכירו את השְׁלוּחִים' : 'Meet the shluchim'}</a>
