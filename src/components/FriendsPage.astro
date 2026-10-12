@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
-import HumanSilhouette from './HumanSilhouette.astro';
 import { friends } from '../data/friends';
+import { friendPortraits } from '../data/friend-portraits';
 import { lurl, type Lang } from '../i18n/ui';
 import { SITES } from '../config';
 import { pageNode, breadcrumbNode, nodeIds, withBrand } from '../lib/seo';
@@ -39,10 +39,15 @@ const jsonLd = [
     <ul>{friends.map((friend) => <li><a href={`#${friend.id}`}>{he ? friend.name : friend.nameEn}</a></li>)}</ul>
   </nav>
   <ul class="friends" aria-label={he ? 'אנשים שאני מעריך' : 'People I appreciate'}>
-    {friends.map((friend) => (
+    {friends.map((friend, index) => (
       <li class="friend" id={friend.id}>
         <div class="friend-heading">
-          <HumanSilhouette variant={friend.silhouette} color={friend.pastel} />
+          <a class="portrait-link" href={friendPortraits[friend.id].source}
+            style={`--portrait-color: ${friend.pastel}; --portrait-position: ${friendPortraits[friend.id].position ?? '50% 50%'}`}
+            aria-label={he ? `מקור התמונה של ${friend.name}: ${friendPortraits[friend.id].sourceName}` : `Photo source for ${friend.nameEn}: ${friendPortraits[friend.id].sourceName}`}>
+            <img class="person-photo" src={friendPortraits[friend.id].src} alt="" width="80" height="80"
+              loading={index < 4 ? 'eager' : 'lazy'} decoding="async" referrerpolicy="no-referrer" />
+          </a>
           <div class="friend-identity">
             <span class="theme">{he ? friend.theme : friend.themeEn}</span>
             <h2><a href={friend.links[0].url}>{he ? friend.name : friend.nameEn}</a></h2>
@@ -51,7 +56,9 @@ const jsonLd = [
         <p>{he ? friend.text : friend.textEn}</p>
         <ul class="friend-links" aria-label={he ? `קישורים של ${friend.name}` : `Links for ${friend.nameEn}`}>
           {friend.links.map((link) => <li><a href={link.url}>{he ? link.he : link.en}<span aria-hidden="true"> ↗</span></a></li>)}
+          <li><a class="photo-source" href={friendPortraits[friend.id].source}>{he ? 'מקור התמונה' : 'Photo source'}</a></li>
         </ul>
+        {friendPortraits[friend.id].photographer && <p class="photo-credit">{he ? `צילום: ${friendPortraits[friend.id].photographer}` : 'Photo: Dana Barak'}</p>}
       </li>
     ))}
   </ul>
@@ -87,6 +94,8 @@ const jsonLd = [
   .friends { list-style: none; padding: 0; margin: 0 0 3rem; display: grid; gap: 0 3rem; }
   .friend { border-top: 1px solid var(--line); padding-block: 1.75rem 2rem; display: flex; flex-direction: column; min-width: 0; scroll-margin-top: 1.5rem; }
   .friend-heading { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+  .portrait-link { display: block; width: 5rem; height: 5rem; flex: 0 0 5rem; border: 3px solid var(--portrait-color); border-radius: 50%; background: var(--portrait-color); overflow: hidden; }
+  .person-photo { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: var(--portrait-position); }
   .friend-identity { min-width: 0; }
   .friend-identity h2 { margin: .25rem 0 0; }
   .theme { color: var(--muted); font-size: .8125rem; }
@@ -96,6 +105,8 @@ const jsonLd = [
   .friend p { margin: 0 0 1rem; max-width: 42ch; }
   .friend-links { display: flex; flex-wrap: wrap; gap: .3rem 1rem; list-style: none; padding: 0; margin: auto 0 0; font-size: var(--step--1); }
   .friend-links a { display: inline-flex; gap: .2rem; align-items: center; min-height: 2.75rem; }
+  .friend-links .photo-source { color: var(--muted); font-size: .8125rem; }
+  .friend .photo-credit { color: var(--muted); font-size: .8125rem; margin: .25rem 0 0; }
   .connections { background: var(--surface); padding: clamp(1.25rem, 3vw, 2.5rem); border-inline-start: 3px solid var(--fg); }
   .connections h2 { font-family: var(--font-display); font-weight: 400; font-size: var(--step-2); }
   .connections p { max-width: 58ch; }
