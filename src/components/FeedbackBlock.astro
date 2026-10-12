@@ -1,55 +1,44 @@
 ---
-// Feedback block, ported from Nitza's handoff and cut down to one tap: two submit buttons ("חידש לי" / "לא התחברתי"),
-// everything else lives in a closed <details>. ZERO client JS: plain form POST -> Supabase Edge Function ->
-// 303 back to return_to#feedback-{thanks|error|slow} -> CSS :target. The endpoint only requires `reaction`.
+// Feedback block v2: pick a reaction (radio), write a few words, send. The form posts into a hidden iframe
+// (target=fb-sink), the edge function 303s to /feedback-toast.html#feedback-{thanks|error|slow}, and that tiny
+// page shows a CSS toast via :target. No reload, no navigation. Without CSS :has the send button simply always shows.
 import '../styles/feedback.css';
 import { FEEDBACK_ENDPOINT } from '../config';
 interface Props { placement: 'post' | 'about' }
 const { placement: kind } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = Astro.url.pathname.startsWith(base) ? Astro.url.pathname.slice(base.length) || '/' : Astro.url.pathname;
-const returnTo = new URL(Astro.url.pathname, Astro.site).href;
+const toastUrl = new URL('feedback-toast.html', Astro.site).href; // must be on ALLOWED_PREFIX (edge function)
 ---
 {FEEDBACK_ENDPOINT && (
 <section class="fb" id="feedback" aria-labelledby={`fb-h-${kind}`}>
-  <div class="fb-note" id="feedback-thanks" role="status" tabindex="-1">
-    <h2>תודה! קיבלתי.</h2>
-    <p>אני קורא כל תגובה בעצמי.<br />אם השארתם אימייל, אולי גם אחזור אליכם.</p>
-    <a class="again" href="#feedback">רוצים להוסיף עוד משהו?</a>
-  </div>
   <h2 class="fb-q" id={`fb-h-${kind}`}>נו, חידש לכם?</h2>
-  <div class="fb-note bad" id="feedback-error" role="alert" tabindex="-1">
-    <h3>אופס, זה לא נשלח.</h3>
-    <p>משהו נתקע אצלנו, לא אצלכם, וההודעה לא נשמרה. נסו שוב עוד רגע.</p>
-  </div>
-  <div class="fb-note bad" id="feedback-slow" role="alert" tabindex="-1">
-    <h3>וואו, הרבה הודעות ברצף.</h3>
-    <p>כדי לעצור ספאם, נסו שוב בעוד 10 דקות. ההודעה הזאת לא נשמרה.</p>
-  </div>
-  <form class="fb-form" method="post" action={FEEDBACK_ENDPOINT} accept-charset="utf-8">
+  <form class="fb-form" method="post" action={FEEDBACK_ENDPOINT} accept-charset="utf-8" target={`fb-sink-${kind}`}>
     <input type="hidden" name="page" value={path} />
-    <input type="hidden" name="return_to" value={returnTo} />
+    <input type="hidden" name="return_to" value={toastUrl} />
     <input type="hidden" name="quote_ok" value="yes" /> {/* submitting = consent (see .fb-fine); nothing is public until Seffy sets status to approved */}
-    <div class="fb-rate" role="group" aria-labelledby={`fb-h-${kind}`}>
-      <button type="submit" name="reaction" value="helped" aria-describedby={`fb-fine-${kind}`}>חידש לי</button>
-      <button type="submit" name="reaction" value="not_really" aria-describedby={`fb-fine-${kind}`}>לא התחברתי</button>
-      <p class="fb-hint">הלחיצה שולחת גם את מה שכתבתם.</p>
-      <p class="fb-fine" id={`fb-fine-${kind}`}>בשליחת הטופס אתם מאשרים פרסום של מה שכתבתם באתר, בלי שם או פרטים אישיים אחרים.</p>
+    <div class="fb-rate" role="radiogroup" aria-labelledby={`fb-h-${kind}`} aria-required="true">
+      {/* The ONLY JS in the block: one inline handler. A label can't both check a radio and focus another field, so
+          after a pointer pick (event.detail > 0) focus moves to the message. Keyboard arrows (detail 0) stay in the group. */}
+      <label class="chip"><input type="radio" name="reaction" value="helped" required onclick="event.detail&&this.form.message.focus()" />חידש לי</label>
+      <label class="chip"><input type="radio" name="reaction" value="not_really" required onclick="event.detail&&this.form.message.focus()" />לא התחברתי</label>
     </div>
-    <details class="fb-extra">
-      <summary>אפשר גם להוסיף מילה</summary>
-      <div class="fb-field">
-        <label class="lbl" for={`fb-msg-${kind}`}>מה עבד, מה חסר, או רעיון למעשיה הבאה</label>
-        <textarea id={`fb-msg-${kind}`} name="message" maxlength="1000" rows="3"></textarea>
-      </div>
+    <div class="fb-field fb-msg">
+      <label class="lbl" for={`fb-msg-${kind}`}>אפשר גם להוסיף מילה</label>
+      <textarea id={`fb-msg-${kind}`} name="message" maxlength="1000" rows="3" required placeholder="אשמח לשמוע בכמה מילים על החוויה שלך.."></textarea>
+    </div>
+    <div class="fb-send">
       <div class="fb-field">
         <label class="lbl" for={`fb-email-${kind}`}>אימייל, רק אם בא לכם שאחזור אליכם</label>
-        <input id={`fb-email-${kind}`} type="email" name="email" autocomplete="email" inputmode="email" dir="ltr" spellcheck="false" aria-describedby={`fb-email-err-${kind} fb-privacy-${kind}`} />
-        <p class="err" id={`fb-email-err-${kind}`}>האימייל הזה לא נראה תקין. בדקו אותו, או השאירו ריק.</p>
+        <input id={`fb-email-${kind}`} type="email" name="email" autocomplete="email" inputmode="email" dir="ltr" spellcheck="false" aria-describedby={`fb-privacy-${kind}`} />
+        <p class="privacy" id={`fb-privacy-${kind}`}>האימייל לא מוצג בפומבי, ומשמש רק כדי לחזור אליכם.</p>
       </div>
-      <p class="privacy" id={`fb-privacy-${kind}`}>האימייל לא מוצג בפומבי, ומשמש רק כדי לחזור אליכם.</p>
-    </details>
+      <button type="submit" aria-describedby={`fb-fine-${kind}`}>שליחה</button>
+      <p class="fb-fine" id={`fb-fine-${kind}`}>בשליחת הטופס אתם מאשרים פרסום של מה שכתבתם באתר, בלי שם או פרטים אישיים אחרים.</p>
+    </div>
     <div class="hp" aria-hidden="true"><label for={`fb-hp-${kind}`}>לא למלא</label><input id={`fb-hp-${kind}`} type="text" name="website" tabindex="-1" autocomplete="off" /></div>
   </form>
+  {/* The 303 from the edge function loads here instead of navigating: the page stays put and the toast page shows the result. */}
+  <iframe class="fb-sink" name={`fb-sink-${kind}`} title="אישור שליחת המשוב" src="about:blank"></iframe>
 </section>
 )}

@@ -106,8 +106,8 @@ export function auditDist(dist, site, base) {
     return existsSync(full) && (statSync(full).isFile() || existsSync(join(full, 'index.html')));
   };
 
-  // admin/ is the CMS editor (noindex on purpose); 404.html is not a public page.
-  const htmlFiles = files.filter((f) => f.endsWith('.html')).filter((f) => !/[\\/]404\.html$/.test(f) && !/^admin[\\/]/.test(relative(dist, f)));
+  // admin/ is the CMS editor (noindex on purpose); 404.html and feedback-toast.html (the feedback form's iframe target) are not public pages.
+  const htmlFiles = files.filter((f) => f.endsWith('.html')).filter((f) => !/[\\/](404|feedback-toast)\.html$/.test(f) && !/^admin[\\/]/.test(relative(dist, f)));
   for (const file of htmlFiles) {
     const rel = relative(dist, file);
     const html = readFileSync(file, 'utf8');

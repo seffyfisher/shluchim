@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width">
+<title>משוב</title>
+<style>
+/* Loaded only inside the feedback form's hidden iframe: the edge function's 303 lands here (#feedback-thanks|error|slow),
+   and :target shows the matching toast. Zero JS. Transparent until then, so the iframe is invisible. */
+:root { color-scheme: light dark; --fg: light-dark(#141414, #f2f2f2); --bg: light-dark(#fafafa, #141414); --line: light-dark(#8c8c8c, #767676); }
+html, body { margin: 0; background: transparent; height: 100%; }
+body { display: flex; align-items: flex-end; justify-content: center; font: 600 15px/1.4 system-ui, -apple-system, 'Segoe UI', Arial, sans-serif; }
+.t { display: none; margin: 0 6px 6px; padding: .7rem 1.1rem; border-radius: 999px; background: var(--fg); color: var(--bg); box-shadow: 0 6px 18px -8px rgb(0 0 0 / .45); }
+.t.bad { background: var(--bg); color: var(--fg); border: 1px solid var(--line); }
+.t:target { display: block; animation: t 5s ease forwards; }
+@keyframes t { 0% { opacity: 0; translate: 0 8px; } 6%, 85% { opacity: 1; translate: 0 0; } 100% { opacity: 0; visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) { .t:target { animation: none; } }
+</style>
+</head>
+<body>
+<p class="t" id="feedback-thanks" role="status">תודה! קיבלתי ✓</p>
+<p class="t bad" id="feedback-error" role="alert">אופס, זה לא נשלח. נסו שוב עוד רגע.</p>
+<p class="t bad" id="feedback-slow" role="alert">הרבה הודעות ברצף. נסו שוב בעוד 10 דקות.</p>
+</body>
+</html>

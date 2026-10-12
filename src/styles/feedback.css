@@ -2,23 +2,23 @@
 .fb { --fb-fill-hover: light-dark(#ebebeb, #2a2a2a); --fb-edge: light-dark(#8c8c8c, #767676); --fb-focus: light-dark(#595959, #a3a3a3); margin-block: clamp(2rem, 5vw, 3rem) 0; padding-block: 1.25rem 0; border-top: 1px solid var(--line); max-width: 40rem; }
 .fb h2 { font-family: 'Noa Shalev', var(--font); font-weight: 400; font-size: var(--step-1); line-height: 1.25; margin: 0; }
 .fb-form { margin-top: 1rem; display: grid; gap: .5rem; }
-/* the two answers: real submit buttons, so one tap sends */
-.fb-rate { order: 1; display: flex; flex-wrap: wrap; gap: .6rem; }
-.fb-rate button { font: inherit; font-weight: 600; min-height: 2.75rem; padding-inline: 1.25rem; border: 1px solid var(--fb-edge); border-radius: 999px; background: transparent; color: var(--fg); cursor: pointer; }
-.fb-rate button:hover { background: var(--fb-fill-hover); }
-.fb-rate button:focus-visible, .fb-extra summary:focus-visible { outline: 2px solid var(--fb-focus); outline-offset: 3px; }
-.fb-fine { flex-basis: 100%; margin: .15rem 0 0; font-size: .8rem; line-height: 1.5; color: var(--muted); }
-.fb-hint { display: none; flex-basis: 100%; order: -1; margin: 0; font-size: var(--step--1); color: var(--muted); }
-/* the optional part: closed by default, one quiet line */
-.fb-extra { order: 2; }
-.fb-extra summary { display: inline-flex; align-items: center; min-height: 2.75rem; cursor: pointer; color: var(--muted); font-size: var(--step--1); }
-.fb-extra summary:hover { color: var(--fg); }
-.fb-extra[open] { display: grid; gap: .75rem; }
-/* once it is open, the answers move below the text, so the message and the tap read in order (without :has they simply stay on top) */
-@supports selector(:has(*)) {
-  .fb-form:has(.fb-extra[open]) .fb-rate { order: 3; }
-  .fb-form:has(.fb-extra[open]) .fb-hint { display: block; }
-}
+/* the two answers: radio chips. Picking one (pointer) moves focus to the message (one inline handler, see the component). */
+.fb-rate { display: flex; flex-wrap: wrap; gap: .6rem; }
+.fb .chip { position: relative; display: inline-flex; align-items: center; font-weight: 600; min-height: 2.75rem; padding-inline: 1.25rem; border: 1px solid var(--fb-edge); border-radius: 999px; color: var(--fg); cursor: pointer; }
+.fb .chip input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.fb .chip:hover { background: var(--fb-fill-hover); }
+.fb .chip:has(:checked) { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.fb .chip:has(:focus-visible), .fb-send button:focus-visible { outline: 2px solid var(--fb-focus); outline-offset: 3px; }
+.fb-msg { margin-top: .5rem; }
+.fb textarea::placeholder { color: var(--muted); opacity: 1; }
+/* send appears only once there is text (CSS :placeholder-shown). Without :has it always shows. */
+.fb-send { display: grid; gap: .6rem; justify-items: start; }
+.fb-send .fb-field { justify-self: stretch; }
+.fb-send button { font: inherit; font-weight: 600; min-height: 2.75rem; padding-inline: 1.5rem; border: 1px solid var(--fg); border-radius: 999px; background: var(--fg); color: var(--bg); cursor: pointer; }
+@supports selector(:has(*)) { .fb-form:has(textarea:placeholder-shown) .fb-send { display: none; } }
+.fb-fine { margin: 0; font-size: .8rem; line-height: 1.5; color: var(--muted); }
+/* the hidden iframe the form posts into; the toast page inside it is transparent until a result arrives */
+.fb-sink { position: fixed; inset-inline: 0; bottom: 0; z-index: 50; width: 100%; height: 5rem; border: 0; background: transparent; color-scheme: light dark; pointer-events: none; }
 .fb-field { display: grid; gap: .3rem; }
 .fb label.lbl { font-size: var(--step--1); color: var(--muted); }
 .fb textarea, .fb input[type=email] { font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--fb-edge); border-radius: var(--radius); padding: .65rem .8rem; min-height: 2.75rem; width: 100%; box-sizing: border-box; }
@@ -33,15 +33,4 @@
 .fb .privacy { margin: 0; font-size: var(--step--1); color: var(--muted); line-height: 1.5; }
 /* honeypot: off-screen, not display:none (some bots skip hidden fields) */
 .fb .hp { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-/* server outcomes via redirect + :target (zero JS) */
-.fb-note { display: none; padding: 1rem 1.1rem; border-radius: var(--radius); margin-top: 1.25rem; }
-.fb-note:focus { outline: none; }
-.fb-note h3 { margin: 0 0 .25rem; font-size: var(--step-0); }
-.fb-note p { margin: 0; }
-.fb-note.bad { border: 2px solid var(--fb-edge); }
-.fb-note:target { display: block; }
-#feedback-thanks { padding: 0; border-radius: 0; margin-top: 0; }
-#feedback-thanks h2 { margin-bottom: .5rem; }
-#feedback-thanks .again { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--fg); }
-.fb:has(#feedback-thanks:target) :is(.fb-q, .fb-form) { display: none; }
-#feedback-thanks:focus { outline: none; }
+
