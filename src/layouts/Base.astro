@@ -59,7 +59,6 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script is:inline>try { const saved = localStorage.getItem('shluchim-theme'); if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved; } catch { /* storage may be disabled */ }</script>
     <title>{fullTitle}</title>
     <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonical} />
@@ -70,6 +69,7 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141414" />
+    <script is:inline>try { const saved = localStorage.getItem('shluchim-theme'); if (saved === 'light' || saved === 'dark') { document.documentElement.dataset.theme = saved; document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => meta.setAttribute('content', saved === 'dark' ? '#141414' : '#fafafa')); } } catch { /* storage may be disabled */ }</script>
     <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={SITE.title} />
@@ -122,7 +122,7 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
         <div class="wrap">
           <a class="name" href={url()}>{SITE.title}</a>
           {SITE.kicker && <span class="kicker" lang="en" dir="ltr">{SITE.kicker}</span>}
-          <nav class="site-nav" aria-label={ui.navMain}><a href={url()} aria-current={Astro.url.pathname === url() ? 'page' : undefined}>{ui.stories}</a><a href={url('team/')} aria-current={Astro.url.pathname.startsWith(url('team/')) ? 'page' : undefined}>{ui.team}</a><a href={url('about/')} aria-current={Astro.url.pathname.startsWith(url('about/')) ? 'page' : undefined}>{ui.about}</a>{showSwitch && <a class="lang" href={switchHref} hreflang={o} lang={o} title={ui.switchHint}>{ui.switchTo}</a>}<ThemeToggle lang={lang} /></nav>
+          <nav class="site-nav" aria-label={ui.navMain}><a href={url()} aria-current={Astro.url.pathname === url() ? 'page' : undefined}>{ui.stories}</a><a href={url('team/')} aria-current={Astro.url.pathname.startsWith(url('team/')) ? 'page' : undefined}>{ui.team}</a><a href={url('about/')} aria-current={Astro.url.pathname.startsWith(url('about/')) ? 'page' : undefined}>{ui.about}</a><span class="nav-controls">{showSwitch && <a class="lang" href={switchHref} hreflang={o} lang={o} title={ui.switchHint}>{ui.switchTo}</a>}<ThemeToggle lang={lang} /></span></nav>
         </div>
       </header>
     )}

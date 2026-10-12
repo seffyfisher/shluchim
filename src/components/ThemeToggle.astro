@@ -18,6 +18,7 @@ const { lang } = Astro.props;
   for (const toggle of toggles) toggle.addEventListener('click', () => {
     const next = current() === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
+    document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]').forEach((meta) => { meta.content = next === 'dark' ? '#141414' : '#fafafa'; });
     try { localStorage.setItem('shluchim-theme', next); } catch { /* storage may be disabled */ }
     sync();
   });
