@@ -19,8 +19,9 @@ body { display: flex; align-items: flex-end; justify-content: center; font: 600 
 </style>
 </head>
 <body>
-<p class="t" id="feedback-thanks" role="status">תודה! קיבלתי ✓</p>
+<p class="t" id="feedback-thanks" role="status">קיבלתי תודה רבה, ואתם יודעים בדיוק לאיפה אני אדחוף את זה</p>
 <p class="t bad" id="feedback-error" role="alert">אופס, זה לא נשלח. נסו שוב עוד רגע.</p>
 <p class="t bad" id="feedback-slow" role="alert">הרבה הודעות ברצף. נסו שוב בעוד 10 דקות.</p>
+<script>/* tell the parent page the outcome (it only accepts this from its own iframe) */ if (location.hash && parent !== window) parent.postMessage(location.hash.slice(1), '*');</script>
 </body>
 </html>

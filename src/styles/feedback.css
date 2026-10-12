@@ -34,3 +34,13 @@
 /* honeypot: off-screen, not display:none (some bots skip hidden fields) */
 .fb .hp { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
+/* v3: with JS the bottom toast is replaced by a centered dialog; after a successful send the form is cleared and hidden */
+.fb.js .fb-sink { visibility: hidden; }
+.fb.sent .fb-form { display: none; }
+.fb-dlg { max-width: min(26rem, calc(100vw - 2.5rem)); padding: 1.6rem 1.5rem 1.2rem; border: 1px solid var(--line); border-radius: calc(var(--radius) * 2); background: var(--bg); color: var(--fg); box-shadow: 0 18px 50px -20px rgb(0 0 0 / .5); text-align: center; }
+.fb-dlg::backdrop { background: rgb(0 0 0 / .45); }
+.fb-dlg-t { margin: 0 0 1.1rem; font-family: 'Noa Shalev', var(--font); font-size: var(--step-1); line-height: 1.35; }
+.fb-dlg.bad .fb-dlg-t { font-family: var(--font); font-size: var(--step-0); }
+.fb-dlg form { margin: 0; }
+.fb-dlg-x { font: inherit; font-weight: 600; min-height: 2.75rem; padding-inline: 1.5rem; border: 1px solid var(--fg); border-radius: 999px; background: var(--fg); color: var(--bg); cursor: pointer; }
+.fb-dlg-x:focus-visible { outline: 2px solid var(--fb-focus); outline-offset: 3px; }

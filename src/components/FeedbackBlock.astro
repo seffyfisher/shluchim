@@ -1,13 +1,15 @@
 ---
 // Feedback block v2: pick a reaction (radio), write a few words, send. The form posts into a hidden iframe
 // (target=fb-sink), the edge function 303s to /feedback-toast.html#feedback-{thanks|error|slow}, and that tiny
-// page shows a CSS toast via :target. No reload, no navigation. Without CSS :has the send button simply always shows.
+// page shows a CSS toast via :target and posts the outcome here; a tiny inline script then resets/hides the form and
+// opens a centered <dialog>. No reload, no navigation. Without CSS :has the send button simply always shows.
 import '../styles/feedback.css';
 import { FEEDBACK_ENDPOINT } from '../config';
 interface Props { placement: 'post' | 'about' }
 const { placement: kind } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = Astro.url.pathname.startsWith(base) ? Astro.url.pathname.slice(base.length) || '/' : Astro.url.pathname;
+const FB_JS = `(()=>{const s=document.currentScript.closest('.fb');if(!s)return;const f=s.querySelector('.fb-form'),i=s.querySelector('.fb-sink'),d=s.querySelector('.fb-dlg'),t=d.querySelector('.fb-dlg-t');s.classList.add('js');addEventListener('message',e=>{if(e.source!==i.contentWindow)return;const o=String(e.data).replace('feedback-','');if(!t.dataset[o])return;t.textContent=t.dataset[o];d.classList.toggle('bad',o!=='thanks');if(o==='thanks'){f.reset();s.classList.add('sent');}d.open||d.showModal();});})();`;
 const toastUrl = new URL('feedback-toast.html', Astro.site).href; // must be on ALLOWED_PREFIX (edge function)
 ---
 {FEEDBACK_ENDPOINT && (
@@ -40,5 +42,14 @@ const toastUrl = new URL('feedback-toast.html', Astro.site).href; // must be on 
   </form>
   {/* The 303 from the edge function loads here instead of navigating: the page stays put and the toast page shows the result. */}
   <iframe class="fb-sink" name={`fb-sink-${kind}`} title="אישור שליחת המשוב" src="about:blank"></iframe>
+  {/* Centered result dialog (native <dialog>: showModal centers it, traps focus, closes on Esc, restores focus). */}
+  <dialog class="fb-dlg" aria-labelledby={`fb-dlg-t-${kind}`}>
+    <p class="fb-dlg-t" id={`fb-dlg-t-${kind}`} data-thanks="קיבלתי תודה רבה, ואתם יודעים בדיוק לאיפה אני אדחוף את זה" data-error="אופס, זה לא נשלח. משהו נתקע אצלנו, לא אצלכם. נסו שוב עוד רגע." data-slow="הרבה הודעות ברצף. כדי לעצור ספאם, נסו שוב בעוד 10 דקות."></p>
+    <form method="dialog"><button class="fb-dlg-x" autofocus>סגירה</button></form>
+  </dialog>
+  {/* Minimal JS, only because CSS can't see the iframe's result: the toast page posts its outcome (thanks|error|slow)
+      to this page. On thanks: reset + hide the form. Any outcome: open the centered dialog. Without JS the toast page's
+      own CSS toast still shows. Accepts messages only from this block's iframe. */}
+  <script is:inline set:html={FB_JS}></script>
 </section>
 )}
