@@ -66,6 +66,7 @@ const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = 
       <a class="btn" href={lurl(lang, 'about/')}>{aboutCard.btn}</a>
     </article>
   </div>
+  <p class="friends-invite"><a href={lurl(lang, 'friends/')}>{he ? 'בני אנוש' : 'Humans'}</a></p>
   {posts.length === 0 ? (
     he
       ? <p class="empty">עוד אין פה מעשיות.<br />השְׁלוּחִים כבר עובדים על הראשונה.</p>

@@ -1,0 +1,131 @@
+---
+import Base from '../layouts/Base.astro';
+import HumanSilhouette from './HumanSilhouette.astro';
+import { friends } from '../data/friends';
+import { lurl, type Lang } from '../i18n/ui';
+import { SITES } from '../config';
+import { pageNode, breadcrumbNode, nodeIds, withBrand } from '../lib/seo';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const he = lang === 'he';
+const title = he ? 'בני אנוש' : 'Humans';
+const description = he
+  ? 'אנשים שאני מעריך את העשייה שלהם ועוקב אחריהם. כמה מילים וקישורים, כדי שגם אתם תוכלו להכיר.'
+  : 'People whose work I appreciate and follow. A few words and links so you can get to know them too.';
+const seoTitle = withBrand(he ? 'בני אנוש: יוצרים ישראלים בתחום ה־AI' : 'Humans: Israeli AI creators I follow', SITES[lang].title);
+const seoDescription = he
+  ? `${friends.length} יוצרים ישראלים בתחום ה־AI שאני מעריך ועוקב אחריהם. כמה מילים על העשייה שלהם וקישורים לאתרים, לניוזלטרים ולתוכן שהם משתפים.`
+  : `${friends.length} Israeli AI creators whose work I appreciate and follow. Short introductions and links to their websites, newsletters and Hebrew-language content.`;
+const abs = (path: string) => new URL(path, Astro.site).href;
+const pageUrl = abs(lurl(lang, 'friends/'));
+const ids = nodeIds(abs(lurl('he')), abs(lurl(lang)));
+const jsonLd = [
+  pageNode({ type: 'CollectionPage', url: pageUrl, name: title, description: seoDescription, lang, websiteId: ids.website,
+    list: friends.map((friend) => ({ name: he ? friend.name : friend.nameEn, url: friend.links[0].url })) }),
+  breadcrumbNode([{ name: SITES[lang].title, url: abs(lurl(lang)) }, { name: title, url: pageUrl }]),
+];
+---
+<Base bodyClass="page-friends" lang={lang} title={title} description={description} seoTitle={seoTitle} seoDescription={seoDescription}
+  alternates={{ he: lurl('he', 'friends/'), en: lurl('en', 'friends/') }} jsonLd={jsonLd}>
+  <header class="page-head human-intro">
+    <div class="intro-copy">
+    <h1>{title}</h1>
+    <p class="page-subtitle">{he ? 'אדמורי שלוחים' : 'The rebbes of Shluchim'}</p>
+    <p>{he ? 'לאדם וחוה היה בן ושמו שת, הבן השלישי שסופר עליו אחרי קין והבל. לשת נולד בן בשם אנוש, ומאנוש התפתחה האנושות וכן האנשים היקרים האלה מטה' : 'Adam and Eve had a son named Seth, the third son mentioned after Cain and Abel. Seth had a son named Enosh, from whom humanity developed, as did the dear people below.'}</p>
+    </div>
+    <div class="human-mark" aria-hidden="true">
+      <svg viewBox="0 0 320 320" fill="none">
+        <path class="mark-line" d="M61 164 152 65 264 142 176 259 61 164 264 142M152 65 176 259" />
+        <circle class="mark-orbit" cx="160" cy="160" r="137" />
+        <circle class="mark-orbit" cx="160" cy="160" r="107" />
+        <circle class="mark-node" cx="61" cy="164" r="15" />
+        <circle class="mark-node" cx="152" cy="65" r="22" />
+        <circle class="mark-node" cx="264" cy="142" r="13" />
+        <circle class="mark-node" cx="176" cy="259" r="18" />
+        <path class="mark-spark" d="M161 124V158M144 141H178" />
+      </svg>
+      <p>{he ? 'אנשים. רעיונות. חיבורים.' : 'People. Ideas. Connections.'}</p>
+    </div>
+  </header>
+  <nav class="people-index" aria-label={he ? 'קפיצה לאדם בדף' : 'Jump to a person'}>
+    <div class="index-heading"><span>{he ? 'על הדף' : 'On this page'}</span><span>{he ? `${friends.length} בני אנוש` : `${friends.length} humans`}</span></div>
+    <ul>{friends.map((friend) => <li><a href={`#${friend.id}`}>{he ? friend.name : friend.nameEn}</a></li>)}</ul>
+  </nav>
+  <ul class="friends" aria-label={he ? 'אנשים שאני מעריך' : 'People I appreciate'}>
+    {friends.map((friend) => (
+      <li class="friend" id={friend.id}>
+        <div class="friend-heading">
+          <HumanSilhouette variant={friend.silhouette} color={friend.pastel} />
+          <div class="friend-identity">
+            <span class="theme">{he ? friend.theme : friend.themeEn}</span>
+            <h2><a href={friend.links[0].url}>{he ? friend.name : friend.nameEn}</a></h2>
+          </div>
+        </div>
+        <p>{he ? friend.text : friend.textEn}</p>
+        <ul class="friend-links" aria-label={he ? `קישורים של ${friend.name}` : `Links for ${friend.nameEn}`}>
+          {friend.links.map((link) => <li><a href={link.url}>{he ? link.he : link.en}<span aria-hidden="true"> ↗</span></a></li>)}
+        </ul>
+      </li>
+    ))}
+  </ul>
+  <section class="connections" aria-labelledby="connections-title">
+    <h2 id="connections-title">{he ? 'עוד דרכים לפגוש את אותם רעיונות' : 'More ways to explore these ideas'}</h2>
+    <p>{he ? 'בנייה, יצירה ועבודה עם AI מופיעות גם בתוכן שלהם וגם בסיפורים כאן. אלה כמה מהניסיונות שלי באותם עולמות:' : 'Building, creating and working with AI show up both in their content and in the stories here. These are a few of my own experiments in those areas:'}</p>
+    <ul>
+      <li><a href={lurl(lang, he ? 'posts/2026-10-10-building-the-shluchim-blog/' : 'posts/2026-10-10-how-the-shluchim-blog-was-born/')}>{he ? 'בנייה עם AI — איך נולד הבלוג הזה' : 'Building with AI — how this blog was born'}</a></li>
+      <li><a href={lurl(lang, he ? 'posts/2026-10-08-spec-driven-tickets-redesign/' : 'posts/2026-10-08-spec-driven-design-for-the-tickets-page/')}>{he ? 'עיצוב ומוצר — מרעיון לתהליך עבודה' : 'Design and product — from an idea to a workflow'}</a></li>
+      <li><a href={lurl(lang, he ? 'posts/2026-10-11-grokbot-email-inbox/' : 'posts/2026-10-11-one-email-address-a-front-door/')}>{he ? 'עבודה עם צוות עוזרי AI — כתובת מייל אחת לכל הצוות' : 'Working with an AI team — one email address for the whole team'}</a></li>
+    </ul>
+  </section>
+  <nav class="post-foot" aria-label={he ? 'ניווט' : 'Navigation'}>
+    <a class="back" href={lurl(lang)}>{he ? '→ לכל הסיפורים' : '← All stories'}</a>
+  </nav>
+</Base>
+<style>
+  :global(.page-friends .wrap) { max-width: 64rem; }
+  .human-intro { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2rem; margin-bottom: 3rem; }
+  .eyebrow { color: var(--muted); font-size: var(--step--1); margin: 0 0 1.25rem; }
+  .human-intro h1 { font-size: clamp(2.75rem, 6vw, 5rem); line-height: 1.12; letter-spacing: -.025em; margin-bottom: .75rem; }
+  .human-intro h1 span { display: block; }
+  .human-intro h1 .title-second { font-size: .76em; }
+  .human-intro .page-subtitle { font-family: var(--font-display); font-size: var(--step-2); color: var(--fg); margin: 0 0 1.5rem; }
+  .intro-copy > p:last-child { max-width: 48ch; margin-bottom: 0; }
+  .human-mark { display: none; }
+  .human-mark svg { width: 100%; height: auto; overflow: visible; }
+  .mark-line { stroke: var(--muted); stroke-width: 1; }
+  .mark-orbit { stroke: var(--line); stroke-width: 1; }
+  .mark-node { fill: var(--fg); stroke: var(--bg); stroke-width: 7; }
+  .mark-spark { stroke: var(--fg); stroke-width: 2; }
+  .human-mark p { color: var(--muted); font-size: var(--step--1); text-align: center; }
+  .people-index { padding-block: 1.25rem; border-block: 1px solid var(--rule); margin-bottom: 3rem; }
+  .index-heading { display: flex; justify-content: space-between; gap: 1rem; color: var(--muted); font-size: .8125rem; margin-bottom: .75rem; }
+  .people-index ul { display: flex; flex-wrap: wrap; gap: .1rem .3rem; margin: 0; padding: 0; list-style: none; }
+  .people-index li { display: flex; align-items: center; }
+  .people-index li:not(:last-child)::after { content: '·'; color: var(--muted); margin-inline: .5rem; }
+  .people-index a { font-size: var(--step--1); text-decoration: none; min-height: 2.75rem; display: inline-flex; align-items: center; }
+  .people-index a:hover { text-decoration: underline; }
+  .friends { list-style: none; padding: 0; margin: 0 0 3rem; display: grid; gap: 0 3rem; }
+  .friend { border-top: 1px solid var(--line); padding-block: 1.75rem 2rem; display: flex; flex-direction: column; min-width: 0; scroll-margin-top: 1.5rem; }
+  .friend-heading { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+  .friend-identity { min-width: 0; }
+  .friend-identity h2 { margin: .25rem 0 0; }
+  .theme { color: var(--muted); font-size: .8125rem; }
+  .friend h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.875rem, 3vw, 2.5rem); margin: 0 0 .75rem; }
+  .friend h2 a { color: var(--fg); text-decoration: none; }
+  .friend h2 a:hover { text-decoration: underline; }
+  .friend p { margin: 0 0 1rem; max-width: 42ch; }
+  .friend-links { display: flex; flex-wrap: wrap; gap: .3rem 1rem; list-style: none; padding: 0; margin: auto 0 0; font-size: var(--step--1); }
+  .friend-links a { display: inline-flex; gap: .2rem; align-items: center; min-height: 2.75rem; }
+  .connections { background: var(--surface); padding: clamp(1.25rem, 3vw, 2.5rem); border-inline-start: 3px solid var(--fg); }
+  .connections h2 { font-family: var(--font-display); font-weight: 400; font-size: var(--step-2); }
+  .connections p { max-width: 58ch; }
+  .connections ul { padding-inline-start: 1.25rem; margin-bottom: 0; }
+  .connections li { margin-block: .75rem; }
+  :global(:root:lang(en)) .friend h2 { font-family: var(--font-display-en, var(--font)); }
+  @media (min-width: 48rem) {
+    .human-intro { grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); gap: 3rem; align-items: center; }
+    .human-mark { display: block; }
+    .friends { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 25rem) { .human-intro h1 { font-size: 2.65rem; } }
+</style>

@@ -40,7 +40,7 @@ export function urlPairs(root, siteBase) {
   const he = read(join(root, 'src/content/posts/he')).filter((p) => !p.draft);
   const en = read(join(root, 'src/content/posts/en')).filter((p) => !p.draft);
   const slug = (f) => f.replace(/\.md$/, '');
-  const pairs = [['', 'en/'], ['team/', 'en/team/']];
+  const pairs = [['', 'en/'], ['team/', 'en/team/'], ['friends/', 'en/friends/']];
   for (const slug of TOPIC_SLUGS) if (he.some((p) => p.topics.includes(slug)) && en.some((p) => p.topics.includes(slug))) pairs.push([`topics/${slug}/`, `en/topics/${slug}/`]);
   if (existsSync(join(root, 'src/content/pages/en/about.md'))) pairs.push(['about/', 'en/about/']);
   for (const e of en) { const h = he.find((x) => x.key === e.key); if (h) pairs.push([`posts/${slug(h.f)}/`, `en/posts/${slug(e.f)}/`]); }
