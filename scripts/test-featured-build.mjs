@@ -55,8 +55,8 @@ try {
     const actual = listed(html);
     assert.deepEqual(actual, expected(posts), `${lang} homepage order`);
     assert.equal(new Set(actual).size, actual.length, `${lang} homepage must not duplicate posts`);
-    const firstList = /<div id="stories">\s*(<ol[\s\S]*?<\/ol>)/.exec(html)?.[1];
-    assert.ok(firstList, `${lang} homepage starts its story area with the featured list, without a heading`);
+    const firstList = /<div id="stories">\s*<h2 class="sr-only">[^<]+<\/h2>\s*(<ol[\s\S]*?<\/ol>)/.exec(html)?.[1];
+    assert.ok(firstList, `${lang} homepage names the featured list for assistive tech without a visible heading`);
     assert.doesNotMatch(firstList, /class="badge"/, `${lang} featured rows have no badge`);
   }
   if (process.env.FEATURED_PREVIEW_DIR) {

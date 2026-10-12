@@ -72,7 +72,10 @@ const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = 
       : <p class="empty">The English translations are on their way.<br />Meanwhile, the stories are all <a href={lurl('he')} hreflang="he" lang="he">in Hebrew</a>.</p>
   ) : (
     <div id="stories">
-      {featured.length > 0 && <StoryList posts={featured} lang={lang} />}
+      {featured.length > 0 && <>
+        <h2 class="sr-only">{he ? 'מעשיות נבחרות' : 'Featured stories'}</h2>
+        <StoryList posts={featured} lang={lang} />
+      </>}
       {history.length > 0 && <>
         <h2 class="list-label">{he
           ? `${history.length === 1 ? 'מעשיה אחת' : `${history.length} מעשיות`}, מהחדשה לישנה`
