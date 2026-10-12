@@ -30,12 +30,13 @@ const seoTitle = d.seoTitle ? withBrand(d.seoTitle, SITES[lang].title) : undefin
 const seoDescription = d.seoDescription ?? d.description;
 const modified = d.updated ?? d.date;
 const cover = d.cover ? await getImage({ src: d.cover, width: 1200, format: 'jpg' }) : undefined;
+const socialImage = d.socialImage ?? cover?.src;
 const ids = nodeIds(abs(lurl('he')), abs(lurl(lang)));
 const keywords = [...new Set([...topics.map((x) => x.label), ...(d.tags ?? []), ...SEO_KEYWORDS[lang]])];
 const jsonLd = [
   blogPostingNode({
     url: pageUrl, headline: d.title, description: seoDescription, lang, published: isoDate(d.date), modified: isoDate(modified),
-    image: cover ? abs(cover.src) : abs(lurl('he', OG_IMAGE.file[lang])), blogId: ids.blog, personId: ids.person, keywords, section: topics[0]?.label, words: wordCount(post.body),
+    image: socialImage ? abs(socialImage) : abs(lurl('he', OG_IMAGE.file[lang])), blogId: ids.blog, personId: ids.person, keywords, section: topics[0]?.label, words: wordCount(post.body),
   }),
   breadcrumbNode([
     { name: SITES[lang].title, url: abs(lurl(lang)) },
@@ -46,7 +47,7 @@ const jsonLd = [
 ---
 <Base title={d.title} description={d.description} seoTitle={seoTitle} seoDescription={seoDescription} noindex={d.draft} lang={lang} alternates={alternates}
   ogType="article" published={d.date} modified={modified} section={topics[0]?.label} tags={topics.map((x) => x.label)}
-  image={cover?.src} imageAlt={d.coverAlt} jsonLd={jsonLd}>
+  image={socialImage} imageAlt={d.coverAlt} jsonLd={jsonLd}>
   <article>
     <header class="post-head">
       <p class="meta">

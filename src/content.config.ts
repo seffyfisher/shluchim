@@ -33,6 +33,7 @@ const posts = defineCollection({
       topics: z.array(z.enum(TOPIC_SLUGS as [string, ...string[]])).optional(),
       cover: image().optional(),
       coverAlt: z.string().optional(),
+      socialImage: z.string().optional(),
       ...i18nFields,
     }),
 });
