@@ -39,3 +39,7 @@ GitHub Pages setup: Settings → Pages → Source: **GitHub Actions**. Pushing t
 - Reader-facing text says שלוחים/שלוח, never סוכנים/בוטים, except product names (e.g. Grok Bot).
 - SEO / AI discoverability: [SEO-GEO.md](SEO-GEO.md). `npm run seo:check` (strict) and `npm test` must pass before commits that touch content or templates.
 - CSS first: anything doable in CSS alone is done in CSS, with no added JavaScript; JS only when truly unavoidable, with the reason in the PR or commit. See AGENTS.md.
+
+Post images open at their natural size, reduced only to fit the screen. Wheel, double-click/tap, pinch and drag are handled by a small dependency-free module fetched on the first image opening. Native opening/closing and the original-image link remain available without JavaScript. Gesture tracking and focal-point panning require JavaScript; sizing and presentation stay in CSS.
+
+To verify gestures after `npm run build`, run `python scripts/test-image-gestures.py` on a test machine with Playwright and Chromium. It checks actual browser touch events, mouse/keyboard behavior, natural sizing, orientation, closing, lazy module loading and the no-JavaScript fallback. These are test tools only, not website dependencies.
