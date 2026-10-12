@@ -305,22 +305,20 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 .site-nav a:first-child { margin-inline-start: -.35rem; }
 /* divider sits in the gap, outside the link box, so focus rings and taps don't include it */
 .site-nav a + a::before { content: ''; position: absolute; inset-inline-start: calc(-.45rem - 1px); top: 50%; height: .95em; translate: 0 -58%; border-inline-start: 1px solid var(--muted); pointer-events: none; }
-.site-nav .lang { letter-spacing: .04em; min-width: 2.75rem; justify-content: center; }
+.site-nav .lang, .theme-toggle { box-sizing: border-box; width: 4.5rem; height: 2.75rem; min-height: 2.75rem; padding: 0; border: 1px solid var(--fg); border-radius: 999px; background: transparent; color: var(--fg); }
+.site-nav .lang { margin-inline-start: 0; letter-spacing: .04em; justify-content: center; align-items: center; font-size: var(--step--1); font-weight: 600; text-decoration: none; flex: none; transition: background-color .2s ease; }
+.site-nav .lang:hover { background: var(--surface); text-decoration: none; }
+.site-nav .lang:first-child { margin-inline-start: 0; }
 .bar .site-nav { max-width: 100%; flex-wrap: wrap; }
 .nav-controls { display: inline-flex; align-items: center; gap: .9rem; flex: none; }
-.theme-toggle { direction: ltr; position: relative; display: inline-flex; align-items: center; justify-content: space-around; flex: none; width: 3.75rem; height: 2rem; padding: 0 .125rem; border: 1px solid var(--muted); border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; transition: border-color .2s ease, color .2s ease; }
-.theme-toggle .theme-thumb { position: absolute; z-index: 0; top: .1875rem; left: .1875rem; width: 1.5rem; height: 1.5rem; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); transform: translateX(1.75rem); transition: transform .2s ease; }
-.theme-toggle .theme-moon, .theme-toggle .theme-sun { position: relative; z-index: 1; flex: none; }
-.theme-toggle .theme-sun { color: var(--fg); }
-:root[data-theme="dark"] .theme-toggle .theme-moon { color: var(--fg); }
-:root[data-theme="dark"] .theme-toggle .theme-sun { color: var(--muted); }
+.theme-toggle { direction: ltr; position: relative; display: inline-grid; grid-template-columns: repeat(2, 1fr); align-items: center; justify-items: center; flex: none; padding-inline: .1875rem; cursor: pointer; transition: background-color .2s ease; }
+.theme-toggle .theme-thumb { position: absolute; z-index: 0; top: calc(50% - 1rem); left: .25rem; width: 2rem; height: 2rem; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); transform: translateX(2rem); transition: transform .2s ease; }
+.theme-toggle .theme-moon, .theme-toggle .theme-sun { position: relative; z-index: 1; display: block; width: 1.5rem; height: 1.5rem; object-fit: contain; }
 :root[data-theme="dark"] .theme-thumb { transform: translateX(0); }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) .theme-thumb { transform: translateX(0); }
-  :root:not([data-theme]) .theme-toggle .theme-moon { color: var(--fg); }
-  :root:not([data-theme]) .theme-toggle .theme-sun { color: var(--muted); }
 }
-.theme-toggle:hover { border-color: var(--fg); color: var(--fg); }
+.theme-toggle:hover { background: var(--surface); }
 .theme-toggle:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .theme-toggle, .theme-toggle .theme-thumb { transition: none; } }
 @media (scripting: none) { .theme-toggle { display: none; } }
@@ -371,9 +369,7 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 
 /* ---------- Home: two cards above the story list (the cards are the section nav, so the masthead only keeps the language link) ---------- */
 .masthead .lang-row { margin: 0 0 .75rem; justify-content: flex-end; }
-/* The language link is a pill button (same look as .card .btn), so it reads as a control and not as loose text. */
-.masthead .lang-row .lang { margin-inline-start: 0; padding-inline: 1.1rem; border: 1px solid var(--fg); border-radius: 999px; color: var(--fg); font-size: var(--step--1); font-weight: 600; text-decoration: none; }
-.masthead .lang-row .lang:hover { background: var(--fg); color: var(--bg); text-decoration: none; }
+/* Both navigation controls share the same outlined chip dimensions above. */
 .masthead .lang-row .lang:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
 .cards { display: grid; gap: 1rem; margin-bottom: 3rem; }
 @media (min-width: 48rem) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
