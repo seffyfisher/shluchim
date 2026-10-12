@@ -122,6 +122,7 @@ main { padding-block: 2.5rem 4rem; }
   padding-block: 1.5rem 1.75rem;
   border-bottom: 1px solid var(--line);
 }
+.story .num.emoji { font-size: var(--step-1); line-height: 1.2; font-variant-numeric: normal; font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif; }
 .story .num { grid-area: num; color: var(--accent); font-weight: 600; font-size: var(--step--1); line-height: 1.6; font-variant-numeric: tabular-nums; }
 .story .meta { grid-area: meta; }
 .story h3 { grid-area: title; font-size: var(--step-2); margin-top: .35rem; }

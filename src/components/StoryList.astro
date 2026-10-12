@@ -1,19 +1,19 @@
 ---
-// The numbered story list, shared by the homepage and the topic hubs.
-import type { CollectionEntry } from 'astro:content';
-import { postUrl, formatDateShort, topicsOf } from '../lib/posts';
+// The story list, shared by the homepage and the topic hubs. Each story shows its emoji (HE frontmatter, shared by translationKey).
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { postUrl, formatDateShort, topicsOf, keyOf } from '../lib/posts';
 import { t, type Lang } from '../i18n/ui';
 interface Props { posts: CollectionEntry<'posts'>[]; lang: Lang }
 const { posts, lang } = Astro.props;
 const ui = t(lang);
-const pad = (n: number) => String(n).padStart(2, '0');
+const emojiByKey = new Map((await getCollection('posts', (p) => p.id.startsWith('he/'))).map((p) => [keyOf(p), p.data.emoji]));
 ---
 <ol class="stories" reversed>
   {posts.map((p, i) => {
     const topics = topicsOf(p, lang);
     return (
       <li class="story">
-        <span class="num" aria-hidden="true">{pad(posts.length - i)}</span>
+        <span class="num emoji" aria-hidden="true">{p.data.emoji || emojiByKey.get(keyOf(p)) || '•'}</span>
         <p class="meta">
           <time datetime={p.data.date.toISOString().slice(0, 10)}>{formatDateShort(p.data.date, lang)}</time>
           {topics.length ? <span>{topics.map((tp, k) => <>{k > 0 && ', '}<a href={tp.href}>{tp.chip}</a></>)}</span> : null}

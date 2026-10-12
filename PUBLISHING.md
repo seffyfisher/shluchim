@@ -24,6 +24,12 @@
 7. ה־push ל־main מפרסם אוטומטית (GitHub Actions). אין לפרסם בשום דרך אחרת.
 8. אישור שלא התקבל = לא מפרסמים. תיקון לפוסט שכבר פורסם עובר שוב דרך ספי.
 
+## אימוג׳י לכל פוסט (standing rule from Seffy, 2026-10-12)
+- בכל פוסט חדש חובה `emoji: "…"` ב־frontmatter של הפוסט העברי. ברשימת המעשיות (בית ונושאים, עברית ואנגלית) הוא מוצג במקום המספר. האנגלי לוקח אותו מהעברי לפי `translationKey`.
+- האימוג׳י צריך להתאים לתוכן של הפוסט, ואסור שיחזור על אימוג׳י של פוסט אחר או יופיע בכותרת של פוסט אחר (למשל 💯 תפוס בכותרת של 100-means-go).
+- ה־list guard מפיל את הבילד אם חסר אימוג׳י או שיש כפילות.
+- Every new post needs a unique, contextual `emoji` in its HE frontmatter (shown instead of the list number, HE and EN). The build fails on a missing or duplicate emoji.
+
 ## עריכת פוסט קיים
 - בתחתית כל פוסט יש קישור ״עריכה״ לעורך של GitHub. commit ל־main מהעורך מפרסם אוטומטית.
 - או לבקש משלוח לערוך את הקובץ ב־`src/content/posts/`. עריכה של שלוח עדיין דורשת אישור מפורש של ספי לפני push.

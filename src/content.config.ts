@@ -16,6 +16,9 @@ const posts = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      // emoji: shown instead of the number in the story lists. Set on the HE post only; EN uses its pair's (translationKey).
+      // Must be unique across posts and contextual (list guard enforces present + unique).
+      emoji: z.string().optional(),
       description: z.string(),
       date: z.coerce.date(),
       draft: z.boolean().default(true),
