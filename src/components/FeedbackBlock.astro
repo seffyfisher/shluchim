@@ -45,7 +45,7 @@ const toastUrl = new URL('feedback-toast.html', Astro.site).href; // must be on 
   {/* Centered result dialog (native <dialog>: showModal centers it, traps focus, closes on Esc, restores focus). */}
   <dialog class="fb-dlg" aria-labelledby={`fb-dlg-t-${kind}`}>
     <p class="fb-dlg-t" id={`fb-dlg-t-${kind}`} data-thanks="קיבלתי תודה רבה, ואתם יודעים בדיוק לאיפה אני אדחוף את זה" data-error="אופס, זה לא נשלח. משהו נתקע אצלנו, לא אצלכם. נסו שוב עוד רגע." data-slow="הרבה הודעות ברצף. כדי לעצור ספאם, נסו שוב בעוד 10 דקות."></p>
-    <form method="dialog"><button class="fb-dlg-x" autofocus>סגירה</button></form>
+    <form method="dialog"><button class="fb-dlg-x" autofocus>אוקיי</button></form>
   </dialog>
   {/* Minimal JS, only because CSS can't see the iframe's result: the toast page posts its outcome (thanks|error|slow)
       to this page. On thanks: reset + hide the form. Any outcome: open the centered dialog. Without JS the toast page's
