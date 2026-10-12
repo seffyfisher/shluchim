@@ -2,7 +2,7 @@
 import handUrl from '../assets/cursor-hand.webp?url&no-inline';
 ---
 <!-- The asset is fetched only after an eligible desktop mouse movement. -->
-<span class="hand-cursor" aria-hidden="true" data-hand-url={handUrl}><img alt="" width="36" height="36" decoding="async" /></span>
+<span class="hand-cursor" aria-hidden="true" data-hand-url={handUrl}><img alt="" width="43" height="43" decoding="async" /></span>
 <script>
   const hand = document.querySelector<HTMLElement>('.hand-cursor');
   const image = hand?.querySelector<HTMLImageElement>('img');
@@ -59,9 +59,13 @@ import handUrl from '../assets/cursor-hand.webp?url&no-inline';
   }
 </script>
 <style is:global>
-  .hand-cursor { display: none; position: fixed; width: 36px; height: 36px; margin: -6.3px 0 0 -6.3px; pointer-events: none; z-index: 1000; transform-origin: 6.3px 6.3px; transform: rotate(var(--hand-angle, 0deg)); }
-  .hand-cursor img { display: block; width: 100%; height: 100%; transform-origin: 6.3px 6.3px; animation: hand-idle 4s ease-in-out infinite; animation-play-state: paused; }
-  @keyframes hand-idle { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
+  .hand-cursor { display: none; position: fixed; --hand-size: 43.2px; --hand-tip: 7.56px; width: var(--hand-size); height: var(--hand-size); margin: calc(-1 * var(--hand-tip)) 0 0 calc(-1 * var(--hand-tip)); pointer-events: none; z-index: 1000; transform-origin: var(--hand-tip) var(--hand-tip); transform: rotate(var(--hand-angle, 0deg)); }
+  .hand-cursor img { display: block; width: 100%; height: 100%; transform-origin: var(--hand-tip) var(--hand-tip); animation: hand-idle 3.2s ease-in-out infinite; animation-play-state: paused; }
+  /* A gentle flex around the fingertip keeps the click point stationary. */
+  @keyframes hand-idle {
+    0%, 100% { transform: rotate(-2deg) skewY(-1deg); }
+    50% { transform: rotate(2deg) skewY(1deg); }
+  }
   @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
     html[data-hand-pointer], html[data-hand-pointer] * { cursor: none; }
     html[data-hand-pointer] .hand-cursor { display: block; }
