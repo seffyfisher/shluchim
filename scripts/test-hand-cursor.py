@@ -37,6 +37,12 @@ try:
                 assert len(requests)==1 and page.evaluate(active)
                 assert page.locator('.hand-cursor').evaluate('(e)=>getComputedStyle(e).pointerEvents')=='none'
                 assert page.locator('.hand-cursor img').evaluate('(i)=>i.naturalWidth')==96
+                size=page.locator('.hand-cursor').evaluate('(e)=>parseFloat(getComputedStyle(e).width)')
+                assert abs(size-36*1.2)<1/64, 'cursor must be exactly 20% larger'
+                for selector in ('.hand-cursor', '.hand-cursor img'):
+                    origin=page.locator(selector).evaluate('(e)=>getComputedStyle(e).transformOrigin')
+                    assert origin=='7.56px 7.56px', 'flex and rotation must anchor at the scaled fingertip'
+                assert page.locator('.hand-cursor img').evaluate('(e)=>getComputedStyle(e).animationDuration')=='3.2s'
                 assert page.locator('.hand-cursor img').evaluate('(i)=>getComputedStyle(i).animationPlayState')=='running'
                 idle_before=page.locator('.hand-cursor img').evaluate('(i)=>getComputedStyle(i).transform')
                 page.wait_for_timeout(1100)
