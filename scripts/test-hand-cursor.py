@@ -22,7 +22,7 @@ try:
             context = browser.new_context(viewport={'width':1440,'height':1000}, has_touch=mode=='touch', is_mobile=mode=='touch', reduced_motion='reduce' if mode=='reduced' else 'no-preference', record_video_dir=str(shots) if mode=='desktop' else None)
             page = context.new_page()
             requests, errors = [], []
-            page.on('request', lambda r: requests.append(r.url) if 'cursor-hand.' in r.url else None)
+            page.on('request', lambda r: requests.append(r.url) if 'cursor-hand-sprite.' in r.url else None)
             page.on('pageerror', lambda e: errors.append(str(e)))
             context.route('**/*', lambda r: r.continue_() if r.request.url.startswith(base) else r.abort())
             page.goto(base)
@@ -36,17 +36,29 @@ try:
             else:
                 assert len(requests)==1 and page.evaluate(active)
                 assert page.locator('.hand-cursor').evaluate('(e)=>getComputedStyle(e).pointerEvents')=='none'
-                assert page.locator('.hand-cursor img').evaluate('(i)=>i.naturalWidth')==96
+                assert page.locator('.hand-cursor img').evaluate('(i)=>[i.naturalWidth,i.naturalHeight]')==[864,96]
+                assert page.locator('.hand-frames').evaluate('(e)=>getComputedStyle(e).overflow')=='hidden', 'only one sprite pose must be visible'
                 size=page.locator('.hand-cursor').evaluate('(e)=>parseFloat(getComputedStyle(e).width)')
                 assert abs(size-36*1.2)<1/64, 'cursor must be exactly 20% larger'
-                for selector in ('.hand-cursor', '.hand-cursor img'):
+                for selector in ('.hand-cursor', '.hand-frames'):
                     origin=page.locator(selector).evaluate('(e)=>getComputedStyle(e).transformOrigin')
                     assert origin=='7.56px 7.56px', 'flex and rotation must anchor at the scaled fingertip'
-                assert page.locator('.hand-cursor img').evaluate('(e)=>getComputedStyle(e).animationDuration')=='3.2s'
+                assert page.locator('.hand-frames').evaluate('(e)=>getComputedStyle(e).animationDuration')=='3.2s'
+                assert page.locator('.hand-cursor img').evaluate('(e)=>getComputedStyle(e).animationDuration')=='33.76s'
                 assert page.locator('.hand-cursor img').evaluate('(i)=>getComputedStyle(i).animationPlayState')=='running'
-                idle_before=page.locator('.hand-cursor img').evaluate('(i)=>getComputedStyle(i).transform')
+                idle_before=page.locator('.hand-frames').evaluate('(i)=>getComputedStyle(i).transform')
                 page.wait_for_timeout(1100)
-                assert idle_before!=page.locator('.hand-cursor img').evaluate('(i)=>getComputedStyle(i).transform'), 'gentle idle motion continues without pointer movement'
+                assert idle_before!=page.locator('.hand-frames').evaluate('(i)=>getComputedStyle(i).transform'), 'gentle idle motion continues without pointer movement'
+                image=page.locator('.hand-cursor img')
+                assert image.evaluate('(i)=>i.offsetLeft')==0, 'sprite must start at the left edge of its clip, including on RTL pages'
+                sprite_size=page.locator('.hand-cursor').evaluate('(e)=>parseFloat(getComputedStyle(e).getPropertyValue("--hand-size"))')
+                # Sample real CSS animation time, including forward/reverse poses and long rests.
+                for time,pose in ((1000,0),(2041,3),(2061,4),(2141,8),(2639,8),(2641,7),(2781,0),(10000,0),(12141,8),(18000,0)):
+                    image.evaluate('(i,time)=>{ const a=i.getAnimations()[0]; a.pause(); a.currentTime=time; }',time)
+                    offset=image.evaluate('(i)=>parseFloat(getComputedStyle(i).translate)||0')
+                    assert abs(offset+pose*sprite_size)<1/64, (time,pose,offset)
+                    assert image.evaluate('(i)=>getComputedStyle(i).opacity')=='1', 'poses change without fading'
+                image.evaluate('(i)=>{ const a=i.getAnimations()[0]; a.currentTime=0; a.play(); }')
                 page.screenshot(path=str(shots/'desktop.png'))
                 for x in range(760,1060,5):
                     page.mouse.move(x,210)
@@ -80,6 +92,13 @@ try:
                 assert viewer.evaluate('(e)=>getComputedStyle(e).cursor')!='none'
                 page.keyboard.press('Escape')
                 assert page.locator('.image-viewer:popover-open').count()==0
+                page.goto(base+'/en/')
+                page.mouse.move(750,200)
+                page.wait_for_timeout(120)
+                page.mouse.move(760,210)
+                page.wait_for_timeout(100)
+                assert page.evaluate(active)
+                assert page.locator('.hand-cursor img').evaluate('(i)=>i.offsetLeft')==0, 'sprite origin must also be correct on LTR pages'
             assert not errors, errors
             context.close()
         context=browser.new_context(java_script_enabled=False)
@@ -91,4 +110,4 @@ try:
         browser.close()
 finally:
     server.shutdown()
-print('Hand cursor: desktop, lazy image, clicks/popover, fields, settling, leaving, reduced-motion, touch, no-JS OK')
+print('Hand cursor: RTL/LTR sprite origin, nine stepped poses, brief middle finger, variable rests, no fades, lazy image, clicks/popover, fields, settling, leaving, reduced-motion, touch, no-JS OK')

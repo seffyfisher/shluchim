@@ -1,8 +1,9 @@
 ---
-import handUrl from '../assets/cursor-hand.webp?url&no-inline';
+import handUrl from '../assets/cursor-hand-sprite.webp?url&no-inline';
+import '../styles/hand-fingers.css';
 ---
 <!-- The asset is fetched only after an eligible desktop mouse movement. -->
-<span class="hand-cursor" aria-hidden="true" data-hand-url={handUrl}><img alt="" width="43" height="43" decoding="async" /></span>
+<span class="hand-cursor" aria-hidden="true" data-hand-url={handUrl}><span class="hand-frames"><img alt="" width="389" height="43" decoding="async" /></span></span>
 <script>
   const hand = document.querySelector<HTMLElement>('.hand-cursor');
   const image = hand?.querySelector<HTMLImageElement>('img');
@@ -60,7 +61,8 @@ import handUrl from '../assets/cursor-hand.webp?url&no-inline';
 </script>
 <style is:global>
   .hand-cursor { display: none; position: fixed; --hand-size: 43.2px; --hand-tip: 7.56px; width: var(--hand-size); height: var(--hand-size); margin: calc(-1 * var(--hand-tip)) 0 0 calc(-1 * var(--hand-tip)); pointer-events: none; z-index: 1000; transform-origin: var(--hand-tip) var(--hand-tip); transform: rotate(var(--hand-angle, 0deg)); }
-  .hand-cursor img { display: block; width: 100%; height: 100%; transform-origin: var(--hand-tip) var(--hand-tip); animation: hand-idle 3.2s ease-in-out infinite; animation-play-state: paused; }
+  .hand-frames { direction: ltr; display: block; width: 100%; height: 100%; overflow: hidden; transform-origin: var(--hand-tip) var(--hand-tip); animation: hand-idle 3.2s ease-in-out infinite; animation-play-state: paused; }
+  .hand-cursor img { display: block; width: calc(var(--hand-size) * 9); max-width: none; height: 100%; animation: hand-fingers 33.76s steps(1, end) infinite; animation-play-state: paused; }
   /* A gentle flex around the fingertip keeps the click point stationary. */
   @keyframes hand-idle {
     0%, 100% { transform: rotate(-2deg) skewY(-1deg); }
@@ -69,12 +71,12 @@ import handUrl from '../assets/cursor-hand.webp?url&no-inline';
   @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
     html[data-hand-pointer], html[data-hand-pointer] * { cursor: none; }
     html[data-hand-pointer] .hand-cursor { display: block; }
-    html[data-hand-pointer] .hand-cursor img { animation-play-state: running; }
+    html[data-hand-pointer] :is(.hand-frames, .hand-cursor img) { animation-play-state: running; }
     html[data-hand-pointer] :is(input, textarea, select, [contenteditable], dialog, :popover-open, iframe),
     html[data-hand-pointer] :is(dialog, :popover-open) * { cursor: revert; }
     html[data-hand-pointer]:has(dialog[open], :popover-open),
     html[data-hand-pointer]:has(dialog[open], :popover-open) * { cursor: revert; }
     html:has(dialog[open], :popover-open) .hand-cursor { display: none; }
-    html:has(dialog[open], :popover-open) .hand-cursor img { animation-play-state: paused; }
+    html:has(dialog[open], :popover-open) :is(.hand-frames, .hand-cursor img) { animation-play-state: paused; }
   }
 </style>

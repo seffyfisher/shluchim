@@ -1,0 +1,71 @@
+/* Nine registered 96px poses, stepped at 20ms without fades.
+   Most of the 33.76s loop shows the index finger. Brief middle-finger appearances
+   last 400-560ms, separated by different rests; each exchange takes 160ms. */
+@keyframes hand-fingers {
+  0.00000000% { translate: calc(var(--hand-size) * 0) 0; }
+  5.92417062% { translate: calc(var(--hand-size) * -1) 0; }
+  5.98341232% { translate: calc(var(--hand-size) * -2) 0; }
+  6.04265403% { translate: calc(var(--hand-size) * -3) 0; }
+  6.10189573% { translate: calc(var(--hand-size) * -4) 0; }
+  6.16113744% { translate: calc(var(--hand-size) * -5) 0; }
+  6.22037915% { translate: calc(var(--hand-size) * -6) 0; }
+  6.27962085% { translate: calc(var(--hand-size) * -7) 0; }
+  6.33886256% { translate: calc(var(--hand-size) * -8) 0; }
+  7.81990521% { translate: calc(var(--hand-size) * -7) 0; }
+  7.87914692% { translate: calc(var(--hand-size) * -6) 0; }
+  7.93838863% { translate: calc(var(--hand-size) * -5) 0; }
+  7.99763033% { translate: calc(var(--hand-size) * -4) 0; }
+  8.05687204% { translate: calc(var(--hand-size) * -3) 0; }
+  8.11611374% { translate: calc(var(--hand-size) * -2) 0; }
+  8.17535545% { translate: calc(var(--hand-size) * -1) 0; }
+  8.23459716% { translate: calc(var(--hand-size) * 0) 0; }
+  35.54502370% { translate: calc(var(--hand-size) * -1) 0; }
+  35.60426540% { translate: calc(var(--hand-size) * -2) 0; }
+  35.66350711% { translate: calc(var(--hand-size) * -3) 0; }
+  35.72274882% { translate: calc(var(--hand-size) * -4) 0; }
+  35.78199052% { translate: calc(var(--hand-size) * -5) 0; }
+  35.84123223% { translate: calc(var(--hand-size) * -6) 0; }
+  35.90047393% { translate: calc(var(--hand-size) * -7) 0; }
+  35.95971564% { translate: calc(var(--hand-size) * -8) 0; }
+  37.20379147% { translate: calc(var(--hand-size) * -7) 0; }
+  37.26303318% { translate: calc(var(--hand-size) * -6) 0; }
+  37.32227488% { translate: calc(var(--hand-size) * -5) 0; }
+  37.38151659% { translate: calc(var(--hand-size) * -4) 0; }
+  37.44075829% { translate: calc(var(--hand-size) * -3) 0; }
+  37.50000000% { translate: calc(var(--hand-size) * -2) 0; }
+  37.55924171% { translate: calc(var(--hand-size) * -1) 0; }
+  37.61848341% { translate: calc(var(--hand-size) * 0) 0; }
+  57.81990521% { translate: calc(var(--hand-size) * -1) 0; }
+  57.87914692% { translate: calc(var(--hand-size) * -2) 0; }
+  57.93838863% { translate: calc(var(--hand-size) * -3) 0; }
+  57.99763033% { translate: calc(var(--hand-size) * -4) 0; }
+  58.05687204% { translate: calc(var(--hand-size) * -5) 0; }
+  58.11611374% { translate: calc(var(--hand-size) * -6) 0; }
+  58.17535545% { translate: calc(var(--hand-size) * -7) 0; }
+  58.23459716% { translate: calc(var(--hand-size) * -8) 0; }
+  59.95260664% { translate: calc(var(--hand-size) * -7) 0; }
+  60.01184834% { translate: calc(var(--hand-size) * -6) 0; }
+  60.07109005% { translate: calc(var(--hand-size) * -5) 0; }
+  60.13033175% { translate: calc(var(--hand-size) * -4) 0; }
+  60.18957346% { translate: calc(var(--hand-size) * -3) 0; }
+  60.24881517% { translate: calc(var(--hand-size) * -2) 0; }
+  60.30805687% { translate: calc(var(--hand-size) * -1) 0; }
+  60.36729858% { translate: calc(var(--hand-size) * 0) 0; }
+  97.74881517% { translate: calc(var(--hand-size) * -1) 0; }
+  97.80805687% { translate: calc(var(--hand-size) * -2) 0; }
+  97.86729858% { translate: calc(var(--hand-size) * -3) 0; }
+  97.92654028% { translate: calc(var(--hand-size) * -4) 0; }
+  97.98578199% { translate: calc(var(--hand-size) * -5) 0; }
+  98.04502370% { translate: calc(var(--hand-size) * -6) 0; }
+  98.10426540% { translate: calc(var(--hand-size) * -7) 0; }
+  98.16350711% { translate: calc(var(--hand-size) * -8) 0; }
+  99.52606635% { translate: calc(var(--hand-size) * -7) 0; }
+  99.58530806% { translate: calc(var(--hand-size) * -6) 0; }
+  99.64454976% { translate: calc(var(--hand-size) * -5) 0; }
+  99.70379147% { translate: calc(var(--hand-size) * -4) 0; }
+  99.76303318% { translate: calc(var(--hand-size) * -3) 0; }
+  99.82227488% { translate: calc(var(--hand-size) * -2) 0; }
+  99.88151659% { translate: calc(var(--hand-size) * -1) 0; }
+  99.94075829% { translate: calc(var(--hand-size) * 0) 0; }
+  100% { translate: 0 0; }
+}
