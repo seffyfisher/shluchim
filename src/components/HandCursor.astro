@@ -1,0 +1,76 @@
+---
+import handUrl from '../assets/cursor-hand.webp?url&no-inline';
+---
+<!-- The asset is fetched only after an eligible desktop mouse movement. -->
+<span class="hand-cursor" aria-hidden="true" data-hand-url={handUrl}><img alt="" width="36" height="36" decoding="async" /></span>
+<script>
+  const hand = document.querySelector<HTMLElement>('.hand-cursor');
+  const image = hand?.querySelector<HTMLImageElement>('img');
+  const enabled = matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
+  if (hand && image) {
+    let ready = false;
+    let frame = 0;
+    let angle = 0;
+    let previousX: number | undefined;
+    let previousTime = 0;
+    const hide = () => {
+      document.documentElement.removeAttribute('data-hand-pointer');
+      cancelAnimationFrame(frame);
+      frame = 0;
+      angle = 0;
+      previousX = undefined;
+      hand.style.setProperty('--hand-angle', '0deg');
+    };
+    const settle = (time: number) => {
+      angle *= Math.exp(-Math.min(time - previousTime, 64) / 240);
+      previousTime = time;
+      if (Math.abs(angle) < 0.04) {
+        angle = 0;
+        frame = 0;
+      } else frame = requestAnimationFrame(settle);
+      hand.style.setProperty('--hand-angle', `${angle}deg`);
+    };
+    document.addEventListener('pointermove', (event) => {
+      if (!enabled.matches || event.pointerType !== 'mouse' || document.hidden ||
+        !(event.target instanceof Element) || event.target.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"]), dialog, :popover-open, iframe')) {
+        hide();
+        return;
+      }
+      if (!image.src) {
+        image.addEventListener('load', () => { ready = true; }, { once: true });
+        image.src = hand.dataset.handUrl!;
+      }
+      if (!ready) return;
+      // Fingertip stays exactly at the native hit point, including during rotation.
+      hand.style.left = `${event.clientX}px`;
+      hand.style.top = `${event.clientY}px`;
+      document.documentElement.setAttribute('data-hand-pointer', '');
+      if (previousX !== undefined) angle = Math.max(-2.5, Math.min(2.5, (event.clientX - previousX) * 0.12));
+      previousX = event.clientX;
+      if (!frame && Math.abs(angle) >= 0.04) {
+        previousTime = performance.now();
+        frame = requestAnimationFrame(settle);
+      }
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', hide);
+    window.addEventListener('blur', hide);
+    document.addEventListener('visibilitychange', hide);
+    enabled.addEventListener('change', hide);
+  }
+</script>
+<style is:global>
+  .hand-cursor { display: none; position: fixed; width: 36px; height: 36px; margin: -6.3px 0 0 -6.3px; pointer-events: none; z-index: 1000; transform-origin: 6.3px 6.3px; transform: rotate(var(--hand-angle, 0deg)); }
+  .hand-cursor img { display: block; width: 100%; height: 100%; transform-origin: 6.3px 6.3px; animation: hand-idle 4s ease-in-out infinite; animation-play-state: paused; }
+  @keyframes hand-idle { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    html[data-hand-pointer], html[data-hand-pointer] * { cursor: none; }
+    html[data-hand-pointer] .hand-cursor { display: block; }
+    html[data-hand-pointer] .hand-cursor img { animation-play-state: running; }
+    html[data-hand-pointer] :is(input, textarea, select, [contenteditable], dialog, :popover-open, iframe),
+    html[data-hand-pointer] :is(dialog, :popover-open) * { cursor: revert; }
+    html[data-hand-pointer]:has(dialog[open], :popover-open),
+    html[data-hand-pointer]:has(dialog[open], :popover-open) * { cursor: revert; }
+    html:has(dialog[open], :popover-open) .hand-cursor { display: none; }
+    html:has(dialog[open], :popover-open) .hand-cursor img { animation-play-state: paused; }
+  }
+</style>

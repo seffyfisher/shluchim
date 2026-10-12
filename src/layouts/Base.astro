@@ -7,6 +7,7 @@ import { LANG_META, lurl, other, t, isLang, type Lang } from '../i18n/ui';
 import { safeJson, personNode, websiteNode, blogNode, nodeIds } from '../lib/seo';
 import { gtagSnippet } from '../lib/analytics';
 import FollowBlock from '../components/FollowBlock.astro';
+import HandCursor from '../components/HandCursor.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 interface Props {
   title?: string; description?: string; noindex?: boolean; masthead?: boolean; bodyClass?: string;
@@ -138,5 +139,6 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
       </div>
     </footer>
     {analytics && <script is:inline set:html={gtagSnippet(GA_MEASUREMENT_ID)} />}
+    <HandCursor />
   </body>
 </html>
