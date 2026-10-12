@@ -31,6 +31,7 @@
 - Every new post needs a unique, contextual `emoji` in its HE frontmatter (shown instead of the list number, HE and EN). The build fails on a missing or duplicate emoji.
 
 ## עריכת פוסט קיים
+- `featured: true` בפוסט עברי מציג אותו פעם אחת בראש עמודי הבית בעברית ובאנגלית, אם יש תרגום מפורסם. פוסטים נבחרים מסודרים מהחדש לישן ואחריהם שאר המעשיות מהחדש לישן. אין שינוי בעמודי הנושא או ב־RSS. בפוסט אנגלי ללא מקור עברי אפשר להגדיר `featured: true` משלו. השדה ״בראש עמוד הבית״ זמין גם ב־CMS; כבוי כברירת מחדל. להסרה, מחקו את השדה או הגדירו `featured: false`.
 - בתחתית כל פוסט יש קישור ״עריכה״ לעורך של GitHub. commit ל־main מהעורך מפרסם אוטומטית.
 - או לבקש משלוח לערוך את הקובץ ב־`src/content/posts/`. עריכה של שלוח עדיין דורשת אישור מפורש של ספי לפני push.
 

@@ -3,12 +3,14 @@ import Base from '../layouts/Base.astro';
 import StoryList from './StoryList.astro';
 import shluchim from '../data/shluchim.json';
 import { getPosts } from '../lib/posts';
+import { splitFeaturedPosts } from '../lib/featured.mjs';
 import { lurl, t, type Lang } from '../i18n/ui';
 import { SEO_HOME } from '../config';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const ui = t(lang);
 const posts = await getPosts(lang);
+const { featured, history } = splitFeaturedPosts(posts, lang === 'he' ? posts : await getPosts('he'), lang);
 const he = lang === 'he';
 const seo = SEO_HOME[lang];
 // Cards above the story list: the featured shaliach and the About card. The shaliach is fixed (not random: random needs JS).
@@ -69,11 +71,14 @@ const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = 
       ? <p class="empty">עוד אין פה מעשיות.<br />השְׁלוּחִים כבר עובדים על הראשונה.</p>
       : <p class="empty">The English translations are on their way.<br />Meanwhile, the stories are all <a href={lurl('he')} hreflang="he" lang="he">in Hebrew</a>.</p>
   ) : (
-    <>
-      <h2 class="list-label" id="stories">{he
-        ? `${posts.length === 1 ? 'מעשיה אחת' : `${posts.length} מעשיות`}, מהחדשה לישנה`
-        : `${posts.length === 1 ? 'One story' : `${posts.length} stories`}, newest first`}</h2>
-      <StoryList posts={posts} lang={lang} />
-    </>
+    <div id="stories">
+      {featured.length > 0 && <StoryList posts={featured} lang={lang} />}
+      {history.length > 0 && <>
+        <h2 class="list-label">{he
+          ? `${history.length === 1 ? 'מעשיה אחת' : `${history.length} מעשיות`}, מהחדשה לישנה`
+          : `${history.length === 1 ? 'One story' : `${history.length} stories`}, newest first`}</h2>
+        <StoryList posts={history} lang={lang} />
+      </>}
+    </div>
   )}
 </Base>
