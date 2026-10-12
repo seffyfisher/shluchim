@@ -21,12 +21,16 @@ const id = `follow-${placement}`; // one block per placement per page, so ids st
   <button type="button" class="follow-btn follow-copy" data-prompt={prompt} data-label={ui.followLabel}>
     <span class="idle">{ui.followCopy}</span><span class="done">{ui.followCopied}</span>
   </button>
-  <p class="follow-status" role="status" data-ok={ui.followDone} data-fail={ui.followCopyFail}></p>
+  <p class="follow-status" role="status" data-fail={ui.followCopyFail}></p>
+  <template class="follow-success">
+    {ui.followDoneStart}<a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" dir="ltr">ChatGPT</a>{ui.followDoneJoin}<a href="https://claude.ai/" target="_blank" rel="noopener noreferrer" dir="ltr">Claude</a>{ui.followDoneEnd}
+  </template>
 </div>
 <script>
   for (const btn of document.querySelectorAll<HTMLButtonElement>('.follow-copy')) {
     const box = btn.closest('.follow')!;
     const status = box.querySelector<HTMLElement>('.follow-status')!;
+    const success = box.querySelector<HTMLTemplateElement>('.follow-success')!;
     btn.dataset.ready = '';
     btn.addEventListener('click', async () => {
       const prompt = btn.dataset.prompt!;
@@ -40,7 +44,8 @@ const id = `follow-${placement}`; // one block per placement per page, so ids st
       }
       btn.toggleAttribute('data-done', ok);
       status.toggleAttribute('data-failed', !ok);
-      status.textContent = ok ? status.dataset.ok! : status.dataset.fail!;
+      if (ok) status.replaceChildren(success.content.cloneNode(true));
+      else status.textContent = status.dataset.fail!;
     });
   }
 </script>
