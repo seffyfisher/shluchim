@@ -1,0 +1,17 @@
+---
+// Vite emits content-hashed URLs and prefixes the configured base. No client JavaScript.
+const assets = import.meta.glob<string>('../assets/shluchim/*.webp', {
+  eager: true, query: '?url', import: 'default',
+});
+interface Props { avatar: string; still?: string; loading?: 'eager' | 'lazy' }
+const { avatar, still, loading = 'lazy' } = Astro.props;
+const assetUrl = (path: string) => {
+  const asset = assets[`../assets/${path}`];
+  if (!asset) throw new Error(`Missing avatar asset: ${path}`);
+  return asset;
+};
+---
+<picture>
+  {still && <source media="(prefers-reduced-motion: reduce)" srcset={assetUrl(still)} type="image/webp" />}
+  <img class="avatar" src={assetUrl(avatar)} alt="" width="112" height="112" loading={loading} decoding="async" />
+</picture>

@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { cpSync, copyFileSync, mkdirSync } from 'node:fs';
 import sitemap from '@astrojs/sitemap';
 import { satteri } from '@astrojs/markdown-satteri';
 import { satteriChat } from './src/lib/remark-chat.mjs';
@@ -19,6 +20,21 @@ const SITE_BASE = new URL(BASE_PATH.replace(/\/?$/, '/'), SITE_URL).href;
 const PAIRS = urlPairs(process.cwd(), SITE_BASE);
 const LASTMOD = lastmods(process.cwd(), SITE_BASE);
 
+// Cached older HTML still requests the former public URLs. Build aliases from the same
+// source files, while new pages use Vite's hashed URLs. This adds no browser JavaScript.
+const legacyAssetUrls = {
+  name: 'legacy-asset-urls',
+  hooks: {
+    'astro:build:done': ({ dir }) => {
+      cpSync(new URL('./src/assets/shluchim/', import.meta.url), new URL('shluchim/', dir), { recursive: true });
+      mkdirSync(new URL('fonts/', dir), { recursive: true });
+      for (const font of ['noa-shalev-regular-AlefAlefAlef.woff2', 'young-serif-400.woff2']) {
+        copyFileSync(new URL(`./src/fonts/${font}`, import.meta.url), new URL(`fonts/${font}`, dir));
+      }
+    },
+  },
+};
+
 export default defineConfig({
   site: SITE_URL,
   base: BASE_PATH,
@@ -28,7 +44,7 @@ export default defineConfig({
   // Hebrew stays at the root (no /he/ prefix, no URL changes); English lives under /en/.
   i18n: { defaultLocale: 'he', locales: ['he', 'en'], routing: { prefixDefaultLocale: false } },
   // Sitemap alternates (he, en, x-default) come from translationKey pairs (English slugs differ from the Hebrew ones); lastmod from post dates.
-  integrations: [sitemap({ serialize(item) { const links = PAIRS.get(item.url); const lastmod = LASTMOD.get(item.url); return { ...item, ...(links ? { links } : {}), ...(lastmod ? { lastmod } : {}) }; } }), i18nCheck(), seoCheck(), listGuard()],
+  integrations: [sitemap({ serialize(item) { const links = PAIRS.get(item.url); const lastmod = LASTMOD.get(item.url); return { ...item, ...(links ? { links } : {}), ...(lastmod ? { lastmod } : {}) }; } }), legacyAssetUrls, i18nCheck(), seoCheck(), listGuard()],
   build: { inlineStylesheets: 'always' },
   // Code blocks follow the site theme (light/dark) via CSS variables; colours applied in global.css.
   markdown: { processor: satteri({ mdastPlugins: [satteriChat, satteriImgSize, satteriPhoto] }), shikiConfig: { themes: { light: 'github-light-high-contrast', dark: 'github-dark-high-contrast' }, defaultColor: false } },

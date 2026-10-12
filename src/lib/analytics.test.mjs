@@ -32,10 +32,11 @@ test('after load it still waits for an idle moment, then appends one async scrip
   listeners.load();
   assert.equal(appended.length, 0, 'nothing is appended straight from the load event');
   assert.equal(idleQueue.length, 1);
-  assert.ok(idleQueue[0].opts.timeout >= 1000, 'bounded wait so a busy page still reports');
+  assert.equal(idleQueue[0].opts?.timeout, undefined, 'never forces the download into a busy interval');
   idleQueue[0].fn();
   assert.equal(appended.length, 1);
   assert.equal(appended[0].async, true);
+  assert.equal(appended[0].fetchPriority, 'low');
   assert.equal(appended[0].src, `https://www.googletagmanager.com/gtag/js?id=${ID}`);
 });
 
@@ -61,10 +62,27 @@ test('the dataLayer is queued up front with real arguments objects, in the order
   const q = win.dataLayer.map((a) => Array.from(a));
   assert.equal(q.length, 2);
   assert.equal(q[0][0], 'js'); assert.ok(q[0][1] instanceof Date);
-  assert.deepEqual(q[1], ['config', ID]);
+  assert.equal(q[1][0], 'config');
+  assert.equal(q[1][1], ID);
   assert.equal(typeof win.gtag, 'function', 'window.gtag stays available for custom events');
   win.gtag('event', 'x');
   assert.deepEqual(Array.from(win.dataLayer[2]), ['event', 'x']);
+});
+
+test('advertising identifiers and personalization are disabled before gtag.js loads', () => {
+  const { win, appended } = run();
+  const config = win.dataLayer.find((a) => a[0] === 'config')[2];
+  assert.equal(config?.allow_google_signals, false);
+  assert.equal(config?.allow_ad_personalization_signals, false);
+  assert.equal(appended.length, 0);
+});
+
+test('a repeated load notification cannot request the library twice', () => {
+  const { appended, listeners, idleQueue } = run();
+  listeners.load();
+  listeners.load();
+  for (const task of idleQueue) task.fn();
+  assert.equal(appended.length, 1);
 });
 
 test('the ID can never close the script tag', () => {

@@ -1,6 +1,6 @@
 # סיפורי הצלחה
 
-Static Hebrew (RTL) blog built with Astro 7. Zero client JS, self-hosted Rubik (Hebrew + Latin subsets, 400/700).
+Static Hebrew (RTL) and English (LTR) blog built with Astro 7. Self-hosted Miriam Libre, Noa Shalev and Young Serif; CSS first, with JavaScript for browser interactions and deferred GA4.
 
 ```bash
 npm ci
@@ -11,6 +11,8 @@ npm run build:drafts    # → dist-drafts/ with drafts + "טיוטה" badge (loc
 npm run preview:drafts  # serve dist-drafts/
 ```
 Requires Node ≥ 22.12 (on the box: `export PATH=~/.local/node22/bin:$PATH`).
+
+Lighthouse delivery, GA4 trade-offs and the required Cloudflare cache/RUM rules: [PERFORMANCE.md](PERFORMANCE.md).
 
 - Posts: `src/content/posts/*.md` (frontmatter: `title`, `description`, `date`, `draft` (default `true`), optional `tags`, `cover`, `coverAlt`). Schema in `src/content.config.ts`.
 - Blog title / tagline: `src/config.ts`.

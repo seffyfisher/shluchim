@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import StoryList from './StoryList.astro';
+import Avatar from './Avatar.astro';
 import shluchim from '../data/shluchim.json';
 import { getPosts } from '../lib/posts';
 import { splitFeaturedPosts } from '../lib/featured.mjs';
@@ -49,10 +50,7 @@ const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = 
       <p class="kick">{he ? 'מִיהוּ שָׁלוּחַ?' : 'Who is a shaliach?'}</p>
       {/* The picture links to the team page too. The "Meet the shluchim" button below is the named link, so this one stays out of the tab order and the screen reader list. */}
       <a href={lurl(lang, 'team/')} tabindex="-1" aria-hidden="true">
-        <picture>
-          {s.still && <source media="(prefers-reduced-motion: reduce)" srcset={lurl('he', s.still)} type="image/webp" />}
-          <img class="avatar" src={lurl('he', s.avatar)} alt="" width="112" height="112" loading="lazy" decoding="async" />
-        </picture>
+        <Avatar avatar={s.avatar} still={s.still} />
       </a>
       <h2>{he ? `למשל ${shaliach.name}` : shaliach.name}</h2>
       <p>{shaliach.role}</p>

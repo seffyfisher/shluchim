@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Avatar from './Avatar.astro';
 import { lurl, type Lang } from '../i18n/ui';
 import shluchim from '../data/shluchim.json';
 import { SITES } from '../config';
@@ -7,7 +8,6 @@ import { pageNode, breadcrumbNode, nodeIds, withBrand } from '../lib/seo';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const he = lang === 'he';
-const url = (p: string) => lurl('he', p); // assets are shared, always at the root
 // Per-language view of the data file. English fields: name_en, role_en, category_en, example_en.
 const people = shluchim.map((s) => he
   ? { ...s }
@@ -66,11 +66,7 @@ const jsonLd = [
           const eager = i++ < EAGER;
           return (
             <li class="shaliach">
-              <picture>
-                {s.still && <source media="(prefers-reduced-motion: reduce)" srcset={url(s.still!)} type="image/webp" />}
-                <img class="avatar" src={url(s.avatar)} alt="" width="112" height="112"
-                  loading={eager ? 'eager' : 'lazy'} decoding="async" />
-              </picture>
+              <Avatar avatar={s.avatar} still={s.still} loading={eager ? 'eager' : 'lazy'} />
               <h3>{s.name}</h3>
               {s.role && <p>{s.role}</p>}
               {s.example && <p class="example">{s.example}</p>}
