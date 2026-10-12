@@ -1,6 +1,9 @@
 ---
 title: "How my shluchim can now make outbound phone calls."
 description: "I wanted a shaliach that calls people for me in Hebrew and sets things up. Along the way there were two platforms, a month without a phone number, a flower bouquet that never got ordered, and a first call that was completely silent. In the end, it gave birth to Danny, the worst stand-up comedian in Israel."
+seoTitle: "An AI agent that makes phone calls in Hebrew"
+seoDescription: "I built an agent that makes phone calls in Hebrew: two platforms, a silent first call, and finally Danny, Israel's worst stand-up comic."
+topics: ["everyday-ai", "agent-teamwork"]
 date: 2026-10-12
 draft: false
 lang: en
