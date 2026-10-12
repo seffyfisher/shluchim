@@ -5,7 +5,7 @@ seoTitle: "An AI agent that makes phone calls in Hebrew"
 seoDescription: "I built an agent that makes phone calls in Hebrew: two platforms, a silent first call, and finally Danny, Israel's worst stand-up comic."
 topics: ["everyday-ai", "agent-teamwork"]
 date: 2026-10-12
-draft: false
+draft: true
 lang: en
 translationKey: "2026-10-12-dial-bot"
 ---
