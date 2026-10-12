@@ -168,7 +168,7 @@ He's confident, tells old jokes, and has zero self-awareness.
 But his business goal is real.
 The comedy just gets in his way.
 
-I wrote him a full spec, version 1.0, with 19 sections.
+<a href="../../../public_assets/dani-standup-agent-spec.md" target="_blank" rel="noopener">I wrote him a full spec, version 1.0, with 19 sections.</a>
 It has a joke library, and rules of comedy.
 
 And it has iron rules of ethics:
