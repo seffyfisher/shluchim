@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import StoryList from './StoryList.astro';
 import Avatar from './Avatar.astro';
-import EVRIT_LOGO from '../assets/evrit-logo.svg?url';
+import EvritLogo from '../assets/evrit-logo.svg';
 import shluchim from '../data/shluchim.json';
 import { getPosts } from '../lib/posts';
 import { splitFeaturedPosts } from '../lib/featured.mjs';
@@ -61,7 +61,7 @@ const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = 
     <article class="card">
       <p class="kick">{aboutCard.kick}</p>
       <h2>{aboutCard.title}</h2>
-      {aboutCard.text.map((line) => <p class="about-line">{line.map((part) => typeof part === 'string' ? part : <a href={part.href} target="_blank" rel="noopener">{part.href === EVRIT ? <img class="evrit-logo" src={EVRIT_LOGO} alt={he ? 'עברית' : 'Evrit'} width="90" height="18" /> : part.t}</a>)}</p>)}
+      {aboutCard.text.map((line) => <p class="about-line">{line.map((part) => typeof part === 'string' ? part : <a href={part.href} target="_blank" rel="noopener">{part.href === EVRIT ? <EvritLogo class="evrit-logo" role="img" aria-label={he ? 'עברית' : 'Evrit'} /> : part.t}</a>)}</p>)}
       <a class="btn" href={lurl(lang, 'about/')}>{aboutCard.btn}</a>
     </article>
   </div>
