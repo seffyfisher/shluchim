@@ -89,3 +89,12 @@ const jsonLd = [
     <a class="edit" href={editUrl} rel="nofollow">{ui.edit}</a>
   </nav>
 </Base>
+<script>
+  // Gesture code is fetched only when someone actually opens a post image.
+  const onImageOpen = (event: Event) => {
+    if ((event as ToggleEvent).newState !== 'open' || !(event.target instanceof HTMLElement) || !event.target.matches('.image-viewer')) return;
+    document.removeEventListener('beforetoggle', onImageOpen, true);
+    import('../lib/image-gestures');
+  };
+  document.addEventListener('beforetoggle', onImageOpen, true);
+</script>

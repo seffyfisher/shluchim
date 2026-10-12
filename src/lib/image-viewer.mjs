@@ -1,19 +1,20 @@
-// Static HTML only: native popover handles opening, Escape and outside clicks;
-// a checkbox and CSS handle zoom. Reuse the same URL to share the image cache.
+// Native popover handles opening/closing. A small post-only script adds wheel,
+// double-click/tap and pinch zoom, which HTML/CSS cannot implement.
 export const escapeHtml = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 export const imageLabels = (lang) => lang === 'en'
-  ? { open: 'Enlarge image', close: 'Close', zoom: 'Zoom', original: 'Open original image' }
-  : { open: 'הגדלת תמונה', close: 'סגירה', zoom: 'זום', original: 'פתיחת התמונה המקורית' };
+  ? { open: 'Enlarge image', close: 'Close', reset: 'Reset', original: 'Original', hint: 'Pinch, double-tap or scroll over the image to zoom. Drag to move.', keyboard: 'Image zoom: use +, −, arrow keys and 0 to reset.' }
+  : { open: 'הגדלת תמונה', close: 'סגירה', reset: 'איפוס', original: 'מקור', hint: 'צביטה, לחיצה כפולה או גלגלת על התמונה להגדלה. גרירה להזזה.', keyboard: 'הגדלת תמונה: פלוס ומינוס להגדלה, חצים להזזה ו־0 לאיפוס.' };
 
 export function imagePopover({ id, src, alt = '', lang = 'he' }) {
   const l = imageLabels(lang);
   const target = escapeHtml(id);
   // Phrasing elements keep the viewer valid even inside a Markdown paragraph.
   return `<span id="${target}" class="image-viewer" popover role="dialog" aria-label="${l.open}" tabindex="-1">` +
-    `<span class="image-viewer-tools"><label><input class="image-viewer-zoom" type="checkbox"> ${l.zoom}</label>` +
+    `<span class="image-viewer-tools"><button type="button" class="image-viewer-reset">${l.reset}</button>` +
     `<a href="${escapeHtml(src)}" target="_blank" rel="noopener">${l.original}</a>` +
     `<button type="button" popovertarget="${target}" popovertargetaction="hide" autofocus>${l.close}</button></span>` +
-    `<span class="image-viewer-scroll" tabindex="0"><img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async"></span></span>`;
+    `<span class="image-viewer-scroll" tabindex="0" aria-label="${l.keyboard}"><img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async" draggable="false"></span>` +
+    `<span class="image-viewer-hint">${l.hint}</span></span>`;
 }
 
 export function imageViewer(thumbnail, options) {
