@@ -65,4 +65,8 @@ export const friendPortraits: Record<string, Portrait> = {
     src: 'https://substackcdn.com/image/fetch/f_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A/substack-post-media.s3.amazonaws.com/public/images/76e0ed7f-bd93-46f9-bbc1-edb702489185_5317x3472.jpeg',
     source: 'https://substack.com/@tomeven', sourceName: 'Substack', position: '50% 35%',
   },
+  'dorit-singer': {
+    src: 'https://clave.co.il/wp-content/uploads/2021/06/Asset-80.png',
+    source: 'https://clave.co.il/', sourceName: 'CLAVE',
+  },
 };

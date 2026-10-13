@@ -10,12 +10,12 @@ const { lang } = Astro.props;
 const he = lang === 'he';
 const title = he ? 'בני אנוש' : 'Humans';
 const description = he
-  ? 'אנשים שאני מעריך את העשייה שלהם ועוקב אחריהם. כמה מילים וקישורים, כדי שגם אתם תוכלו להכיר.'
-  : 'People whose work I appreciate and follow. A few words and links so you can get to know them too.';
-const seoTitle = withBrand(he ? 'בני אנוש: יוצרים ישראלים בתחום ה־AI' : 'Humans: Israeli AI creators I follow', SITES[lang].title);
+  ? 'אנשים שאני עוקב אחריהם ומקבל מהם השראה, עם קשר ובלי קשר ל־AI. כמה מילים וקישורים, כדי שגם אתם תוכלו להכיר.'
+  : 'People I follow and find inspiring, in AI and beyond. A few words and links so you can get to know them too.';
+const seoTitle = withBrand(he ? 'בני אנוש: אנשים שנותנים לי השראה' : 'Humans: people who inspire me', SITES[lang].title);
 const seoDescription = he
-  ? `${friends.length} יוצרים ישראלים בתחום ה־AI שאני מעריך ועוקב אחריהם. כמה מילים על העשייה שלהם וקישורים לאתרים, לניוזלטרים ולתוכן שהם משתפים.`
-  : `${friends.length} Israeli AI creators whose work I appreciate and follow. Short introductions and links to their websites, newsletters and Hebrew-language content.`;
+  ? `${friends.length} אנשים שאני עוקב אחריהם ומקבל מהם השראה, עם קשר ובלי קשר ל־AI. כמה מילים על העשייה שלהם וקישורים לתוכן שהם משתפים.`
+  : `${friends.length} people I follow and find inspiring, in AI and beyond. Short introductions and links to the writing, work and ideas they share.`;
 const abs = (path: string) => new URL(path, Astro.site).href;
 const pageUrl = abs(lurl(lang, 'friends/'));
 const ids = nodeIds(abs(lurl('he')), abs(lurl(lang)));
@@ -30,15 +30,15 @@ const jsonLd = [
   <header class="page-head human-intro">
     <div class="intro-copy">
     <h1>{title}</h1>
-    <p class="page-subtitle">{he ? 'אדמורי שלוחים' : 'The rebbes of Shluchim'}</p>
-    <p>{he ? 'לאדם וחוה היה בן ושמו שת, הבן השלישי שסופר עליו אחרי קין והבל. לשת נולד בן בשם אנוש, ומאנוש התפתחה האנושות וכן האנשים היקרים האלה מטה' : 'Adam and Eve had a son named Seth, the third son mentioned after Cain and Abel. Seth had a son named Enosh, from whom humanity developed, as did the dear people below.'}</p>
+    <p class="page-subtitle">{he ? 'אנשים שאני עוקב אחריהם ומקבל מהם השראה' : 'People I follow who inspire me'}</p>
+    <p>{he ? 'יש כאן אנשים שאני עוקב אחריהם ולומד מהעשייה שלהם, עם קשר ובלי קשר ל־AI. כמה מילים על כל אחד וקישורים, כדי שגם אתם תוכלו להכיר.' : 'These are people I follow and learn from, in AI and beyond. A few words about each person and links so you can get to know them too.'}</p>
     </div>
   </header>
   <nav class="people-index" aria-label={he ? 'קפיצה לאדם בדף' : 'Jump to a person'}>
     <div class="index-heading"><span>{he ? 'על הדף' : 'On this page'}</span><span>{he ? `${friends.length} בני אנוש` : `${friends.length} humans`}</span></div>
     <ul>{friends.map((friend) => <li><a href={`#${friend.id}`}>{he ? friend.name : friend.nameEn}</a></li>)}</ul>
   </nav>
-  <ul class="friends" aria-label={he ? 'אנשים שאני מעריך' : 'People I appreciate'}>
+  <ul class="friends" aria-label={he ? 'אנשים שנותנים לי השראה' : 'People who inspire me'}>
     {friends.map((friend, index) => (
       <li class="friend" id={friend.id}>
         <div class="friend-heading">
@@ -63,8 +63,8 @@ const jsonLd = [
     ))}
   </ul>
   <section class="connections" aria-labelledby="connections-title">
-    <h2 id="connections-title">{he ? 'עוד דרכים לפגוש את אותם רעיונות' : 'More ways to explore these ideas'}</h2>
-    <p>{he ? 'בנייה, יצירה ועבודה עם AI מופיעות גם בתוכן שלהם וגם בסיפורים כאן. אלה כמה מהניסיונות שלי באותם עולמות:' : 'Building, creating and working with AI show up both in their content and in the stories here. These are a few of my own experiments in those areas:'}</p>
+    <h2 id="connections-title">{he ? 'עוד מהסיפורים שלי' : 'More of my own stories'}</h2>
+    <p>{he ? 'בבלוג אני מתעד עבודה משותפת עם השְׁלוּחִים: מה ביקשתי, מה ניסינו ומה יצא. הנה כמה מהסיפורים:' : 'On the blog I document working with my shluchim: what I asked for, what we tried and how it turned out. Here are a few of those stories:'}</p>
     <ul>
       <li><a href={lurl(lang, he ? 'posts/2026-10-10-building-the-shluchim-blog/' : 'posts/2026-10-10-how-the-shluchim-blog-was-born/')}>{he ? 'בנייה עם AI — איך נולד הבלוג הזה' : 'Building with AI — how this blog was born'}</a></li>
       <li><a href={lurl(lang, he ? 'posts/2026-10-08-spec-driven-tickets-redesign/' : 'posts/2026-10-08-spec-driven-design-for-the-tickets-page/')}>{he ? 'עיצוב ומוצר — מרעיון לתהליך עבודה' : 'Design and product — from an idea to a workflow'}</a></li>

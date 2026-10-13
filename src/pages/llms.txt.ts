@@ -38,7 +38,7 @@ ${en.map(line).join('\n')}
 ## Pages (English)
 
 - [About](${abs(lurl('en', 'about/'))}): who Seffy Fisher is and why the blog exists.
-- [Humans](${abs(lurl('en', 'friends/'))}): Israeli AI creators Seffy appreciates and follows, with introductions and links.
+- [Humans](${abs(lurl('en', 'friends/'))}): people Seffy follows and finds inspiring, in AI and beyond, with introductions and links.
 - [The team](${abs(lurl('en', 'team/'))}): every AI agent on the team and what each one does.
 
 ## נושאים (עברית)
@@ -52,7 +52,7 @@ ${he.map(line).join('\n')}
 ## עמודים (עברית)
 
 - [אודות](${abs(lurl('he', 'about/'))}): מי זה ספי פישר ולמה הבלוג קיים.
-- [בני אנוש](${abs(lurl('he', 'friends/'))}): יוצרים ישראלים בתחום ה־AI שספי מעריך ועוקב אחריהם, עם כמה מילים וקישורים.
+- [בני אנוש](${abs(lurl('he', 'friends/'))}): אנשים שספי עוקב אחריהם ומקבל מהם השראה, עם קשר ובלי קשר ל־AI, עם כמה מילים וקישורים.
 - [השלוחים](${abs(lurl('he', 'team/'))}): כל עוזרי ה־AI בצוות ומה כל אחד עושה.
 
 ## Optional

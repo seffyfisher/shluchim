@@ -1,4 +1,4 @@
-// Personally selected by Seffy. Keep his order; this is appreciation, not a ranking.
+// People Seffy follows for inspiration across different fields. Keep his order and personal descriptions.
 // Pastel colors were randomly assigned once, then saved to keep each person recognizable.
 // Public sources checked 2026-10-11; descriptions reflect the linked creators' work.
 export const friends = [
@@ -58,4 +58,9 @@ export const friends = [
     text: 'בונה ועובד עם צוות של עוזרי AI, ומשתף איך זה עובד אצלו בעסק. מלמד מתוך המערכת שהוא משתמש בה בעצמו.',
     textEn: 'Builds and works with a team of AI assistants, sharing how they run in his own business and teaching from the system he uses himself.',
     links: [{ he: 'agents&me', en: 'agents&me', url: 'https://getagents.today/' }, { he: 'לינקדאין', en: 'LinkedIn', url: 'https://il.linkedin.com/in/tom-even-ai' }] },
+  // CLAVE website and blog checked 2026-10-13; the personal recommendation is Seffy's wording.
+  { id: 'dorit-singer', silhouette: 'female' as const, pastel: '#E2C7AF', theme: 'סטוריטלינג ושיווק', themeEn: 'Storytelling & marketing', name: 'דורית סינגר (CLAVE)', nameEn: 'Dorit Singer (CLAVE)',
+    text: 'סטוריטלר לשיווק מספר 1, מבחינתי. ב־CLAVE היא כותבת ומשתפת ידע על סטוריטלינג, שיווק ואיקומרס.',
+    textEn: 'My number-one marketing storyteller. At CLAVE she writes and shares insights on storytelling, marketing and e-commerce.',
+    links: [{ he: 'CLAVE', en: 'CLAVE', url: 'https://clave.co.il/' }, { he: 'הבלוג', en: 'Blog', url: 'https://clave.co.il/%D7%91%D7%9C%D7%95%D7%92/' }] },
 ];
