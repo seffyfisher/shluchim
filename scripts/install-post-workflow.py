@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install the project's Shluchim workflow as a user-level Codex skill."""
+"""Install the Shluchim blog skill and its compatibility router for Codex."""
 
 import argparse
 from pathlib import Path
@@ -9,18 +9,16 @@ import tempfile
 
 def install(source: Path, skills_root: Path) -> Path:
     """Copy a complete skill; preserve any different existing version as a backup."""
-    expected = {
-        "SKILL.md",
-        "agents/openai.yaml",
-        "references/shluchim-post-workflow.md",
-    }
+    if source.name not in {"shluchim-blog-post", "shluchim-post-workflow"}:
+        raise SystemExit(f"Unexpected skill name: {source.name}")
     if not source.is_dir() or source.is_symlink():
         raise SystemExit(f"Missing skill source: {source}")
     files = {str(path.relative_to(source)) for path in source.rglob("*") if path.is_file()}
-    if files != expected or any(path.is_symlink() for path in source.rglob("*")):
+    expected = files
+    if not {"SKILL.md", "agents/openai.yaml"}.issubset(files) or any(path.is_symlink() for path in source.rglob("*")):
         raise SystemExit("The skill source is incomplete or contains unexpected files.")
     skills_root.mkdir(parents=True, exist_ok=True)
-    destination = skills_root / "shluchim-post-workflow"
+    destination = skills_root / source.name
     if destination.is_symlink():
         raise SystemExit(f"The destination is a symbolic link; left untouched: {destination}")
     if destination.exists():
@@ -37,7 +35,7 @@ def install(source: Path, skills_root: Path) -> Path:
         if destination.exists():
             backup_root = skills_root.parent / "skill-backups"
             backup_root.mkdir(parents=True, exist_ok=True)
-            backup = Path(tempfile.mkdtemp(prefix="shluchim-post-workflow-", dir=backup_root)) / destination.name
+            backup = Path(tempfile.mkdtemp(prefix=source.name + "-", dir=backup_root)) / destination.name
             destination.rename(backup)
             print(f"Previous version preserved: {backup}")
         prepared.rename(destination)
@@ -49,9 +47,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--skills-root", type=Path, default=Path.home() / ".agents" / "skills")
     args = parser.parse_args()
-    source = Path(__file__).resolve().parent.parent / ".agents" / "skills" / "shluchim-post-workflow"
-    install(source, args.skills_root.expanduser().resolve())
-    print("Use $shluchim-post-workflow for Shluchim posts in any project. Restart Codex if needed.")
+    sources = Path(__file__).resolve().parent.parent / ".agents" / "skills"
+    for name in ["shluchim-blog-post", "shluchim-post-workflow"]:
+        install(sources / name, args.skills_root.expanduser().resolve())
+    print("Use $shluchim-blog-post for Shluchim posts in any project. Restart Codex if needed.")
 
 
 if __name__ == "__main__":

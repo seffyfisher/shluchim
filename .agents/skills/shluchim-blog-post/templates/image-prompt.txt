@@ -1,0 +1,12 @@
+Use case: illustration-story. ONE widescreen 16:9 blog illustration (not a collage).
+Style: premium detailed 3D clay/vinyl designer-toy doll render. Characters are grey/warm-grey stone-skinned round blob heads (no human torso, no clothes). No hands, no arms, head-only character on a small base (small cylindrical doll base). Big funny half-lidded deadpan eyes with sideways pupils, expressive arched black eyebrows, small nose, small crooked mouth. Every character must carry a strong sense of soul and personality. Matte soft-touch material, subtle texture, ambient occlusion, soft contact shadows.
+Match the attached reference images exactly for each character's identity (hair, hat, facial hair, glasses, accessories, proportions). Change only expression, head tilt and placement.
+Background: ONE solid clean pastel seamless studio backdrop (default pale mint #EAFDF6). No spotlights, no stage lights, no beams, no bokeh, no crowd, no busy environment.
+Lighting: soft even diffused studio light, gentle shadows.
+Composition: one clear focal character or small group, large in frame, generous breathing room, nothing cropped. Props colorful in mint #90E6CC, pink #FDA5C9, butter #F0DDAD, lavender #D49AF0, peach #F6AD98.
+Absolutely NO text, letters, digits, Hebrew letters, logos, emblems, brand marks, watermarks or captions anywhere. Screens show only abstract pastel circles or are off. NO floating icons, emojis or symbols. No hands, no arms, no extra limbs.
+Output: PNG 2048x1153.
+Scene: <one or two sentences: who, doing what, which props, expression>
+
+# How to use: paste the block above as-is. Attach one reference image per recurring character.
+# Replace the Scene line per image: <who> <doing what> <which props> <expression>, background color (one pastel per image, mint is default).

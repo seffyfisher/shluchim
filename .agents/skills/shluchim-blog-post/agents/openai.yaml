@@ -1,0 +1,6 @@
+interface:
+  display_name: "Shluchim blog post"
+  short_description: "Draft and prepare Shluchim posts in Seffy's voice."
+  default_prompt: "Use $shluchim-blog-post to prepare this Shluchim story through text review, images, English, and publication checks."
+policy:
+  allow_implicit_invocation: true
