@@ -6,7 +6,7 @@ seoTitle: "עבודה בקול עם ChatGPT ו־Codex"
 seoDescription: "שעתיים וחצי של עבודה בקול עם Codex הניבו יותר מ־4 PRs בשעה. איך שיחה אחת עם שלוח קולי הופכת בקשות לתיקוני קוד, מיילים ומחקר במקביל."
 topics: ["ai-at-work", "everyday-ai"]
 date: 2026-10-13
-draft: true
+draft: false
 lang: he
 translationKey: "2026-10-13-wake-up-sky"
 cover: "../../../assets/posts/wake-up-sky.jpg"

@@ -5,7 +5,7 @@ seoTitle: "Working by voice with ChatGPT and Codex"
 seoDescription: "Two and a half hours talking to Codex produced more than four PRs an hour. One voice conversation kept code changes, emails and research moving in parallel."
 topics: ["ai-at-work", "everyday-ai"]
 date: 2026-10-13
-draft: true
+draft: false
 lang: en
 translationKey: "2026-10-13-wake-up-sky"
 cover: "../../../assets/posts/wake-up-sky.jpg"
