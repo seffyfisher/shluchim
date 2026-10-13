@@ -75,31 +75,18 @@ const englishLinks = [
           </div>
         </section>
       </div>
-      <details class="reading-options">
-        <summary>אפשרויות קריאה</summary>
-        <div class="reading-controls">
-          <div class="pause-control"><input type="checkbox" id="pause"><label for="pause">עצירת הגלילה</label></div>
-          <div class="pause-control"><input type="checkbox" id="read-static"><label for="read-static">הצגת כל הנוסח</label></div>
-        </div>
-      </details>
     </figure>
-    <nav class="return-nav" aria-label="לחזור למקום שעובד">
-      <div class="secondary-actions">
-        <a href={`${lurl('he')}#stories`}>לרשימת המעשיות</a><span aria-hidden="true">·</span>
-        <a href={lurl('he', 'friends/')}>לבני האנוש</a>
-      </div>
-    </nav>
-    <details class="page-footer">
-      <summary>ניווט לכל דפי האתר</summary>
+    <section class="page-footer" aria-labelledby="other-pages-heading">
+      <h2 id="other-pages-heading">לכל שאר הדפים החיים</h2>
       <div class="sitemap-columns">
         <nav aria-label="האתר"><h3>האתר</h3>{siteLinks.map((link) => <a href={lurl('he', link.path)}>{link.name}</a>)}<a href={`${lurl('he')}#stories`}>רשימת המעשיות</a><a href="https://he.wikipedia.org/wiki/%D7%97%D7%91%D7%A8%D7%94_%D7%A7%D7%93%D7%99%D7%A9%D7%90" target="_blank" rel="noopener noreferrer">עוד על חברה קדישא</a></nav>
         <nav aria-label="הנושאים"><h3>הנושאים</h3>{TOPIC_SLUGS.map((slug) => <a href={lurl('he', `topics/${slug}/`)}>{TOPICS[slug as keyof typeof TOPICS].he.label}</a>)}</nav>
         <nav lang="en" dir="ltr" aria-label="In English"><h3>In English</h3>{englishLinks.map((link) => <a href={lurl('en', link.path)}>{link.name}</a>)}{TOPIC_SLUGS.map((slug) => <a href={lurl('en', `topics/${slug}/`)}>{TOPICS[slug as keyof typeof TOPICS].en.label}</a>)}</nav>
       </div>
       <div class="story-index">
-        <details><summary>כל המעשיות בעברית ({hePosts.length})</summary><ul>{hePosts.map((post) => <li><a href={postUrl(post)}>{post.data.title}</a></li>)}</ul></details>
-        <details lang="en" dir="ltr"><summary>All stories in English ({enPosts.length})</summary><ul>{enPosts.map((post) => <li><a href={postUrl(post)}>{post.data.title}</a></li>)}</ul></details>
+        <section class="story-list"><h3>כל המעשיות בעברית ({hePosts.length})</h3><ul>{hePosts.map((post) => <li><a href={postUrl(post)}>{post.data.title}</a></li>)}</ul></section>
+        <section class="story-list" lang="en" dir="ltr"><h3>All stories in English ({enPosts.length})</h3><ul>{enPosts.map((post) => <li><a href={postUrl(post)}>{post.data.title}</a></li>)}</ul></section>
       </div>
-    </details>
+    </section>
   </div>
 </Base>

@@ -9,7 +9,7 @@
 .not-found .teleprompter { text-align: center; }
 /* Inactive paragraphs collapse so the monument follows the current text. */
 .not-found .prompt-window { overflow: hidden; mask-image: linear-gradient(to bottom, #000 0%, #000 96%, transparent 100%); }
-.not-found .prompt-block { position: relative; max-height: 0; overflow: hidden; opacity: 0; animation-duration: 80s; animation-timing-function: linear; animation-iteration-count: infinite; }
+.not-found .prompt-block { position: relative; max-height: 0; overflow: hidden; opacity: 0; animation-duration: 24s; animation-timing-function: linear; animation-iteration-count: infinite; }
 .not-found .prompt-block-intro { animation-name: nf-intro; }
 .not-found .prompt-block-gathering { animation-name: nf-gathering; }
 .not-found .prompt-block-prayer { animation-name: nf-prayer; }
@@ -21,28 +21,19 @@
 .not-found .memorial { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; margin: 4px auto 0; }
 .not-found .participants { display: flex; flex-direction: column; align-items: center; gap: 40px; }
 .not-found .head { width: 54px; height: 54px; object-fit: contain; }
+.not-found .participants:first-child .head { transform: scaleX(-1); }
 .not-found .sprite { background: url('../assets/not-found/funeral-sprites.webp') no-repeat; background-size: 400% 400%; background-position: calc(var(--col) * 100% / 3) calc(var(--row) * 100% / 3); }
 .not-found .tombstone { width: 155px; height: 182px; }
-.not-found .reading-options { margin: .25rem auto 0; width: fit-content; font-size: .75rem; color: var(--muted); }
-.not-found summary { cursor: pointer; padding-block: .75rem; }
-.not-found .reading-controls { display: flex; flex-wrap: wrap; justify-content: center; gap: .25rem 1rem; }
-.not-found .pause-control { display: flex; align-items: center; gap: .4rem; }
-.not-found .pause-control input { width: 16px; height: 16px; margin: 0; accent-color: var(--fg); cursor: pointer; }
-.not-found .pause-control label { cursor: pointer; padding-block: .75rem; }
-.not-found .ceremony:has(#pause:checked) .prompt-block { animation-play-state: paused; }
-.not-found .return-nav { text-align: center; }
-.not-found .secondary-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .75rem; font-size: .8rem; margin-top: .5rem; }
-.not-found .secondary-actions a { padding-block: .75rem; }
-.not-found .secondary-actions span { color: var(--muted); align-self: center; }
 .not-found .page-footer { border-top: 1px solid var(--line); margin-top: 1.25rem; padding-inline: 1rem; font-size: .8rem; }
-.not-found .page-footer > summary { text-align: center; color: var(--muted); }
+.not-found .page-footer > h2 { text-align: center; color: var(--muted); font-size: 1rem; font-weight: 500; margin: 1rem 0; }
 .not-found .sitemap-columns { display: grid; grid-template-columns: 1fr 1.5fr 1.2fr; gap: 2rem; margin-top: 1rem; }
 .not-found .sitemap-columns nav { display: flex; flex-direction: column; gap: .4rem; }
 .not-found .sitemap-columns h3 { color: var(--muted); font-size: .75rem; font-weight: 500; margin: 0 0 .5rem; }
 .not-found .sitemap-columns a { width: fit-content; text-decoration: none; }
 .not-found .sitemap-columns a:hover { text-decoration: underline; }
 .not-found .story-index { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem; }
-.not-found .story-index details { border-block: 1px solid var(--line); }
+.not-found .story-list { border-block: 1px solid var(--line); }
+.not-found .story-list h3 { font-size: .85rem; font-weight: 500; margin: 1rem 0; }
 .not-found .story-index ul { display: grid; gap: .6rem; list-style: none; padding: 0 1rem 1rem; margin: 0; }
 .not-found .story-index a { font-size: .75rem; }
 
@@ -67,14 +58,9 @@
   .not-found .sitemap-columns nav:last-child h3 { grid-column: 1 / -1; }
   .not-found .story-index { grid-template-columns: 1fr; gap: .75rem; }
 }
-/* Both reading modes expose the full, unclipped text in its original order. */
-.not-found .ceremony:has(#read-static:checked) .prompt-window { overflow: visible; mask-image: none; }
-.not-found .ceremony:has(#read-static:checked) .prompt-block { animation: none; max-height: none; overflow: visible; opacity: 1; transform: none; margin-bottom: 24px; }
-.not-found .ceremony:has(#read-static:checked) .prompt-block:last-child { margin-bottom: 0; }
 @media (prefers-reduced-motion: reduce) {
   .not-found .prompt-window { overflow: visible; mask-image: none; }
   .not-found .prompt-block { animation: none; max-height: none; overflow: visible; opacity: 1; transform: none; margin-bottom: 24px; }
   .not-found .prompt-block:last-child { margin-bottom: 0; }
-  .not-found .reading-options { display: none; }
 }
 @media (forced-colors: active) { .not-found .sprite { forced-color-adjust: none; } .not-found .prompt-window { mask-image: none; } }
