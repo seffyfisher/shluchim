@@ -1,13 +1,29 @@
 # מדריך פרסום לבן
 
-1. צור קובץ חדש: `src/content/posts/YYYY-MM-DD-slug.md` (ה־slug באנגלית, הוא נהיה ה־URL).
+## התהליך המחייב לפוסט
+
+לפני כתיבה, עריכה, איור, תרגום או פרסום, קוראים את
+[המיומנות של הפרויקט](.agents/skills/shluchim-post-workflow/SKILL.md)
+ואת [התהליך המלא שספי סיפק](.agents/skills/shluchim-post-workflow/references/shluchim-post-workflow.md).
+הם קובעים את הקול, הציטוטים, התאריך ושלבי אישור הטקסט והתמונות.
+ההוראות בהמשך מתארות את ההעלאה הטכנית לאתר.
+
+באתר הזה `summary` נשמר בשדה `description`, ו־`status: draft` מיוצג באמצעות
+`draft: true`. שומרים גם את שדות ה־SEO והשפה הנדרשים באתר.
+להתקנה גלובלית בCodex, מכל checkout של הפרויקט:
+`python3 scripts/install-post-workflow.py`.
+
+1. צור קובץ חדש: `src/content/posts/he/YYYY-MM-DD-slug.md` (ה־slug באנגלית, הוא נהיה ה־URL).
 2. Frontmatter חובה:
    ```yaml
    ---
    title: "כותרת"
-   description: "משפט אחד שמופיע בעמוד הבית וב־RSS"
+   description: "תקציר של 2–4 משפטים שמופיע בעמוד הבית וב־RSS"
    date: 2026-10-09
    draft: true
+   emoji: "אימוג׳י מתאים וייחודי"
+   lang: he
+   translationKey: "YYYY-MM-DD-slug"
    tags: ["אופציונלי"]
    seoTitle: "מה שאנשים היו מקלידים, עד כ־50 תווים"
    seoDescription: "70 עד 160 תווים. התשובה והמספר האמיתי כבר במשפט הראשון."
@@ -16,11 +32,12 @@
    ```
    `seoTitle`, `seoDescription` ו־`topics` חובה בכל פוסט, בעברית ובאנגלית. הם קובעים מה מופיע בגוגל ובמנועי AI, ולא משנים את מה שהקורא רואה בעמוד. הכללים: [SEO-GEO.md](SEO-GEO.md). `npm run seo:check` חייב לעבור לפני פרסום.
 3. `draft: true` נשאר עד אישור מפורש של ספי. בלי יוצא מן הכלל.
-4. טקסט שנכתב בשם ספי (גוף ראשון) כפוף ל־`/workspace/voice/seffy-voice-profile.md`.
+4. טקסט שנכתב בשם ספי (גוף ראשון) כפוף לכללי הקול שבסעיף 4 בתהליך המלא.
 5. תצוגה מקדימה לספי: `export PATH=~/.local/node22/bin:$PATH && npm run build:drafts && npm run preview:drafts`
    (הטיוטות מוצגות עם תג ״טיוטה״), ושלח לו צילום מסך של העמוד.
-6. רק אחרי ש־ספי כתב במפורש שהוא מאשר: שנה ל־`draft: false`, הרץ `npm run build` (חייב לעבור),
-   ואז `git add -A && git commit -m "post: <slug>" && git push origin main`.
+6. אחרי אישור הטקסט וכל התמונות לפי התהליך, הכן את הגרסה האנגלית באותו שם קובץ.
+   בשלב הפרסום שנה בשתי השפות ל־`draft: false`, הרץ `npm test` ו־`npm run seo:check`
+   (חייבים לעבור), הוסף רק את הקבצים השייכים לשינוי, צור commit, ודחוף ל־main.
 7. ה־push ל־main מפרסם אוטומטית (GitHub Actions). אין לפרסם בשום דרך אחרת.
 8. אישור שלא התקבל = לא מפרסמים. תיקון לפוסט שכבר פורסם עובר שוב דרך ספי.
 

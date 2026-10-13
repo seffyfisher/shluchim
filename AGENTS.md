@@ -1,5 +1,16 @@
 # AGENTS.md
 
+## Shluchim posts: required workflow (Seffy, 2026-10-13)
+
+Before writing, revising, illustrating, translating, reviewing or publishing a
+Shluchim post, read [.agents/skills/shluchim-post-workflow/SKILL.md](.agents/skills/shluchim-post-workflow/SKILL.md)
+and its complete supplied workflow. Follow its original-story date, Seffy's voice,
+real quotations, full Hebrew review, text approval, image approval, English,
+publication and live verification stages. An explicit request to write a post
+also starts the workflow. Keep the skill, reference, installer and this pointer
+when changing the project; update them together when Seffy changes the process.
+Technical publishing conventions remain in [PUBLISHING.md](PUBLISHING.md).
+
 ## CSS first, no added JavaScript (standing rule from Seffy, 2026-10-10)
 
 - כל מה שאפשר לעשות ב־CSS בלבד, עושים ב־CSS, בלי להוסיף JavaScript. מוסיפים JS רק כשאין באמת ברירה, ומסבירים למה ב־PR או בקומיט.
