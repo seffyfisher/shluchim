@@ -18,7 +18,20 @@ export const satteriImgSize = () => {
       if (n && w > +n[1]) { h = Math.round(h * +n[1] / w); w = +n[1]; }
       size = ` width="${w}" height="${h}"`;
     }
-    const img = `<img src="${esc(src)}" alt="${esc(node.alt)}"${node.title ? ` title="${esc(node.title)}"` : ''}${size} loading="lazy" decoding="async">`;
+    // New illustrations keep their native resolution and a 1024px derivative.
+    // Only emit candidates that actually exist; older retina screenshots keep their sizing.
+    let responsive = '';
+    const native = rel && /-(\d{4})\.webp$/i.exec(rel);
+    if (d && native && +native[1] === d.width && d.width > 1024) {
+      const smaller = rel.replace(/-\d{4}\.webp$/i, '-1024.webp');
+      try {
+        const dimensions = imageSize(readFileSync(new URL('../../public/' + smaller, import.meta.url)));
+        if (dimensions?.width === 1024) {
+          responsive = ` srcset="${esc(withBase('/' + smaller))} 1024w, ${esc(src)} ${d.width}w" sizes="(max-width: 46rem) 100vw, 46rem"`;
+        }
+      } catch { /* A single native image remains valid without a derivative. */ }
+    }
+    const img = `<img src="${esc(src)}" alt="${esc(node.alt)}"${node.title ? ` title="${esc(node.title)}"` : ''}${size}${responsive} loading="lazy" decoding="async">`;
     const fm = ctx.data?.astro?.frontmatter;
     return fm?.date ? imageViewer(img, { id: `post-image-${++index}`, src, alt: node.alt, lang: fm.lang ?? 'he' }) : img;
   };
