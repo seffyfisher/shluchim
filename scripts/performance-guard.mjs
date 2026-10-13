@@ -7,7 +7,7 @@ import { createGzip } from 'node:zlib';
 
 // Use the same Lighthouse release and mobile defaults for every candidate.
 // Never block third-party requests or turn analytics off for the audit.
-const routes = ['/', '/en/', '/posts/2026-10-12-lighthouse-four-hundreds/'];
+const routes = ['/', '/en/', '/posts/2026-10-06-reminders-shaliach/'];
 const reportDir = resolve('lighthouse-reports');
 const buildDir = resolve('dist');
 const lighthouseCli = resolve('node_modules/lighthouse/cli/index.js');
