@@ -44,19 +44,19 @@ const jsonLd = [
         <div class="friend-heading">
           <a class="portrait-link" href={friendPortraits[friend.id].source}
             style={`--portrait-color: ${friend.pastel}; --portrait-position: ${friendPortraits[friend.id].position ?? '50% 50%'}`}
-            aria-label={he ? `מקור התמונה של ${friend.name}: ${friendPortraits[friend.id].sourceName}` : `Photo source for ${friend.nameEn}: ${friendPortraits[friend.id].sourceName}`}>
+            aria-label={he ? `מקור התמונה של ${friend.name}: ${friendPortraits[friend.id].sourceName}` : `Photo source for ${friend.nameEn}: ${friendPortraits[friend.id].sourceName}`} target="_blank" rel="noopener">
             <img class="person-photo" src={friendPortraits[friend.id].src} alt="" width="80" height="80"
               loading={index < 4 ? 'eager' : 'lazy'} decoding="async" referrerpolicy="no-referrer" />
           </a>
           <div class="friend-identity">
             <span class="theme">{he ? friend.theme : friend.themeEn}</span>
-            <h2><a href={friend.links[0].url}>{he ? friend.name : friend.nameEn}</a></h2>
+            <h2><a href={friend.links[0].url} target="_blank" rel="noopener">{he ? friend.name : friend.nameEn}</a></h2>
           </div>
         </div>
         <p>{he ? friend.text : friend.textEn}</p>
         <ul class="friend-links" aria-label={he ? `קישורים של ${friend.name}` : `Links for ${friend.nameEn}`}>
-          {friend.links.map((link) => <li><a href={link.url}>{he ? link.he : link.en}<span aria-hidden="true"> ↗</span></a></li>)}
-          <li><a class="photo-source" href={friendPortraits[friend.id].source}>{he ? 'מקור התמונה' : 'Photo source'}</a></li>
+          {friend.links.map((link) => <li><a href={link.url} target="_blank" rel="noopener">{he ? link.he : link.en}<span aria-hidden="true"> ↗</span></a></li>)}
+          <li><a class="photo-source" href={friendPortraits[friend.id].source} target="_blank" rel="noopener">{he ? 'מקור התמונה' : 'Photo source'}</a></li>
         </ul>
         {friendPortraits[friend.id].photographer && <p class="photo-credit">{he ? `צילום: ${friendPortraits[friend.id].photographer}` : 'Photo: Dana Barak'}</p>}
       </li>

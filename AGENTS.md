@@ -18,6 +18,12 @@ Technical publishing conventions remain in [PUBLISHING.md](PUBLISHING.md).
 - כל מה שאפשר לעשות ב־CSS בלבד, עושים ב־CSS, בלי להוסיף JavaScript. מוסיפים JS רק כשאין באמת ברירה, ומסבירים למה ב־PR או בקומיט.
 - Anything that can be done with CSS alone is done in CSS, with no added JavaScript. JS is added only when truly unavoidable, and the reason is explained in the PR or commit.
 
+## External links open in a new tab (standing rule from Seffy, 2026-10-13)
+
+- כל קישור לאתר חיצוני, בעברית ובאנגלית ובדף ״בני אנוש״, חייב `target="_blank"` ו־`rel="noopener"`. קישורים לאותו האתר, כולל כתובות מלאות וקישורי עוגן, נפתחים באותו טאב. משמרים ערכי `rel` נוספים כמו `nofollow`.
+- Every link to another site, in Hebrew and English and on the Humans page, must have `target="_blank"` and `rel="noopener"`. Links to this site, including absolute URLs and fragments, open in the same tab. Preserve other `rel` tokens such as `nofollow`.
+- Astro templates set external-link attributes explicitly; `src/lib/links.mjs` uses the configured `SITE_URL` host to apply the rule to Markdown and raw HTML and fails every build if any rendered link violates it. Keep enforcement at build time, without browser JavaScript.
+
 ## SEO / GEO: ממשיכים לקדם את הבלוג (standing rule from Seffy, 2026-10-11)
 
 המטרה: שהבלוג, בעברית ובאנגלית, יימצא בגוגל, בבינג ובמנועי AI, ושזה לא יתפרק עם הזמן. המדריך המלא: [SEO-GEO.md](SEO-GEO.md). הכללים כאן מחייבים כל מי שנוגע בתוכן או בתבניות.
