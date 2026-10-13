@@ -20,6 +20,8 @@ const posts = defineCollection({
       // Must be unique across posts and contextual (list guard enforces present + unique).
       emoji: z.string().optional(),
       description: z.string(),
+      // Short copy for the homepage and topic lists. The full description remains on the post page and in RSS.
+      listDescription: z.string().optional(),
       date: z.coerce.date(),
       draft: z.boolean().default(true),
       featured: z.boolean().default(false),

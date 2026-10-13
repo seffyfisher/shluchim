@@ -21,7 +21,7 @@ const emojiByKey = new Map((await getCollection('posts', (p) => p.id.startsWith(
           {p.data.draft && <span class="badge">{ui.draft}</span>}
         </p>
         <h3><a href={postUrl(p)}>{p.data.title}</a></h3>
-        <p class="dek">{p.data.description}</p>
+        <p class="dek">{p.data.listDescription ?? p.data.description}</p>
       </li>
     );
   })}

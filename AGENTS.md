@@ -18,6 +18,12 @@ Technical publishing conventions remain in [PUBLISHING.md](PUBLISHING.md).
 - כל מה שאפשר לעשות ב־CSS בלבד, עושים ב־CSS, בלי להוסיף JavaScript. מוסיפים JS רק כשאין באמת ברירה, ומסבירים למה ב־PR או בקומיט.
 - Anything that can be done with CSS alone is done in CSS, with no added JavaScript. JS is added only when truly unavoidable, and the reason is explained in the PR or commit.
 
+## תקצירים ברשימות המעשיות (standing rule from Seffy, 2026-10-13)
+
+- בדף הבית ובעמודי הנושאים, בעברית ובאנגלית, תקציר של פוסט מוגבל תמיד לשלוש שורות לכל היותר.
+- לפוסט חדש עם `description` ארוך כותבים גם `listDescription`: משפט או שניים קצרים שמספרים מה נתקע ומה יצא. `description` המלא נשאר בעמוד הפוסט וב־RSS. אם אין `listDescription`, הרשימה מציגה את `description` ומגבילה אותו לשלוש שורות.
+- The shared `StoryList` component and its CSS enforce this for every list; keep the authoring guidance in `PUBLISHING.md`, the CMS and the post skill in sync.
+
 ## External links open in a new tab (standing rule from Seffy, 2026-10-13)
 
 - כל קישור לאתר חיצוני, בעברית ובאנגלית ובדף ״בני אנוש״, חייב `target="_blank"` ו־`rel="noopener"`. קישורים לאותו האתר, כולל כתובות מלאות וקישורי עוגן, נפתחים באותו טאב. משמרים ערכי `rel` נוספים כמו `nofollow`.

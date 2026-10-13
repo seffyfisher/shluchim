@@ -10,6 +10,10 @@
 
 באתר הזה `summary` נשמר בשדה `description`, ו־`status: draft` מיוצג באמצעות
 `draft: true`. שומרים גם את שדות ה־SEO והשפה הנדרשים באתר.
+ברשימות המעשיות בדף הבית ובעמודי הנושאים התקציר מוגבל לשלוש שורות לכל היותר.
+אם `description` ארוך, מוסיפים `listDescription` של משפט או שניים קצרים שמתארים
+מה נתקע ומה יצא. הוא מופיע רק ברשימות; `description` המלא נשאר בעמוד הפוסט וב־RSS.
+הכלל חל בעברית ובאנגלית, וגם על פוסטים בלי `listDescription`.
 להתקנה גלובלית בCodex, מכל checkout של הפרויקט:
 `python3 scripts/install-post-workflow.py`.
 
@@ -18,7 +22,8 @@
    ```yaml
    ---
    title: "כותרת"
-   description: "תקציר של 2–4 משפטים שמופיע בעמוד הבית וב־RSS"
+   description: "תקציר של 2–4 משפטים שמופיע בעמוד הפוסט וב־RSS"
+   # listDescription: "משפט או שניים קצרים לרשימות, אם התקציר המלא ארוך"
    date: 2026-10-09
    draft: true
    emoji: "אימוג׳י מתאים וייחודי"
@@ -71,7 +76,7 @@ Exception (Seffy, 2026-10-10): the site tagline (`tagline` in `src/config.ts`) i
 ## English translations (/en/)
 - Hebrew posts: `src/content/posts/he/<slug>.md` (URL: `/posts/<slug>/`).
 - English posts: `src/content/posts/en/<same file name>.md` -> `/en/posts/<slug>/`. Same file name as the Hebrew one (the CMS, the sitemap alternates and the switcher pair them by it).
-- Frontmatter: `title`, `description` (150–160 chars, rewritten for readers abroad), `seoTitle`, `seoDescription` (70–160 chars) and `topics` (same topics as the Hebrew post), `date` (SAME as the Hebrew post), `draft: true` until Seffy approves, `lang: en`, `translationKey: "<Hebrew file name without .md>"`. Search-copy rules: [SEO-GEO.md](SEO-GEO.md).
+- Frontmatter: `title`, `description` (150–160 chars, rewritten for readers abroad), optional short `listDescription` for the story lists, `seoTitle`, `seoDescription` (70–160 chars) and `topics` (same topics as the Hebrew post), `date` (SAME as the Hebrew post), `draft: true` until Seffy approves, `lang: en`, `translationKey: "<Hebrew file name without .md>"`. Search-copy rules: [SEO-GEO.md](SEO-GEO.md).
 - Chat bubbles: translate the text; add a line `original: <Hebrew text>` right after a message to show a collapsible "Hebrew original" under it.
 - No niqqud in English text (only on `original:` lines). The build warns about it, and about Hebrew posts with no English pair.
 - About in English: `src/content/pages/en/about.md` (`title`, `description`, `lang: en`, `translationKey: about`). Team: `name_en`, `role_en`, `category_en`, `example_en` in `src/data/shluchim.json`.

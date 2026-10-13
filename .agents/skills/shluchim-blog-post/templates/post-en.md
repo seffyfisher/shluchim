@@ -1,6 +1,7 @@
 ---
 title: "English title, faithful to the approved Hebrew"
 summary: "Faithful translation of the Hebrew summary."
+# listDescription: "One or two short sentences for the story lists, if the full summary is long."
 date: YYYY-MM-DD   # same date as the Hebrew post
 status: approved   # the Hebrew text is already approved
 lang: en

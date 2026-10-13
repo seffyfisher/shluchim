@@ -113,7 +113,17 @@ main { padding-block: 2.5rem 4rem; }
 .story h3 a::after { content: ''; position: absolute; inset: 0; } /* whole row is the link target */
 .story h3 a:focus-visible { outline: none; }
 .story:has(a:focus-visible) { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
-.story .dek { grid-area: dek; margin: .5rem 0 0; color: var(--muted); font-size: var(--fs-desc); max-width: 60ch; }
+.story .dek {
+  grid-area: dek;
+  margin: .5rem 0 0;
+  color: var(--muted);
+  font-size: var(--fs-desc);
+  max-width: 60ch;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
 .story .badge { position: relative; }
 @media (min-width: 48rem) {
   .story { grid-template-columns: 4rem 1fr; grid-template-areas: "num meta" "num title" "num dek"; padding-block: 2rem 2.25rem; }
