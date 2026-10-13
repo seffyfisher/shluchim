@@ -5,7 +5,7 @@ seoTitle: "How my blog got four 100s in Lighthouse"
 seoDescription: "Four scores of 100 in my blog's Lighthouse audit. What we changed with an AI agent, why readers benefit, and how Google's page experience signals affect search."
 topics: ["agent-teamwork"]
 date: 2026-10-12
-draft: false
+draft: true
 lang: en
 translationKey: "2026-10-12-lighthouse-four-hundreds"
 ---

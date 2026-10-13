@@ -6,7 +6,7 @@ seoTitle: "איך הבלוג הגיע לארבעה ציוני 100 בLighthouse"
 seoDescription: "ארבעה ציוני 100 בבדיקת Lighthouse של עמוד הבית: איך שיפרנו את טעינת הבלוג עם שלוח, למה זה חשוב לקוראים, ואיך זה קשור לחיפוש בגוגל."
 topics: ["agent-teamwork"]
 date: 2026-10-12
-draft: false
+draft: true
 lang: he
 translationKey: "2026-10-12-lighthouse-four-hundreds"
 ---
