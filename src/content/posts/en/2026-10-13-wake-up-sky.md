@@ -90,6 +90,8 @@ Without it, I probably would have kept going for quite a while.
 It's hard to convey how much this changes work until you work this way.
 I didn't understand it either until I got into that conversation.
 
+![Four childlike shluchim look curiously at Sky's cloud-filled voice circle.](/images/posts/wake-up-sky-shluchim-1672.webp)
+
 **I turned to the heavens for help. I came back from coffee to a work update.**
 
 Then I thought about my son again.
