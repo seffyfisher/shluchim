@@ -1,7 +1,7 @@
 ---
 // "Follow with your AI", minimal: a question ("want to know when a new post goes up?") and one button. The button copies a standing
 // prompt and says so; the reader then gives it to their own AI assistant ("their shluchim"), which reads this blog's RSS feed and
-// checks it once a week. Same block in two places: end of a story and footer (every page). The prompt itself is never shown.
+// checks it once a week. The block appears once per page, in the footer. The prompt itself is never shown.
 //
 // CSS first (AGENTS.md): the layout and the feedback states are HTML and CSS. The ONE exception is the copy: writing to the
 // clipboard has no HTML or CSS equivalent, so a ~20-line script does it. Until it runs the button is invisible but keeps its
@@ -10,14 +10,13 @@
 import '../styles/follow.css';
 import { lurl, t, type Lang } from '../i18n/ui';
 import { followPrompt } from '../lib/follow';
-interface Props { lang: Lang; placement: 'post' | 'footer' }
-const { lang, placement } = Astro.props;
+interface Props { lang: Lang }
+const { lang } = Astro.props;
 const ui = t(lang);
 const prompt = followPrompt(lang, { feedUrl: new URL(lurl(lang, 'rss.xml'), Astro.site).href });
-const id = `follow-${placement}`; // one block per placement per page, so ids stay unique
 ---
-<div class={`follow follow-${placement}`} role="group" aria-labelledby={`${id}-q`}>
-  <p class="follow-q" id={`${id}-q`}>{ui.followQ}</p>
+<div class="follow follow-footer" role="group" aria-labelledby="follow-q">
+  <p class="follow-q" id="follow-q">{ui.followQ}</p>
   <button type="button" class="follow-btn follow-copy" data-prompt={prompt} data-label={ui.followLabel}>
     <span class="idle">{ui.followCopy}</span><span class="done">{ui.followCopied}</span>
   </button>
