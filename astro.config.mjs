@@ -46,7 +46,7 @@ export default defineConfig({
   i18n: { defaultLocale: 'he', locales: ['he', 'en'], routing: { prefixDefaultLocale: false } },
   // Sitemap alternates (he, en, x-default) come from translationKey pairs (English slugs differ from the Hebrew ones); lastmod from post dates.
   integrations: [sitemap({ serialize(item) { const links = PAIRS.get(item.url); const lastmod = LASTMOD.get(item.url); return { ...item, ...(links ? { links } : {}), ...(lastmod ? { lastmod } : {}) }; } }), legacyAssetUrls, i18nCheck(), seoCheck(), listGuard(), linkGuard()],
-  build: { inlineStylesheets: 'auto' },
+  build: { inlineStylesheets: 'always' },
   // Code blocks follow the site theme (light/dark) via CSS variables; colours applied in global.css.
   markdown: { processor: satteri({ mdastPlugins: [satteriChat, satteriImgSize, satteriPhoto], hastPlugins: [satteriLinks], features: { rawHtml: true } }), shikiConfig: { themes: { light: 'github-light-high-contrast', dark: 'github-dark-high-contrast' }, defaultColor: false } },
 });
