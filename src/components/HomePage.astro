@@ -27,7 +27,7 @@ const ART = 'https://shinlamed.com';
 const EVRIT = 'https://e-vrit.co.il';
 const PARENTHOOD = 'https://he.wikipedia.org/wiki/%D7%94%D7%95%D7%A8%D7%95%D7%AA';
 const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = he
-  ? { kick: 'האדם מאחורי הבלוג', title: 'מי אני', text: [['קוראים לי ספי פישר.'], ['אני ', L('אמן חזותי', ART), ', CTO של ', L('עברית', EVRIT), ', ', L('אבא לשניים', PARENTHOOD), ', ומופרע קשב עם בעיות ויסות רגשי.'], ['וכמו כולם, מנסה ללמוד להתמודד עם השינויים שה־AI מביא.'], ['הבלוג הזה הוא הדרך שלי לעשות את זה בקול רם.']], btn: 'עוד עליי' }
+  ? { kick: 'האדם מאחורי הבלוג', title: 'מי אני', text: [['קוראים לי ספי פישר.'], ['אני ', L('אמן חזותי', ART), ', CTO של ', L('עברית', EVRIT), ' ', L('אבא לשניים', PARENTHOOD), ', ומופרע קשב עם בעיות ויסות רגשי.'], ['וכמו כולם, מנסה ללמוד להתמודד עם השינויים שה־AI מביא.'], ['הבלוג הזה הוא הדרך שלי לעשות את זה בקול רם.']], btn: 'עוד עליי' }
   : { kick: 'The person behind the blog', title: 'Who I am', text: [['My name is Seffy Fisher.'], ["I'm a ", L('visual artist', ART), ', a CTO of ', L('Hebrew', EVRIT), ', a ', L('father of two', PARENTHOOD), ', and a person with ADHD and emotional regulation problems.'], ["Like everyone, I'm trying to learn to cope with the changes AI brings."], ['This blog is my way of doing that out loud.']], btn: 'More about me' };
 ---
 <Base masthead noindex={!he && posts.length === 0} lang={lang} alternates={{ he: lurl('he'), en: lurl('en') }} seoTitle={seo.title} seoDescription={seo.description}>
