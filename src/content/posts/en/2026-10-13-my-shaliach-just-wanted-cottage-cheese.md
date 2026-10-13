@@ -1,6 +1,8 @@
 ---
 title: "My shaliach just wanted to buy cottage cheese for the kids at Rami Levy"
 description: "I asked the Chef, the shaliach that plans my meals, to fill a cart at Rami Levy so I'd have all the groceries for the week of meals he planned for me. Rami Levy's site blocked him, because Grok Bot's cloud computer goes out to the internet from the US, not from Israel. We also tried knocking on Shufersal's gates, we talked about a VPN, and in the end Grok Bot added a new feature that routes network traffic out through my own local computer. We tested it, and now when the Chef runs automatically every week and plans my weekly meals, he also does my shopping at Rami Levy with no problem."
+seoTitle: "Israeli grocery site blocks US IPs: route via home PC"
+seoDescription: "Rami Levy returned 403 to my cloud AI agent with a US IP. Routing through my home computer gave an Israeli IP and a 200, so it now fills the cart weekly."
 topics: ["everyday-ai"]
 date: 2026-10-13
 draft: false
