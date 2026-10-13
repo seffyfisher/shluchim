@@ -1,5 +1,9 @@
 # AGENTS.md
 
+## Lighthouse release gate (standing rule from Seffy, 2026-10-13)
+
+Before any PR, merge, push to `main`, or deployment, read [.agents/skills/lighthouse-release-guard/SKILL.md](.agents/skills/lighthouse-release-guard/SKILL.md) and run its checks. The deployment workflow must not publish a build unless mobile Lighthouse Performance scores 100 on the checked pages. Check the live score after deployment and investigate any drop. Never weaken the guard to make a release pass.
+
 ## Shluchim posts: required workflow (Seffy, 2026-10-13)
 
 Before writing, revising, illustrating, translating, reviewing or publishing a

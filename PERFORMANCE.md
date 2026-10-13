@@ -1,11 +1,17 @@
 # Lighthouse delivery and analytics
 
+## Release guard (October 13, 2026)
+
+The uploaded October 13 mobile Lighthouse 13.4.1 report scored **96 / 100 / 100 / 100**. FCP and LCP were 1.8 s; Total Blocking Time was 197 ms. The two long tasks attributed to `gtag.js` (192 ms and 105 ms) account for the blocking time after first paint. The report also shows Cloudflare RUM injected into the page and a four-hour browser TTL on hashed `/_astro/` assets. The previous score of 100 is a measurement, not a guarantee for later runs.
+
+`npm run perf:check` audits the production build on a local preview. Run `npm run build` first. The guard checks the Hebrew and English homepages and a Hebrew post three times each using Lighthouse 13.4.1 mobile defaults and fails if any page's median is below 100 Performance. It saves JSON reports in `lighthouse-reports/`. The GitHub Pages workflow runs it before deploying and audits the live URL after deploying; reports are uploaded as workflow artifacts. For a manual production run, set `PERF_BASE_URL=https://shluchim.shinlamed.com/`. The live mode also fails if Cloudflare RUM is injected or hashed assets lack a one-year browser TTL. The local result cannot prove a live 100 because GitHub Pages, Cloudflare, GA4, and network timing differ.
+
 The uploaded October 12, 2026 mobile Lighthouse 13.4.1 report scored Performance / Accessibility / Best Practices / SEO at **100 / 100 / 77 / 100**. A category score of 100 does not require every diagnostic to disappear.
 
 ## Repository changes
 
 - GA4 keeps first-party page and audience measurement, with `allow_google_signals: false` and `allow_ad_personalization_signals: false`. This removes advertising and demographic/interest features. [Google configuration reference](https://developers.google.com/analytics/devguides/collection/ga4/reference/config).
-- Its library waits for `window.load` and `requestIdleCallback`, without a forced idle timeout. Browsers without that API wait another 3 seconds. The script is async and has low fetch priority. It is initialized once; custom events stay queued.
+- Its library waits for `window.load`, then a five-second settling period and `requestIdleCallback`, without a forced idle timeout. Browsers without that API wait another 3 seconds. The script is async and has low fetch priority. It is initialized once; custom events stay queued.
 - This prioritizes page loading, but Google's library still needs bandwidth and main-thread execution after download. Short visits and persistently busy pages can go uncounted. Deferring cannot promise zero interaction cost or remove Google's unused code.
 - Hebrew and English display fonts are preloaded, and fonts and team avatars use Vite's content-hashed `/_astro/` URLs. The same font URL appears in CSS and its preload, avoiding a duplicate fetch.
 - Avatars live in `src/assets/shluchim/`; the shared `Avatar.astro` renders them with no client JS. Reduced-motion users still receive a still image. The build also emits the former `/shluchim/*.webp` and display-font URLs from these same source files so cached older HTML keeps working.
