@@ -82,9 +82,9 @@ coverAlt: "צוות השְׁלוּחִים עם הדמות של ספי"
 
 למשל כמו שאני משתמש בבלוג כדי לעשות צילומי מסך של UI של גרוקבוט דרך המחשב שמריץ גרוקבוט, או לנסות להתקין CLI של כלי AI נוספים כמו CODEX או Claude Code)
 
-![ממשק Grok Bot במחשב: רשימת בוטים משמאל ושיחה עם כרטיס לפתיחת המחשב בענן](/media/posts/grok-bot-guide/official-launch-computer.webp)
+![תקריב של מסך MacBook Pro עם ממשק Grok Bot: רשימת שְׁלוּחִים משמאל ושיחה בעברית עם באשר](/media/posts/grok-bot-guide/official-launch-computer.webp)
 
-רשימת בוטים וכרטיס Open computer בממשק הדסקטופ, מתוך סרטון ההשקה הרשמי של Grok Bot. הדגמה מאוגוסט 2026; הממשק עשוי להשתנות. [מקור: xAI](https://x.ai/news/introducing-grok-bot)
+ממשק Grok Bot שלי: רשימת השְׁלוּחִים ושיחה בעברית עם באשר. צילום מסך בתוך הדמיה של MacBook Pro. [על Grok Bot: xAI](https://x.ai/news/introducing-grok-bot)
 
 ## המשרד שלי בכיס
 

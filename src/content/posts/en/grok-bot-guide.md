@@ -82,9 +82,9 @@ You can even open Grok Bot inside Grok Bot's computer. Grok Bot inside Grok Bot.
 
 For example, I've used the blog to take screenshots of Grok Bot's UI through the computer running Grok Bot, or tried installing the CLI for other AI tools such as Codex or Claude Code.)
 
-![Grok Bot desktop interface: a list of bots on the left and a conversation with an Open computer card](/media/posts/grok-bot-guide/official-launch-computer.webp)
+![Close-up of a MacBook Pro screen showing Grok Bot, with a list of shluchim on the left and a Hebrew conversation with Basher](/media/posts/grok-bot-guide/official-launch-computer.webp)
 
-The bot list and Open computer card in the desktop interface, from Grok Bot's official launch video. This is an August 2026 demonstration; the interface may have changed. [Source: xAI](https://x.ai/news/introducing-grok-bot)
+My Grok Bot interface: the shluchim list and a Hebrew chat with Basher, shown in a MacBook Pro mockup. [About Grok Bot: xAI](https://x.ai/news/introducing-grok-bot)
 
 ## My office in my pocket
 
