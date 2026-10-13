@@ -4,6 +4,8 @@ import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import FeedbackBlock from './FeedbackBlock.astro';
 import FollowBlock from './FollowBlock.astro';
+import IdeaBlock from './IdeaBlock.astro';
+import { ideaPrompt } from '../lib/idea-prompt';
 import { imageLabels, imagePopover } from '../lib/image-viewer.mjs';
 import '../styles/image-viewer.css';
 import { langOf, postUrl, getPosts, getTranslation, formatDate, formatDateShort, readingMinutes, readingLabel, topicsOf, relatedPosts } from '../lib/posts';
@@ -26,6 +28,13 @@ const related = relatedPosts(await getPosts(lang), post);
 // SEO: <title> / meta description come from seoTitle / seoDescription when set; the page itself keeps title + description.
 const abs = (p: string) => new URL(p, Astro.site).href;
 const pageUrl = abs(postUrl(post));
+const prompt = ideaPrompt(lang, {
+  title: d.title, description: d.description, body: post.body ?? '', published: isoDate(d.date),
+  updated: d.updated ? isoDate(d.updated) : undefined,
+  pageUrl, blogUrl: abs(lurl(lang)), aboutUrl: abs(lurl(lang, 'about/')), feedUrl: abs(lurl(lang, 'rss.xml')),
+  translationUrl: tr ? abs(postUrl(tr)) : undefined,
+  coverUrl: d.cover ? abs(d.cover.src) : undefined, coverAlt: d.coverAlt,
+});
 const seoTitle = d.seoTitle ? withBrand(d.seoTitle, SITES[lang].title) : undefined;
 const seoDescription = d.seoDescription ?? d.description;
 const modified = d.updated ?? d.date;
@@ -70,6 +79,7 @@ const jsonLd = [
       <Content />
     </div>
   </article>
+  <IdeaBlock lang={lang} prompt={prompt} />
   {lang === 'he' && <FeedbackBlock placement="post" />}
   <FollowBlock lang={lang} placement="post" />
   {related.length > 0 && (

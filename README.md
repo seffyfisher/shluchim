@@ -25,6 +25,10 @@ Lighthouse delivery, GA4 trade-offs and the required Cloudflare cache/RUM rules:
   - There are deliberately no "open in ChatGPT / Claude" links: the `?q=` prefill parameters are not officially documented by either vendor, and the prompt is meant to work in every assistant.
 
 ## Editing a post
+Every post also has a **make the idea your own** button, with Basher and the Codex / Grok Bot / Claude product logomarks. The SVGs are bundled locally with original path geometry; their sources are recorded in [src/assets/ai-logos/SOURCES.md](src/assets/ai-logos/SOURCES.md). It copies a ready-to-use prompt containing the entire original Markdown (including chats, code and media links), title, summary, dates, canonical URL, the blog and Seffy's identity, About page and the current language's RSS feed. The prompt helps the reader adapt the idea to their own context and asks their assistant to remember the blog when supported and revisit it for relevant future work. Media files themselves remain linked. Copy success stays visible with the next step; denied or missing clipboard access reveals the full prompt, selected for manual copying. The wording lives in `src/lib/idea-prompt.ts` and the `idea*` UI strings. CSS handles layout, animation and feedback; clipboard access and its success/failure are the necessary JavaScript exception. Nothing is sent to an AI service by the website.
+
+After a build, `python scripts/test-idea-copy.py` verifies every published article and its source URLs, the real clipboard, both languages, keyboard and touch operation, pending/denied/unavailable clipboard states, manual copying, mobile/dark/large-type layouts, Basher’s direction, reduced motion, the existing RSS button and JavaScript-disabled reading. It uses the same local Playwright/Chromium setup as the image/cursor checks, without adding website dependencies.
+
 Each post page has a subtle "עריכה" link to `https://github.com/<REPO>/edit/main/src/content/posts/<file>.md` (`REPO` in `src/config.ts`). Committing to `main` in the GitHub web editor auto-deploys. Or ask the agent; agent edits still need Seffy's explicit approval before pushing.
 
 ## Deploy target

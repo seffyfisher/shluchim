@@ -1,0 +1,54 @@
+---
+import Avatar from './Avatar.astro';
+import codexLogo from '../assets/ai-logos/codex.svg?raw';
+import grokBotLogo from '../assets/ai-logos/grok-bot.svg?raw';
+import claudeLogo from '../assets/ai-logos/claude.svg?raw';
+import { t, type Lang } from '../i18n/ui';
+import '../styles/idea.css';
+interface Props { lang: Lang; prompt: string }
+const { lang, prompt } = Astro.props;
+const ui = t(lang);
+---
+<section class="idea" aria-labelledby="idea-heading">
+  <h2 id="idea-heading">{ui.ideaHeading}</h2>
+  <p class="idea-intro" id="idea-help">{ui.ideaHelp}</p>
+  <button class="idea-copy" type="button" aria-describedby="idea-help">
+    <span class="idea-avatar" aria-hidden="true"><Avatar avatar="shluchim/basher.webp" still="shluchim/basher-still.webp" /></span>
+    <span class="idea-labels"><span class="idle">{ui.ideaCopy}</span><span class="done">{ui.ideaCopied}</span></span>
+    <svg class="idea-copy-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2" /><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3" /></svg>
+    <svg class="idea-done-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6" /></svg>
+  </button>
+  <p class="idea-tools">
+    <span dir="ltr"><span class="idea-logo" aria-hidden="true"><Fragment set:html={codexLogo} /></span>Codex</span>
+    <span dir="ltr"><span class="idea-logo" aria-hidden="true"><Fragment set:html={grokBotLogo} /></span>Grok Bot</span>
+    <span dir="ltr"><span class="idea-logo" aria-hidden="true"><Fragment set:html={claudeLogo} /></span>Claude</span>
+    <span>{ui.ideaAny}</span>
+  </p>
+  <p class="idea-status" role="status" aria-atomic="true" data-success={ui.ideaDone} data-fail={ui.ideaFail}></p>
+  <!-- One escaped copy of the complete prompt, ready before the click. Revealed only if clipboard access fails. -->
+  <textarea class="idea-manual" readonly hidden rows="10" aria-label={ui.ideaLabel} aria-describedby="idea-status-help">{prompt}</textarea>
+  <span class="sr-only" id="idea-status-help">{ui.ideaManualHelp}</span>
+</section>
+<script>
+  // CSS-first exception: clipboard access and reporting its actual result require JavaScript.
+  // All layout, motion and visual feedback use CSS; no fetch, external service or assistant-specific URL is needed.
+  for (const btn of document.querySelectorAll<HTMLButtonElement>('.idea-copy')) {
+    const box = btn.closest('.idea')!;
+    const status = box.querySelector<HTMLElement>('.idea-status')!;
+    const manual = box.querySelector<HTMLTextAreaElement>('.idea-manual')!;
+    btn.dataset.ready = '';
+    btn.addEventListener('click', async () => {
+      btn.disabled = true;
+      btn.removeAttribute('data-done');
+      status.textContent = '';
+      let ok = true;
+      try { await navigator.clipboard.writeText(manual.value); } catch { ok = false; }
+      btn.disabled = false;
+      btn.toggleAttribute('data-done', ok);
+      status.toggleAttribute('data-failed', !ok);
+      status.textContent = ok ? status.dataset.success! : status.dataset.fail!;
+      manual.hidden = ok;
+      if (!ok) { manual.focus(); manual.select(); manual.scrollTop = 0; }
+    });
+  }
+</script>
