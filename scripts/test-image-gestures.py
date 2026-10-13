@@ -39,6 +39,10 @@ try:
             page.wait_for_function('document.querySelector(".image-viewer:popover-open img")?.style.transform')
             assert len(gesture_requests) == 1, 'gesture module loads once, on demand'
             page.wait_for_timeout(100)
+            if mobile:
+                bounds = viewer.bounding_box()
+                assert abs(bounds['width'] - 390 * .75) < 2 and abs(bounds['height'] - 844 * .75) < 2
+                assert bounds['x'] > 40 and bounds['y'] > 90, 'backdrop remains exposed around the viewer'
             fitted = image.bounding_box()
             natural = image.evaluate('(i) => ({ width: i.naturalWidth, height: i.naturalHeight })')
             assert fitted['width'] <= natural['width'] + 1 and fitted['height'] <= natural['height'] + 1
@@ -104,9 +108,12 @@ try:
                 page.set_viewport_size({'width': 844, 'height': 390})
                 page.wait_for_timeout(100)
                 bounds = viewer.bounding_box()
-                assert bounds['width'] <= 844 and bounds['height'] <= 390
+                assert abs(bounds['width'] - 844 * .75) < 2 and abs(bounds['height'] - 390 * .75) < 2
                 assert abs(image.bounding_box()['width'] - 120) < 1
-            page.mouse.click(1, 1)
+            if mobile:
+                page.touchscreen.tap(1, 1)
+            else:
+                page.mouse.click(1, 1)
             assert viewer.count() == 0
             assert not errors, errors
             assert len(gesture_requests) == 1, 'reopening reuses the same loaded module'

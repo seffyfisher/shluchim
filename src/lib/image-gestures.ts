@@ -53,11 +53,12 @@ function setup(viewer: HTMLElement, stage: HTMLElement, img: HTMLImageElement) {
     const horizontal = parseFloat(styles.paddingLeft) + parseFloat(styles.paddingRight) + parseFloat(styles.borderLeftWidth) + parseFloat(styles.borderRightWidth);
     const vertical = parseFloat(styles.paddingTop) + parseFloat(styles.paddingBottom) + parseFloat(styles.borderTopWidth) + parseFloat(styles.borderBottomWidth);
     const gaps = (parseFloat(styles.rowGap) || 0) * 2;
-    const availableWidth = Math.max(1, Math.min(innerWidth - 2 * fontSize, 100 * fontSize) - horizontal);
+    const compact = matchMedia('(max-width: 48rem), (pointer: coarse) and (max-height: 48rem)').matches;
+    const availableWidth = Math.max(1, (compact ? viewer.clientWidth : Math.min(innerWidth - 2 * fontSize, 100 * fontSize)) - horizontal);
     const minimumWidth = Math.min(300, availableWidth);
     viewer.style.width = `${Math.max(minimumWidth, Math.min(img.naturalWidth, availableWidth)) + horizontal}px`;
     for (let pass = 0; pass < 2; pass++) {
-      const availableHeight = Math.max(1, innerHeight - 2 * fontSize - vertical - gaps - viewer.querySelector<HTMLElement>('.image-viewer-tools')!.offsetHeight - viewer.querySelector<HTMLElement>('.image-viewer-hint')!.offsetHeight);
+      const availableHeight = Math.max(1, (compact ? viewer.clientHeight : innerHeight - 2 * fontSize) - vertical - gaps - viewer.querySelector<HTMLElement>('.image-viewer-tools')!.offsetHeight - viewer.querySelector<HTMLElement>('.image-viewer-hint')!.offsetHeight);
       fit = Math.min(1, availableWidth / img.naturalWidth, availableHeight / img.naturalHeight);
       width = img.naturalWidth * fit; height = img.naturalHeight * fit;
       viewer.style.width = `${Math.max(minimumWidth, width) + horizontal}px`;
