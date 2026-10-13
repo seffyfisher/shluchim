@@ -13,6 +13,7 @@
     "astro": "astro",
     "test": "node --experimental-strip-types --no-warnings --test src/lib/remark-chat.test.mjs src/lib/seo.test.mjs src/lib/seo-check.test.mjs src/lib/indexnow.test.mjs src/lib/follow.test.mjs src/lib/idea-prompt.test.mjs src/lib/analytics.test.mjs src/lib/featured.test.mjs src/lib/links.test.mjs && node scripts/test-featured-build.mjs",
     "seo:check": "SEO_STRICT=1 astro build",
+    "perf:check": "node scripts/performance-guard.mjs",
     "build:drafts": "SHOW_DRAFTS=1 astro build",
     "preview:drafts": "SHOW_DRAFTS=1 astro preview"
   },
@@ -22,5 +23,8 @@
     "@fontsource/rubik": "^5.3.0",
     "astro": "^7.3.8",
     "satteri": "^0.10.5"
+  },
+  "devDependencies": {
+    "lighthouse": "13.4.1"
   }
 }
