@@ -126,11 +126,12 @@ try:
             assert page.locator('.idea-avatar img').evaluate('(img) => img.currentSrc.includes("basher-still")')
             assert button.evaluate('(el) => getComputedStyle(el).animationName') == 'none'
             assert not errors, errors
-            # Existing RSS copy still works independently.
+            # The footer has the only RSS follow block on the article page.
             page.evaluate('delete navigator.clipboard')
-            rss = page.locator('.follow-post .follow-copy')
+            assert page.locator('.follow').count() == 1
+            rss = page.locator('.follow-footer .follow-copy')
             rss.click()
-            page.wait_for_function('document.querySelector(".follow-post .follow-copy").hasAttribute("data-done")')
+            page.wait_for_function('document.querySelector(".follow-footer .follow-copy").hasAttribute("data-done")')
             assert page.evaluate('navigator.clipboard.readText()') == rss.get_attribute('data-prompt')
             context.close()
             # Exercise the actual touch input path, rather than only resizing a desktop viewport.
