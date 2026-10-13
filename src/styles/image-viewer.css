@@ -41,29 +41,25 @@ html:has(.image-viewer:popover-open) { overflow: hidden; }
 .image-viewer[data-zoomed] .image-viewer-scroll { cursor: grab; }
 .image-viewer[data-dragging] .image-viewer-scroll { cursor: grabbing; }
 
-/* On phones, use the whole screen and keep long screenshots readable.
-   Override the desktop gesture sizing so zoom and pan use the entire screen. */
-@media (max-width: 48rem) {
+/* Leave a generous backdrop around the viewer so it is easy to tap to close. */
+@media (max-width: 48rem), (pointer: coarse) and (max-height: 48rem) {
   .image-viewer {
-    width: 100% !important;
-    height: 100dvh;
+    width: 75vw !important;
+    height: 75dvh;
     max-width: none;
     max-height: none;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
+    margin: auto;
+    padding: .5rem;
   }
-  .image-viewer:popover-open { gap: 0; }
+  .image-viewer:popover-open { gap: .5rem; }
   .image-viewer-tools {
-    padding: max(.5rem, env(safe-area-inset-top)) max(.75rem, env(safe-area-inset-right)) .5rem max(.75rem, env(safe-area-inset-left));
+    padding: .25rem;
   }
   .image-viewer-scroll {
     flex: 1;
     min-width: 0;
-    max-width: none;
+    max-width: 100%;
     max-height: none;
-    padding-bottom: env(safe-area-inset-bottom);
   }
   .image-viewer .image-viewer-scroll img { width: 100%; max-height: none; }
 }
