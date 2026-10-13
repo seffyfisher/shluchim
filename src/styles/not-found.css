@@ -1,0 +1,177 @@
+/* The 404 scene shares the site's fonts, colour tokens, theme and navigation. */
+.page-404 main.wrap { max-width: 76rem; padding-block: 1.5rem 2rem; }
+.not-found .hero { text-align: center; }
+.not-found .eyebrow { color: var(--muted); font-size: .75rem; margin: 0 0 .5rem; }
+.not-found .eyebrow span { margin-inline: .5rem; }
+.not-found h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(4.5rem, 9vw, 7rem); line-height: 1.05; margin: 0 0 .75rem; }
+.not-found .gematria { font-size: 1rem; margin: 0 0 1rem; }
+.not-found .gematria strong { font-weight: 500; }
+.not-found .ceremony { margin: .75rem auto 0; max-width: 70rem; }
+.not-found .scene-controls { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .5rem; font-size: .75rem; position: relative; z-index: 15; }
+.not-found .scene-note { display: flex; align-items: center; gap: .5rem; color: var(--muted); margin: 0; }
+.not-found .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--fg); }
+.not-found .reading-controls { display: flex; flex-wrap: wrap; gap: .5rem; }
+.not-found .pause-control { display: flex; align-items: center; gap: .35rem; border: 1px solid var(--line); border-radius: 5px; padding: .25rem .5rem; background: var(--bg); }
+.not-found .pause-control input { width: 16px; height: 16px; margin: 0; accent-color: var(--fg); cursor: pointer; }
+.not-found .pause-control label { cursor: pointer; }
+.not-found .stage { position: relative; isolation: isolate; min-height: 420px; padding-bottom: 18px; overflow: hidden; }
+.not-found .stage-rule { position: absolute; bottom: 0; left: 3%; width: 94%; border-bottom: 1px solid var(--line); z-index: -1; }
+.not-found .sprite { background: url('../assets/not-found/funeral-sprites.webp') no-repeat; background-size: 400% 400%; background-position: calc(var(--col) * 100% / 3) calc(var(--row) * 100% / 3); }
+.not-found .participant { position: absolute; left: var(--x); top: var(--y); width: 112px; height: 110px; transform: translate(-50%, -50%); z-index: 3; }
+.not-found .walker { width: 100%; height: 100%; animation: nf-search 18s infinite; animation-delay: var(--delay); }
+.not-found .portrait { position: relative; width: 100%; height: 90px; animation: nf-shuffle 18s infinite; animation-delay: var(--delay); }
+.not-found .head { position: absolute; top: 0; left: 50%; width: 90px; height: 90px; object-fit: contain; transform: translateX(-50%); animation: nf-look 18s infinite; animation-delay: var(--delay); }
+.not-found .character-name { display: block; text-align: center; color: var(--muted); font-size: 10px; line-height: 1.2; margin-top: 4px; }
+.not-found .cloud { position: absolute; top: 1%; left: 7%; width: 150px; height: 70px; opacity: .45; z-index: -1; animation: nf-float 15s infinite alternate; }
+.not-found .cloud-second { left: auto; right: 10%; top: 0; width: 100px; height: 47px; animation-delay: -8s; }
+.not-found .teleprompter { position: relative; width: min(44%, 480px); margin-inline: auto; padding-top: 25px; z-index: 8; text-align: center; }
+.not-found .reading-invitation { font-family: var(--font-display); font-size: 26px; line-height: 1.4; margin: 0 0 10px; }
+/* Only the active paragraph occupies space, so the monument follows its actual height. */
+.not-found .prompt-window { overflow: hidden; background: var(--bg); mask-image: linear-gradient(to bottom, #000 0%, #000 76%, transparent 100%); }
+.not-found .prompt-block { position: relative; max-height: 0; overflow: hidden; opacity: 0; animation-duration: 80s; animation-timing-function: linear; animation-iteration-count: infinite; }
+.not-found .prompt-block-intro { animation-name: nf-intro; }
+.not-found .prompt-block-gathering { animation-name: nf-gathering; }
+.not-found .prompt-block-prayer { animation-name: nf-prayer; }
+.not-found .prompt-block-comfort { animation-name: nf-comfort; }
+.not-found .prompt-block-amen { animation-name: nf-amen; }
+.not-found .prompt-line { position: static; font-size: 18px; line-height: 1.8; text-align: center; text-wrap: balance; padding-inline: 4px; margin: 0 0 6px; }
+.not-found .prompt-intro { color: var(--muted); font-size: 17px; }
+.not-found .prompt-line strong { font-weight: 650; }
+.not-found .prompt-amen { font-family: var(--font-display); font-size: 42px; line-height: 1.25; }
+.not-found .memorial { position: relative; width: 155px; margin: 4px auto 0; text-align: center; }
+.not-found .tombstone { width: 155px; height: 182px; }
+.not-found .last-seen { font: 9px ui-monospace, monospace; color: var(--muted); margin: -18px 0 4px; }
+.not-found .ribbon { display: inline-block; font-size: 10px; line-height: 1.8; margin: 0; padding: 1px 9px; color: var(--bg); background: var(--fg); transform: rotate(-3deg); }
+.not-found .speech { position: absolute; max-width: 164px; font-size: 11px; line-height: 1.45; padding: 7px 11px; border: 1px solid var(--line); border-radius: 9px; box-shadow: 0 3px 0 var(--surface); background: var(--bg); text-align: center; z-index: 12; pointer-events: none; animation: nf-remarks 18s infinite; }
+.not-found .speech span { display: block; font-size: 9px; color: var(--muted); margin-top: 3px; }
+.not-found .speech-plan { left: 12%; top: 2%; }
+.not-found .speech-code { left: 81%; top: 9%; animation-delay: -1s; }
+.not-found .speech-qa { left: 12%; top: 53%; animation-delay: -4s; }
+.not-found .speech-chef { left: 0; top: 72%; animation-delay: -8s; }
+.not-found .speech-data { left: 81%; top: 62%; animation-delay: -6s; }
+.not-found .speech-support { left: 0; top: 42%; animation-delay: -10s; }
+.not-found .speech-lost { left: 41%; top: 0; font-weight: 600; animation: nf-lost 18s infinite; }
+.not-found figcaption { text-align: center; font-size: .75rem; color: var(--muted); margin-top: .75rem; }
+.not-found figcaption span { color: var(--fg); }
+.not-found .motion-note { display: none; text-align: center; font-size: .7rem; color: var(--muted); }
+.not-found .ceremony:has(#pause:checked) .stage * { animation-play-state: paused !important; }
+.not-found .return-nav { padding-top: 1.25rem; text-align: center; }
+.not-found .primary-actions { display: flex; justify-content: center; gap: .75rem; }
+.not-found .button { display: flex; justify-content: center; align-items: center; gap: .75rem; min-height: 51px; padding: .6rem 1.5rem; border: 1px solid var(--fg); border-radius: 5px; font-size: 1rem; font-weight: 600; text-decoration: none; }
+.not-found .button-primary { background: var(--fg); color: var(--bg); }
+.not-found .button-secondary { background: var(--bg); }
+.not-found .button-secondary:hover { background: var(--surface); }
+.not-found .button span:last-child { margin-inline-start: .5rem; }
+.not-found .star-icon, .not-found .external-icon { display: inline-block; width: 17px; height: 17px; flex-shrink: 0; background: currentColor; mask: url('../assets/not-found/jewish-star.svg') center / contain no-repeat; }
+.not-found .external-icon { width: 12px; height: 12px; mask-image: url('../assets/not-found/external-link.svg'); vertical-align: -2px; }
+.not-found .secondary-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .75rem; font-size: .8rem; margin-top: 1rem; }
+.not-found .secondary-actions span { color: var(--muted); }
+.not-found .kadisha-note { text-align: center; margin: 1.5rem 0 2rem; }
+.not-found .kadisha-link { color: var(--muted); font-size: .75rem; }
+.not-found .page-footer { border-top: 1px solid var(--line); padding: 1.75rem 1.25rem; background: var(--surface); }
+.not-found .footer-heading { margin-bottom: 1.5rem; }
+.not-found .footer-heading h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; line-height: 1.4; }
+.not-found .footer-heading p { color: var(--muted); font-size: .8rem; margin: .3rem 0; }
+.not-found .sitemap-columns { display: grid; grid-template-columns: 1fr 1.5fr 1.2fr; gap: 2rem; }
+.not-found .sitemap-columns nav { display: flex; flex-direction: column; gap: .4rem; font-size: .8rem; }
+.not-found .sitemap-columns h3 { color: var(--muted); font-size: .75rem; font-weight: 500; margin: 0 0 .5rem; }
+.not-found .sitemap-columns a { width: fit-content; text-decoration: none; }
+.not-found .sitemap-columns a:hover { text-decoration: underline; }
+.not-found .story-index { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem; }
+.not-found .story-index details { border-block: 1px solid var(--line); font-size: .8rem; }
+.not-found .story-index summary { padding: .8rem 0; cursor: pointer; }
+.not-found .story-index ul { display: grid; gap: .6rem; list-style: none; padding: 0 1rem 1rem; margin: 0; }
+.not-found .story-index a { font-size: .75rem; }
+
+@keyframes nf-intro { 0%,11.25%{max-height:700px;opacity:1;transform:translateY(0)}16.2%{max-height:700px;opacity:0;transform:translateY(100%)}16.25%,100%{max-height:0;opacity:0;transform:translateY(100%)} }
+@keyframes nf-gathering { 0%,16.2%{max-height:0;opacity:0;transform:translateY(0)}16.25%,22.5%{max-height:700px;opacity:1;transform:translateY(0)}27.45%{max-height:700px;opacity:0;transform:translateY(100%)}27.5%,100%{max-height:0;opacity:0;transform:translateY(100%)} }
+@keyframes nf-prayer { 0%,27.45%{max-height:0;opacity:0;transform:translateY(0)}27.5%,47.5%{max-height:700px;opacity:1;transform:translateY(0)}53.7%{max-height:700px;opacity:0;transform:translateY(100%)}53.75%,100%{max-height:0;opacity:0;transform:translateY(100%)} }
+@keyframes nf-comfort { 0%,53.7%{max-height:0;opacity:0;transform:translateY(0)}53.75%,73.75%{max-height:700px;opacity:1;transform:translateY(0)}79.95%{max-height:700px;opacity:0;transform:translateY(100%)}80%,100%{max-height:0;opacity:0;transform:translateY(100%)} }
+@keyframes nf-amen { 0%,79.95%{max-height:0;opacity:0;transform:translateY(0)}80%,86.25%{max-height:700px;opacity:1;transform:translateY(0)}92.5%{max-height:700px;opacity:0;transform:translateY(100%)}92.55%,100%{max-height:0;opacity:0;transform:translateY(100%)} }
+@keyframes nf-search { 0%,27%,100%{transform:translate(0,0)}31%{transform:translate(2px,-2px)}39%{transform:translate(calc(var(--dx)*.15),3px)}48%{transform:translate(var(--dx),var(--dy))}59%{transform:translate(calc(var(--dx)*-.6),calc(var(--dy)*.5))}69%{transform:translate(calc(var(--dx)*.7),calc(var(--dy)*-.3))}79%{transform:translate(calc(var(--dx)*-.25),-8px)}89%{transform:translate(0,0)} }
+@keyframes nf-shuffle { 0%,28%,90%,100%{transform:rotate(0)}35%{transform:rotate(-3deg)}40%,50%,60%,70%,80%{transform:rotate(8deg) translateY(-7px)}45%,55%,65%,75%,85%{transform:rotate(-8deg) translateY(0)} }
+@keyframes nf-look { 0%,22%,94%,100%{transform:translateX(-50%) rotate(0)}28%,38%,60%,76%{transform:translateX(-50%) rotate(-10deg)}33%,48%,66%,84%{transform:translateX(-50%) rotate(12deg)} }
+@keyframes nf-remarks { 0%,22%{opacity:1;transform:translateY(0)}26%,100%{opacity:0;transform:translateY(4px)} }
+@keyframes nf-lost { 0%,32%,88%,100%{opacity:0}36%,82%{opacity:1} }
+@keyframes nf-float { to{transform:translateX(16px)} }
+
+@media (max-width: 1000px) and (min-width: 701px) {
+  .not-found .participant { width: 92px; height: 97px; }
+  .not-found .portrait { height: 77px; }
+  .not-found .head { width: 77px; height: 77px; }
+  .not-found .prompt-line { font-size: 16px; }
+  .not-found .prompt-intro { font-size: 15px; }
+  .not-found .reading-invitation { font-size: 23px; }
+}
+@media (max-width: 700px) {
+  .page-404 main.wrap { padding-inline: .6rem; padding-top: 1.25rem; }
+  .not-found h1 { font-size: 5rem; }
+  .not-found .gematria { font-size: .9rem; }
+  .not-found .scene-controls { font-size: .65rem; }
+  .not-found .reading-controls { gap: .35rem; }
+  .not-found .pause-control { padding: .2rem .35rem; }
+  .not-found .stage { min-height: 430px; }
+  .not-found .participant { width: 58px; height: 69px; left: var(--mx); top: var(--my); }
+  .not-found .walker { animation-name: nf-search-mobile; }
+  .not-found .portrait { height: 53px; }
+  .not-found .head { width: 53px; height: 53px; }
+  .not-found .character-name { font-size: 9px; margin-top: 3px; }
+  .not-found .teleprompter { width: calc(100% - 130px); padding-top: 16px; }
+  .not-found .reading-invitation { font-size: 19px; line-height: 1.5; }
+  .not-found .prompt-line { font-size: 15px; line-height: 1.75; padding-inline: 2px; }
+  .not-found .prompt-intro { font-size: 14px; }
+  .not-found .prompt-amen { font-size: 35px; }
+  .not-found .memorial { width: 133px; }
+  .not-found .tombstone { width: 133px; height: 157px; }
+  .not-found .cloud { width: 96px; height: 47px; left: 2%; }
+  .not-found .cloud-second { width: 85px; height: 41px; right: 1%; left: auto; }
+  .not-found .speech { max-width: 91px; font-size: 8px; padding: 4px 6px; }
+  .not-found .speech-plan { left: 0; top: 3%; }
+  .not-found .speech-code { left: auto; right: 0; top: 20%; }
+  .not-found .speech-qa { left: 0; top: 53%; }
+  .not-found .speech-chef { left: 0; top: 83%; }
+  .not-found .speech-data { left: auto; right: 0; top: 63%; }
+  .not-found .speech-support { left: 0; top: 69%; }
+  .not-found .speech-lost { left: calc(50% - 62px); }
+  .not-found figcaption span { display: block; }
+  .not-found .primary-actions { gap: .5rem; }
+  .not-found .button { font-size: .8rem; padding: .6rem .75rem; gap: .4rem; }
+  .not-found .button span:last-child { margin-inline-start: 0; }
+  .not-found .secondary-actions { font-size: .75rem; }
+  .not-found .page-footer { padding: 1.5rem .75rem; }
+  .not-found .footer-heading h2 { font-size: 1.7rem; }
+  .not-found .sitemap-columns { grid-template-columns: 1fr 1.3fr; gap: 1.5rem 1rem; }
+  .not-found .sitemap-columns nav:last-child { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; }
+  .not-found .sitemap-columns nav:last-child h3 { grid-column: 1 / -1; }
+  .not-found .story-index { grid-template-columns: 1fr; gap: .75rem; }
+}
+@media (max-width: 370px) {
+  .not-found .teleprompter { width: calc(100% - 118px); }
+  .not-found .prompt-line { font-size: 14px; }
+  .not-found .prompt-intro { font-size: 13px; }
+  .not-found .reading-invitation { font-size: 18px; }
+  .not-found .reading-controls { width: 100%; justify-content: space-between; }
+}
+@keyframes nf-search-mobile { 0%,27%,100%{transform:translate(0,0)}39%{transform:translate(1px,-2px)}48%{transform:translate(calc(var(--dx)*.08),calc(var(--dy)*.35))}59%{transform:translate(calc(var(--dx)*-.06),calc(var(--dy)*.25))}69%{transform:translate(calc(var(--dx)*.06),calc(var(--dy)*-.2))}79%{transform:translate(calc(var(--dx)*-.04),-6px)}89%{transform:translate(0,0)} }
+
+/* Static reading changes the layout, rather than leaving text clipped in a stopped viewport. */
+.not-found .ceremony:has(#read-static:checked) .stage { display: grid; grid-template-columns: repeat(7,minmax(0,1fr)); gap: 15px 0; min-height: 0; padding-top: 18px; overflow: visible; }
+.not-found .ceremony:has(#read-static:checked) .stage * { animation: none !important; }
+.not-found .ceremony:has(#read-static:checked) .teleprompter { grid-column: 1 / -1; order: -2; width: min(100%,540px); padding-top: 0; }
+.not-found .ceremony:has(#read-static:checked) .prompt-window { overflow: visible; mask-image: none; background: none; }
+.not-found .ceremony:has(#read-static:checked) .prompt-block { max-height: none; overflow: visible; opacity: 1; transform: none; margin-bottom: 28px; }
+.not-found .ceremony:has(#read-static:checked) .participant { position: static; width: 100%; transform: none; }
+.not-found .ceremony:has(#read-static:checked) .cloud, .not-found .ceremony:has(#read-static:checked) .speech, .not-found .ceremony:has(#read-static:checked) .stage-rule { display: none; }
+@media (max-width: 700px) { .not-found .ceremony:has(#read-static:checked) .stage { grid-template-columns: repeat(5,minmax(0,1fr)); } }
+@media (prefers-reduced-motion: reduce) {
+  .not-found .stage { display: grid; grid-template-columns: repeat(7,minmax(0,1fr)); gap: 15px 0; min-height: 0; padding-top: 18px; overflow: visible; }
+  .not-found .stage * { animation: none !important; }
+  .not-found .teleprompter { grid-column: 1 / -1; order: -2; width: min(100%,540px); padding-top: 0; }
+  .not-found .prompt-window { overflow: visible; mask-image: none; background: none; }
+  .not-found .prompt-block { max-height: none; overflow: visible; opacity: 1; transform: none; margin-bottom: 28px; }
+  .not-found .participant { position: static; width: 100%; transform: none; }
+  .not-found .cloud, .not-found .speech, .not-found .stage-rule, .not-found .reading-controls { display: none; }
+  .not-found .motion-note { display: block; }
+}
+@media (prefers-reduced-motion: reduce) and (max-width: 700px) { .not-found .stage { grid-template-columns: repeat(5,minmax(0,1fr)); } }
+@media (forced-colors: active) { .not-found .sprite { forced-color-adjust: none; } .not-found .prompt-window { mask-image: none; } }

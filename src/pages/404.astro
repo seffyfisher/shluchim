@@ -1,0 +1,139 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/not-found.css';
+import shluchim from '../data/shluchim.json';
+import { TOPICS, TOPIC_SLUGS } from '../data/topics.mjs';
+import { lurl } from '../i18n/ui';
+import { getPosts, postUrl } from '../lib/posts';
+
+// Still portraits keep the pause and reduced-motion controls in charge of all movement.
+const portraits = import.meta.glob<string>('../assets/shluchim/*-still.webp', { eager: true, query: '?url', import: 'default' });
+const positions: Record<string, string> = {
+  "basher": "--x:24%;--y:20%;--mx:7%;--my:12%;--z:3;--dx:65px;--dy:-28px;--delay:0s",
+  "hiba": "--x:9%;--y:27%;--mx:7%;--my:28%;--z:2;--dx:50px;--dy:35px;--delay:-0.4s",
+  "kinneret": "--x:75%;--y:19%;--mx:93%;--my:12%;--z:2;--dx:-54px;--dy:30px;--delay:-0.8s",
+  "ben": "--x:76%;--y:44%;--mx:93%;--my:43%;--z:2;--dx:-67px;--dy:-20px;--delay:-1.2s",
+  "nitza": "--x:23%;--y:41%;--mx:7%;--my:44%;--z:2;--dx:-48px;--dy:25px;--delay:-0.2s",
+  "kochava": "--x:86%;--y:30%;--mx:93%;--my:28%;--z:2;--dx:65px;--dy:-16px;--delay:-1s",
+  "dima": "--x:24%;--y:66%;--mx:7%;--my:61%;--z:6;--dx:-56px;--dy:16px;--delay:-0.5s",
+  "anali": "--x:75%;--y:66%;--mx:93%;--my:61%;--z:6;--dx:65px;--dy:-25px;--delay:-0.7s",
+  "shaltiel": "--x:9%;--y:55%;--mx:7%;--my:76%;--z:6;--dx:60px;--dy:-20px;--delay:-0.9s",
+  "shon": "--x:94%;--y:53%;--mx:93%;--my:76%;--z:3;--dx:-65px;--dy:35px;--delay:-1.1s",
+  "chef": "--x:8%;--y:83%;--mx:7%;--my:89%;--z:7;--dx:70px;--dy:-30px;--delay:-0.3s",
+  "shlomby": "--x:88%;--y:83%;--mx:93%;--my:89%;--z:7;--dx:-85px;--dy:-25px;--delay:-1.3s",
+  "eran": "--x:28%;--y:88%;--mx:27%;--my:93%;--z:7;--dx:65px;--dy:-30px;--delay:-0.6s"
+};
+const people = shluchim.map((person, index) => {
+  const image = portraits[`../assets/${person.still}`];
+  if (!image) throw new Error(`Missing 404 portrait: ${person.still}`);
+  return { ...person, image, position: positions[person.id] ?? `--x:${index % 2 ? 88 : 12}%;--y:${20 + (index % 5) * 15}%;--mx:${index % 2 ? 93 : 7}%;--my:${20 + (index % 5) * 15}%;--dx:30px;--dy:-15px;--delay:0s` };
+});
+const sceneDescription = `הראשים המקוריים של כל ${people.length} השְׁלוּחִים — ${people.map((person) => person.name).join(', ')} — סביב מצבת דפדפן עם 404. הנוסח מופיע לפי סדר הקריאה ונע מטה.`;
+const [hePosts, enPosts] = await Promise.all([getPosts('he'), getPosts('en')]);
+const siteLinks = [
+  { name: 'דף הבית', path: '' }, { name: 'השְׁלוּחִים', path: 'team/' },
+  { name: 'בני אנוש', path: 'friends/' }, { name: 'אודות', path: 'about/' },
+];
+const englishLinks = [
+  { name: 'Home & stories', path: '' }, { name: 'The Shluchim', path: 'team/' },
+  { name: 'Humans', path: 'friends/' }, { name: 'About', path: 'about/' },
+];
+---
+<Base lang="he" bodyClass="page-404" title="קדש" seoTitle="קדש: העמוד לא נמצא (404) · שְׁלוּחִים"
+  description="העמוד שחיפשת כבר לא איתנו. כל השְׁלוּחִים התכנסו לקד(י)ש קטן, ומכאן אפשר לחזור לדף הבית, לצוות ולכל המעשיות בעברית ובאנגלית.">
+  <div class="not-found">
+    <header class="hero">
+      <p class="eyebrow"><span aria-hidden="true">✦</span> לזכר העמוד האבוד <span aria-hidden="true">✦</span></p>
+      <h1>קדש</h1>
+      <p class="gematria"><strong><bdi>404</bdi> בגמטריא = קד(י)ש</strong></p>
+    </header>
+    <figure class="ceremony" aria-labelledby="scene-caption">
+      <div class="scene-controls">
+        <p class="scene-note"><span class="live-dot" aria-hidden="true"></span> כל הצוות הגיע. העמוד פחות.</p>
+        <div class="reading-controls">
+          <div class="pause-control"><input type="checkbox" id="pause"><label for="pause">עצירת האנימציה</label></div>
+          <div class="pause-control"><input type="checkbox" id="read-static"><label for="read-static">קריאה ללא גלילה</label></div>
+        </div>
+      </div>
+      <div class="stage" role="group" aria-label={sceneDescription}>
+        <div class="cloud sprite" style="--col:3;--row:3" aria-hidden="true"></div>
+        <div class="cloud cloud-second sprite" style="--col:3;--row:3" aria-hidden="true"></div>
+        <span class="stage-rule" aria-hidden="true"></span>
+        {people.map((person) => (
+          <div class="participant" data-character={person.id} style={person.position} aria-hidden="true" title={`${person.name}: ${person.role}`}>
+            <div class="walker"><div class="portrait"><img class="head" src={person.image} width="128" height="128" alt="" decoding="async" /></div><span class="character-name">{person.name}</span></div>
+          </div>
+        ))}
+        <section class="teleprompter" aria-labelledby="reading-invitation">
+          <p class="reading-invitation" id="reading-invitation">מוזמנים להקריא את זה בראש.</p>
+          <div class="prompt-window">
+            <div class="prompt-block prompt-block-intro">
+              <p class="prompt-line prompt-intro">העמוד שחיפשת כבר לא איתנו.</p>
+              <p class="prompt-line prompt-intro">אולי הוא הוסר,</p>
+              <p class="prompt-line prompt-intro">אולי הועבר,</p>
+              <p class="prompt-line prompt-intro">ואולי פשוט הלך לעולם שכולו טוב.</p>
+            </div>
+            <div class="prompt-block prompt-block-gathering">
+              <p class="prompt-line prompt-intro">לזכרו, כינסנו את כל השלוחים</p>
+              <p class="prompt-line prompt-intro">ואמרנו עליו קד(י)ש קטן:</p>
+            </div>
+            <div class="prompt-block prompt-block-prayer">
+              <p class="prompt-line"><strong>יתגדל ויתקדש שמיה דהאתר,</strong></p>
+              <p class="prompt-line">ויהא זכרו של העמוד האבוד שמור עמנו,</p>
+              <p class="prompt-line">אף כי לא נטען,</p>
+              <p class="prompt-line">אף כי לא נמצא,</p>
+              <p class="prompt-line">אף כי החזיר ארבע-מאות-וארבע.</p>
+            </div>
+            <div class="prompt-block prompt-block-comfort">
+              <p class="prompt-line">המקום ינחם את מחפשי הדפים,</p>
+              <p class="prompt-line">וישיב את כולנו בשלום</p>
+              <p class="prompt-line">אל דף הבית,</p>
+              <p class="prompt-line">אל החיפוש,</p>
+              <p class="prompt-line">או לפחות אל מקום שכן עובד.</p>
+            </div>
+            <div class="prompt-block prompt-block-amen">
+              <p class="prompt-line prompt-amen"><strong>אמן.</strong></p>
+            </div>
+          </div>
+        <div class="memorial" aria-hidden="true">
+          <div class="tombstone sprite" style="--col:1;--row:3"></div>
+          <p class="last-seen" dir="ltr">Last seen: /old-page</p>
+          <p class="ribbon">נלחץ הרבה, נטען מעט</p>
+        </div>
+        </section>
+        <div class="speech speech-qa">״זה היה אמור להיתפס<br>לפני פרודקשן״<span>דימה</span></div>
+        <div class="speech speech-code">״אצלי זה עובד״<span>כוכבה</span></div>
+        <div class="speech speech-chef">״מי רוצה בורקס?״<span>שף</span></div>
+        <div class="speech speech-plan">״לא היה לזה<br><bdi>acceptance criteria</bdi>״<span>באשר</span></div>
+        <div class="speech speech-data">״יש פה <bdi>spike</bdi><br>ב־<bdi>exit rate</bdi>״<span>אנאלי</span></div>
+        <div class="speech speech-support">״אנחנו כאן אם תרצו<br>עמוד חלופי״<span>שאלתיאל</span></div>
+        <div class="speech speech-lost">״רגע, איפה העמוד?״</div>
+      </div>
+      <figcaption id="scene-caption">הלך, אך לא נשכח. <span>בעיקר כי דימה כבר פתח טיקט.</span></figcaption>
+      <p class="motion-note">בהעדפת תנועה מופחתת, הנוסח מוצג במלואו ללא גלילה.</p>
+    </figure>
+    <nav class="return-nav" aria-label="לחזור למקום שעובד">
+      <div class="primary-actions">
+        <a class="button button-primary" href={lurl('he')}><span class="star-icon" aria-hidden="true"></span> חזרה לדף הבית <span aria-hidden="true">←</span></a>
+        <a class="button button-secondary" href={lurl('he', 'team/')}><span class="star-icon" aria-hidden="true"></span> לעמוד השלוחים <span aria-hidden="true">←</span></a>
+      </div>
+      <div class="secondary-actions">
+        <a href={`${lurl('he')}#stories`}>לרשימת המעשיות</a><span aria-hidden="true">·</span>
+        <a href={lurl('he', 'friends/')}>לבני האנוש</a>
+      </div>
+    </nav>
+    <p class="kadisha-note"><a class="kadisha-link" href="https://he.wikipedia.org/wiki/%D7%97%D7%91%D7%A8%D7%94_%D7%A7%D7%93%D7%99%D7%A9%D7%90" target="_blank" rel="noopener noreferrer">עוד על חברה קדישא <span class="external-icon" aria-hidden="true"></span></a></p>
+    <section class="page-footer" aria-labelledby="all-pages-heading">
+      <div class="footer-heading"><h2 id="all-pages-heading">מכאן, כל הקישורים בחיים.</h2><p>לכל העמודים, המעשיות והנושאים שלנו.</p></div>
+      <div class="sitemap-columns">
+        <nav aria-label="האתר"><h3>האתר</h3>{siteLinks.map((link) => <a href={lurl('he', link.path)}>{link.name}</a>)}<a href={`${lurl('he')}#stories`}>רשימת המעשיות</a></nav>
+        <nav aria-label="הנושאים"><h3>הנושאים</h3>{TOPIC_SLUGS.map((slug) => <a href={lurl('he', `topics/${slug}/`)}>{TOPICS[slug as keyof typeof TOPICS].he.label}</a>)}</nav>
+        <nav lang="en" dir="ltr" aria-label="In English"><h3>In English</h3>{englishLinks.map((link) => <a href={lurl('en', link.path)}>{link.name}</a>)}{TOPIC_SLUGS.map((slug) => <a href={lurl('en', `topics/${slug}/`)}>{TOPICS[slug as keyof typeof TOPICS].en.label}</a>)}</nav>
+      </div>
+      <div class="story-index">
+        <details><summary>כל המעשיות בעברית ({hePosts.length})</summary><ul>{hePosts.map((post) => <li><a href={postUrl(post)}>{post.data.title}</a></li>)}</ul></details>
+        <details lang="en" dir="ltr"><summary>All stories in English ({enPosts.length})</summary><ul>{enPosts.map((post) => <li><a href={postUrl(post)}>{post.data.title}</a></li>)}</ul></details>
+      </div>
+    </section>
+  </div>
+</Base>
