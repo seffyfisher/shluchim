@@ -27,10 +27,14 @@ test('gtag.js is not requested while the page is loading', () => {
   assert.equal(typeof listeners.load, 'function', 'waits for the load event');
 });
 
-test('after load it still waits for an idle moment, then appends one async script', () => {
-  const { appended, listeners, idleQueue } = run();
+test('after load it waits five seconds and then an idle moment before requesting gtag.js', () => {
+  const { appended, listeners, idleQueue, timers } = run();
   listeners.load();
   assert.equal(appended.length, 0, 'nothing is appended straight from the load event');
+  assert.equal(timers.length, 1);
+  assert.equal(timers[0].ms, 5000);
+  assert.equal(idleQueue.length, 0);
+  timers[0].fn();
   assert.equal(idleQueue.length, 1);
   assert.equal(idleQueue[0].opts?.timeout, undefined, 'never forces the download into a busy interval');
   idleQueue[0].fn();
@@ -45,15 +49,20 @@ test('without requestIdleCallback it falls back to a timer, not to loading at on
   listeners.load();
   assert.equal(appended.length, 0);
   assert.equal(timers.length, 1);
-  assert.ok(timers[0].ms >= 1000);
+  assert.equal(timers[0].ms, 5000);
   timers[0].fn();
+  assert.equal(timers.length, 2);
+  assert.ok(timers[1].ms >= 1000);
+  timers[1].fn();
   assert.equal(appended.length, 1);
 });
 
-test('a page that is already complete schedules the idle load without waiting for load', () => {
-  const { appended, listeners, idleQueue } = run({ readyState: 'complete' });
+test('a page that is already complete schedules the settling period without waiting for load', () => {
+  const { appended, listeners, idleQueue, timers } = run({ readyState: 'complete' });
   assert.equal(listeners.load, undefined);
   assert.equal(appended.length, 0);
+  assert.equal(timers.length, 1);
+  timers[0].fn();
   assert.equal(idleQueue.length, 1);
 });
 
@@ -78,9 +87,11 @@ test('advertising identifiers and personalization are disabled before gtag.js lo
 });
 
 test('a repeated load notification cannot request the library twice', () => {
-  const { appended, listeners, idleQueue } = run();
+  const { appended, listeners, idleQueue, timers } = run();
   listeners.load();
   listeners.load();
+  assert.equal(timers.length, 1);
+  timers[0].fn();
   for (const task of idleQueue) task.fn();
   assert.equal(appended.length, 1);
 });

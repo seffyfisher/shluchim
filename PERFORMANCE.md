@@ -11,7 +11,7 @@ The uploaded October 12, 2026 mobile Lighthouse 13.4.1 report scored Performance
 ## Repository changes
 
 - GA4 keeps first-party page and audience measurement, with `allow_google_signals: false` and `allow_ad_personalization_signals: false`. This removes advertising and demographic/interest features. [Google configuration reference](https://developers.google.com/analytics/devguides/collection/ga4/reference/config).
-- Its library waits for `window.load` and `requestIdleCallback`, without a forced idle timeout. Browsers without that API wait another 3 seconds. The script is async and has low fetch priority. It is initialized once; custom events stay queued.
+- Its library waits for `window.load`, then a five-second settling period and `requestIdleCallback`, without a forced idle timeout. Browsers without that API wait another 3 seconds. The script is async and has low fetch priority. It is initialized once; custom events stay queued.
 - This prioritizes page loading, but Google's library still needs bandwidth and main-thread execution after download. Short visits and persistently busy pages can go uncounted. Deferring cannot promise zero interaction cost or remove Google's unused code.
 - Hebrew and English display fonts are preloaded, and fonts and team avatars use Vite's content-hashed `/_astro/` URLs. The same font URL appears in CSS and its preload, avoiding a duplicate fetch.
 - Avatars live in `src/assets/shluchim/`; the shared `Avatar.astro` renders them with no client JS. Reduced-motion users still receive a still image. The build also emits the former `/shluchim/*.webp` and display-font URLs from these same source files so cached older HTML keeps working.
