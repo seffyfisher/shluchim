@@ -5,7 +5,7 @@ seoTitle: "Work Outlook in Grok Bot without a connector"
 seoDescription: "My company blocked the Outlook connector, so I signed in once in my AI agent's browser. It got my work email and calendar, with no password shared."
 topics: ["grok-bot", "ai-at-work"]
 date: 2026-10-09
-draft: false
+draft: true
 lang: en
 translationKey: "2026-10-09-work-outlook-browser"
 ---

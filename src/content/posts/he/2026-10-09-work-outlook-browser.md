@@ -6,7 +6,7 @@ seoTitle: "מייל ויומן של העבודה ב־Grok Bot, בלי קונקט
 seoDescription: "הארגון חסם את הקונקטור של Outlook, אז התחברתי פעם אחת בדפדפן של השלוח. קיבלתי מייל ויומן של העבודה, בלי קונקטור ובלי למסור סיסמה."
 topics: ["grok-bot", "ai-at-work"]
 date: 2026-10-09
-draft: false
+draft: true
 lang: he
 translationKey: "2026-10-09-work-outlook-browser"
 ---
