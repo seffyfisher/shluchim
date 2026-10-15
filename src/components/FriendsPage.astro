@@ -56,7 +56,6 @@ const jsonLd = [
         <p>{he ? friend.text : friend.textEn}</p>
         <ul class="friend-links" aria-label={he ? `קישורים של ${friend.name}` : `Links for ${friend.nameEn}`}>
           {friend.links.map((link) => <li><a href={link.url} target="_blank" rel="noopener">{he ? link.he : link.en}<span aria-hidden="true"> ↗</span></a></li>)}
-          <li><a class="photo-source" href={friendPortraits[friend.id].source} target="_blank" rel="noopener">{he ? 'מקור התמונה' : 'Photo source'}</a></li>
         </ul>
         {friendPortraits[friend.id].photographer && <p class="photo-credit">{he ? `צילום: ${friendPortraits[friend.id].photographer}` : 'Photo: Dana Barak'}</p>}
       </li>
@@ -105,7 +104,6 @@ const jsonLd = [
   .friend p { margin: 0 0 1rem; max-width: 42ch; }
   .friend-links { display: flex; flex-wrap: wrap; gap: .3rem 1rem; list-style: none; padding: 0; margin: auto 0 0; font-size: var(--step--1); }
   .friend-links a { display: inline-flex; gap: .2rem; align-items: center; min-height: 2.75rem; }
-  .friend-links .photo-source { color: var(--muted); font-size: .8125rem; }
   .friend .photo-credit { color: var(--muted); font-size: .8125rem; margin: .25rem 0 0; }
   .connections { background: var(--surface); padding: clamp(1.25rem, 3vw, 2.5rem); border-inline-start: 3px solid var(--fg); }
   .connections h2 { font-family: var(--font-display); font-weight: 400; font-size: var(--step-2); }
