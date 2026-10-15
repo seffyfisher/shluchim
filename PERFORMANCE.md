@@ -1,5 +1,20 @@
 # Lighthouse delivery and analytics
 
+## Font-loading fallback correction (October 15, 2026)
+
+The [first live font audit](https://github.com/seffyfisher/shluchim/actions/runs/38801304141)
+confirmed both WOFF2 files returned HTTP 200, but the reminders article shifted
+by 0.179 CLS when Leon replaced the system fallback. Delaying the fonts by 1.5
+seconds reproduced the same shift at 412px with DejaVu Sans. Arial reduced that
+case to 0.0011 CLS and kept the article's vertical position unchanged; it is now
+the explicit fallback for running text and the feedback toast. Leon and all
+heading fonts remain unchanged. Delayed loading was also checked on the other
+four release routes at 320px, 412px and 1280px.
+
+Changed files: `src/styles/global.css`, `public/feedback-toast.html` and this
+note. The first live audit also retained the existing 14,400-second asset cache
+TTL failure; the font fallback correction does not alter hosting settings.
+
 ## Leon Product font verification (October 15, 2026)
 
 Running text uses the supplied Leon Product Regular and Bold, losslessly converted

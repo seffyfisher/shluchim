@@ -40,7 +40,7 @@
   --code-bg:  light-dark(#ffffff, #0d0d0d);
   /* type */
   --font-system: system-ui, sans-serif; /* Preserve the existing heading fonts and fallbacks. */
-  --font: 'Leon Product', var(--font-system);
+  --font: 'Leon Product', Arial, sans-serif; /* Arial keeps Hebrew wrapping stable while Leon downloads. */
   --font-display: 'Noa Shalev', 'Noa Shalev Fallback', var(--font-system); /* Hebrew display headings */
   --step--1: 0.9375rem;
   --step-0: 1.125rem;
