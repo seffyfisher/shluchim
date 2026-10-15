@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "source": "https://www.spreaker.com/show/7465546/episodes/feed",
+  "updatedAt": "2026-10-15T13:47:28Z",
+  "episodes": [
+    {
+      "guid": "https://api.spreaker.com/episode/75804362",
+      "title": "עורו, שמיים. | פרק 1",
+      "published": "2026-10-15T10:06:06Z",
+      "durationSeconds": 315,
+      "number": 1,
+      "language": "he",
+      "description": "",
+      "pageUrl": "https://shluchim.shinlamed.com/posts/2026-10-13-wake-up-sky/",
+      "audioUrl": "https://api.spreaker.com/download/episode/75804362/eps1_upload.mp3",
+      "audioType": "audio/mpeg"
+    }
+  ]
+}

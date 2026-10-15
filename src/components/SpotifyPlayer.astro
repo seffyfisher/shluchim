@@ -1,0 +1,66 @@
+---
+import '../styles/podcast.css';
+interface Props { kind: 'show' | 'episode'; spotifyId: string; title: string }
+const { kind, spotifyId, title } = Astro.props;
+if (!/^[A-Za-z0-9]{22}$/.test(spotifyId)) throw new Error('Invalid Spotify ID');
+const src = `https://open.spotify.com/embed/${kind}/${spotifyId}?utm_source=generator`;
+---
+<div class="spotify-player" data-src={src} data-title={title}>
+  <div class="spotify-stage">
+    <div class="spotify-placeholder">
+      <svg class="podcast-play" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="15" stroke="currentColor" /><path d="m13 10 9 6-9 6V10Z" fill="currentColor" /></svg>
+      <button class="podcast-button spotify-load" type="button" hidden>טעינת נגן Spotify<span class="sr-only">: {title}</span></button>
+      <p class="spotify-privacy">הנגן של Spotify נטען רק לאחר לחיצה. ההאזנה מתחילה בנגן.</p>
+      <noscript><p>אפשר להאזין דרך הקישורים שמתחת לנגן.</p></noscript>
+    </div>
+  </div>
+  <p class="spotify-status" role="status" aria-live="polite"></p>
+</div>
+<script>
+  // A click is required before contacting Spotify. CSS cannot create an iframe,
+  // handle a stalled network request, or offer a retry. All presentation is CSS.
+  document.querySelectorAll<HTMLElement>('.spotify-player').forEach((player) => {
+    const button = player.querySelector<HTMLButtonElement>('.spotify-load')!;
+    const stage = player.querySelector<HTMLElement>('.spotify-stage')!;
+    const status = player.querySelector<HTMLElement>('.spotify-status')!;
+    button.hidden = false;
+    let attempt = 0;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    button.addEventListener('click', () => {
+      const current = ++attempt;
+      clearTimeout(timer);
+      stage.querySelector('iframe')?.remove();
+      player.dataset.state = 'loading';
+      status.textContent = 'טוענים את הנגן של Spotify…';
+      button.disabled = true;
+      const iframe = document.createElement('iframe');
+      iframe.src = player.dataset.src!;
+      iframe.title = player.dataset.title!;
+      iframe.width = '100%';
+      iframe.height = '152';
+      iframe.allow = 'encrypted-media; fullscreen; picture-in-picture';
+      iframe.allowFullscreen = true;
+      const fail = () => {
+        if (current !== attempt) return;
+        ++attempt;
+        clearTimeout(timer);
+        iframe.remove();
+        player.dataset.state = 'error';
+        status.textContent = 'הנגן מתעכב או לא זמין. אפשר לנסות שוב, או להאזין בקישור הישיר שמתחת.';
+        button.disabled = false;
+        button.firstChild!.textContent = 'לנסות לטעון שוב';
+      };
+      iframe.addEventListener('load', () => {
+        if (current !== attempt) return;
+        clearTimeout(timer);
+        player.dataset.state = 'loaded';
+        status.textContent = 'מסגרת הנגן נטענה. אם אין נגן, אפשר להאזין בקישור הישיר שמתחת.';
+        // Keyboard activation moves naturally into the newly available player.
+        iframe.focus({ preventScroll: true });
+      }, { once: true });
+      iframe.addEventListener('error', fail, { once: true });
+      timer = setTimeout(fail, 15000);
+      stage.append(iframe);
+    });
+  });
+</script>

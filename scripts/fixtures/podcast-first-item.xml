@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test fixture reconstructed from the first item's cloud-browser-verified
+     metadata on 2026-10-15. This is not a verbatim capture of the full RSS. -->
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+  <channel>
+    <title>שְׁלוּחִים</title>
+    <language>he</language>
+    <item>
+      <guid isPermaLink="false">https://api.spreaker.com/episode/75804362</guid>
+      <title>עורו, שמיים. | פרק 1</title>
+      <pubDate>Thu, 15 Oct 2026 10:06:06 +0000</pubDate>
+      <link>https://shluchim.shinlamed.com/posts/2026-10-13-wake-up-sky/</link>
+      <enclosure url="https://api.spreaker.com/download/episode/75804362/eps1_upload.mp3" type="audio/mpeg" length="7540235" />
+      <itunes:duration>315</itunes:duration>
+      <itunes:episode>1</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+      <itunes:explicit>false</itunes:explicit>
+    </item>
+  </channel>
+</rss>
