@@ -133,7 +133,7 @@ main { padding-block: 2.5rem 4rem; }
 
 /* ---------- post ---------- */
 .post-head { padding-bottom: 1.75rem; margin-bottom: 2rem; border-bottom: 2px solid var(--rule); }
-.post-head h1 { font-family: var(--font-display); font-size: calc(var(--step-3) * 1.1); font-weight: 400; line-height: 1.15; margin-block: .5rem .75rem; }
+.post-head h1 { font-family: var(--font-display); font-size: calc(var(--step-3) * 1.1); font-weight: 400; line-height: 1.15; margin-block: .5rem .75rem; overflow-wrap: anywhere; }
 .lede { margin: 0; color: var(--muted); font-size: var(--step-1); line-height: 1.55; max-width: 52ch; }
 .cover { display: block; width: 100%; height: auto; border-radius: var(--radius); margin-bottom: 2rem; background: var(--surface); }
 
