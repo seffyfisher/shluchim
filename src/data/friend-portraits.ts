@@ -1,6 +1,8 @@
 // Public profile portraits selected from each creator's site/profile or speaker page, 2026-10-12.
 // Keep the original URLs and publishing pages together so attribution survives future image changes.
-// Images are served from their original hosts; no generated likenesses or third-party news photos.
+// Remote portraits use their original hosts; Or Kantor's approved crop is bundled locally.
+// No generated likenesses or third-party news photos.
+import orKantorPortrait from '../assets/creators/or-kantor-portrait.jpg?url';
 interface Portrait {
   src: string;
   source: string;
@@ -68,5 +70,11 @@ export const friendPortraits: Record<string, Portrait> = {
   'dorit-singer': {
     src: 'https://clave.co.il/wp-content/uploads/2021/06/Asset-80.png',
     source: 'https://clave.co.il/', sourceName: 'CLAVE',
+  },
+  'or-kantor': {
+    // Faithful close crop of the approved official portrait:
+    // https://static.wixstatic.com/media/2fb31b_84a66c1022a849e28199edadebea5645~mv2.jpg
+    src: orKantorPortrait,
+    source: 'https://www.orkantor.com/about-5-1', sourceName: 'Or Kantor',
   },
 };

@@ -63,4 +63,9 @@ export const friends = [
     text: 'סטוריטלר לשיווק מספר 1, מבחינתי. ב־CLAVE היא כותבת ומשתפת ידע על סטוריטלינג, שיווק ואיקומרס.',
     textEn: 'My number-one marketing storyteller. At CLAVE she writes and shares insights on storytelling, marketing and e-commerce.',
     links: [{ he: 'CLAVE', en: 'CLAVE', url: 'https://clave.co.il/' }, { he: 'הבלוג', en: 'Blog', url: 'https://clave.co.il/%D7%91%D7%9C%D7%95%D7%92/' }] },
+  // Official biography checked 2026-10-14: https://www.orkantor.com/about-5-1.
+  { id: 'or-kantor', silhouette: 'male' as const, pastel: '#BCD8CD', theme: 'יוצרים', themeEn: 'Creators', name: 'אור קנטור', nameEn: 'Or Kantor',
+    text: 'אמן רב־תחומי ומקעקע. התחיל את דרכו בקעקועים ומשלב מהם אלמנטים באמנות שלו: ציור באקריליק על קנבס, גואש על נייר, רישום והדפס.',
+    textEn: 'A multidisciplinary artist and tattooist. He began in tattooing and brings elements of it into his art: acrylic on canvas, gouache on paper, drawing and printmaking.',
+    links: [{ he: 'האתר והעבודות', en: 'Website and work', url: 'https://www.orkantor.com/' }] },
 ];
