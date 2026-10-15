@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "source": "https://www.spreaker.com/show/7465546/episodes/feed",
-  "updatedAt": "2026-10-15T13:47:28Z",
+  "updatedAt": "2026-10-15T14:32:44.896483Z",
   "episodes": [
     {
       "guid": "https://api.spreaker.com/episode/75804362",
@@ -10,7 +10,7 @@
       "durationSeconds": 315,
       "number": 1,
       "language": "he",
-      "description": "",
+      "description": "ישבתי במשרד ודיברתי עם ״שמיים״ שעתיים וחצי: ביקשתי פיצ׳רים ותיקונים, יצאתי לקפה וחזרתי לעדכונים על עבודה שכבר הסתיימה. בפרק הראשון של שְׁלוּחִים אני מספר איך נראית עבודה בקול עם ChatGPT ו־Codex, ומה עוד חסר לי כדי לדבר ככה שעות: קצת אופי וחוש הומור. הפוסט המקורי בבלוג שלוחים:…",
       "pageUrl": "https://shluchim.shinlamed.com/posts/2026-10-13-wake-up-sky/",
       "audioUrl": "https://api.spreaker.com/download/episode/75804362/eps1_upload.mp3",
       "audioType": "audio/mpeg"
