@@ -1,5 +1,33 @@
 # Lighthouse delivery and analytics
 
+## Leon Product font verification (October 15, 2026)
+
+Running text uses the supplied Leon Product Regular and Bold, losslessly converted
+from OTF to WOFF2 (21,472 and 21,128 bytes). Both weights use hashed asset URLs
+and matching preloads. Heading families, weights, sizes and line heights remain
+unchanged, checked in Chromium across all 75 non-admin HTML pages. The standalone
+feedback toast uses a public alias of the same Bold font.
+
+`npm ci`, `npm test`, `npm run seo:check`, `npm run build` and `npm run perf:check`
+passed in the Linux cloud workspace with Node 24.19.0, Chromium 154 and Lighthouse
+13.4.1 mobile defaults against the local production preview. Each route scored
+100 in all three runs, with cumulative layout shift below 0.005:
+
+| Route | Performance (three runs) |
+| --- | --- |
+| `/` | 100, 100, 100 |
+| `/en/` | 100, 100, 100 |
+| `/posts/2026-10-06-reminders-shaliach/` | 100, 100, 100 |
+| `/podcast/` | 100, 100, 100 |
+| `/posts/2026-10-13-wake-up-sky/` | 100, 100, 100 |
+
+Changed files: `src/fonts/Leon-ProductRegular.woff2`,
+`src/fonts/Leon-ProductBold.woff2`, `src/styles/global.css`,
+`src/styles/feedback.css`, `src/layouts/Base.astro`,
+`src/components/FriendsPage.astro`, `public/feedback-toast.html`,
+`astro.config.mjs`, `README.md` and this verification note. These are local
+measurements; a live audit follows deployment under the existing release guard.
+
 ## Release guard (October 13, 2026)
 
 The uploaded October 13 mobile Lighthouse 13.4.1 report scored **96 / 100 / 100 / 100**. FCP and LCP were 1.8 s; Total Blocking Time was 197 ms. The two long tasks attributed to `gtag.js` (192 ms and 105 ms) account for the blocking time after first paint. The report also shows Cloudflare RUM injected into the page and a four-hour browser TTL on hashed `/_astro/` assets. The previous score of 100 is a measurement, not a guarantee for later runs.

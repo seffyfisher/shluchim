@@ -1,4 +1,16 @@
 @font-face {
+  font-family: 'Leon Product';
+  src: url('../fonts/Leon-ProductRegular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Leon Product';
+  src: url('../fonts/Leon-ProductBold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
   font-family: 'Noa Shalev';
   src: url('../fonts/noa-shalev-regular-AlefAlefAlef.woff2') format('woff2');
   font-weight: 400;
@@ -27,8 +39,9 @@
   --badge-fg: var(--fg);
   --code-bg:  light-dark(#ffffff, #0d0d0d);
   /* type */
-  --font: system-ui, sans-serif;
-  --font-display: 'Noa Shalev', 'Noa Shalev Fallback', var(--font); /* Hebrew display headings */
+  --font-system: system-ui, sans-serif; /* Preserve the existing heading fonts and fallbacks. */
+  --font: 'Leon Product', var(--font-system);
+  --font-display: 'Noa Shalev', 'Noa Shalev Fallback', var(--font-system); /* Hebrew display headings */
   --step--1: 0.9375rem;
   --step-0: 1.125rem;
   --step-1: 1.3125rem;
@@ -68,6 +81,7 @@ a:hover { text-decoration-thickness: 2px; }
 .skip { position: absolute; inset-inline-start: -999px; top: 0; }
 .skip:focus { inset-inline-start: 1rem; top: 1rem; background: var(--bg); color: var(--fg); padding: .5rem 1rem; z-index: 10; }
 
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-system); }
 h1, h2, h3 { font-weight: 600; line-height: 1.3; text-wrap: balance; margin: 0; }
 p, li { text-wrap: pretty; }
 
@@ -213,7 +227,7 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 .shaliach { display: flex; flex-direction: column; align-items: flex-start; gap: .35rem; min-width: 0; }
 .avatar { display: block; width: 6rem; height: 6rem; object-fit: contain; background: none; border: 0; border-radius: 0; box-shadow: none; }
 @media (min-width: 40rem) { .avatar { width: 7rem; height: 7rem; } }
-.roster .shaliach h3 { font-family: var(--font); font-weight: 600; font-size: var(--step-1); margin-top: .5rem; overflow-wrap: anywhere; }
+.roster .shaliach h3 { font-family: var(--font-system); font-weight: 600; font-size: var(--step-1); margin-top: .5rem; overflow-wrap: anywhere; }
 .shaliach p { margin: 0; color: var(--muted); font-size: var(--step--1); line-height: 1.55; }
 .shaliach p.example { font-size: .8rem; padding-top: .35rem; border-top: 1px dashed var(--line); margin-top: .15rem; }
 
@@ -227,7 +241,7 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 .about .prose h1 { font-family: var(--font-display); font-weight: 400; font-size: calc(var(--step-3) * 1.1); line-height: 1.15; margin-block: 0 2rem; padding-bottom: 1.75rem; border-bottom: 2px solid var(--rule); }
 .about .prose h2 { font-family: var(--font-display); font-weight: 400; font-size: calc(var(--step-2) * 1.1); }
 .about .prose a[href^="mailto"] { unicode-bidi: isolate; }
-.about .prose h2:has(+ small) { font-family: var(--font); font-weight: 600; font-size: var(--step-1); color: var(--muted); margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--line); margin-bottom: .75rem; }
+.about .prose h2:has(+ small) { font-family: var(--font-system); font-weight: 600; font-size: var(--step-1); color: var(--muted); margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--line); margin-bottom: .75rem; }
 .about .prose small { display: block; font-size: var(--step--1); line-height: 1.6; color: var(--muted); }
 .about .prose small > * { margin-block: 0 .6em; }
 .about .prose small p, .about .prose small li { font-size: inherit; }
@@ -396,7 +410,7 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 .card .about-line a { color: var(--fg); text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); }
 .card .about-line a:hover { text-decoration-color: currentColor; }
 .card .about-line .evrit-logo { display: inline-block; width: auto; height: .75em; vertical-align: baseline; color: light-dark(#000, #fff); }
-.card h2 { font-family: var(--font); font-weight: 600; font-size: var(--step-1); line-height: 1.3; margin: 0; overflow-wrap: anywhere; }
+.card h2 { font-family: var(--font-system); font-weight: 600; font-size: var(--step-1); line-height: 1.3; margin: 0; overflow-wrap: anywhere; }
 /* The avatar art looks to the right. In Hebrew it sits at the right edge of the card, so mirror it to face the text (English already faces inward). */
 :root[dir="rtl"] .card .avatar { transform: scaleX(-1); }
 .card .example { font-size: .8rem; padding-top: .35rem; border-top: 1px dashed var(--line); }
