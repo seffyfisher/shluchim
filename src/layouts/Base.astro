@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import heDisplayFontUrl from '../fonts/noa-shalev-regular-AlefAlefAlef.woff2?url';
 import enDisplayFontUrl from '../fonts/young-serif-400.woff2?url';
+import bodyFontUrl from '../fonts/Leon-ProductRegular.woff2?url';
+import boldFontUrl from '../fonts/Leon-ProductBold.woff2?url';
 import { SITES, SHOW_DRAFTS, SHOW_SWITCHER_ON_HE, PERSON, SEO_HOME, SEO_KEYWORDS, OG_IMAGE, VERIFY, GA_MEASUREMENT_ID } from '../config';
 import { TOPICS, TOPIC_SLUGS } from '../data/topics.mjs';
 import { LANG_META, lurl, other, t, isLang, type Lang } from '../i18n/ui';
@@ -73,6 +75,8 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141414" />
     <script is:inline>try { const saved = localStorage.getItem('shluchim-theme'); if (saved === 'light' || saved === 'dark') { document.documentElement.dataset.theme = saved; document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => meta.setAttribute('content', saved === 'dark' ? '#141414' : '#fafafa')); } } catch { /* storage may be disabled */ }</script>
     <link rel="preload" href={lang === 'he' ? heDisplayFontUrl : enDisplayFontUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={bodyFontUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={boldFontUrl} as="font" type="font/woff2" crossorigin />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={SITE.title} />
     <meta property="og:url" content={canonical} />

@@ -1,6 +1,6 @@
 /* Feedback block: one tap. Tokens come from the site's global.css: --fg --bg --muted --line --radius. Zero JS. */
 .fb { --fb-fill-hover: light-dark(#ebebeb, #2a2a2a); --fb-edge: light-dark(#8c8c8c, #767676); --fb-focus: light-dark(#595959, #a3a3a3); margin-block: clamp(2rem, 5vw, 3rem) 0; padding-block: 1.25rem 0; border-top: 1px solid var(--line); max-width: 40rem; }
-.fb h2 { font-family: 'Noa Shalev', var(--font); font-weight: 400; font-size: var(--step-1); line-height: 1.25; margin: 0; }
+.fb h2 { font-family: 'Noa Shalev', var(--font-system); font-weight: 400; font-size: var(--step-1); line-height: 1.25; margin: 0; }
 .fb-form { margin-top: 1rem; display: grid; gap: .5rem; }
 /* the two answers: radio chips. Picking one (pointer) moves focus to the message (one inline handler, see the component). */
 .fb-rate { display: flex; flex-wrap: wrap; gap: .6rem; }
@@ -39,7 +39,7 @@
 .fb.sent .fb-form { display: none; }
 .fb-dlg { max-width: min(26rem, calc(100vw - 2.5rem)); padding: 1.6rem 1.5rem 1.2rem; border: 1px solid var(--line); border-radius: calc(var(--radius) * 2); background: var(--bg); color: var(--fg); box-shadow: 0 18px 50px -20px rgb(0 0 0 / .5); text-align: center; }
 .fb-dlg::backdrop { background: rgb(0 0 0 / .45); }
-.fb-dlg-t { margin: 0 0 1.1rem; font-family: 'Noa Shalev', var(--font); font-size: var(--step-1); line-height: 1.35; }
+.fb-dlg-t { margin: 0 0 1.1rem; font-family: 'Noa Shalev', var(--font-system); font-size: var(--step-1); line-height: 1.35; }
 .fb-dlg.bad .fb-dlg-t { font-family: var(--font); font-size: var(--step-0); }
 .fb-dlg form { margin: 0; }
 .fb-dlg-x { font: inherit; font-weight: 600; min-height: 2.75rem; padding-inline: 1.5rem; border: 1px solid var(--fg); border-radius: 999px; background: var(--fg); color: var(--bg); cursor: pointer; }
