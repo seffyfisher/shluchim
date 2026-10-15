@@ -1,0 +1,16 @@
+---
+import SpotifyPlayer from './SpotifyPlayer.astro';
+import { lurl } from '../i18n/ui';
+import type { Episode } from '../data/podcast';
+interface Props { episode: Episode }
+const { episode } = Astro.props;
+---
+<aside class="podcast-listen" aria-labelledby="podcast-listen-heading">
+  <div class="podcast-listen-head">
+    <h2 id="podcast-listen-heading">מעדיפים להקשיב?</h2>
+    <p class="meta">{episode.number && <span>פרק {episode.number}</span>}<span><bdi>{episode.duration}</bdi> דקות</span></p>
+  </div>
+  <p class="podcast-note">המעשיה הזאת גם בגרסת שמע. הקריינות מופקת בעזרת בינה מלאכותית.</p>
+  <SpotifyPlayer kind="episode" spotifyId={episode.spotifyId} title={`Spotify: ${episode.title}`} />
+  <p class="podcast-links"><a href={episode.spotifyUrl} target="_blank" rel="noopener">האזנה לפרק ב־Spotify<span class="sr-only"> (בטאב חדש)</span></a><a href={lurl('he', 'podcast/')}>לעמוד הפודקסט</a></p>
+</aside>

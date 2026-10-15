@@ -1,0 +1,95 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import SpotifyPlayer from '../components/SpotifyPlayer.astro';
+import Avatar from '../components/Avatar.astro';
+import shluchim from '../data/shluchim.json';
+import { PODCAST, episodeForGuid, validatePodcastAssociations, validateEpisodeEnrichment } from '../data/podcast';
+import feedSnapshot from '../data/podcast-feed.json';
+import { podcastArchive, podcastDuration } from '../lib/podcast-archive';
+import { lurl } from '../i18n/ui';
+import { formatDate, getPosts, postUrl } from '../lib/posts';
+import { breadcrumbNode, nodeIds, pageNode } from '../lib/seo';
+const episodes = podcastArchive(feedSnapshot);
+const studioGuests = ['basher', 'kinneret'].map((id) => shluchim.find((shaliach) => shaliach.id === id)!);
+validateEpisodeEnrichment(episodes.map((episode) => episode.guid));
+validatePodcastAssociations((await getCollection('posts')).map((p) => p.id));
+const description = 'המעשיות של שְׁלוּחִים בגרסת שמע, בקריינות בינה מלאכותית. האזנה ב־Spotify וב־Apple Podcasts, והפרק הראשון: ״עורו, שמיים.״, 5:14 דקות.';
+const abs = (p: string) => new URL(p, Astro.site).href;
+const pageUrl = abs(lurl('he', 'podcast/'));
+const seriesId = `${pageUrl}#series`;
+const ids = nodeIds(abs(lurl('he')), abs(lurl('he')));
+// An exact published canonical URL is an explicit feed association; titles are never compared.
+const publishedPosts = [...await getPosts('he'), ...await getPosts('en')].filter((post) => !post.data.draft);
+const postsByCanonical = new Map(publishedPosts.map((post) => [abs(postUrl(post)), post]));
+const jsonLd = [
+  pageNode({ type: 'WebPage', url: pageUrl, name: 'הפודקסט', description, lang: 'he', websiteId: ids.website, mainEntityId: seriesId }),
+  { '@type': 'PodcastSeries', '@id': seriesId, name: PODCAST.name, url: pageUrl, inLanguage: 'he', description, author: { '@id': ids.person }, sameAs: [PODCAST.spotifyUrl, PODCAST.appleUrl], webFeed: PODCAST.feedUrl },
+  ...episodes.map((episode) => {
+    const verified = episodeForGuid(episode.guid);
+    const post = postsByCanonical.get(episode.pageUrl);
+    return { '@type': 'PodcastEpisode', '@id': `${pageUrl}#episode-${encodeURIComponent(episode.guid)}`,
+      name: episode.title, url: verified?.spotifyUrl ?? episode.pageUrl,
+      datePublished: episode.published, inLanguage: episode.language,
+      ...(verified?.number || episode.number ? { episodeNumber: verified?.number ?? episode.number } : {}),
+      ...(episode.durationSeconds ? { duration: `PT${episode.durationSeconds}S` } : {}),
+      description: verified?.description ?? episode.description, partOfSeries: { '@id': seriesId },
+      associatedMedia: { '@type': 'AudioObject', contentUrl: episode.audioUrl, encodingFormat: episode.audioType },
+      ...(post ? { isBasedOn: abs(postUrl(post)) } : verified?.postPath ? { isBasedOn: abs(lurl('he', verified.postPath)) } : {}),
+    };
+  }),
+  breadcrumbNode([{ name: 'שְׁלוּחִים', url: abs(lurl('he')) }, { name: 'הפודקסט', url: pageUrl }]),
+];
+---
+<Base lang="he" title="הפודקסט" seoTitle="הפודקסט של שְׁלוּחִים · מעשיות בגרסת שמע" description={description} jsonLd={jsonLd} bodyClass="page-podcast">
+  <link slot="head" rel="alternate" type="application/rss+xml" title="שְׁלוּחִים — הפודקסט" href={PODCAST.feedUrl} />
+  <header class="post-head podcast-studio-head">
+    <div>
+      <p class="meta podcast-studio-kicker">מהמעשיות אל המיקרופון.</p>
+      <h1>הפודקסט</h1>
+      <p class="lede">המעשיות מהבלוג, בגרסת שמע.</p>
+      <p class="podcast-note">הקריינות מופקת בעזרת בינה מלאכותית.</p>
+    </div>
+    <div class="podcast-studio-art" aria-hidden="true">
+      <div class="podcast-studio-guests">{studioGuests.map((guest) => <Avatar avatar={guest.still} still={guest.still} loading="eager" />)}</div>
+      {/* Static decoration: these marks never represent playback or audio level. */}
+      <div class="podcast-studio-wave">{[10, 20, 14, 28, 36, 22, 12, 30, 18, 8].map((height) => <span style={`--bar:${height}px`}></span>)}</div>
+    </div>
+  </header>
+  <section class="podcast-show" aria-labelledby="podcast-show-heading">
+    <h2 id="podcast-show-heading">מקשיבים ב־Spotify</h2>
+    <SpotifyPlayer kind="show" spotifyId={PODCAST.spotifyShowId} title="Spotify: הפודקסט של שְׁלוּחִים" />
+    <p class="podcast-links"><a href={PODCAST.spotifyUrl} target="_blank" rel="noopener">פתיחה ב־Spotify<span class="sr-only"> (בטאב חדש)</span></a><a href={PODCAST.appleUrl} target="_blank" rel="noopener">Apple Podcasts<span class="sr-only"> (בטאב חדש)</span></a><a href={PODCAST.feedUrl} target="_blank" rel="noopener">RSS של הפודקסט<span class="sr-only"> (בטאב חדש)</span></a></p>
+  </section>
+  <section class="podcast-first" aria-labelledby="podcast-archive-heading">
+    <h2 id="podcast-archive-heading" class="list-label">כל הפרקים</h2>
+    <ol class="podcast-episodes">
+      {episodes.map((episode) => {
+        const verified = episodeForGuid(episode.guid);
+        const duration = podcastDuration(episode.durationSeconds);
+        const post = postsByCanonical.get(episode.pageUrl);
+        const pageHost = new URL(episode.pageUrl).hostname;
+        const spreakerUrl = verified?.spreakerUrl ?? (pageHost === 'spreaker.com' || pageHost.endsWith('.spreaker.com') ? episode.pageUrl : undefined);
+        const externalPage = pageHost !== Astro.site!.hostname;
+        return <li>
+          <article class="podcast-episode" data-episode-guid={episode.guid}>
+            <p class="meta"><time datetime={episode.published}>{formatDate(new Date(episode.published))}</time>{duration && <span><bdi>{duration}</bdi> דקות</span>}</p>
+            <h3>{episode.title}</h3>
+            {(verified?.description ?? episode.description) && <p>{verified?.description ?? episode.description}</p>}
+            {verified?.aiNarrated && <p class="podcast-note">קריינות בינה מלאכותית.</p>}
+            {verified && <details class="podcast-episode-player">
+              <summary>האזנה לפרק כאן</summary>
+              <SpotifyPlayer kind="episode" spotifyId={verified.spotifyId} title={`Spotify: ${verified.title}`} />
+            </details>}
+            <p class="podcast-links">
+              {verified && <a href={verified.spotifyUrl} target="_blank" rel="noopener">האזנה לפרק ב־Spotify<span class="sr-only"> (בטאב חדש)</span></a>}
+              {spreakerUrl && <a href={spreakerUrl} target="_blank" rel="noopener">האזנה באתר Spreaker<span class="sr-only"> (בטאב חדש)</span></a>}
+              {!verified && <a href={episode.audioUrl} target="_blank" rel="noopener">קובץ השמע מ־Spreaker<span class="sr-only"> (בטאב חדש)</span></a>}
+              {post ? <a href={postUrl(post)}>לקריאת ״{post.data.title}״</a> : verified?.postPath ? <a href={lurl('he', verified.postPath)}>לקריאת ״{verified.postTitle}״</a> : !spreakerUrl && <a href={episode.pageUrl} target={externalPage ? '_blank' : undefined} rel={externalPage ? 'noopener' : undefined}>לעמוד הפרק{externalPage && <span class="sr-only"> (בטאב חדש)</span>}</a>}
+            </p>
+          </article>
+        </li>;
+      })}
+    </ol>
+  </section>
+</Base>

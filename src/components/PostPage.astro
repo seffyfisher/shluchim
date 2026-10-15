@@ -4,6 +4,8 @@ import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import FeedbackBlock from './FeedbackBlock.astro';
 import IdeaBlock from './IdeaBlock.astro';
+import PodcastListen from './PodcastListen.astro';
+import { episodeForPost } from '../data/podcast';
 import { ideaPrompt } from '../lib/idea-prompt';
 import { imageLabels, imagePopover } from '../lib/image-viewer.mjs';
 import '../styles/image-viewer.css';
@@ -13,6 +15,7 @@ import { REPO, SITES, SEO_KEYWORDS, OG_IMAGE } from '../config';
 import { blogPostingNode, breadcrumbNode, nodeIds, withBrand, isoDate, wordCount } from '../lib/seo';
 interface Props { post: CollectionEntry<'posts'> }
 const { post } = Astro.props;
+const podcastEpisode = episodeForPost(post.id);
 const lang = langOf(post);
 const ui = t(lang);
 const { Content } = await render(post);
@@ -68,6 +71,7 @@ const jsonLd = [
       <h1>{d.title}</h1>
       <p class="lede">{d.description}</p>
     </header>
+    {podcastEpisode && <PodcastListen episode={podcastEpisode} />}
     {d.cover && <>
       <button class="image-enlarge image-enlarge-cover" type="button" popovertarget="post-cover" aria-label={imageLabels(lang).open}>
         <Image class="cover" src={d.cover} alt={d.coverAlt ?? ''} widths={[400, 800, 1200]} sizes="(max-width: 46rem) 100vw, 46rem" />

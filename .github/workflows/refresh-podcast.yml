@@ -1,0 +1,75 @@
+# Approved for activation with the podcast release, 2026-10-15.
+name: Refresh published podcast metadata
+
+on:
+  # Verify the real refresh immediately when this workflow is installed/changed.
+  push:
+    branches: [main]
+    paths: ['.github/workflows/refresh-podcast.yml']
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: podcast-metadata-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      SITE_URL: ${{ vars.SITE_URL }}
+      BASE_PATH: ${{ vars.BASE_PATH }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      # A fetch/parse error fails the job before any commit or deploy. Existing
+      # checked-in data and the last successful Pages deployment stay intact.
+      - run: npm run podcast:sync
+      - run: npm test
+      - run: npm run seo:check
+      - run: npm run build
+      - run: npm run perf:check
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: podcast-refresh-lighthouse
+          path: lighthouse-reports/
+          if-no-files-found: ignore
+      - name: Persist only the validated snapshot
+        run: |
+          if ! git diff --quiet -- src/data/podcast-feed.json; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add src/data/podcast-feed.json
+            git commit -m 'Refresh published podcast metadata from the official RSS'
+            git push origin HEAD:main
+          fi
+      - name: Request the guarded Pages build when main is not yet deployed
+        run: |
+          current="$(git rev-parse HEAD)"
+          deployed="$(gh api "repos/$GH_REPO/actions/workflows/deploy.yml/runs?branch=main&status=success&per_page=1" --jq '.workflow_runs[0].head_sha // ""')"
+          if [ "$current" != "$deployed" ]; then
+            gh workflow run deploy.yml --ref main
+          fi
+        # GITHUB_TOKEN pushes do not trigger push workflows. Explicit dispatch
+        # is necessary, and the existing deploy workflow repeats its build gate.
+        # This comparison also retries a previously failed dispatch/deployment on
+        # the next successful refresh even if the RSS data has not changed.

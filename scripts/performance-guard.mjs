@@ -7,7 +7,14 @@ import { createGzip } from 'node:zlib';
 
 // Use the same Lighthouse release and mobile defaults for every candidate.
 // Never block third-party requests or turn analytics off for the audit.
-const routes = ['/', '/en/', '/posts/2026-10-06-reminders-shaliach/'];
+const routeNames = {
+  '/': 'he-home',
+  '/en/': 'en-home',
+  '/posts/2026-10-06-reminders-shaliach/': 'he-post',
+  '/podcast/': 'he-podcast',
+  '/posts/2026-10-13-wake-up-sky/': 'he-podcast-post',
+};
+const routes = Object.keys(routeNames);
 const reportDir = resolve('lighthouse-reports');
 const buildDir = resolve('dist');
 const lighthouseCli = resolve('node_modules/lighthouse/cli/index.js');
@@ -65,7 +72,7 @@ async function startPreview() {
 const metricIds = ['first-contentful-paint', 'largest-contentful-paint', 'total-blocking-time', 'cumulative-layout-shift'];
 
 async function audit(baseUrl, route, runIndex) {
-  const name = route === '/' ? 'he-home' : route === '/en/' ? 'en-home' : 'he-post';
+  const name = routeNames[route];
   const report = resolve(reportDir, `${name}-${runIndex}.json`);
   const url = new URL(route.slice(1), baseUrl).href;
   await run(process.execPath, [

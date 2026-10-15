@@ -11,6 +11,11 @@ npm run build:drafts    # → dist-drafts/ with drafts + "טיוטה" badge (loc
 npm run preview:drafts  # serve dist-drafts/
 ```
 Requires Node ≥ 22.12 (on the box: `export PATH=~/.local/node22/bin:$PATH`).
+The podcast metadata tests and `npm run podcast:sync` also use Python 3's
+standard library (no Python packages). The native RSS-backed episode archive,
+exact post associations and approved hourly refresh/build workflow are described
+in [PODCAST.md](PODCAST.md). The refresh uses the existing GitHub Actions token
+and does not generate, upload or syndicate audio.
 
 Lighthouse delivery, GA4 trade-offs and the required Cloudflare cache/RUM rules: [PERFORMANCE.md](PERFORMANCE.md).
 
