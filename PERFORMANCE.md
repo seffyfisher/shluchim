@@ -248,6 +248,47 @@ font bytes and styles, so the priority hint is reverted. All three original
 font preloads retain their default priority. Hosting checks remain green, and
 the reader startup and analytics behavior remain unchanged.
 
+## Smaller reading fonts (October 16, 2026)
+
+The two full Polin faces transfer 77,944 bytes. The common-character copies
+transfer 41,832 bytes (46% less): Regular 20,972 and Extrabold 20,860. Both retain
+normal preload priority. No font size, weight, fallback metric or startup delay
+changes. The original full files remain unchanged.
+
+`src/fonts/polin-core.css` assigns disjoint Unicode ranges to the common copies
+and full originals, for each weight. All 729 original codepoints remain covered.
+The common copy keeps complete basic Latin, Hebrew/niqqud, Hebrew presentation,
+punctuation and currency ranges supported by the original, plus characters in
+current source content. Rare text downloads the original face on demand through
+CSS; no browser JavaScript is added.
+
+To regenerate, install `fonttools[woff]==4.67.0` and `brotli==1.2.0` in a temporary
+Python environment, then run `python scripts/generate-polin-core.py`. The
+generator preserves all layout features, hinting and global bounding boxes, compares outlines and
+horizontal/vertical metrics, checks name/license metadata, and records byte
+hashes and coverage in `src/fonts/polin-core.json`. Never replace the original
+faces with a subset or remove the full fallback.
+
+After a build, `npm run test:fonts` checks the validated hashes, initial font
+requests, exact Chromium glyph pixels at 18/32px for both weights and all core characters,
+real text geometry at 412/1440px across all five audited routes, and actual
+rare-character fallback requests before reference fonts are loaded. The unchanged
+Lighthouse guard runs separately, with real third parties enabled.
+
+The initial subset prototype recalculated its global bounds. The 18px raster
+comparison caught a Hebrew rendering difference that the 32px comparison missed.
+Retaining the original `head` and CFF bounding boxes resolves it; both sizes now
+match the original pixels. This check stays in CI.
+
+The [rollback's production run](https://github.com/seffyfisher/shluchim/actions/runs/38931917864)
+removed the large layout shifts but still measured medians 100/99/99/99/99,
+with reading-text LCP around 2.0–2.1s on the failing pages. Hosting checks passed.
+This separates the rejected priority change from the remaining download cost;
+the smaller-font candidate must pass the same live gate after deployment.
+
+References: [fontTools subsetting and retained layout/hinting](https://fonttools.readthedocs.io/en/latest/subset/index.html),
+[CSS unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@font-face/unicode-range).
+
 ## Cloudflare configuration (applied October 16, 2026)
 
 The origin is **GitHub Pages**. A `_headers` file or HTML meta tag cannot change its HTTP cache headers. The recurring failure came from a missing cache rule: the existing zone had no Cache Rules. Both rules below are now active, scoped only to `shluchim.shinlamed.com`. Live requests negotiated as HTML no longer contain RUM, and the previously failing hashed font returns `max-age=31536000`. HTML retains `max-age=600`. The repository does not control these external settings; keep these rules when changing hosting configuration.
