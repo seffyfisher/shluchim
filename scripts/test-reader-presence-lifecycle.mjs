@@ -115,25 +115,39 @@ try {
   const initialTiming = await Promise.all([first.page, second.page].map(page => page.evaluate(() => window.presenceFirstReadyMs)));
   assert.ok(initialTiming.every(ms => ms >= 450 && ms < 3000), `count short visits after load: ${initialTiming.join(', ')}ms`);
   console.log(`Initial reader sync after load: ${initialTiming.map(ms => Math.round(ms)).join(', ')}ms; both visible within a three-second visit`);
+  await first.page.waitForFunction(() => document.querySelector('[data-readers-crowd] [data-blinking]'), { timeout: 5000 });
+  const automaticBlink = await first.page.$('[data-readers-crowd] [data-blinking]');
+  await first.page.waitForFunction(svg => !svg.hasAttribute('data-blinking'), { timeout: 1000 }, automaticBlink);
   // Pixel checks catch missing SVG eye holes and inert animations; checking
   // only CSS/DOM would accept a moving mask that never reaches the body.
   injected = Object.fromEntries(Array.from({ length: 16 }, (_, i) => [`00000000-0000-4000-8000-${String(i).padStart(12, '0')}`, { metas: [{ phx_ref: `face-${i}` }] }]));
   broadcast(); await count(first.page, 18);
   const bandHeight = await first.page.$eval('[data-online-readers]', el => el.getBoundingClientRect().height);
-  const face = (await first.page.evaluateHandle(() => [...document.querySelectorAll('[data-readers-crowd] use')].find(use => /#eye-(?:1[6-9]|2[0-3])-0$/.test(use.getAttribute('href')))?.closest('svg'))).asElement();
+  const face = (await first.page.evaluateHandle(() => {
+    const original = [...document.querySelectorAll('[data-readers-crowd] use')].find(use => /#eye-(?:1[6-9]|2[0-3])-0$/.test(use.getAttribute('href')))?.closest('svg');
+    if (!original) return null;
+    // Seek CSS on a copy so the real idle scheduler cannot end the gesture
+    // while screenshots are captured. Both use the production SVG and CSS.
+    const copy = original.cloneNode(true), mask = copy.querySelector('mask');
+    mask.id += '-pixel-test';
+    copy.querySelector(':scope > use').setAttribute('mask', `url(#${mask.id})`);
+    copy.setAttribute('data-moving', '');
+    original.parentElement.append(copy);
+    return copy;
+  })).asElement();
   assert.ok(face, 'the crowd includes the upstream surprised expression');
   await face.scrollIntoView();
   await first.page.waitForFunction(svg => svg.hasAttribute('data-moving'), {}, face);
-  await face.evaluate(svg => { for (const animation of svg.getAnimations({ subtree: true })) {
+  await face.evaluate(svg => { svg.setAttribute('data-blinking', ''); svg.setAttribute('data-looking', ''); for (const animation of svg.getAnimations({ subtree: true })) {
     animation.pause(); animation.effect.updateTiming({ delay: 0 }); animation.currentTime = 0;
   } });
   const open = await face.screenshot();
   await face.evaluate(svg => { for (const animation of svg.getAnimations({ subtree: true })) {
-    if (animation.animationName === 'reader-blink') animation.currentTime = Number(animation.effect.getTiming().duration) * .2435;
+    if (animation.animationName === 'reader-blink') animation.currentTime = Number(animation.effect.getTiming().duration) * .45;
   } });
   const blink = await face.screenshot();
   await face.evaluate(svg => { for (const animation of svg.getAnimations({ subtree: true })) {
-    animation.currentTime = animation.animationName === 'reader-gaze' ? Number(animation.effect.getTiming().duration) * .25 : 0;
+    animation.currentTime = animation.animationName === 'reader-gaze' ? Number(animation.effect.getTiming().duration) * .26 : 0;
   } });
   const gaze = await face.screenshot();
   const mask = await face.$eval(':scope > use', use => { const mask = use.getAttribute('mask'); use.removeAttribute('mask'); return mask; });
@@ -150,6 +164,7 @@ try {
   await first.page.waitForFunction(() => !document.getAnimations().some(a => a.animationName?.startsWith('reader-')));
   const reducedPixels = await pixels(await face.screenshot());
   assert.ok(difference(reducedPixels, solidPixels) > 1000, 'reduced motion preserves open, visible eyes');
+  await face.evaluate(svg => svg.remove());
   await mkdir('preview-shots', { recursive: true });
   await Promise.all([writeFile('preview-shots/reader-eyes-open.png', open), writeFile('preview-shots/reader-eyes-blink.png', blink)]);
   await first.page.$eval('[data-readers-crowd]', crowd => { crowd.scrollLeft = 0; });

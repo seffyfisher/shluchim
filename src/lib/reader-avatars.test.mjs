@@ -61,7 +61,7 @@ test('malicious keys cannot inject markup, CSS or an external SVG URL', () => {
   const galleryState = gallery();
   galleryState.update(['<img src=x onerror=alert(1)>', '__proto__', 'javascript:alert(1)', '"; background: url(https://evil.invalid)']);
   for (const node of galleryState.children) {
-    assert.match(node.attributes.style, /^--reader-hue: [\d.]+; --reader-phase: -\d+ms; --reader-blink: \d+ms; --reader-gaze: \d+ms$/);
+    assert.match(node.attributes.style, /^--reader-hue: [\d.]+$/);
     const uses = descendants(node).filter(node => node.name === 'use');
     assert.equal(uses.length, 3);
     for (const use of uses) assert.match(use.attributes.href, /^\/_astro\/bloub\.svg#(?:body-[0-7]|eye-\d{1,3}-[01])$/);
@@ -71,10 +71,11 @@ test('malicious keys cannot inject markup, CSS or an external SVG URL', () => {
 
 test('one observer gates motion to visible icons, pauses in the background, and releases removed icons and listeners', () => {
   let callback;
-  const observed = new Set(), listeners = new Map();
+  const observed = new Set(), listeners = new Map(), timers = new Map();
+  let time = 0, timerId = 0;
   const doc = {
     visibilityState: 'visible',
-    defaultView: { IntersectionObserver: class {
+    defaultView: { performance: { now: () => time }, setTimeout: fn => { timers.set(++timerId, fn); return timerId; }, clearTimeout: id => timers.delete(id), IntersectionObserver: class {
       constructor(fn) { callback = fn; }
       observe(svg) { observed.add(svg); }
       unobserve(svg) { observed.delete(svg); }
@@ -90,15 +91,25 @@ test('one observer gates motion to visible icons, pauses in the background, and 
     }),
     createDocumentFragment: () => ({ append() {} }),
   };
-  const avatars = readerAvatars({ ownerDocument: doc, append() {} }, '/sprite.svg');
+  const avatars = readerAvatars({ ownerDocument: doc, append() {}, addEventListener() {}, removeEventListener() {} }, '/sprite.svg');
   avatars.update(Array.from({ length: 5000 }, (_, i) => `browser-${i}`));
   assert.equal(observed.size, MAX_READER_AVATARS);
   const [first, second, clipped] = observed;
   callback([{ target: first, isIntersecting: true }, { target: second, isIntersecting: true }, { target: clipped, isIntersecting: false }]);
   const isMoving = svg => 'data-moving' in svg.attributes;
   assert.deepEqual([first, second, clipped].map(isMoving), [true, true, false]);
+  assert.equal(timers.size, 1, 'one shared timer, even for a large crowd');
+  time = 3000;
+  const [nextTick] = timers.values(); timers.clear(); nextTick();
+  assert.ok('data-blinking' in first.attributes && 'data-blinking' in second.attributes);
+  assert.equal(timers.size, 1);
+  time = 3200;
+  const [finishBlink] = timers.values(); timers.clear(); finishBlink();
+  assert.ok(!('data-blinking' in first.attributes) && !('data-blinking' in second.attributes), 'finite gestures end without relying on SVG animation events');
+  assert.equal(timers.size, 1);
   doc.visibilityState = 'hidden'; listeners.get('visibilitychange')();
   assert.deepEqual([first, second].map(isMoving), [false, false]);
+  assert.equal(timers.size, 0, 'background motion has no active timer');
   doc.visibilityState = 'visible'; listeners.get('visibilitychange')();
   assert.deepEqual([first, second].map(isMoving), [true, true]);
   avatars.update([]);
@@ -108,10 +119,14 @@ test('one observer gates motion to visible icons, pauses in the background, and 
   avatars.update(['new']);
   const [next] = observed;
   callback([{ target: next, isIntersecting: true }]);
+  const [staleTick] = timers.values();
   avatars.dispose();
   assert.equal(observed.size, 0);
   assert.equal(listeners.size, 0);
+  assert.equal(timers.size, 0);
   assert.equal(isMoving(next), false);
   callback([{ target: next, isIntersecting: true }]);
+  staleTick();
   assert.equal(isMoving(next), false, 'a queued callback cannot revive a disposed gallery');
+  assert.equal(timers.size, 0);
 });

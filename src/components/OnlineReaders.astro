@@ -33,13 +33,13 @@ const { lang } = Astro.props;
   .readers-crowd { display: flex; align-items: center; gap: .375rem; flex: 1; min-inline-size: 0; block-size: 3rem; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }
   .readers-crowd:focus-visible { outline: 2px solid var(--fg); outline-offset: -2px; }
   [data-readers-overflow] { order: 1; flex: none; direction: ltr; color: var(--muted); font-size: .8125rem; }
-  .readers-crowd :global(svg) { inline-size: 2.5rem; block-size: 2.5rem; flex: none; color: light-dark(oklch(58% .18 var(--reader-hue)), oklch(76% .15 var(--reader-hue))); }
+  .readers-crowd :global(svg) { inline-size: 2.5rem; block-size: 2.5rem; flex: none; contain: strict; color: light-dark(oklch(58% .18 var(--reader-hue)), oklch(76% .15 var(--reader-hue))); }
   .readers-crowd :global(.reader-blink) { transform-box: fill-box; transform-origin: center; }
   @media (prefers-reduced-motion: no-preference) {
-    .online-readers[data-ready] .readers-crowd :global([data-moving] .reader-blink) { animation: reader-blink var(--reader-blink) linear var(--reader-phase) infinite; }
-    .online-readers[data-ready] .readers-crowd :global([data-moving] .reader-gaze) { animation: reader-gaze var(--reader-gaze) ease-in-out var(--reader-phase) infinite; }
+    .online-readers[data-ready] .readers-crowd :global([data-moving][data-blinking] .reader-blink) { animation: reader-blink .18s linear; }
+    .online-readers[data-ready] .readers-crowd :global([data-moving][data-looking] .reader-gaze) { animation: reader-gaze 1.2s steps(3, end); }
   }
   /* Bloub's idle life is gaze drift and a quick vertical blink, not floating bodies. */
-  @keyframes reader-blink { 0%,23%,26%,76%,79%,100% { transform: scaleY(1); } 24.35%,77.35% { transform: scaleY(.06); } }
+  @keyframes reader-blink { 0%,100% { transform: scaleY(1); } 45% { transform: scaleY(.06); } }
   @keyframes reader-gaze { 0%,100% { transform: translate(0, 0); } 25% { transform: translate(4px, -3px); } 50% { transform: translate(-4px, 2px); } 75% { transform: translate(2px, 3px); } }
 </style>
