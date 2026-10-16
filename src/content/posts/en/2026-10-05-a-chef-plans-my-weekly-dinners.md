@@ -62,7 +62,7 @@ including delivery, as a guest, without paying.
 Meanwhile, the pantry items went into an iHerb order.
 
 
-![Chef plans seven dinners, broccoli first, a doubled pot and cottage cheese in a cart awaiting payment.](/images/posts/chef-weekly-dinners-story-1672.webp)
+![Chef plans seven dinners, broccoli first, a doubled pot and cottage cheese in a cart awaiting payment.](/images/posts/chef-weekly-dinners-story-v2-1672.webp)
 
 
 ## What came out:

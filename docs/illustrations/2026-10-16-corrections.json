@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-16",
+  "site": "https://shluchim.shinlamed.com",
+  "reason": "Targeted user corrections to five already published illustrations.",
+  "edits": [
+    {
+      "key": "chef-weekly-dinners",
+      "source": "exec-eb68194a-f6e5-4625-bd74-66fd7eab367d.png",
+      "prompt": "Use case: precise-object-edit. Edit the supplied 16:9 Shluchim blog illustration. Change ONLY the chef's eyes: remove the duplicate pupil/black fragment in the eye on the viewer's right and make both eyes anatomically coherent designer-toy eyes, exactly ONE solid black pupil per eyeball, looking together sideways. Keep the same heavy half-closed eyelids, deadpan expression, eyebrows, chef identity, inflated white hat, moustache, head on base, peach background #F2D0B5, grocery basket, vegetables, cottage-cheese tub, phone, payment card and meal trays exactly as they are. No added objects. Preserve the composition, colors, framing, toy-clay material, native landscape resolution. No text, no logo, no watermark, no extra limbs. Inspect every eye for single-pupil consistency.",
+      "generated": "/Users/seffyfisher/.codex/generated_images/01a143de-83a1-7982-b260-600edb51ffa9/exec-06ca0e2e-270b-4394-b514-36244cb32510.png",
+      "tool": "built-in image_gen",
+      "images": [
+        "/images/posts/chef-weekly-dinners-story-v2-1672.webp",
+        "/images/posts/chef-weekly-dinners-story-v2-1024.webp"
+      ]
+    },
+    {
+      "key": "reminders-shaliach",
+      "source": "exec-0657c85b-189b-4ba0-aa43-b9190e71eae9.png",
+      "prompt": "Use case: precise-object-edit. Edit the supplied 16:9 Shluchim illustration. Replace ONLY the anthropomorphic alarm-clock character in the center with a NEW tired female secretary character in the blog's established 3D clay/vinyl designer-toy language. The secretary must be a nonhuman grey-stone round pear/blob HEAD on a tiny cylindrical base, no human body or clothing, no arms or hands. Oversized funny half-lidded sleepy eyes, exactly one simple black pupil in each eye looking sideways, expressive dark eyebrows and a small wry overworked mouth. Sculpted chunky dark hair in an untidy bun, tiny simple glasses and a paperclip-shaped hair accessory; she feels like an exhausted but capable secretary, not a real woman, not a realistic portrait, not a clock. Keep all surrounding props and their arrangement: birthday cakes at left, refund envelope and payment card at right, work reminder cards, converging plum/forest-green arrows, central tray of reminders and the completed reminder dissolving into confetti. Keep the original solid dusty-pink #ECCED0 background and original prop palette, soft even lighting and wide composition. No words, letters, logos, watermark, limbs or photo-realistic skin/hair. Only replace the central character.",
+      "generated": "/Users/seffyfisher/.codex/generated_images/01a143de-83a1-7982-b260-600edb51ffa9/exec-1fc42801-0a9b-4bed-97d9-90362b48e9bf.png",
+      "tool": "built-in image_gen",
+      "images": [
+        "/images/posts/reminders-shaliach-story-v2-1672.webp",
+        "/images/posts/reminders-shaliach-story-v2-1024.webp"
+      ]
+    },
+    {
+      "key": "clerk-auth-cost",
+      "source": "exec-8c7837dc-0618-4e3a-8a66-5de7ce89ebae.png",
+      "prompt": "Use case: precise-object-edit. Edit the supplied 16:9 Shluchim illustration. Replace ALL generic round person-icon tokens, especially the large pile on the right scale pan and the two chutes, with varied TINY Shluchim designer-toy heads. Each miniature head is a different nonhuman grey clay blob character with individual chunky hair, small hats, different glasses, moustaches or facial expressions; varied warm-grey faces with exactly TWO coherent eyes and ONE black pupil per eye. Use expressive little deadpan faces, no generic profile silhouettes and no stamped person icons. Keep the meaning: one isolated tiny head on the left pan versus a heavy crowd of distinct little heads on the right, with heads arriving from both phone and laptop. Preserve the main Anali character at left, her round glasses, black bun, orange clips and turquoise earrings, the orange-and-violet balance, devices, composition and solid pale-sage #D9E3CF background. The main character must not change. Maintain soft matte clay toy style, no text or logos, no bodies/arms/hands, no photorealism, no duplicated or malformed pupils. All miniature faces must be readable and varied.",
+      "generated": "/Users/seffyfisher/.codex/generated_images/01a143de-83a1-7982-b260-600edb51ffa9/exec-a0f0086f-be51-4086-a165-260242464bf5.png",
+      "tool": "built-in image_gen",
+      "images": [
+        "/images/posts/clerk-auth-cost-story-v2-1672.webp",
+        "/images/posts/clerk-auth-cost-story-v2-1024.webp"
+      ]
+    },
+    {
+      "key": "building-shluchim-blog",
+      "source": "exec-ebfe74f5-08d4-436b-a44d-bdcae9d8f9bf.png",
+      "prompt": "Use case: precise-object-edit. Make two precise corrections to the supplied 16:9 Shluchim illustration. (1) On Ben, the big male clay head in the pink cap at left, remove the stray dark crescents/circles immediately UNDER both eyes. Keep his normal eyelids, one black pupil in each eye, curled moustache, triangular goatee and single tooth unchanged. The cheeks below his eyes must be clean grey clay. (2) Correct the eyes on ALL SIX miniature heads in the web gallery at right: clean matching eye pairs, exactly one black pupil in each eye, pupils looking consistently in the same direction per head. Make the tiny pupils simple and clear with no duplicate black flecks or misplaced highlights; retain six different little characters and their hair/glasses. Preserve Kochava at center, Ben's identity, toy proportions, pink cap, glasses, book, beach phone/island props, gallery layout, cream #F2E8D4 background, lighting and overall composition. No new text, logos, limbs or objects. Do not change anything else.",
+      "generated": "/Users/seffyfisher/.codex/generated_images/01a143de-83a1-7982-b260-600edb51ffa9/exec-fe8a1021-aa16-4990-bfd6-68593625a8e9.png",
+      "tool": "built-in image_gen",
+      "images": [
+        "/images/posts/building-shluchim-blog-story-v2-1672.webp",
+        "/images/posts/building-shluchim-blog-story-v2-1024.webp"
+      ]
+    },
+    {
+      "key": "bar2go-pickup-points",
+      "source": "exec-1202a051-8460-46ae-9abd-2b06f0b2305c.png",
+      "refs": [
+        "/Users/seffyfisher/Documents/ChatGPT/shluchim 2/src/assets/shluchim/kochava-still.webp"
+      ],
+      "prompt": "Use case: style-transfer. Input 1 is the exact scene/edit target. Input 2 is Kochava's canonical character STYLE AND IDENTITY reference, not a scene to copy. Re-render Input 1 less realistically and much closer to Input 2 and the Shluchim cartoon designer-toy language. Keep the exact composition and story: Kochava's isolated grey clay head on a small base at left, oversized blue smartphone in center with a dark blank upper screen and a physical little street map unfolding from its low delivery drawer, three simple parcel boxes on colored discs, and a duplicate map on the small coral freestanding tab at right. Stylize Kochava with a rounder chunky blob head, big exaggerated half-lidded eyes with exactly one black pupil per eye, bold simple eyebrows, small cartoon nose and wry mouth, chunky sculpted BLACK BOB hair (broad solid clay locks, NO fine realistic hair strands), thick black rectangular glasses and the plain pink hair clip without symbol. Soft matte clay, clean broad shapes, simplified toy parcels/maps/devices; avoid real skin pores, realistic human anatomy, glass-photography highlights and realistic hair. Preserve the original pale-sand #F0DFC1 background, cobalt/coral/turquoise palette, all object positions, wide 16:9 framing and soft lighting. No text, logos, watermark, arms, hands or torso.",
+      "generated": "/Users/seffyfisher/.codex/generated_images/01a143de-83a1-7982-b260-600edb51ffa9/exec-13c61389-37c1-47b6-b868-16eb83f3548f.png",
+      "tool": "built-in image_gen",
+      "images": [
+        "/images/posts/bar2go-pickup-points-story-v2-1672.webp",
+        "/images/posts/bar2go-pickup-points-story-v2-1024.webp"
+      ]
+    }
+  ]
+}

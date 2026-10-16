@@ -79,7 +79,7 @@ seffy: תוסיף לבלוג את רשימת כל השלוחים עם apng או 
 ```
 
 
-![בן וכוכבה בונים את בית המעשיות, מהטלפון בחוף ועד עמוד הצוות.](/images/posts/building-shluchim-blog-story-1672.webp)
+![בן וכוכבה בונים את בית המעשיות, מהטלפון בחוף ועד עמוד הצוות.](/images/posts/building-shluchim-blog-story-v2-1672.webp)
 
 
 ## הרעיון בקיצור:

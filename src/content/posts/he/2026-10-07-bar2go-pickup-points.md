@@ -42,7 +42,7 @@ translationKey: "2026-10-07-bar2go-pickup-points"
 שאר הקופה לא נגעה.
 
 
-![כוכבה בוחנת מפה קטנה של נקודות איסוף לצד מחשב וחבילות.](/images/posts/bar2go-pickup-points-story-1672.webp)
+![כוכבה בוחנת מפה קטנה של נקודות איסוף לצד מחשב וחבילות.](/images/posts/bar2go-pickup-points-story-v2-1672.webp)
 
 
 ## הבדיקות:

@@ -35,6 +35,11 @@ jobs:
       - run: npm run build   # never SHOW_DRAFTS here
       - run: npm run test:story-loading # prevent below-fold art competing with initial content
       - run: npm run perf:check # mobile Lighthouse must score 100 before any deployment
+      - name: Check production hosting before deploying
+        if: github.event_name != 'pull_request'
+        env:
+          PERF_BASE_URL: ${{ vars.SITE_URL || 'https://shluchim.shinlamed.com/' }}
+        run: npm run perf:delivery
       - uses: actions/upload-artifact@v4
         if: always()
         with:

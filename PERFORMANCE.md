@@ -1,5 +1,31 @@
 # Lighthouse delivery and analytics
 
+## Recurring delivery failure (October 16, 2026)
+
+Production run [38879483519](https://github.com/seffyfisher/shluchim/actions/runs/38879483519)
+deployed successfully, then measured a median 98 Performance on each of the five
+release routes. Before the hosting correction, the hashed font response had `max-age=14400`,
+and the browser's network report contained Cloudflare RUM. These are hosting settings;
+the local build's fifteen scores of 100 do not verify them.
+
+The former delivery check missed RUM because a default Node fetch requests
+`Accept: */*`: Cloudflare does not inject the beacon into that representation.
+Requesting `Accept: text/html` reproduces the browser's injection. The delivery
+check now negotiates HTML, with a regression fixture that injects RUM only for
+HTML requests. Run it independently with `npm run perf:delivery` (override
+`PERF_BASE_URL` to inspect another deployment).
+
+The deployment workflow also checks the current production hosting before
+uploading a new version. A missing cache rule or renewed RUM injection therefore
+blocks the next deployment. The full local and post-deployment Lighthouse audits
+retain the same five routes, three runs, mobile defaults and 100 threshold.
+The Cloudflare rules below were applied separately in the existing zone on
+October 16. The repository guard detects configuration drift; it does not apply
+hosting settings or guarantee a live score of 100. The first live Mac audit after
+the hosting fix measured medians 100/100/99/100/100: the reminders page retained
+variable text-render timing (LCP 1.3–1.7 s). The delivery check passed. These
+measurements are retained separately from the final deployment audit.
+
 ## Editorial homepage: bounded illustration loading (October 16, 2026)
 
 The new featured card uses the guide's actual illustration, and desktop feed
@@ -162,9 +188,9 @@ The uploaded October 12, 2026 mobile Lighthouse 13.4.1 report scored Performance
 - Avatars live in `src/assets/shluchim/`; the shared `Avatar.astro` renders them with no client JS. Reduced-motion users still receive a still image. The build also emits the former `/shluchim/*.webp` and display-font URLs from these same source files so cached older HTML keeps working.
 - The homepage link's accessible name now includes the exact visible Hebrew title, including niqqud.
 
-## Cloudflare changes still required
+## Cloudflare configuration (applied October 16, 2026)
 
-The origin is **GitHub Pages**. A `_headers` file or HTML meta tag cannot change its HTTP cache headers. The supplied report shows Cloudflare returning only a 4-hour browser TTL. Apply these changes in the existing Cloudflare zone; they are not applied by this repository.
+The origin is **GitHub Pages**. A `_headers` file or HTML meta tag cannot change its HTTP cache headers. The recurring failure came from a missing cache rule: the existing zone had no Cache Rules. Both rules below are now active, scoped only to `shluchim.shinlamed.com`. Live requests negotiated as HTML no longer contain RUM, and the previously failing hashed font returns `max-age=31536000`. HTML retains `max-age=600`. The repository does not control these external settings; keep these rules when changing hosting configuration.
 
 1. **Cache Rule** matching:
 

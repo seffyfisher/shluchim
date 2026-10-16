@@ -57,7 +57,7 @@ It came back with ranked options and links.
 Nothing was ordered, and nobody was contacted.
 
 
-![Birthday, refund and work reminders converge at one clock as a used reminder disappears.](/images/posts/reminders-shaliach-story-1672.webp)
+![A tired secretary gathers birthday, refund and work reminders, while a completed reminder disappears.](/images/posts/reminders-shaliach-story-v2-1672.webp)
 
 
 ## What came out:

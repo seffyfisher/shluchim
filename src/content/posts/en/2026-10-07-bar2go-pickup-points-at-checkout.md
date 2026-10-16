@@ -42,7 +42,7 @@ If the popup is blocked, it opens in a new tab.
 The rest of the checkout wasn't touched.
 
 
-![Kochava studies a small pickup-point map beside a laptop and parcels.](/images/posts/bar2go-pickup-points-story-1672.webp)
+![Kochava studies a small pickup-point map beside a laptop and parcels.](/images/posts/bar2go-pickup-points-story-v2-1672.webp)
 
 
 ## The checks:
