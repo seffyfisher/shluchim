@@ -10,18 +10,40 @@ const { lang } = Astro.props;
   <img class="theme-moon" src={moon.src} alt="" aria-hidden="true" width="24" height="24" />
   <img class="theme-sun" src={sun.src} alt="" aria-hidden="true" width="24" height="24" />
 </button>
+<button class="theme-system" type="button" aria-label={lang === 'he' ? 'חזרה אוטומטית לערכת הנושא של המערכת' : 'Use system theme automatically'}>{lang === 'he' ? 'לפי המערכת' : 'System'}</button>
 <script>
+  const key = 'shluchim-theme';
   const preference = matchMedia('(prefers-color-scheme: dark)');
   const toggles = document.querySelectorAll<HTMLButtonElement>('.theme-toggle');
+  const systemButtons = document.querySelectorAll<HTMLButtonElement>('.theme-system');
+  type Theme = 'light' | 'dark' | null;
+  const parse = (value: string | null): Theme => value === 'light' || value === 'dark' ? value : null;
   const current = () => document.documentElement.dataset.theme || (preference.matches ? 'dark' : 'light');
   const sync = () => toggles.forEach((toggle) => toggle.setAttribute('aria-checked', String(current() === 'dark')));
+  const apply = (theme: Theme, persist = true) => {
+    if (theme) document.documentElement.dataset.theme = theme;
+    else delete document.documentElement.dataset.theme;
+    document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]').forEach((meta) => {
+      const dark = theme ? theme === 'dark' : (meta.getAttribute('media')?.includes('dark') ?? preference.matches);
+      meta.content = dark ? '#141414' : '#fafafa';
+    });
+    if (persist) try {
+      if (theme) localStorage.setItem(key, theme);
+      else localStorage.removeItem(key);
+    } catch { /* storage may be disabled; the current page still updates */ }
+    sync();
+  };
   sync();
   preference.addEventListener('change', sync);
   for (const toggle of toggles) toggle.addEventListener('click', () => {
-    const next = current() === 'dark' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = next;
-    document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]').forEach((meta) => { meta.content = next === 'dark' ? '#141414' : '#fafafa'; });
-    try { localStorage.setItem('shluchim-theme', next); } catch { /* storage may be disabled */ }
-    sync();
+    apply(current() === 'dark' ? 'light' : 'dark');
+  });
+  for (const button of systemButtons) button.addEventListener('click', () => {
+    apply(null);
+    button.parentElement?.querySelector<HTMLButtonElement>('.theme-toggle')?.focus();
+  });
+  // A choice made in another open blog tab should remain the same preference here.
+  window.addEventListener('storage', (event) => {
+    if (event.key === key || event.key === null) apply(parse(event.newValue), false);
   });
 </script>
