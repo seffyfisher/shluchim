@@ -136,7 +136,7 @@ including measurement requirements before an A/B test (a trial between two versi
 
 ![Before: the live ticket bundles page on mobile, four colorful bundles in a long list.](/images/posts/tickets-before-390.webp)
 
-![After: the prototype on mobile, with the headline "Your next book is already yours" and one recommended bundle at the top of the page.](/images/posts/tickets-after-390.webp)
+![After: the new ticket bundles page on mobile, with the headline "Read more, pay less" and a pink short-stories bundle at the top of the list.](/images/posts/tickets-after-776.webp)
 
 
 ## Why it was excellent:
