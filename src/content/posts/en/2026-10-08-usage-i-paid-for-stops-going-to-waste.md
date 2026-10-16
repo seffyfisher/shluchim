@@ -5,6 +5,7 @@ seoTitle: "Grok Bot usage alerts before your quota resets"
 seoDescription: "A routine that warns me before my Grok Bot and Cursor usage quotas reset, and stays quiet otherwise, so paid usage stops going to waste."
 topics: ["grok-bot", "everyday-ai"]
 date: 2026-10-08
+updated: 2026-10-16
 draft: false
 lang: en
 translationKey: "2026-10-08-usage-reset-alert"
@@ -33,6 +34,9 @@ a day or two before the weekly reset, and also close to the monthly one.
 Each run checks in the browser how much is left.
 If a lot is left, it writes to me and suggests tasks from the backlog (the task queue) worth running.
 If not, it stays quiet.
+
+
+![Basher redirects unused quota toward tasks before the hourglass runs out.](/images/posts/usage-reset-alert-story-1672.webp)
 
 
 ## Why this is excellent:

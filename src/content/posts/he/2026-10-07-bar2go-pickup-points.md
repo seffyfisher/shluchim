@@ -6,6 +6,7 @@ seoTitle: "נקודות איסוף Bar2Go בקופה, עם AI"
 seoDescription: "כוכבה, עוזרת AI לפיתוח, חקרה קודם את שלב המשלוח בקופה ורק אחר כך הוסיפה קישור אחד למפת נקודות האיסוף של Bar2Go. שינוי קטן בדף הכי רגיש."
 topics: ["ai-at-work"]
 date: 2026-10-07
+updated: 2026-10-16
 draft: false
 lang: he
 translationKey: "2026-10-07-bar2go-pickup-points"
@@ -39,6 +40,9 @@ translationKey: "2026-10-07-bar2go-pickup-points"
 אם החלון נחסם, היא נפתחת בטאב חדש.
 
 שאר הקופה לא נגעה.
+
+
+![כוכבה בוחנת מפה קטנה של נקודות איסוף לצד מחשב וחבילות.](/images/posts/bar2go-pickup-points-story-1672.webp)
 
 
 ## הבדיקות:

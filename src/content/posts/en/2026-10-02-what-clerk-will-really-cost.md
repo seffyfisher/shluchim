@@ -5,6 +5,7 @@ seoTitle: "Clerk pricing by MRU: why login events mislead"
 seoDescription: "Clerk charges per monthly retained user. Pricing it that way, not from login events, showed our first estimate was 20x too low: $25 vs about $500 a month."
 topics: ["ai-at-work"]
 date: 2026-10-02
+updated: 2026-10-16
 draft: false
 lang: en
 translationKey: "2026-10-02-clerk-auth-cost"
@@ -31,6 +32,9 @@ And then they showed the gap.
 Based on login events alone, it comes to about $25 a month.
 But for planning, we need about $500 a month,
 from around 73,000 signed-in MRUs in the reader.
+
+
+![Anali weighs web and app usage before estimating the cost.](/images/posts/clerk-auth-cost-story-1672.webp)
 
 
 ## What came out:

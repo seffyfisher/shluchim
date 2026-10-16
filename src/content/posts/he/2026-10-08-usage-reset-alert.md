@@ -6,6 +6,7 @@ seoTitle: "התראה לפני איפוס מכסה של גרוקבוט (Grok Bot
 seoDescription: "שגרה שמזהירה אותי לפני שהמכסה של Grok Bot ו־Cursor מתאפסת, ושותקת כשאין סיבה, כדי שהשימוש ששילמתי עליו לא ילך לפח."
 topics: ["grok-bot", "everyday-ai"]
 date: 2026-10-08
+updated: 2026-10-16
 draft: false
 lang: he
 translationKey: "2026-10-08-usage-reset-alert"
@@ -33,6 +34,9 @@ translationKey: "2026-10-08-usage-reset-alert"
 כל ריצה בודקת בדפדפן כמה נשאר.
 אם נשאר הרבה, היא כותבת לי ומציעה משימות מהתור שכדאי להריץ.
 אם לא, היא שותקת.
+
+
+![באשר לצד שעון חול מפנה מכסה שנותרה למשימות לפני האיפוס.](/images/posts/usage-reset-alert-story-1672.webp)
 
 
 ## למה זה מעולה:

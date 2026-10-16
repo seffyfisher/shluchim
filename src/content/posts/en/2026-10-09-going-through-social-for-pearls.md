@@ -5,6 +5,7 @@ seoTitle: "Mining Facebook groups for customer quotes with AI"
 seoDescription: "An AI agent went through Facebook reading groups and, within an hour, pulled out 28 reader quotes for a campaign and 5 real mentions of e-vrit."
 topics: ["ai-at-work"]
 date: 2026-10-09
+updated: 2026-10-16
 draft: false
 lang: en
 translationKey: "2026-10-09-social-pearls"
@@ -80,6 +81,9 @@ and that's important information for the campaign on its own.
 And 5 real mentions of e-vrit.
 A reader literally begging us to bring back the old site.
 And a reader who bought a Boox (an e-ink reader), purely for the e-vrit app.
+
+
+![Pearls from six reading groups, five separate mentions and an e-reader bought for the app.](/images/posts/social-pearls-story-1672.webp)
 
 
 ## What's worth taking from this:

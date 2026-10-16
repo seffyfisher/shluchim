@@ -5,6 +5,7 @@ seoTitle: "9,001 support tickets summarized in 7 minutes"
 seoDescription: "An AI agent summarized 30 days and 9,001 support tickets in about 7 minutes: 16 draft FAQs, ranked topics and two real production bugs."
 topics: ["ai-at-work"]
 date: 2026-10-08
+updated: 2026-10-16
 draft: false
 lang: en
 translationKey: "2026-10-08-help-center-monthly"
@@ -82,6 +83,9 @@ They were assigned to a developer, with evidence and a request to reproduce.
 
 A checkout failure with a kibbutz address went to Nitza.
 She reproduced it against QA, and suggested a fix to the site's copy.
+
+
+![Shaltiel distills a month into FAQ drafts and isolates a broken email link and an SMS pointing to QA.](/images/posts/help-center-monthly-story-1672.webp)
 
 
 ## Why this is good:

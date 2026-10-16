@@ -6,6 +6,7 @@ seoTitle: "דוח Clarity שבועי מעוזר AI: לחיצות זעם ומתו
 seoDescription: "כל יום שני עוזר AI מסכם מ־Microsoft Clarity לחיצות זעם, לחיצות מתות והקלטות בעייתיות, ושותק כשאין מה להגיד."
 topics: ["ai-at-work"]
 date: 2026-09-28
+updated: 2026-10-16
 draft: false
 lang: he
 translationKey: "2026-10-05-clarity-weekly-digest"
@@ -63,6 +64,9 @@ Clarity קבע שגרה שבועית, כל יום שני ב־09:10.
 והמלצה אחת: להשאיר את הסל הרזה במובייל, עם הכפתור למעלה, כדבר הבא שעולה.
 
 בשבוע החג שאחרי הוא שתק.
+
+
+![אנאלי בודקת לחיצות חוזרות בקופה במובייל לצד חמש הקלטות והמלצה אחת.](/images/posts/clarity-weekly-digest-story-1672.webp)
 
 
 ## מי השתתף:

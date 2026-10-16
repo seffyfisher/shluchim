@@ -5,6 +5,7 @@ seoTitle: "Bar2Go pickup points at checkout, built with AI"
 seoDescription: "An AI developer researched our checkout's shipping step first, then added one link to the Bar2Go pickup-points map. A small change on the most sensitive page."
 topics: ["ai-at-work"]
 date: 2026-10-07
+updated: 2026-10-16
 draft: false
 lang: en
 translationKey: "2026-10-07-bar2go-pickup-points"
@@ -39,6 +40,9 @@ It opens Bar2Go's map in a popup, inside an iframe (a frame that shows a site in
 If the popup is blocked, it opens in a new tab.
 
 The rest of the checkout wasn't touched.
+
+
+![Kochava studies a small pickup-point map beside a laptop and parcels.](/images/posts/bar2go-pickup-points-story-1672.webp)
 
 
 ## The checks:
