@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { Lang } from '../i18n/ui';
+import { postUrl, formatDateShort, readingMinutes, readingLabel, keyOf } from '../lib/posts';
+import { storyImage, previewUrl, previewSrcset } from '../lib/story-images.mjs';
+interface Props { posts: CollectionEntry<'posts'>[]; lang: Lang }
+const { posts, lang } = Astro.props;
+const he = lang === 'he';
+const entries = await Promise.all(posts.map(async (post) => {
+  const guide = keyOf(post) === 'grok-bot-guide';
+  const description = post.data.listDescription ?? post.data.description;
+  // The guide's own opening question is its short editorial teaser; the article and metadata stay intact.
+  const teaser = guide && !post.data.listDescription && description.includes('?') ? description.slice(0, description.indexOf('?') + 1) : description;
+  return { post, guide, teaser, image: await storyImage(post) };
+}));
+---
+<section class="featured-section" aria-labelledby="featured-title">
+  <header class="featured-heading">
+    <h2 id="featured-title">{he ? <>מעשיות <mark>נבחרות</mark></> : <>Featured <mark>stories</mark></>}</h2>
+    <p>{he ? 'כדאי להתחיל כאן' : 'A good place to start'}</p>
+  </header>
+  <ol class="featured-stories" role="list">
+    {entries.map(({ post, guide, teaser, image }) => (
+      <li class:list={['featured-story', { 'has-image': !!image }]}>
+        {image && <span class="featured-art-frame" data-story-art-frame>
+          <img class="featured-art" src={previewUrl(image, 768)} srcset={previewSrcset(image, [480, 768, 1120, 1536])} sizes="(min-width: 62.5rem) 35rem, (min-width: 48rem) calc(58.334vw - 1.46rem), calc(100vw - 2.5rem)" width={image.width} height={image.height} alt={image.alt} loading="lazy" decoding="async" fetchpriority="low" />
+        </span>}
+        <div class="featured-copy">
+          <p class="meta"><time datetime={post.data.date.toISOString().slice(0, 10)}>{formatDateShort(post.data.date, lang)}</time><span>{readingLabel(readingMinutes(post.body, lang), lang)}</span></p>
+          <h3><a href={postUrl(post)}>{post.data.title}</a></h3>
+          <p class="dek">{teaser}</p>
+          <span class="featured-cta" aria-hidden="true">{he ? (guide ? 'למדריך המלא' : 'למעשיה המלאה') : (guide ? 'Read the full guide' : 'Read the full story')}</span>
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>

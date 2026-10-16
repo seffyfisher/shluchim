@@ -1,0 +1,34 @@
+{/* Native lazy loading can fetch these below-fold images before the intro's fonts finish.
+    CSS cannot configure that distance. This small enhancement bounds it to 200px;
+    real src/srcset stay in HTML, and no JS/unsupported browsers keep native loading. */}
+<script is:inline>
+  (() => {
+    if (typeof IntersectionObserver !== 'function') return;
+    const root = document.documentElement;
+    const reveal = (frame) => { frame.dataset.artReady = ''; };
+    root.classList.add('story-art-loading');
+    document.addEventListener('DOMContentLoaded', () => {
+      let observer;
+      try {
+        const frames = document.querySelectorAll('[data-story-art-frame]');
+        observer = new IntersectionObserver((entries) => {
+          for (const { target, isIntersecting } of entries) if (isIntersecting) {
+            reveal(target); observer.unobserve(target);
+          }
+        }, { rootMargin: '200px 0px' });
+        frames.forEach((frame) => observer.observe(frame));
+        document.addEventListener('focusin', ({ target }) => {
+          const frame = target.closest('.featured-story, .story')?.querySelector('[data-story-art-frame]');
+          if (frame) { reveal(frame); observer.unobserve(frame); }
+        });
+        addEventListener('beforeprint', () => {
+          frames.forEach((frame) => { reveal(frame); frame.querySelector('img').loading = 'eager'; });
+          observer.disconnect();
+        });
+      } catch {
+        // Fail open: a missing or failed enhancement must never hide article artwork.
+        root.classList.remove('story-art-loading'); observer?.disconnect();
+      }
+    }, { once: true });
+  })();
+</script>

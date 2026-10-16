@@ -55,9 +55,13 @@ try {
     const actual = listed(html);
     assert.deepEqual(actual, expected(posts), `${lang} homepage order`);
     assert.equal(new Set(actual).size, actual.length, `${lang} homepage must not duplicate posts`);
-    const firstList = /<div id="stories">\s*<h2 class="sr-only">[^<]+<\/h2>\s*(<ol[\s\S]*?<\/ol>)/.exec(html)?.[1];
-    assert.ok(firstList, `${lang} homepage names the featured list for assistive tech without a visible heading`);
-    assert.doesNotMatch(firstList, /class="badge"/, `${lang} featured rows have no badge`);
+    const featuredSection = /<section class="featured-section"[^>]*>([\s\S]*?)<\/section>/.exec(html)?.[1];
+    assert.ok(featuredSection, `${lang} homepage has a separate featured editorial section`);
+    assert.match(featuredSection, /<h2 id="featured-title">/, `${lang} featured section has a visible accessible heading`);
+    assert.match(featuredSection, /<mark>/, `${lang} selected heading retains the marker accent`);
+    assert.deepEqual(listed(featuredSection), actual.slice(0, selected.length), `${lang} featured cards contain exactly the selected posts`);
+    assert.match(html, /class="stories stories-illustrated"/, `${lang} chronological feed enables article thumbnails`);
+    assert.doesNotMatch(featuredSection, /class="badge"/, `${lang} featured cards have no redundant badge`);
   }
   if (process.env.FEATURED_PREVIEW_DIR) {
     cpSync(join(fixture, 'dist'), resolve(process.env.FEATURED_PREVIEW_DIR), { recursive: true });
