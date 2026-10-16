@@ -1,0 +1,38 @@
+---
+import { PRESENCE_URL, PRESENCE_PUBLISHABLE_KEY } from '../config';
+import spriteUrl from '../assets/bloub-readers.svg?url';
+import type { Lang } from '../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+
+<section class="online-readers wrap" data-online-readers data-url={PRESENCE_URL} data-key={PRESENCE_PUBLISHABLE_KEY} data-lang={lang} data-sprite={spriteUrl} aria-label={lang === 'he' ? 'קוראים כאן יחד' : 'Reading together'}>
+  <div class="readers-panel">
+    <p class="readers-caption"><span class="online-dot" aria-hidden="true"></span><span data-readers-label></span></p>
+    <div class="readers-crowd" data-readers-crowd dir="rtl" tabindex="0" role="group" aria-label={lang === 'he' ? 'דמויות הקוראים, אפשר לגלול שמאלה' : 'Reader characters; scroll left to see more'}></div>
+  </div>
+</section>
+<noscript><style is:inline>.online-readers{display:none}</style></noscript>
+
+<script>
+  import { mountOnlineReaders } from '../lib/presence';
+  const counter = document.querySelector<HTMLElement>('[data-online-readers]');
+  if (counter) mountOnlineReaders(counter);
+</script>
+
+<style>
+  /* A stable band below the header: revealing even a large crowd never moves the story. */
+  .online-readers { block-size: 4rem; padding-block-start: .5rem; visibility: hidden; }
+  .online-readers[data-ready] { visibility: visible; }
+  .readers-panel { display: flex; align-items: center; gap: .75rem; border-block: 1px solid var(--line); block-size: 100%; }
+  .readers-caption { display: flex; align-items: center; flex: none; inline-size: 8.5rem; gap: .4em; margin: 0; white-space: nowrap; color: var(--muted); font-size: .8125rem; line-height: 1.5; font-variant-numeric: tabular-nums; }
+  [data-lang="en"] .readers-caption { inline-size: 10rem; }
+  [data-readers-label] { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; }
+  .online-dot { inline-size: .4em; block-size: .4em; border-radius: 50%; background: currentColor; flex: none; }
+  .readers-crowd { display: flex; align-items: center; gap: .375rem; flex: 1; min-inline-size: 0; block-size: 3rem; padding-block: .25rem; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }
+  .readers-crowd:focus-visible { outline: 2px solid var(--fg); outline-offset: -2px; }
+  .readers-crowd :global(svg) { inline-size: 2rem; block-size: 2rem; flex: none; color: light-dark(oklch(58% .18 var(--reader-hue)), oklch(76% .15 var(--reader-hue))); animation: reader-hello 1.6s ease-out both; }
+  @keyframes reader-hello { 0% { transform: scale(.75) rotate(-8deg); } 35% { transform: scale(1.05) rotate(6deg); } 65% { transform: rotate(-3deg); } 100% { transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .readers-crowd :global(svg) { animation: none; } }
+</style>

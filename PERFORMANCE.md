@@ -1,30 +1,39 @@
 # Lighthouse delivery and analytics
 
-## Recurring delivery failure (October 16, 2026)
+## Deferred interaction analytics (October 16, 2026)
 
-Production run [38879483519](https://github.com/seffyfisher/shluchim/actions/runs/38879483519)
-deployed successfully, then measured a median 98 Performance on each of the five
-release routes. Before the hosting correction, the hashed font response had `max-age=14400`,
-and the browser's network report contained Cloudflare RUM. These are hosting settings;
-the local build's fifteen scores of 100 do not verify them.
+The existing GA4 loader now installs passive delegated interaction listeners at
+the same delayed idle point as the library download, after load plus five
+seconds. All added actions use `select_content` with dynamic parameters; the
+tracking plan and GA4 Enhanced Measurement assumptions are in [ANALYTICS.md](ANALYTICS.md).
+No new production dependency, navigation wait, scroll listener or DOM scan was
+added. Clipboard and feedback components publish outcome-only DOM events after
+their UI work. JavaScript is necessary to observe these interactions.
 
-The former delivery check missed RUM because a default Node fetch requests
-`Accept: */*`: Cloudflare does not inject the beacon into that representation.
-Requesting `Accept: text/html` reproduces the browser's injection. The delivery
-check now negotiates HTML, with a regression fixture that injects RUM only for
-HTML requests. Run it independently with `npm run perf:delivery` (override
-`PERF_BASE_URL` to inspect another deployment).
+`npm ci`, `npm test`, `npm run seo:check`, `npm run build`, the Chromium browser
+checks in `scripts/test-analytics.py`, and the unchanged `npm run perf:check`
+passed locally with Node 24.19.0, Chromium 154 and Lighthouse 13.4.1. The browser
+test stubs external requests; the separate performance guard does not. All 15
+mobile production-build audits scored 100, with TBT 0 ms and CLS 0:
 
-The deployment workflow also checks the current production hosting before
-uploading a new version. A missing cache rule or renewed RUM injection therefore
-blocks the next deployment. The full local and post-deployment Lighthouse audits
-retain the same five routes, three runs, mobile defaults and 100 threshold.
-The Cloudflare rules below were applied separately in the existing zone on
-October 16. The repository guard detects configuration drift; it does not apply
-hosting settings or guarantee a live score of 100. The first live Mac audit after
-the hosting fix measured medians 100/100/99/100/100: the reminders page retained
-variable text-render timing (LCP 1.3–1.7 s). The delivery check passed. These
-measurements are retained separately from the final deployment audit.
+| Route | Performance (three runs) |
+| --- | --- |
+| `/` | 100, 100, 100 |
+| `/en/` | 100, 100, 100 |
+| `/posts/2026-10-06-reminders-shaliach/` | 100, 100, 100 |
+| `/podcast/` | 100, 100, 100 |
+| `/posts/2026-10-13-wake-up-sky/` | 100, 100, 100 |
+
+Changed runtime files: `src/lib/analytics.ts`,
+`src/lib/analytics-interactions.mjs`, `IdeaBlock.astro`, `FollowBlock.astro`,
+`FeedbackBlock.astro`, `SpotifyPlayer.astro`, and `src/pages/podcast.astro`.
+These are local measurements in the cloud workspace's restricted network.
+GA4 remains enabled in the audited HTML; its third-party library does not
+appear in the first homepage audit's recorded network window. Deferred
+third-party execution and real ingestion are not established by this score.
+The connected Analytics plugin requires OAuth configuration; account-side
+settings remain unverified. No deployment or live audit was performed.
+
 
 ## Editorial homepage: bounded illustration loading (October 16, 2026)
 
@@ -187,6 +196,47 @@ The uploaded October 12, 2026 mobile Lighthouse 13.4.1 report scored Performance
 - Hebrew and English display fonts are preloaded, and fonts and team avatars use Vite's content-hashed `/_astro/` URLs. The same font URL appears in CSS and its preload, avoiding a duplicate fetch.
 - Avatars live in `src/assets/shluchim/`; the shared `Avatar.astro` renders them with no client JS. Reduced-motion users still receive a still image. The build also emits the former `/shluchim/*.webp` and display-font URLs from these same source files so cached older HTML keeps working.
 - The homepage link's accessible name now includes the exact visible Hebrew title, including niqqud.
+
+## Recurring delivery failure (October 16, 2026)
+
+Production run [38879483519](https://github.com/seffyfisher/shluchim/actions/runs/38879483519)
+deployed successfully, then measured a median 98 Performance on each of the five
+release routes. Before the hosting correction, the hashed font response had `max-age=14400`,
+and the browser's network report contained Cloudflare RUM. These are hosting settings;
+the local build's fifteen scores of 100 do not verify them.
+
+The former delivery check missed RUM because a default Node fetch requests
+`Accept: */*`: Cloudflare does not inject the beacon into that representation.
+Requesting `Accept: text/html` reproduces the browser's injection. The delivery
+check now negotiates HTML, with a regression fixture that injects RUM only for
+HTML requests. Run it independently with `npm run perf:delivery` (override
+`PERF_BASE_URL` to inspect another deployment).
+
+The deployment workflow also checks the current production hosting before
+uploading a new version. A missing cache rule or renewed RUM injection therefore
+blocks the next deployment. The full local and post-deployment Lighthouse audits
+retain the same five routes, three runs, mobile defaults and 100 threshold.
+The Cloudflare rules below were applied separately in the existing zone on
+October 16. The repository guard detects configuration drift; it does not apply
+hosting settings or guarantee a live score of 100. The first live Mac audit after
+the hosting fix measured medians 100/100/99/100/100: the reminders page retained
+variable text-render timing (LCP 1.3–1.7 s). The delivery check passed. These
+measurements are retained separately from the final deployment audit.
+
+The latest shared-module build also extracted Vite's import helper into the
+initial article gesture entry. The reminders route measured a local median 99
+(100/99/99, LCP 1.9–2.0 s), and the new Chromium regression failed because
+`PostPage.*.js` downloaded before an image was opened. `deferredPostImages` now
+replaces that entry tag with an inline native-popover listener. Only an actual
+image opening downloads the existing entry, helper and gesture module; the
+entry also initializes an already-open first image. This applies to every
+visitor. HTML/CSS still provide opening and closing without JavaScript. The
+small listener is necessary because CSS cannot load a module on `beforetoggle`;
+no gesture feature or analytics behavior was added.
+
+The browser regression now checks zero initial gesture-module requests, zoom
+on the first opening, Escape closing, and native enlargement without JavaScript.
+All existing homepage request, geometry and fallback checks remain active.
 
 ## Cloudflare configuration (applied October 16, 2026)
 

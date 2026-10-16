@@ -78,7 +78,7 @@ const jsonLd = [
             {(verified?.description ?? episode.description) && <p>{verified?.description ?? episode.description}</p>}
             {verified?.aiNarrated && <p class="podcast-note">קריינות בינה מלאכותית.</p>}
             {verified && <details class="podcast-episode-player">
-              <summary>האזנה לפרק כאן</summary>
+              <summary data-analytics-id={verified.spotifyId}>האזנה לפרק כאן</summary>
               <SpotifyPlayer kind="episode" spotifyId={verified.spotifyId} title={`Spotify: ${verified.title}`} />
             </details>}
             <p class="podcast-links">

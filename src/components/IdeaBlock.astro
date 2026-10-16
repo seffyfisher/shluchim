@@ -9,10 +9,10 @@ interface Props { lang: Lang; prompt: string }
 const { lang, prompt } = Astro.props;
 const ui = t(lang);
 ---
-<section class="idea" aria-labelledby="idea-heading">
+<section class="idea" aria-labelledby="idea-heading" data-analytics-content="idea">
   <h2 id="idea-heading">{ui.ideaHeading}</h2>
   <p class="idea-intro" id="idea-help">{ui.ideaHelp}</p>
-  <button class="idea-copy" type="button" aria-describedby="idea-help">
+  <button class="idea-copy" type="button" aria-describedby="idea-help" data-analytics-action="copy">
     <span class="idea-avatar" aria-hidden="true"><Avatar avatar="shluchim/basher.webp" still="shluchim/basher-still.webp" /></span>
     <span class="idea-labels"><span class="idle">{ui.ideaCopy}</span><span class="done">{ui.ideaCopied}</span></span>
     <svg class="idea-copy-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2" /><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3" /></svg>
@@ -49,6 +49,7 @@ const ui = t(lang);
       status.textContent = ok ? status.dataset.success! : status.dataset.fail!;
       manual.hidden = ok;
       if (!ok) { manual.focus(); manual.select(); manual.scrollTop = 0; }
+      btn.dispatchEvent(new CustomEvent('analytics:result', { bubbles: true, detail: ok ? 'success' : 'error' }));
     });
   }
 </script>

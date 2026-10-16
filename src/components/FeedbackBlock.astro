@@ -9,13 +9,13 @@ interface Props { placement: 'post' | 'about' }
 const { placement: kind } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = Astro.url.pathname.startsWith(base) ? Astro.url.pathname.slice(base.length) || '/' : Astro.url.pathname;
-const FB_JS = `(()=>{const s=document.currentScript.closest('.fb');if(!s)return;const f=s.querySelector('.fb-form'),i=s.querySelector('.fb-sink'),d=s.querySelector('.fb-dlg'),t=d.querySelector('.fb-dlg-t');s.classList.add('js');addEventListener('message',e=>{if(e.source!==i.contentWindow)return;const o=String(e.data).replace('feedback-','');if(!t.dataset[o])return;t.textContent=t.dataset[o];d.classList.toggle('bad',o!=='thanks');if(o==='thanks'){f.reset();s.classList.add('sent');}d.open||d.showModal();});})();`;
+const FB_JS = `(()=>{const s=document.currentScript.closest('.fb');if(!s)return;const f=s.querySelector('.fb-form'),i=s.querySelector('.fb-sink'),d=s.querySelector('.fb-dlg'),t=d.querySelector('.fb-dlg-t');s.classList.add('js');addEventListener('message',e=>{if(e.source!==i.contentWindow)return;const o=String(e.data).replace('feedback-','');if(!t.dataset[o])return;t.textContent=t.dataset[o];d.classList.toggle('bad',o!=='thanks');if(o==='thanks'){f.reset();s.classList.add('sent');}d.open||d.showModal();f.dispatchEvent(new CustomEvent('analytics:result',{bubbles:true,detail:o==='thanks'?'success':o}));});})();`;
 const toastUrl = new URL('feedback-toast.html', Astro.site).href; // must be on ALLOWED_PREFIX (edge function)
 ---
 {FEEDBACK_ENDPOINT && (
-<section class="fb" id="feedback" aria-labelledby={`fb-h-${kind}`}>
+<section class="fb" id="feedback" aria-labelledby={`fb-h-${kind}`} data-analytics-content="feedback">
   <h2 class="fb-q" id={`fb-h-${kind}`}>נו, חידש לכם?</h2>
-  <form class="fb-form" method="post" action={FEEDBACK_ENDPOINT} accept-charset="utf-8" target={`fb-sink-${kind}`}>
+  <form class="fb-form" method="post" action={FEEDBACK_ENDPOINT} accept-charset="utf-8" target={`fb-sink-${kind}`} data-analytics-id={kind}>
     <input type="hidden" name="page" value={path} />
     <input type="hidden" name="return_to" value={toastUrl} />
     <input type="hidden" name="quote_ok" value="yes" /> {/* submitting = consent (see .fb-fine); nothing is public until Seffy sets status to approved */}
