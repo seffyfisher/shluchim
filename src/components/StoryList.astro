@@ -3,16 +3,21 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { postUrl, formatDateShort, topicsOf, keyOf } from '../lib/posts';
 import { t, type Lang } from '../i18n/ui';
-interface Props { posts: CollectionEntry<'posts'>[]; lang: Lang }
-const { posts, lang } = Astro.props;
+import { storyImage, previewUrl, previewSrcset } from '../lib/story-images.mjs';
+interface Props { posts: CollectionEntry<'posts'>[]; lang: Lang; illustrated?: boolean }
+const { posts, lang, illustrated = false } = Astro.props;
 const ui = t(lang);
 const emojiByKey = new Map((await getCollection('posts', (p) => p.id.startsWith('he/'))).map((p) => [keyOf(p), p.data.emoji]));
+const images = illustrated ? await Promise.all(posts.map(storyImage)) : [];
 ---
-<ol class="stories" reversed>
+<ol class:list={['stories', { 'stories-illustrated': illustrated }]} reversed>
   {posts.map((p, i) => {
     const topics = topicsOf(p, lang);
     return (
-      <li class="story">
+      <li class:list={['story', { 'has-image': !!images[i] }]}>
+        {images[i] && <span class="story-art-frame" data-story-art-frame>
+          <img class="story-art" src={previewUrl(images[i], 160)} srcset={previewSrcset(images[i], [160, 320])} sizes="9rem" width={images[i].width} height={images[i].height} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        </span>}
         <span class="num emoji" aria-hidden="true">{p.data.emoji || emojiByKey.get(keyOf(p)) || '•'}</span>
         <p class="meta">
           <time datetime={p.data.date.toISOString().slice(0, 10)}>{formatDateShort(p.data.date, lang)}</time>

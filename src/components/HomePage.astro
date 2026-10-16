@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import StoryList from './StoryList.astro';
+import FeaturedStories from './FeaturedStories.astro';
+import StoryArtLoading from './StoryArtLoading.astro';
 import Avatar from './Avatar.astro';
 import EvritLogo from '../assets/evrit-logo.svg';
 import shluchim from '../data/shluchim.json';
@@ -31,6 +33,7 @@ const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = 
   : { kick: 'The person behind the blog', title: 'Who I am', text: [['My name is Seffy Fisher.'], ["I'm a ", L('visual artist', ART), ', a CTO of ', L('Hebrew', EVRIT), ', a ', L('father of two', PARENTHOOD), ', and a person with ADHD and emotional regulation problems.'], ["Like everyone, I'm trying to learn to cope with the changes AI brings."], ['This blog is my way of doing that out loud.']], btn: 'More about me' };
 ---
 <Base masthead noindex={!he && posts.length === 0} lang={lang} alternates={{ he: lurl('he'), en: lurl('en') }} seoTitle={seo.title} seoDescription={seo.description}>
+  <StoryArtLoading slot="head" />
   <section class="intro" aria-label={he ? 'פתיח' : 'Intro'}>
     {he ? (
       <>
@@ -74,16 +77,13 @@ const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = 
       ? <p class="empty">עוד אין פה מעשיות.<br />השְׁלוּחִים כבר עובדים על הראשונה.</p>
       : <p class="empty">The English translations are on their way.<br />Meanwhile, the stories are all <a href={lurl('he')} hreflang="he" lang="he">in Hebrew</a>.</p>
   ) : (
-    <div id="stories">
-      {featured.length > 0 && <>
-        <h2 class="sr-only">{he ? 'מעשיות נבחרות' : 'Featured stories'}</h2>
-        <StoryList posts={featured} lang={lang} />
-      </>}
+    <div id="stories" class="home-stories">
+      {featured.length > 0 && <FeaturedStories posts={featured} lang={lang} />}
       {history.length > 0 && <>
         <h2 class="list-label">{he
           ? `${history.length === 1 ? 'מעשיה אחת' : `${history.length} מעשיות`}, מהחדשה לישנה`
           : `${history.length === 1 ? 'One story' : `${history.length} stories`}, newest first`}</h2>
-        <StoryList posts={history} lang={lang} />
+        <StoryList posts={history} lang={lang} illustrated />
       </>}
     </div>
   )}

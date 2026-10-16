@@ -33,6 +33,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build   # never SHOW_DRAFTS here
+      - run: npm run test:story-loading # prevent below-fold art competing with initial content
       - run: npm run perf:check # mobile Lighthouse must score 100 before any deployment
       - uses: actions/upload-artifact@v4
         if: always()

@@ -1,5 +1,57 @@
 # Lighthouse delivery and analytics
 
+## Editorial homepage: bounded illustration loading (October 16, 2026)
+
+The new featured card uses the guide's actual illustration, and desktop feed
+rows use the first real local image from each article. WebP derivatives are
+built at quality 90, without upscaling or cropping. Current main's independent
+article/illustration update (4530638) is included unchanged.
+
+Native `loading="lazy"` still fetched the offscreen featured illustration before
+first paint. In controlled English runs on the original base (818ce86), main
+scored 100/100/100 (LCP 1.878–1.880s), while the candidate scored 99/99/99
+(1.955–1.957s). Removing that request in a disposable diagnostic build restored
+100/100/100. The raw Lighthouse dependency graph showed a 150ms extra RTT in
+its pessimistic font-completion estimate, weighted to about 75ms extra LCP.
+No chronological-feed illustration was requested in that failing mobile trace.
+
+`StoryArtLoading.astro` now enables a small inline enhancement only on the two
+homepages. Reserved image frames reveal their original images within 200px of
+the viewport; keyboard focus and printing also reveal them. Original `src`,
+`srcset`, sizes and alt text stay in HTML. Without JavaScript, or when the
+observer is unavailable/fails, ordinary native image loading remains in place.
+The reserved frames keep the approved image geometry and full composition.
+
+This is the narrow exception to the CSS-first rule: CSS cannot configure the
+browser's native lazy-loading distance. The [browser loading documentation](https://web.dev/articles/browser-level-image-lazy-loading/)
+explains that limitation and that hidden native-lazy images are not requested.
+No external image library, analytics, fonts, hosting or credentials changed.
+
+`npm run test:story-loading` drives real Chromium requests. It failed before the
+fix when a far-below-fold illustration loaded during initial rendering. It now
+passes for HE/EN mobile and desktop, loading before an image reaches the
+viewport, stable geometry, article links, and no-JavaScript/unavailable/failed
+observer fallbacks. CI runs it after build and before the existing Lighthouse
+gate, so the loading contract and the score are checked independently.
+
+Fresh install, 67 Node tests, 15 Python tests, controlled builds, strict SEO,
+production build and the loading regression passed on current main plus this
+feature. The unchanged Lighthouse 13.4.1 mobile gate passed all 15 final runs
+with Node 24.4.0 and Chrome 155.0.8059.40 on this Mac:
+
+| Route | Performance (three runs) |
+| --- | --- |
+| `/` | 100, 100, 100 |
+| `/en/` | 100, 100, 100 |
+| `/posts/2026-10-06-reminders-shaliach/` | 100, 100, 100 |
+| `/podcast/` | 100, 100, 100 |
+| `/posts/2026-10-13-wake-up-sky/` | 100, 100, 100 |
+
+No threshold, route, audit, request filter, analytics or throttling was changed.
+These are local candidate results; deployment and live delivery are verified
+separately. The paused office article and all article/font/image source bytes
+remain unchanged relative to current main.
+
 ## Polin running text: local verification (October 15, 2026)
 
 Running text now uses the supplied Polin Regular (400) and Extrabold (800),
