@@ -195,7 +195,7 @@ Codex, Claude Code,Instinct,Gemini,copilot ואפילו Manus בתוך טלגר�
 גופנים:
 
 - כותרות: נעה שלו (Noa Shalev), מאת נעה שלו, בהוצאת [אלף אלף אלף](https://alefalefalef.co.il/). רישיון חינמי לפי [תנאי השימוש של אלף אלף אלף](https://alefalefalef.co.il/eula/?licenses=free).
-- טקסט: גופן ממשק המשתמש של מערכת ההפעלה, המשתנה בהתאם למכשיר.
+- טקסט: פולין (Polin), בעיצוב עברי של בן נתן ולטיני של מטאוש מחלסקי, בהוצאת [הפונטיה](https://hafontia.com/family/polin/).
 
 טכנולוגיה:
 

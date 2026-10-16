@@ -2,8 +2,8 @@
 import '../styles/global.css';
 import heDisplayFontUrl from '../fonts/noa-shalev-regular-AlefAlefAlef.woff2?url';
 import enDisplayFontUrl from '../fonts/young-serif-400.woff2?url';
-import bodyFontUrl from '../fonts/Leon-ProductRegular.woff2?url';
-import boldFontUrl from '../fonts/Leon-ProductBold.woff2?url';
+import bodyFontUrl from '../fonts/Polin-Regular.woff2?url';
+import boldFontUrl from '../fonts/Polin-Extrabold.woff2?url';
 import { SITES, SHOW_DRAFTS, SHOW_SWITCHER_ON_HE, PERSON, SEO_HOME, SEO_KEYWORDS, OG_IMAGE, VERIFY, GA_MEASUREMENT_ID } from '../config';
 import { TOPICS, TOPIC_SLUGS } from '../data/topics.mjs';
 import { LANG_META, lurl, other, t, isLang, type Lang } from '../i18n/ui';
@@ -139,6 +139,7 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
       <div class="wrap">
         <FollowBlock lang={lang} />
         <p>{SITE.footerNote}</p>
+        <p class="font-credit">{ui.fontCredit} <a href="https://hafontia.com/" target="_blank" rel="noopener">{ui.fontFoundry}</a></p>
         <nav class="links topics" aria-label={ui.topics}>{TOPIC_SLUGS.map((slug) => <a href={url(`topics/${slug}/`)}>{TOPICS[slug as keyof typeof TOPICS][lang].label}</a>)}</nav>
         <p class="links"><a href={url()}>{ui.allStories}</a><a href={lurl('he', 'podcast/')} hreflang="he">{lang === 'he' ? 'הפודקסט' : 'Podcast (HE)'}</a><a href={url('team/')}>{ui.team}</a><a href={url('friends/')}>{ui.friends}</a><a href={url('about/')}>{ui.about}</a><a href={url('rss.xml')}>RSS</a></p>
       </div>

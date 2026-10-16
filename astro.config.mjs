@@ -29,7 +29,7 @@ const legacyAssetUrls = {
     'astro:build:done': ({ dir }) => {
       cpSync(new URL('./src/assets/shluchim/', import.meta.url), new URL('shluchim/', dir), { recursive: true });
       mkdirSync(new URL('fonts/', dir), { recursive: true });
-      for (const font of ['noa-shalev-regular-AlefAlefAlef.woff2', 'young-serif-400.woff2', 'Leon-ProductBold.woff2']) {
+      for (const font of ['noa-shalev-regular-AlefAlefAlef.woff2', 'young-serif-400.woff2', 'Leon-ProductBold.woff2', 'Polin-Extrabold.woff2']) {
         copyFileSync(new URL(`./src/fonts/${font}`, import.meta.url), new URL(`fonts/${font}`, dir));
       }
     },

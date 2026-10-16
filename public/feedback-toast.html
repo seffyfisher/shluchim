@@ -9,9 +9,11 @@
 /* Loaded only inside the feedback form's hidden iframe: the edge function's 303 lands here (#feedback-thanks|error|slow),
    and :target shows the matching toast. Zero JS. Transparent until then, so the iframe is invisible. */
 :root { color-scheme: light dark; --fg: light-dark(#141414, #f2f2f2); --bg: light-dark(#fafafa, #141414); --line: light-dark(#8c8c8c, #767676); }
-@font-face { font-family: 'Leon Product'; src: url('fonts/Leon-ProductBold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Polin'; src: url('fonts/Polin-Extrabold.woff2') format('woff2'); font-weight: 800; font-display: swap; }
+@font-face { font-family: 'Polin Hebrew Fallback'; src: local('Arial Bold'), local('Arial-BoldMT'); font-weight: 800; size-adjust: 110.99%; ascent-override: 72.08%; descent-override: 18.02%; line-gap-override: 18.02%; unicode-range: U+590-5FF, U+FB1D-FB4F; }
+@font-face { font-family: 'Polin Latin Fallback'; src: local('Arial Bold'), local('Arial-BoldMT'); font-weight: 800; size-adjust: 104.42%; ascent-override: 76.61%; descent-override: 19.15%; line-gap-override: 19.15%; }
 html, body { margin: 0; background: transparent; height: 100%; }
-body { display: flex; align-items: flex-end; justify-content: center; font: 600 15px/1.4 'Leon Product', Arial, sans-serif; }
+body { display: flex; align-items: flex-end; justify-content: center; font: 600 15px/1.4 'Polin', 'Polin Hebrew Fallback', 'Polin Latin Fallback', Arial, sans-serif; }
 .t { display: none; margin: 0 6px 6px; padding: .7rem 1.1rem; border-radius: 999px; background: var(--fg); color: var(--bg); box-shadow: 0 6px 18px -8px rgb(0 0 0 / .45); }
 .t.bad { background: var(--bg); color: var(--fg); border: 1px solid var(--line); }
 .t:target { display: block; animation: t 5s ease forwards; }

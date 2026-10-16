@@ -1,6 +1,6 @@
 # סיפורי הצלחה
 
-Static Hebrew (RTL) and English (LTR) blog built with Astro 7. Self-hosted Leon Product Regular and Bold for running text; headings keep Noa Shalev, Young Serif and their existing system fonts. CSS first, with JavaScript for browser interactions and deferred GA4.
+Static Hebrew (RTL) and English (LTR) blog built with Astro 7. Self-hosted Polin Regular (400) and Extrabold (800) for running text; bold requests use the supplied Extrabold face. Headings keep Noa Shalev, Young Serif and their existing system fonts. CSS first, with JavaScript for browser interactions and deferred GA4.
 
 ```bash
 npm ci
