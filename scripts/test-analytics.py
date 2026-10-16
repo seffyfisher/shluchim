@@ -25,7 +25,7 @@ def clear(page):
 
 try:
     with sync_playwright() as p:
-        browser = p.chromium.launch(executable_path=which('chromium'), args=['--no-sandbox'])
+        browser = p.chromium.launch(executable_path=which('chromium') or which('google-chrome'), args=['--no-sandbox'])
         for prefix, slug in [('', '2026-10-12-dial-bot'), ('en/', '2026-10-12-my-shluchim-can-make-phone-calls')]:
             context = browser.new_context(permissions=['clipboard-read', 'clipboard-write'])
             ga_requests = []
@@ -44,9 +44,13 @@ try:
             page.on('pageerror', lambda error: errors.append(str(error)))
             page.goto(f'{base}/{prefix}posts/{slug}/', wait_until='load')
             assert not ga_requests, 'no GA network request at load'
-            # The UI works immediately, before measurement is installed.
+            # Listeners are live at once; early events wait in dataLayer for gtag.js, which still loads late.
             page.locator('.idea-copy').click()
-            assert not events(page), 'early interactions are deliberately unmeasured'
+            page.wait_for_function("dataLayer.some(x=>x[2]?.result==='success')")
+            rows = events(page)
+            assert [row['action'] for row in rows] == ['copy', 'result'], rows
+            assert all(row['post_slug'] == slug for row in rows), rows
+            assert not ga_requests, 'early events are queued; gtag.js is still not requested'
             page.wait_for_function('window.__gaTestLoaded === true', timeout=20000)
             assert len(ga_requests) == 1
 
@@ -61,6 +65,7 @@ try:
                 assert all(row['content_type'] == content and row['placement'] == placement for row in rows), rows
                 assert all(row['name'] == 'select_content' for row in rows)
                 assert rows[1]['result'] == 'success'
+                assert all(row['post_slug'] == slug for row in rows), rows
 
             clear(page)
             page.evaluate("Object.defineProperty(navigator, 'clipboard', {configurable:true,value:{writeText:async()=>{throw Error('denied')}}})")
@@ -84,6 +89,7 @@ try:
                 rows = events(page)
                 assert [row['action'] for row in rows] == ['change', 'submit', 'result'], rows
                 assert 'PRIVATE-FEEDBACK' not in str(rows) and 'private@example.com' not in str(rows)
+                assert all(row['post_slug'] == slug for row in rows), rows
                 page.locator('.fb-dlg-x').click()
 
             clear(page)
@@ -94,7 +100,12 @@ try:
               document.body.append(a); a.firstChild.click();
             }""")
             rows = events(page)
-            assert len(rows) == 1 and rows[0]['link_url'] == base + '/en/', rows
+            assert len(rows) == 1 and rows[0]['link_url'] == base + '/en/' and rows[0]['label'] == 'other', rows
+            assert 'post_slug' not in rows[0], rows
+            clear(page)
+            page.locator('.related a').first.evaluate("a=>{a.addEventListener('click',e=>e.preventDefault(),{once:true});a.click()}")
+            page.locator('footer .topics a').first.evaluate("a=>{a.addEventListener('click',e=>e.preventDefault(),{once:true});a.click()}")
+            assert [row['label'] for row in events(page)] == ['related', 'footer_topics'], events(page)
             clear(page)
             page.evaluate("""() => {
               for (const href of ['https://example.com/', '/test.pdf', 'mailto:private@example.com', 'tel:123']) {
@@ -102,7 +113,9 @@ try:
                 a.addEventListener('click',e=>e.preventDefault());document.body.append(a);a.click();
               }
             }""")
-            assert not events(page), 'no duplicate outbound/download events or personal contact URLs'
+            rows = events(page)
+            assert len(rows) == 1 and rows[0]['action'] == 'email' and rows[0]['item_id'] == 'mailto', rows
+            assert 'private' not in str(rows), 'no duplicate outbound/download events or personal contact URLs'
 
             clear(page)
             page.locator('audio').first.dispatch_event('play')
@@ -110,6 +123,18 @@ try:
             assert [row['action'] for row in events(page)] == ['play', 'complete']
             assert all(row['content_type'] == 'audio' for row in events(page))
             assert not errors, errors
+            context.close()
+
+        for about in ['about/', 'en/about/']:
+            context = browser.new_context()
+            context.route('**/*', lambda r: r.continue_() if r.request.url.startswith(base) else r.abort())
+            page = context.new_page()
+            page.goto(f'{base}/{about}', wait_until='load')
+            page.evaluate("document.addEventListener('click',e=>e.preventDefault())")  # never open a mail client
+            page.locator('.prose a[href^="mailto:"]').click()
+            rows = events(page)
+            assert len(rows) == 1 and rows[0]['action'] == 'email' and rows[0]['item_id'] == 'mailto', rows
+            assert rows[0]['label'] == 'prose' and '@' not in str(rows), rows
             context.close()
 
         context = browser.new_context()
@@ -128,6 +153,6 @@ try:
         assert rows[1]['content_type'] == 'podcast' and rows[1]['action'] == 'load_player', rows
         assert rows[0]['item_id'] == rows[1]['item_id'], rows
         browser.close()
-        print('Analytics browser checks passed: deferred activation, HE/EN, keyboard/nested clicks, clipboard outcomes, feedback privacy, navigation, deduplication, audio and Spotify.')
+        print('Analytics browser checks passed: deferred GA load with early events queued, HE/EN, post_slug, link labels, about mailto, keyboard/nested clicks, clipboard outcomes, feedback privacy, navigation, deduplication, audio and Spotify.')
 finally:
     server.shutdown()
