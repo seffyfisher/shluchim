@@ -2,8 +2,8 @@
 
 ## Online readers (Realtime Presence + Bloub)
 
-A visible band below the header shows one Bloub character per connected,
-visible browser across all Hebrew and English pages. It uses the same project
+A compact, single-row band below the header shows one coloured Bloub character
+per connected, visible browser across all Hebrew and English pages. It uses the same project
 (`tyzswuffvhxnmtaoaskz`) and the public `shluchim-online` Presence channel;
 no table, migration or new Edge Function. Public Realtime channels must be
 allowed in the project's Realtime settings.
@@ -21,13 +21,18 @@ The gallery entry and Vite helper download after `load`, five seconds and
 Without that API, each idle slot uses a three-second timer. There is no idle
 timeout forcing work into a busy interval. The SVG sprite is requested
 only once actual readers are rendered. The band reserves its full height, so
-appearing/disappearing counts and crowds do not move the story. Large crowds
-wrap and scroll inside the band; no readers are silently capped.
+appearing/disappearing counts and crowds do not move the story. The band is
+64px high, including its top spacing, down from the original 132px. Large crowds
+scroll left horizontally inside the band using touch, a trackpad or keyboard;
+no readers are silently capped. Keyboard focus outlines the scroll area.
 
 The artwork is generated with the MIT-licensed Bloub engine from
 https://github.com/jeremy-prt/bloub, pinned to commit
 `b4bb3c1b5f93c7b87a2e8d620f667c4093d97749`. `npm run readers:avatars`
 reproduces the 128 combinations of its eight shapes and sixteen expressions.
+The first sixteen readers use different expressions. Each reader keeps its
+assigned hue and SVG node across Presence updates; 3,600 hue slots are available
+before colours repeat. CSS adjusts the colours for the active light/dark theme.
 See `scripts/vendor/bloub/README.md`. No Vue or Bloub animation engine ships to
 the browser: the committed SVG is hashed by Vite, and each joining character
 gets a short CSS greeting, disabled for reduced motion. Existing characters
