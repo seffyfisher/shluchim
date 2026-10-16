@@ -4,20 +4,49 @@ const EXPRESSIONS = VARIANTS / SHAPES;
 const COLORS = 3600;
 const SVG_NS = 'http://www.w3.org/2000/svg';
 export const MAX_READER_AVATARS = 500;
+let sequence = 0;
 
 /** Bound decorative DOM even when an untrusted public channel reports a crowd. */
 export function readerAvatars(crowd: HTMLElement, sprite: string) {
+  const doc = crowd.ownerDocument;
   const readers = new Map<string, { svg: SVGSVGElement; variant: number; color: number }>();
-  return (keys: string[]) => {
+  const visible = new Set<SVGSVGElement>();
+  const observed = new WeakSet<SVGSVGElement>();
+  let disposed = false;
+  const moving = (svg: SVGSVGElement) => svg.toggleAttribute('data-moving', visible.has(svg) && doc.visibilityState === 'visible');
+  // CSS cannot pause a time-based animation when its icon is clipped by a
+  // horizontal scroller. One observer bounds work to the visible characters.
+  const Observer = doc.defaultView?.IntersectionObserver;
+  const observer = Observer ? new Observer(entries => {
+    for (const entry of entries) {
+      const svg = entry.target as SVGSVGElement;
+      if (disposed || !observed.has(svg)) continue;
+      if (entry.isIntersecting) visible.add(svg); else visible.delete(svg);
+      moving(svg);
+    }
+  }) : undefined;
+  const visibility = () => { for (const svg of visible) moving(svg); };
+  if (observer) doc.addEventListener('visibilitychange', visibility);
+  const node = (name: string, attributes: Record<string, string>) => {
+    const element = doc.createElementNS(SVG_NS, name);
+    for (const [key, value] of Object.entries(attributes)) element.setAttribute(key, value);
+    return element;
+  };
+
+  function update(keys: string[]) {
+    if (disposed) return;
     keys = keys.slice(0, MAX_READER_AVATARS);
     const present = new Set(keys);
     for (const [key, reader] of readers) {
-      if (!present.has(key)) { reader.svg.remove(); readers.delete(key); }
+      if (!present.has(key)) {
+        observer?.unobserve(reader.svg); observed.delete(reader.svg); visible.delete(reader.svg);
+        reader.svg.remove(); readers.delete(key);
+      }
     }
     const used = new Set([...readers.values()].map(reader => reader.variant));
     const expressions = new Set([...readers.values()].map(reader => Math.floor(reader.variant / SHAPES)));
     const colors = new Set([...readers.values()].map(reader => reader.color));
-    const fragment = crowd.ownerDocument.createDocumentFragment();
+    const fragment = doc.createDocumentFragment();
     for (const key of keys.toSorted()) {
       if (readers.has(key)) continue;
       let hash = 2166136261;
@@ -37,21 +66,35 @@ export function readerAvatars(crowd: HTMLElement, sprite: string) {
       // Resolve hue collisions with a large step to keep new colours varied.
       while (colors.size < COLORS && colors.has(color)) color = (color + 1379) % COLORS;
       colors.add(color);
-      const svg = crowd.ownerDocument.createElementNS(SVG_NS, 'svg');
-      const use = crowd.ownerDocument.createElementNS(SVG_NS, 'use');
-      // The external symbol owns its centred viewBox. The outer viewport
-      // starts at zero, otherwise the nested symbol is translated and clipped.
-      svg.setAttribute('viewBox', '0 0 316 316');
-      svg.setAttribute('width', '32');
-      svg.setAttribute('height', '32');
-      svg.setAttribute('style', `--reader-hue: ${color / 10}`);
+      const svg = node('svg', { viewBox: '-120 -120 240 240', width: '40', height: '40' }) as SVGSVGElement;
+      const maskId = `online-reader-eyes-${sequence++}`;
+      svg.setAttribute('style', `--reader-hue: ${color / 10}; --reader-phase: -${(hash >>> 0) % 12000}ms; --reader-blink: ${5000 + (hash >>> 8) % 2500}ms; --reader-gaze: ${10000 + (hash >>> 16) % 5000}ms`);
       svg.setAttribute('aria-hidden', 'true');
       svg.setAttribute('focusable', 'false');
-      use.setAttribute('href', `${sprite}#reader-${variant}`);
-      svg.append(use);
+      const definitions = node('defs', {});
+      const mask = node('mask', { id: maskId, maskUnits: 'userSpaceOnUse', x: '-120', y: '-120', width: '240', height: '240', style: 'mask-type: luminance' });
+      mask.append(node('rect', { x: '-120', y: '-120', width: '240', height: '240', fill: 'white' }));
+      const gaze = node('g', { class: 'reader-gaze', fill: 'black' });
+      for (let side = 0; side < 2; side++) {
+        const blink = node('g', { class: 'reader-blink' });
+        blink.append(node('use', { href: `${sprite}#eye-${variant}-${side}` }));
+        gaze.append(blink);
+      }
+      mask.append(gaze); definitions.append(mask);
+      svg.append(definitions);
+      svg.append(node('use', { href: `${sprite}#body-${variant % SHAPES}`, fill: 'currentColor', mask: `url(#${maskId})` }));
       readers.set(key, { svg, variant, color });
       fragment.append(svg);
+      observed.add(svg);
+      observer?.observe(svg);
     }
     crowd.append(fragment);
-  };
+  }
+  return { update, dispose() {
+    disposed = true;
+    observer?.disconnect();
+    if (observer) doc.removeEventListener('visibilitychange', visibility);
+    for (const svg of visible) svg.removeAttribute('data-moving');
+    visible.clear();
+  } };
 }

@@ -10,7 +10,13 @@ run the generator; redundant blank lines at EOF are trimmed. Geometry and facial
 upstream code, including its eye-fitting corrections.
 
 Run `npm run readers:avatars` after updating this snapshot. It uses BotEngine
-to generate 128 shapes/expressions in `src/assets/bloub-readers.svg`. The SVG
+to generate 8 bodies and eyes for 128 shapes/expressions in `src/assets/bloub-readers.svg`. The SVG
 is committed, and Vite gives it a content-hashed URL. Neither this engine nor
-Vue is imported by the website. Animation is a finite CSS greeting; there is
-no per-reader requestAnimationFrame loop or animation dependency.
+Vue is imported by the website. The site assembles transparent eye masks and
+adds CSS blinking and gentle gaze drift, with a different phase per reader.
+The tighter 240-unit viewport makes eyes legible in the same single-row band.
+One IntersectionObserver pauses characters clipped by the scroller or outside
+the viewport; background tabs and reduced-motion preferences stay still.
+Without IntersectionObserver, faces remain visible and static. The CSS motion
+adapts the upstream idle behaviour; it does not replay its 14-state editor or
+run its engine, Vue, a per-reader animation loop, or another dependency.

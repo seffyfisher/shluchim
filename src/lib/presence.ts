@@ -92,7 +92,7 @@ export function mountOnlineReaders(
           ? `${count.toLocaleString('he-IL')} ${count === 1 ? 'קורא כאן עכשיו' : 'קוראים כאן עכשיו'}`
           : `${count.toLocaleString('en')} ${count === 1 ? 'reader here now' : 'readers here now'}`;
         if (label.textContent !== text) label.textContent = text;
-        renderAvatars?.(keys);
+        renderAvatars?.update(keys);
         if (overflow) {
           const extra = Math.max(0, count - MAX_READER_AVATARS);
           overflow.hidden = extra === 0;
@@ -136,6 +136,7 @@ export function mountOnlineReaders(
   return () => {
     away = true;
     suspend();
+    renderAvatars?.dispose();
     doc.removeEventListener('visibilitychange', visibility);
     win.removeEventListener('offline', suspend);
     win.removeEventListener('online', schedule);
