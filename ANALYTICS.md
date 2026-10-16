@@ -7,9 +7,11 @@ conversion is configured in the GA4 account.
 
 The existing GA4 property in `src/config.ts` is used; no second SDK or dependency.
 Production pages only; development and draft previews do not collect analytics.
-The library and interaction listeners start after `window.load`, five seconds,
-and a browser idle callback (another three-second timer on older browsers).
-Actions before that point are deliberately not recorded. A blocked GA request
+The library starts after `window.load`, five seconds, and a browser idle
+callback (another three-second timer on older browsers). The interaction
+listeners start at once: until the library arrives, `gtag()` only pushes onto
+`dataLayer`, and gtag.js replays that queue in order (after the page view).
+Actions on a page left before the library loads are still lost. A blocked GA request
 never stops copying, form submission or navigation. No delivery callbacks,
 navigation delays, DOM scans, mutation observers or pointer/scroll listeners.
 Google's downloaded code still has a main-thread cost; this cannot promise zero
@@ -96,19 +98,24 @@ language, button, topic or podcast episode.
 
 | Interaction | `content_type` | `action` | `item_id` / extra |
 | --- | --- | --- | --- |
-| Copy idea / follow prompt | `idea` / `follow` | `copy`, then `result` | Button class; `result=success/error` |
-| Internal links / same-page anchors | `a` (or enclosing content group) | `navigate` | Destination without query; fragment for same-page anchors |
+| Copy idea / follow prompt | `idea` / `follow` | `copy`, then `result` | Button class; `result=success/error`; `post_slug` on post pages |
+| Internal links / same-page anchors | `a` (or enclosing content group) | `navigate` | Destination without query; fragment for same-page anchors; `label` = link group |
+| Email link (e.g. /about/) | `a` | `email` | `mailto` (never the address); `label` |
 | Image open, close, reset; dialog dismiss | `button` | `click` | Popover target or button class |
 | Expand/collapse transcript or podcast | `summary` | `open/close` | Summary or explicit identifier |
 | Theme choice | `theme` | `change` | `light/dark/system` |
-| Feedback choice | `feedback` | `change` | `helped/not_really` |
-| Valid feedback submission | `feedback` | `submit` | `post/about` |
-| Feedback server response | `feedback` | `result` | `post/about`; `result=success/error/slow` |
+| Feedback choice | `feedback` | `change` | `helped/not_really`; `post_slug` on post pages |
+| Valid feedback submission | `feedback` | `submit` | `post/about`; `post_slug` on post pages |
+| Feedback server response | `feedback` | `result` | `post/about`; `result=success/error/slow`; `post_slug` on post pages |
 | Load Spotify frame (including retries) | `podcast` | `load_player` | Spotify episode/show ID |
 | Native audio/video | `audio/video` | `play/complete` | Source URL without query |
 
-`placement` is `header`, `main`, `footer` or `page`; `language` is the document
-language. Copy clicks and copy outcomes are distinct rows: count `action=copy`
+`placement` is `header`, `main`, `footer` or `page`; `site_language` is the
+document language (`he`/`en`); the name `language` is reserved by gtag.js and
+was never sent as an event parameter. `post_slug` is the URL slug of the post page. `label` is the nearest
+`data-analytics-label`, else the first class of the nearest classed
+`nav`/`aside`/`ol`/`ul`, `.prose` or `.meta` (e.g. `related`, `stories`,
+`site-nav`, `post-foot`, `footer_topics`, `footer_links`, `site_title`), else `other`. Copy clicks and copy outcomes are distinct rows: count `action=copy`
 for attempts, or `action=result,result=success` for successful copies.
 Submitting does not mean the server accepted the feedback; use the result row.
 Spotify frame loading is not proof of listening. Interactions inside the
@@ -116,7 +123,8 @@ cross-origin Spotify frame cannot be observed by this tracker. Native playback
 resumption generates another `play`; no progress timers or percentage events.
 
 No feedback text, email, clipboard content, prompt, arbitrary input value or
-visible label is read by the tracker. It ignores mailto/tel links. Custom link
+visible label is read by the tracker. Email links send only `mailto`, never the
+address; tel links are ignored. Custom link
 and media parameters strip query strings. GA4's own automatic URL collection
 remains governed by the web stream settings.
 
@@ -128,7 +136,7 @@ allowlisted outcome after finishing their normal UI work. No GA dependency
 is imported into those components.
 
 For reports, `content_type` is standard; register event-scoped custom dimensions
-for `action`, `result`, `placement`, and `item_id` if needed in Explore.
+for `action`, `result`, `placement`, `item_id`, `post_slug`, `label` and `site_language` if needed in Explore.
 Do not create a custom dimension for each button or post. In DebugView (with
 debug mode enabled for the test browser), verify one event per action/outcome
 in both languages after the deferred activation. Actual ingestion and Enhanced
@@ -141,7 +149,8 @@ Run `npm test`, `npm run seo:check`, `npm run build`, then
 `python3 scripts/test-analytics.py` and `npm run perf:check`.
 The browser test checks the real production HTML in both languages with external
 requests stubbed to avoid submitting feedback or polluting production analytics.
-It verifies deferred activation, keyboard/nested clicks, successful and failed
+It verifies deferred library loading with early events queued, `post_slug`,
+link `label`, the /about/ email link, keyboard/nested clicks, successful and failed
 clipboard writes, feedback result/privacy, navigation, outbound/download
 deduplication, native media and the Spotify load control. The Lighthouse guard
 runs separately, without request stubs or analytics overrides.

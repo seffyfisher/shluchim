@@ -1,8 +1,15 @@
-/** Serialized into the delayed GA loader. No imports, DOM scans, observers or per-element listeners.
+/** Serialized into the GA snippet and run at once. No imports, DOM scans, observers or per-element listeners.
  * JS is necessary to measure interactions; all handlers are passive and never wait for delivery.
+ * Events go to window.gtag, which only pushes onto dataLayer until gtag.js arrives and replays the queue in order.
  */
 export function installInteractions() {
   const options = { capture: true, passive: true };
+  const slug = /\/posts\/([^/]+)\/$/.exec(location.pathname)?.[1]; // Post pages only.
+  // Which group of links was used: explicit data-analytics-label, else the nearest classed list/nav/aside or prose.
+  const label = (element) => {
+    const group = element.closest('[data-analytics-label],nav[class],aside[class],ol[class],ul[class],.prose,.meta,.site-nav');
+    return group?.dataset.analyticsLabel || group?.classList[0] || 'other';
+  };
   const path = (value) => {
     try {
       const url = new URL(value, location.href);
@@ -14,13 +21,15 @@ export function installInteractions() {
       const group = element.closest('[data-analytics-content]');
       const section = element.closest('header,footer,main');
       const link = element.closest('a[href]');
+      const type = extra.content_type || group?.dataset.analyticsContent || element.tagName.toLowerCase();
       window.gtag('event', 'select_content', {
-        content_type: group?.dataset.analyticsContent || element.tagName.toLowerCase(),
+        content_type: type,
         item_id: link ? path(link.href) : element.dataset.analyticsId || element.id ||
           element.getAttribute('popovertarget') || element.classList[0] || element.tagName.toLowerCase(),
         action,
         placement: section?.tagName.toLowerCase() || 'page',
-        language: document.documentElement.lang,
+        site_language: document.documentElement.lang, // gtag.js reserves 'language'.
+        ...(slug && ['idea', 'follow', 'feedback'].includes(type) ? { post_slug: slug } : {}),
         ...extra,
       });
     } catch { /* Measurement must never break the reader's action, even if GA is blocked. */ }
@@ -31,10 +40,12 @@ export function installInteractions() {
     if (element.tagName === 'A') {
       let url;
       try { url = new URL(element.href, location.href); } catch { return; }
-      if (!/^https?:$/.test(url.protocol)) return; // Never collect mailto/tel addresses.
+      // Email links count as one fixed item; the address itself is never collected. tel: and others are ignored.
+      if (url.protocol === 'mailto:') return report(element, 'email', { item_id: 'mailto', label: label(element) });
+      if (!/^https?:$/.test(url.protocol)) return;
       // GA4 Enhanced Measurement owns outbound clicks and its supported file extensions.
       if (url.origin !== location.origin || /\.(pdf|xlsx?|docx?|txt|rtf|csv|exe|key|pp[stx]*|7z|pkg|rar|gz|zip|avi|mov|mp4|mpe?g|wmv|midi?|mp3|wav|wma)$/i.test(url.pathname)) return;
-      report(element, 'navigate', { link_url: path(element.href),
+      report(element, 'navigate', { link_url: path(element.href), label: label(element),
         // Only same-page fragments are useful for in-page navigation; never send query strings.
         ...(url.pathname === location.pathname && url.hash ? { item_id: url.pathname + url.hash } : {}),
       });
