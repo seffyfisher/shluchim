@@ -5,11 +5,11 @@ const { kind, spotifyId, title } = Astro.props;
 if (!/^[A-Za-z0-9]{22}$/.test(spotifyId)) throw new Error('Invalid Spotify ID');
 const src = `https://open.spotify.com/embed/${kind}/${spotifyId}?utm_source=generator`;
 ---
-<div class="spotify-player" data-src={src} data-title={title}>
+<div class="spotify-player" data-src={src} data-title={title} data-analytics-content="podcast">
   <div class="spotify-stage">
     <div class="spotify-placeholder">
       <svg class="podcast-play" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="15" stroke="currentColor" /><path d="m13 10 9 6-9 6V10Z" fill="currentColor" /></svg>
-      <button class="podcast-button spotify-load" type="button" hidden>טעינת נגן Spotify<span class="sr-only">: {title}</span></button>
+      <button class="podcast-button spotify-load" type="button" hidden data-analytics-action="load_player" data-analytics-id={spotifyId}>טעינת נגן Spotify<span class="sr-only">: {title}</span></button>
       <p class="spotify-privacy">הנגן של Spotify נטען רק לאחר לחיצה. ההאזנה מתחילה בנגן.</p>
       <noscript><p>אפשר להאזין דרך הקישורים שמתחת לנגן.</p></noscript>
     </div>

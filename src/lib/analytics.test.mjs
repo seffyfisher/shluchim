@@ -7,16 +7,17 @@ const ID = 'G-TEST123';
 
 /** Runs the snippet in a stub browser and records what it does. */
 function run({ readyState = 'loading', idle = true, id = ID } = {}) {
-  const appended = [], listeners = {}, idleQueue = [], timers = [];
+  const appended = [], listeners = {}, interactionListeners = {}, idleQueue = [], timers = [];
   const win = {
-    document: { readyState, head: { appendChild: (el) => appended.push(el) }, createElement: () => ({}) },
+    document: { readyState, head: { appendChild: (el) => appended.push(el) }, createElement: () => ({}),
+      addEventListener: (type, fn, opts) => { interactionListeners[type] = { fn, opts }; } },
     addEventListener: (type, fn) => { listeners[type] = fn; },
     setTimeout: (fn, ms) => timers.push({ fn, ms }),
   };
   if (idle) win.requestIdleCallback = (fn, opts) => idleQueue.push({ fn, opts });
   win.window = win;
   vm.runInNewContext(gtagSnippet(id), Object.assign(win, { document: win.document, encodeURIComponent, Date }));
-  return { win, appended, listeners, idleQueue, timers };
+  return { win, appended, listeners, interactionListeners, idleQueue, timers };
 }
 
 test('gtag.js is not requested while the page is loading', () => {
@@ -98,4 +99,18 @@ test('a repeated load notification cannot request the library twice', () => {
 
 test('the ID can never close the script tag', () => {
   assert.ok(!gtagSnippet('</script><script>alert(1)</script>').includes('</script>'));
+});
+
+test('interaction tracking starts only after load, settling and idle, with passive delegated handlers', () => {
+  const { listeners, interactionListeners, timers, idleQueue } = run();
+  assert.equal(Object.keys(interactionListeners).length, 0);
+  listeners.load();
+  timers[0].fn();
+  assert.equal(Object.keys(interactionListeners).length, 0);
+  idleQueue[0].fn();
+  assert.deepEqual(Object.keys(interactionListeners).sort(), ['analytics:result', 'change', 'click', 'ended', 'play', 'submit']);
+  for (const handler of Object.values(interactionListeners)) {
+    assert.equal(handler.opts.passive, true);
+    assert.equal(handler.opts.capture, true);
+  }
 });

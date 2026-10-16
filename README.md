@@ -18,6 +18,7 @@ in [PODCAST.md](PODCAST.md). The refresh uses the existing GitHub Actions token
 and does not generate, upload or syndicate audio.
 
 Lighthouse delivery, GA4 trade-offs and the required Cloudflare cache/RUM rules: [PERFORMANCE.md](PERFORMANCE.md).
+Generic interaction events, GA4 Enhanced Measurement settings and reporting: [ANALYTICS.md](ANALYTICS.md).
 
 - Posts: `src/content/posts/*.md` (frontmatter: `title`, `description`, `date`, `draft` (default `true`), optional `tags`, `cover`, `coverAlt`). Schema in `src/content.config.ts`.
 - Blog title / tagline: `src/config.ts`.

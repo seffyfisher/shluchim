@@ -15,9 +15,9 @@ const { lang } = Astro.props;
 const ui = t(lang);
 const prompt = followPrompt(lang, { feedUrl: new URL(lurl(lang, 'rss.xml'), Astro.site).href });
 ---
-<div class="follow follow-footer" role="group" aria-labelledby="follow-q">
+<div class="follow follow-footer" role="group" aria-labelledby="follow-q" data-analytics-content="follow">
   <p class="follow-q" id="follow-q">{ui.followQ}</p>
-  <button type="button" class="follow-btn follow-copy" data-prompt={prompt} data-label={ui.followLabel}>
+  <button type="button" class="follow-btn follow-copy" data-prompt={prompt} data-label={ui.followLabel} data-analytics-action="copy">
     <span class="idle">{ui.followCopy}</span><span class="done">{ui.followCopied}</span>
   </button>
   <p class="follow-status" role="status" data-fail={ui.followCopyFail}></p>
@@ -45,6 +45,7 @@ const prompt = followPrompt(lang, { feedUrl: new URL(lurl(lang, 'rss.xml'), Astr
       status.toggleAttribute('data-failed', !ok);
       if (ok) status.replaceChildren(success.content.cloneNode(true));
       else status.textContent = status.dataset.fail!;
+      btn.dispatchEvent(new CustomEvent('analytics:result', { bubbles: true, detail: ok ? 'success' : 'error' }));
     });
   }
 </script>
