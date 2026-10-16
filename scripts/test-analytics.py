@@ -65,6 +65,7 @@ try:
                 assert all(row['content_type'] == content and row['placement'] == placement for row in rows), rows
                 assert all(row['name'] == 'select_content' for row in rows)
                 assert rows[1]['result'] == 'success'
+                assert all(row['site_language'] == (prefix[:2] or 'he') and 'language' not in row for row in rows), rows
                 assert all(row['post_slug'] == slug for row in rows), rows
 
             clear(page)

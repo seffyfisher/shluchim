@@ -28,7 +28,7 @@ export function installInteractions() {
           element.getAttribute('popovertarget') || element.classList[0] || element.tagName.toLowerCase(),
         action,
         placement: section?.tagName.toLowerCase() || 'page',
-        language: document.documentElement.lang,
+        site_language: document.documentElement.lang, // gtag.js reserves 'language'.
         ...(slug && ['idea', 'follow', 'feedback'].includes(type) ? { post_slug: slug } : {}),
         ...extra,
       });

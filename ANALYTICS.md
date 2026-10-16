@@ -110,8 +110,9 @@ language, button, topic or podcast episode.
 | Load Spotify frame (including retries) | `podcast` | `load_player` | Spotify episode/show ID |
 | Native audio/video | `audio/video` | `play/complete` | Source URL without query |
 
-`placement` is `header`, `main`, `footer` or `page`; `language` is the document
-language. `post_slug` is the URL slug of the post page. `label` is the nearest
+`placement` is `header`, `main`, `footer` or `page`; `site_language` is the
+document language (`he`/`en`); the name `language` is reserved by gtag.js and
+was never sent as an event parameter. `post_slug` is the URL slug of the post page. `label` is the nearest
 `data-analytics-label`, else the first class of the nearest classed
 `nav`/`aside`/`ol`/`ul`, `.prose` or `.meta` (e.g. `related`, `stories`,
 `site-nav`, `post-foot`, `footer_topics`, `footer_links`, `site_title`), else `other`. Copy clicks and copy outcomes are distinct rows: count `action=copy`
@@ -135,7 +136,7 @@ allowlisted outcome after finishing their normal UI work. No GA dependency
 is imported into those components.
 
 For reports, `content_type` is standard; register event-scoped custom dimensions
-for `action`, `result`, `placement`, `item_id`, `post_slug` and `label` if needed in Explore.
+for `action`, `result`, `placement`, `item_id`, `post_slug`, `label` and `site_language` if needed in Explore.
 Do not create a custom dimension for each button or post. In DebugView (with
 debug mode enabled for the test browser), verify one event per action/outcome
 in both languages after the deferred activation. Actual ingestion and Enhanced

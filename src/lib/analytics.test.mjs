@@ -159,7 +159,7 @@ test('clicks before gtag.js is ready are queued and delivered in order once it l
   const [copy, result] = hits.slice(2).map((h) => h[2]);
   assert.equal(hits[2][1], 'select_content');
   assert.deepEqual({ ...result }, { content_type: 'idea', item_id: 'idea-copy', action: 'result', placement: 'main',
-    language: 'he', post_slug: '2026-10-12-dial-bot', result: 'success' });
+    site_language: 'he', post_slug: '2026-10-12-dial-bot', result: 'success' });
   assert.equal(copy.post_slug, '2026-10-12-dial-bot');
 });
 
@@ -212,6 +212,6 @@ test('mailto clicks are tracked without the address; tel and outbound links are 
   }
   const rows = events(win);
   assert.equal(rows.length, 1, JSON.stringify(rows));
-  assert.deepEqual({ ...rows[0] }, { content_type: 'a', item_id: 'mailto', action: 'email', placement: 'main', language: 'he', label: 'prose' });
+  assert.deepEqual({ ...rows[0] }, { content_type: 'a', item_id: 'mailto', action: 'email', placement: 'main', site_language: 'he', label: 'prose' });
   assert.ok(!JSON.stringify(rows).includes('private'));
 });
