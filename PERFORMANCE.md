@@ -238,19 +238,15 @@ The browser regression now checks zero initial gesture-module requests, zoom
 on the first opening, Escape closing, and native enlargement without JavaScript.
 All existing homepage request, geometry and fallback checks remain active.
 
-## Reading-font download priority (October 16, 2026)
+## Rejected font-priority experiment (October 16, 2026)
 
-The [first production run after PR 45](https://github.com/seffyfisher/shluchim/actions/runs/38924005769)
-passed delivery checks but retained medians 99/99/99/100/99. Its reading-text LCP
-was about 2.0–2.1 seconds. All three font preloads had High priority: the two
-body faces alone transferred about 79 KB, including roughly 40 KB for Extrabold.
-
-The Extrabold preload now uses `fetchpriority="low"`. The reading and display
-faces retain their original priority, and every font file, glyph, weight,
-fallback metric and final style is unchanged. Chromium's request report confirms
-Extrabold is Low while Regular and the display face remain High. This is an HTML
-priority hint, as documented in the [Fetch Priority guide](https://web.dev/articles/fetch-priority).
-The reader counter's 500ms startup and all analytics behavior are preserved.
+PR 53 tried lowering only the Extrabold preload's priority. All 15 local runs
+scored 100, but [production run 38927849241](https://github.com/seffyfisher/shluchim/actions/runs/38927849241)
+measured medians 99/98/93/99/100. Two reminders audits shifted by 0.157–0.158 CLS
+while the bold face arrived late. This is a real regression despite unchanged
+font bytes and styles, so the priority hint is reverted. All three original
+font preloads retain their default priority. Hosting checks remain green, and
+the reader startup and analytics behavior remain unchanged.
 
 ## Cloudflare configuration (applied October 16, 2026)
 
