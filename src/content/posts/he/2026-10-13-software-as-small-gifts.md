@@ -7,7 +7,7 @@ seoDescription: "TypoSwap הוא מתנת תוכנה ל־2 מערכות, Mac ו�
 emoji: "🎁"
 topics: ["everyday-ai", "ai-at-work"]
 date: 2026-10-13
-draft: false
+draft: true
 lang: he
 translationKey: "2026-10-13-software-as-small-gifts"
 ---
