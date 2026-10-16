@@ -1,0 +1,116 @@
+{
+  "sourcePage": "https://chatgpt.com/space/page_d60ee3209ddc8191ac0ab2808ab53bd1",
+  "sourcePageUpdatedAt": "2026-10-14T18:24:32.753661Z",
+  "sourceSequence": 32,
+  "originalStoryDate": "2026-10-13",
+  "publicationAuthorized": "User explicitly authorized publication of the current Page, its five images, original video and interactive wrapping demo.",
+  "assets": [
+    {
+      "name": "01-personal-gift.png",
+      "page_id": "page_d60ee3209ddc8191ac0ab2808ab53bd1",
+      "reference": "library-file:fde1_bGliZmlsZV9Vc2RfRk13WW55RVZ5LTRfWmhMd21R_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
+      "mime_type": "image/png",
+      "byte_size": 1517170,
+      "sha256": "964bb3b67128bc91db48b2e643d4f4a6589d9d9c593e69bef03bde5fd866ee85",
+      "text_representation": null,
+      "text_byte_size": null,
+      "kind": "image",
+      "width": 1672,
+      "height": 941,
+      "publicImages": [
+        "/media/posts/software-as-small-gifts/01-personal-gift-1024.webp",
+        "/media/posts/software-as-small-gifts/01-personal-gift-1672.webp"
+      ]
+    },
+    {
+      "name": "02-keyboard-plan-logo.png",
+      "page_id": "page_d60ee3209ddc8191ac0ab2808ab53bd1",
+      "reference": "library-file:fde1_bGliZmlsZV9YV3d0RmhMZVNnQmNtMHdQQVk2OVhn_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
+      "mime_type": "image/png",
+      "byte_size": 1607405,
+      "sha256": "d916d7e70133facabb4538019d4c6ba64de7bc6a5f677bfeb0c835764083e5df",
+      "text_representation": null,
+      "text_byte_size": null,
+      "kind": "image",
+      "width": 1672,
+      "height": 941,
+      "publicImages": [
+        "/media/posts/software-as-small-gifts/02-keyboard-plan-logo-1024.webp",
+        "/media/posts/software-as-small-gifts/02-keyboard-plan-logo-1672.webp"
+      ]
+    },
+    {
+      "name": "03-wrapped-software.png",
+      "page_id": "page_d60ee3209ddc8191ac0ab2808ab53bd1",
+      "reference": "library-file:fde1_bGliZmlsZV9faTBpSV9Xb2FWcEg3NFlPN1lOTk5n_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
+      "mime_type": "image/png",
+      "byte_size": 1680300,
+      "sha256": "bc5235c5ab5d920f7b53b3304b9d28427718ebdaf921978a7d80a0a21adeb006",
+      "text_representation": null,
+      "text_byte_size": null,
+      "kind": "image",
+      "width": 1672,
+      "height": 941,
+      "publicImages": [
+        "/media/posts/software-as-small-gifts/03-wrapped-software-1024.webp",
+        "/media/posts/software-as-small-gifts/03-wrapped-software-1672.webp"
+      ]
+    },
+    {
+      "name": "04-typing-workflow.png",
+      "page_id": "page_d60ee3209ddc8191ac0ab2808ab53bd1",
+      "reference": "library-file:fde1_bGliZmlsZV8zeEYxU2FhemZtS1IyRjJLU1lzU1NR_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
+      "mime_type": "image/png",
+      "byte_size": 139751,
+      "sha256": "e467beb101714208fbeed880ea226fd0795f134deb68e13d501b4f0f3dd17e3e",
+      "text_representation": null,
+      "text_byte_size": null,
+      "kind": "image",
+      "width": 1120,
+      "height": 1390,
+      "publicImages": [
+        "/media/posts/software-as-small-gifts/04-typing-workflow-1024.webp",
+        "/media/posts/software-as-small-gifts/04-typing-workflow-1120.webp"
+      ]
+    },
+    {
+      "name": "05-gift-installation.png",
+      "page_id": "page_d60ee3209ddc8191ac0ab2808ab53bd1",
+      "reference": "library-file:fde1_bGliZmlsZV96NlNOMG9IYnlGUEd3am9PQzBjUS1B_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
+      "mime_type": "image/png",
+      "byte_size": 490275,
+      "sha256": "46998a22666e0622d459f51c7979e7d94c304cc693258b3eebd91d15200ecd44",
+      "text_representation": null,
+      "text_byte_size": null,
+      "kind": "image",
+      "width": 925,
+      "height": 790,
+      "publicImages": [
+        "/media/posts/software-as-small-gifts/05-gift-installation-925.webp"
+      ]
+    },
+    {
+      "name": "gift-wrap-source.html",
+      "page_id": "page_d60ee3209ddc8191ac0ab2808ab53bd1",
+      "reference": "visualize:fde1_bGliZmlsZV9YVmtkUHJSa1FqTlMtd29WMTh6NzlB_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
+      "mime_type": "text/html",
+      "byte_size": 15742,
+      "sha256": "ead14ecc5f2456cedbcf472f58e6b729d35a2c6dc8ba7424a2b0a4abd73881b0",
+      "text_representation": "source",
+      "text_byte_size": 15742,
+      "kind": "text"
+    }
+  ],
+  "video": {
+    "name": "TypoSwap-Gift-Walkthrough.mp4",
+    "sedimentFileId": "file_00000000fd8c820e852a9332a1851231",
+    "byteSize": 1171789,
+    "sha256": "950892c6214cb892c060b0d3fca47bce246ddec3c2a90c45b82a29850d2ed31d",
+    "durationSeconds": 36,
+    "width": 1920,
+    "height": 1080,
+    "kind": "simulation"
+  },
+  "sourcePreservation": "Original images remain in their persistent Page Files references. Local originals were read from those references, verified by SHA-256, and retained outside public/. WebP quality is 95; no crop or upscale.",
+  "javascript": "The approved wrapping demo requires pointer coordinates, drag progress, keyboard activation and replay state. Clipboard writes and success/failure feedback also require JavaScript. Styling and transitions use CSS. No existing analytics or release checks were changed."
+}
