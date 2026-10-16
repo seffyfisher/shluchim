@@ -39,8 +39,9 @@ await new Promise(r => server.listen(0, '127.0.0.1', r));
 base = `http://127.0.0.1:${server.address().port}`;
 const wss = new WebSocketServer({ server }), sockets = new Set(), browsers = [], errors = [];
 let sequence = 0;
+let injected = Object.create(null);
 const state = () => {
-  const value = {};
+  const value = Object.assign(Object.create(null), injected);
   for (const ws of sockets) if (ws.tracked) {
     value[ws.key] ??= { metas: [] };
     value[ws.key].metas.push({ phx_ref: String(ws.id) });
@@ -75,7 +76,7 @@ const wait = async (predicate, message) => {
   }
   assert.fail(`${message}: ${sockets.size} sockets, ${Object.keys(state()).length} browser keys`);
 };
-const count = (page, n) => page.waitForFunction(n => document.querySelector('[data-online-readers]')?.hasAttribute('data-ready') && document.querySelector('[data-readers-label]')?.textContent.startsWith(`${n} `), { timeout: 20000 }, n);
+const count = (page, n) => page.waitForFunction(n => document.querySelector('[data-online-readers]')?.hasAttribute('data-ready') && document.querySelector('[data-readers-label]')?.textContent.startsWith(`${n.toLocaleString('he-IL')} `), { timeout: 20000 }, n);
 async function launch() {
   const args = ['--no-sandbox', '--disable-dev-shm-usage'];
   if (process.env.HTTPS_PROXY) args.push(`--proxy-server=${process.env.HTTPS_PROXY}`);
@@ -104,6 +105,28 @@ try {
   await Promise.all([first.page.goto(base + '/?presence-window=a'), second.page.goto(base + '/?presence-window=b')]);
   await Promise.all([visibility(first, true), visibility(second, true)]);
   await Promise.all([count(first.page, 2), count(second.page, 2)]);
+  // A bounded local adversarial fixture, never a flood against the live service.
+  const attack = '<img src="https://presence-attacker.invalid/x" onerror="window.presenceAttack=true">';
+  const hostileRequests = [];
+  first.page.on('request', request => { if (request.url().includes('presence-attacker.invalid')) hostileRequests.push(request.url()); });
+  injected = Object.fromEntries(Array.from({ length: 5000 }, (_, i) => [`00000000-0000-4000-8000-${String(i).padStart(12, '0')}`, { metas: [{ phx_ref: `attack-${i}`, html: attack }] }]));
+  Object.defineProperties(injected, Object.getOwnPropertyDescriptors(JSON.parse('{"__proto__":{"metas":[{"phx_ref":"proto","__proto__":{"presenceAttack":true}}]},"constructor":{"metas":[{"phx_ref":"constructor"}]}}')));
+  injected[attack] = { metas: [{ phx_ref: 'markup' }] };
+  injected['x'.repeat(100000)] = { metas: [{ phx_ref: 'long-key' }] };
+  broadcast(); await count(first.page, 5002);
+  const security = await first.page.evaluate(() => ({
+    avatars: document.querySelectorAll('[data-readers-crowd] svg').length,
+    overflow: document.querySelector('[data-readers-overflow]').textContent,
+    overflowHidden: document.querySelector('[data-readers-overflow]').hidden,
+    injected: window.presenceAttack === true || ({}).presenceAttack === true,
+    unsafeUses: [...document.querySelectorAll('[data-readers-crowd] use')].filter(use => !/^\/_astro\/[^#]+#reader-\d+$/.test(use.getAttribute('href'))).length,
+  }));
+  assert.deepEqual(security, { avatars: 500, overflow: '+4,502', overflowHidden: false, injected: false, unsafeUses: 0 });
+  assert.deepEqual(hostileRequests, []);
+  injected = Object.create(null); broadcast();
+  await Promise.all([count(first.page, 2), count(second.page, 2)]);
+  await first.page.waitForFunction(() => document.querySelectorAll('[data-readers-crowd] svg').length === 2 && document.querySelector('[data-readers-overflow]').hidden);
+  console.log('Public-channel attack fixture: 5,000 fake UUIDs, hostile metadata/prototype/markup/long keys; DOM bounded to 500, full count + overflow, no XSS or attacker requests, clean recovery');
   for (let i = 0; i < 3; i++) for (const [hidden, peer] of [[first, second], [second, first]]) {
     await visibility(hidden, false); await count(peer.page, 1);
     await wait(() => sockets.size === 1, 'hidden window retained its transport');

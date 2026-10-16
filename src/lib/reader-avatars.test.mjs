@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readerAvatars } from './reader-avatars.ts';
+import { readerAvatars, MAX_READER_AVATARS } from './reader-avatars.ts';
 
 function gallery() {
   const children = [];
@@ -40,4 +40,25 @@ test('crowds get 16 expressions before repeating, 128 combinations and individua
   const shape = node => Number(node.children[0].attributes.href.split('#reader-')[1]) % 8;
   assert.ok(new Set(galleryState.children.slice(0, 16).map(shape)).size >= 4, 'expression diversity also preserves varied shapes');
   assert.equal(new Set(galleryState.children.map(node => node.attributes.style)).size, 200);
+});
+
+test('bounds decorative DOM during a crowd flood and recovers when readers leave', () => {
+  const galleryState = gallery();
+  const keys = Array.from({ length: 5000 }, (_, i) => `reader-${i}`);
+  galleryState.update(keys);
+  assert.equal(galleryState.children.length, MAX_READER_AVATARS);
+  galleryState.update(keys.slice(500, 1100));
+  assert.equal(galleryState.children.length, MAX_READER_AVATARS);
+  galleryState.update(keys.slice(700, 702));
+  assert.equal(galleryState.children.length, 2);
+});
+
+test('malicious keys cannot inject markup, CSS or an external SVG URL', () => {
+  const galleryState = gallery();
+  galleryState.update(['<img src=x onerror=alert(1)>', '__proto__', 'javascript:alert(1)', '"; background: url(https://evil.invalid)']);
+  for (const node of galleryState.children) {
+    assert.match(node.attributes.style, /^--reader-hue: [\d.]+$/);
+    assert.match(node.children[0].attributes.href, /^\/_astro\/bloub\.svg#reader-\d{1,3}$/);
+    assert.equal(node.children.length, 1);
+  }
 });

@@ -1,5 +1,10 @@
 # Online readers: verification, October 16, 2026
 
+Historical verification of PR #44. The current lifecycle/security changes and
+remaining live-server checks are in [the security review](online-readers-security-review.md)
+and `supabase/README-supabase.md`; measurements and layout below describe the
+original candidate, not the current production revision.
+
 Branch: `codex/online-readers-bloub`, based on `main` at
 `b8c324be7780b467e88a1c8db0643890a8ac5150` (PR #43 included).
 

@@ -24,7 +24,10 @@ only once actual readers are rendered. The band reserves its full height, so
 appearing/disappearing counts and crowds do not move the story. The band is
 64px high, including its top spacing, down from the original 132px. Large crowds
 scroll left horizontally inside the band using touch, a trackpad or keyboard;
-no readers are silently capped. Keyboard focus outlines the scroll area.
+at most 500 decorative avatars are rendered, with a visible `+N` for the rest.
+The label keeps the full count of valid browser IDs. This bounds DOM work from
+untrusted channel input without silently discarding the crowd size. Keyboard
+focus outlines the scroll area.
 
 The artwork is generated with the MIT-licensed Bloub engine from
 https://github.com/jeremy-prt/bloub, pinned to commit
@@ -39,14 +42,21 @@ gets a short CSS greeting, disabled for reduced motion. Existing characters
 retain their DOM nodes and do not replay the greeting on every sync.
 
 The count estimates **visible browsers**, including the current reader. A
-random localStorage ID groups tabs; blocked storage falls back to a tab ID.
+random localStorage ID groups tabs; new connections replace it on each new UTC
+day. Existing connections retain their current ID until reconnecting; tabs
+straddling midnight can briefly be counted separately. Legacy permanent IDs
+are replaced. Blocked storage falls back to a tab ID.
 Only that random ID and an empty payload are shared on the public channel;
 no names, emails or page paths. Presence can be spoofed and is not an
 authoritative people count. No history is saved to Postgres. Short visits that
 leave before the deferred connection are not counted. Hidden/offline tabs
 disconnect and resume on visibility, connectivity or bfcache restore. Failed
 or disconnected counts stay hidden. Realtime connection/message quotas apply;
-there are no polling API requests.
+there are no polling API requests. This public channel is not an abuse boundary:
+clients can spoof valid IDs or exhaust project quotas. A frontend cap protects
+decorative DOM, not the SDK's incoming state or the service's billing limits.
+See [the security review](../docs/online-readers-security-review.md) for findings,
+remaining server checks and evidence. Do not send private information on it.
 
 Each page reuses one SDK client because Phoenix retains its own page-lifecycle
 hooks. Suspension closes the transport before removing channels, waits for

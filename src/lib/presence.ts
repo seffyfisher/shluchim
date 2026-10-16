@@ -1,4 +1,6 @@
-import { readerAvatars } from './reader-avatars.ts';
+import { readerAvatars, MAX_READER_AVATARS } from './reader-avatars.ts';
+
+const READER_ID = /^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}$/i;
 
 type Realtime = typeof import('@supabase/realtime-js');
 
@@ -15,6 +17,7 @@ export function mountOnlineReaders(
   const doc = element.ownerDocument;
   const win = doc.defaultView!;
   const label = element.querySelector<HTMLElement>('[data-readers-label]')!;
+  const overflow = element.querySelector<HTMLElement>('[data-readers-overflow]');
   const { url, key, lang, sprite } = element.dataset;
   if (!url || !key?.startsWith('sb_publishable_')) return;
   const crowd = element.querySelector<HTMLElement>('[data-readers-crowd]');
@@ -55,13 +58,16 @@ export function mountOnlineReaders(
       const { RealtimeClient } = await loadRealtime();
       if (stopping) await stopping;
       if (current !== generation || !active()) return;
-      // One random key per browser, shared by tabs. Never send names, page
-      // paths, emails or account IDs. Storage-disabled browsers still work.
+      // Share a daily random ID across tabs, not a permanent public browser ID.
+      // Rotation happens on connection; an already-connected tab keeps its ID.
+      // Never send names, page paths, emails or account IDs.
       let visitor: string = win.crypto.randomUUID();
       try {
+        const day = new Date().toISOString().slice(0, 10);
         const stored = win.localStorage.getItem('shluchim-presence-id');
-        if (stored && /^[\da-f-]{36}$/i.test(stored)) visitor = stored;
-        else win.localStorage.setItem('shluchim-presence-id', visitor);
+        const id = stored?.startsWith(`${day}:`) ? stored.slice(11) : undefined;
+        if (id && READER_ID.test(id)) visitor = id;
+        else win.localStorage.setItem('shluchim-presence-id', `${day}:${visitor}`);
       } catch { /* With blocked storage, count this tab only. */ }
       // Phoenix retains page lifecycle hooks. Reuse its client so restoring a
       // cached page cannot reconnect a discarded transport beside a new one.
@@ -78,12 +84,21 @@ export function mountOnlineReaders(
         const state = channel.presenceState();
         // Wait for our own presence to sync; never invent a count of one.
         if (!state[visitor]?.length) { hide(); return; }
-        const count = Object.keys(state).length; // keys, not per-tab entries
+        // Channel keys and metadata are public, attacker-controlled input.
+        // Ignore metadata, malformed IDs and prototype property names entirely.
+        const keys = Object.keys(state).filter(id => id.length === 36 && READER_ID.test(id));
+        const count = keys.length; // keys, not per-tab entries
         const text = lang === 'he'
           ? `${count.toLocaleString('he-IL')} ${count === 1 ? 'קורא כאן עכשיו' : 'קוראים כאן עכשיו'}`
           : `${count.toLocaleString('en')} ${count === 1 ? 'reader here now' : 'readers here now'}`;
         if (label.textContent !== text) label.textContent = text;
-        renderAvatars?.(Object.keys(state));
+        renderAvatars?.(keys);
+        if (overflow) {
+          const extra = Math.max(0, count - MAX_READER_AVATARS);
+          overflow.hidden = extra === 0;
+          overflow.textContent = extra ? `+${extra.toLocaleString(lang === 'he' ? 'he-IL' : 'en')}` : '';
+          overflow.setAttribute('aria-label', lang === 'he' ? `ועוד ${extra} קוראים` : `${extra} more readers`);
+        }
         element.setAttribute('data-ready', '');
       };
       channel.on('presence', { event: 'sync' }, render).subscribe(async (status) => {
