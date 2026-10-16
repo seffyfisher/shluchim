@@ -1,5 +1,55 @@
 # Lighthouse delivery and analytics
 
+## Polin running text: local verification (October 15, 2026)
+
+Running text now uses the supplied Polin Regular (400) and Extrabold (800),
+converted locally from OTF to WOFF2 with FontTools 4.67.0. The files are 38,056
+and 39,888 bytes. Each retains all 805 glyphs, 729 mapped codepoints, original
+names, embedding flags (`OS/2.fsType = 0x0008`) and shaping tables. Round-trip
+comparison found identical table bytes except the head checksum and WOFF2 flag.
+All Hebrew characters used by the current blog are covered; U+05BD (meteg),
+which the current content does not use, is absent from both supplied fonts.
+The actual faces are Regular and Extrabold; CSS declares their true weights,
+and browser inspection confirms that bold requests select Polin-Extrabold.
+
+The font metadata credits Ben Nathan and Mateusz Machalski. The
+[official Polin page](https://hafontia.com/family/polin/) identifies the Hebrew
+design as Ben Nathan's and the Latin as Mateusz Machalski's. Footer and About
+credits now identify Polin; the other font and technology credits are preserved.
+Noa Shalev, Young Serif, heading styles and their system fallbacks are unchanged.
+Both active body-font URLs are hashed and match their preloads. The feedback
+toast uses a public alias of Polin Extrabold. The existing Leon Bold public alias
+is retained for previously cached feedback HTML.
+
+Plain Arial caused up to 0.2574 CLS with Polin delayed by 1.5 seconds. Local
+Arial fallback faces now match Polin's Hebrew and Latin widths separately for
+400 and 800, with CSS metric overrides. Chromium 155.0.8059.40 on this Mac
+measured a maximum 0.0031 CLS across the five release routes at 320px, 412px
+and 1280px with the same font delay. Those measurements are specific to this
+Mac's Arial; device-specific fallback review remains separate.
+
+Hebrew and English homepages were checked at 390px and 1440px, in light and
+dark themes, plus 390px without JavaScript. There was no horizontal overflow.
+Chrome's platform-font inspection confirmed Polin Regular/Extrabold for pointed
+Hebrew and Latin text, and the existing display fonts for the headings.
+
+`npm ci`, `npm test` (63 Node tests, 15 Python tests and the controlled builds),
+`npm run seo:check`, `npm run build` and the unchanged `npm run perf:check` passed
+locally with Node 24.4.0 and Lighthouse 13.4.1. All 74 pages using the shared
+footer contain one localized Polin credit and only the new active body-font URLs.
+All 15 Lighthouse runs scored 100, with CLS 0:
+
+| Route | Performance (three runs) |
+| --- | --- |
+| `/` | 100, 100, 100 |
+| `/en/` | 100, 100, 100 |
+| `/posts/2026-10-06-reminders-shaliach/` | 100, 100, 100 |
+| `/podcast/` | 100, 100, 100 |
+| `/posts/2026-10-13-wake-up-sky/` | 100, 100, 100 |
+
+These are local production-build measurements. No publication or live audit was
+performed for this change; the existing live cache warning remains separate.
+
 ## Font-loading fallback correction (October 15, 2026)
 
 The [first live font audit](https://github.com/seffyfisher/shluchim/actions/runs/38801304141)
