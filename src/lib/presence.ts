@@ -1,11 +1,13 @@
-import { readerAvatars } from './reader-avatars.ts';
+import { readerAvatars, MAX_READER_AVATARS } from './reader-avatars.ts';
+
+const READER_ID = /^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}$/i;
 
 type Realtime = typeof import('@supabase/realtime-js');
 
 /**
  * A shared, anonymous count of visible browsers, across pages and languages.
  * JS is necessary to receive live state on this static site. readers-loader.mjs
- * defers this entire entry until load + five seconds + browser idle. The SDK
+ * defers this entire entry until load + half a second + browser idle. The SDK
  * is another dynamic chunk, requested only when the browser is idle again.
  */
 export function mountOnlineReaders(
@@ -15,12 +17,15 @@ export function mountOnlineReaders(
   const doc = element.ownerDocument;
   const win = doc.defaultView!;
   const label = element.querySelector<HTMLElement>('[data-readers-label]')!;
+  const overflow = element.querySelector<HTMLElement>('[data-readers-overflow]');
   const { url, key, lang, sprite } = element.dataset;
   if (!url || !key?.startsWith('sb_publishable_')) return;
   const crowd = element.querySelector<HTMLElement>('[data-readers-crowd]');
   const renderAvatars = crowd && sprite ? readerAvatars(crowd, sprite) : undefined;
 
   let client: InstanceType<Realtime['RealtimeClient']> | undefined;
+  let reusableClient: typeof client;
+  let stopping: Promise<unknown> | undefined;
   let pending = false, away = false;
   let generation = 0;
   let idle: number | undefined, fallback: number | undefined;
@@ -36,11 +41,12 @@ export function mountOnlineReaders(
     idle = fallback = undefined;
     const previous = client;
     client = undefined;
-    // Stop the transport at once, including offline/pagehide; also tear down
-    // channel retry timers. Do not keep working in a background tab.
+    // Close before queuing channel-leave frames: Phoenix waits for its send
+    // buffer, and pagehide can freeze that wait in the back/forward cache.
     if (previous) {
-      void previous.removeAllChannels().catch(() => {});
-      void previous.disconnect().catch(() => {});
+      stopping = Promise.allSettled([previous.disconnect(), previous.removeAllChannels()])
+        // Invalidate Phoenix's saved pageshow reconnect after teardown too.
+        .then(() => previous.disconnect()).catch(() => {});
     }
   }
 
@@ -50,16 +56,22 @@ export function mountOnlineReaders(
     const current = generation;
     try {
       const { RealtimeClient } = await loadRealtime();
+      if (stopping) await stopping;
       if (current !== generation || !active()) return;
-      // One random key per browser, shared by tabs. Never send names, page
-      // paths, emails or account IDs. Storage-disabled browsers still work.
+      // Share a daily random ID across tabs, not a permanent public browser ID.
+      // Rotation happens on connection; an already-connected tab keeps its ID.
+      // Never send names, page paths, emails or account IDs.
       let visitor: string = win.crypto.randomUUID();
       try {
+        const day = new Date().toISOString().slice(0, 10);
         const stored = win.localStorage.getItem('shluchim-presence-id');
-        if (stored && /^[\da-f-]{36}$/i.test(stored)) visitor = stored;
-        else win.localStorage.setItem('shluchim-presence-id', visitor);
+        const id = stored?.startsWith(`${day}:`) ? stored.slice(11) : undefined;
+        if (id && READER_ID.test(id)) visitor = id;
+        else win.localStorage.setItem('shluchim-presence-id', `${day}:${visitor}`);
       } catch { /* With blocked storage, count this tab only. */ }
-      const connection = new RealtimeClient(url!, { params: { apikey: key! } });
+      // Phoenix retains page lifecycle hooks. Reuse its client so restoring a
+      // cached page cannot reconnect a discarded transport beside a new one.
+      const connection = reusableClient ??= new RealtimeClient(url!, { params: { apikey: key! } });
       client = connection;
       pending = false;
       const channel = connection.channel('shluchim-online', {
@@ -72,12 +84,21 @@ export function mountOnlineReaders(
         const state = channel.presenceState();
         // Wait for our own presence to sync; never invent a count of one.
         if (!state[visitor]?.length) { hide(); return; }
-        const count = Object.keys(state).length; // keys, not per-tab entries
+        // Channel keys and metadata are public, attacker-controlled input.
+        // Ignore metadata, malformed IDs and prototype property names entirely.
+        const keys = Object.keys(state).filter(id => id.length === 36 && READER_ID.test(id));
+        const count = keys.length; // keys, not per-tab entries
         const text = lang === 'he'
           ? `${count.toLocaleString('he-IL')} ${count === 1 ? 'קורא כאן עכשיו' : 'קוראים כאן עכשיו'}`
           : `${count.toLocaleString('en')} ${count === 1 ? 'reader here now' : 'readers here now'}`;
         if (label.textContent !== text) label.textContent = text;
-        renderAvatars?.(Object.keys(state));
+        renderAvatars?.(keys);
+        if (overflow) {
+          const extra = Math.max(0, count - MAX_READER_AVATARS);
+          overflow.hidden = extra === 0;
+          overflow.textContent = extra ? `+${extra.toLocaleString(lang === 'he' ? 'he-IL' : 'en')}` : '';
+          overflow.setAttribute('aria-label', lang === 'he' ? `ועוד ${extra} קוראים` : `${extra} more readers`);
+        }
         element.setAttribute('data-ready', '');
       };
       channel.on('presence', { event: 'sync' }, render).subscribe(async (status) => {
@@ -100,7 +121,7 @@ export function mountOnlineReaders(
     if (pending || client || !active()) return;
     pending = true;
     if (typeof win.requestIdleCallback === 'function') idle = win.requestIdleCallback(() => { void connect(); });
-    else fallback = win.setTimeout(() => { void connect(); }, 3000);
+    else fallback = win.setTimeout(() => { void connect(); }, 250);
   }
   const visibility = () => active() ? schedule() : suspend();
   const pagehide = () => { away = true; suspend(); };

@@ -3,11 +3,13 @@ const SHAPES = 8;
 const EXPRESSIONS = VARIANTS / SHAPES;
 const COLORS = 3600;
 const SVG_NS = 'http://www.w3.org/2000/svg';
+export const MAX_READER_AVATARS = 500;
 
-/** Reconcile one actual Bloub SVG per Presence key, retaining existing nodes. */
+/** Bound decorative DOM even when an untrusted public channel reports a crowd. */
 export function readerAvatars(crowd: HTMLElement, sprite: string) {
   const readers = new Map<string, { svg: SVGSVGElement; variant: number; color: number }>();
   return (keys: string[]) => {
+    keys = keys.slice(0, MAX_READER_AVATARS);
     const present = new Set(keys);
     for (const [key, reader] of readers) {
       if (!present.has(key)) { reader.svg.remove(); readers.delete(key); }

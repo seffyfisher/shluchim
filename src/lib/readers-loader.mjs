@@ -10,8 +10,8 @@ export function readersLoader(url) {
     'document.removeEventListener("visibilitychange",schedule);removeEventListener("online",schedule);' +
     `var s=document.createElement("script");s.type="module";s.src=${quoted};s.fetchPriority="low";document.head.appendChild(s)}` +
     'function schedule(){if(!ready||queued||loaded||document.visibilityState!=="visible"||!navigator.onLine)return;queued=true;' +
-    '"requestIdleCallback"in window?requestIdleCallback(go):setTimeout(go,3e3)}' +
-    'function settle(){setTimeout(function(){ready=true;schedule()},5e3)}' +
+    '"requestIdleCallback"in window?requestIdleCallback(go):setTimeout(go,250)}' +
+    'function settle(){setTimeout(function(){ready=true;schedule()},500)}' +
     'document.addEventListener("visibilitychange",schedule);addEventListener("online",schedule);' +
     'document.readyState==="complete"?settle():addEventListener("load",settle,{once:true})})()';
 }

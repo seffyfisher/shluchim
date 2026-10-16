@@ -16,15 +16,19 @@ key is rejected by the build. There is no counter in `astro dev` or drafts.
 Only an inline loader (about 430 bytes gzipped) runs with the initial HTML.
 The Astro `deferredReaders` build hook replaces the generated Presence module
 tag with this loader; it fails the build if the module tag changes unexpectedly.
-The gallery entry and Vite helper download after `load`, five seconds and
+The gallery entry and Vite helper download after `load`, 500ms and
 `requestIdleCallback`; the Realtime SDK then imports during another idle slot.
-Without that API, each idle slot uses a three-second timer. There is no idle
+Without that API, each idle slot uses a 250ms timer (about one second after
+load before connecting, rather than the old eleven-second minimum). There is no idle
 timeout forcing work into a busy interval. The SVG sprite is requested
 only once actual readers are rendered. The band reserves its full height, so
 appearing/disappearing counts and crowds do not move the story. The band is
 64px high, including its top spacing, down from the original 132px. Large crowds
 scroll left horizontally inside the band using touch, a trackpad or keyboard;
-no readers are silently capped. Keyboard focus outlines the scroll area.
+at most 500 decorative avatars are rendered, with a visible `+N` for the rest.
+The label keeps the full count of valid browser IDs. This bounds DOM work from
+untrusted channel input without silently discarding the crowd size. Keyboard
+focus outlines the scroll area.
 
 The artwork is generated with the MIT-licensed Bloub engine from
 https://github.com/jeremy-prt/bloub, pinned to commit
@@ -39,24 +43,44 @@ gets a short CSS greeting, disabled for reduced motion. Existing characters
 retain their DOM nodes and do not replay the greeting on every sync.
 
 The count estimates **visible browsers**, including the current reader. A
-random localStorage ID groups tabs; blocked storage falls back to a tab ID.
+random localStorage ID groups tabs; new connections replace it on each new UTC
+day. Existing connections retain their current ID until reconnecting; tabs
+straddling midnight can briefly be counted separately. Legacy permanent IDs
+are replaced. Blocked storage falls back to a tab ID.
 Only that random ID and an empty payload are shared on the public channel;
 no names, emails or page paths. Presence can be spoofed and is not an
 authoritative people count. No history is saved to Postgres. Short visits that
 leave before the deferred connection are not counted. Hidden/offline tabs
 disconnect and resume on visibility, connectivity or bfcache restore. Failed
 or disconnected counts stay hidden. Realtime connection/message quotas apply;
-there are no polling API requests.
+there are no polling API requests. This public channel is not an abuse boundary:
+clients can spoof valid IDs or exhaust project quotas. A frontend cap protects
+decorative DOM, not the SDK's incoming state or the service's billing limits.
+See [the security review](../docs/online-readers-security-review.md) for findings,
+remaining server checks and evidence. Do not send private information on it.
+
+Each page reuses one SDK client because Phoenix retains its own page-lifecycle
+hooks. Suspension closes the transport before removing channels, waits for
+both operations, then disconnects again to invalidate a saved automatic
+`pageshow` reconnect. A new subscription waits for that teardown. This prevents
+frozen sockets and extra connections when returning from the back/forward cache.
 
 Validation: `node --test --test-isolation=none src/lib/presence.test.mjs
 src/lib/reader-avatars.test.mjs src/lib/readers-loader.test.mjs` covers deferral, unique browser counts,
 languages, failure/reconnection, background/offline/bfcache, blocked storage,
 and 200-character crowds. Run normal tests, SEO, build and Lighthouse checks
 with the feature enabled. In a browser, confirm SDK/socket/sprite downloads
-start at least five seconds after `load`; check two tabs plus another browser,
+start after `load` + 500ms + idle; check two tabs plus another browser,
 light/dark/reduced-motion and responsiveness/layout shifts with a large crowd.
 An initial Lighthouse pass alone does not verify deferred work or Supabase
 connectivity. A local protocol fixture does not verify the live service.
+
+`npm run test:presence-lifecycle` runs the production build in actual Chromium
+windows against a local Phoenix/Presence fixture, using the real pinned SDK.
+It checks short visits (initial sync within three seconds in the local fixture),
+fresh navigation without idle callbacks, native minimize/restore and real bfcache restores, socket
+counts, duplicate-browser keys, closure of both windows and uncaught errors.
+CI runs it before Lighthouse and deployment. `ws` is a test-only dependency.
 
 ## Feedback
 
