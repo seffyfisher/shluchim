@@ -15,6 +15,68 @@ navigation delays, DOM scans, mutation observers or pointer/scroll listeners.
 Google's downloaded code still has a main-thread cost; this cannot promise zero
 impact on later interactions. Run the unchanged Lighthouse release guard.
 
+## Required workflow for features and merges
+
+Standing rule from Seffy, October 16, 2026: every new or changed feature that
+affects a meaningful user action or outcome includes analytics as part of the
+implementation. This applies to actions such as using/copying an idea, following
+new posts, submitting feedback, navigating to content, or using a player. It
+also applies when a refactor changes the controls, identifiers or success
+conditions of an already measured flow.
+
+### Implementing agent
+
+1. State the questions the data must answer: whether the feature is used,
+   which content/control is selected, and whether the intended outcome succeeds
+   or fails where the site can observe that outcome. Map every meaningful action
+   and outcome in the changed flow; measure business-relevant steps rather than
+   every DOM interaction.
+2. Inspect existing coverage first. Reuse GA4 Enhanced Measurement or a
+   recommended GA4 event and the shared tracker. Existing delegated tracking
+   counts as coverage only after verifying its actual payload for the new UI.
+   Use stable dynamic identifiers/parameters; add a new event name only when
+   existing semantics cannot answer the question, and explain why in the PR.
+3. Define triggers and outcomes accurately. A click is an attempt; report success
+   only after the operation confirms it. A loaded player frame does not establish
+   listening, and copying a follow prompt does not establish a subscription.
+   Keep attempts, confirmed outcomes and unavailable observations distinguishable
+   in the data. Preserve production-only collection and the shared deferred
+   activation boundary: load, settling period and browser idle.
+4. Keep measurement passive and independent of feature behavior. The action
+   must work when GA is unavailable; sending analytics must not delay rendering,
+   navigation, copying or submission. Reuse the shared loader rather than adding
+   a feature-specific SDK or eager listener bundle. Collect stable identifiers
+   and allowlisted values; exclude email, feedback text, prompts, clipboard
+   contents and other free-form/personal data.
+5. Verify the affected flow in the production build, in each affected language
+   and input mode. Check the actual event name, parameters, trigger timing,
+   attempts/results, failures, and duplicate counts, including interaction with
+   built-in GA4 events. Check that the UI still works when analytics is blocked.
+   Run the applicable verification and performance checks documented below and
+   in the release guard. Reuse existing checks where they cover the change.
+6. Update the tracking table in this document when coverage or semantics change.
+   In the PR, record each data question, event and dynamic parameters, trigger,
+   outcome definition and verification evidence. Distinguish browser event/queue
+   verification from actual GA4 ingestion and report configuration. If account
+   access is unavailable, name the remaining check and the access needed; mark
+   ingestion/settings as unverified rather than claiming they passed.
+
+### Merging agent
+
+Before merging the exact PR head, inspect the changed user flow and its analytics
+evidence. Confirm every meaningful action/outcome has coverage, parameters allow
+the stated questions to be answered, triggers reflect real outcomes, and the
+implementation meets privacy and deferred-loading requirements. Confirm the
+applicable browser and release checks passed on the candidate being merged.
+
+An applicable feature is not ready to merge while tracking coverage or browser
+verification is missing, duplicates or misleading success signals remain, or
+measurement blocks the UI or exposes personal content. Request the concrete
+missing implementation/evidence and recheck it before merge. A docs-only change
+or another change with no effect on user actions may record **Analytics: not
+applicable**, with a specific reason. Record any GA4 access/configuration gap
+separately so it stays visible after publication.
+
 ## Use GA4 defaults first
 
 In the web stream's Enhanced Measurement settings, keep page views, scrolls,
