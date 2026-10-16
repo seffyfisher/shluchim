@@ -26,8 +26,9 @@ function browser({ readyState = 'loading', idle = true, visible = true, storage 
     removeAttribute: (key) => attrs.delete(key),
   };
   class RealtimeClient {
-    constructor(url, options) { Object.assign(this, { url, options, state: {}, tracks: [], closed: 0, removed: 0, trackResult: 'ok' }); clients.push(this); }
+    constructor(url, options) { Object.assign(this, { url, options, state: {}, tracks: [], closed: 0, removed: 0, channelCalls: 0, trackResult: 'ok' }); clients.push(this); }
     channel(name, options) {
+      this.channelCalls++;
       this.name = name; this.config = options.config;
       const channel = {
         on: (_type, _filter, fn) => { this.sync = fn; return channel; },
@@ -37,12 +38,12 @@ function browser({ readyState = 'loading', idle = true, visible = true, storage 
       };
       return channel;
     }
-    async removeAllChannels() { this.removed++; }
-    async disconnect() { this.closed++; }
+    async removeAllChannels() { this.removed++; return this.cleanupResult; }
+    async disconnect() { this.closed++; return this.disconnectResult; }
   }
   const cleanup = mountOnlineReaders(element, () => { imports.push(true); return loader ? loader() : Promise.resolve({ RealtimeClient }); });
   const fire = (target, type) => target.dispatchEvent(new Event(type));
-  const flush = async () => { await Promise.resolve(); await Promise.resolve(); };
+  const flush = () => new Promise(resolve => setImmediate(resolve));
   const delay = (ms) => {
     const entry = [...timers].find(([, timer]) => timer.ms === ms);
     assert.ok(entry, `expected ${ms}ms timer`);
@@ -121,13 +122,14 @@ test('does not load in the background; disconnects when hidden and reconnects wh
   assert.equal(b.imports.length, 0);
   b.doc.visibilityState = 'visible'; b.fire(b.doc, 'visibilitychange'); await b.runIdle();
   const client = await b.presence();
+  const oldSync = client.sync;
   b.doc.visibilityState = 'hidden'; b.fire(b.doc, 'visibilitychange');
   assert.equal(client.closed, 1); assert.equal(client.removed, 1);
   assert.equal(b.attrs.has('data-ready'), false);
   b.doc.visibilityState = 'visible'; b.fire(b.doc, 'visibilitychange'); await b.runIdle();
-  assert.equal(b.clients.length, 2);
-  assert.equal(b.clients[1].config.presence.key, client.config.presence.key);
-  client.sync(); assert.equal(b.attrs.has('data-ready'), false, 'ignores callbacks from the old socket');
+  assert.equal(b.clients.length, 1, 'reuse the SDK client and its page lifecycle hooks');
+  assert.equal(client.channelCalls, 2);
+  oldSync(); assert.equal(b.attrs.has('data-ready'), false, 'ignores callbacks from the old channel');
 });
 
 test('an old tracking acknowledgement cannot reveal a count after the connection fails', async () => {
@@ -148,12 +150,44 @@ test('offline and bfcache navigation close the socket and resume only when activ
   assert.equal(b.attrs.has('data-ready'), false);
   b.win.navigator.onLine = true; b.fire(b.win, 'online'); await b.runIdle();
   await b.presence();
+  const closes = b.clients[0].closed;
   b.fire(b.win, 'pagehide');
-  assert.equal(b.clients.at(-1).closed, 1);
+  assert.equal(b.clients.at(-1).closed, closes + 1);
   b.fire(b.win, 'pageshow'); await b.runIdle();
-  assert.equal(b.clients.length, 3);
+  assert.equal(b.clients.length, 1);
+  assert.equal(b.clients[0].channelCalls, 3);
   b.cleanup(); b.fire(b.win, 'pageshow'); await b.runIdle();
-  assert.equal(b.clients.length, 3, 'cleanup removes all scheduling listeners');
+  assert.equal(b.clients[0].channelCalls, 3, 'cleanup removes all scheduling listeners');
+});
+
+test('waits for transport and channel cleanup before reusing the client', async () => {
+  for (const field of ['disconnectResult', 'cleanupResult']) {
+    const b = browser(); await b.start(); const client = await b.presence();
+    let finish;
+    client[field] = new Promise(resolve => { finish = resolve; });
+    b.doc.visibilityState = 'hidden'; b.fire(b.doc, 'visibilitychange');
+    b.doc.visibilityState = 'visible'; b.fire(b.doc, 'visibilitychange'); await b.runIdle();
+    assert.equal(client.channelCalls, 1, `${field} still pending: do not add a channel that old cleanup could disconnect`);
+    finish(); await b.flush();
+    assert.equal(b.clients.length, 1);
+    assert.equal(client.channelCalls, 2);
+    b.cleanup(); await b.flush();
+  }
+});
+
+test('becoming hidden while cleanup is pending cancels the queued resume', async () => {
+  const b = browser(); await b.start(); const client = await b.presence();
+  let finish;
+  client.cleanupResult = new Promise(resolve => { finish = resolve; });
+  b.doc.visibilityState = 'hidden'; b.fire(b.doc, 'visibilitychange');
+  b.doc.visibilityState = 'visible'; b.fire(b.doc, 'visibilitychange'); await b.runIdle();
+  b.doc.visibilityState = 'hidden'; b.fire(b.doc, 'visibilitychange');
+  finish(); await b.flush();
+  assert.equal(client.channelCalls, 1);
+  assert.equal(b.attrs.has('data-ready'), false);
+  b.doc.visibilityState = 'visible'; b.fire(b.doc, 'visibilitychange'); await b.runIdle();
+  assert.equal(client.channelCalls, 2);
+  assert.equal(b.clients.length, 1);
 });
 
 test('tabs in one browser reuse the same random key; blocked storage still works', async () => {

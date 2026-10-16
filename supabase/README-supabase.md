@@ -48,6 +48,12 @@ disconnect and resume on visibility, connectivity or bfcache restore. Failed
 or disconnected counts stay hidden. Realtime connection/message quotas apply;
 there are no polling API requests.
 
+Each page reuses one SDK client because Phoenix retains its own page-lifecycle
+hooks. Suspension closes the transport before removing channels, waits for
+both operations, then disconnects again to invalidate a saved automatic
+`pageshow` reconnect. A new subscription waits for that teardown. This prevents
+frozen sockets and extra connections when returning from the back/forward cache.
+
 Validation: `node --test --test-isolation=none src/lib/presence.test.mjs
 src/lib/reader-avatars.test.mjs src/lib/readers-loader.test.mjs` covers deferral, unique browser counts,
 languages, failure/reconnection, background/offline/bfcache, blocked storage,
@@ -57,6 +63,12 @@ start at least five seconds after `load`; check two tabs plus another browser,
 light/dark/reduced-motion and responsiveness/layout shifts with a large crowd.
 An initial Lighthouse pass alone does not verify deferred work or Supabase
 connectivity. A local protocol fixture does not verify the live service.
+
+`npm run test:presence-lifecycle` runs the production build in actual Chromium
+windows against a local Phoenix/Presence fixture, using the real pinned SDK.
+It checks native minimize/restore, navigation and real bfcache restores, socket
+counts, duplicate-browser keys, closure of both windows and uncaught errors.
+CI runs it before Lighthouse and deployment. `ws` is a test-only dependency.
 
 ## Feedback
 

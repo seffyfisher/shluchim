@@ -21,6 +21,8 @@ export function mountOnlineReaders(
   const renderAvatars = crowd && sprite ? readerAvatars(crowd, sprite) : undefined;
 
   let client: InstanceType<Realtime['RealtimeClient']> | undefined;
+  let reusableClient: typeof client;
+  let stopping: Promise<unknown> | undefined;
   let pending = false, away = false;
   let generation = 0;
   let idle: number | undefined, fallback: number | undefined;
@@ -36,11 +38,12 @@ export function mountOnlineReaders(
     idle = fallback = undefined;
     const previous = client;
     client = undefined;
-    // Stop the transport at once, including offline/pagehide; also tear down
-    // channel retry timers. Do not keep working in a background tab.
+    // Close before queuing channel-leave frames: Phoenix waits for its send
+    // buffer, and pagehide can freeze that wait in the back/forward cache.
     if (previous) {
-      void previous.removeAllChannels().catch(() => {});
-      void previous.disconnect().catch(() => {});
+      stopping = Promise.allSettled([previous.disconnect(), previous.removeAllChannels()])
+        // Invalidate Phoenix's saved pageshow reconnect after teardown too.
+        .then(() => previous.disconnect()).catch(() => {});
     }
   }
 
@@ -50,6 +53,7 @@ export function mountOnlineReaders(
     const current = generation;
     try {
       const { RealtimeClient } = await loadRealtime();
+      if (stopping) await stopping;
       if (current !== generation || !active()) return;
       // One random key per browser, shared by tabs. Never send names, page
       // paths, emails or account IDs. Storage-disabled browsers still work.
@@ -59,7 +63,9 @@ export function mountOnlineReaders(
         if (stored && /^[\da-f-]{36}$/i.test(stored)) visitor = stored;
         else win.localStorage.setItem('shluchim-presence-id', visitor);
       } catch { /* With blocked storage, count this tab only. */ }
-      const connection = new RealtimeClient(url!, { params: { apikey: key! } });
+      // Phoenix retains page lifecycle hooks. Reuse its client so restoring a
+      // cached page cannot reconnect a discarded transport beside a new one.
+      const connection = reusableClient ??= new RealtimeClient(url!, { params: { apikey: key! } });
       client = connection;
       pending = false;
       const channel = connection.channel('shluchim-online', {
