@@ -372,8 +372,12 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 }
 .theme-toggle:hover { background: var(--surface); }
 .theme-toggle:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+.theme-system { display: none; align-items: center; min-height: 2.75rem; padding: .4rem .75rem; border: 1px solid var(--fg); border-radius: 999px; background: transparent; color: var(--fg); font: inherit; font-size: var(--step--1); white-space: nowrap; cursor: pointer; }
+:root[data-theme] .theme-system { display: inline-flex; }
+.theme-system:hover { background: var(--surface); }
+.theme-system:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .theme-toggle, .theme-toggle .theme-thumb { transition: none; } }
-@media (scripting: none) { .theme-toggle { display: none; } }
+@media (scripting: none) { .theme-toggle, :root[data-theme] .theme-system { display: none; } }
 @media (max-width: 63.99rem) { .page-about .site-nav a { min-height: 2.75rem; } .page-about header.site.bar .name { padding-block: 0; } }
 @media (max-width: 28rem) {
   .page-about { padding-top: 0; }
