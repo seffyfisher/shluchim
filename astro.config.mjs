@@ -10,6 +10,7 @@ import { i18nCheck, urlPairs, lastmods } from './src/lib/i18n-check.mjs';
 import { seoCheck } from './src/lib/seo-check.mjs';
 import { SITE_URL, BASE_PATH } from './src/lib/site-env.mjs';
 import { listGuard } from './src/lib/list-guard.mjs';
+import { deferredReaders } from './src/lib/readers-loader.mjs';
 import { satteriLinks, linkGuard } from './src/lib/links.mjs';
 
 // Deploy target: defaults live in src/lib/site-env.mjs (custom domain https://shluchim.shinlamed.com, served at the root).
@@ -45,7 +46,7 @@ export default defineConfig({
   // Hebrew stays at the root (no /he/ prefix, no URL changes); English lives under /en/.
   i18n: { defaultLocale: 'he', locales: ['he', 'en'], routing: { prefixDefaultLocale: false } },
   // Sitemap alternates (he, en, x-default) come from translationKey pairs (English slugs differ from the Hebrew ones); lastmod from post dates.
-  integrations: [sitemap({ serialize(item) { const links = PAIRS.get(item.url); const lastmod = LASTMOD.get(item.url); return { ...item, ...(links ? { links } : {}), ...(lastmod ? { lastmod } : {}) }; } }), legacyAssetUrls, i18nCheck(), seoCheck(), listGuard(), linkGuard()],
+  integrations: [sitemap({ serialize(item) { const links = PAIRS.get(item.url); const lastmod = LASTMOD.get(item.url); return { ...item, ...(links ? { links } : {}), ...(lastmod ? { lastmod } : {}) }; } }), legacyAssetUrls, deferredReaders(), i18nCheck(), seoCheck(), listGuard(), linkGuard()],
   build: { inlineStylesheets: 'always' },
   // Code blocks follow the site theme (light/dark) via CSS variables; colours applied in global.css.
   markdown: { processor: satteri({ mdastPlugins: [satteriChat, satteriImgSize, satteriPhoto], hastPlugins: [satteriLinks], features: { rawHtml: true } }), shikiConfig: { themes: { light: 'github-light-high-contrast', dark: 'github-dark-high-contrast' }, defaultColor: false } },

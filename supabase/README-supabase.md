@@ -1,5 +1,60 @@
 # Feedback backend (Supabase)
 
+## Online readers (Realtime Presence + Bloub)
+
+A visible band below the header shows one Bloub character per connected,
+visible browser across all Hebrew and English pages. It uses the same project
+(`tyzswuffvhxnmtaoaskz`) and the public `shluchim-online` Presence channel;
+no table, migration or new Edge Function. Public Realtime channels must be
+allowed in the project's Realtime settings.
+
+The public `sb_publishable_...` key provided for this feature is configured in
+`src/config.ts`. Override `PRESENCE_PUBLISHABLE_KEY` when building if needed;
+an explicit empty value disables the feature. A secret or legacy service-role
+key is rejected by the build. There is no counter in `astro dev` or drafts.
+
+Only an inline loader (about 430 bytes gzipped) runs with the initial HTML.
+The Astro `deferredReaders` build hook replaces the generated Presence module
+tag with this loader; it fails the build if the module tag changes unexpectedly.
+The gallery entry and Vite helper download after `load`, five seconds and
+`requestIdleCallback`; the Realtime SDK then imports during another idle slot.
+Without that API, each idle slot uses a three-second timer. There is no idle
+timeout forcing work into a busy interval. The SVG sprite is requested
+only once actual readers are rendered. The band reserves its full height, so
+appearing/disappearing counts and crowds do not move the story. Large crowds
+wrap and scroll inside the band; no readers are silently capped.
+
+The artwork is generated with the MIT-licensed Bloub engine from
+https://github.com/jeremy-prt/bloub, pinned to commit
+`b4bb3c1b5f93c7b87a2e8d620f667c4093d97749`. `npm run readers:avatars`
+reproduces the 128 combinations of its eight shapes and sixteen expressions.
+See `scripts/vendor/bloub/README.md`. No Vue or Bloub animation engine ships to
+the browser: the committed SVG is hashed by Vite, and each joining character
+gets a short CSS greeting, disabled for reduced motion. Existing characters
+retain their DOM nodes and do not replay the greeting on every sync.
+
+The count estimates **visible browsers**, including the current reader. A
+random localStorage ID groups tabs; blocked storage falls back to a tab ID.
+Only that random ID and an empty payload are shared on the public channel;
+no names, emails or page paths. Presence can be spoofed and is not an
+authoritative people count. No history is saved to Postgres. Short visits that
+leave before the deferred connection are not counted. Hidden/offline tabs
+disconnect and resume on visibility, connectivity or bfcache restore. Failed
+or disconnected counts stay hidden. Realtime connection/message quotas apply;
+there are no polling API requests.
+
+Validation: `node --test --test-isolation=none src/lib/presence.test.mjs
+src/lib/reader-avatars.test.mjs src/lib/readers-loader.test.mjs` covers deferral, unique browser counts,
+languages, failure/reconnection, background/offline/bfcache, blocked storage,
+and 200-character crowds. Run normal tests, SEO, build and Lighthouse checks
+with the feature enabled. In a browser, confirm SDK/socket/sprite downloads
+start at least five seconds after `load`; check two tabs plus another browser,
+light/dark/reduced-motion and responsiveness/layout shifts with a large crowd.
+An initial Lighthouse pass alone does not verify deferred work or Supabase
+connectivity. A local protocol fixture does not verify the live service.
+
+## Feedback
+
 Plain HTML form (zero client JS) → Supabase Edge Function `feedback` → Postgres table `public.feedback`.
 Moderation: in the Supabase dashboard (Table Editor → `feedback`), change `status` from `pending` to `approved` or `rejected`.
 Notifications: a Grok Bot routine polls for new `pending` rows (read with the service role). No email, no domain.

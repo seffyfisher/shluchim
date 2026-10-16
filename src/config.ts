@@ -46,6 +46,14 @@ export const SHOW_DRAFTS = process.env.SHOW_DRAFTS === '1';
 // Empty = the block is not rendered at all. Env FEEDBACK_ENDPOINT overrides for previews.
 export const FEEDBACK_ENDPOINT: string = process.env.FEEDBACK_ENDPOINT || 'https://tyzswuffvhxnmtaoaskz.supabase.co/functions/v1/feedback';
 
+// Public Presence channel in the existing feedback project. Empty key = off.
+// Only a publishable key is accepted: never ship a secret/service-role key.
+export const PRESENCE_URL = 'wss://tyzswuffvhxnmtaoaskz.supabase.co/realtime/v1';
+export const PRESENCE_PUBLISHABLE_KEY = process.env.PRESENCE_PUBLISHABLE_KEY?.trim() ?? 'sb_publishable_vkqNq3EtxIGg7G-xpyyXgA_8RVR9H-_';
+if (PRESENCE_PUBLISHABLE_KEY && !/^sb_publishable_[A-Za-z0-9_-]+$/.test(PRESENCE_PUBLISHABLE_KEY)) {
+  throw new Error('PRESENCE_PUBLISHABLE_KEY must be a public sb_publishable_ key.');
+}
+
 // Google Analytics 4 measurement ID (public by design). Loaded after the page has finished loading and the browser is idle
 // (src/lib/analytics.ts), at low download priority, with advertising features disabled. Google's execution still has a cost.
 // Empty = no analytics. Never in draft previews or `astro dev`.

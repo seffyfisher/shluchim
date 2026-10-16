@@ -4,7 +4,7 @@ import heDisplayFontUrl from '../fonts/noa-shalev-regular-AlefAlefAlef.woff2?url
 import enDisplayFontUrl from '../fonts/young-serif-400.woff2?url';
 import bodyFontUrl from '../fonts/Polin-Regular.woff2?url';
 import boldFontUrl from '../fonts/Polin-Extrabold.woff2?url';
-import { SITES, SHOW_DRAFTS, SHOW_SWITCHER_ON_HE, PERSON, SEO_HOME, SEO_KEYWORDS, OG_IMAGE, VERIFY, GA_MEASUREMENT_ID } from '../config';
+import { SITES, SHOW_DRAFTS, SHOW_SWITCHER_ON_HE, PERSON, SEO_HOME, SEO_KEYWORDS, OG_IMAGE, VERIFY, GA_MEASUREMENT_ID, PRESENCE_PUBLISHABLE_KEY } from '../config';
 import { TOPICS, TOPIC_SLUGS } from '../data/topics.mjs';
 import { LANG_META, lurl, other, t, isLang, type Lang } from '../i18n/ui';
 import { safeJson, personNode, websiteNode, blogNode, nodeIds } from '../lib/seo';
@@ -12,6 +12,7 @@ import { gtagSnippet } from '../lib/analytics';
 import FollowBlock from '../components/FollowBlock.astro';
 import HandCursor from '../components/HandCursor.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
+import OnlineReaders from '../components/OnlineReaders.astro';
 interface Props {
   title?: string; description?: string; noindex?: boolean; masthead?: boolean; bodyClass?: string;
   lang?: Lang;
@@ -132,6 +133,7 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
         </div>
       </header>
     )}
+    {import.meta.env.PROD && !SHOW_DRAFTS && PRESENCE_PUBLISHABLE_KEY && <OnlineReaders lang={lang} />}
     <main id="main" class="wrap">
       <slot />
     </main>
