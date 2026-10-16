@@ -85,6 +85,33 @@ try {
     assert.equal(await page.$eval('html', e => e.classList.contains('story-art-loading')), false);
     await context.close(); console.log(`${mode}: original HTML image and native lazy loading remain available`);
   }
+  for (const javascript of [true, false]) {
+    const context = await browser.createBrowserContext(), page = await context.newPage();
+    await page.setViewport({ width: 412, height: 823, deviceScaleFactor: 1.75 });
+    await page.setJavaScriptEnabled(javascript);
+    const gestureRequests = [];
+    page.on('request', request => {
+      if (/\/(?:PostPage\.[^/]+|image-gestures\.[^/]+)\.js/.test(request.url())) gestureRequests.push(request.url());
+    });
+    await page.goto(base + '/posts/2026-10-06-reminders-shaliach/', { waitUntil: 'load' });
+    // With page JavaScript disabled, requestAnimationFrame callbacks do not
+    // run; the navigation's load event is the native fallback readiness signal.
+    if (javascript) await settle(page);
+    assert.deepEqual(gestureRequests, [], 'article gesture modules must not compete with initial fonts and content');
+    await page.click('.image-enlarge');
+    await page.waitForFunction(() => document.querySelector('.image-viewer:popover-open img')?.naturalWidth > 0);
+    if (javascript) {
+      await page.waitForFunction(() => document.querySelector('.image-viewer:popover-open')?.hasAttribute('data-gestures'));
+      assert.ok(gestureRequests.some(url => /image-gestures\./.test(url)), 'first opening loads and initializes gestures');
+      await page.focus('.image-viewer-scroll');
+      await page.keyboard.press('+');
+      await page.waitForFunction(() => document.querySelector('.image-viewer:popover-open')?.hasAttribute('data-zoomed'));
+    } else assert.deepEqual(gestureRequests, [], 'native enlargement needs no JavaScript');
+    await page.keyboard.press('Escape');
+    assert.equal(await page.$eval('.image-viewer', element => element.matches(':popover-open')), false);
+    await context.close();
+    console.log(`article ${javascript ? 'with JS' : 'no JS'}: gesture downloads wait for opening; image, zoom and closing preserved`);
+  }
 } finally {
   if (browser) await browser.close();
   await new Promise(r => server.close(r));

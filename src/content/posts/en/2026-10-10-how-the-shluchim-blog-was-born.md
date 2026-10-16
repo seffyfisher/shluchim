@@ -96,7 +96,7 @@ seffy: תוסיף לבלוג את רשימת כל השלוחים עם apng או 
 ```
 
 
-![Ben and Kochava build a home for stories, from the beach phone to the team gallery.](/images/posts/building-shluchim-blog-story-1672.webp)
+![Ben and Kochava build a home for stories, from the beach phone to the team gallery.](/images/posts/building-shluchim-blog-story-v2-1672.webp)
 
 
 ## The idea, in short:

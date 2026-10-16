@@ -1,3 +1,4 @@
+import { checkLiveDelivery } from './live-delivery.mjs';
 import { spawn } from 'node:child_process';
 import { createReadStream } from 'node:fs';
 import { mkdir, readFile, stat } from 'node:fs/promises';
@@ -87,25 +88,6 @@ async function audit(baseUrl, route, runIndex) {
   const metrics = metricIds.map((id) => `${id}: ${data.audits[id]?.displayValue ?? 'unknown'}`).join(', ');
   console.log(`${route} run ${runIndex}: Performance ${score}/100; ${metrics}; report: ${report}`);
   return score;
-}
-
-async function checkLiveDelivery(baseUrl) {
-  const response = await fetch(baseUrl);
-  if (!response.ok) throw new Error(`Live homepage returned HTTP ${response.status}`);
-  const html = await response.text();
-  if (html.includes('static.cloudflareinsights.com/beacon.min.js')) {
-    throw new Error('Cloudflare RUM is still injected. Disable RUM for this hostname as described in PERFORMANCE.md.');
-  }
-  const asset = html.match(/["']([^"']*\/_astro\/[^"']+)["']/)?.[1];
-  if (!asset) throw new Error('Could not find a hashed /_astro/ asset in the live homepage.');
-  const assetResponse = await fetch(new URL(asset, baseUrl), { method: 'HEAD' });
-  if (!assetResponse.ok) throw new Error(`Hashed asset returned HTTP ${assetResponse.status}`);
-  const cacheControl = assetResponse.headers.get('cache-control') ?? '';
-  const maxAge = Number(cacheControl.match(/(?:^|,)\s*max-age=(\d+)/)?.[1] ?? 0);
-  if (maxAge < 31536000) {
-    throw new Error(`Hashed assets have browser cache TTL ${maxAge}s; set Cloudflare Browser TTL to one year as described in PERFORMANCE.md.`);
-  }
-  console.log('Live delivery check passed: no Cloudflare RUM and hashed assets cached for one year.');
 }
 
 let preview;

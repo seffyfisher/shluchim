@@ -1,0 +1,91 @@
+{
+  "site": "https://shluchim.shinlamed.com/",
+  "checkedAt": "2026-10-16T09:59:33.197Z",
+  "cacheRule": {
+    "id": "6195503fcfd840b59f8936069f37548c",
+    "expression": "(http.host eq \"shluchim.shinlamed.com\" and starts_with(http.request.uri.path, \"/_astro/\"))",
+    "browserTTL": 31536000
+  },
+  "configurationRule": {
+    "id": "e97115f6f89f4641a5a14425e2dacdc9",
+    "expression": "(http.host eq \"shluchim.shinlamed.com\")",
+    "disable_rum": true
+  },
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "cacheControl": "max-age=600",
+      "rum": false
+    },
+    {
+      "path": "/en/",
+      "status": 200,
+      "cacheControl": "max-age=600",
+      "rum": false
+    },
+    {
+      "path": "/posts/2026-10-06-reminders-shaliach/",
+      "status": 200,
+      "cacheControl": "max-age=600",
+      "rum": false
+    }
+  ],
+  "assets": [
+    {
+      "path": "/_astro/noa-shalev-regular-AlefAlefAlef.DSiU2GRX.woff2",
+      "status": 200,
+      "cacheControl": "max-age=31536000"
+    },
+    {
+      "path": "/_astro/Polin-Regular.BRhOKqDE.woff2",
+      "status": 200,
+      "cacheControl": "max-age=31536000"
+    },
+    {
+      "path": "/_astro/Polin-Extrabold.B0LBZB1b.woff2",
+      "status": 200,
+      "cacheControl": "max-age=31536000"
+    },
+    {
+      "path": "/_astro/young-serif-400.DRBgePr_.woff2",
+      "status": 200,
+      "cacheControl": "max-age=31536000"
+    },
+    {
+      "path": "/_astro/moon.DCNv0xbG.webp",
+      "status": 200,
+      "cacheControl": "max-age=31536000"
+    },
+    {
+      "path": "/_astro/sun.0EHf8dAK.webp",
+      "status": 200,
+      "cacheControl": "max-age=31536000"
+    },
+    {
+      "path": "/_astro/computer.B5mL0lHm.webp",
+      "status": 200,
+      "cacheControl": "max-age=31536000"
+    },
+    {
+      "path": "/_astro/basher-still.AUM3yEIS.webp",
+      "status": 200,
+      "cacheControl": "max-age=31536000"
+    },
+    {
+      "path": "/_astro/basher.B-ItNt2g.webp",
+      "status": 200,
+      "cacheControl": "max-age=31536000"
+    },
+    {
+      "path": "/_astro/cursor-hand-sprite.BzGe3WIO.webp",
+      "status": 200,
+      "cacheControl": "max-age=31536000"
+    },
+    {
+      "path": "/_astro/PostPage.astro_astro_type_script_index_0_lang.1Fg7MMFs.js",
+      "status": 200,
+      "cacheControl": "max-age=31536000"
+    }
+  ]
+}

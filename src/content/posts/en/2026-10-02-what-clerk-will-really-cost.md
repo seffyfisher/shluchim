@@ -34,7 +34,7 @@ But for planning, we need about $500 a month,
 from around 73,000 signed-in MRUs in the reader.
 
 
-![Anali weighs web and app usage before estimating the cost.](/images/posts/clerk-auth-cost-story-1672.webp)
+![Anali weighs web and app usage before estimating the cost.](/images/posts/clerk-auth-cost-story-v2-1672.webp)
 
 
 ## What came out:
