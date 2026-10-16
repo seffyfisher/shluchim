@@ -7,7 +7,7 @@ seoDescription: "TypoSwap is a gift for 2 operating systems, Mac and Windows: lo
 emoji: "🎁"
 topics: ["everyday-ai", "ai-at-work"]
 date: 2026-10-13
-draft: false
+draft: true
 lang: en
 translationKey: "2026-10-13-software-as-small-gifts"
 ---
