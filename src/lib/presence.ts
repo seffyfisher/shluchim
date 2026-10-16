@@ -7,7 +7,7 @@ type Realtime = typeof import('@supabase/realtime-js');
 /**
  * A shared, anonymous count of visible browsers, across pages and languages.
  * JS is necessary to receive live state on this static site. readers-loader.mjs
- * defers this entire entry until load + five seconds + browser idle. The SDK
+ * defers this entire entry until load + half a second + browser idle. The SDK
  * is another dynamic chunk, requested only when the browser is idle again.
  */
 export function mountOnlineReaders(
@@ -121,7 +121,7 @@ export function mountOnlineReaders(
     if (pending || client || !active()) return;
     pending = true;
     if (typeof win.requestIdleCallback === 'function') idle = win.requestIdleCallback(() => { void connect(); });
-    else fallback = win.setTimeout(() => { void connect(); }, 3000);
+    else fallback = win.setTimeout(() => { void connect(); }, 250);
   }
   const visibility = () => active() ? schedule() : suspend();
   const pagehide = () => { away = true; suspend(); };

@@ -57,7 +57,7 @@ function browser({ readyState = 'loading', idle = true, visible = true, storage 
     for (const [id, task] of idleTasks) { idleTasks.delete(id); task.fn(); }
     await flush();
   };
-  const start = async () => { if (idle) await runIdle(); else { delay(3000); await flush(); } };
+  const start = async () => { if (idle) await runIdle(); else { delay(250); await flush(); } };
   const presence = async (others = {}, ownTabs = 1) => {
     const client = clients.at(-1);
     client.state = { ...others, ...(ownTabs ? { [client.config.presence.key]: Array.from({ length: ownTabs }, () => ({})) } : {}) };
@@ -77,10 +77,10 @@ test('after the delayed entry loads, waits for idle before importing the SDK, wi
   assert.equal(b.attrs.has('data-ready'), false, 'no guessed count before a successful sync');
 });
 
-test('without requestIdleCallback the deferred entry waits another three seconds before the SDK', async () => {
+test('without requestIdleCallback the deferred entry waits only 250ms before the SDK', async () => {
   const b = browser({ readyState: 'complete', idle: false });
   assert.equal(b.imports.length, 0);
-  b.delay(3000); await b.flush();
+  b.delay(250); await b.flush();
   assert.equal(b.clients.length, 1);
 });
 

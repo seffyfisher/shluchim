@@ -16,9 +16,10 @@ key is rejected by the build. There is no counter in `astro dev` or drafts.
 Only an inline loader (about 430 bytes gzipped) runs with the initial HTML.
 The Astro `deferredReaders` build hook replaces the generated Presence module
 tag with this loader; it fails the build if the module tag changes unexpectedly.
-The gallery entry and Vite helper download after `load`, five seconds and
+The gallery entry and Vite helper download after `load`, 500ms and
 `requestIdleCallback`; the Realtime SDK then imports during another idle slot.
-Without that API, each idle slot uses a three-second timer. There is no idle
+Without that API, each idle slot uses a 250ms timer (about one second after
+load before connecting, rather than the old eleven-second minimum). There is no idle
 timeout forcing work into a busy interval. The SVG sprite is requested
 only once actual readers are rendered. The band reserves its full height, so
 appearing/disappearing counts and crowds do not move the story. The band is
@@ -69,14 +70,15 @@ src/lib/reader-avatars.test.mjs src/lib/readers-loader.test.mjs` covers deferral
 languages, failure/reconnection, background/offline/bfcache, blocked storage,
 and 200-character crowds. Run normal tests, SEO, build and Lighthouse checks
 with the feature enabled. In a browser, confirm SDK/socket/sprite downloads
-start at least five seconds after `load`; check two tabs plus another browser,
+start after `load` + 500ms + idle; check two tabs plus another browser,
 light/dark/reduced-motion and responsiveness/layout shifts with a large crowd.
 An initial Lighthouse pass alone does not verify deferred work or Supabase
 connectivity. A local protocol fixture does not verify the live service.
 
 `npm run test:presence-lifecycle` runs the production build in actual Chromium
 windows against a local Phoenix/Presence fixture, using the real pinned SDK.
-It checks native minimize/restore, navigation and real bfcache restores, socket
+It checks short visits (initial sync within three seconds in the local fixture),
+fresh navigation without idle callbacks, native minimize/restore and real bfcache restores, socket
 counts, duplicate-browser keys, closure of both windows and uncaught errors.
 CI runs it before Lighthouse and deployment. `ws` is a test-only dependency.
 

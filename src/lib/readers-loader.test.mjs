@@ -24,11 +24,11 @@ function browser({ readyState = 'loading', idle = true, visible = true } = {}) {
   return { appended, timers, tasks, events, documentEvents, doc, win };
 }
 
-test('the entire module waits for load, five seconds and idle before any script download', () => {
+test('the entire module waits for load, half a second and idle before any script download', () => {
   const b = browser();
   assert.equal(b.appended.length, 0); assert.equal(b.timers.length, 0);
   b.events.load();
-  assert.equal(b.timers[0].ms, 5000); assert.equal(b.appended.length, 0);
+  assert.equal(b.timers[0].ms, 500); assert.equal(b.appended.length, 0);
   b.timers[0].fn();
   assert.equal(b.tasks[0].options, undefined); assert.equal(b.appended.length, 0);
   b.tasks[0].fn();
@@ -39,8 +39,8 @@ test('the entire module waits for load, five seconds and idle before any script 
 
 test('already-loaded browsers without idle callbacks use delayed timers', () => {
   const b = browser({ readyState: 'complete', idle: false });
-  assert.equal(b.timers[0].ms, 5000);
-  b.timers[0].fn(); assert.equal(b.timers[1].ms, 3000);
+  assert.equal(b.timers[0].ms, 500);
+  b.timers[0].fn(); assert.equal(b.timers[1].ms, 250);
   assert.equal(b.appended.length, 0);
   b.timers[1].fn(); assert.equal(b.appended.length, 1);
 });

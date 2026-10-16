@@ -88,6 +88,12 @@ async function prepare(page) {
   await page.evaluateOnNewDocument(() => {
     window.presencePageShows = [];
     addEventListener('pageshow', e => window.presencePageShows.push(e.persisted));
+    const observer = new MutationObserver(() => {
+      if (!document.querySelector('[data-online-readers]')?.hasAttribute('data-ready')) return;
+      window.presenceFirstReadyMs = performance.now() - performance.getEntriesByType('navigation')[0].loadEventEnd;
+      observer.disconnect();
+    });
+    observer.observe(document, { subtree: true, attributes: true, attributeFilter: ['data-ready'] });
   });
   await page.setViewport({ width: 390, height: 844 });
   const session = await page.createCDPSession();
@@ -105,6 +111,9 @@ try {
   await Promise.all([first.page.goto(base + '/?presence-window=a'), second.page.goto(base + '/?presence-window=b')]);
   await Promise.all([visibility(first, true), visibility(second, true)]);
   await Promise.all([count(first.page, 2), count(second.page, 2)]);
+  const initialTiming = await Promise.all([first.page, second.page].map(page => page.evaluate(() => window.presenceFirstReadyMs)));
+  assert.ok(initialTiming.every(ms => ms >= 450 && ms < 3000), `count short visits after load: ${initialTiming.join(', ')}ms`);
+  console.log(`Initial reader sync after load: ${initialTiming.map(ms => Math.round(ms)).join(', ')}ms; both visible within a three-second visit`);
   // A bounded local adversarial fixture, never a flood against the live service.
   const attack = '<img src="https://presence-attacker.invalid/x" onerror="window.presenceAttack=true">';
   const hostileRequests = [];
@@ -127,6 +136,15 @@ try {
   await Promise.all([count(first.page, 2), count(second.page, 2)]);
   await first.page.waitForFunction(() => document.querySelectorAll('[data-readers-crowd] svg').length === 2 && document.querySelector('[data-readers-overflow]').hidden);
   console.log('Public-channel attack fixture: 5,000 fake UUIDs, hostile metadata/prototype/markup/long keys; DOM bounded to 500, full count + overflow, no XSS or attacker requests, clean recovery');
+  // A fresh page must reconnect quickly too, including the older-browser path.
+  await first.page.evaluateOnNewDocument(() => { delete window.requestIdleCallback; delete window.cancelIdleCallback; });
+  await first.page.goto(base + '/en/');
+  await count(second.page, 1);
+  await Promise.all([count(first.page, 2), count(second.page, 2)]);
+  const fallback = await first.page.evaluate(() => ({ ms: window.presenceFirstReadyMs, hasIdle: 'requestIdleCallback' in window }));
+  assert.equal(fallback.hasIdle, false);
+  assert.ok(fallback.ms >= 950 && fallback.ms < 3000, `older-browser fresh navigation: ${fallback.ms}ms`);
+  console.log(`Fresh navigation without requestIdleCallback: reader returned ${Math.round(fallback.ms)}ms after load; shared Hebrew/English count restored`);
   for (let i = 0; i < 3; i++) for (const [hidden, peer] of [[first, second], [second, first]]) {
     await visibility(hidden, false); await count(peer.page, 1);
     await wait(() => sockets.size === 1, 'hidden window retained its transport');

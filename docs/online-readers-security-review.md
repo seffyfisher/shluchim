@@ -68,8 +68,10 @@ account security or the deployed feedback implementation.
   All twelve vendored TypeScript files matched the named upstream commit after
   the documented relative-import `.ts` extensions and trailing-newline
   normalization; no additional source modifications were found.
-- SDK/entry remain deferred until after load, five seconds and idle. Failure
-  hides the reader band; the static blog content does not depend on Supabase.
+- SDK/entry remain deferred until after load, 500ms and idle; older browsers
+  use two 250ms fallbacks, for about one second after load before connecting.
+  The earlier five-second delay was shortened to count brief visible visits.
+  Failure hides the reader band; the static blog content does not depend on Supabase.
   The 64px band and horizontal scrolling remain in place. No extra service,
   schema, polling request or runtime dependency was introduced by hardening.
 
@@ -78,14 +80,32 @@ Final candidate validation on `main` base `080a2ae`:
 - `npm ci`, `npm test` (92 Node tests, 15 Python tests and existing controlled
   build checks), `npm run seo:check`, `npm run build`,
   `npm run test:story-loading`, `npm run test:presence-lifecycle`: passed.
+- After shortening the delay, real Chromium with the pinned SDK and local
+  protocol fixture synced initial readers 568ms and 561ms after load. Fresh
+  navigation without `requestIdleCallback` restored the shared Hebrew/English
+  count after 1,021ms. The regression requires initial/fresh-navigation sync
+  within a three-second visit in this controlled fixture. Previously, a native
+  navigation probe measured an absent reader for 5,056ms after the new page
+  loaded. These are local timings, not live Supabase latency guarantees;
+  network transfers, load time and busy-page idle scheduling can add delay.
 - The unchanged `npm run perf:check` passed with the feature/analytics enabled.
   Lighthouse 13.4.1 mobile defaults, Chromium 154.0.8037.57, Node 24.19.0,
-  Linux workspace, 2026-10-16. Three runs per route; all 15 runs scored 100.
+  Linux workspace, 2026-10-16. Three runs per route; 14 runs scored 100 and
+  one representative-post run scored 99 (FCP 1.07s, LCP 1.81s, TBT 0ms).
   Routes: `/`, `/en/`, `/posts/2026-10-06-reminders-shaliach/`, `/podcast/`,
   `/posts/2026-10-13-wake-up-sky/`. All five medians: **100**. Initial-load
   performance is not a guarantee of zero deferred CPU or resilience to every
   possible network/payload flood.
-- Local raw logs: `/tmp/presence-security-final-*.log`; advisory scan JSON:
+
+  | Route | Runs | Median |
+  | --- | --- | --- |
+  | `/` | 100, 100, 100 | 100 |
+  | `/en/` | 100, 100, 100 | 100 |
+  | `/posts/2026-10-06-reminders-shaliach/` | 99, 100, 100 | 100 |
+  | `/podcast/` | 100, 100, 100 | 100 |
+  | `/posts/2026-10-13-wake-up-sky/` | 100, 100, 100 | 100 |
+- Local raw logs: `/tmp/presence-faster-*.log` (current timing revision),
+  `/tmp/presence-security-final-*.log` (security baseline); advisory scan JSON:
   `/tmp/presence-security-audit-prod.json` and `-all.json`. These are workspace
   evidence; they are not required runtime assets or a live-project audit.
 
