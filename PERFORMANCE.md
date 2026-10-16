@@ -238,6 +238,20 @@ The browser regression now checks zero initial gesture-module requests, zoom
 on the first opening, Escape closing, and native enlargement without JavaScript.
 All existing homepage request, geometry and fallback checks remain active.
 
+## Reading-font download priority (October 16, 2026)
+
+The [first production run after PR 45](https://github.com/seffyfisher/shluchim/actions/runs/38924005769)
+passed delivery checks but retained medians 99/99/99/100/99. Its reading-text LCP
+was about 2.0–2.1 seconds. All three font preloads had High priority: the two
+body faces alone transferred about 79 KB, including roughly 40 KB for Extrabold.
+
+The Extrabold preload now uses `fetchpriority="low"`. The reading and display
+faces retain their original priority, and every font file, glyph, weight,
+fallback metric and final style is unchanged. Chromium's request report confirms
+Extrabold is Low while Regular and the display face remain High. This is an HTML
+priority hint, as documented in the [Fetch Priority guide](https://web.dev/articles/fetch-priority).
+The reader counter's 500ms startup and all analytics behavior are preserved.
+
 ## Cloudflare configuration (applied October 16, 2026)
 
 The origin is **GitHub Pages**. A `_headers` file or HTML meta tag cannot change its HTTP cache headers. The recurring failure came from a missing cache rule: the existing zone had no Cache Rules. Both rules below are now active, scoped only to `shluchim.shinlamed.com`. Live requests negotiated as HTML no longer contain RUM, and the previously failing hashed font returns `max-age=31536000`. HTML retains `max-age=600`. The repository does not control these external settings; keep these rules when changing hosting configuration.
