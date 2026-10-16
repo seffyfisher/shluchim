@@ -2,24 +2,33 @@
 import type { Lang } from '../i18n/ui';
 import sun from '../assets/theme/sun.webp';
 import moon from '../assets/theme/moon.webp';
+import computer from '../assets/theme/computer.webp';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
+const options = [
+  { value: 'dark', image: moon, label: lang === 'he' ? 'מצב לילה' : 'Dark mode' },
+  { value: 'light', image: sun, label: lang === 'he' ? 'מצב יום' : 'Light mode' },
+  { value: 'system', image: computer, label: lang === 'he' ? 'לפי המערכת' : 'System theme' },
+];
 ---
-<button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label={lang === 'he' ? 'מצב לילה' : 'Dark mode'}>
+<fieldset class="theme-toggle">
+  <legend class="sr-only">{lang === 'he' ? 'ערכת נושא' : 'Theme'}</legend>
   <span class="theme-thumb" aria-hidden="true"></span>
-  <img class="theme-moon" src={moon.src} alt="" aria-hidden="true" width="24" height="24" />
-  <img class="theme-sun" src={sun.src} alt="" aria-hidden="true" width="24" height="24" />
-</button>
-<button class="theme-system" type="button" aria-label={lang === 'he' ? 'חזרה אוטומטית לערכת הנושא של המערכת' : 'Use system theme automatically'}>{lang === 'he' ? 'לפי המערכת' : 'System'}</button>
+  {options.map(({ value, image, label }) => (
+    <label class="theme-option" title={label}>
+      <input class="sr-only" type="radio" name="shluchim-theme-mode" value={value} checked={value === 'system'} />
+      <img src={image.src} alt="" aria-hidden="true" width="24" height="24" />
+      <span class="sr-only">{label}</span>
+    </label>
+  ))}
+</fieldset>
 <script>
   const key = 'shluchim-theme';
   const preference = matchMedia('(prefers-color-scheme: dark)');
-  const toggles = document.querySelectorAll<HTMLButtonElement>('.theme-toggle');
-  const systemButtons = document.querySelectorAll<HTMLButtonElement>('.theme-system');
+  const choices = document.querySelectorAll<HTMLInputElement>('.theme-option input');
   type Theme = 'light' | 'dark' | null;
   const parse = (value: string | null): Theme => value === 'light' || value === 'dark' ? value : null;
-  const current = () => document.documentElement.dataset.theme || (preference.matches ? 'dark' : 'light');
-  const sync = () => toggles.forEach((toggle) => toggle.setAttribute('aria-checked', String(current() === 'dark')));
+  const sync = () => choices.forEach((choice) => { choice.checked = choice.value === (document.documentElement.dataset.theme || 'system'); });
   const apply = (theme: Theme, persist = true) => {
     if (theme) document.documentElement.dataset.theme = theme;
     else delete document.documentElement.dataset.theme;
@@ -35,12 +44,8 @@ const { lang } = Astro.props;
   };
   sync();
   preference.addEventListener('change', sync);
-  for (const toggle of toggles) toggle.addEventListener('click', () => {
-    apply(current() === 'dark' ? 'light' : 'dark');
-  });
-  for (const button of systemButtons) button.addEventListener('click', () => {
-    apply(null);
-    button.parentElement?.querySelector<HTMLButtonElement>('.theme-toggle')?.focus();
+  for (const choice of choices) choice.addEventListener('change', () => {
+    if (choice.checked) apply(parse(choice.value));
   });
   // A choice made in another open blog tab should remain the same preference here.
   window.addEventListener('storage', (event) => {
