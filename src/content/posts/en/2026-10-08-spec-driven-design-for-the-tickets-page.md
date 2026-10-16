@@ -8,6 +8,8 @@ date: 2026-10-07
 draft: false
 lang: en
 translationKey: "2026-10-08-spec-driven-tickets-redesign"
+cover: "../../../assets/posts/spec-driven-tickets-redesign.webp"
+coverAlt: "Nitza the designer and Kochava the engineer working together on the ticket bundles redesign: sketches, colorful cards, a laptop with a shell sticker, and a phone showing the new page."
 ---
 
 I wanted a spec-driven process, but for design.

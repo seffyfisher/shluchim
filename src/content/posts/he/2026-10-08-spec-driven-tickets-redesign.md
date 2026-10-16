@@ -9,6 +9,8 @@ date: 2026-10-07
 draft: false
 lang: he
 translationKey: "2026-10-08-spec-driven-tickets-redesign"
+cover: "../../../assets/posts/spec-driven-tickets-redesign.webp"
+coverAlt: "ניצה המעצבת וכוכבה המהנדסת עובדות יחד על עיצוב הכרטיסיות: סקיצות, כרטיסיות צבעוניות, לפטופ עם מדבקת צדף וטלפון עם הדף החדש."
 ---
 
 רציתי תהליך spec-driven, אבל לעיצוב.
