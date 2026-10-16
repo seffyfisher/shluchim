@@ -1,5 +1,9 @@
 # AGENTS.md
 
+## Analytics for user-facing functionality (Seffy, 2026-10-16)
+
+When implementing, reviewing or merging a feature that adds or changes a meaningful user action or outcome, read and follow the [required analytics workflow in ANALYTICS.md](ANALYTICS.md#required-workflow-for-features-and-merges). Measurement is part of the feature's completion criteria. The implementing agent supplies the tracking plan and evidence; the merging agent checks them before merge. Use the PR template to record coverage or a specific not-applicable reason.
+
 ## Lighthouse release gate (standing rule from Seffy, 2026-10-13)
 
 Before any PR, merge, push to `main`, or deployment, read [.agents/skills/lighthouse-release-guard/SKILL.md](.agents/skills/lighthouse-release-guard/SKILL.md) and run its checks. The deployment workflow must not publish a build unless mobile Lighthouse Performance scores 100 on the checked pages. Check the live score after deployment and investigate any drop. Never weaken the guard to make a release pass.
