@@ -5,6 +5,7 @@ seoTitle: "One AI agent for all reminders"
 seoDescription: "My AI agents hand their reminders to a single reminders agent. Each reminder goes out once, then deletes itself. How it works, with real examples."
 topics: ["everyday-ai", "agent-teamwork"]
 date: 2026-10-06
+updated: 2026-10-16
 draft: false
 lang: en
 translationKey: "2026-10-06-reminders-shaliach"
@@ -54,6 +55,9 @@ and the second one focused on delivery.
 
 It came back with ranked options and links.
 Nothing was ordered, and nobody was contacted.
+
+
+![Birthday, refund and work reminders converge at one clock as a used reminder disappears.](/images/posts/reminders-shaliach-story-1672.webp)
 
 
 ## What came out:

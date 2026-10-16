@@ -5,6 +5,7 @@ seoTitle: "A weekly Microsoft Clarity report from an AI agent"
 seoDescription: "Every Monday my AI agent reports rage clicks, dead clicks and problem session recordings from Microsoft Clarity, and stays quiet when nothing matters."
 topics: ["ai-at-work"]
 date: 2026-09-28
+updated: 2026-10-16
 draft: false
 lang: en
 translationKey: "2026-10-05-clarity-weekly-digest"
@@ -68,6 +69,9 @@ Five direct links to recordings were attached,
 plus one recommendation: keep the slim mobile cart, with the button at the top, as the next thing to ship.
 
 The holiday week after that, it stayed quiet.
+
+
+![Anali examines repeated mobile checkout taps beside five recordings and one recommendation.](/images/posts/clarity-weekly-digest-story-1672.webp)
 
 
 ## Who took part:

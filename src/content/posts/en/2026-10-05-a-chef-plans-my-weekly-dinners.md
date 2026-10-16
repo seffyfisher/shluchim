@@ -5,6 +5,7 @@ seoTitle: "An AI chef plans dinners and fills the cart"
 seoDescription: "An AI chef plans a seasonal weekly dinner menu, writes the shopping list, and fills a supermarket cart through my own computer's Israeli network."
 topics: ["everyday-ai", "grok-bot"]
 date: 2026-10-05
+updated: 2026-10-16
 draft: false
 lang: en
 translationKey: "2026-10-05-chef-weekly-dinners"
@@ -59,6 +60,9 @@ Chef got an Israeli IP (network address), and filled a Rami Levy cart with the w
 including delivery, as a guest, without paying.
 
 Meanwhile, the pantry items went into an iHerb order.
+
+
+![Chef plans seven dinners, broccoli first, a doubled pot and cottage cheese in a cart awaiting payment.](/images/posts/chef-weekly-dinners-story-1672.webp)
 
 
 ## What came out:

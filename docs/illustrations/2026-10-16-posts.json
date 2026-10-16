@@ -1,0 +1,371 @@
+[
+  {
+    "key": "product-page-beach",
+    "scene": "Illustrate this precise story moment: analytics was fixed remotely from a child's friend's birthday party at the beach, with no laptop. Anali from the reference is beside a PHONE standing in a little island of sand, a tiny birthday cake with one unlit candle and a few unbranded peanut-shaped corn snacks, and a folded little beach umbrella. The phone has only abstract circles. A lavender cable from it enters the WRONG socket of a small two-socket toy routing box and emerges as a messy tangle, while an adjacent correct cable is neatly routed to a different socket. The visual joke is an internal product-page source being mistaken for an external campaign source. Clear focal phone and Anali, not a generic desk.",
+    "alt_he": "אנאלי מפענחת נתונים בטלפון לצד שמשייה קטנה בחוף.",
+    "alt_en": "Anali untangles phone analytics beside a small beach umbrella.",
+    "background": "#DCEBFA",
+    "backgroundName": "powder blue",
+    "palette": "coral, butter yellow and royal-blue props",
+    "refs": [
+      "anali"
+    ],
+    "slug": "2026-09-11-product-page-beach",
+    "anchorHe": "איך זה עבד:",
+    "anchorEn": "How it worked:",
+    "prompt": "Use case: illustration-story. ONE widescreen 16:9 blog illustration (not a collage).\nStyle: premium detailed 3D clay/vinyl designer-toy doll render. Characters are grey/warm-grey stone-skinned round blob heads (no human torso, no clothes). No hands, no arms, head-only character on a small base (small cylindrical doll base). Big funny half-lidded deadpan eyes with sideways pupils, expressive arched black eyebrows, small nose, small crooked mouth. Every character must carry a strong sense of soul and personality. Matte soft-touch material, subtle texture, ambient occlusion, soft contact shadows.\nMatch the attached reference images exactly for each character's identity (hair, hat, facial hair, glasses, accessories, proportions), except remove any lettering or symbols from hats. Change only expression, head tilt and placement.\nBackground: ONE solid clean pastel seamless studio backdrop, use the exact post-specific color below. No spotlights, no stage lights, no beams, no bokeh, no crowd, no busy environment.\nLighting: soft even diffused studio light, gentle shadows.\nComposition: one clear focal character or small group, large in frame, generous breathing room, nothing cropped. Use the post-specific contrasting prop palette below, rather than repeating mint props.\nAbsolutely NO text, letters, digits, Hebrew letters, logos, emblems, brand marks, watermarks or captions anywhere. Screens show only abstract pastel circles or are off. NO floating icons, emojis or symbols. No hands, no arms, no extra limbs.\nOutput: a sharp high-resolution PNG, landscape 2048x1152 if supported, preserve native output resolution.\nPost-specific background: #DCEBFA (powder blue), solid seamless background AND floor. Do not use mint. Prop palette: coral, butter yellow and royal-blue props.\nScene: Illustrate this precise story moment: analytics was fixed remotely from a child's friend's birthday party at the beach, with no laptop. Anali from the reference is beside a PHONE standing in a little island of sand, a tiny birthday cake with one unlit candle and a few unbranded peanut-shaped corn snacks, and a folded little beach umbrella. The phone has only abstract circles. A lavender cable from it enters the WRONG socket of a small two-socket toy routing box and emerges as a messy tangle, while an adjacent correct cable is neatly routed to a different socket. The visual joke is an internal product-page source being mistaken for an external campaign source. Clear focal phone and Anali, not a generic desk.",
+    "tool": "built-in image_gen",
+    "nativeSize": {
+      "width": 1672,
+      "height": 941
+    },
+    "images": [
+      "/images/posts/product-page-beach-story-1672.webp",
+      "/images/posts/product-page-beach-story-1024.webp"
+    ]
+  },
+  {
+    "key": "messy-email-to-dossier",
+    "scene": "OBJECT-ONLY illustration in the same premium clay/vinyl toy style, no character, no people. Precise story: preparing for a medical board by extracting medical records from messy email and keeping personal facts distinct from 11 sourced research files in one dedicated case. A tiny open pastel mail cabinet spills blank folded records toward one sturdy open dossier with a clearly divided double compartment. On one side, personal-record sheets and a tiny blank appointment card; on the other, exactly eleven thin upright research folders with round blank tabs and one miniature closed law book. The organized dossier rests beside a closed miniature consultation-room door and a small five-minute hourglass, suggesting being prepared before walking in. No health icons, no writing, no invented medical information. Two sides visually separated, no generic magnifying glass.",
+    "alt_he": "תיק לוועדה רפואית מפריד מסמכים אישיים מ־11 קובצי מחקר ליד דלת החדר.",
+    "alt_en": "A medical-board dossier separates personal records from eleven research files beside the room door.",
+    "background": "#F6DED0",
+    "backgroundName": "soft terracotta peach",
+    "palette": "sage, plum and ivory props",
+    "refs": [],
+    "slug": "2026-09-17-messy-email-to-dossier",
+    "anchorHe": "מה יצא:",
+    "anchorEn": "What came out:",
+    "prompt": "Use case: illustration-story. ONE widescreen 16:9 blog illustration (not a collage).\nStyle: premium detailed 3D clay/vinyl designer-toy doll render. Background: ONE solid clean pastel seamless studio backdrop, use the exact post-specific color below. No spotlights, no stage lights, no beams, no bokeh, no crowd, no busy environment.\nLighting: soft even diffused studio light, gentle shadows.\nComposition: one clear focal character or small group, large in frame, generous breathing room, nothing cropped. Use the post-specific contrasting prop palette below, rather than repeating mint props.\nAbsolutely NO text, letters, digits, Hebrew letters, logos, emblems, brand marks, watermarks or captions anywhere. Screens show only abstract pastel circles or are off. NO floating icons, emojis or symbols. No hands, no arms, no extra limbs.\nOutput: a sharp high-resolution PNG, landscape 2048x1152 if supported, preserve native output resolution.\nPost-specific background: #F6DED0 (soft terracotta peach), solid seamless background AND floor. Do not use mint. Prop palette: sage, plum and ivory props.\nScene: OBJECT-ONLY illustration in the same premium clay/vinyl toy style, no character, no people. Precise story: preparing for a medical board by extracting medical records from messy email and keeping personal facts distinct from 11 sourced research files in one dedicated case. A tiny open pastel mail cabinet spills blank folded records toward one sturdy open dossier with a clearly divided double compartment. On one side, personal-record sheets and a tiny blank appointment card; on the other, exactly eleven thin upright research folders with round blank tabs and one miniature closed law book. The organized dossier rests beside a closed miniature consultation-room door and a small five-minute hourglass, suggesting being prepared before walking in. No health icons, no writing, no invented medical information. Two sides visually separated, no generic magnifying glass.",
+    "tool": "built-in image_gen",
+    "nativeSize": {
+      "width": 1672,
+      "height": 941
+    },
+    "images": [
+      "/images/posts/messy-email-to-dossier-story-1672.webp",
+      "/images/posts/messy-email-to-dossier-story-1024.webp"
+    ]
+  },
+  {
+    "key": "thin-work-checkin",
+    "scene": "OBJECT-ONLY premium clay/vinyl still life, no invented character. Literal illustration of 'the shaliach learned to knock': a tiny open office door frames a desktop monitor with abstract circles, and a matching removable snapshot card resting outside it as if the current screen was handed over. A blank two-sided coin is balanced at the doorway, with three small silent alarm clocks standing farther away. One half of the doorframe has a little closed letter slot; the coin suggests the 50/50 choice to ask for a screenshot or stay silent. No human torso, no hand, no floating symbols. Focus on door, coin and captured screen, not a generic assistant at a computer.",
+    "alt_he": "דלת משרד, צילום המסך הנוכחי ומטבע שמחליט אם לשלוח צ׳ק־אין.",
+    "alt_en": "An office door, a captured screen and a coin deciding whether to send a check-in.",
+    "background": "#E4D9FA",
+    "backgroundName": "lilac",
+    "palette": "sunflower yellow, coral and indigo props",
+    "refs": [],
+    "slug": "2026-09-21-thin-work-checkin-bot",
+    "anchorHe": "מה זה שינה אצלי בראש:",
+    "anchorEn": "What changed in my head:",
+    "prompt": "Use case: illustration-story. ONE widescreen 16:9 blog illustration (not a collage).\nStyle: premium detailed 3D clay/vinyl designer-toy doll render. Background: ONE solid clean pastel seamless studio backdrop, use the exact post-specific color below. No spotlights, no stage lights, no beams, no bokeh, no crowd, no busy environment.\nLighting: soft even diffused studio light, gentle shadows.\nComposition: one clear focal character or small group, large in frame, generous breathing room, nothing cropped. Use the post-specific contrasting prop palette below, rather than repeating mint props.\nAbsolutely NO text, letters, digits, Hebrew letters, logos, emblems, brand marks, watermarks or captions anywhere. Screens show only abstract pastel circles or are off. NO floating icons, emojis or symbols. No hands, no arms, no extra limbs.\nOutput: a sharp high-resolution PNG, landscape 2048x1152 if supported, preserve native output resolution.\nPost-specific background: #E4D9FA (lilac), solid seamless background AND floor. Do not use mint. Prop palette: sunflower yellow, coral and indigo props.\nScene: OBJECT-ONLY premium clay/vinyl still life, no invented character. Literal illustration of 'the shaliach learned to knock': a tiny open office door frames a desktop monitor with abstract circles, and a matching removable snapshot card resting outside it as if the current screen was handed over. A blank two-sided coin is balanced at the doorway, with three small silent alarm clocks standing farther away. One half of the doorframe has a little closed letter slot; the coin suggests the 50/50 choice to ask for a screenshot or stay silent. No human torso, no hand, no floating symbols. Focus on door, coin and captured screen, not a generic assistant at a computer.",
+    "tool": "built-in image_gen",
+    "nativeSize": {
+      "width": 1672,
+      "height": 941
+    },
+    "images": [
+      "/images/posts/thin-work-checkin-story-1672.webp",
+      "/images/posts/thin-work-checkin-story-1024.webp"
+    ]
+  },
+  {
+    "key": "help-center-gaps",
+    "scene": "Shaltiel from the NEW reference, the actual customer support shaliach with black beret, orange side hair, angular green sunglasses and little tooth, investigates THREE exact support gaps: a closed miniature book with a small padlock that will not open even though a blank payment card is beside it; an empty delivery-box-shaped recess with a parcel visible just outside it; and a physical key caught in a looping circular track. Beside those three pain points sit exactly eight blank ivory FAQ draft cards in a neat stack under a transparent cover, still awaiting human approval. Minimal clever toy diorama, not generic envelopes and a puzzle book.",
+    "alt_he": "שאלתיאל בוחן ספר נעול, משלוח חסר ולולאת התחברות לצד שמונה טיוטות תשובה.",
+    "alt_en": "Shaltiel examines a locked book, a missing delivery and a login loop beside eight FAQ drafts.",
+    "background": "#FFF0B3",
+    "backgroundName": "pale lemon yellow",
+    "palette": "cobalt, raspberry and white props",
+    "refs": [
+      "shaltiel"
+    ],
+    "slug": "2026-09-24-help-center-gaps",
+    "anchorHe": "מה יצא:",
+    "anchorEn": "What came out:",
+    "prompt": "Use case: illustration-story. ONE widescreen 16:9 blog illustration (not a collage).\nStyle: premium detailed 3D clay/vinyl designer-toy doll render. Characters are grey/warm-grey stone-skinned round blob heads (no human torso, no clothes). No hands, no arms, head-only character on a small base (small cylindrical doll base). Big funny half-lidded deadpan eyes with sideways pupils, expressive arched black eyebrows, small nose, small crooked mouth. Every character must carry a strong sense of soul and personality. Matte soft-touch material, subtle texture, ambient occlusion, soft contact shadows.\nMatch the attached reference images exactly for each character's identity (hair, hat, facial hair, glasses, accessories, proportions), except remove any lettering or symbols from hats. Change only expression, head tilt and placement.\nBackground: ONE solid clean pastel seamless studio backdrop, use the exact post-specific color below. No spotlights, no stage lights, no beams, no bokeh, no crowd, no busy environment.\nLighting: soft even diffused studio light, gentle shadows.\nComposition: one clear focal character or small group, large in frame, generous breathing room, nothing cropped. Use the post-specific contrasting prop palette below, rather than repeating mint props.\nAbsolutely NO text, letters, digits, Hebrew letters, logos, emblems, brand marks, watermarks or captions anywhere. Screens show only abstract pastel circles or are off. NO floating icons, emojis or symbols. No hands, no arms, no extra limbs.\nOutput: a sharp high-resolution PNG, landscape 2048x1152 if supported, preserve native output resolution.\nPost-specific background: #FFF0B3 (pale lemon yellow), solid seamless background AND floor. Do not use mint. Prop palette: cobalt, raspberry and white props.\nScene: Shaltiel from the NEW reference, the actual customer support shaliach with black beret, orange side hair, angular green sunglasses and little tooth, investigates THREE exact support gaps: a closed miniature book with a small padlock that will not open even though a blank payment card is beside it; an empty delivery-box-shaped recess with a parcel visible just outside it; and a physical key caught in a looping circular track. Beside those three pain points sit exactly eight blank ivory FAQ draft cards in a neat stack under a transparent cover, still awaiting human approval. Minimal clever toy diorama, not generic envelopes and a puzzle book.",
+    "tool": "built-in image_gen",
+    "nativeSize": {
+      "width": 1672,
+      "height": 941
+    },
+    "images": [
+      "/images/posts/help-center-gaps-story-1672.webp",
+      "/images/posts/help-center-gaps-story-1024.webp"
+    ]
+  },
+  {
+    "key": "chartbeat-ga4-reply",
+    "scene": "Anali from the reference and Basher from a second reference together, small group with strong expressions. Precise Chartbeat story: a vendor's FOUR-question questionnaire answered from real GA4 data while a meeting was still in progress; then a vendor video meeting two days later, but the quote turned out too expensive. Four blank paper cards with physical tabs sit beside an abacus-like physical bar chart on a small desk. At the edge, a PHONE on a tiny meeting chair rests next to an open unmarked envelope. Behind, a miniature two-seat video-call frame represented ONLY by two solid pastel circles, never fake interface text. Basher squints in shock at an absurdly long blank price receipt curling over the edge, Anali remains dryly precise. No numerals, no graph labels.",
+    "alt_he": "באשר ואנאלי מכינים מענה לארבע שאלות ספק ומגלים הצעת מחיר ארוכה במיוחד.",
+    "alt_en": "Basher and Anali answer four vendor questions and discover a very long price quote.",
+    "background": "#EFD2DE",
+    "backgroundName": "dusty rose",
+    "palette": "navy, pale gold and white props",
+    "refs": [
+      "anali",
+      "basher"
+    ],
+    "slug": "2026-09-25-chartbeat-ga4-reply",
+    "anchorHe": "מה יצא:",
+    "anchorEn": "What came out:",
+    "prompt": "Use case: illustration-story. ONE widescreen 16:9 blog illustration (not a collage).\nStyle: premium detailed 3D clay/vinyl designer-toy doll render. Characters are grey/warm-grey stone-skinned round blob heads (no human torso, no clothes). No hands, no arms, head-only character on a small base (small cylindrical doll base). Big funny half-lidded deadpan eyes with sideways pupils, expressive arched black eyebrows, small nose, small crooked mouth. Every character must carry a strong sense of soul and personality. Matte soft-touch material, subtle texture, ambient occlusion, soft contact shadows.\nMatch the attached reference images exactly for each character's identity (hair, hat, facial hair, glasses, accessories, proportions), except remove any lettering or symbols from hats. Change only expression, head tilt and placement.\nBackground: ONE solid clean pastel seamless studio backdrop, use the exact post-specific color below. No spotlights, no stage lights, no beams, no bokeh, no crowd, no busy environment.\nLighting: soft even diffused studio light, gentle shadows.\nComposition: one clear focal character or small group, large in frame, generous breathing room, nothing cropped. Use the post-specific contrasting prop palette below, rather than repeating mint props.\nAbsolutely NO text, letters, digits, Hebrew letters, logos, emblems, brand marks, watermarks or captions anywhere. Screens show only abstract pastel circles or are off. NO floating icons, emojis or symbols. No hands, no arms, no extra limbs.\nOutput: a sharp high-resolution PNG, landscape 2048x1152 if supported, preserve native output resolution.\nPost-specific background: #EFD2DE (dusty rose), solid seamless background AND floor. Do not use mint. Prop palette: navy, pale gold and white props.\nScene: Anali from the reference and Basher from a second reference together, small group with strong expressions. Precise Chartbeat story: a vendor's FOUR-question questionnaire answered from real GA4 data while a meeting was still in progress; then a vendor video meeting two days later, but the quote turned out too expensive. Four blank paper cards with physical tabs sit beside an abacus-like physical bar chart on a small desk. At the edge, a PHONE on a tiny meeting chair rests next to an open unmarked envelope. Behind, a miniature two-seat video-call frame represented ONLY by two solid pastel circles, never fake interface text. Basher squints in shock at an absurdly long blank price receipt curling over the edge, Anali remains dryly precise. No numerals, no graph labels.",
+    "tool": "built-in image_gen",
+    "nativeSize": {
+      "width": 1672,
+      "height": 941
+    },
+    "images": [
+      "/images/posts/chartbeat-ga4-reply-story-1672.webp",
+      "/images/posts/chartbeat-ga4-reply-story-1024.webp"
+    ]
+  },
+  {
+    "key": "clerk-auth-cost",
+    "scene": "Anali from the reference inspects a dramatic undercount in authentication pricing: on a low balance scale, one SMALL login-event token on one side, while exactly twenty identical user tokens are arranged in four rows of five on the larger other side. The large side is supplied by TWO little chutes coming from a blank smartphone e-reader and a miniature laptop, representing reader app AND store usage. Anali has a skeptical raised eyebrow at the misleading tiny estimate. This is the specific roughly twenty-fold planning error from counting login events instead of monthly active users, no currency symbols, no numerical text, no generic mystery piles.",
+    "alt_he": "אנאלי שוקלת את היקף המשתמשים באתר ובאפליקציה לפני חישוב העלות.",
+    "alt_en": "Anali weighs web and app usage before estimating the cost.",
+    "background": "#D9E3CF",
+    "backgroundName": "light sage green",
+    "palette": "burnt orange, dark violet and ivory props",
+    "refs": [
+      "anali"
+    ],
+    "slug": "2026-10-02-clerk-auth-cost",
+    "anchorHe": "מה יצא:",
+    "anchorEn": "What came out:",
+    "prompt": "Use case: illustration-story. ONE widescreen 16:9 blog illustration (not a collage).\nStyle: premium detailed 3D clay/vinyl designer-toy doll render. Characters are grey/warm-grey stone-skinned round blob heads (no human torso, no clothes). No hands, no arms, head-only character on a small base (small cylindrical doll base). Big funny half-lidded deadpan eyes with sideways pupils, expressive arched black eyebrows, small nose, small crooked mouth. Every character must carry a strong sense of soul and personality. Matte soft-touch material, subtle texture, ambient occlusion, soft contact shadows.\nMatch the attached reference images exactly for each character's identity (hair, hat, facial hair, glasses, accessories, proportions), except remove any lettering or symbols from hats. Change only expression, head tilt and placement.\nBackground: ONE solid clean pastel seamless studio backdrop, use the exact post-specific color below. No spotlights, no stage lights, no beams, no bokeh, no crowd, no busy environment.\nLighting: soft even diffused studio light, gentle shadows.\nComposition: one clear focal character or small group, large in frame, generous breathing room, nothing cropped. Use the post-specific contrasting prop palette below, rather than repeating mint props.\nAbsolutely NO text, letters, digits, Hebrew letters, logos, emblems, brand marks, watermarks or captions anywhere. Screens show only abstract pastel circles or are off. NO floating icons, emojis or symbols. No hands, no arms, no extra limbs.\nOutput: a sharp high-resolution PNG, landscape 2048x1152 if supported, preserve native output resolution.\nPost-specific background: #D9E3CF (light sage green), solid seamless background AND floor. Do not use mint. Prop palette: burnt orange, dark violet and ivory props.\nScene: Anali from the reference inspects a dramatic undercount in authentication pricing: on a low balance scale, one SMALL login-event token on one side, while exactly twenty identical user tokens are arranged in four rows of five on the larger other side. The large side is supplied by TWO little chutes coming from a blank smartphone e-reader and a miniature laptop, representing reader app AND store usage. Anali has a skeptical raised eyebrow at the misleading tiny estimate. This is the specific roughly twenty-fold planning error from counting login events instead of monthly active users, no currency symbols, no numerical text, no generic mystery piles.",
+    "tool": "built-in image_gen",
+    "nativeSize": {
+      "width": 1672,
+      "height": 941
+    },
+    "images": [
+      "/images/posts/clerk-auth-cost-story-1672.webp",
+      "/images/posts/clerk-auth-cost-story-1024.webp"
+    ]
+  },
+  {
+    "key": "chef-weekly-dinners",
+    "scene": "Chef from the reference with puffy white hat, curled black moustache, black side curls. Precise dinner-planning story: seven weeknight meals, perishable broccoli FIRST, one pot deliberately doubled for tomorrow's lunch, and the cart contains groceries plus cottage cheese awaiting the human's payment. Seven blank menu tiles make a clean left-to-right row; on the first is a miniature broccoli head, on a later tile two matching little covered lunch pots. A small plain basket holds squash, cauliflower, corn, a kiwi and persimmon and one conspicuously tiny plain white cottage-cheese tub. A smartphone with dark screen lies outside the basket with an unbranded payment card set aside, clearly no checkout completed. Let Chef give the cottage-cheese tub a deadpan side-eye. No money, no labels, no generic vegetable abundance.",
+    "alt_he": "שף מסדר שבע ארוחות, ברוקולי ראשון, סיר כפול וקוטג׳ בסל שעדיין מחכה לתשלום.",
+    "alt_en": "Chef plans seven dinners, broccoli first, a doubled pot and cottage cheese in a cart awaiting payment.",
+    "background": "#F2D0B5",
+    "backgroundName": "light apricot",
+    "palette": "aubergine, leafy green and cream props",
+    "refs": [
+      "chef"
+    ],
+    "slug": "2026-10-05-chef-weekly-dinners",
+    "anchorHe": "מה נהיה מזה:",
+    "anchorEn": "What came out:",
+    "prompt": "Use case: illustration-story. ONE widescreen 16:9 blog illustration (not a collage).\nStyle: premium detailed 3D clay/vinyl designer-toy doll render. Characters are grey/warm-grey stone-skinned round blob heads (no human torso, no clothes). No hands, no arms, head-only character on a small base (small cylindrical doll base). Big funny half-lidded deadpan eyes with sideways pupils, expressive arched black eyebrows, small nose, small crooked mouth. Every character must carry a strong sense of soul and personality. Matte soft-touch material, subtle texture, ambient occlusion, soft contact shadows.\nMatch the attached reference images exactly for each character's identity (hair, hat, facial hair, glasses, accessories, proportions), except remove any lettering or symbols from hats. Change only expression, head tilt and placement.\nBackground: ONE solid clean pastel seamless studio backdrop, use the exact post-specific color below. No spotlights, no stage lights, no beams, no bokeh, no crowd, no busy environment.\nLighting: soft even diffused studio light, gentle shadows.\nComposition: one clear focal character or small group, large in frame, generous breathing room, nothing cropped. Use the post-specific contrasting prop palette below, rather than repeating mint props.\nAbsolutely NO text, letters, digits, Hebrew letters, logos, emblems, brand marks, watermarks or captions anywhere. Screens show only abstract pastel circles or are off. NO floating icons, emojis or symbols. No hands, no arms, no extra limbs.\nOutput: a sharp high-resolution PNG, landscape 2048x1152 if supported, preserve native output resolution.\nPost-specific background: #F2D0B5 (light apricot), solid seamless background AND floor. Do not use mint. Prop palette: aubergine, leafy green and cream props.\nScene: Chef from the reference with puffy white hat, curled black moustache, black side curls. Precise dinner-planning story: seven weeknight meals, perishable broccoli FIRST, one pot deliberately doubled for tomorrow's lunch, and the cart contains groceries plus cottage cheese awaiting the human's payment. Seven blank menu tiles make a clean left-to-right row; on the first is a miniature broccoli head, on a later tile two matching little covered lunch pots. A small plain basket holds squash, cauliflower, corn, a kiwi and persimmon and one conspicuously tiny plain white cottage-cheese tub. A smartphone with dark screen lies outside the basket with an unbranded payment card set aside, clearly no checkout completed. Let Chef give the cottage-cheese tub a deadpan side-eye. No money, no labels, no generic vegetable abundance.",
+    "tool": "built-in image_gen",
+    "nativeSize": {
+      "width": 1672,
+      "height": 941
+    },
+    "images": [
+      "/images/posts/chef-weekly-dinners-story-1672.webp",
+      "/images/posts/chef-weekly-dinners-story-1024.webp"
+    ]
+  },
+  {
+    "key": "clarity-weekly-digest",
+    "scene": "Anali from the reference studies a miniature PHONE laid horizontally on the studio floor beside a toy shopping cart. Several small red physical round press pads are clustered around the SAME unresponsive delivery/payment area of the phone, depicting repeated rage taps WITHOUT human fingers or UI icons. Five tiny blank recording strips are clipped neatly beside the phone; ONE recommendation card is raised at the top of a simple thin cart panel, echoing the specific recommendation to put the mobile cart button at the top. A closed quiet bell sits farther away, representing silence in the quiet holiday week. Clean precise metaphor for mobile checkout friction plus five session recordings, not generic analytics.",
+    "alt_he": "אנאלי בודקת לחיצות חוזרות בקופה במובייל לצד חמש הקלטות והמלצה אחת.",
+    "alt_en": "Anali examines repeated mobile checkout taps beside five recordings and one recommendation.",
+    "background": "#D4ECEB",
+    "backgroundName": "ice turquoise",
+    "palette": "red-orange, charcoal and white props",
+    "refs": [
+      "anali"
+    ],
+    "slug": "2026-10-05-clarity-weekly-digest",
+    "anchorHe": "מי השתתף:",
+    "anchorEn": "Who took part:",
+    "prompt": "Use case: illustration-story. ONE widescreen 16:9 blog illustration (not a collage).\nStyle: premium detailed 3D clay/vinyl designer-toy doll render. Characters are grey/warm-grey stone-skinned round blob heads (no human torso, no clothes). No hands, no arms, head-only character on a small base (small cylindrical doll base). Big funny half-lidded deadpan eyes with sideways pupils, expressive arched black eyebrows, small nose, small crooked mouth. Every character must carry a strong sense of soul and personality. Matte soft-touch material, subtle texture, ambient occlusion, soft contact shadows.\nMatch the attached reference images exactly for each character's identity (hair, hat, facial hair, glasses, accessories, proportions), except remove any lettering or symbols from hats. Change only expression, head tilt and placement.\nBackground: ONE solid clean pastel seamless studio backdrop, use the exact post-specific color below. No spotlights, no stage lights, no beams, no bokeh, no crowd, no busy environment.\nLighting: soft even diffused studio light, gentle shadows.\nComposition: one clear focal character or small group, large in frame, generous breathing room, nothing cropped. Use the post-specific contrasting prop palette below, rather than repeating mint props.\nAbsolutely NO text, letters, digits, Hebrew letters, logos, emblems, brand marks, watermarks or captions anywhere. Screens show only abstract pastel circles or are off. NO floating icons, emojis or symbols. No hands, no arms, no extra limbs.\nOutput: a sharp high-resolution PNG, landscape 2048x1152 if supported, preserve native output resolution.\nPost-specific background: #D4ECEB (ice turquoise), solid seamless background AND floor. Do not use mint. Prop palette: red-orange, charcoal and white props.\nScene: Anali from the reference studies a miniature PHONE laid horizontally on the studio floor beside a toy shopping cart. Several small red physical round press pads are clustered around the SAME unresponsive delivery/payment area of the phone, depicting repeated rage taps WITHOUT human fingers or UI icons. Five tiny blank recording strips are clipped neatly beside the phone; ONE recommendation card is raised at the top of a simple thin cart panel, echoing the specific recommendation to put the mobile cart button at the top. A closed quiet bell sits farther away, representing silence in the quiet holiday week. Clean precise metaphor for mobile checkout friction plus five session recordings, not generic analytics.",
+    "tool": "built-in image_gen",
+    "nativeSize": {
+      "width": 1672,
+      "height": 941
+    },
+    "images": [
+      "/images/posts/clarity-weekly-digest-story-1672.webp",
+      "/images/posts/clarity-weekly-digest-story-1024.webp"
+    ]
+  },
+  {
+    "key": "linear-weekly-brief",
+    "scene": "Basher with the reference red mohawk examines a tidy miniature weekly stand-up briefing arranged in TWO person-specific lanes: one lane holds SIX cards and the other ONE card, all seven suspicious cards visibly protruding from an ARCHIVE box into an active-work tray. A blank printed brief is ready beside a small meeting table with two empty chairs. Two analog clocks with no numerals show hands at ten o'clock and half past ten, the briefing before the sync. Basher's skeptical side-eye is aimed at the seven archived tasks still acting active. Exact six-plus-one layout, no writing or logos.",
+    "alt_he": "באשר מגלה שש משימות ועוד אחת שמציצות מהארכיון כאילו הן עדיין פעילות.",
+    "alt_en": "Basher finds six archived tasks plus one more still appearing active before the weekly sync.",
+    "background": "#DADCF5",
+    "backgroundName": "light periwinkle",
+    "palette": "ochre, deep teal and warm ivory props",
+    "refs": [
+      "basher"
+    ],
+    "slug": "2026-10-05-linear-weekly-brief",
+    "anchorHe": "מה יצא:",
+    "anchorEn": "What came out:",
+    "prompt": "Use case: illustration-story. ONE widescreen 16:9 blog illustration (not a collage).\nStyle: premium detailed 3D clay/vinyl designer-toy doll render. Characters are grey/warm-grey stone-skinned round blob heads (no human torso, no clothes). No hands, no arms, head-only character on a small base (small cylindrical doll base). Big funny half-lidded deadpan eyes with sideways pupils, expressive arched black eyebrows, small nose, small crooked mouth. Every character must carry a strong sense of soul and personality. Matte soft-touch material, subtle texture, ambient occlusion, soft contact shadows.\nMatch the attached reference images exactly for each character's identity (hair, hat, facial hair, glasses, accessories, proportions), except remove any lettering or symbols from hats. Change only expression, head tilt and placement.\nBackground: ONE solid clean pastel seamless studio backdrop, use the exact post-specific color below. No spotlights, no stage lights, no beams, no bokeh, no crowd, no busy environment.\nLighting: soft even diffused studio light, gentle shadows.\nComposition: one clear focal character or small group, large in frame, generous breathing room, nothing cropped. Use the post-specific contrasting prop palette below, rather than repeating mint props.\nAbsolutely NO text, letters, digits, Hebrew letters, logos, emblems, brand marks, watermarks or captions anywhere. Screens show only abstract pastel circles or are off. NO floating icons, emojis or symbols. No hands, no arms, no extra limbs.\nOutput: a sharp high-resolution PNG, landscape 2048x1152 if supported, preserve native output resolution.\nPost-specific background: #DADCF5 (light periwinkle), solid seamless background AND floor. Do not use mint. Prop palette: ochre, deep teal and warm ivory props.\nScene: Basher with the reference red mohawk examines a tidy miniature weekly stand-up briefing arranged in TWO person-specific lanes: one lane holds SIX cards and the other ONE card, all seven suspicious cards visibly protruding from an ARCHIVE box into an active-work tray. A blank printed brief is ready beside a small meeting table with two empty chairs. Two analog clocks with no numerals show hands at ten o'clock and half past ten, the briefing before the sync. Basher's skeptical side-eye is aimed at the seven archived tasks still acting active. Exact six-plus-one layout, no writing or logos.",
+    "tool": "built-in image_gen",
+    "nativeSize": {
+      "width": 1672,
+      "height": 941
+    },
+    "images": [
+      "/images/posts/linear-weekly-brief-story-1672.webp",
+      "/images/posts/linear-weekly-brief-story-1024.webp"
+    ]
+  },
+  {
+    "key": "reminders-shaliach",
+    "scene": "OBJECT-ONLY premium clay/vinyl toy still life, no invented mascot. One central unnumbered analog alarm clock and a single receiving tray gather reminders from THREE small colored paths. Along one path are a miniature birthday cake invitation and a tiny pastry-box sample; along another a plain blank payment card beside an open envelope indicating the credit-card refund was already answered; the last has two neat blank work-task cards. One used reminder card is visibly fading into a small neat pile of paper confetti beside the tray, metaphor for one-time reminders deleting themselves. No duplicate clocks or repeated competing inboxes, no digits, no logos.",
+    "alt_he": "תזכורות יום הולדת, החזר ועבודה מתכנסות לשעון אחד, ותזכורת שבוצעה נמחקת.",
+    "alt_en": "Birthday, refund and work reminders converge at one clock as a used reminder disappears.",
+    "background": "#ECCED0",
+    "backgroundName": "pale salmon",
+    "palette": "forest green, plum and cream props",
+    "refs": [],
+    "slug": "2026-10-06-reminders-shaliach",
+    "anchorHe": "מה יצא:",
+    "anchorEn": "What came out:",
+    "prompt": "Use case: illustration-story. ONE widescreen 16:9 blog illustration (not a collage).\nStyle: premium detailed 3D clay/vinyl designer-toy doll render. Characters are grey/warm-grey stone-skinned round blob heads (no human torso, no clothes). No hands, no arms, head-only character on a small base (small cylindrical doll base). Big funny half-lidded deadpan eyes with sideways pupils, expressive arched black eyebrows, small nose, small crooked mouth. Every character must carry a strong sense of soul and personality. Matte soft-touch material, subtle texture, ambient occlusion, soft contact shadows.\nBackground: ONE solid clean pastel seamless studio backdrop, use the exact post-specific color below. No spotlights, no stage lights, no beams, no bokeh, no crowd, no busy environment.\nLighting: soft even diffused studio light, gentle shadows.\nComposition: one clear focal character or small group, large in frame, generous breathing room, nothing cropped. Use the post-specific contrasting prop palette below, rather than repeating mint props.\nAbsolutely NO text, letters, digits, Hebrew letters, logos, emblems, brand marks, watermarks or captions anywhere. Screens show only abstract pastel circles or are off. NO floating icons, emojis or symbols. No hands, no arms, no extra limbs.\nOutput: a sharp high-resolution PNG, landscape 2048x1152 if supported, preserve native output resolution.\nPost-specific background: #ECCED0 (pale salmon), solid seamless background AND floor. Do not use mint. Prop palette: forest green, plum and cream props.\nScene: OBJECT-ONLY premium clay/vinyl toy still life, no invented mascot. One central unnumbered analog alarm clock and a single receiving tray gather reminders from THREE small colored paths. Along one path are a miniature birthday cake invitation and a tiny pastry-box sample; along another a plain blank payment card beside an open envelope indicating the credit-card refund was already answered; the last has two neat blank work-task cards. One used reminder card is visibly fading into a small neat pile of paper confetti beside the tray, metaphor for one-time reminders deleting themselves. No duplicate clocks or repeated competing inboxes, no digits, no logos.",
+    "tool": "built-in image_gen",
+    "nativeSize": {
+      "width": 1672,
+      "height": 941
+    },
+    "images": [
+      "/images/posts/reminders-shaliach-story-1672.webp",
+      "/images/posts/reminders-shaliach-story-1024.webp"
+    ]
+  },
+  {
+    "key": "bar2go-pickup-points",
+    "scene": "Kochava with reference black bob and black glasses investigates the exact pickup-map checkout improvement. A miniature upright PHONE shows only a dark blank upper screen, and a physical small folded street map unfolds out of its LOW delivery-section slot like a popup drawer. The folded map contains three little parcel boxes standing at distinct locations on a simple pastel street grid; a second tiny duplicate map is on a freestanding rectangular tab behind it, representing the new-tab fallback if the popup is blocked. Kochava leans her expressive head toward the ONE added map drawer. Minimal focus on opening pickup locations from checkout, no text or pins or invented app UI.",
+    "alt_he": "כוכבה בוחנת מפה קטנה של נקודות איסוף לצד מחשב וחבילות.",
+    "alt_en": "Kochava studies a small pickup-point map beside a laptop and parcels.",
+    "background": "#F0DFC1",
+    "backgroundName": "warm pale sand",
+    "palette": "cobalt, vivid coral and turquoise props",
+    "refs": [
+      "kochava"
+    ],
+    "slug": "2026-10-07-bar2go-pickup-points",
+    "anchorHe": "הבדיקות:",
+    "anchorEn": "The checks:",
+    "prompt": "Use case: illustration-story. ONE widescreen 16:9 blog illustration (not a collage).\nStyle: premium detailed 3D clay/vinyl designer-toy doll render. Characters are grey/warm-grey stone-skinned round blob heads (no human torso, no clothes). No hands, no arms, head-only character on a small base (small cylindrical doll base). Big funny half-lidded deadpan eyes with sideways pupils, expressive arched black eyebrows, small nose, small crooked mouth. Every character must carry a strong sense of soul and personality. Matte soft-touch material, subtle texture, ambient occlusion, soft contact shadows.\nMatch the attached reference images exactly for each character's identity (hair, hat, facial hair, glasses, accessories, proportions), except remove any lettering or symbols from hats. Change only expression, head tilt and placement.\nBackground: ONE solid clean pastel seamless studio backdrop, use the exact post-specific color below. No spotlights, no stage lights, no beams, no bokeh, no crowd, no busy environment.\nLighting: soft even diffused studio light, gentle shadows.\nComposition: one clear focal character or small group, large in frame, generous breathing room, nothing cropped. Use the post-specific contrasting prop palette below, rather than repeating mint props.\nAbsolutely NO text, letters, digits, Hebrew letters, logos, emblems, brand marks, watermarks or captions anywhere. Screens show only abstract pastel circles or are off. NO floating icons, emojis or symbols. No hands, no arms, no extra limbs.\nOutput: a sharp high-resolution PNG, landscape 2048x1152 if supported, preserve native output resolution.\nPost-specific background: #F0DFC1 (warm pale sand), solid seamless background AND floor. Do not use mint. Prop palette: cobalt, vivid coral and turquoise props.\nScene: Kochava with reference black bob and black glasses investigates the exact pickup-map checkout improvement. A miniature upright PHONE shows only a dark blank upper screen, and a physical small folded street map unfolds out of its LOW delivery-section slot like a popup drawer. The folded map contains three little parcel boxes standing at distinct locations on a simple pastel street grid; a second tiny duplicate map is on a freestanding rectangular tab behind it, representing the new-tab fallback if the popup is blocked. Kochava leans her expressive head toward the ONE added map drawer. Minimal focus on opening pickup locations from checkout, no text or pins or invented app UI.",
+    "tool": "built-in image_gen",
+    "nativeSize": {
+      "width": 1672,
+      "height": 941
+    },
+    "images": [
+      "/images/posts/bar2go-pickup-points-story-1672.webp",
+      "/images/posts/bar2go-pickup-points-story-1024.webp"
+    ]
+  },
+  {
+    "key": "help-center-monthly",
+    "scene": "Shaltiel from the reference with black beret, green angular sunglasses, orange side hair and small tooth stands beside a stack of THIRTY thin blank daily export folders being compressed by a simple physical funnel into SIXTEEN tiny FAQ cards in four neat rows of four. Off to the side, TWO concrete separate faults are isolated under little clear inspection domes: an envelope with a visibly snapped chain link for the broken contact link in the delivery-delay email, and a small PHONE connected by a cord to a tiny wrong-colored TEST server toy for the order-confirmation SMS pointing to QA. One small seven-minute hourglass beside the funnel. The point is FAQ drafts versus actionable production bugs, not a generic mail pile. No text, numbers or symbols.",
+    "alt_he": "שאלתיאל מזקק חודש לטיוטות ומפריד קישור שבור במייל וקישור SMS לשרת בדיקות.",
+    "alt_en": "Shaltiel distills a month into FAQ drafts and isolates a broken email link and an SMS pointing to QA.",
+    "background": "#DCECBF",
+    "backgroundName": "pale pistachio",
+    "palette": "deep violet, orange and chalk white props",
+    "refs": [
+      "shaltiel"
+    ],
+    "slug": "2026-10-08-help-center-monthly",
+    "anchorHe": "למה זה טוב:",
+    "anchorEn": "Why this is good:",
+    "prompt": "Use case: illustration-story. ONE widescreen 16:9 blog illustration (not a collage).\nStyle: premium detailed 3D clay/vinyl designer-toy doll render. Characters are grey/warm-grey stone-skinned round blob heads (no human torso, no clothes). No hands, no arms, head-only character on a small base (small cylindrical doll base). Big funny half-lidded deadpan eyes with sideways pupils, expressive arched black eyebrows, small nose, small crooked mouth. Every character must carry a strong sense of soul and personality. Matte soft-touch material, subtle texture, ambient occlusion, soft contact shadows.\nMatch the attached reference images exactly for each character's identity (hair, hat, facial hair, glasses, accessories, proportions), except remove any lettering or symbols from hats. Change only expression, head tilt and placement.\nBackground: ONE solid clean pastel seamless studio backdrop, use the exact post-specific color below. No spotlights, no stage lights, no beams, no bokeh, no crowd, no busy environment.\nLighting: soft even diffused studio light, gentle shadows.\nComposition: one clear focal character or small group, large in frame, generous breathing room, nothing cropped. Use the post-specific contrasting prop palette below, rather than repeating mint props.\nAbsolutely NO text, letters, digits, Hebrew letters, logos, emblems, brand marks, watermarks or captions anywhere. Screens show only abstract pastel circles or are off. NO floating icons, emojis or symbols. No hands, no arms, no extra limbs.\nOutput: a sharp high-resolution PNG, landscape 2048x1152 if supported, preserve native output resolution.\nPost-specific background: #DCECBF (pale pistachio), solid seamless background AND floor. Do not use mint. Prop palette: deep violet, orange and chalk white props.\nScene: Shaltiel from the reference with black beret, green angular sunglasses, orange side hair and small tooth stands beside a stack of THIRTY thin blank daily export folders being compressed by a simple physical funnel into SIXTEEN tiny FAQ cards in four neat rows of four. Off to the side, TWO concrete separate faults are isolated under little clear inspection domes: an envelope with a visibly snapped chain link for the broken contact link in the delivery-delay email, and a small PHONE connected by a cord to a tiny wrong-colored TEST server toy for the order-confirmation SMS pointing to QA. One small seven-minute hourglass beside the funnel. The point is FAQ drafts versus actionable production bugs, not a generic mail pile. No text, numbers or symbols.",
+    "tool": "built-in image_gen",
+    "nativeSize": {
+      "width": 1672,
+      "height": 941
+    },
+    "images": [
+      "/images/posts/help-center-monthly-story-1672.webp",
+      "/images/posts/help-center-monthly-story-1024.webp"
+    ]
+  },
+  {
+    "key": "usage-reset-alert",
+    "scene": "Basher with reference mohawk stares with a dry urgent eyebrow at TWO little transparent hourglass-shaped quota reservoirs, one weekly and one monthly, both still partly full of unused cobalt tokens. A simple physical gate just before a nearby empty wastebasket diverts those tokens into a neat tray of real blank task cards, while two small laptop-shaped dashboard props stand behind the reservoirs with no UI text. A tiny unnumbered calendar has two adjacent raised weekday tabs, corresponding to Wednesday and Thursday before reset. Exact story: check actual remaining quota before reset and suggest backlog work, stay silent if not useful. The wastebasket remains EMPTY.",
+    "alt_he": "באשר לצד שעון חול מפנה מכסה שנותרה למשימות לפני האיפוס.",
+    "alt_en": "Basher redirects unused quota toward tasks before the hourglass runs out.",
+    "background": "#D6DCE2",
+    "backgroundName": "pale blue-grey",
+    "palette": "burgundy, sunny yellow and white props",
+    "refs": [
+      "basher"
+    ],
+    "slug": "2026-10-08-usage-reset-alert",
+    "anchorHe": "למה זה מעולה:",
+    "anchorEn": "Why this is excellent:",
+    "prompt": "Use case: illustration-story. ONE widescreen 16:9 blog illustration (not a collage).\nStyle: premium detailed 3D clay/vinyl designer-toy doll render. Characters are grey/warm-grey stone-skinned round blob heads (no human torso, no clothes). No hands, no arms, head-only character on a small base (small cylindrical doll base). Big funny half-lidded deadpan eyes with sideways pupils, expressive arched black eyebrows, small nose, small crooked mouth. Every character must carry a strong sense of soul and personality. Matte soft-touch material, subtle texture, ambient occlusion, soft contact shadows.\nMatch the attached reference images exactly for each character's identity (hair, hat, facial hair, glasses, accessories, proportions), except remove any lettering or symbols from hats. Change only expression, head tilt and placement.\nBackground: ONE solid clean pastel seamless studio backdrop, use the exact post-specific color below. No spotlights, no stage lights, no beams, no bokeh, no crowd, no busy environment.\nLighting: soft even diffused studio light, gentle shadows.\nComposition: one clear focal character or small group, large in frame, generous breathing room, nothing cropped. Use the post-specific contrasting prop palette below, rather than repeating mint props.\nAbsolutely NO text, letters, digits, Hebrew letters, logos, emblems, brand marks, watermarks or captions anywhere. Screens show only abstract pastel circles or are off. NO floating icons, emojis or symbols. No hands, no arms, no extra limbs.\nOutput: a sharp high-resolution PNG, landscape 2048x1152 if supported, preserve native output resolution.\nPost-specific background: #D6DCE2 (pale blue-grey), solid seamless background AND floor. Do not use mint. Prop palette: burgundy, sunny yellow and white props.\nScene: Basher with reference mohawk stares with a dry urgent eyebrow at TWO little transparent hourglass-shaped quota reservoirs, one weekly and one monthly, both still partly full of unused cobalt tokens. A simple physical gate just before a nearby empty wastebasket diverts those tokens into a neat tray of real blank task cards, while two small laptop-shaped dashboard props stand behind the reservoirs with no UI text. A tiny unnumbered calendar has two adjacent raised weekday tabs, corresponding to Wednesday and Thursday before reset. Exact story: check actual remaining quota before reset and suggest backlog work, stay silent if not useful. The wastebasket remains EMPTY.",
+    "tool": "built-in image_gen",
+    "nativeSize": {
+      "width": 1672,
+      "height": 941
+    },
+    "images": [
+      "/images/posts/usage-reset-alert-story-1672.webp",
+      "/images/posts/usage-reset-alert-story-1024.webp"
+    ]
+  },
+  {
+    "key": "social-pearls",
+    "scene": "OBJECT-ONLY premium clay/vinyl toy still life. Very specific social-reading research: SIX open oyster shells sit each beside a different little reading-group book, yielding TWENTY-EIGHT small pearl beads sorted in three low topic trays; a separate tiny dish has FIVE distinct copper-colored pearls for real brand mentions. One conspicuous small e-ink reader with a matte blank screen stands among the books because one reader bought a Boox only for the e-vrit app. A little row of empty bead spaces is intentionally left empty, representing the finding of almost no discussion of badges and reminders. No social logos, no private profiles, no invented person or generic Ben mascot. The humor is literally mining reader-group pearls and preserving the empty result too.",
+    "alt_he": "פנינים משש קבוצות קריאה, חמש אזכורים נפרדים וקורא ספרים שנקנה בשביל האפליקציה.",
+    "alt_en": "Pearls from six reading groups, five separate mentions and an e-reader bought for the app.",
+    "background": "#ECCFF2",
+    "backgroundName": "pale orchid",
+    "palette": "cobalt, tangerine and white pearl props",
+    "refs": [],
+    "slug": "2026-10-09-social-pearls",
+    "anchorHe": "מה כדאי לקחת מזה:",
+    "anchorEn": "What's worth taking from this:",
+    "prompt": "Use case: illustration-story. ONE widescreen 16:9 blog illustration (not a collage).\nStyle: premium detailed 3D clay/vinyl designer-toy doll render. Characters are grey/warm-grey stone-skinned round blob heads (no human torso, no clothes). No hands, no arms, head-only character on a small base (small cylindrical doll base). Big funny half-lidded deadpan eyes with sideways pupils, expressive arched black eyebrows, small nose, small crooked mouth. Every character must carry a strong sense of soul and personality. Matte soft-touch material, subtle texture, ambient occlusion, soft contact shadows.\nBackground: ONE solid clean pastel seamless studio backdrop, use the exact post-specific color below. No spotlights, no stage lights, no beams, no bokeh, no crowd, no busy environment.\nLighting: soft even diffused studio light, gentle shadows.\nComposition: one clear focal character or small group, large in frame, generous breathing room, nothing cropped. Use the post-specific contrasting prop palette below, rather than repeating mint props.\nAbsolutely NO text, letters, digits, Hebrew letters, logos, emblems, brand marks, watermarks or captions anywhere. Screens show only abstract pastel circles or are off. NO floating icons, emojis or symbols. No hands, no arms, no extra limbs.\nOutput: a sharp high-resolution PNG, landscape 2048x1152 if supported, preserve native output resolution.\nPost-specific background: #ECCFF2 (pale orchid), solid seamless background AND floor. Do not use mint. Prop palette: cobalt, tangerine and white pearl props.\nScene: OBJECT-ONLY premium clay/vinyl toy still life. Very specific social-reading research: SIX open oyster shells sit each beside a different little reading-group book, yielding TWENTY-EIGHT small pearl beads sorted in three low topic trays; a separate tiny dish has FIVE distinct copper-colored pearls for real brand mentions. One conspicuous small e-ink reader with a matte blank screen stands among the books because one reader bought a Boox only for the e-vrit app. A little row of empty bead spaces is intentionally left empty, representing the finding of almost no discussion of badges and reminders. No social logos, no private profiles, no invented person or generic Ben mascot. The humor is literally mining reader-group pearls and preserving the empty result too.",
+    "tool": "built-in image_gen",
+    "nativeSize": {
+      "width": 1672,
+      "height": 941
+    },
+    "images": [
+      "/images/posts/social-pearls-story-1672.webp",
+      "/images/posts/social-pearls-story-1024.webp"
+    ]
+  },
+  {
+    "key": "building-shluchim-blog",
+    "scene": "Ben from first reference, pink cap with NO lettering, curled moustache, little triangular goatee and silver hoop earring, beside Kochava from second reference, black bob, black glasses and pink clip without a logo. Exact origin of this blog: the writer turns real messages into airy stories and the developer builds their home. A small PHONE rests open on a little island of sand as an homage to the first GA4 beach story, its blank message card physically slides into an open blank NOTEBOOK. Beside Kochava a tiny freestanding webpage-shaped frame has several round miniature portrait discs arranged as the team gallery, with two or three simple pastel content blocks below. All screens only abstract shapes. No typography, no symbols, no generic building blocks. Warm personality and clear writer/developer partnership.",
+    "alt_he": "בן וכוכבה בונים את בית המעשיות, מהטלפון בחוף ועד עמוד הצוות.",
+    "alt_en": "Ben and Kochava build a home for stories, from the beach phone to the team gallery.",
+    "background": "#F2E8D4",
+    "backgroundName": "warm cream",
+    "palette": "tomato red, dark teal and ink-blue props",
+    "refs": [
+      "ben",
+      "kochava"
+    ],
+    "slug": "2026-10-10-building-the-shluchim-blog",
+    "anchorHe": "הרעיון בקיצור:",
+    "anchorEn": "The idea, in short:",
+    "prompt": "Use case: illustration-story. ONE widescreen 16:9 blog illustration (not a collage).\nStyle: premium detailed 3D clay/vinyl designer-toy doll render. Characters are grey/warm-grey stone-skinned round blob heads (no human torso, no clothes). No hands, no arms, head-only character on a small base (small cylindrical doll base). Big funny half-lidded deadpan eyes with sideways pupils, expressive arched black eyebrows, small nose, small crooked mouth. Every character must carry a strong sense of soul and personality. Matte soft-touch material, subtle texture, ambient occlusion, soft contact shadows.\nMatch the attached reference images exactly for each character's identity (hair, hat, facial hair, glasses, accessories, proportions), except remove any lettering or symbols from hats. Change only expression, head tilt and placement.\nBackground: ONE solid clean pastel seamless studio backdrop, use the exact post-specific color below. No spotlights, no stage lights, no beams, no bokeh, no crowd, no busy environment.\nLighting: soft even diffused studio light, gentle shadows.\nComposition: one clear focal character or small group, large in frame, generous breathing room, nothing cropped. Use the post-specific contrasting prop palette below, rather than repeating mint props.\nAbsolutely NO text, letters, digits, Hebrew letters, logos, emblems, brand marks, watermarks or captions anywhere. Screens show only abstract pastel circles or are off. NO floating icons, emojis or symbols. No hands, no arms, no extra limbs.\nOutput: a sharp high-resolution PNG, landscape 2048x1152 if supported, preserve native output resolution.\nPost-specific background: #F2E8D4 (warm cream), solid seamless background AND floor. Do not use mint. Prop palette: tomato red, dark teal and ink-blue props.\nScene: Ben from first reference, pink cap with NO lettering, curled moustache, little triangular goatee and silver hoop earring, beside Kochava from second reference, black bob, black glasses and pink clip without a logo. Exact origin of this blog: the writer turns real messages into airy stories and the developer builds their home. A small PHONE rests open on a little island of sand as an homage to the first GA4 beach story, its blank message card physically slides into an open blank NOTEBOOK. Beside Kochava a tiny freestanding webpage-shaped frame has several round miniature portrait discs arranged as the team gallery, with two or three simple pastel content blocks below. All screens only abstract shapes. No typography, no symbols, no generic building blocks. Warm personality and clear writer/developer partnership.",
+    "tool": "built-in image_gen",
+    "nativeSize": {
+      "width": 1672,
+      "height": 941
+    },
+    "images": [
+      "/images/posts/building-shluchim-blog-story-1672.webp",
+      "/images/posts/building-shluchim-blog-story-1024.webp"
+    ]
+  }
+]

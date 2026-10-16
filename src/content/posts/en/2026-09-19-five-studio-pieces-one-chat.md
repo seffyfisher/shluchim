@@ -1,58 +1,76 @@
 ---
 title: "Five pieces from my old studio went up on my site in one chat."
-description: "I sent photos to Shinlamed, my website's AI agent, approved previews, and my personal art site finally got updated."
-seoTitle: "An AI agent updates my art website from one chat"
-seoDescription: "I sent phone photos to my website's AI agent. It cleaned backgrounds, I approved previews, and five artworks went live on my personal art site in one chat."
+description: "I sent photos to Shinlamed, my website's shaliach, approved previews, and my personal art site finally got updated."
+seoTitle: "A shaliach updates my art website from one chat"
+seoDescription: "I sent phone photos to my website's shaliach. He cleaned backgrounds, I approved previews, and five artworks went live on my personal art site in one chat."
 topics: ["everyday-ai"]
 date: 2026-09-19
+updated: 2026-10-16
 draft: false
 lang: en
 translationKey: "2026-09-19-shinlamed-studio-upload"
 ---
 
 I moved studios.
+I had photos of work from the old place,
+and my personal site, shinlamed.com, almost never gets updated.
 
-I had photos of work from the old place.
-And my personal site, shinlamed.com, almost never gets updated.
+Anyone who creates knows this friction:
+you spend hours working on original vinyl art, cutting pieces by hand,
+snap a phone shot on the wall, and then everything grinds to a halt.
+
+Because getting it onto the site means sitting down at a computer,
+downloading files, cleaning backgrounds in Photoshop,
+straightening angles, coming up with titles,
+logging into a CMS (content management system),
+and running a deploy (going live).
+
+The result: you just don't have the energy for it.
+The photos sit in your phone's camera roll for months,
+and your portfolio looks like you stopped making art.
+
+So instead of booking another free weekend for tedious grunt work,
+I dumped the whole process onto Shinlamed,
+the shaliach in charge of my site.
+(Shluchim, singular shaliach, is Hebrew for "emissaries". It's what I call my AI agents.)
 
 
 ## How it worked:
 
-I sent the photos to my site's shaliach, Shinlamed.
-(Shluchim, singular shaliach, is Hebrew for "emissaries". It's what I call my AI agents.)
+I sent him the raw shots straight from my phone, exactly as they were:
+crooked photos on a gray wall, a hand shadow in the corner,
+and some pieces were even lying on their side.
 
-I asked him to only clean the background and fix the orientation.
-To show me before uploading,
-and only then push to the CMS, the system that manages the site's content.
+The task I set for him was simple and clear:
 
-Along the way there were two orientation fixes,
-for a crying face and a face with a bulge.
+**1. Clean and straighten.**
+Drop the gray background, fix the angle, and trim the margins.
 
-Four vinyl pieces first went up with no name, as "unnamed" (more on that below),
+**2. Preview before every step.**
+The rule was strict: show me in chat first, and only push live once I approve.
+Along the way there were two manual directional adjustments (for a crying face and a face with an acorn).
+
+**3. Push to CMS and deploy.**
+The moment I gave the thumbs up, he pushed the files straight into the site's CMS.
+
+Four vinyl pieces first went up with no name, as "unnamed" (more on that honest part below),
 and one more went up earlier that same day.
 Five pieces live on the site in total.
 
-It took about half an hour and 15 to 25 messages,
-including all the attempts to straighten things.
+The whole thing took about half an hour and 15 to 25 messages in chat.
 
 
 ## Before and after:
 
-My photos were bad.
-Phone shots on the wall, crooked, gray, with a shadow in the corner.
-Some of the pieces were even lying on their side.
-
-And that's fine.
-I just bring the bad photo.
-
-Shinlamed cleans the background, straightens, crops and fixes the color,
-then uploads it to the site with a title and text.
+The photos I brought were terrible, and that's totally fine.
+I bring the messy raw material,
+and Shinlamed cleans the background, straightens, and fixes the color.
 
 ![goblin hat tip, before and after](/images/posts/shinlamed-01-goblin-hat-tip.webp)
 
 **[goblin hat tip](https://shinlamed.com/project/goblin-hat-tip-3/).**
 Shot sideways on a gray wall.
-It went up straight, on white, with a title and text.
+It went up straight, on clean white, with a title and text.
 
 ![spiked punch, before and after](/images/posts/shinlamed-02-spiked-punch.webp)
 
@@ -64,14 +82,14 @@ It went up straight, on white, with a title and text.
 Not everything came out perfect the first time.
 
 Four pieces went up with no name,
-as "unnamed", and without a word of text.
-I only noticed a few weeks later.
+as "unnamed", and without a single word of text.
+I only noticed a few weeks later when browsing the site.
 
-I asked Kinneret, the writing shaliach, to suggest names.
+Instead of getting frustrated, I asked Kinneret, the writing shaliach, to suggest names.
 She came back with three options for each piece,
-and I approved her top pick.
+and I simply picked her top suggestion.
 
-Shinlamed updated the live site:
+Shinlamed updated the live site on the fly:
 [spiked punch](https://shinlamed.com/project/spiked-punch-4/),
 [crying foul](https://shinlamed.com/project/crying-foul-5/),
 [heads up](https://shinlamed.com/project/heads-up-6/),
@@ -86,10 +104,10 @@ and trimmed the leftover white margin at the bottom of ring a bell?.
 
 ## What came out:
 
-I didn't sit at a computer uploading by hand.
+Zero minutes sitting in front of Photoshop or admin dashboards.
 
-I handed over photos and approved previews.
-The site updated after a deploy (going live) from main.
+I threw photos from my phone and approved results.
+My site is alive, up to date, and showing the work the way it deserves to be seen.
 
 
 ## What to take from this:

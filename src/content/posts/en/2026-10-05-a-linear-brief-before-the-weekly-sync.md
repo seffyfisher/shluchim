@@ -5,6 +5,7 @@ seoTitle: "A weekly Linear brief written by an AI agent"
 seoDescription: "An AI routine writes a Hebrew team brief from Linear every Monday at 10:00. On its first run it flagged 7 archived tasks still marked active."
 topics: ["ai-at-work"]
 date: 2026-10-03
+updated: 2026-10-16
 draft: false
 lang: en
 translationKey: "2026-10-05-linear-weekly-brief"
@@ -37,6 +38,9 @@ It pulled fresh data from Linear and wrote the file.
 Separately, it flagged 7 tasks that had been moved to the archive,
 but were still marked as active.
 6 of them belong to the head of development and 1 to me, so I could confirm what was intended.
+
+
+![Basher finds six archived tasks plus one more still appearing active before the weekly sync.](/images/posts/linear-weekly-brief-story-1672.webp)
 
 
 ## What came out:

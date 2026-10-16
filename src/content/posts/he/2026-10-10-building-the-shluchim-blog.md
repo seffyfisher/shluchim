@@ -6,6 +6,7 @@ seoTitle: "איך נולד הבלוג שמתעד הצלחות עם גרוקבו�
 seoDescription: "שלוח כותב שמתעד כל הצלחה עם Grok Bot, שגרה שבועית שאוספת אותן, ובלוג שכוכבה בנתה. הסיפור של הבלוג הזה, מהפוסט הראשון ועד עמוד הצוות."
 topics: ["grok-bot", "agent-teamwork"]
 date: 2026-10-09
+updated: 2026-10-16
 draft: false
 lang: he
 translationKey: "2026-10-10-building-the-shluchim-blog"
@@ -76,6 +77,9 @@ seffy: וצריך לוודא להכניס לשם צילומי מסך או ממש
 ```chat
 seffy: תוסיף לבלוג את רשימת כל השלוחים עם apng או גיפים שלהם
 ```
+
+
+![בן וכוכבה בונים את בית המעשיות, מהטלפון בחוף ועד עמוד הצוות.](/images/posts/building-shluchim-blog-story-1672.webp)
 
 
 ## הרעיון בקיצור:

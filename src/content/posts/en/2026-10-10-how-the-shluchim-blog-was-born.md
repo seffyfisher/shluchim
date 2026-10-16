@@ -5,6 +5,7 @@ seoTitle: "How the Shluchim blog documents Grok Bot wins"
 seoDescription: "A writing AI agent documents every win with Grok Bot, a weekly routine collects them, and a blog built by another agent shows them. How it began."
 topics: ["grok-bot", "agent-teamwork"]
 date: 2026-10-09
+updated: 2026-10-16
 draft: false
 lang: en
 translationKey: "2026-10-10-building-the-shluchim-blog"
@@ -93,6 +94,9 @@ seffy: Add to the blog the list of all the shluchim, with their APNGs or GIFs.
 ```chat-he
 seffy: תוסיף לבלוג את רשימת כל השלוחים עם apng או גיפים שלהם
 ```
+
+
+![Ben and Kochava build a home for stories, from the beach phone to the team gallery.](/images/posts/building-shluchim-blog-story-1672.webp)
 
 
 ## The idea, in short:

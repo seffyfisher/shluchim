@@ -6,6 +6,7 @@ seoTitle: "9,001 טיקטים בשבע דקות: סיכום חודשי עם AI"
 seoDescription: "עוזר AI סיכם חודש וכ־9,001 טיקטים של לקוחות בכ־7 דקות: 16 טיוטות FAQ, נושאים מדורגים ושני באגים אמיתיים בפרודקשן."
 topics: ["ai-at-work"]
 date: 2026-10-08
+updated: 2026-10-16
 draft: false
 lang: he
 translationKey: "2026-10-08-help-center-monthly"
@@ -77,6 +78,9 @@ translationKey: "2026-10-08-help-center-monthly"
 
 כשל בצ׳קאאוט (הקופה) עם כתובת של קיבוץ הועבר לניצה.
 היא שחזרה אותו מול QA, והציעה תיקון בקופי (הטקסטים באתר).
+
+
+![שאלתיאל מזקק חודש לטיוטות ומפריד קישור שבור במייל וקישור SMS לשרת בדיקות.](/images/posts/help-center-monthly-story-1672.webp)
 
 
 ## למה זה טוב:
