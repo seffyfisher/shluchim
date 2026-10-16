@@ -77,7 +77,8 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
     <script is:inline>try { const saved = localStorage.getItem('shluchim-theme'); if (saved === 'light' || saved === 'dark') { document.documentElement.dataset.theme = saved; document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => meta.setAttribute('content', saved === 'dark' ? '#141414' : '#fafafa')); } } catch { /* storage may be disabled */ }</script>
     <link rel="preload" href={lang === 'he' ? heDisplayFontUrl : enDisplayFontUrl} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={bodyFontUrl} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={boldFontUrl} as="font" type="font/woff2" crossorigin />
+    <!-- Reading and display faces get the bandwidth first; bold retains its preload. -->
+    <link rel="preload" href={boldFontUrl} as="font" type="font/woff2" crossorigin fetchpriority="low" />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={SITE.title} />
     <meta property="og:url" content={canonical} />
