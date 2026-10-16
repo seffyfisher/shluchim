@@ -208,8 +208,6 @@ code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-si
 /* ---------- footer ---------- */
 footer.site { border-top: 1px solid var(--line); padding-block: 2rem 2.5rem; color: var(--muted); font-size: var(--step--1); }
 footer.site p { margin: 0; }
-footer.site .font-credit { margin-top: .25rem; }
-footer.site .font-credit a { color: inherit; }
 footer.site .links { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: .25rem; }
 footer.site .links a { color: var(--muted); display: inline-flex; align-items: center; min-height: 2.75rem; }
 footer.site .links a:hover { color: var(--fg); }

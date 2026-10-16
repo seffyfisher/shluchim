@@ -206,7 +206,7 @@ Fonts:
 
 - Hebrew headlines: Noa Shalev, by Noa Shalev, published by [AlefAlefAlef](https://alefalefalef.co.il/). Free license under [AlefAlefAlef's terms of use](https://alefalefalef.co.il/eula/?licenses=free).
 - English headlines: Young Serif, by Bryan Kirschen, SIL Open Font License 1.1.
-- Text: Polin, with Hebrew by Ben Nathan and Latin by Mateusz Machalski, published by [Hafontia](https://hafontia.com/family/polin/).
+- Text: [Polin](https://hafontia.com/family/polin/), with Hebrew by [Ben Nathan](https://hafontia.com/about/) and Latin by Mateusz Machalski, published by [Hafontia](https://hafontia.com/).
 
 Technology:
 

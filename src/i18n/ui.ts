@@ -15,7 +15,6 @@ export const UI = {
     edit: 'עריכה ב־GitHub', draft: 'טיוטה', postNav: 'ניווט בסוף המעשיה', nav: 'ניווט', chat: 'שיחה',
     switchTo: 'EN', switchHint: 'Read this in English',
     topics: 'נושאים', related: 'עוד מעשיות', topicNav: 'נושאים נוספים', home: 'מעשיות',
-    fontCredit: 'הפונט הרץ פולין, בעיצוב בן נתן —', fontFoundry: 'הפונטיה',
     // "Follow with your AI" block (FollowBlock.astro): a question and one button. The prompt itself lives in src/lib/follow.ts.
     followQ: 'רוצה לדעת שעולה פוסט חדש?',
     followCopy: 'תגיד את זה לשְׁלוּחִים שלך', followCopied: 'הועתק!',
@@ -40,7 +39,6 @@ export const UI = {
     edit: 'Edit on GitHub', draft: 'Draft', postNav: 'Story navigation', nav: 'Navigation', chat: 'Conversation',
     switchTo: 'עברית', switchHint: 'לקריאה בעברית',
     topics: 'Topics', related: 'More stories', topicNav: 'More topics', home: 'Stories',
-    fontCredit: 'Body typeface: Polin, Hebrew design by Ben Nathan —', fontFoundry: 'Hafontia',
     followQ: 'Want to know when a new post goes up?',
     followCopy: 'Tell your shluchim', followCopied: 'Copied!',
     followDoneStart: 'Now paste it to your shluchim: ',
