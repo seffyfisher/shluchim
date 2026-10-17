@@ -9,6 +9,8 @@ animate same-origin document navigation: content fades in over 220 ms with an
 The browser keeps normal document loading, link behavior, history, focus and
 page-script initialization. No client router, dependency or production
 JavaScript was added. This does not persist audio playback between documents.
+The content group does not interpolate its geometry: moving from a long,
+scrolled article to a shorter page cannot stretch or slide the content bounds.
 
 Reduced-motion users opt out of transitions entirely. Browsers without native
 cross-document transition support retain normal navigation. Hebrew and English

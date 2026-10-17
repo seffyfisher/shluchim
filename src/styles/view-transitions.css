@@ -25,6 +25,17 @@
     animation-timing-function: cubic-bezier(.2, .8, .2, 1);
   }
 
+  /* Main can be a long article or a short page, at different scroll offsets.
+     Use the destination bounds immediately rather than morphing that geometry. */
+  ::view-transition-group(page-content) {
+    animation: none;
+  }
+
+  ::view-transition-old(page-content),
+  ::view-transition-new(page-content) {
+    height: auto;
+  }
+
   ::view-transition-old(page-content) {
     animation: page-leave 110ms ease-out both;
   }

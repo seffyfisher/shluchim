@@ -36,7 +36,7 @@ try {
         if (!e.viewTransition) return;
         e.viewTransition.ready.then(() => {
           const rows = JSON.parse(sessionStorage.getItem('transition-evidence') ?? '[]');
-          rows.push({ path: location.pathname, animations: document.getAnimations().map(a => a.animationName).filter(Boolean) });
+          rows.push({ path: location.pathname, animations: document.getAnimations().map(a => a.animationName).filter(Boolean), contentGroupAnimation: getComputedStyle(document.documentElement, '::view-transition-group(page-content)').animationName });
           sessionStorage.setItem('transition-evidence', JSON.stringify(rows));
         });
       });
@@ -93,6 +93,7 @@ try {
     const evidence = await page.evaluate(() => JSON.parse(sessionStorage.getItem('transition-evidence') ?? '[]'));
     assert.ok(evidence.length >= 4, 'story, Back, Forward and About trigger native transitions');
     assert.ok(evidence.every(row => row.animations.includes('page-enter')), JSON.stringify(evidence));
+    assert.ok(evidence.every(row => row.contentGroupAnimation === 'none'), 'content never interpolates geometry between long/scrolled and short pages');
     // The theme control still binds in each newly loaded document.
     await page.$eval('.theme-option input[value="dark"]', input => input.click());
     assert.equal(await page.$eval('html', el => el.dataset.theme), 'dark');
