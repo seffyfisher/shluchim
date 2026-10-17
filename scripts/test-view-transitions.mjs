@@ -36,7 +36,8 @@ try {
         if (!e.viewTransition) return;
         e.viewTransition.ready.then(() => {
           const rows = JSON.parse(sessionStorage.getItem('transition-evidence') ?? '[]');
-          rows.push({ path: location.pathname, animations: document.getAnimations().map(a => a.animationName).filter(Boolean), contentGroupAnimation: getComputedStyle(document.documentElement, '::view-transition-group(page-content)').animationName });
+          const fades = document.getAnimations().filter(a => a.animationName?.startsWith('screen-fade-'));
+          rows.push({ path: location.pathname, animations: fades.map(a => a.animationName), fadeFrames: fades.map(a => a.effect.getKeyframes()), rootGroupAnimation: getComputedStyle(document.documentElement, '::view-transition-group(root)').animationName, separateSnapshots: ['main', 'header.site'].map(selector => getComputedStyle(document.querySelector(selector)).viewTransitionName) });
           sessionStorage.setItem('transition-evidence', JSON.stringify(rows));
         });
       });
@@ -92,8 +93,10 @@ try {
     console.log(`${lang}: About opened.`);
     const evidence = await page.evaluate(() => JSON.parse(sessionStorage.getItem('transition-evidence') ?? '[]'));
     assert.ok(evidence.length >= 4, 'story, Back, Forward and About trigger native transitions');
-    assert.ok(evidence.every(row => row.animations.includes('page-enter')), JSON.stringify(evidence));
-    assert.ok(evidence.every(row => row.contentGroupAnimation === 'none'), 'content never interpolates geometry between long/scrolled and short pages');
+    assert.ok(evidence.every(row => row.animations.includes('screen-fade-in') && row.animations.includes('screen-fade-out')), JSON.stringify(evidence));
+    assert.ok(evidence.every(row => row.rootGroupAnimation === 'none'), 'screen never interpolates geometry between long/scrolled and short pages');
+    assert.ok(evidence.every(row => row.separateSnapshots.every(name => name === 'none')), 'header and content fade together in the screen snapshot');
+    assert.ok(evidence.every(row => row.fadeFrames.flat().every(frame => 'opacity' in frame && !('transform' in frame) && !('width' in frame) && !('height' in frame))), 'screen animations change opacity only');
     // The theme control still binds in each newly loaded document.
     await page.$eval('.theme-option input[value="dark"]', input => input.click());
     assert.equal(await page.$eval('html', el => el.dataset.theme), 'dark');
@@ -105,7 +108,7 @@ try {
       console.log(`${lang}: navigation checks passed; finishing video encoding.`);
       await recorder.stop();
     }
-    console.log(`${lang} ${width}px: native content animation, keyboard/touch navigation, Back/Forward, theme persistence, existing GA navigation payload verified (${evidence.length} transitions).`);
+    console.log(`${lang} ${width}px: opacity-only screen crossfade, keyboard/touch navigation, Back/Forward, theme persistence, existing GA navigation payload verified (${evidence.length} transitions).`);
     await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
     await page.goto(base + prefix, { waitUntil: 'load' });
     await page.evaluate(() => sessionStorage.removeItem('transition-evidence'));

@@ -6,50 +6,32 @@
     navigation: auto;
   }
 
-  /* Keep the page background steady while content gently fades into place.
-     A vertical movement works equally well in Hebrew and English. */
-  :root {
-    view-transition-name: none;
-  }
-
-  main {
-    view-transition-name: page-content;
-  }
-
-  header.site {
-    view-transition-name: site-header;
-  }
-
-  ::view-transition-group(*) {
-    animation-duration: 220ms;
-    animation-timing-function: cubic-bezier(.2, .8, .2, 1);
-  }
-
-  /* Main can be a long article or a short page, at different scroll offsets.
-     Use the destination bounds immediately rather than morphing that geometry. */
-  ::view-transition-group(page-content) {
+  /* Crossfade the entire viewport, including the header and footer.
+     No separate element snapshots, movement or geometry interpolation. */
+  ::view-transition-group(root) {
     animation: none;
   }
 
-  ::view-transition-old(page-content),
-  ::view-transition-new(page-content) {
-    height: auto;
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    mix-blend-mode: plus-lighter;
   }
 
-  ::view-transition-old(page-content) {
-    animation: page-leave 110ms ease-out both;
+  ::view-transition-old(root) {
+    animation: screen-fade-out 220ms ease-in-out both;
   }
 
-  ::view-transition-new(page-content) {
-    animation: page-enter 220ms cubic-bezier(.2, .8, .2, 1) both;
+  ::view-transition-new(root) {
+    animation: screen-fade-in 220ms ease-in-out both;
   }
 
-  @keyframes page-leave {
+  @keyframes screen-fade-out {
+    from { opacity: 1; }
     to { opacity: 0; }
   }
 
-  @keyframes page-enter {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes screen-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 }
