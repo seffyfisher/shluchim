@@ -18,11 +18,11 @@
   }
 
   ::view-transition-old(root) {
-    animation: screen-fade-out 220ms ease-in-out both;
+    animation: screen-fade-out 280ms ease-in-out both;
   }
 
   ::view-transition-new(root) {
-    animation: screen-fade-in 220ms ease-in-out both;
+    animation: screen-fade-in 280ms ease-in-out both;
   }
 
   @keyframes screen-fade-out {

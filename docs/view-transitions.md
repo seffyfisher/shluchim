@@ -4,7 +4,7 @@ Implemented October 17, 2026, following the browser-native cross-document option
 in [Astro's guide](https://docs.astro.build/en/guides/view-transitions/).
 
 The shared layout imports `src/styles/view-transitions.css`. Supporting browsers
-animate same-origin document navigation with a 220 ms crossfade of the entire
+animate same-origin document navigation with a 280 ms crossfade of the entire
 screen, including the header, content and footer. Animations change opacity only.
 The browser keeps normal document loading, link behavior, history, focus and
 page-script initialization. No client router, dependency or production
