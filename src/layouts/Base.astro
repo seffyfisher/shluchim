@@ -11,6 +11,7 @@ import { LANG_META, lurl, other, t, isLang, type Lang } from '../i18n/ui';
 import { safeJson, personNode, websiteNode, blogNode, nodeIds } from '../lib/seo';
 import { gtagSnippet } from '../lib/analytics';
 import FollowBlock from '../components/FollowBlock.astro';
+import CollaborateBlock from '../components/CollaborateBlock.astro';
 import HandCursor from '../components/HandCursor.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 import OnlineReaders from '../components/OnlineReaders.astro';
@@ -141,6 +142,7 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
     <footer class="site">
       <div class="wrap">
         <FollowBlock lang={lang} />
+        <CollaborateBlock lang={lang} />
         <p>{SITE.footerNote}</p>
         <nav class="links topics" aria-label={ui.topics} data-analytics-label="footer_topics">{TOPIC_SLUGS.map((slug) => <a href={url(`topics/${slug}/`)}>{TOPICS[slug as keyof typeof TOPICS][lang].label}</a>)}</nav>
         <p class="links" data-analytics-label="footer_links"><a href={url()}>{ui.allStories}</a><a href={lurl('he', 'podcast/')} hreflang="he">{lang === 'he' ? 'הפודקסט' : 'Podcast (HE)'}</a><a href={url('team/')}>{ui.team}</a><a href={url('friends/')}>{ui.friends}</a><a href={url('about/')}>{ui.about}</a><a href={url('rss.xml')}>RSS</a></p>

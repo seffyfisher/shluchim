@@ -1,0 +1,28 @@
+---
+import { lurl, type Lang } from '../i18n/ui';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const he = lang === 'he';
+---
+<div class="collaborate" data-analytics-content="collaborate" data-analytics-label="footer_collaborate">
+  <span>{he ? 'רוצים לשתף פעולה?' : 'Want to collaborate?'}</span>
+  <details>
+    <summary data-analytics-id="collaborate-contact">{he ? 'בואו נדבר' : 'Let’s talk'}</summary>
+    <nav aria-label={he ? 'איך נוח לכם לדבר?' : 'How would you like to get in touch?'}>
+      <a href="mailto:seffyfisher1989@gmail.com">{he ? 'מייל' : 'Email'}</a>
+      <a href="https://instagram.com/shinlamed" target="_blank" rel="noopener">{he ? 'אינסטגרם' : 'Instagram'}</a>
+      <a href="https://www.facebook.com/shinlamed" target="_blank" rel="noopener">{he ? 'פייסבוק' : 'Facebook'}</a>
+      <a href={lurl(lang, 'about/')}>{he ? 'קצת עליי' : 'About me'}</a>
+    </nav>
+  </details>
+</div>
+
+<style>
+  .collaborate { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 1rem; margin-block: 0 1.25rem; color: var(--fg); }
+  details { min-inline-size: 0; }
+  summary { width: fit-content; min-height: 2.75rem; display: flex; align-items: center; cursor: pointer; list-style: none; text-decoration: underline; text-underline-offset: .2em; }
+  summary::-webkit-details-marker { display: none; }
+  nav { display: flex; flex-wrap: wrap; gap: 0 1.25rem; padding-block-end: .25rem; }
+  a { display: inline-flex; align-items: center; min-height: 2.75rem; color: inherit; text-underline-offset: .2em; }
+  summary:focus-visible, a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+</style>
