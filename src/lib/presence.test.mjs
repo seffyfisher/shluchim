@@ -90,19 +90,19 @@ test('counts browsers rather than per-tab presence entries, across one shared ch
   assert.equal(client.name, 'shluchim-online');
   assert.equal(client.config.presence.enabled, true);
   assert.deepEqual(client.tracks, [{}], 'sends no personal data or paths');
-  assert.equal(b.label.textContent, '2 קוראים כאן עכשיו');
+  assert.equal(b.label.textContent, 'יש כאן עכשיו 2 קוראים');
   assert.equal(b.attrs.has('data-ready'), true);
   client.state = { [client.config.presence.key]: [{}] }; client.sync();
-  assert.equal(b.label.textContent, '1 קורא כאן עכשיו');
+  assert.equal(b.label.textContent, 'רק אתה כאן כרגע. אל דאגה, עוד רגע מישהו מצטרף.');
 });
 
 test('English uses the same channel and handles singular and plural', async () => {
   const b = browser({ lang: 'en' }); await b.start();
   const client = await b.presence();
   assert.equal(client.name, 'shluchim-online');
-  assert.equal(b.label.textContent, '1 reader here now');
+  assert.equal(b.label.textContent, "Just you here right now. Don't worry, someone will join soon.");
   client.state[OTHER] = [{}]; client.sync();
-  assert.equal(b.label.textContent, '2 readers here now');
+  assert.equal(b.label.textContent, '2 readers here right now');
 });
 
 test('waits for our presence, hides a lost connection, and tracks again on rejoin', async () => {
@@ -227,7 +227,7 @@ test('rejects hostile channel keys and ignores their payloads, while disclosing 
   hostile['x'.repeat(100000)] = [{}];
   const readers = Object.fromEntries(Array.from({ length: 1000 }, (_, i) => [`00000000-0000-4000-8000-${String(i).padStart(12, '0')}`, [{ page: '/secret', html: '<script>alert(1)</script>' }]]));
   const client = await b.presence({ ...hostile, ...readers });
-  assert.equal(b.label.textContent, '1,001 קוראים כאן עכשיו');
+  assert.equal(b.label.textContent, 'יש כאן עכשיו 1,001 קוראים');
   assert.equal(b.overflow.hidden, false);
   assert.equal(b.overflow.textContent, '+501');
   assert.equal(Object.prototype.polluted, undefined);
