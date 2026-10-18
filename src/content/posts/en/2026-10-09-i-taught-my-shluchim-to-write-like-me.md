@@ -8,6 +8,7 @@ date: 2026-10-09
 draft: false
 lang: en
 translationKey: "2026-10-09-voice-profile"
+socialImage: "/images/posts/voice-profile-share-1200x630.webp"
 ---
 
 I wanted my shluchim to write so much like me

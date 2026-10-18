@@ -8,6 +8,7 @@ date: 2026-10-09
 draft: false
 lang: en
 translationKey: "2026-10-09-animated-avatars"
+socialImage: "/images/posts/animated-avatars-share-1200x630.webp"
 ---
 
 I made character sheets for my shluchim.
