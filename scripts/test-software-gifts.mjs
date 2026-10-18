@@ -50,7 +50,24 @@ try {
       else request.abort(); // No test traffic is sent to GA or reader-presence services.
     });
     const route = `${lang === 'en' ? '/en' : ''}/posts/${expected.slug}/`;
-    const response = await page.goto(base + route, { waitUntil: 'load' });
+    const home = await page.goto(base + `${lang === 'en' ? '/en/' : '/'}`, { waitUntil: 'load' });
+    assert.equal(home.status(), 200, 'homepage is available');
+    const stories = await page.$$eval('.stories .story', es => es.map(e => ({
+      href: new URL(e.querySelector('h3 a').href).pathname,
+      date: e.querySelector('time').dateTime.slice(0, 10)
+    })));
+    const homepageEntry = stories.find(e => e.href === route);
+    assert.ok(homepageEntry, 'published post appears in the homepage story list');
+    assert.equal(homepageEntry.date, '2026-10-18', 'homepage displays the requested date');
+    assert.deepEqual(stories.map(e => e.date), stories.map(e => e.date).sort().reverse(), 'story list remains chronological');
+    const homepageLink = await page.$(`.stories .story h3 a[href="${route}"]`);
+    await homepageLink.evaluate(e => e.scrollIntoView({ block: 'center', behavior: 'instant' }));
+    await page.screenshot({ path: `${report}/${lang}-${width}-homepage.png` });
+    const navigation = page.waitForNavigation({ waitUntil: 'load' });
+    if (width === 390) {
+      const box = await homepageLink.boundingBox(); await page.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2);
+    } else { await homepageLink.focus(); await page.keyboard.press('Enter'); }
+    const response = await navigation;
     console.log(`Checking ${route} ${width}px`);
     assert.equal(response.status(), 200, route);
     await page.evaluate(() => document.fonts.ready);
@@ -60,7 +77,7 @@ try {
     assert.equal(await page.$eval('link[rel="canonical"]', e => e.href), 'https://shluchim.shinlamed.com' + route);
     assert.ok(await page.$('link[hreflang="he"]'));
     assert.ok(await page.$('link[hreflang="en"]'));
-    assert.equal(await page.$eval('time', e => e.dateTime.slice(0, 10)), '2026-10-13');
+    assert.equal(await page.$eval('time', e => e.dateTime.slice(0, 10)), '2026-10-18');
     const plainQuotes = text => text.replace(/[‘’]/g, "'").replace(/[“”]/g, '"');
     assert.deepEqual((await page.$$eval('.prose h2,.prose h3', es => es.map(e => e.textContent.trim()))).map(plainQuotes), data.headings.map(plainQuotes));
     assert.equal(await page.$('#gift-unwrapping,linear-image,linear-embed'), null);
@@ -75,6 +92,22 @@ try {
       assert.ok(actual.naturalWidth > 0);
     }
     await page.screenshot({ path: `${report}/${lang}-${width}-final-gifts.png` });
+    const cards = await page.$$('.gift-app');
+    assert.equal(cards.length, 2, 'both repositories use the same card treatment');
+    const geometry = await page.$$eval('.gift-app', es => es.map(e => {
+      const r = e.getBoundingClientRect(); return { width: r.width, height: r.height };
+    }));
+    assert.ok(Math.abs(geometry[0].width - geometry[1].width) < 1 && Math.abs(geometry[0].height - geometry[1].height) < 1, 'both software gifts have equal visual space');
+    await (await page.$('.gift-apps')).screenshot({ path: `${report}/${lang}-${width}-matching-cards.png` });
+    for (const card of cards) {
+      const trigger = await card.$('.image-enlarge');
+      await trigger.evaluate(e => e.scrollIntoView({ block: 'center', behavior: 'instant' }));
+      if (width === 390) {
+        const box = await trigger.boundingBox(); await page.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2);
+      } else { await trigger.focus(); await page.keyboard.press('Enter'); }
+      assert.ok(await page.$('.image-viewer:popover-open'), 'card image enlargement remains usable');
+      await page.keyboard.press('Escape');
+    }
     console.log('Original images decoded at their reserved dimensions');
     for (const repository of ['orbit-windows', 'kol-chen']) {
       const link = await page.$(`.prose a[href="https://github.com/seffyfisher/${repository}"]`);
@@ -148,7 +181,7 @@ try {
     await page.addStyleTag({ content: 'html{font-size:100%}' });
     await page.evaluate(() => scrollTo(0, 0));
     await page.screenshot({ path: `${report}/${lang}-${width}-top.png` });
-    results.push({ route, width, status: 200, images: 7, exactPromptsCopied: buttons.length, input: width === 390 ? 'touch' : 'keyboard', failureEvidence, videoEvidence, noOverflowAt200Percent: true, analyticsBlockedUi: true });
+    results.push({ route, width, status: 200, homepageEntry, homepageLinkOpened: true, matchingBlueCards: 2, images: 7, exactPromptsCopied: buttons.length, input: width === 390 ? 'touch' : 'keyboard', failureEvidence, videoEvidence, noOverflowAt200Percent: true, analyticsBlockedUi: true });
     console.log(`${route} ${width}px: 7 original images; ${buttons.length} exact clipboard copies; failure selection; 1080p playback/end; analytics; 200% text; dark/reduced motion PASS`);
     await context.close();
   }
