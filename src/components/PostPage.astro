@@ -1,6 +1,6 @@
 ---
 import { render, type CollectionEntry } from 'astro:content';
-import { Image, getImage } from 'astro:assets';
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import FeedbackBlock from './FeedbackBlock.astro';
 import IdeaBlock from './IdeaBlock.astro';
@@ -9,10 +9,11 @@ import { episodeForPost } from '../data/podcast';
 import { ideaPrompt } from '../lib/idea-prompt';
 import { imageLabels, imagePopover } from '../lib/image-viewer.mjs';
 import '../styles/image-viewer.css';
-import { langOf, postUrl, getPosts, getTranslation, formatDate, formatDateShort, readingMinutes, readingLabel, topicsOf, relatedPosts } from '../lib/posts';
+import { langOf, keyOf, postUrl, getPosts, getTranslation, formatDate, formatDateShort, readingMinutes, readingLabel, topicsOf, relatedPosts } from '../lib/posts';
 import { lurl, t } from '../i18n/ui';
 import { REPO, SITES, SEO_KEYWORDS, OG_IMAGE } from '../config';
 import { blogPostingNode, breadcrumbNode, nodeIds, withBrand, isoDate, wordCount } from '../lib/seo';
+import { postOgImage, ogUrl } from '../lib/og-images.mjs';
 interface Props { post: CollectionEntry<'posts'> }
 const { post } = Astro.props;
 const podcastEpisode = episodeForPost(post.id);
@@ -40,8 +41,10 @@ const prompt = ideaPrompt(lang, {
 const seoTitle = d.seoTitle ? withBrand(d.seoTitle, SITES[lang].title) : undefined;
 const seoDescription = d.seoDescription ?? d.description;
 const modified = d.updated ?? d.date;
-const cover = d.cover ? await getImage({ src: d.cover, width: 1200, format: 'jpg' }) : undefined;
-const socialImage = d.socialImage ?? cover?.src;
+// Share card: a 1200x630 crop of the post's own artwork, prerendered by src/pages/og/posts/[image].jpg.ts.
+const og = await postOgImage(post);
+const socialImage = og ? ogUrl(keyOf(post), og) : undefined;
+const socialImageAlt = og ? (og.alt || d.title) : undefined;
 const ids = nodeIds(abs(lurl('he')), abs(lurl(lang)));
 const keywords = [...new Set([...topics.map((x) => x.label), ...(d.tags ?? []), ...SEO_KEYWORDS[lang]])];
 const jsonLd = [
@@ -58,7 +61,7 @@ const jsonLd = [
 ---
 <Base title={d.title} description={d.description} seoTitle={seoTitle} seoDescription={seoDescription} noindex={d.draft} lang={lang} alternates={alternates}
   ogType="article" published={d.date} modified={modified} section={topics[0]?.label} tags={topics.map((x) => x.label)}
-  image={socialImage} imageAlt={d.coverAlt} jsonLd={jsonLd}>
+  image={socialImage} imageAlt={socialImageAlt} imageWidth={og?.width} imageHeight={og?.height} jsonLd={jsonLd}>
   <article>
     <header class="post-head">
       <p class="meta">

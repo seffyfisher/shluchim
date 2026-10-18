@@ -9,6 +9,7 @@ date: 2026-10-09
 draft: false
 lang: he
 translationKey: "2026-10-09-animated-avatars"
+socialImage: "/images/posts/animated-avatars-share-1200x630.webp"
 ---
 
 יצרתי לשְׁלוּחִים שלי דפי דמות,

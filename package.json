@@ -11,7 +11,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "test": "node --experimental-strip-types --no-warnings --test src/lib/remark-chat.test.mjs src/lib/seo.test.mjs src/lib/seo-check.test.mjs src/lib/indexnow.test.mjs src/lib/follow.test.mjs src/lib/idea-prompt.test.mjs src/lib/analytics.test.mjs src/lib/presence.test.mjs src/lib/readers-loader.test.mjs src/lib/reader-avatars.test.mjs src/lib/featured.test.mjs src/lib/story-images.test.mjs src/lib/links.test.mjs src/lib/podcast.test.mjs src/lib/podcast-archive.test.mjs src/lib/live-delivery.test.mjs && node scripts/test-featured-build.mjs && python3 scripts/test_podcast_sync.py && node scripts/test-podcast-archive-build.mjs",
+    "test": "node --experimental-strip-types --no-warnings --test src/lib/remark-chat.test.mjs src/lib/seo.test.mjs src/lib/seo-check.test.mjs src/lib/indexnow.test.mjs src/lib/follow.test.mjs src/lib/idea-prompt.test.mjs src/lib/analytics.test.mjs src/lib/presence.test.mjs src/lib/readers-loader.test.mjs src/lib/reader-avatars.test.mjs src/lib/featured.test.mjs src/lib/story-images.test.mjs src/lib/og-images.test.mjs src/lib/links.test.mjs src/lib/podcast.test.mjs src/lib/podcast-archive.test.mjs src/lib/live-delivery.test.mjs && node scripts/test-featured-build.mjs && python3 scripts/test_podcast_sync.py && node scripts/test-podcast-archive-build.mjs",
     "seo:check": "SEO_STRICT=1 astro build",
     "test:story-loading": "node scripts/test-story-image-loading.mjs",
     "test:software-gifts": "node scripts/test-software-gifts.mjs",
