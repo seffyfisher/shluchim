@@ -49,6 +49,8 @@ including a romance group with 117 thousand members and more than 50 posts a day
 
 And Facebook? Not a single warning.
 
+![Pearls from six reading groups, five separate mentions and an e-reader bought for the app.](/images/posts/social-pearls-story-1672.webp)
+
 
 ## Step four, reading and organizing:
 
@@ -81,9 +83,6 @@ and that's important information for the campaign on its own.
 And 5 real mentions of e-vrit.
 A reader literally begging us to bring back the old site.
 And a reader who bought a Boox (an e-ink reader), purely for the e-vrit app.
-
-
-![Pearls from six reading groups, five separate mentions and an e-reader bought for the app.](/images/posts/social-pearls-story-1672.webp)
 
 
 ## What's worth taking from this:

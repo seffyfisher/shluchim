@@ -26,8 +26,9 @@ const { lang } = Astro.props;
   .online-readers { block-size: 4rem; padding-block-start: .5rem; visibility: hidden; }
   .online-readers[data-ready] { visibility: visible; }
   .readers-panel { display: flex; align-items: center; gap: .75rem; border-block: 1px solid var(--line); block-size: 100%; }
-  .readers-caption { display: flex; align-items: center; flex: none; inline-size: 8.5rem; gap: .4em; margin: 0; white-space: nowrap; color: var(--muted); font-size: .8125rem; line-height: 1.5; font-variant-numeric: tabular-nums; }
-  [data-lang="en"] .readers-caption { inline-size: 10rem; }
+  /* Short counts keep the stable 8.5rem column; the longer one-reader sentence may widen it or wrap to two lines, always leaving room for the reader's avatar. */
+  .readers-caption { display: flex; align-items: center; flex: 0 1 auto; min-inline-size: 8.5rem; max-inline-size: calc(100% - 3.25rem); gap: .4em; margin: 0; color: var(--muted); font-size: .8125rem; line-height: 1.5; font-variant-numeric: tabular-nums; }
+  [data-lang="en"] .readers-caption { min-inline-size: 10rem; }
   [data-readers-label] { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; }
   .online-dot { inline-size: .4em; block-size: .4em; border-radius: 50%; background: currentColor; flex: none; }
   .readers-crowd { display: flex; align-items: center; gap: .375rem; flex: 1; min-inline-size: 0; block-size: 3rem; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; }
