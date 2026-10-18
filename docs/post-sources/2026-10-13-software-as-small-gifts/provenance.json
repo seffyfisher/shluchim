@@ -9,22 +9,22 @@
       "uuid": "9f682bee-8431-4f87-8b8e-48426b7e0497",
       "title": "כתיבת פוסט: תוכנות כמתנות",
       "url": "https://linear.app/e-vrit/issue/SEF-174/כתיבת-פוסט-תוכנות-כמתנות",
-      "updatedAt": "2026-10-17T21:25:15.040Z",
-      "contentSha256": "a76a6a26a4a0196dc4d3d4b2fdd70d4f41914c524894b7063c5cca342ce34917"
+      "updatedAt": "2026-10-18T12:38:20.371Z",
+      "contentSha256": "65f10786cd468f9cc60b3c56e391c42bcb7990139a2f488fc31603057e51e248"
     },
     {
       "id": "19611f5f-6b61-4dfb-980b-36077db9a00e",
       "title": "Software as (Small) Gifts – English draft",
       "url": "https://linear.app/e-vrit/document/software-as-small-gifts-english-draft-55fba72f2441",
-      "updatedAt": "2026-10-16T16:47:01.791Z",
-      "contentSha256": "a202b82863700dcf251a1912851ef150b679c3387b2bf8bbe9976dc8acfb15e2"
+      "updatedAt": "2026-10-18T12:38:15.904Z",
+      "contentSha256": "a1c1f2e52f08ba30a0053d49733aec4833fac05b93b3c26afa4cb26b0b0ba292"
     },
     {
       "id": "92309f2b-844b-47e0-86fd-7948b2fa50ad",
       "title": "חבילת פרסום ומדיה: תוכנות כמתנות (קטנות)",
       "url": "https://linear.app/e-vrit/document/חבילת-פרסום-ומדיה-תוכנות-כמתנות-קטנות-e4e04b24950a",
-      "updatedAt": "2026-10-16T16:52:09.331Z",
-      "contentSha256": "420e707157229515b4e57b37a54473940b1d3d79789729d160a047ebe5f190af"
+      "updatedAt": "2026-10-18T12:38:56.295Z",
+      "contentSha256": "7807f2aa6fd2509d36cc6847931b7f1f489fe0e5d6601e9b5f29ec2605375172"
     }
   ],
   "assets": [
@@ -124,5 +124,27 @@
   ],
   "removedInteractiveGiftDemo": true,
   "archivedPageFiles": "approved-he-blocks.json and gift-wrap-original.html are historical source archives, not the publication source.",
-  "imageConversion": "Existing first five image derivatives retained after matching the freshly downloaded Linear originals to their recorded SHA256. Orbit and Kol-Chen converted to WebP quality 95, without resize or crop. Original MP4 retained byte for byte."
+  "imageConversion": "Existing first five image derivatives retained after matching the freshly downloaded Linear originals to their recorded SHA256. Orbit and Kol-Chen converted to WebP quality 95, without resize or crop. Original MP4 retained byte for byte.",
+  "candidateRevision": {
+    "status": "approved by Seffy: מאושר; faithful shortened English completed; ready for release checks",
+    "displayDate": "2026-10-18",
+    "dateOverrideRequestedBy": "Seffy explicitly requested display date 18 October 2026 after publication",
+    "originalStoryDate": "2026-10-13",
+    "unchangedSlug": "2026-10-13-software-as-small-gifts",
+    "hebrewSourceUpdatedAt": "2026-10-18T12:38:20.371Z",
+    "mediaPackageUpdatedAt": "2026-10-18T12:38:56.295Z",
+    "mediaAndExactPrompts": "all protected source blocks verified unchanged; 7 images, 2 video references, 3 prompt blocks",
+    "englishSourceUpdatedAt": "2026-10-18T12:38:15.904Z",
+    "blueCardDesign": {
+      "sameWidthAndHeight": true,
+      "imageAspectRatio": "4/3",
+      "borderLight": "#2459e0",
+      "borderDark": "#92b3ff",
+      "originalImagesUnchanged": true,
+      "newProductionJavaScript": false,
+      "browserVerification": "HE/EN 390px and 1280px, touch/keyboard native image enlargement, original image sizes, 200% text, dark mode and no JS passed"
+    },
+    "approval": "Seffy approved the full shortened Hebrew, display date 18 October 2026 and matching blue card preview in this chat."
+  },
+  "sourceHashNormalization": "Strip temporary Linear asset URL signature query strings before UTF-8 SHA256; retain all other source text."
 }
