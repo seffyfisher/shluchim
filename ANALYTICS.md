@@ -99,6 +99,7 @@ language, button, topic or podcast episode.
 | Interaction | `content_type` | `action` | `item_id` / extra |
 | --- | --- | --- | --- |
 | Copy idea / follow prompt | `idea` / `follow` | `copy`, then `result` | Button class; `result=success/error`; `post_slug` on post pages |
+| Copy a software-gift prompt (HE/EN, including verbatim Hebrew originals) | `idea` | `copy`, then `result` | Stable `software-gift-*` ID; `result=success` only after clipboard write resolves, `error` for manual-selection fallback; `post_slug`; no prompt text |
 | Internal links / same-page anchors | `a` (or enclosing content group) | `navigate` | Destination without query; fragment for same-page anchors; `label` = link group |
 | Email link (e.g. /about/) | `a` | `email` | `mailto` (never the address); `label` |
 | Image open, close, reset; dialog dismiss | `button` | `click` | Popover target or button class |

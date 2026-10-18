@@ -1,0 +1,157 @@
+{
+  "slug": "2026-10-13-software-as-small-gifts",
+  "languages": {
+    "he": {
+      "headings": [
+        "קודם מוצאים בעיה:",
+        "הלו הלו, אתה כותב ביידיש:",
+        "מה עשיתי עם זה:",
+        "הפרומפט המקורי ל־TypoSwap",
+        "לראות את התוכנית מלמעלה",
+        "מה השתנה בבנייה:",
+        "מתנה בקובץ ZIP:",
+        "ככה נראית חוויית ההתקנה",
+        "הפרומפט המקורי לחוויית ההתקנה",
+        "עוד תוכנות כמתנות:"
+      ],
+      "images": [
+        {
+          "src": "/media/posts/software-as-small-gifts/01-personal-gift-1672.webp",
+          "alt": "ספי ובאשר עם רעיון למתנת תוכנה",
+          "width": 1672,
+          "height": 941
+        },
+        {
+          "src": "/media/posts/software-as-small-gifts/02-keyboard-plan-logo-1672.webp",
+          "alt": "הלוגו הברור של הסיכה של כוכבה",
+          "width": 1672,
+          "height": 941
+        },
+        {
+          "src": "/media/posts/software-as-small-gifts/04-typing-workflow-1120.webp",
+          "alt": "המחשת השימוש ב־TypoSwap והכנת תיקון להדבקה",
+          "width": 1120,
+          "height": 1390
+        },
+        {
+          "src": "/media/posts/software-as-small-gifts/03-wrapped-software-1672.webp",
+          "alt": "השְׁלוּחִים אורזים את התוכנה במתנה",
+          "width": 1672,
+          "height": 941
+        },
+        {
+          "src": "/media/posts/software-as-small-gifts/05-gift-installation-925.webp",
+          "alt": "פתיחת מתנת TypoSwap בעטיפת נייר כחולה",
+          "width": 925,
+          "height": 790
+        },
+        {
+          "src": "/media/posts/software-as-small-gifts/06-orbit-windows-wrapped-1024.webp",
+          "alt": "Orbit Windows עטוף במתנה – מסך ההדגמה המקורי מהריפו",
+          "width": 1024,
+          "height": 800
+        },
+        {
+          "src": "/media/posts/software-as-small-gifts/07-kol-chen-wrapped-480.webp",
+          "alt": "קול-חן עטוף במתנה בנייר עם תמונות קלטות",
+          "width": 480,
+          "height": 204
+        }
+      ],
+      "prompts": [
+        {
+          "id": "software-gift-typoswap",
+          "text": "אני רוצה לבנות תוכנה שדואגת לי כל פעם שאני מקליד בטעות באנגלית ויצא לי עברית ולהפך, צריך להיות זמין ברמת כל המחשב וזמין למעכת ההפעלה ווינדוס ומק, זה צריך להיות סופר יעיל שכמעט לא משפיעה על הזכרון והאחסון במחשב\nוהמטרה היא פשוטה, הקלדת משהו באנגלית שרצית בעברית או הקלדת באנגלית שרצית בעברית, יוצא משהו סופר לא ברור, התוכנה אמור לאפשר לך לסמן את הטקסט ובקלות קיצונית על ידי קיצור מקלדת או לחיצה על מקש ימיני ובחירה מאופציה שם שקיימת אחרי שהתקנת את התוכנה זה ישר יעביר לך לעברית או לאנגלית לפי הצורך.\nחשוב מאוד שזה באמת יעבוד ממש טוב לפני הכל , כלומר שהזיהוי שהטקסט אכן לא יצא תקין יהיה מעולה כך שזה יכול ישר גם להציע לך האם תרצה להחליף והתכוונת ל... ולא רק משהו שאפשר להשתמש בו בצורה פאסיבית;"
+        },
+        {
+          "id": "software-gift-plan",
+          "text": "החוויה צריכה להיות שקופה כמעט לגמרי. הכלי יושב בשקט, מופיע כשצריך, מתקן בלחיצה וממשיך הלאה. לא ניכנס עכשיו לעיצוב.\n\nבוא תראה לי קודם את תוכנית העבודה מלמעלה."
+        },
+        {
+          "id": "software-gift-installation",
+          "text": "איך אפשר לייצר קובץ התקנה שמתקינים אותו מקבלים הרגשה כאילו קיבלת מתנה והתהליך התקנה שלך כולל לפתוח את המתנה(את הזיפ) ממש כמו חווית של קריעת נייר מתנה והסרת הדברים של המתנה ממנה"
+        }
+      ]
+    },
+    "en": {
+      "headings": [
+        "First, find a problem:",
+        "Hey, hey, you're writing in Yiddish:",
+        "What I did with it:",
+        "My original TypoSwap prompt",
+        "Seeing the plan from above",
+        "What changed during the build:",
+        "A gift in a ZIP file:",
+        "What the installation experience looks like",
+        "My original installation-experience prompt",
+        "More software gifts:"
+      ],
+      "images": [
+        {
+          "src": "/media/posts/software-as-small-gifts/01-personal-gift-1672.webp",
+          "alt": "Seffy and Bashar with an idea for a software gift",
+          "width": 1672,
+          "height": 941
+        },
+        {
+          "src": "/media/posts/software-as-small-gifts/02-keyboard-plan-logo-1672.webp",
+          "alt": "Kochava's hair clip with the clear logo",
+          "width": 1672,
+          "height": 941
+        },
+        {
+          "src": "/media/posts/software-as-small-gifts/04-typing-workflow-1120.webp",
+          "alt": "TypoSwap interface illustration showing a correction ready to paste",
+          "width": 1120,
+          "height": 1390
+        },
+        {
+          "src": "/media/posts/software-as-small-gifts/03-wrapped-software-1672.webp",
+          "alt": "The shluchim wrapping software as a gift",
+          "width": 1672,
+          "height": 941
+        },
+        {
+          "src": "/media/posts/software-as-small-gifts/05-gift-installation-925.webp",
+          "alt": "Opening a TypoSwap gift wrapped in blue paper",
+          "width": 925,
+          "height": 790
+        },
+        {
+          "src": "/media/posts/software-as-small-gifts/06-orbit-windows-wrapped-1024.webp",
+          "alt": "Orbit Windows gift-wrapping preview from the original repository",
+          "width": 1024,
+          "height": 800
+        },
+        {
+          "src": "/media/posts/software-as-small-gifts/07-kol-chen-wrapped-480.webp",
+          "alt": "Kol-Chen wrapped in gift paper featuring cassette tapes",
+          "width": 480,
+          "height": 204
+        }
+      ],
+      "prompts": [
+        {
+          "id": "software-gift-typoswap",
+          "text": "I want to build software that takes care of it whenever I accidentally type in English and get Hebrew and vice versa, it needs to be available across the whole computer and available for Windows and Mac, it needs to be super efficient so it barely affects memory and storage on the computer\nand the goal is simple, you typed something in English that you wanted in Hebrew or typed in English that you wanted in Hebrew, something super unclear comes out, the software should let you select the text and extremely easily, using a keyboard shortcut or right-clicking and choosing an option that exists there after you install the software, it immediately changes it to Hebrew or English as needed.\nIt's very important that it really works very well before everything else, meaning the detection that the text really came out wrong should be excellent so it can also immediately suggest would you like to replace it and did you mean... and not just something you can use passively;"
+        },
+        {
+          "id": "software-gift-typoswap-original-he",
+          "text": "אני רוצה לבנות תוכנה שדואגת לי כל פעם שאני מקליד בטעות באנגלית ויצא לי עברית ולהפך, צריך להיות זמין ברמת כל המחשב וזמין למעכת ההפעלה ווינדוס ומק, זה צריך להיות סופר יעיל שכמעט לא משפיעה על הזכרון והאחסון במחשב\nוהמטרה היא פשוטה, הקלדת משהו באנגלית שרצית בעברית או הקלדת באנגלית שרצית בעברית, יוצא משהו סופר לא ברור, התוכנה אמור לאפשר לך לסמן את הטקסט ובקלות קיצונית על ידי קיצור מקלדת או לחיצה על מקש ימיני ובחירה מאופציה שם שקיימת אחרי שהתקנת את התוכנה זה ישר יעביר לך לעברית או לאנגלית לפי הצורך.\nחשוב מאוד שזה באמת יעבוד ממש טוב לפני הכל , כלומר שהזיהוי שהטקסט אכן לא יצא תקין יהיה מעולה כך שזה יכול ישר גם להציע לך האם תרצה להחליף והתכוונת ל... ולא רק משהו שאפשר להשתמש בו בצורה פאסיבית;"
+        },
+        {
+          "id": "software-gift-plan",
+          "text": "The experience should be almost invisible. The tool sits quietly, appears when needed, corrects with a click and moves on. Let's not get into visual design now.\n\nFirst, show me the work plan from above."
+        },
+        {
+          "id": "software-gift-installation",
+          "text": "How can we create an installer file that, when you install it, makes you feel like you received a gift, and your installation process includes opening the gift (the zip), just like the experience of tearing gift wrap and removing the things wrapping the gift"
+        },
+        {
+          "id": "software-gift-installation-original-he",
+          "text": "איך אפשר לייצר קובץ התקנה שמתקינים אותו מקבלים הרגשה כאילו קיבלת מתנה והתהליך התקנה שלך כולל לפתוח את המתנה(את הזיפ) ממש כמו חווית של קריעת נייר מתנה והסרת הדברים של המתנה ממנה"
+        }
+      ]
+    }
+  }
+}

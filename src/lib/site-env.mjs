@@ -14,10 +14,10 @@ export const withBase = (p) => BASE + (p.startsWith('/') ? p : '/' + p);
 
 /**
  * Content may still carry the old hard-coded '/shluchim/images/...' form (written before the domain move) or the
- * base-free '/images/...' form (what the CMS writes now). Both mean the same file in public/images/.
+ * base-free '/images/...' form (what the CMS writes now). Post media also lives under '/media/posts/'.
  * Returns the path inside public/ (e.g. 'images/posts/x.webp') or null when it is not a site image.
  */
 export const imagePath = (url) => {
-  const m = /^(?:\/shluchim)?\/(images\/.+)$/.exec(url || '');
+  const m = /^(?:\/shluchim)?\/(images\/.+|media\/posts\/.+\.(?:webp|png|gif))$/i.exec(url || '');
   return m ? m[1] : null;
 };

@@ -1,116 +1,128 @@
 {
-  "sourcePage": "https://chatgpt.com/space/page_d60ee3209ddc8191ac0ab2808ab53bd1",
-  "sourcePageUpdatedAt": "2026-10-14T18:24:32.753661Z",
-  "sourceSequence": 32,
+  "primarySource": "Linear",
   "originalStoryDate": "2026-10-13",
-  "publicationAuthorized": "User explicitly authorized publication of the current Page, its five images, original video and interactive wrapping demo.",
-  "assets": [
+  "publicationNotBefore": "2026-10-18T14:24:57+03:00",
+  "publicationAuthorized": "Seffy explicitly authorized the text, seven images and original video for Sunday 18 October 2026. The browser gift-opening demo was subsequently removed at his request.",
+  "sources": [
     {
-      "name": "01-personal-gift.png",
-      "page_id": "page_d60ee3209ddc8191ac0ab2808ab53bd1",
-      "reference": "library-file:fde1_bGliZmlsZV9Vc2RfRk13WW55RVZ5LTRfWmhMd21R_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
-      "mime_type": "image/png",
-      "byte_size": 1517170,
-      "sha256": "964bb3b67128bc91db48b2e643d4f4a6589d9d9c593e69bef03bde5fd866ee85",
-      "text_representation": null,
-      "text_byte_size": null,
-      "kind": "image",
-      "width": 1672,
-      "height": 941,
-      "publicImages": [
-        "/media/posts/software-as-small-gifts/01-personal-gift-1024.webp",
-        "/media/posts/software-as-small-gifts/01-personal-gift-1672.webp"
-      ]
+      "id": "SEF-174",
+      "uuid": "9f682bee-8431-4f87-8b8e-48426b7e0497",
+      "title": "כתיבת פוסט: תוכנות כמתנות",
+      "url": "https://linear.app/e-vrit/issue/SEF-174/כתיבת-פוסט-תוכנות-כמתנות",
+      "updatedAt": "2026-10-17T21:25:15.040Z",
+      "contentSha256": "a76a6a26a4a0196dc4d3d4b2fdd70d4f41914c524894b7063c5cca342ce34917"
     },
     {
-      "name": "02-keyboard-plan-logo.png",
-      "page_id": "page_d60ee3209ddc8191ac0ab2808ab53bd1",
-      "reference": "library-file:fde1_bGliZmlsZV9YV3d0RmhMZVNnQmNtMHdQQVk2OVhn_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
-      "mime_type": "image/png",
-      "byte_size": 1607405,
-      "sha256": "d916d7e70133facabb4538019d4c6ba64de7bc6a5f677bfeb0c835764083e5df",
-      "text_representation": null,
-      "text_byte_size": null,
-      "kind": "image",
-      "width": 1672,
-      "height": 941,
-      "publicImages": [
-        "/media/posts/software-as-small-gifts/02-keyboard-plan-logo-1024.webp",
-        "/media/posts/software-as-small-gifts/02-keyboard-plan-logo-1672.webp"
-      ]
+      "id": "19611f5f-6b61-4dfb-980b-36077db9a00e",
+      "title": "Software as (Small) Gifts – English draft",
+      "url": "https://linear.app/e-vrit/document/software-as-small-gifts-english-draft-55fba72f2441",
+      "updatedAt": "2026-10-16T16:47:01.791Z",
+      "contentSha256": "a202b82863700dcf251a1912851ef150b679c3387b2bf8bbe9976dc8acfb15e2"
     },
     {
-      "name": "03-wrapped-software.png",
-      "page_id": "page_d60ee3209ddc8191ac0ab2808ab53bd1",
-      "reference": "library-file:fde1_bGliZmlsZV9faTBpSV9Xb2FWcEg3NFlPN1lOTk5n_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
-      "mime_type": "image/png",
-      "byte_size": 1680300,
-      "sha256": "bc5235c5ab5d920f7b53b3304b9d28427718ebdaf921978a7d80a0a21adeb006",
-      "text_representation": null,
-      "text_byte_size": null,
-      "kind": "image",
-      "width": 1672,
-      "height": 941,
-      "publicImages": [
-        "/media/posts/software-as-small-gifts/03-wrapped-software-1024.webp",
-        "/media/posts/software-as-small-gifts/03-wrapped-software-1672.webp"
-      ]
-    },
-    {
-      "name": "04-typing-workflow.png",
-      "page_id": "page_d60ee3209ddc8191ac0ab2808ab53bd1",
-      "reference": "library-file:fde1_bGliZmlsZV8zeEYxU2FhemZtS1IyRjJLU1lzU1NR_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
-      "mime_type": "image/png",
-      "byte_size": 139751,
-      "sha256": "e467beb101714208fbeed880ea226fd0795f134deb68e13d501b4f0f3dd17e3e",
-      "text_representation": null,
-      "text_byte_size": null,
-      "kind": "image",
-      "width": 1120,
-      "height": 1390,
-      "publicImages": [
-        "/media/posts/software-as-small-gifts/04-typing-workflow-1024.webp",
-        "/media/posts/software-as-small-gifts/04-typing-workflow-1120.webp"
-      ]
-    },
-    {
-      "name": "05-gift-installation.png",
-      "page_id": "page_d60ee3209ddc8191ac0ab2808ab53bd1",
-      "reference": "library-file:fde1_bGliZmlsZV96NlNOMG9IYnlGUEd3am9PQzBjUS1B_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
-      "mime_type": "image/png",
-      "byte_size": 490275,
-      "sha256": "46998a22666e0622d459f51c7979e7d94c304cc693258b3eebd91d15200ecd44",
-      "text_representation": null,
-      "text_byte_size": null,
-      "kind": "image",
-      "width": 925,
-      "height": 790,
-      "publicImages": [
-        "/media/posts/software-as-small-gifts/05-gift-installation-925.webp"
-      ]
-    },
-    {
-      "name": "gift-wrap-source.html",
-      "page_id": "page_d60ee3209ddc8191ac0ab2808ab53bd1",
-      "reference": "visualize:fde1_bGliZmlsZV9YVmtkUHJSa1FqTlMtd29WMTh6NzlB_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
-      "mime_type": "text/html",
-      "byte_size": 15742,
-      "sha256": "ead14ecc5f2456cedbcf472f58e6b729d35a2c6dc8ba7424a2b0a4abd73881b0",
-      "text_representation": "source",
-      "text_byte_size": 15742,
-      "kind": "text"
+      "id": "92309f2b-844b-47e0-86fd-7948b2fa50ad",
+      "title": "חבילת פרסום ומדיה: תוכנות כמתנות (קטנות)",
+      "url": "https://linear.app/e-vrit/document/חבילת-פרסום-ומדיה-תוכנות-כמתנות-קטנות-e4e04b24950a",
+      "updatedAt": "2026-10-16T16:52:09.331Z",
+      "contentSha256": "420e707157229515b4e57b37a54473940b1d3d79789729d160a047ebe5f190af"
     }
   ],
-  "video": {
-    "name": "TypoSwap-Gift-Walkthrough.mp4",
-    "sedimentFileId": "file_00000000fd8c820e852a9332a1851231",
-    "byteSize": 1171789,
-    "sha256": "950892c6214cb892c060b0d3fca47bce246ddec3c2a90c45b82a29850d2ed31d",
-    "durationSeconds": 36,
-    "width": 1920,
-    "height": 1080,
-    "kind": "simulation"
-  },
-  "sourcePreservation": "Original images remain in their persistent Page Files references. Local originals were read from those references, verified by SHA-256, and retained outside public/. WebP quality is 95; no crop or upscale.",
-  "javascript": "The approved wrapping demo requires pointer coordinates, drag progress, keyboard activation and replay state. Clipboard writes and success/failure feedback also require JavaScript. Styling and transitions use CSS. No existing analytics or release checks were changed."
+  "assets": [
+    {
+      "filename": "orbit-windows-wrapped.jpg",
+      "attachment_id": "56222ff0-bff4-4aea-ac82-a85e79429125",
+      "sha256": "7de8e2ba22cc439cd10d0cfef0b43793b5191a75fe5a91a1c14463047d51cf93",
+      "size": 54171,
+      "mime_type": "image/jpeg",
+      "alt_he": "Orbit Windows עטוף במתנה – מסך ההדגמה המקורי מהריפו",
+      "alt_en": "Orbit Windows gift-wrapping preview from the original repository",
+      "source_page_reference": "library-file:fde1_bGliZmlsZV9Tb2NCYUVXUjlSTXFfTW9iZmhtcG1R_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
+      "publicPath": "/media/posts/software-as-small-gifts/06-orbit-windows-wrapped-1024.webp"
+    },
+    {
+      "filename": "01-personal-gift.png",
+      "attachment_id": "08519e0d-f04d-44e0-9f6e-25e2e236d2cb",
+      "sha256": "964bb3b67128bc91db48b2e643d4f4a6589d9d9c593e69bef03bde5fd866ee85",
+      "size": 1517170,
+      "mime_type": "image/png",
+      "alt_he": "ספי ובאשר עם רעיון למתנת תוכנה",
+      "alt_en": "Seffy and Bashar with an idea for a software gift",
+      "source_page_reference": "library-file:fde1_bGliZmlsZV9Vc2RfRk13WW55RVZ5LTRfWmhMd21R_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
+      "publicPath": "/media/posts/software-as-small-gifts/01-personal-gift-1672.webp"
+    },
+    {
+      "filename": "02-keyboard-plan-logo.png",
+      "attachment_id": "6877a792-4f94-4075-b0c9-86759a5a8007",
+      "sha256": "d916d7e70133facabb4538019d4c6ba64de7bc6a5f677bfeb0c835764083e5df",
+      "size": 1607405,
+      "mime_type": "image/png",
+      "alt_he": "הלוגו הברור של הסיכה של כוכבה",
+      "alt_en": "Kochava's hair clip with the clear logo",
+      "source_page_reference": "library-file:fde1_bGliZmlsZV9YV3d0RmhMZVNnQmNtMHdQQVk2OVhn_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
+      "publicPath": "/media/posts/software-as-small-gifts/02-keyboard-plan-logo-1672.webp"
+    },
+    {
+      "filename": "03-wrapped-software.png",
+      "attachment_id": "06634b89-1212-4f03-96b4-ef14319a5190",
+      "sha256": "bc5235c5ab5d920f7b53b3304b9d28427718ebdaf921978a7d80a0a21adeb006",
+      "size": 1680300,
+      "mime_type": "image/png",
+      "alt_he": "השְׁלוּחִים אורזים את התוכנה במתנה",
+      "alt_en": "The shluchim wrapping software as a gift",
+      "source_page_reference": "library-file:fde1_bGliZmlsZV9faTBpSV9Xb2FWcEg3NFlPN1lOTk5n_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
+      "publicPath": "/media/posts/software-as-small-gifts/03-wrapped-software-1672.webp"
+    },
+    {
+      "filename": "04-typing-workflow.png",
+      "attachment_id": "f30ff5eb-b6bb-45ab-b667-a5d294209cda",
+      "sha256": "e467beb101714208fbeed880ea226fd0795f134deb68e13d501b4f0f3dd17e3e",
+      "size": 139751,
+      "mime_type": "image/png",
+      "alt_he": "המחשת השימוש ב־TypoSwap והכנת תיקון להדבקה",
+      "alt_en": "TypoSwap interface illustration showing a correction ready to paste",
+      "source_page_reference": "library-file:fde1_bGliZmlsZV8zeEYxU2FhemZtS1IyRjJLU1lzU1NR_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
+      "publicPath": "/media/posts/software-as-small-gifts/04-typing-workflow-1120.webp"
+    },
+    {
+      "filename": "05-gift-installation.png",
+      "attachment_id": "edd8abfc-aae3-40a6-bb93-0f1c3e820dbf",
+      "sha256": "46998a22666e0622d459f51c7979e7d94c304cc693258b3eebd91d15200ecd44",
+      "size": 490275,
+      "mime_type": "image/png",
+      "alt_he": "פתיחת מתנת TypoSwap בעטיפת נייר כחולה",
+      "alt_en": "Opening a TypoSwap gift wrapped in blue paper",
+      "source_page_reference": "library-file:fde1_bGliZmlsZV96NlNOMG9IYnlGUEd3am9PQzBjUS1B_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
+      "publicPath": "/media/posts/software-as-small-gifts/05-gift-installation-925.webp"
+    },
+    {
+      "filename": "kol-chen-wrapped.png",
+      "attachment_id": "94e2e6dd-84bd-4c17-bcae-2287f71d770b",
+      "sha256": "6809e133a15c4cc45dc1460e2f48bc44c09b4b155a6e71a1f5c4cb7af3143bbd",
+      "size": 141729,
+      "mime_type": "image/png",
+      "alt_he": "קול-חן עטוף במתנה בנייר עם תמונות קלטות",
+      "alt_en": "Kol-Chen wrapped in gift paper featuring cassette tapes",
+      "source_page_reference": "library-file:fde1_bGliZmlsZV9ScjlEN1NxMWVRS3lMbmh1dlduWlB3_FileDrive_21c90a5a3b888191bf1db4463bbe8a17",
+      "publicPath": "/media/posts/software-as-small-gifts/07-kol-chen-wrapped-480.webp"
+    },
+    {
+      "attachment_id": "73bdc030-2c2f-48a5-9867-67b7be0bd600",
+      "sha256": "950892c6214cb892c060b0d3fca47bce246ddec3c2a90c45b82a29850d2ed31d",
+      "filename": "TypoSwap-Gift-Walkthrough.mp4",
+      "size": 1171789,
+      "mime_type": "video/mp4",
+      "width": 1920,
+      "height": 1080,
+      "duration_seconds": 36,
+      "audio": false,
+      "role": "simulation",
+      "html5_controls": true,
+      "html5_playsinline": true,
+      "html5_autoplay": false,
+      "publicPath": "/media/posts/software-as-small-gifts/TypoSwap-Gift-Walkthrough.mp4"
+    }
+  ],
+  "removedInteractiveGiftDemo": true,
+  "archivedPageFiles": "approved-he-blocks.json and gift-wrap-original.html are historical source archives, not the publication source.",
+  "imageConversion": "Existing first five image derivatives retained after matching the freshly downloaded Linear originals to their recorded SHA256. Orbit and Kol-Chen converted to WebP quality 95, without resize or crop. Original MP4 retained byte for byte."
 }
