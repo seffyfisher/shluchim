@@ -104,6 +104,8 @@ language, button, topic or podcast episode.
 | Email link (e.g. /about/) | `a` | `email` | `mailto` (never the address); `label` |
 | Image open, close, reset; dialog dismiss | `button` | `click` | Popover target or button class |
 | Expand/collapse transcript or podcast | `summary` | `open/close` | Summary or explicit identifier |
+| Expand/collapse footer contact options | `collaborate` | `open/close` | `collaborate-contact`; `placement=footer`; `site_language` |
+| Footer collaboration email / About link | `collaborate` | `email` / `navigate` | `mailto` / destination path; `label=footer_collaborate`; `placement=footer`; `site_language` |
 | Theme choice | `theme` | `change` | `light/dark/system` |
 | Feedback choice | `feedback` | `change` | `helped/not_really`; `post_slug` on post pages |
 | Valid feedback submission | `feedback` | `submit` | `post/about`; `post_slug` on post pages |
@@ -128,6 +130,12 @@ visible label is read by the tracker. Email links send only `mailto`, never the
 address; tel links are ignored. Custom link
 and media parameters strip query strings. GA4's own automatic URL collection
 remains governed by the web stream settings.
+
+The collaboration footer reuses the delegated disclosure, email and navigation
+tracking. Instagram/Facebook clicks belong to GA4 Enhanced Measurement, with no
+duplicate custom click. These events answer whether readers open contact options
+and which route they choose; opening an app/link does not confirm a message was
+sent. The native disclosure and links work without JavaScript or analytics.
 
 New links, buttons and disclosures are covered by delegation. Use
 `data-analytics-content` on a container and `data-analytics-id` /
