@@ -77,7 +77,9 @@ const wait = async (predicate, message) => {
   }
   assert.fail(`${message}: ${sockets.size} sockets, ${Object.keys(state()).length} browser keys`);
 };
-const count = (page, n) => page.waitForFunction(n => document.querySelector('[data-online-readers]')?.hasAttribute('data-ready') && document.querySelector('[data-readers-label]')?.textContent.startsWith(`${n.toLocaleString('he-IL')} `), { timeout: 20000 }, n);
+const count = (page, n) => page.waitForFunction(n => document.querySelector('[data-online-readers]')?.hasAttribute('data-ready') && document.querySelector('[data-readers-label]')?.textContent === (document.querySelector('[data-online-readers]').dataset.lang === 'en'
+  ? (n === 1 ? "Just you here right now. Don't worry, someone will join soon." : `${n.toLocaleString('en')} readers here right now`)
+  : (n === 1 ? 'רק אתה כאן כרגע. אל דאגה, עוד רגע מישהו מצטרף.' : `יש כאן עכשיו ${n.toLocaleString('he-IL')} קוראים`)), { timeout: 20000 }, n);
 async function launch() {
   const args = ['--no-sandbox', '--disable-dev-shm-usage'];
   if (process.env.HTTPS_PROXY) args.push(`--proxy-server=${process.env.HTTPS_PROXY}`);

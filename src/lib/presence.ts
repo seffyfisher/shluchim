@@ -89,8 +89,8 @@ export function mountOnlineReaders(
         const keys = Object.keys(state).filter(id => id.length === 36 && READER_ID.test(id));
         const count = keys.length; // keys, not per-tab entries
         const text = lang === 'he'
-          ? `${count.toLocaleString('he-IL')} ${count === 1 ? 'קורא כאן עכשיו' : 'קוראים כאן עכשיו'}`
-          : `${count.toLocaleString('en')} ${count === 1 ? 'reader here now' : 'readers here now'}`;
+          ? (count === 1 ? 'רק אתה כאן כרגע. אל דאגה, עוד רגע מישהו מצטרף.' : `יש כאן עכשיו ${count.toLocaleString('he-IL')} קוראים`)
+          : (count === 1 ? "Just you here right now. Don't worry, someone will join soon." : `${count.toLocaleString('en')} readers here right now`);
         if (label.textContent !== text) label.textContent = text;
         renderAvatars?.update(keys);
         if (overflow) {
