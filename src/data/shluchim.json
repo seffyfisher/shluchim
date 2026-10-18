@@ -56,6 +56,34 @@
     "example_en": "For example: I put a 💯 on a message, and he turns it into a story that comes to me for approval."
   },
   {
+    "id": "bore",
+    "name": "בורא השְׁלוּחִים",
+    "name_en": "The Shluchim Creator",
+    "role": "בונה לי שְׁלוּחִים חדשים. שואל כמה שאלות, ואז יוצר אותם.",
+    "role_en": "Builds new shluchim for me. Asks a few questions, then creates them.",
+    "category": "ניהול וכלים",
+    "category_en": "Management & tools",
+    "avatar": "shluchim/bore.webp",
+    "animated": true,
+    "still": "shluchim/bore-still.webp",
+    "example": "למשל: אני מסביר לו מה השָׁלוּחַ החדש צריך לעשות. הוא שואל כמה שאלות, ובונה אותו עם תפקיד אחד וקול אחד.",
+    "example_en": "For example: I tell him what the new shaliach should do. He asks a few questions, and builds it with one job and one voice."
+  },
+  {
+    "id": "loren",
+    "name": "לורן",
+    "name_en": "Loren",
+    "role": "שְׁלוּחַת השיווק וההפצה: קמפיינים, קריאייטיב, ניתוח ערוצים ופוסטים.",
+    "role_en": "The marketing and distribution shaliach: campaigns, creative, channel analysis and posts.",
+    "category": "ניהול וכלים",
+    "category_en": "Management & tools",
+    "avatar": "shluchim/loren.webp",
+    "animated": true,
+    "still": "shluchim/loren-still.webp",
+    "example": "למשל: היא מכינה קמפיין עם קריאייטיב חדש, אבל לא משנה תקציב, לא מפרסמת ולא שולחת כלום בלי אישור שלי.",
+    "example_en": "For example: she builds a campaign with fresh creative, but doesn't change spend, post, or send anything without my okay."
+  },
+  {
     "id": "nitza",
     "name": "ניצה",
     "name_en": "Nitza",
