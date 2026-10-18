@@ -91,6 +91,16 @@ test('named anchors and example code remain content, while generated image links
   assert.equal(localOriginal.target, undefined);
 });
 
+test('post media reserves image geometry and offers responsive sources without upscaling small originals', () => {
+  const options = { mdastPlugins: [satteriImgSize], data: { astro: { frontmatter: { date: '2026-10-13', lang: 'he' } } } };
+  const art = render('![Gift](/media/posts/software-as-small-gifts/01-personal-gift-1672.webp)', options);
+  assert.match(art, /width="1672" height="941"/);
+  assert.match(art, /srcset="[^"]+-1024.webp 1024w, [^"]+-1672.webp 1672w"/);
+  const small = render('![Kol-Chen](/media/posts/software-as-small-gifts/07-kol-chen-wrapped-480.webp)', options);
+  assert.match(small, /width="480" height="204"/);
+  assert.doesNotMatch(small, /srcset=/);
+});
+
 test('the built-page guard finds violations across both languages and ignores inert markup', (t) => {
   const dir = mkdtempSync(join(tmpdir(), 'shluchim-links-'));
   t.after(() => rmSync(dir, { recursive: true, force: true }));

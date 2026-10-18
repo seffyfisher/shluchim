@@ -8,4 +8,5 @@ noa-shots/
 dist-fb/
 node_modules
 lighthouse-reports/
+publication-reports/
 __pycache__/
