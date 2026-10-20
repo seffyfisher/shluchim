@@ -39,6 +39,8 @@ const posts = defineCollection({
       // heOnly: an intentionally Hebrew-only post (Seffy's decision). It is exempt from the HE/EN list parity
       // check and the missing-translation warning, and gets no English page, hreflang or sitemap alternate.
       heOnly: z.boolean().optional(),
+      // hideWaCta: skip the WhatsApp invite line at the end of a Hebrew post (e.g. the WhatsApp group post itself).
+      hideWaCta: z.boolean().optional(),
       ...i18nFields,
     }),
 });
