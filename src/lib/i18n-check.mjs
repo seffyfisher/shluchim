@@ -9,17 +9,17 @@ import { parseFrontmatter } from './frontmatter.mjs';
 const fm = (src) => {
   const m = /^---\n([\s\S]*?)\n---/.exec(src);
   const get = (k) => m && (new RegExp(`^${k}:\\s*["']?(.*?)["']?\\s*$`, 'm').exec(m[1]) || [])[1];
-  return { draft: get('draft'), key: get('translationKey') };
+  return { draft: get('draft'), key: get('translationKey'), heOnly: get('heOnly') === 'true' };
 };
 const read = (dir) => existsSync(dir)
-  ? readdirSync(dir).filter((f) => f.endsWith('.md')).map((f) => { const src = readFileSync(join(dir, f), 'utf8'); const d = fm(src); const pf = parseFrontmatter(src).data; return { f, src, key: d.key || f.replace(/\.md$/, ''), draft: d.draft !== 'false', date: String(pf.date ?? '').slice(0, 10) || undefined, updated: String(pf.updated ?? '').slice(0, 10) || undefined, topics: Array.isArray(pf.topics) ? pf.topics : [] }; })
+  ? readdirSync(dir).filter((f) => f.endsWith('.md')).map((f) => { const src = readFileSync(join(dir, f), 'utf8'); const d = fm(src); const pf = parseFrontmatter(src).data; return { f, src, key: d.key || f.replace(/\.md$/, ''), draft: d.draft !== 'false', heOnly: d.heOnly, date: String(pf.date ?? '').slice(0, 10) || undefined, updated: String(pf.updated ?? '').slice(0, 10) || undefined, topics: Array.isArray(pf.topics) ? pf.topics : [] }; })
   : [];
 
 export function checkTranslations(root) {
   const he = read(join(root, 'src/content/posts/he')).filter((p) => !p.draft && p.f !== 'example-draft.md');
   const en = read(join(root, 'src/content/posts/en'));
   const enKeys = new Set(en.filter((p) => !p.draft).map((p) => p.key)); // drafts don't count as translated
-  const missing = he.filter((p) => !enKeys.has(p.key)).map((p) => p.f);
+  const missing = he.filter((p) => !p.heOnly && !enKeys.has(p.key)).map((p) => p.f); // heOnly: Hebrew on purpose
   const nikud = en.filter((p) => p.src.replace(/```chat-he\n[\s\S]*?\n```/g, '').split('\n').some((l) => !/^\s*(original|מקור):/i.test(l) && /[\u0591-\u05C7]/.test(l))).map((p) => p.f);
   return { missing, nikud, total: he.length };
 }

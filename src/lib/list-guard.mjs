@@ -1,5 +1,6 @@
 // Build-time guard: every published (non-draft) post must appear in its language's homepage list,
 // and the HE and EN lists must have the same count and the same order (paired by translationKey).
+// Exception: Hebrew posts marked `heOnly: true` are compared without their (intentionally absent) English pair.
 // Fails the build otherwise. Skipped for SHOW_DRAFTS preview builds.
 import { BASE_PATH } from './site-env.mjs';
 import { readFileSync, readdirSync } from 'node:fs';
@@ -11,7 +12,7 @@ const field = (fm, k) => (fm.match(new RegExp(`^${k}:\\s*"?([^"\\n]*)"?`, 'm')) 
 function published(dir) {
   return readdirSync(dir).filter((f) => f.endsWith('.md')).map((f) => {
     const fm = fmOf(readFileSync(join(dir, f), 'utf8'));
-    return { slug: f.slice(0, -3), key: field(fm, 'translationKey') || f.slice(0, -3), draft: field(fm, 'draft') !== 'false', emoji: field(fm, 'emoji'), title: field(fm, 'title') || '' };
+    return { slug: f.slice(0, -3), key: field(fm, 'translationKey') || f.slice(0, -3), draft: field(fm, 'draft') !== 'false', heOnly: field(fm, 'heOnly') === 'true', emoji: field(fm, 'emoji'), title: field(fm, 'title') || '' };
   }).filter((p) => !p.draft && p.slug !== 'example-draft');
 }
 const listed = (html, base) => [...html.matchAll(new RegExp(`<h3><a href="${base}(?:en/)?posts/([^/"]+)/"`, 'g'))].map((m) => m[1]);
@@ -36,6 +37,10 @@ export function checkLists(root, outDir, base) {
     const clash = he.find((q) => q.slug !== p.slug && q.title.includes(p.emoji));
     if (clash) errs.push(`emoji ${p.emoji} of ${p.slug} already appears in the title of ${clash.slug}`);
   }
+  // Intentionally Hebrew-only posts (`heOnly: true`) are listed in Hebrew only; parity holds for every other post.
+  const heOnlyKeys = new Set(he.filter((p) => p.heOnly).map((p) => p.key));
+  for (const p of he.filter((x) => x.heOnly)) if (res.en.includes(p.key)) errs.push(`he/${p.slug}: heOnly but also listed in English`);
+  res.he = res.he.filter((k) => !heOnlyKeys.has(k));
   if (res.he.length !== res.en.length) errs.push(`count mismatch: he ${res.he.length}, en ${res.en.length}`);
   const i = res.he.findIndex((k, n) => k !== res.en[n]);
   if (i >= 0) errs.push(`order mismatch at position ${i + 1}: he=${res.he[i]} en=${res.en[i]}`);
