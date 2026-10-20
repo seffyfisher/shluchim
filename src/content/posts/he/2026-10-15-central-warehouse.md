@@ -6,7 +6,7 @@ listDescription: "רעיונות, מסמכים והחלטות שעבדתם על�
 seoTitle: "מחסן אחד לעבודה עם AI, כדי לא לאבד רעיונות"
 seoDescription: "רעיונות ומסמכים שעבדתם עליהם עם AI נקברים בשיחות. מחסן אחד מחוץ לכלי, ליניאר אצלי, וארבע שורות לכל משימה, כדי להמשיך מחר גם עם כלי אחר."
 topics: ["everyday-ai", "ai-at-work"]
-date: 2026-10-15
+date: 2026-10-20
 draft: false
 lang: he
 translationKey: "2026-10-15-central-warehouse"
