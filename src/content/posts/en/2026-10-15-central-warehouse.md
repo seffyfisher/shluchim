@@ -5,7 +5,7 @@ description: "Ideas, documents and decisions you worked on with AI get buried in
 seoTitle: "One warehouse for working with AI, so you don't lose ideas"
 seoDescription: "Ideas and docs you build with AI get buried in chats. Keep them in one warehouse outside the tool, Linear for me, with four lines per task, and resume tomorrow."
 topics: ["everyday-ai", "ai-at-work"]
-date: 2026-10-15
+date: 2026-10-20
 draft: false
 lang: en
 translationKey: "2026-10-15-central-warehouse"
