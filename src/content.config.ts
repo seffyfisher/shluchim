@@ -36,6 +36,9 @@ const posts = defineCollection({
       cover: image().optional(),
       coverAlt: z.string().optional(),
       socialImage: z.string().optional(),
+      // heOnly: an intentionally Hebrew-only post (Seffy's decision). It is exempt from the HE/EN list parity
+      // check and the missing-translation warning, and gets no English page, hreflang or sitemap alternate.
+      heOnly: z.boolean().optional(),
       ...i18nFields,
     }),
 });
