@@ -1,11 +1,12 @@
 ---
 title: "Keilu's Warehouse"
+emoji: "🗄️"
 description: "Ideas, documents and decisions you worked on with AI get buried inside chats. For me, everything goes into one warehouse outside the AI tool, Linear in my case, and I just tell my shaliach \"save it to the warehouse for me\". That way it's clear where everything is, and tomorrow you can pick up right where you left off, even with a different tool."
-seoTitle: "One place outside AI chats to keep your work"
+seoTitle: "One warehouse for working with AI, so you don't lose ideas"
 seoDescription: "Ideas and docs you build with AI get buried in chats. Keep them in one warehouse outside the tool, Linear for me, with four lines per task, and resume tomorrow."
 topics: ["everyday-ai", "ai-at-work"]
 date: 2026-10-15
-draft: true
+draft: false
 lang: en
 translationKey: "2026-10-15-central-warehouse"
 socialImage: "/images/posts/central-warehouse-1-shelf-1672.webp"
@@ -27,11 +28,33 @@ So this is the time to pick a warehouse.
 One place where your work goes.
 For me it's Linear (a task management system).
 For you it can be any system you're comfortable with.
+monday, ClickUp, Google Drive, Dropbox, Google Keep, Trello,
+or anything else that works for you.
+
+And if none of them really fits,
+maybe it's time to build a warehouse of your own.
+That could be a pretty cool project too.
+Keilu's Warehouse 2.0, I'm looking at you 😇
 
 What matters is that the warehouse lives outside the AI tool,
 and that the connection between them is really easy.
 
-![Seffy between a pile of crumpled chat bubbles and a tidy shelf of colorful crates, with Keilu keeping the shelf](/images/posts/central-warehouse-1-shelf-1672.webp)
+![Seffy between a pile of crumpled chat bubbles and a tidy shelf of colorful crates, with Keilu guarding the shelf](/images/posts/central-warehouse-1-shelf-1672.webp)
+
+## Why do you even need a warehouse:
+
+A chat with AI is a great place to think.
+But a lousy place to keep things.
+
+The chat gets longer, you open a new one,
+and the good version gets buried somewhere in the middle.
+And the AI doesn't always remember what you decided last week.
+
+One warehouse solves that.
+One place where everyone can see what the idea is, what was decided and what the next step is.
+You, the shaliach, and even a tool you haven't started using yet.
+
+![A real task from Ivrit in Linear: adding page count and listening time filters](/images/posts/central-warehouse-evrit-1-filters-1920.webp)
 
 ## Wait, but I only use one chat:
 
@@ -101,6 +124,8 @@ For each idea or task, it's enough to save:
 And when we're done, we mark it done.
 Meaning, not when the shaliach stopped answering,
 but when the thing we wanted actually came out.
+
+![A real task from Ivrit in Linear: the genres on the My Books page](/images/posts/central-warehouse-evrit-2-my-books-1920.webp)
 
 ## The warehouse stays yours:
 

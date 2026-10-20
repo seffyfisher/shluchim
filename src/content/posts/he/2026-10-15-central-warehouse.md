@@ -7,7 +7,7 @@ seoTitle: "מחסן אחד לעבודה עם AI, כדי לא לאבד רעיונ
 seoDescription: "רעיונות ומסמכים שעבדתם עליהם עם AI נקברים בשיחות. מחסן אחד מחוץ לכלי, ליניאר אצלי, וארבע שורות לכל משימה, כדי להמשיך מחר גם עם כלי אחר."
 topics: ["everyday-ai", "ai-at-work"]
 date: 2026-10-15
-draft: true
+draft: false
 lang: he
 translationKey: "2026-10-15-central-warehouse"
 socialImage: "/images/posts/central-warehouse-1-shelf-1672.webp"
@@ -54,7 +54,7 @@ monday, ClickUp, Google Drive, Dropbox, Google Keep, Trello,
 מקום אחד שבו רואים מה הרעיון, מה הוחלט ומה הצעד הבא.
 גם אתם, גם השלוח, וגם כלי שעוד לא התחלתם לעבוד איתו.
 
-![רשימת המשימות של הבלוג בפרויקט שלוחים בליניאר](/images/posts/central-warehouse-linear-1-project-1920.webp)
+![משימה אמיתית מ׳עברית׳ בליניאר: להוסיף לפילטור כמות עמודים וזמן האזנה](/images/posts/central-warehouse-evrit-1-filters-1920.webp)
 
 ## רגע, אבל אני משתמש רק בצ׳אט אחד:
 
@@ -125,7 +125,7 @@ monday, ClickUp, Google Drive, Dropbox, Google Keep, Trello,
 ז״א, לא כשהשלוח הפסיק לענות,
 אלא כשבאמת יצא הדבר שרצינו.
 
-![משימה אחת במחסן: מה רוצים, מה הוחלט ומה נשאר לעשות](/images/posts/central-warehouse-linear-2-issue-1920.webp)
+![משימה אמיתית מ׳עברית׳ בליניאר: הז׳אנרים בדף הספרים שלי](/images/posts/central-warehouse-evrit-2-my-books-1920.webp)
 
 ## המחסן נשאר אצלכם:
 
