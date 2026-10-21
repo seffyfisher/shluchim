@@ -467,9 +467,10 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 .card .btn:hover { background: var(--fg); color: var(--bg); }
 .card .btn:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
 
-/* Native audio player in posts (no JS): full column width, neutral, follows light/dark. */
 /* WhatsApp glyph at the start of the Hebrew invite line (decorative, aria-hidden). */
 .post-invite .wa-icon { display: inline-block; width: 1em; height: 1em; margin-inline-end: .3em; vertical-align: -.15em; border-radius: 0; fill: #25D366; }
+
+/* Native audio player in posts (no JS): full column width, neutral, follows light/dark. */
 .prose audio { display: block; width: 100%; max-width: 40rem; height: 3rem; margin: 1.75rem 0; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color-scheme: light dark; }
 
 .podcast-home { display: flex; flex-wrap: wrap; align-items: baseline; gap: .1rem 1.25rem; margin: -1rem 0 2rem; padding-block: .5rem; border-block: 1px solid var(--line); font-size: var(--step--1); }
