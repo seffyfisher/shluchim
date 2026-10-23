@@ -14,6 +14,7 @@ import { lurl, t } from '../i18n/ui';
 import { REPO, SITES, SEO_KEYWORDS, OG_IMAGE } from '../config';
 import { blogPostingNode, breadcrumbNode, nodeIds, withBrand, isoDate, wordCount } from '../lib/seo';
 import { postOgImage, ogUrl } from '../lib/og-images.mjs';
+import { markdownUrl } from '../lib/post-markdown.mjs';
 interface Props { post: CollectionEntry<'posts'> }
 const { post } = Astro.props;
 const podcastEpisode = episodeForPost(post.id);
@@ -61,7 +62,7 @@ const jsonLd = [
 ---
 <Base title={d.title} description={d.description} seoTitle={seoTitle} seoDescription={seoDescription} noindex={d.draft} lang={lang} alternates={alternates}
   ogType="article" published={d.date} modified={modified} section={topics[0]?.label} tags={topics.map((x) => x.label)}
-  image={socialImage} imageAlt={socialImageAlt} imageWidth={og?.width} imageHeight={og?.height} jsonLd={jsonLd}>
+  image={socialImage} imageAlt={socialImageAlt} imageWidth={og?.width} imageHeight={og?.height} markdown={markdownUrl(postUrl(post))} jsonLd={jsonLd}>
   <article>
     <header class="post-head">
       <p class="meta">
