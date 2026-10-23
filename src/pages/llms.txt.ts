@@ -19,7 +19,7 @@ export const GET = async ({ site }: APIContext) => {
 
 > Shluchim is a personal blog by Seffy Fisher: first-hand stories about practical, everyday AI. Each story shows what he asked his AI agents to do, which agents took part, and what came out, with real numbers and screenshots. Available in Hebrew and English.
 
-"Shluchim" (Hebrew: שלוחים, "emissaries"; singular shaliach) is what Seffy calls his AI agents (Hebrew: עוזרי AI). The blog is not about Chabad emissaries: it borrows the Hebrew word for an emissary, from the saying "a person's emissary is as the person himself". Many stories use Grok Bot (גרוקבוט), the AI-agent product the team runs on.
+"Shluchim" (Hebrew: שְׁלוּחִים, "emissaries"; singular shaliach) is what Seffy calls his AI agents (Hebrew: עוזרי AI). The blog is not about Chabad emissaries: it borrows the Hebrew word for an emissary, from the saying "a person's emissary is as the person himself". Many stories use Grok Bot (גרוקבוט), the AI-agent product the team runs on.
 
 - Topics covered: ${SEO_KEYWORDS.en.join(', ')}.
 - Hebrew topics (נושאים): ${SEO_KEYWORDS.he.join(', ')}.
