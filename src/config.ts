@@ -97,7 +97,7 @@ export const SEO_HOME = {
 // Machine-readable keywords (JSON-LD `keywords`, llms.txt). Not rendered on the page, so the Hebrew list can name the
 // search terms people actually use without touching the reader-facing vocabulary rule.
 export const SEO_KEYWORDS = {
-  he: ['בינה מלאכותית', 'מעשיות על בינה מלאכותית', 'AI פרקטי', 'AI ביומיום', 'סוכני AI', 'עוזרי AI', 'גרוקבוט', 'Grok Bot', 'שלוחים'],
+  he: ['בינה מלאכותית', 'מעשיות על בינה מלאכותית', 'AI פרקטי', 'AI ביומיום', 'עוזרי AI', 'גרוקבוט', 'Grok Bot', 'שְׁלוּחִים'],
   en: ['AI agents', 'practical AI', 'everyday AI', 'stories about AI', 'AI bots', 'Grok Bot', 'AI assistants at work', 'shluchim'],
 } as const;
 

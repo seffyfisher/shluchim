@@ -2,7 +2,7 @@
 title: "Keilu's Warehouse"
 emoji: "🗄️"
 description: "Ideas, documents and decisions you worked on with AI get buried inside chats. For me, everything goes into one warehouse outside the AI tool, Linear in my case, and I just tell my shaliach \"save it to the warehouse for me\". That way it's clear where everything is, and tomorrow you can pick up right where you left off, even with a different tool."
-seoTitle: "One warehouse for working with AI, so you don't lose ideas"
+seoTitle: "One warehouse for all your AI work"
 seoDescription: "Ideas and docs you build with AI get buried in chats. Keep them in one warehouse outside the tool, Linear for me, with four lines per task, and resume tomorrow."
 topics: ["everyday-ai", "ai-at-work"]
 date: 2026-10-20

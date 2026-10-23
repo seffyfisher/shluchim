@@ -94,11 +94,13 @@ for weight, style in [(400, "Regular"), (800, "Extrabold")]:
         assert original["hmtx"][before] == candidate["hmtx"][after], hex(point)
         assert outline(original, before) == outline(candidate, after), hex(point)
     # The font uses CFF outlines; retained hints are validated in the browser raster test.
-    for points, path in [(selected, output_path), (remaining, original_path)]:
+    # Core faces: `optional` (Seffy, 23.10): no late swap, so no layout shift; preloaded, so they still win on
+    # almost every visit. The full originals only cover rare glyphs and keep `swap`.
+    for points, path, display in [(selected, output_path, "optional"), (remaining, original_path, "swap")]:
         css.extend([
             "@font-face {", "  font-family: 'Polin';",
             f"  src: url('./{path.name}') format('woff2');",
-            f"  font-weight: {weight};", "  font-style: normal;", "  font-display: swap;",
+            f"  font-weight: {weight};", "  font-style: normal;", f"  font-display: {display};",
             f"  unicode-range: {ranges(points)};", "}",
         ])
     manifest["faces"].append({
