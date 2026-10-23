@@ -47,7 +47,8 @@ What it changed here: the opt-in IndexNow ping, the Bing AI Performance report a
 | Homepage / site-wide copy, keywords, author, share image, verification tokens | `src/config.ts` (`SEO_HOME`, `SEO_KEYWORDS`, `PERSON`, `OG_IMAGE`, `VERIFY`) |
 | Topic hub pages | `src/components/TopicPage.astro`, `src/pages/topics/`, `src/pages/en/topics/` |
 | Sitemap: hreflang pairs (he, en, x-default) and `lastmod` | `astro.config.mjs` + `src/lib/i18n-check.mjs` |
-| `/robots.txt`, `/llms.txt` | `src/pages/robots.txt.ts`, `src/pages/llms.txt.ts` (generated, never hand-edit) |
+| `/robots.txt`, `/llms.txt`, `/llms-full.txt` | `src/pages/robots.txt.ts`, `src/pages/llms.txt.ts`, `src/pages/llms-full.txt.ts` (generated, never hand-edit) |
+| Markdown copy of each story (`/posts/<slug>.md`, `/en/posts/<slug>.md`, announced by `<link rel="alternate" type="text/markdown">`) | `src/pages/posts/[slug].md.ts`, `src/pages/en/posts/[slug].md.ts`, `src/lib/post-md.ts`, `src/lib/post-markdown.mjs` (the post's own Markdown, links made absolute) |
 | Share cards (1200x630) | `public/og/`, source in `scripts/og-card/` |
 | The guard | `src/lib/seo-check.mjs`, `npm run seo:check`, `.github/workflows/seo-guard.yml` |
 
@@ -120,7 +121,7 @@ When it fails, the message names the file and the fix. Do not silence the guard 
 ## Honest limits
 
 - No on-site change makes a brand-new blog on a brand-new domain rank for `בינה מלאכותית`. This setup gets pages indexed correctly, understood, and eligible for long-tail and Grok Bot queries.
-- `llms.txt` is generated and kept because it is cheap. Coverage of Google's guide says Search ignores it, and no AI vendor has confirmed using it. We could not open the primary pages to check. Do not expect a measurable effect, and do not add more machine-only files on the strength of it.
+- `llms.txt` is generated and kept because it is cheap. Coverage of Google's guide says Search ignores it, and no AI vendor has confirmed using it. We could not open the primary pages to check. Do not expect a measurable effect. On 2026-10-23 Seffy asked for full LLM readiness, so `llms-full.txt` and a Markdown copy of every story were added: both are generated from the same Markdown at build time and cost nothing to keep. Do not add further machine-only files without a reason.
 - Structured data makes pages eligible for rich results such as breadcrumbs. It does not raise rankings by itself. JSON-LD `keywords` is ignored by Google.
 - `lastmod` is the post date (or `updated`). It is only as accurate as those fields, so set `updated` when a post changes in a way that matters.
 

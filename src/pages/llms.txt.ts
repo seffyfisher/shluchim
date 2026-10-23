@@ -26,6 +26,7 @@ export const GET = async ({ site }: APIContext) => {
 - Languages: Hebrew (primary, right-to-left) and English. Every story exists in both; the pages link to each other with hreflang.
 - Format: first-person accounts, one story per page, newest first. The archive starts on 2026-09-11.
 - Citing: link to the story's own URL and name "Seffy Fisher, Shluchim blog".
+- Markdown: every story is also available as plain Markdown at its URL with \`.md\` instead of the trailing slash (for example ${abs(lurl('en', 'posts/grok-bot-guide.md'))}). The full text of all stories is in [llms-full.txt](${abs(lurl('he', 'llms-full.txt'))}).
 
 ## Topics (English)
 
@@ -58,6 +59,7 @@ ${he.map(line).join('\n')}
 
 ## Optional
 
+- [Full text of every story, English and Hebrew](${abs(lurl('he', 'llms-full.txt'))})
 - [RSS, English](${abs(lurl('en', 'rss.xml'))})
 - [RSS, עברית](${abs(lurl('he', 'rss.xml'))})
 - [Sitemap](${abs(lurl('he', 'sitemap-index.xml'))})

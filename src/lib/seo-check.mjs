@@ -187,7 +187,7 @@ export function auditDist(dist, site, base) {
     }
   }
   // sitemap + machine files
-  for (const f of ['sitemap-index.xml', 'llms.txt', 'robots.txt']) if (!existsSync(join(dist, f))) errors.push(`${f} was not generated`);
+  for (const f of ['sitemap-index.xml', 'llms.txt', 'llms-full.txt', 'robots.txt']) if (!existsSync(join(dist, f))) errors.push(`${f} was not generated`);
   return { errors, warnings, pages: htmlFiles.length };
 }
 
