@@ -2,6 +2,7 @@
 // - A published Hebrew post with no English counterpart (same translationKey, or same file name) -> warning.
 // - Niqqud in an English post outside "original:" lines / ```chat-he blocks -> warning (niqqud is Hebrew-only).
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 import { TOPIC_SLUGS } from '../data/topics.mjs';
 import { parseFrontmatter } from './frontmatter.mjs';
@@ -50,8 +51,40 @@ export function urlPairs(root, siteBase) {
 }
 
 /** Sitemap <lastmod>: a post's `updated` (else `date`); index and topic pages take their newest story. Only dates we really know. */
+/**
+ * Last commit date (ISO, committer time) touching any of `files`, from git. Deterministic for a given commit.
+ * Returns undefined when git is unavailable or the clone is shallow (a shallow clone would date every file to
+ * the checkout commit), so a page without a trustworthy date simply gets no <lastmod>. CI checks out full history.
+ */
+export function gitLastModified(root, files) {
+  try {
+    const git = (args) => execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+    if (git(['rev-parse', '--is-shallow-repository']) !== 'false') return undefined;
+    return git(['log', '-1', '--format=%cI', '--', ...files]) || undefined;
+  } catch { return undefined; }
+}
+
+/** Source files behind each static page; a commit to any of them changes the page. */
+const PAGE_SOURCES = {
+  'about/': (lang) => [`src/content/pages/${lang}/about.md`, 'src/components/AboutPage.astro', 'src/data/about-photos.json'],
+  'team/': () => ['src/components/TeamPage.astro', 'src/data/shluchim.json'],
+  'friends/': () => ['src/components/FriendsPage.astro', 'src/data/friends.ts', 'src/data/friend-portraits.ts'],
+};
+
+/** Newest podcast episode date (the podcast page lists the episodes; Hebrew only). */
+const newestEpisode = (root) => {
+  try {
+    const feed = JSON.parse(readFileSync(join(root, 'src/data/podcast-feed.json'), 'utf8'));
+    return (feed.episodes ?? []).map((e) => e.published).filter(Boolean).sort().pop();
+  } catch { return undefined; }
+};
+
 export function lastmods(root, siteBase) {
   const map = new Map();
+  for (const [lang, prefix] of [['he', ''], ['en', 'en/']]) {
+    for (const [path, files] of Object.entries(PAGE_SOURCES)) { const d = gitLastModified(root, files(lang)); if (d) map.set(`${siteBase}${prefix}${path}`, d); }
+  }
+  const ep = newestEpisode(root); if (ep) map.set(`${siteBase}podcast/`, ep);
   const when = (p) => [p.date, p.updated].filter(Boolean).sort().pop();
   const newest = (ps) => ps.map(when).filter(Boolean).sort().pop();
   for (const [lang, prefix] of [['he', ''], ['en', 'en/']]) {

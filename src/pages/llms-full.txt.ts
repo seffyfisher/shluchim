@@ -22,7 +22,7 @@ export const GET = async ({ site }: APIContext) => {
   const stories = async (list: typeof he) => Promise.all(list.map(async (p) => demoteHeadings(await storyMarkdown(p, site!), 1)));
   const sep = '\n\n---\n\n';
   const sections = [
-    `# Shluchim (שְׁלוּחִים): full text\n\n> Full text of every published story on ${abs(lurl('he'))}, a personal blog by Seffy Fisher (ספי פישר) about practical, everyday AI, in English and Hebrew. The short map of the site is ${abs(lurl('he', 'llms.txt'))}. Each story is also available on its own as Markdown: its URL with \`.md\` instead of the trailing slash.`,
+    `# Shluchim (שלוחים): full text\n\n> Full text of every published story on ${abs(lurl('he'))}, a personal blog by Seffy Fisher (ספי פישר) about practical, everyday AI, in English and Hebrew. The short map of the site is ${abs(lurl('he', 'llms.txt'))}. Each story is also available on its own as Markdown: its URL with \`.md\` instead of the trailing slash.`,
     `# English\n\n${[...about('en'), ...(await stories(en))].join(sep)}`,
     `# עברית\n\n${[...about('he'), ...(await stories(he))].join(sep)}`,
   ];

@@ -22,6 +22,8 @@ jobs:
       BASE_PATH: ${{ vars.BASE_PATH }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history: sitemap <lastmod> for about/team/friends comes from git (src/lib/i18n-check.mjs)
       - uses: actions/setup-node@v4
         with:
           node-version: 22

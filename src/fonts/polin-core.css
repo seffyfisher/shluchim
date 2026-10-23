@@ -4,7 +4,7 @@
   src: url('./Polin-Regular-core.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: optional;
   unicode-range: U+20-7E, U+A0-A9, U+AB-AC, U+AE-B1, U+B4-B8, U+BB-FF, U+5B0-5BC, U+5BE-5BF, U+5C1-5C2, U+5C7, U+5D0-5EA, U+5F0-5F4, U+2000, U+2002-200B, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+202F-2030, U+2039-203A, U+2044, U+205F, U+20AA, U+20AC, U+2190, U+2192, U+2197, U+2212, U+FB1F, U+FB2A-FB36, U+FB38-FB3C, U+FB3E, U+FB40-FB41, U+FB43-FB44, U+FB46-FB4B;
 }
 @font-face {
@@ -20,7 +20,7 @@
   src: url('./Polin-Extrabold-core.woff2') format('woff2');
   font-weight: 800;
   font-style: normal;
-  font-display: swap;
+  font-display: optional;
   unicode-range: U+20-7E, U+A0-A9, U+AB-AC, U+AE-B1, U+B4-B8, U+BB-FF, U+5B0-5BC, U+5BE-5BF, U+5C1-5C2, U+5C7, U+5D0-5EA, U+5F0-5F4, U+2000, U+2002-200B, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+202F-2030, U+2039-203A, U+2044, U+205F, U+20AA, U+20AC, U+2190, U+2192, U+2197, U+2212, U+FB1F, U+FB2A-FB36, U+FB38-FB3C, U+FB3E, U+FB40-FB41, U+FB43-FB44, U+FB46-FB4B;
 }
 @font-face {
