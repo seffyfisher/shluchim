@@ -9,7 +9,7 @@ interface Props { placement: 'post' | 'about' }
 const { placement: kind } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = Astro.url.pathname.startsWith(base) ? Astro.url.pathname.slice(base.length) || '/' : Astro.url.pathname;
-const FB_JS = `(()=>{const s=document.currentScript.closest('.fb');if(!s)return;const f=s.querySelector('.fb-form'),i=s.querySelector('.fb-sink'),d=s.querySelector('.fb-dlg'),t=d.querySelector('.fb-dlg-t');s.classList.add('js');addEventListener('message',e=>{if(e.source!==i.contentWindow)return;const o=String(e.data).replace('feedback-','');if(!t.dataset[o])return;t.textContent=t.dataset[o];d.classList.toggle('bad',o!=='thanks');if(o==='thanks'){f.reset();s.classList.add('sent');}d.open||d.showModal();f.dispatchEvent(new CustomEvent('analytics:result',{bubbles:true,detail:o==='thanks'?'success':o}));});})();`;
+const FB_JS = `(()=>{const s=document.currentScript.closest('.fb');if(!s)return;const f=s.querySelector('.fb-form'),i=s.querySelector('.fb-sink'),d=s.querySelector('.fb-dlg'),t=d.querySelector('.fb-dlg-t'),b=f.querySelector('button[type=submit]');let w=0,m;const done=()=>{clearTimeout(m);w=0;f.classList.remove('busy');b.removeAttribute('aria-disabled');};s.classList.add('js');f.addEventListener('submit',e=>{if(w){e.preventDefault();e.stopImmediatePropagation();return;}w=1;f.classList.add('busy');b.setAttribute('aria-disabled','true');m=setTimeout(done,15e3);});addEventListener('message',e=>{if(e.source!==i.contentWindow)return;const o=String(e.data).replace('feedback-','');if(!t.dataset[o])return;done();t.textContent=t.dataset[o];d.classList.toggle('bad',o!=='thanks');if(o==='thanks'){f.reset();s.classList.add('sent');}d.open||d.showModal();f.dispatchEvent(new CustomEvent('analytics:result',{bubbles:true,detail:o==='thanks'?'success':o}));});})();`;
 const toastUrl = new URL('feedback-toast.html', Astro.site).href; // must be on ALLOWED_PREFIX (edge function)
 ---
 {FEEDBACK_ENDPOINT && (
@@ -49,7 +49,9 @@ const toastUrl = new URL('feedback-toast.html', Astro.site).href; // must be on 
   </dialog>
   {/* Minimal JS, only because CSS can't see the iframe's result: the toast page posts its outcome (thanks|error|slow)
       to this page. On thanks: reset + hide the form. Any outcome: open the centered dialog. Without JS the toast page's
-      own CSS toast still shows. Accepts messages only from this block's iframe. */}
+      own CSS toast still shows. Accepts messages only from this block's iframe.
+      Double submit guard: while a send is in flight (.busy, button aria-disabled) further submits (double click, Enter
+      twice) are dropped, until the iframe reports a result or 15s pass. The server also drops identical resubmits. */}
   <script is:inline set:html={FB_JS}></script>
 </section>
 )}

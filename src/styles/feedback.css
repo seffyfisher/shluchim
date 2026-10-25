@@ -48,3 +48,6 @@
 /* v4: nothing beyond the two reactions shows until one is picked (pure CSS). display:none = not focusable while hidden.
    The pointer-pick focus handler still works: focus() recalculates style after the radio is already checked. */
 @supports selector(:has(*)) { .fb-form:not(:has(.fb-rate input:checked)) :is(.fb-msg, .fb-send) { display: none; } }
+
+/* double submit guard: while a send is in flight the button looks pending; the inline script drops extra submits */
+.fb-form.busy .fb-send button { opacity: .6; cursor: progress; }
