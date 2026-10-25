@@ -7,6 +7,7 @@
 export const ALLOWED_PREFIX = "https://shluchim.shinlamed.com/";
 export const RATE_LIMIT = 5; // per IP ...
 export const RATE_WINDOW_MS = 10 * 60 * 1000; // ... per 10 minutes (matches the copy "בעוד 10 דקות")
+export const DUPLICATE_WINDOW_MS = 60 * 1000; // identical resubmits (double click / double submit) inside this window are not stored again
 export const MAX_BODY = 16 * 1024; // bytes; a full legit form is < 5 KB
 const EMAIL_RE = /^[^\s@<>"]{1,64}@[^\s@<>"]+\.[^\s@<>"]{2,}$/;
 
@@ -19,6 +20,14 @@ export interface Store {
   countRecent(ipHash: string, sinceIso: string): Promise<number>;
   logAttempt(ipHash: string): Promise<void>;
   insert(row: FeedbackRow): Promise<void>;
+  /** Rows stored for this ip_hash since sinceIso (newest first, small cap): used to drop identical resubmits. */
+  recentRows(ipHash: string, sinceIso: string): Promise<DuplicateKey[]>;
+}
+export type DuplicateKey = Pick<FeedbackRow, "page" | "reaction" | "message" | "email">;
+
+export function isDuplicate(row: DuplicateKey, recent: DuplicateKey[]): boolean {
+  return recent.some((r) => r.page === row.page && r.reaction === row.reaction &&
+    (r.message ?? null) === (row.message ?? null) && (r.email ?? null) === (row.email ?? null));
 }
 
 export function safeReturnTo(raw: string | null): string {
@@ -109,6 +118,12 @@ export async function handle(req: Request, store: Store, salt: string): Promise<
     if ((form.get("website") || "").trim() !== "") return respond(req, returnTo, "thanks");
     const v = validate(form);
     if (!v.ok) return respond(req, returnTo, "error");
+    // Double submit guard: an identical row from the same ip_hash in the last minute -> thanks again, no second row.
+    // Fails open: if the lookup itself fails we still store the feedback rather than lose it.
+    try {
+      const recent = await store.recentRows(ipHash, new Date(Date.now() - DUPLICATE_WINDOW_MS).toISOString());
+      if (isDuplicate(v.row, recent)) return respond(req, returnTo, "thanks");
+    } catch (e) { console.warn("feedback duplicate check failed", e instanceof Error ? e.message : e); }
     const ua = (req.headers.get("user-agent") || "").slice(0, 120) || null;
     await store.insert({ ...v.row, ip_hash: ipHash, user_agent: ua });
     return respond(req, returnTo, "thanks");
@@ -136,6 +151,14 @@ export function restStore(url: string, key: string): Store {
     async insert(row) {
       const r = await fetch(`${base}/feedback`, { method: "POST", headers: { ...h, prefer: "return=minimal" }, body: JSON.stringify(row) });
       if (!r.ok) throw new Error(`insert ${r.status}`);
+    },
+    async recentRows(ipHash, sinceIso) {
+      // Filter by ip_hash + time only (feedback_ip_recent_idx) and compare fields in code: a 1000-char Hebrew message
+      // would not fit safely in a PostgREST query string.
+      const r = await fetch(`${base}/feedback?select=page,reaction,message,email&ip_hash=eq.${ipHash}&created_at=gte.${encodeURIComponent(sinceIso)}&order=created_at.desc&limit=20`,
+        { headers: h });
+      if (!r.ok) throw new Error(`recent ${r.status}`);
+      return await r.json() as DuplicateKey[];
     },
   };
 }
