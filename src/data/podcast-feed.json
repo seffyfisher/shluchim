@@ -1,8 +1,20 @@
 {
   "schemaVersion": 1,
   "source": "https://www.spreaker.com/show/7465546/episodes/feed",
-  "updatedAt": "2026-10-15T14:32:44.896483Z",
+  "updatedAt": "2026-10-25T03:37:21.466401Z",
   "episodes": [
+    {
+      "guid": "https://api.spreaker.com/episode/75971655",
+      "title": "איך השְׁלוּחִים שלי יכולים עכשיו גם להוציא שיחות יוצאות בטלפון. | פרק 2",
+      "published": "2026-10-25T03:33:55Z",
+      "durationSeconds": 580,
+      "number": 2,
+      "language": "he",
+      "description": "רציתי שלוח שמתקשר בעברית וקובע לי דברים. בדרך היו שתי פלטפורמות, חודש בלי מספר, זר פרחים שלא הוזמן ושיחה ראשונה שקטה לגמרי. בסוף יצא ממנו דני, הסטנדאפיסט הגרוע ביותר בישראל. הפוסט המקורי בבלוג שלוחים: https://shluchim.shinlamed.com/posts/2026-10-12-dial-bot/ This episode includes AI-generated content. This episode…",
+      "pageUrl": "https://shluchim.shinlamed.com/posts/2026-10-12-dial-bot/",
+      "audioUrl": "https://api.spreaker.com/download/episode/75971655/dial_bot_ep2.mp3",
+      "audioType": "audio/mpeg"
+    },
     {
       "guid": "https://api.spreaker.com/episode/75804362",
       "title": "עורו, שמיים. | פרק 1",
