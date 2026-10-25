@@ -42,6 +42,22 @@ export const EPISODES = {
     postPath: 'posts/2026-10-13-wake-up-sky/',
     postTitle: 'עורו, שמיים.',
   },
+  'dial-bot-2': {
+    rssGuid: 'https://api.spreaker.com/episode/75971655',
+    number: 2,
+    title: 'איך השְׁלוּחִים שלי מרימים טלפון (איפה אתם?)',
+    description: 'רציתי שלוח שמתקשר בעברית וקובע לי דברים. בדרך היו שתי פלטפורמות, חודש בלי מספר, זר פרחים שלא הוזמן ושיחה ראשונה שקטה לגמרי. בסוף יצא ממנו דני, הסטנדאפיסט הגרוע ביותר בישראל.',
+    spotifyId: '6hTt8Fs8nll2Ug9vHFwSMl',
+    spotifyUrl: 'https://open.spotify.com/episode/6hTt8Fs8nll2Ug9vHFwSMl',
+    spreakerUrl: 'https://www.spreaker.com/episode/yk-hselwhiym-sly-ykwlym-ksyw-gm-lhwzy-syhwt-ywz-wt-btlpwn-prq-2--75971655',
+    published: '2026-10-25',
+    duration: '9:40',
+    durationIso: 'PT9M40S',
+    language: 'he',
+    aiNarrated: true,
+    postPath: 'posts/2026-10-12-dial-bot/',
+    postTitle: 'איך השְׁלוּחִים שלי יכולים עכשיו גם להוציא שיחות יוצאות בטלפון.',
+  },
 } as const satisfies Record<string, Episode>;
 
 /** Only verified GUID enrichment can supply Spotify/post links to an RSS row. */
@@ -62,6 +78,7 @@ export function validateEpisodeEnrichment(feedGuids: string[]) {
 // Exact content collection IDs, including language. Never compare display titles.
 const POST_EPISODES: Record<string, keyof typeof EPISODES> = {
   'he/2026-10-13-wake-up-sky': 'wake-up-sky-1',
+  'he/2026-10-12-dial-bot': 'dial-bot-2',
 };
 
 export function episodeForPost(postId: string): Episode | undefined {
