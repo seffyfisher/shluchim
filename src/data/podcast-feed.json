@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "https://www.spreaker.com/show/7465546/episodes/feed",
-  "updatedAt": "2026-10-25T03:49:57.728541Z",
+  "updatedAt": "2026-10-25T04:03:03.325899Z",
   "episodes": [
     {
       "guid": "https://api.spreaker.com/episode/75971655",
-      "title": "דני האיך השְׁלוּחִים שלי מרימים טלפון (איפה אתם?)",
+      "title": "איך השְׁלוּחִים שלי מרימים טלפון (איפה אתם?)",
       "published": "2026-10-25T03:33:55Z",
       "durationSeconds": 580,
       "number": 2,
