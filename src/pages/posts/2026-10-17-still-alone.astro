@@ -1,0 +1,19 @@
+---
+// Permanent redirect stub: old publish slug → today's slug.
+const target = '/posts/2026-10-26-still-alone/';
+---
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <title>העברה…</title>
+    <link rel="canonical" href={`https://shluchim.shinlamed.com${target}`} />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <meta name="robots" content="noindex" />
+    <script is:inline define:vars={{ target }}>
+      location.replace(target);
+    </script>
+  </head>
+  <body>
+    <p><a href={target}>המעשיה עברה לכאן</a>.</p>
+  </body>
+</html>

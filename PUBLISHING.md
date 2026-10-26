@@ -163,14 +163,12 @@ RTL/LTR, canonical, hreflang, RSS, sitemap, מובייל ודסקטופ, הגד�
 
 ## עריכת פוסט קיים
 - `featured: true` בפוסט עברי מציג אותו פעם אחת בראש עמודי הבית בעברית ובאנגלית, אם יש תרגום מפורסם. פוסטים נבחרים מסודרים מהחדש לישן ואחריהם שאר המעשיות מהחדש לישן. אין שינוי בעמודי הנושא או ב־RSS. בפוסט אנגלי ללא מקור עברי אפשר להגדיר `featured: true` משלו. השדה ״בראש עמוד הבית״ זמין גם ב־CMS; כבוי כברירת מחדל. להסרה, מחקו את השדה או הגדירו `featured: false`.
-- בתחתית כל פוסט יש קישור ״עריכה״ לעורך של GitHub. commit ל־main מהעורך מפרסם אוטומטית.
-- או לבקש משלוח לערוך את הקובץ ב־`src/content/posts/`. עריכה של שלוח עדיין דורשת אישור מפורש של ספי לפני push.
+- אין קישור עריכה בגיטהאב באתר. עריכות עוברות רק דרך שלוח + אישור מפורש של ספי לפני push.
 
 - טקסט לקוראים: תמיד שלוחים/שלוח, אף פעם לא סוכנים/בוטים (חוץ משמות מוצרים כמו Grok Bot).
 
-## Post dates (standing rule from Seffy, 2026-10-10)
-The post date is the date of Seffy's ORIGINAL message where the story happened (the original ask), not the date he approved or asked to publish. Never give batch-published posts consecutive dates.
-`date` in the frontmatter must always be that original-request date, and Ben supplies it with each post. Keep the slug (file name) unchanged when a date is corrected, so links don't break.
+## Post dates (standing rule from Seffy, 2026-10-26; replaces 2026-10-10)
+The post date is the **actual publish day** (Asia/Jerusalem), not the date of the original ask or draft. When a post goes live, set `date` (and the slug date prefix) to that day. If an already-live slug must change, add a permanent redirect stub from the old URL (seo-check skips `http-equiv="refresh"` pages). Never invent consecutive dates for a batch — each post gets the day it actually published.
 
 ## Real chat screenshots (standing rule from Seffy, 2026-10-10)
 Add real Grok Bot chat screenshots to posts now and then, only where they genuinely help the content. Follow the skill "Grok Bot chat screenshots" (/home/box/agent-data/workflows/grok-bot-chat-screenshots/SKILL.md): sharp, tight crops, privacy-safe, and Seffy approves every shot before it goes into a published post.
