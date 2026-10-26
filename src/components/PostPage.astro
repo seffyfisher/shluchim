@@ -11,7 +11,7 @@ import { imageLabels, imagePopover } from '../lib/image-viewer.mjs';
 import '../styles/image-viewer.css';
 import { langOf, keyOf, postUrl, getPosts, getTranslation, formatDate, formatDateShort, readingMinutes, readingLabel, topicsOf, relatedPosts } from '../lib/posts';
 import { lurl, t } from '../i18n/ui';
-import { REPO, SITES, SEO_KEYWORDS, OG_IMAGE } from '../config';
+import { SITES, SEO_KEYWORDS, OG_IMAGE } from '../config';
 import { blogPostingNode, breadcrumbNode, nodeIds, withBrand, isoDate, wordCount } from '../lib/seo';
 import { postOgImage, ogUrl } from '../lib/og-images.mjs';
 import { markdownUrl } from '../lib/post-markdown.mjs';
@@ -24,7 +24,6 @@ const { Content } = await render(post);
 const d = post.data;
 const tr = await getTranslation(post);
 const alternates = tr ? { [langOf(tr)]: postUrl(tr) } : {};
-const editUrl = `https://github.com/${REPO}/edit/main/${post.filePath ?? `src/content/posts/${post.id}.md`}`;
 
 const topics = topicsOf(post, lang);
 const related = relatedPosts(await getPosts(lang), post);
@@ -106,7 +105,6 @@ const jsonLd = [
   )}
   <nav class="post-foot" aria-label={ui.postNav}>
     <a class="back" href={lurl(lang)}>{ui.back}</a>
-    <a class="edit" href={editUrl} rel="nofollow noopener" target="_blank">{ui.edit}</a>
   </nav>
 </Base>
 <script>

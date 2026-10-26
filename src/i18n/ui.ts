@@ -12,7 +12,7 @@ export const UI = {
   he: {
     skip: 'דלג לתוכן', preview: 'מצב תצוגה מקדימה: כולל טיוטות שלא אושרו לפרסום', navMain: 'ראשי',
     stories: 'מעשיות', team: 'השלוחים', about: 'אודות', friends: 'בני אנוש', allStories: 'כל המעשיות', back: '→ לכל המעשיות',
-    edit: 'עריכה ב־GitHub', draft: 'טיוטה', postNav: 'ניווט בסוף המעשיה', nav: 'ניווט', chat: 'שיחה',
+draft: 'טיוטה', postNav: 'ניווט בסוף המעשיה', nav: 'ניווט', chat: 'שיחה',
     switchTo: 'EN', switchHint: 'Read this in English',
     topics: 'נושאים', related: 'עוד מעשיות', topicNav: 'נושאים נוספים', home: 'מעשיות',
     // "Follow with your AI" block (FollowBlock.astro): a question and one button. The prompt itself lives in src/lib/follow.ts.
@@ -36,7 +36,7 @@ export const UI = {
   en: {
     skip: 'Skip to content', preview: "Preview mode: includes drafts that aren't approved for publishing yet", navMain: 'Main',
     stories: 'Stories', team: 'Team', about: 'About', friends: 'Humans', allStories: 'All stories', back: '← All stories',
-    edit: 'Edit on GitHub', draft: 'Draft', postNav: 'Story navigation', nav: 'Navigation', chat: 'Conversation',
+draft: 'Draft', postNav: 'Story navigation', nav: 'Navigation', chat: 'Conversation',
     switchTo: 'עברית', switchHint: 'לקריאה בעברית',
     topics: 'Topics', related: 'More stories', topicNav: 'More topics', home: 'Stories',
     followQ: 'Want to know when a new post goes up?',

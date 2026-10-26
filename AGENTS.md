@@ -12,7 +12,7 @@ Before any PR, merge, push to `main`, or deployment, read [.agents/skills/lighth
 
 Before writing, revising, illustrating, translating, reviewing or publishing a
 Shluchim post, read [.agents/skills/shluchim-blog-post/SKILL.md](.agents/skills/shluchim-blog-post/SKILL.md)
-and its required references and checklists. Follow its original-story date, Seffy's voice,
+and its required references and checklists. Follow its publish-day date rule, Seffy's voice,
 real quotations, full Hebrew review, text approval, image approval, English,
 publication and live verification stages. An explicit request to write a post
 also starts the workflow. Keep the skill, reference, installer and this pointer

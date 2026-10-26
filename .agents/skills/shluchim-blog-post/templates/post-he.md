@@ -2,7 +2,7 @@
 title: "כותרת קצרה עם hook, אפשר עם שְׁלוּחִים מנוקד"
 summary: "2–4 משפטים: מה רציתי, מה נתקע, ואיך זה נגמר."
 # listDescription: "משפט או שניים קצרים לרשימות, אם התקציר המלא ארוך."
-date: YYYY-MM-DD   # תאריך ההודעה המקורית של ספי, לא תאריך הפרסום
+date: YYYY-MM-DD   # תאריך הפרסום בפועל (Asia/Jerusalem), לא תאריך הבקשה/הטיוטה
 status: draft      # draft ← approved ← published
 ---
 
