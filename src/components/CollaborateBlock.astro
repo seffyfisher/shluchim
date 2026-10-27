@@ -1,13 +1,23 @@
 ---
 import { lurl, type Lang } from '../i18n/ui';
-interface Props { lang: Lang }
-const { lang } = Astro.props;
+interface Props {
+  lang: Lang;
+  /** Leading line before the contact control. Omit for CTA-only (e.g. links page). */
+  prompt?: string;
+  /** Summary / button text that opens the same contact options as the footer. */
+  cta?: string;
+  analyticsLabel?: string;
+}
+const { lang, prompt, cta, analyticsLabel = 'footer_collaborate' } = Astro.props;
 const he = lang === 'he';
+const lead = prompt ?? (he ? 'רוצים לשתף פעולה?' : 'Want to collaborate?');
+const summary = cta ?? (he ? 'בואו נדבר' : 'Let’s talk');
+const showLead = prompt !== '';
 ---
-<div class="collaborate" data-analytics-content="collaborate" data-analytics-label="footer_collaborate">
-  <span>{he ? 'רוצים לשתף פעולה?' : 'Want to collaborate?'}</span>
+<div class="collaborate" data-analytics-content="collaborate" data-analytics-label={analyticsLabel}>
+  {showLead && <span>{lead}</span>}
   <details>
-    <summary data-analytics-id="collaborate-contact">{he ? 'בואו נדבר' : 'Let’s talk'}</summary>
+    <summary data-analytics-id="collaborate-contact">{summary}</summary>
     <nav aria-label={he ? 'איך נוח לכם לדבר?' : 'How would you like to get in touch?'}>
       <a href="mailto:seffyfisher1989@gmail.com">{he ? 'מייל' : 'Email'}</a>
       <a href="https://instagram.com/shinlamed" target="_blank" rel="noopener">{he ? 'אינסטגרם' : 'Instagram'}</a>
