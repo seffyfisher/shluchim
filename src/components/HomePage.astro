@@ -68,10 +68,15 @@ const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = 
       <a class="btn" href={lurl(lang, 'about/')}>{aboutCard.btn}</a>
     </article>
   </div>
-  <div class="podcast-home">
-    <a href={lurl('he', 'podcast/')} hreflang="he">{he ? 'הפודקסט' : 'Podcast (in Hebrew)'}</a>
-    <span>{he ? 'המעשיות, גם באוזניים.' : 'The stories, in audio too.'}</span>
-  </div>
+  {/* Full site menu, same destinations as the bar nav on post pages (Base.astro nav-pages). The homepage masthead has no page links, so this strip carries them. */}
+  <nav class="home-nav" aria-label={ui.navMain}>
+    <a href={lurl(lang)} aria-current="page">{ui.stories}</a>
+    <a href={lurl('he', 'podcast/')} hreflang="he">{he ? 'הפודקסט' : 'Podcast (HE)'}</a>
+    <a href={lurl(lang, 'team/')}>{ui.team}</a>
+    <a href={lurl(lang, 'friends/')}>{ui.friends}</a>
+    {he && <a href={lurl(lang, 'links/')}>{ui.links}</a>}
+    <a href={lurl(lang, 'about/')}>{ui.about}</a>
+  </nav>
   {posts.length === 0 ? (
     he
       ? <p class="empty">עוד אין פה מעשיות.<br />השְׁלוּחִים כבר עובדים על הראשונה.</p>
