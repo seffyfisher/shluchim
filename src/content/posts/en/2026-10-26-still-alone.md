@@ -61,6 +61,22 @@ That way the habit doesn't depend on my memory.
 It catches onto something that already happens.
 
 
+## Midday, we stop for a second:
+
+A reminder, or a routine, that stops me in the middle.
+Not at the end of the day, when it's already too late to think.
+
+Take a screenshot on the phone or the computer.
+Send it as-is to the shaliach.
+And ask:
+
+"How can you help me with this?
+This is what I'm doing right now."
+
+No cleaning, no wording, no waiting for the perfect moment.
+That's how the reflex sticks.
+
+
 ## I don't have the energy to write him an operating manual
 
 Now I already remember he's there.
