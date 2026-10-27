@@ -474,6 +474,10 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 /* Native audio player in posts (no JS): full column width, neutral, follows light/dark. */
 .prose audio { display: block; width: 100%; max-width: 40rem; height: 3rem; margin: 1.75rem 0; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color-scheme: light dark; }
 
-.podcast-home { display: flex; flex-wrap: wrap; align-items: baseline; gap: .1rem 1.25rem; margin: -1rem 0 2rem; padding-block: .5rem; border-block: 1px solid var(--line); font-size: var(--step--1); }
-.podcast-home a { display: inline-flex; align-items: center; min-height: 2.75rem; font-weight: 600; }
-.podcast-home span { color: var(--muted); }
+/* Homepage menu strip under the intro cards: the same links as the post-page bar nav. */
+.home-nav { display: flex; flex-wrap: wrap; align-items: center; gap: .1rem 1.25rem; margin: -1rem 0 2rem; padding-block: .5rem; border-block: 1px solid var(--line); font-size: var(--step--1); }
+.home-nav a { display: inline-flex; align-items: center; min-height: 2.75rem; font-weight: 600; color: var(--fg); text-decoration: none; }
+.home-nav a:hover { text-decoration: underline; }
+.home-nav a:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+.home-nav a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .25em; }
+:root:lang(en) .home-nav a { white-space: nowrap; }
