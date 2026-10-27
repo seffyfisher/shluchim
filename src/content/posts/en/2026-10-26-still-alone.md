@@ -66,6 +66,8 @@ It catches onto something that already happens.
 A reminder, or a routine, that stops me in the middle.
 Not at the end of the day, when it's already too late to think.
 
+![Basher swallowing a screenshot sent to him midday](/images/posts/still-alone-20261026-tip-midday-1600.webp)
+
 Take a screenshot on the phone or the computer.
 Send it as-is to the shaliach.
 And ask:
