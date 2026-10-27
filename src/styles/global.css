@@ -388,10 +388,25 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 .nav-controls { display: inline-flex; flex-wrap: wrap; max-width: 100%; align-items: center; gap: .9rem; flex: none; }
 .nav-pages { display: flex; flex-wrap: wrap; align-items: center; gap: .9rem; }
 @media (max-width: 40rem) {
-  .bar .site-nav { width: 100%; gap: .35rem .9rem; padding-bottom: .5rem; }
-  .nav-pages { width: 100%; justify-content: space-between; gap: .5rem; font-size: .875rem; }
-  .nav-pages a, .nav-pages a:first-child { padding-inline: 0; margin-inline-start: 0; }
+  /* Seffy 2026-10-27: keep every nav link; if they don't fit, scroll the menu — don't wrap/shorten/footer-only */
+  .bar .site-nav { width: 100%; gap: .35rem .9rem; padding-bottom: .5rem; flex-wrap: nowrap; align-items: center; }
+  .nav-pages {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+    max-width: 100%;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: .65rem;
+    font-size: .875rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .nav-pages a, .nav-pages a:first-child { padding-inline: 0; margin-inline-start: 0; flex: none; white-space: nowrap; }
   .nav-pages a + a::before { content: none; }
+  .nav-controls { flex: none; }
 }
 .theme-toggle { direction: ltr; position: relative; display: inline-grid; grid-template-columns: repeat(3, 2rem); align-items: center; flex: none; width: 6.5rem; min-inline-size: 0; margin: 0; padding-inline: .1875rem; transition: background-color .2s ease; }
 .theme-toggle .theme-thumb { box-sizing: border-box; position: absolute; z-index: 0; top: calc(50% - 1rem); left: .1875rem; width: 2rem; height: 2rem; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); transform: translateX(4rem); transition: transform .2s ease; }

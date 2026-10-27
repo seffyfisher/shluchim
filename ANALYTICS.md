@@ -108,8 +108,8 @@ language, button, topic or podcast episode.
 | Footer collaboration email / About link | `collaborate` | `email` / `navigate` | `mailto` / destination path; `label=footer_collaborate`; `placement=footer`; `site_language` |
 | Theme choice | `theme` | `change` | `light/dark/system` |
 | Feedback choice | `feedback` | `change` | `helped/not_really`; `post_slug` on post pages |
-| Valid feedback submission | `feedback` | `submit` | `post/about`; `post_slug` on post pages |
-| Feedback server response | `feedback` | `result` | `post/about`; `result=success/error/slow`; `post_slug` on post pages |
+| Valid feedback submission | `feedback` | `submit` | `post/about/feedback`; `post_slug` on post pages |
+| Feedback server response | `feedback` | `result` | `post/about/feedback`; `result=success/error/slow`; `post_slug` on post pages |
 | Load Spotify frame (including retries) | `podcast` | `load_player` | Spotify episode/show ID |
 | Native audio/video | `audio/video` | `play/complete` | Source URL without query |
 
