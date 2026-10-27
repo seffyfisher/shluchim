@@ -9,7 +9,7 @@ date: 2026-10-26
 draft: false
 lang: en
 translationKey: "2026-10-26-still-alone"
-socialImage: "/images/posts/still-alone-20261026-share-1200.webp"
+socialImage: "/images/posts/still-alone-20261027-tip-share-1200.webp"
 ---
 
 I have a personal assistant.
@@ -36,7 +36,7 @@ Great, more work for me.
 
 So the question is how you make daily use actually stick.
 
-![The Chef beside a quiet tray opposite a pile of noise: update only when you need me](/images/posts/still-alone-20261026-noise-quiet-1600.webp)
+![Basher swallowing a screenshot sent to him midday](/images/posts/still-alone-20261026-tip-midday-1600.webp)
 
 
 ## The morning started without him
@@ -65,8 +65,6 @@ It catches onto something that already happens.
 
 A reminder, or a routine, that stops me in the middle.
 Not at the end of the day, when it's already too late to think.
-
-![Basher swallowing a screenshot sent to him midday](/images/posts/still-alone-20261026-tip-midday-1600.webp)
 
 Take a screenshot on the phone or the computer.
 Send it as-is to the shaliach.
@@ -170,6 +168,8 @@ It matters that the assistant also knows where the work stops.
 
 If every little thing gets an update, now I have another chat to read.
 And then I simply stop opening it.
+
+![The Chef beside a quiet tray opposite a pile of noise: update only when you need me](/images/posts/still-alone-20261026-noise-quiet-1600.webp)
 
 You can set it ahead:
 Update when there's a result, a block, or a decision you need from me.

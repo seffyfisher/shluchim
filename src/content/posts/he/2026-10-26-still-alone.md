@@ -10,7 +10,7 @@ date: 2026-10-26
 draft: false
 lang: he
 translationKey: "2026-10-26-still-alone"
-socialImage: "/images/posts/still-alone-20261026-share-1200.webp"
+socialImage: "/images/posts/still-alone-20261027-tip-share-1200.webp"
 ---
 יש לי עוזר פרטי.
 ועד שאני נזכר לבקש ממנו משהו, כבר עשיתי את העבודה לבד.
@@ -34,7 +34,7 @@ socialImage: "/images/posts/still-alone-20261026-share-1200.webp"
 
 אז השאלה היא איך גורמים לשימוש היומיומי באמת להידבק.
 
-![השף ליד מגש שקט מול ערימת רעש: עדכון רק כשצריך אותי](/images/posts/still-alone-20261026-noise-quiet-1600.webp)
+![בשר בולע צילום מסך שנשלח לו באמצע היום](/images/posts/still-alone-20261026-tip-midday-1600.webp)
 
 
 ## הבוקר התחיל בלעדיו
@@ -63,8 +63,6 @@ socialImage: "/images/posts/still-alone-20261026-share-1200.webp"
 
 תזכורת, או שגרה, שעוצרת אותי באמצע.
 לא בסוף היום, כשכבר מאוחר מדי לחשוב.
-
-![בשר בולע צילום מסך שנשלח לו באמצע היום](/images/posts/still-alone-20261026-tip-midday-1600.webp)
 
 מצלמים מסך בטלפון או במחשב.
 שולחים כמו שזה לשלוח.
@@ -168,6 +166,8 @@ socialImage: "/images/posts/still-alone-20261026-share-1200.webp"
 
 אם על כל דבר מגיע עדכון, עכשיו יש לי עוד צ׳אט לקרוא.
 ואז אני פשוט מפסיק לפתוח.
+
+![השף ליד מגש שקט מול ערימת רעש: עדכון רק כשצריך אותי](/images/posts/still-alone-20261026-noise-quiet-1600.webp)
 
 אפשר להגדיר מראש:
 עדכן כשיש תוצאה, חסם או החלטה שצריך ממני.
