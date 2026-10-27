@@ -32,7 +32,7 @@ const jsonLd = [
   ]),
 ];
 ---
-{/* Layout aligned with /friends/ per Nitzah: editorial list, jump index, B&W faces, light-gray hover + CTA. Avatar choice (shared / variants / per-link) still pending Seffy. */}
+{/* Layout aligned with /friends/ per Nitzah: editorial list, jump index, B&W still faces (6-variant rotation, ~72px), light-gray hover + CTA. Preview OK pending before merge. */}
 <Base
   bodyClass="page-links"
   lang="he"
@@ -67,7 +67,7 @@ const jsonLd = [
       <li class="ready-bot" id={link.id}>
         <div class="ready-bot-heading">
           <span class="ready-bot-face" aria-hidden="true">
-            <Avatar avatar={link.avatar} loading={index < 4 ? 'eager' : 'lazy'} />
+            <Avatar avatar={link.avatar} loading={index < 2 ? 'eager' : 'lazy'} />
           </span>
           <div class="ready-bot-identity">
             <h2>
@@ -180,9 +180,9 @@ const jsonLd = [
   }
   .ready-bot-face {
     display: block;
-    width: 5rem;
-    height: 5rem;
-    flex: 0 0 5rem;
+    width: 4.5rem; /* ~72px — within 64–80px brief */
+    height: 4.5rem;
+    flex: 0 0 4.5rem;
     border: 3px solid var(--fg);
     border-radius: 50%;
     overflow: hidden;

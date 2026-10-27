@@ -1,12 +1,12 @@
 // Ready-bot link directory for /links/ (HE).
 // Copy: draft-v4 micro-stories (Kineret polish, Seffy voice) — approved via Yosef 2026-10-27.
-// Avatar choice (shared / 4–6 variants / per-link) still pending Seffy. Do not merge until Yosef final OK.
+// Avatars: 6 still shaliach faces in rotation (Seffy 2026-10-27). Do not merge until Seffy OK on live preview via Yosef.
 export type ReadyBotLink = {
   id: string;
   button: string; // short HE CTA
   href: string;
   body: string[]; // HE micro-story paragraphs
-  avatar: string; // path under src/assets/ (placeholder faces until Seffy decides)
+  avatar: string; // path under src/assets/ — one of 6 still variants, rotated
 };
 
 export const readyBotIntro = {
@@ -48,7 +48,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "בניתם צוות שלושה ימים ברצף, ואז שכחתם מה עבד ומה נשבר.",
       "כאן יש חוקים ומדריכים מתוך 72 שעות בנייה חיה, וגם יומן של מה שלא עבד. אפשר להעתיק ולהתחיל ממה שכבר נבדק בפועל.",
     ],
-    avatar: "shluchim/basher.webp",
+    avatar: "shluchim/basher-still.webp",
   },
   {
     id: "link-02",
@@ -58,7 +58,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "יושבים מול מסך ריק וכותבים הוראות מאפס, בזמן שמישהו כבר בנה את זה אלפי פעמים.",
       "יש כאן יותר מ־6,000 בוטים מוכנים, מסודרים עם חיפוש. שווה להציץ לפני שמתחילים מההתחלה.",
     ],
-    avatar: "shluchim/kochava.webp",
+    avatar: "shluchim/kochava-still.webp",
   },
   {
     id: "link-03",
@@ -68,7 +68,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "רוצים לבדוק רעיון מסחר, בלי לתת לבוט ללחוץ לבד על כפתור הקנייה.",
       "יש כאן שולחן עם מומחים שמכסים מחקר, סיכון וביקורת. קודם מחקר, וכל עסקה דורשת אישור שלך.",
     ],
-    avatar: "shluchim/kinneret.webp",
+    avatar: "shluchim/kinneret-still.webp",
   },
   {
     id: "link-04",
@@ -78,7 +78,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "צריך צוות למייסד, לתפעול או לכספים, ואין כוח להמציא תפקידים מאפס.",
       "יש 82 הרכבים מוכנים להדבקה. לכל אחד יש תפקידים, משימה ראשונה, ומה מותר רק אחרי שאישרת.",
     ],
-    avatar: "shluchim/ben.webp",
+    avatar: "shluchim/ben-still.webp",
   },
   {
     id: "link-05",
@@ -88,7 +88,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "הבונה סיים שינוי, ואז בדק את עצמו. ניחשתם איך זה נגמר.",
       "כאן יש ארבעה תפקידים, והבודק עובד בצ׳אט נפרד. ככה אף אחד לא בודק את העבודה של עצמו.",
     ],
-    avatar: "shluchim/loren.webp",
+    avatar: "shluchim/loren-still.webp",
   },
   {
     id: "link-06",
@@ -98,7 +98,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "רוצים צוות שלם לחברה, בלי לשבת שעה על כל בוט בנפרד.",
       "מעתיקים הוראת התקנה אחת. הוא יוצר את הבוטים, פותח צ׳אט קבוצתי, ומציע שגרות לאישור שלך.",
     ],
-    avatar: "shluchim/nitza.webp",
+    avatar: "shluchim/nitza-still.webp",
   },
   {
     id: "link-07",
@@ -108,7 +108,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "יש תפקיד בראש, ואין מילים להסביר לבוט מה אתם רוצים ממנו.",
       "כאן יש מדריך פתוח של הוראות לפי תפקיד. גולשים, מעתיקים, וממשיכים.",
     ],
-    avatar: "shluchim/chef.webp",
+    avatar: "shluchim/basher-still.webp",
   },
   {
     id: "link-08",
@@ -118,7 +118,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "אומרים לבוט ״תתקן את זה״, והוא מנחש. לפעמים הוא מנחש נכון. לפעמים לא.",
       "יש כאן 195 תהליכים מוכנים לבדיקת קוד, תיקון באגים, מחקר, כתיבה ומשלוח. במקום הוראה מעורפלת, נותנים לו דרך שכבר נוסתה.",
     ],
-    avatar: "shluchim/anali.webp",
+    avatar: "shluchim/kochava-still.webp",
   },
   {
     id: "link-09",
@@ -128,7 +128,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "פתחתם חמישה בוטים בבת אחת, ואז גיליתם שאתם מנהלים את כולם לבד.",
       "בוט שורש מחליט כמה גדול הצוות צריך להיות. יוצר את המומחים, ומעביר את הניהול היומי למי שאחראי.",
     ],
-    avatar: "shluchim/hiba.webp",
+    avatar: "shluchim/kinneret-still.webp",
   },
   {
     id: "link-10",
@@ -138,7 +138,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "הצוות רץ, אבל אף אחד לא זוכר מי אחראי על מה, ומתי מותר לעצור.",
       "יש כאן הסכם הפעלה פשוט. משימות ברורות, שם על כל בעלות, הוכחה בכל מסירה, ועצירה כשהתקציב נגמר.",
     ],
-    avatar: "shluchim/dima.webp",
+    avatar: "shluchim/ben-still.webp",
   },
   {
     id: "link-11",
@@ -148,7 +148,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "רוצים להתחיל מהר, בלי לבנות הכל מהיסוד.",
       "יש 49 תבניות, צוותים, מיומנויות ושגרות. ויש גם ציון שמראה כמה ההתקנה באמת מוכנה.",
     ],
-    avatar: "shluchim/shlomby.webp",
+    avatar: "shluchim/loren-still.webp",
   },
   {
     id: "link-12",
@@ -158,7 +158,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "רוצים צוות שחוקר מניות, בלי שהוא יתחיל לסחור בשמכם.",
       "יש כאן חוקרים קבועים, דוחות ודעות שנבדקו. המחקר נשאר מופרד ממסחר חי בכוונה.",
     ],
-    avatar: "shluchim/shon.webp",
+    avatar: "shluchim/nitza-still.webp",
   },
   {
     id: "link-13",
@@ -168,7 +168,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "הלידים נערמים, והמעקב נשאר בראש של מישהו אחד.",
       "יש 13 תפקידי מכירות, מסימן שמישהו מוכן לקנות ועד מעקב אחרי מה שפתוח. הכול דרך החיבור של GojiberryAI.",
     ],
-    avatar: "shluchim/shaltiel.webp",
+    avatar: "shluchim/basher-still.webp",
   },
   {
     id: "link-14",
@@ -178,7 +178,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "רוצים לפנות לאנשים חדשים, בלי לשלוח הודעה אחת בלי עיניים שלכם עליה.",
       "יש מדריך מלא: מחקר, מייל, לינקדאין, תשובות ומעקב אחרי פגישות. כל שליחה עוברת אישור שלך.",
     ],
-    avatar: "shluchim/bore.webp",
+    avatar: "shluchim/kochava-still.webp",
   },
   {
     id: "link-15",
@@ -188,7 +188,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "מצאתם בוט נחמד, ואז גיליתם שהוא יכול לעשות דברים שלא ביקשתם.",
       "כאן כל התקנה מפרטת אילו חיבורים היא צריכה. ואיזו פעולה אחת אסור לה לעשות בלי אותך.",
     ],
-    avatar: "shluchim/eran.webp",
+    avatar: "shluchim/kinneret-still.webp",
   },
   {
     id: "link-16",
@@ -198,7 +198,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "הצ׳אט התנפח, והחשבון קפץ, כי הבוטים גררו איתם את כל ההיסטוריה.",
       "כאן הראש והעובדים מתחילים מכרטיס תפקיד קצר ומסירה נקייה. בלי לגרור צ׳אטים ישנים קדימה.",
     ],
-    avatar: "shluchim/basher.webp",
+    avatar: "shluchim/ben-still.webp",
   },
   {
     id: "link-17",
@@ -208,7 +208,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "פתחתם קישור יפה, והוא הוביל למקום מת.",
       "כאן כמעט 1,900 בוטים ציבוריים, כל קישור נבדק עם ייחוס למקור. אפשר לחפש לפי תפקיד בלי לנחש.",
     ],
-    avatar: "shluchim/kochava.webp",
+    avatar: "shluchim/loren-still.webp",
   },
   {
     id: "link-18",
@@ -218,7 +218,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "הבוט יודע לדבר, אבל הוא לא מחובר לכלום.",
       "יש כאן יותר מ־60 מיומנויות, תוספים וחיבורים שנבדקו. ועוד דרכים להריץ אצלך על המחשב.",
     ],
-    avatar: "shluchim/kinneret.webp",
+    avatar: "shluchim/nitza-still.webp",
   },
   {
     id: "link-19",
@@ -228,7 +228,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "רוצים ליצור בוטים ולשלוח הודעות מתוכנית, בלי להעתיק סיסמאות למקום מוזר.",
       "הכלי הזה עובד מהמחשב שלכם. יוצרים קבוצות, שולחים הודעות, ובודקים שיחות בלי דרך עקומה.",
     ],
-    avatar: "shluchim/ben.webp",
+    avatar: "shluchim/basher-still.webp",
   },
   {
     id: "link-20",
@@ -238,7 +238,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "אתם כבר בקרסר, ורוצים לרשום עמית ב־Grok Bot בלי לעבור חמישה מסכים.",
       "יש מיומנות שעושה בדיוק את זה. רושמים, שולחים הודעות, ויוצרים עמיתים משם.",
     ],
-    avatar: "shluchim/loren.webp",
+    avatar: "shluchim/kochava-still.webp",
   },
   {
     id: "link-21",
@@ -248,7 +248,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "יש עבודה כבדה מדי לצ׳אט, ואתם לא רוצים לחכות עם העיניים על המסך.",
       "Grok Bot מעביר אותה לבוט על המחשב שלכם. ומתעורר לבד כשהעבודה נגמרת.",
     ],
-    avatar: "shluchim/nitza.webp",
+    avatar: "shluchim/kinneret-still.webp",
   },
   {
     id: "link-22",
@@ -258,7 +258,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "יודעים שצריך צוות הנדסה או שיווק, ולא יודעים מאיפה להתחיל.",
       "מדביקים קובץ התחלה ובוחרים צוות מוכן. הנדסה, מכירות, שיווק, תפעול או אישי.",
     ],
-    avatar: "shluchim/chef.webp",
+    avatar: "shluchim/ben-still.webp",
   },
   {
     id: "link-23",
@@ -268,7 +268,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "אוהבים את הרעיון של Grok Bot, ורוצים לבחור בעצמכם את המודל ואת סביבת ההרצה.",
       "יש חלופה בקוד פתוח. אותו כיוון, עם יותר שליטה בידיים שלכם.",
     ],
-    avatar: "shluchim/anali.webp",
+    avatar: "shluchim/loren-still.webp",
   },
   {
     id: "link-24",
@@ -278,7 +278,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "רוצים עמיתים עם זיכרון משלהם, בלי שההיסטוריה תברח החוצה.",
       "הם רצים אצלכם, עם כלים והוראות משלהם. הפרופילים נשארים על המכונות שלכם.",
     ],
-    avatar: "shluchim/hiba.webp",
+    avatar: "shluchim/nitza-still.webp",
   },
   {
     id: "link-25",
@@ -288,6 +288,6 @@ export const readyBotLinks: ReadyBotLink[] = [
       "הבוטים עובדים בחלון אחד, ואתם מעבירים ביניהם הודעות ביד.",
       "יש מקום עבודה משותף על המחשב. הם חולקים צ׳אטים, מעבירים משימות, ומשתמשים בכלים ביחד.",
     ],
-    avatar: "shluchim/dima.webp",
+    avatar: "shluchim/basher-still.webp",
   },
 ];
