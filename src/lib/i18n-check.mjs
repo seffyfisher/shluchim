@@ -69,6 +69,7 @@ const PAGE_SOURCES = {
   'about/': (lang) => [`src/content/pages/${lang}/about.md`, 'src/components/AboutPage.astro', 'src/data/about-photos.json'],
   'team/': () => ['src/components/TeamPage.astro', 'src/data/shluchim.json'],
   'friends/': () => ['src/components/FriendsPage.astro', 'src/data/friends.ts', 'src/data/friend-portraits.ts'],
+  'links/': () => ['src/components/ReadyBotsPage.astro', 'src/data/ready-bots.ts'],
 };
 
 /** Newest podcast episode date (the podcast page lists the episodes; Hebrew only). */

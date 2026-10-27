@@ -5,7 +5,7 @@
 // opens a centered <dialog>. No reload, no navigation. Without CSS :has the send button simply always shows.
 import '../styles/feedback.css';
 import { FEEDBACK_ENDPOINT } from '../config';
-interface Props { placement: 'post' | 'about' }
+interface Props { placement: 'post' | 'about' | 'links' }
 const { placement: kind } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = Astro.url.pathname.startsWith(base) ? Astro.url.pathname.slice(base.length) || '/' : Astro.url.pathname;
@@ -14,7 +14,7 @@ const toastUrl = new URL('feedback-toast.html', Astro.site).href; // must be on 
 ---
 {FEEDBACK_ENDPOINT && (
 <section class="fb" id="feedback" aria-labelledby={`fb-h-${kind}`} data-analytics-content="feedback">
-  <h2 class="fb-q" id={`fb-h-${kind}`}>נו, חידש לכם?</h2>
+  <h2 class="fb-q" id={`fb-h-${kind}`}>{kind === 'links' ? 'יש לך מקור מעניין נוסף ששווה להכניס?' : 'נו, חידש לכם?'}</h2>
   <form class="fb-form" method="post" action={FEEDBACK_ENDPOINT} accept-charset="utf-8" target={`fb-sink-${kind}`} data-analytics-id={kind}>
     <input type="hidden" name="page" value={path} />
     <input type="hidden" name="return_to" value={toastUrl} />

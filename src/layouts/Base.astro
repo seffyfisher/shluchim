@@ -136,7 +136,7 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
         <div class="wrap">
           <a class="name" href={url()} data-analytics-label="site_title">{SITE.title}</a>
           {SITE.kicker && <span class="kicker" lang="en" dir="ltr">{SITE.kicker}</span>}
-          <nav class="site-nav" aria-label={ui.navMain}><span class="nav-pages"><a href={url()} aria-current={Astro.url.pathname === url() ? 'page' : undefined}>{ui.stories}</a><a href={lurl('he', 'podcast/')} hreflang="he" aria-current={Astro.url.pathname === lurl('he', 'podcast/') ? 'page' : undefined}>{lang === 'he' ? 'הפודקסט' : 'Podcast (HE)'}</a><a href={url('team/')} aria-current={Astro.url.pathname.startsWith(url('team/')) ? 'page' : undefined}>{ui.team}</a><a href={url('friends/')} aria-current={Astro.url.pathname.startsWith(url('friends/')) ? 'page' : undefined}>{ui.friends}</a><a href={url('about/')} aria-current={Astro.url.pathname.startsWith(url('about/')) ? 'page' : undefined}>{ui.about}</a></span><span class="nav-controls">{showSwitch && <a class="lang" href={switchHref} hreflang={o} lang={o} title={ui.switchHint}>{ui.switchTo}</a>}<ThemeToggle lang={lang} /></span></nav>
+          <nav class="site-nav" aria-label={ui.navMain}><span class="nav-pages"><a href={url()} aria-current={Astro.url.pathname === url() ? 'page' : undefined}>{ui.stories}</a><a href={lurl('he', 'podcast/')} hreflang="he" aria-current={Astro.url.pathname === lurl('he', 'podcast/') ? 'page' : undefined}>{lang === 'he' ? 'הפודקסט' : 'Podcast (HE)'}</a><a href={url('team/')} aria-current={Astro.url.pathname.startsWith(url('team/')) ? 'page' : undefined}>{ui.team}</a><a href={url('friends/')} aria-current={Astro.url.pathname.startsWith(url('friends/')) ? 'page' : undefined}>{ui.friends}</a>{lang === 'he' && <a href={url('links/')} aria-current={Astro.url.pathname.startsWith(url('links/')) ? 'page' : undefined}>{ui.links}</a>}<a href={url('about/')} aria-current={Astro.url.pathname.startsWith(url('about/')) ? 'page' : undefined}>{ui.about}</a></span><span class="nav-controls">{showSwitch && <a class="lang" href={switchHref} hreflang={o} lang={o} title={ui.switchHint}>{ui.switchTo}</a>}<ThemeToggle lang={lang} /></span></nav>
         </div>
       </header>
     )}
@@ -150,7 +150,7 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
         <CollaborateBlock lang={lang} />
         <p>{SITE.footerNote}</p>
         <nav class="links topics" aria-label={ui.topics} data-analytics-label="footer_topics">{TOPIC_SLUGS.map((slug) => <a href={url(`topics/${slug}/`)}>{TOPICS[slug as keyof typeof TOPICS][lang].label}</a>)}</nav>
-        <p class="links" data-analytics-label="footer_links"><a href={url()}>{ui.allStories}</a><a href={lurl('he', 'podcast/')} hreflang="he">{lang === 'he' ? 'הפודקסט' : 'Podcast (HE)'}</a><a href={url('team/')}>{ui.team}</a><a href={url('friends/')}>{ui.friends}</a><a href={url('about/')}>{ui.about}</a><a href={url('rss.xml')}>RSS</a></p>
+        <p class="links" data-analytics-label="footer_links"><a href={url()}>{ui.allStories}</a><a href={lurl('he', 'podcast/')} hreflang="he">{lang === 'he' ? 'הפודקסט' : 'Podcast (HE)'}</a><a href={url('team/')}>{ui.team}</a><a href={url('friends/')}>{ui.friends}</a>{lang === 'he' && <a href={url('links/')}>{ui.links}</a>}<a href={url('about/')}>{ui.about}</a><a href={url('rss.xml')}>RSS</a></p>
       </div>
     </footer>
     {analytics && <script is:inline set:html={gtagSnippet(GA_MEASUREMENT_ID)} />}

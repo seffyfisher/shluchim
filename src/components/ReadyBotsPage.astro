@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+import Avatar from './Avatar.astro';
+import FeedbackBlock from './FeedbackBlock.astro';
+import { readyBotIntro, readyBotLinks } from '../data/ready-bots';
+import { lurl } from '../i18n/ui';
+import { SITES } from '../config';
+import { pageNode, breadcrumbNode, nodeIds, withBrand } from '../lib/seo';
+
+const title = readyBotIntro.title;
+const description =
+  '25 קישורים לבוטים מוכנים בגיטהאב — צוותים, מיומנויות ותבניות בחינם, עם הסבר קצר בעברית לכל אחד.';
+const seoTitle = withBrand('קישורים נוספים: בוטים מוכנים לשְׁלוּחִים', SITES.he.title);
+const seoDescription =
+  'רשימת קישורים לבוטים מוכנים בחינם בגיטהאב: צוותים, מיומנויות ותבניות. הסבר קצר בעברית לכל מקור, לבניית שְׁלוּחִים ב־Grok Bot.';
+const abs = (path: string) => new URL(path, Astro.site).href;
+const pageUrl = abs(lurl('he', 'links/'));
+const ids = nodeIds(abs(lurl('he')), abs(lurl('he')));
+const jsonLd = [
+  pageNode({
+    type: 'CollectionPage',
+    url: pageUrl,
+    name: `${title}: ${readyBotIntro.subtitle}`,
+    description: seoDescription,
+    lang: 'he',
+    websiteId: ids.website,
+    list: readyBotLinks.map((link) => ({ name: link.button, url: link.href })),
+  }),
+  breadcrumbNode([
+    { name: SITES.he.title, url: abs(lurl('he')) },
+    { name: title, url: pageUrl },
+  ]),
+];
+---
+<Base
+  bodyClass="page-links"
+  lang="he"
+  title={`${title}: ${readyBotIntro.subtitle}`}
+  description={description}
+  seoTitle={seoTitle}
+  seoDescription={seoDescription}
+  jsonLd={jsonLd}
+>
+  <header class="page-head links-intro">
+    <h1>{title}</h1>
+    <p class="page-subtitle">{readyBotIntro.subtitle}</p>
+    {readyBotIntro.paragraphs.map((p) => <p>{p}</p>)}
+    <p class="meta"><span>{readyBotLinks.length} קישורים</span></p>
+  </header>
+
+  <ul class="ready-bots" aria-label="קישורים לבוטים מוכנים">
+    {readyBotLinks.map((link, index) => (
+      <li class="ready-bot" id={link.id}>
+        <div class="ready-bot-heading">
+          <Avatar avatar={link.avatar} loading={index < 4 ? 'eager' : 'lazy'} />
+          <div class="ready-bot-copy">
+            <p>{link.body}</p>
+            <a class="btn" href={link.href} target="_blank" rel="noopener">{link.button}<span aria-hidden="true"> ↗</span></a>
+          </div>
+        </div>
+      </li>
+    ))}
+  </ul>
+
+  <section class="links-closing" aria-labelledby="links-closing-h">
+    <h2 id="links-closing-h" class="list-label">איך להתחיל בלי להסתבך</h2>
+    {readyBotIntro.closing.map((p) => <p>{p}</p>)}
+  </section>
+
+  <section class="links-suggest" aria-labelledby="links-suggest-h">
+    <h2 id="links-suggest-h" class="list-label">{readyBotIntro.suggestCta}</h2>
+    <p>כותבים כאן מקור ששווה להוסיף לרשימה — ואני אבדוק אותו.</p>
+    <FeedbackBlock placement="links" />
+  </section>
+
+  <nav class="post-foot" aria-label="ניווט">
+    <a class="back" href={lurl('he')}>→ לכל המעשיות</a>
+  </nav>
+</Base>
+<style>
+  :global(.page-links .wrap) { max-width: 48rem; }
+  .links-intro { margin-bottom: 2.5rem; }
+  .links-intro h1 { margin-bottom: .5rem; }
+  .links-intro .page-subtitle {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    margin: 0 0 1.25rem;
+  }
+  .links-intro > p { max-width: 48ch; }
+  .ready-bots {
+    list-style: none;
+    margin: 0 0 3rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .ready-bot {
+    border-top: 1px solid var(--line);
+    padding-block: 1.5rem;
+  }
+  .ready-bot-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .ready-bot-heading :global(.avatar) {
+    width: 3.5rem;
+    height: 3.5rem;
+    flex: 0 0 3.5rem;
+    border-radius: 50%;
+  }
+  .ready-bot-copy { min-width: 0; flex: 1; }
+  .ready-bot-copy p {
+    margin: 0 0 1rem;
+    max-width: 46ch;
+  }
+  .ready-bot-copy .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .25rem;
+    min-height: 2.75rem;
+    padding-inline: 1.1rem;
+    border: 1px solid var(--fg);
+    border-radius: 999px;
+    color: var(--fg);
+    font-size: var(--step--1);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .ready-bot-copy .btn:hover { background: var(--fg); color: var(--bg); }
+  .ready-bot-copy .btn:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+  .links-closing {
+    background: var(--surface);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border-inline-start: 3px solid var(--fg);
+    margin-bottom: 2.5rem;
+  }
+  .links-closing p { max-width: 48ch; }
+  .links-suggest { margin-bottom: 1rem; }
+  .links-suggest > p { max-width: 42ch; margin-bottom: 1.25rem; }
+  /* Hide the default feedback question; the section heading is the CTA */
+  .links-suggest :global(.fb-q) { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+</style>
