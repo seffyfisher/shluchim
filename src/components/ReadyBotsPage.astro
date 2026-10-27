@@ -1,0 +1,254 @@
+---
+import Base from '../layouts/Base.astro';
+import Avatar from './Avatar.astro';
+import CollaborateBlock from './CollaborateBlock.astro';
+import { readyBotIntro, readyBotLinks } from '../data/ready-bots';
+import { lurl } from '../i18n/ui';
+import { SITES } from '../config';
+import { pageNode, breadcrumbNode, nodeIds, withBrand } from '../lib/seo';
+
+const title = readyBotIntro.title;
+const description =
+  '25 קישורים לבוטים מוכנים בגיטהאב — צוותים, מיומנויות ותבניות בחינם, עם הסבר קצר בעברית לכל אחד.';
+const seoTitle = withBrand('קישורים נוספים: בוטים מוכנים לשְׁלוּחִים', SITES.he.title);
+const seoDescription =
+  'רשימת קישורים לבוטים מוכנים בחינם בגיטהאב: צוותים, מיומנויות ותבניות. הסבר קצר בעברית לכל מקור, לבניית שְׁלוּחִים ב־Grok Bot.';
+const abs = (path: string) => new URL(path, Astro.site).href;
+const pageUrl = abs(lurl('he', 'links/'));
+const ids = nodeIds(abs(lurl('he')), abs(lurl('he')));
+const jsonLd = [
+  pageNode({
+    type: 'CollectionPage',
+    url: pageUrl,
+    name: `${title}: ${readyBotIntro.subtitle}`,
+    description: seoDescription,
+    lang: 'he',
+    websiteId: ids.website,
+    list: readyBotLinks.map((link) => ({ name: link.button, url: link.href })),
+  }),
+  breadcrumbNode([
+    { name: SITES.he.title, url: abs(lurl('he')) },
+    { name: title, url: pageUrl },
+  ]),
+];
+---
+{/* Layout aligned with /friends/ per Nitzah: editorial list, jump index, B&W still faces (6-variant rotation, ~72px), light-gray hover + CTA. Preview OK pending before merge. */}
+<Base
+  bodyClass="page-links"
+  lang="he"
+  title={`${title}: ${readyBotIntro.subtitle}`}
+  description={description}
+  seoTitle={seoTitle}
+  seoDescription={seoDescription}
+  jsonLd={jsonLd}
+>
+  <header class="page-head links-intro">
+    <div class="intro-copy">
+      <h1>{title}</h1>
+      <p class="page-subtitle">{readyBotIntro.subtitle}</p>
+      {readyBotIntro.paragraphs.map((p) => <p>{p}</p>)}
+    </div>
+  </header>
+
+  <nav class="links-index" aria-label="קפיצה לקישור בדף">
+    <div class="index-heading">
+      <span>על הדף</span>
+      <span>{readyBotLinks.length} קישורים</span>
+    </div>
+    <ul>
+      {readyBotLinks.map((link) => (
+        <li><a href={`#${link.id}`}>{link.button}</a></li>
+      ))}
+    </ul>
+  </nav>
+
+  <ul class="ready-bots" aria-label="קישורים לבוטים מוכנים">
+    {readyBotLinks.map((link, index) => (
+      <li class="ready-bot" id={link.id}>
+        <div class="ready-bot-heading">
+          <span class="ready-bot-face" aria-hidden="true">
+            <Avatar avatar={link.avatar} loading={index < 2 ? 'eager' : 'lazy'} />
+          </span>
+          <div class="ready-bot-identity">
+            <h2>
+              <a href={link.href} target="_blank" rel="noopener">{link.button}<span aria-hidden="true"> ↗</span></a>
+            </h2>
+          </div>
+        </div>
+        {link.body.map((para) => <p>{para}</p>)}
+      </li>
+    ))}
+  </ul>
+
+  <section class="links-closing" aria-labelledby="links-closing-h">
+    <h2 id="links-closing-h">איך להתחיל בלי להסתבך</h2>
+    {readyBotIntro.closing.map((p) => <p>{p}</p>)}
+  </section>
+
+  <section class="links-suggest" aria-label={readyBotIntro.suggestCta}>
+    <CollaborateBlock
+      lang="he"
+      prompt=""
+      cta={readyBotIntro.suggestCta}
+      analyticsLabel="links_suggest"
+    />
+  </section>
+
+  <nav class="post-foot" aria-label="ניווט">
+    <a class="back" href={lurl('he')}>→ לכל המעשיות</a>
+  </nav>
+</Base>
+<style>
+  :global(.page-links .wrap) { max-width: 64rem; }
+  .links-intro { margin-bottom: 3rem; }
+  .links-intro h1 {
+    font-size: clamp(2.75rem, 6vw, 5rem);
+    line-height: 1.12;
+    letter-spacing: -.025em;
+    margin-bottom: .75rem;
+  }
+  .links-intro .page-subtitle {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    color: var(--fg);
+    margin: 0 0 1.5rem;
+  }
+  .intro-copy > p {
+    margin: 0 0 0.35em;
+    max-width: 48ch;
+  }
+  .intro-copy > p:last-child { margin-bottom: 0; }
+  .links-index {
+    padding-block: 1.25rem;
+    border-block: 1px solid var(--rule);
+    margin-bottom: 3rem;
+  }
+  .index-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    color: var(--muted);
+    font-size: .8125rem;
+    margin-bottom: .75rem;
+  }
+  .links-index ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .1rem .3rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .links-index li { display: flex; align-items: center; }
+  .links-index li:not(:last-child)::after {
+    content: '·';
+    color: var(--muted);
+    margin-inline: .5rem;
+  }
+  .links-index a {
+    font-size: var(--step--1);
+    text-decoration: none;
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+  }
+  .links-index a:hover { text-decoration: underline; }
+
+  .ready-bots {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 3rem;
+    display: grid;
+    gap: 0 3rem;
+  }
+  .ready-bot {
+    border-top: 1px solid var(--line);
+    padding-block: 1.75rem 2rem;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    scroll-margin-top: 1.5rem;
+    border-radius: var(--radius);
+    transition: background-color .15s ease;
+  }
+  .ready-bot:hover { background: var(--surface); }
+  .ready-bot-heading {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  .ready-bot-face {
+    display: block;
+    width: 4.5rem; /* ~72px — within 64–80px brief */
+    height: 4.5rem;
+    flex: 0 0 4.5rem;
+    border: 3px solid var(--fg);
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .ready-bot-face :global(.avatar),
+  .ready-bot-face :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1);
+  }
+  .ready-bot-identity { min-width: 0; }
+  .ready-bot h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.875rem, 3vw, 2.5rem);
+    margin: 0;
+  }
+  .ready-bot h2 a {
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .ready-bot h2 a:hover { text-decoration: underline; }
+  .ready-bot > p {
+    margin: 0;
+    max-width: 42ch;
+  }
+  .ready-bot > p + p { margin-top: 0.75em; }
+
+  .links-closing {
+    background: var(--surface);
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+    border-inline-start: 3px solid var(--fg);
+    margin-bottom: 2.5rem;
+  }
+  .links-closing h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--step-2);
+  }
+  .links-closing p {
+    max-width: 58ch;
+    margin: 0 0 0.35em;
+  }
+  .links-closing p:last-child { margin-bottom: 0; }
+
+  .links-suggest {
+    background: var(--surface);
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+    margin-bottom: 1rem;
+  }
+  .links-suggest :global(.collaborate) { margin: 0; }
+  .links-suggest :global(summary) {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+  .links-suggest :global(summary:hover) { opacity: .85; }
+
+  @media (min-width: 48rem) {
+    .ready-bots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 25rem) {
+    .links-intro h1 { font-size: 2.65rem; }
+  }
+</style>
