@@ -1,6 +1,15 @@
 {
-  "_about": "Weekly curated wall for /feedback/. Source of truth: public.feedback_public_quotes (not status=approved). Synced 2026-10-27 Asia/Jerusalem — 4 public quotes. reaction joined from feedback for postmark labels.",
+  "_about": "Weekly curated wall for /feedback/. Source of truth: public.feedback_public_quotes (not status=approved). Synced 2026-10-27 Asia/Jerusalem — 6 public quotes. reaction joined from feedback for postmark labels.",
   "items": [
+    {
+      "id": "a1104c33",
+      "source": "feedback_public_quotes",
+      "created_at": "2026-10-24T22:22:56+03:00",
+      "page": "/posts/2026-10-12-dial-bot/",
+      "reaction": "helped",
+      "message": "אהבתי ממש",
+      "name": null
+    },
     {
       "id": "6cae09c0",
       "source": "feedback_public_quotes",
@@ -17,6 +26,15 @@
       "page": "/posts/grok-bot-guide/",
       "reaction": "helped",
       "message": "קראתי ויש משהו מקסים ומרגש של גילוי עולם חדש בטקסט שלך. אני פנסיונר קשיש בן 73 אז אקרא שוב ושוב כדי להבין",
+      "name": null
+    },
+    {
+      "id": "9a035d6a",
+      "source": "feedback_public_quotes",
+      "created_at": "2026-10-13T06:27:16+03:00",
+      "page": "/about/",
+      "reaction": "helped",
+      "message": "יצירתי ויפה, מרגיש כמו פעם הבלוג הזה, מעניין אם כתבת הכל בhtml או שנעזרת בשלוחים",
       "name": null
     },
     {
