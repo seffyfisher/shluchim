@@ -169,8 +169,6 @@ It matters that the assistant also knows where the work stops.
 If every little thing gets an update, now I have another chat to read.
 And then I simply stop opening it.
 
-![The Chef beside a quiet tray opposite a pile of noise: update only when you need me](/images/posts/still-alone-20261026-noise-quiet-1600.webp)
-
 You can set it ahead:
 Update when there's a result, a block, or a decision you need from me.
 Roll the rest up.
