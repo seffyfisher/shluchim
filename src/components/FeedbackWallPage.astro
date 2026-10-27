@@ -1,0 +1,144 @@
+---
+// /feedback/ (Hebrew only): approved reader feedback as vintage B&W postcards (sketch direction C,
+// /workspace/shluchim-feedback-sketches/c-vintage-postcards.html). Static data from src/data/feedback-wall.json,
+// curated weekly; no live API and no client JavaScript on this page beyond the shared FeedbackBlock.
+import Base from '../layouts/Base.astro';
+import FeedbackBlock from './FeedbackBlock.astro';
+import { getCollection } from 'astro:content';
+import wall from '../data/feedback-wall.json';
+import { getPosts, slugOf } from '../lib/posts';
+import { lurl } from '../i18n/ui';
+import { SITES } from '../config';
+import { pageNode, breadcrumbNode, nodeIds, withBrand, clip } from '../lib/seo';
+
+type Item = { id: string; created_at: string; page: string; reaction: string; message: string; name?: string | null; label?: string };
+const REACTION: Record<string, string> = { helped: 'חידש לי', not_really: 'לא התחברתי' };
+
+// Resolve each item's page to a live Hebrew title + href at build time. Dead links (unpublished/removed) get no link.
+const posts = await getPosts('he');
+const known = new Map<string, string>(posts.map((p) => [`/posts/${slugOf(p)}/`, p.data.title.replace(/[.:]\s*$/, '')]));
+const about = (await getCollection('pages')).find((p) => p.id === 'he/about');
+if (about) known.set('/about/', 'אודות');
+const norm = (page: string) => `/${page.replace(/^\/+|\/+$/g, '')}/`;
+
+const dayMonth = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Jerusalem', day: '2-digit', month: '2-digit' });
+const cards = (wall.items as Item[])
+  .filter((it) => it.message?.trim() && REACTION[it.reaction])
+  .sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))
+  .map((it) => {
+    const path = norm(it.page);
+    const title = known.get(path);
+    return {
+      id: `fb-${it.id}`,
+      message: it.message.trim(),
+      name: it.name?.trim() || undefined,
+      date: dayMonth.format(new Date(it.created_at)).replace('/', '.'),
+      iso: new Date(it.created_at).toISOString(),
+      reaction: REACTION[it.reaction],
+      link: title ? { href: lurl('he', path), label: it.label?.trim() || title } : undefined,
+    };
+  });
+
+const title = 'פידבקים';
+const description = 'כמו גלויה שהגיעה בדואר: כמה מילים ממי שקרא. מתעדכן פעם בשבוע.';
+const seoTitle = withBrand('פידבקים מקוראי שְׁלוּחִים', SITES.he.title);
+const seoDescription = 'גלויות מהקוראים: מה כתבו על המעשיות של שְׁלוּחִים, חידש לי או לא התחברתי. משוב שאושר לפרסום, בלי מיילים, מתעדכן פעם בשבוע.';
+const abs = (path: string) => new URL(path, Astro.site).href;
+const pageUrl = abs(lurl('he', 'feedback/'));
+const ids = nodeIds(abs(lurl('he')), abs(lurl('he')));
+const jsonLd = [
+  pageNode({
+    type: 'CollectionPage', url: pageUrl, name: title, description: seoDescription, lang: 'he', websiteId: ids.website,
+    list: cards.map((c) => ({ name: clip(c.message, 80), url: `${pageUrl}#${c.id}` })),
+  }),
+  breadcrumbNode([{ name: SITES.he.title, url: abs(lurl('he')) }, { name: title, url: pageUrl }]),
+];
+---
+<Base bodyClass="page-feedback" lang="he" title={title} description={description} seoTitle={seoTitle} seoDescription={seoDescription} jsonLd={jsonLd}>
+  <header class="page-head fw-head">
+    <h1>{title}</h1>
+    <p class="fw-lede">{description}</p>
+  </header>
+
+  <section class="fw-grid" aria-label="גלויות מהקוראים" data-analytics-label="feedback_wall">
+    {cards.map((c) => (
+      <article class="pc" id={c.id}>
+        <div class="pc-msg">
+          <blockquote><p>{c.message}</p></blockquote>
+          {c.name && <p class="pc-from">מאת: {c.name}</p>}
+        </div>
+        <div class="pc-addr">
+          <div class="pc-stamp" aria-hidden="true">שְׁלוּחִים<small lang="en">POST</small></div>
+          <p class="pc-postmark"><time datetime={c.iso}><b>{c.date}</b></time><span>{c.reaction}</span></p>
+          <p class="pc-lines">אל: שְׁלוּחִים{c.link && <><br />על <a href={c.link.href}>{c.link.label}</a></>}</p>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <section class="fw-desk" aria-labelledby="fw-desk-h">
+    {/* CTA copy: כנרת (body, button), title by Seffy. The button only jumps to the shared FeedbackBlock below (#feedback): same form, same submit. */}
+    <h2 id="fw-desk-h">אני רוצה לקבל ממך גלויה!</h2>
+    <p>אני ממש אשמח לקבל גלויה ממך.</p>
+    <p>כתבו כמה מילים על החוויה,<br />ואם זה מתאים, זה יתווסף כאן כגלויה בקרוב.</p>
+    <a class="fw-cta" href="#feedback">לשלוח גלויה</a>
+    <FeedbackBlock placement="feedback" />
+  </section>
+
+  <nav class="post-foot" aria-label="ניווט">
+    <a class="back" href={lurl('he')}>→ לכל המעשיות</a>
+  </nav>
+</Base>
+<style>
+  :global(.page-feedback .wrap) { max-width: 56rem; }
+  .fw-head { margin-bottom: 2rem; }
+  .fw-head h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.12; margin: 0 0 .6rem; }
+  .fw-lede { margin: 0; color: var(--muted); max-width: 36rem; }
+
+  .fw-grid { --pc-shadow: light-dark(rgb(0 0 0 / .13), rgb(255 255 255 / .1)); display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr)); gap: 1.5rem 1.25rem; }
+  .pc {
+    position: relative; min-height: 13.5rem; aspect-ratio: 5 / 3.2;
+    background: var(--bg); color: var(--fg); border: 1px solid var(--fg);
+    padding: 1rem 1.05rem .9rem;
+    display: grid; grid-template-columns: 1.15fr .85fr; gap: .65rem;
+    transform: rotate(var(--tilt, -.35deg)); box-shadow: 3px 3px 0 var(--pc-shadow);
+  }
+  .pc:nth-child(4n + 2) { --tilt: .45deg; }
+  .pc:nth-child(4n + 3) { --tilt: -.55deg; }
+  .pc:nth-child(4n + 4) { --tilt: .3deg; }
+  .pc-msg { display: flex; flex-direction: column; gap: .55rem; min-width: 0; padding-inline-end: .55rem; border-inline-end: 1px dashed var(--muted); }
+  .pc-msg blockquote { margin: 0; flex: 1; }
+  .pc-msg blockquote p { margin: 0; font-family: var(--font-display); font-size: 1.1rem; line-height: 1.4; overflow-wrap: anywhere; }
+  .pc-from { margin: 0; font-size: .8rem; color: var(--muted); }
+  .pc-addr { display: flex; flex-direction: column; align-items: stretch; gap: .45rem; padding-inline-start: .15rem; min-width: 0; }
+  .pc-stamp {
+    align-self: end; width: 3.1rem; height: 3.6rem; border: 2px solid var(--fg);
+    display: grid; place-content: center; text-align: center; font-size: .62rem; font-weight: 800; letter-spacing: .02em; line-height: 1.15;
+    background: repeating-linear-gradient(-45deg, transparent, transparent 3px, var(--line) 3px, var(--line) 4px);
+    box-shadow: inset 0 0 0 3px var(--bg);
+  }
+  .pc-stamp small { display: block; font-weight: 400; font-size: .55rem; margin-top: .15rem; }
+  .pc-postmark {
+    margin: 0; align-self: center; width: 4.3rem; height: 4.3rem; border: 2px solid var(--fg); border-radius: 50%;
+    display: grid; place-content: center; text-align: center; font-size: .6rem; line-height: 1.25;
+    transform: rotate(-18deg); opacity: .9;
+    background: radial-gradient(circle, transparent 58%, var(--fg) 59%, var(--fg) 61%, transparent 62%);
+  }
+  .pc-postmark b { font-weight: 800; font-size: .68rem; }
+  .pc-postmark span { display: block; }
+  .pc-lines { margin: auto 0 0; font-size: .75rem; line-height: 1.5; color: var(--muted); border-block-start: 1px solid var(--line); padding-top: .35rem; }
+  .pc-lines a { color: var(--fg); text-decoration: underline; text-underline-offset: 2px; display: inline-block; min-height: 1.5rem; }
+
+  .fw-desk { margin-top: 3rem; border: 1px solid var(--fg); padding: 1.4rem 1.35rem 1.5rem; }
+  .fw-desk h2 { font-family: var(--font-display); font-weight: 400; font-size: var(--step-2); line-height: 1.25; margin: 0 0 .4rem; }
+  .fw-desk > p { margin: 0 0 .6rem; color: var(--muted); max-width: 40rem; }
+  .fw-cta { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: 1.5rem; margin-top: .4rem; border: 1px solid var(--fg); border-radius: 999px; background: var(--fg); color: var(--bg); font-weight: 600; text-decoration: none; }
+  .fw-cta:focus-visible { outline: 2px solid var(--muted); outline-offset: 3px; }
+  .fw-desk :global(#feedback) { scroll-margin-top: 1.5rem; }
+  .fw-desk :global(.fb) { margin-block: 1.25rem 0; padding-block: 1rem 0; }
+  .fw-desk + .post-foot { margin-top: 2.5rem; }
+
+  @media (max-width: 30rem) {
+    .pc { aspect-ratio: auto; }
+  }
+</style>

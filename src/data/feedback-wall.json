@@ -1,0 +1,52 @@
+{
+  "_about": "Feedback wall (/feedback/). Static, curated, updated weekly: the weekly workflow appends rows that Seffy set to status='approved' in public.feedback (fields id, created_at, page, reaction, message, name; NEVER email, ip_hash or user_agent). name: shown only when non-empty; null = no 'from' line at all. label: optional short title for the «על …» link; otherwise the post title is used. Links resolve at build time against published posts and /about/; a page that no longer exists simply gets no link. source: 'supabase' = real approved row; 'sketch' = curated seed quote from the vintage-postcards sketch (confirm with Seffy before merge).",
+  "items": [
+    {
+      "id": "115cf4e8",
+      "source": "supabase",
+      "created_at": "2026-10-11T12:00:00+03:00",
+      "page": "/posts/2026-10-10-100-means-go/",
+      "reaction": "helped",
+      "message": "דבר פשוט נעשה סנריו - פשוט גאונות",
+      "name": "יקי"
+    },
+    {
+      "id": "8e0947f3",
+      "source": "supabase",
+      "created_at": "2026-10-12T12:00:00+03:00",
+      "page": "/posts/2026-10-12-dial-bot/",
+      "reaction": "helped",
+      "message": "העפת לי את המוח. סופר מעניין!",
+      "name": null,
+      "label": "בוט החיוג"
+    },
+    {
+      "id": "sketch-grok-guide",
+      "source": "sketch",
+      "created_at": "2026-10-18T12:00:00+03:00",
+      "page": "/posts/grok-bot-guide/",
+      "reaction": "helped",
+      "message": "יש בטקסט משהו מקסים ומרגש של גילוי עולם חדש. אקרא שוב ושוב כדי להבין.",
+      "name": null,
+      "label": "מדריך לגרוקבוט"
+    },
+    {
+      "id": "sketch-wake-up-sky",
+      "source": "sketch",
+      "created_at": "2026-10-18T13:00:00+03:00",
+      "page": "/posts/2026-10-13-wake-up-sky/",
+      "reaction": "helped",
+      "message": "שאלתי אם יש לו חוש הומור, והוא היה מצחיק יותר מבני אדם.",
+      "name": null
+    },
+    {
+      "id": "sketch-about",
+      "source": "sketch",
+      "created_at": "2026-10-20T12:00:00+03:00",
+      "page": "/about/",
+      "reaction": "helped",
+      "message": "אתה איש גאון.",
+      "name": null
+    }
+  ]
+}

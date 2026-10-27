@@ -70,6 +70,7 @@ const PAGE_SOURCES = {
   'team/': () => ['src/components/TeamPage.astro', 'src/data/shluchim.json'],
   'friends/': () => ['src/components/FriendsPage.astro', 'src/data/friends.ts', 'src/data/friend-portraits.ts'],
   'links/': () => ['src/components/ReadyBotsPage.astro', 'src/data/ready-bots.ts'],
+  'feedback/': () => ['src/components/FeedbackWallPage.astro', 'src/data/feedback-wall.json'],
 };
 
 /** Newest podcast episode date (the podcast page lists the episodes; Hebrew only). */

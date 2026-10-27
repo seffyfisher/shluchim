@@ -5,8 +5,8 @@
 // opens a centered <dialog>. No reload, no navigation. Without CSS :has the send button simply always shows.
 import '../styles/feedback.css';
 import { FEEDBACK_ENDPOINT } from '../config';
-interface Props { placement: 'post' | 'about' }
-const { placement: kind } = Astro.props;
+interface Props { placement: 'post' | 'about' | 'feedback'; /** Question above the reaction chips (default: «נו, חידש לכם?»). */ heading?: string }
+const { placement: kind, heading = 'נו, חידש לכם?' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = Astro.url.pathname.startsWith(base) ? Astro.url.pathname.slice(base.length) || '/' : Astro.url.pathname;
 const FB_JS = `(()=>{const s=document.currentScript.closest('.fb');if(!s)return;const f=s.querySelector('.fb-form'),i=s.querySelector('.fb-sink'),d=s.querySelector('.fb-dlg'),t=d.querySelector('.fb-dlg-t'),b=f.querySelector('button[type=submit]');let w=0,m;const done=()=>{clearTimeout(m);w=0;f.classList.remove('busy');b.removeAttribute('aria-disabled');};s.classList.add('js');f.addEventListener('submit',e=>{if(w){e.preventDefault();e.stopImmediatePropagation();return;}w=1;f.classList.add('busy');b.setAttribute('aria-disabled','true');m=setTimeout(done,15e3);});addEventListener('message',e=>{if(e.source!==i.contentWindow)return;const o=String(e.data).replace('feedback-','');if(!t.dataset[o])return;done();t.textContent=t.dataset[o];d.classList.toggle('bad',o!=='thanks');if(o==='thanks'){f.reset();s.classList.add('sent');}d.open||d.showModal();f.dispatchEvent(new CustomEvent('analytics:result',{bubbles:true,detail:o==='thanks'?'success':o}));});})();`;
@@ -14,7 +14,7 @@ const toastUrl = new URL('feedback-toast.html', Astro.site).href; // must be on 
 ---
 {FEEDBACK_ENDPOINT && (
 <section class="fb" id="feedback" aria-labelledby={`fb-h-${kind}`} data-analytics-content="feedback">
-  <h2 class="fb-q" id={`fb-h-${kind}`}>נו, חידש לכם?</h2>
+  <h2 class="fb-q" id={`fb-h-${kind}`}>{heading}</h2>
   <form class="fb-form" method="post" action={FEEDBACK_ENDPOINT} accept-charset="utf-8" target={`fb-sink-${kind}`} data-analytics-id={kind}>
     <input type="hidden" name="page" value={path} />
     <input type="hidden" name="return_to" value={toastUrl} />
