@@ -58,7 +58,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "יושבים מול מסך ריק וכותבים הוראות מאפס, בזמן שמישהו כבר בנה את זה אלפי פעמים.",
       "יש כאן יותר מ־6,000 בוטים מוכנים, מסודרים עם חיפוש. שווה להציץ לפני שמתחילים מההתחלה.",
     ],
-    avatar: "shluchim/kochava-still.webp",
+    avatar: "shluchim/anali-still.webp",
   },
   {
     id: "link-03",
@@ -118,7 +118,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "אומרים לבוט ״תתקן את זה״, והוא מנחש. לפעמים הוא מנחש נכון. לפעמים לא.",
       "יש כאן 195 תהליכים מוכנים לבדיקת קוד, תיקון באגים, מחקר, כתיבה ומשלוח. במקום הוראה מעורפלת, נותנים לו דרך שכבר נוסתה.",
     ],
-    avatar: "shluchim/kochava-still.webp",
+    avatar: "shluchim/anali-still.webp",
   },
   {
     id: "link-09",
@@ -178,7 +178,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "רוצים לפנות לאנשים חדשים, בלי לשלוח הודעה אחת בלי עיניים שלכם עליה.",
       "יש מדריך מלא: מחקר, מייל, לינקדאין, תשובות ומעקב אחרי פגישות. כל שליחה עוברת אישור שלך.",
     ],
-    avatar: "shluchim/kochava-still.webp",
+    avatar: "shluchim/anali-still.webp",
   },
   {
     id: "link-15",
@@ -238,7 +238,7 @@ export const readyBotLinks: ReadyBotLink[] = [
       "אתם כבר בקרסר, ורוצים לרשום עמית ב־Grok Bot בלי לעבור חמישה מסכים.",
       "יש מיומנות שעושה בדיוק את זה. רושמים, שולחים הודעות, ויוצרים עמיתים משם.",
     ],
-    avatar: "shluchim/kochava-still.webp",
+    avatar: "shluchim/anali-still.webp",
   },
   {
     id: "link-21",
