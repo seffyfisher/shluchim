@@ -8,7 +8,6 @@ seoDescription: "הודעה קולית אחת, ואחרי קצת יותר משע
 topics: ["everyday-ai", "grok-bot"]
 date: 2026-10-23
 draft: false
-heOnly: true
 lang: he
 translationKey: "2026-10-23-lima-beans-for-mom"
 socialImage: "/images/posts/lima-beans-for-mom-share-1200.webp"
