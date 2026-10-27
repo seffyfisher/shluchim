@@ -8,7 +8,6 @@ seoDescription: "יש לי עוזר פרטי, ועד שאני נזכר לבקש 
 topics: ["everyday-ai", "grok-bot"]
 date: 2026-10-26
 draft: false
-heOnly: true
 lang: he
 translationKey: "2026-10-26-still-alone"
 socialImage: "/images/posts/still-alone-20261026-share-1200.webp"

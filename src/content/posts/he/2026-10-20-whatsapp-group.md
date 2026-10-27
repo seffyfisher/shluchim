@@ -8,7 +8,6 @@ seoDescription: "קבוצת ווטסאפ קטנה למי שבונה שְׁלוּ
 topics: ["grok-bot"]
 date: 2026-10-20
 draft: false
-heOnly: true
 hideWaCta: true
 lang: he
 translationKey: "2026-10-20-whatsapp-group"
