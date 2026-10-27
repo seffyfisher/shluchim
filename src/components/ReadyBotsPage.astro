@@ -75,7 +75,7 @@ const jsonLd = [
             </h2>
           </div>
         </div>
-        <p>{link.body}</p>
+        {link.body.map((para) => <p>{para}</p>)}
       </li>
     ))}
   </ul>
@@ -113,8 +113,11 @@ const jsonLd = [
     color: var(--fg);
     margin: 0 0 1.5rem;
   }
-  .intro-copy > p:last-child { max-width: 48ch; margin-bottom: 0; }
-
+  .intro-copy > p {
+    margin: 0 0 0.35em;
+    max-width: 48ch;
+  }
+  .intro-copy > p:last-child { margin-bottom: 0; }
   .links-index {
     padding-block: 1.25rem;
     border-block: 1px solid var(--rule);
@@ -209,6 +212,7 @@ const jsonLd = [
     margin: 0;
     max-width: 42ch;
   }
+  .ready-bot > p + p { margin-top: 0.75em; }
 
   .links-closing {
     background: var(--surface);
@@ -221,7 +225,11 @@ const jsonLd = [
     font-weight: 400;
     font-size: var(--step-2);
   }
-  .links-closing p { max-width: 58ch; }
+  .links-closing p {
+    max-width: 58ch;
+    margin: 0 0 0.35em;
+  }
+  .links-closing p:last-child { margin-bottom: 0; }
 
   .links-suggest {
     background: var(--surface);
