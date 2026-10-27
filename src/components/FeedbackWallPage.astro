@@ -77,11 +77,11 @@ const jsonLd = [
   </section>
 
   <section class="fw-desk" aria-labelledby="fw-desk-h">
-    {/* CTA copy: כנרת (body, button), title by Seffy. The button only jumps to the shared FeedbackBlock below (#feedback): same form, same submit. */}
+    {/* CTA copy: כנרת (body, button), title by Seffy. The button jumps to the shared FeedbackBlock below (#feedback), pre-selects «חידש לי» so the message box opens, and focuses it. Same form, same submit; without JS it is a plain #feedback link. */}
     <h2 id="fw-desk-h">אני רוצה לקבל ממך גלויה!</h2>
     <p>אני ממש אשמח לקבל גלויה ממך.</p>
     <p>כתבו כמה מילים על החוויה,<br />ואם זה מתאים, זה יתווסף כאן כגלויה בקרוב.</p>
-    <a class="fw-cta" href="#feedback">לשלוח גלויה</a>
+    <a class="fw-cta" href="#feedback" onclick="var f=document.querySelector('#feedback form');if(f){f.reaction.value='helped';f.message.focus()}">לשלוח גלויה</a>
     <FeedbackBlock placement="feedback" />
   </section>
 
