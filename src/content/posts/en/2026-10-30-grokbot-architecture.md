@@ -1,5 +1,5 @@
 ---
-title: "Why my shluchim remember what we agreed on yesterday"
+title: "Personal assistants, purpose-driven shluchim, and what's in between"
 emoji: "🧠"
 description: "What changed in how Grok Bot and similar products are built, and why a team of small shluchim, each with one job, works better than one shaliach who does everything."
 listDescription: "Half an hour into a chat, and it already forgot what we agreed on at the start. Here's how I built a team of shluchim that remembers what matters."
