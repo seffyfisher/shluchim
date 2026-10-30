@@ -5,12 +5,18 @@ import type { Lang } from '../i18n/ui';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
+const COPY: Record<Lang, { section: string; crowd: string }> = {
+  he: { section: 'קוראים כאן יחד', crowd: 'דמויות הקוראים, אפשר לגלול שמאלה' },
+  en: { section: 'Reading together', crowd: 'Reader characters; scroll left to see more' },
+  ar: { section: 'نقرأ هنا معًا', crowd: 'شخصيات القراء، يمكن التمرير يسارًا لرؤية المزيد' },
+};
+const copy = COPY[lang];
 ---
 
-<section class="online-readers wrap" data-online-readers data-url={PRESENCE_URL} data-key={PRESENCE_PUBLISHABLE_KEY} data-lang={lang} data-sprite={spriteUrl} aria-label={lang === 'he' ? 'קוראים כאן יחד' : 'Reading together'}>
+<section class="online-readers wrap" data-online-readers data-url={PRESENCE_URL} data-key={PRESENCE_PUBLISHABLE_KEY} data-lang={lang} data-sprite={spriteUrl} aria-label={copy.section}>
   <div class="readers-panel">
     <p class="readers-caption"><span class="online-dot" aria-hidden="true"></span><span data-readers-label></span></p>
-    <div class="readers-crowd" data-readers-crowd dir="rtl" tabindex="0" role="group" aria-label={lang === 'he' ? 'דמויות הקוראים, אפשר לגלול שמאלה' : 'Reader characters; scroll left to see more'}><span data-readers-overflow hidden></span></div>
+    <div class="readers-crowd" data-readers-crowd dir="rtl" tabindex="0" role="group" aria-label={copy.crowd}><span data-readers-overflow hidden></span></div>
   </div>
 </section>
 <noscript><style is:inline>.online-readers{display:none}</style></noscript>

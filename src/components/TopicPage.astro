@@ -1,19 +1,24 @@
 ---
-// Topic hub: /topics/<slug>/ (he) and /en/topics/<slug>/ (en). A short intro and every story on the topic.
+// Topic hub: /topics/<slug>/ (he), /en/topics/<slug>/ (en), and /ar/topics/<slug>/ (ar). A short intro and every story on the topic.
 import Base from '../layouts/Base.astro';
 import StoryList from './StoryList.astro';
 import { getTopicPosts, postUrl } from '../lib/posts';
 import { TOPICS, TOPIC_SLUGS } from '../data/topics.mjs';
-import { lurl, t, type Lang } from '../i18n/ui';
+import { LOCALES, lurl, t, type Lang } from '../i18n/ui';
 import { SITES } from '../config';
 import { pageNode, breadcrumbNode, nodeIds, withBrand } from '../lib/seo';
 interface Props { lang: Lang; slug: keyof typeof TOPICS }
 const { lang, slug } = Astro.props;
-const he = lang === 'he';
 const ui = t(lang);
 const topic = TOPICS[slug][lang];
 const posts = await getTopicPosts(slug, lang);
-const others = TOPIC_SLUGS.filter((s) => s !== slug) as (keyof typeof TOPICS)[];
+const others = (await Promise.all(
+  TOPIC_SLUGS.filter((s) => s !== slug).map(async (s) => ((await getTopicPosts(s, lang)).length > 0 ? (s as keyof typeof TOPICS) : null)),
+)).filter((s): s is keyof typeof TOPICS => s !== null);
+const altEntries = await Promise.all(
+  LOCALES.map(async (l) => (l === lang || (await getTopicPosts(slug, l)).length > 0 ? ([l, lurl(l, `topics/${slug}/`)] as const) : null)),
+);
+const alternates: Partial<Record<Lang, string>> = Object.fromEntries(altEntries.filter((x): x is readonly [Lang, string] => x !== null));
 const abs = (p: string) => new URL(p, Astro.site).href;
 const pageUrl = abs(lurl(lang, `topics/${slug}/`));
 const ids = nodeIds(abs(lurl('he')), abs(lurl(lang)));
@@ -21,12 +26,15 @@ const jsonLd = [
   pageNode({ type: 'CollectionPage', url: pageUrl, name: topic.title, description: topic.seoDescription, lang, websiteId: ids.website, list: posts.map((p) => ({ name: p.data.title, url: abs(postUrl(p)) })) }),
   breadcrumbNode([{ name: SITES[lang].title, url: abs(lurl(lang)) }, { name: topic.label, url: pageUrl }]),
 ];
-const count = he
-  ? `${posts.length === 1 ? 'מעשיה אחת' : `${posts.length} מעשיות`}, מהחדשה לישנה`
-  : `${posts.length === 1 ? 'One story' : `${posts.length} stories`}, newest first`;
+const COUNT_LABEL: Record<Lang, (n: number) => string> = {
+  he: (n) => `${n === 1 ? 'מעשיה אחת' : `${n} מעשיות`}, מהחדשה לישנה`,
+  en: (n) => `${n === 1 ? 'One story' : `${n} stories`}, newest first`,
+  ar: (n) => `${n === 1 ? 'حكاية واحدة' : `${n} حكاية`}، من الأحدث إلى الأقدم`,
+};
+const count = COUNT_LABEL[lang](posts.length);
 ---
 <Base lang={lang} noindex={posts.length === 0} title={topic.title} seoTitle={withBrand(topic.seoTitle, SITES[lang].title)} seoDescription={topic.seoDescription} description={topic.seoDescription}
-  alternates={{ he: lurl('he', `topics/${slug}/`), en: lurl('en', `topics/${slug}/`) }} jsonLd={jsonLd}>
+  alternates={alternates} jsonLd={jsonLd}>
   <header class="page-head">
     <h1>{topic.title}</h1>
     <div class="topic-intro">

@@ -1,14 +1,18 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { SHOW_DRAFTS } from '../config';
-import { LANG_META, lurl, type Lang } from '../i18n/ui';
+import { DEFAULT_LANG, isLang, LANG_META, LOCALES, lurl, otherLangs, type Lang } from '../i18n/ui';
 import { TOPICS } from '../data/topics.mjs';
 
 type Entry = CollectionEntry<'posts'> | CollectionEntry<'pages'>;
-/** Language of an entry: from its folder (he/ or en/). */
-export const langOf = (e: Entry): Lang => (e.id.startsWith('en/') ? 'en' : 'he');
-/** URL slug: the entry id without the language folder (same as before the he/en split). */
-export const slugOf = (e: Entry) => e.id.replace(/^(he|en)\//, '');
-/** Pairs a Hebrew entry with its English translation. */
+const LOCALE_PREFIX = new RegExp(`^(${LOCALES.join('|')})/`);
+/** Language of an entry: from its folder prefix (he/, en/, ar/). */
+export const langOf = (e: Entry): Lang => {
+  const prefix = e.id.split('/')[0];
+  return isLang(prefix) ? prefix : DEFAULT_LANG;
+};
+/** URL slug: the entry id without the language folder. */
+export const slugOf = (e: Entry) => e.id.replace(LOCALE_PREFIX, '');
+/** Groups translations of the same entry across languages. */
 export const keyOf = (e: Entry) => e.data.translationKey ?? slugOf(e);
 
 /**
@@ -49,10 +53,15 @@ export function relatedPosts(all: CollectionEntry<'posts'>[], current: Collectio
     .map((x) => x.p);
 }
 
-/** The published (or, in preview, draft) counterpart of a post in the other language, if any. */
-export async function getTranslation(p: CollectionEntry<'posts'>) {
-  const target: Lang = langOf(p) === 'he' ? 'en' : 'he';
-  return (await getPosts(target)).find((x) => keyOf(x) === keyOf(p));
+/** Published (or, in preview, draft) counterparts of a post in all other languages, keyed by Lang. */
+export async function getTranslations(p: CollectionEntry<'posts'>): Promise<Partial<Record<Lang, CollectionEntry<'posts'>>>> {
+  const k = keyOf(p);
+  const out: Partial<Record<Lang, CollectionEntry<'posts'>>> = {};
+  for (const l of otherLangs(langOf(p))) {
+    const match = (await getPosts(l)).find((x) => keyOf(x) === k);
+    if (match) out[l] = match;
+  }
+  return out;
 }
 
 /** Build an internal URL that respects BASE_PATH. Always use this for links. */
@@ -79,5 +88,9 @@ export function readingMinutes(body = '', lang: Lang = 'he') {
   const words = text.split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.round(words / LANG_META[lang].wpm));
 }
-export const readingLabel = (min: number, lang: Lang = 'he') =>
-  lang === 'en' ? `${min} min read` : min === 1 ? 'דקת קריאה' : `${min} דקות קריאה`;
+const READING_LABEL: Record<Lang, (min: number) => string> = {
+  he: (min) => (min === 1 ? 'דקת קריאה' : `${min} דקות קריאה`),
+  en: (min) => `${min} min read`,
+  ar: (min) => (min === 1 ? 'دقيقة قراءة' : min === 2 ? 'دقيقتا قراءة' : min <= 10 ? `${min} دقائق قراءة` : `${min} دقيقة قراءة`),
+};
+export const readingLabel = (min: number, lang: Lang = 'he') => READING_LABEL[lang](min);

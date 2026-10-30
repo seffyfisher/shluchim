@@ -1,6 +1,7 @@
 // SEO / GEO helpers. Pure functions (no astro imports) so `npm test` can run them under plain node.
 // Everything here is build-time string work: the site still ships zero client JS.
-export type Lang = 'he' | 'en';
+import type { Lang } from '../i18n/ui.ts';
+export type { Lang };
 
 /** Collapse whitespace and cut at a word boundary with an ellipsis. */
 export function clip(text: string, max: number): string {

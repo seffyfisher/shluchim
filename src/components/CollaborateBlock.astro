@@ -9,20 +9,25 @@ interface Props {
   analyticsLabel?: string;
 }
 const { lang, prompt, cta, analyticsLabel = 'footer_collaborate' } = Astro.props;
-const he = lang === 'he';
-const lead = prompt ?? (he ? 'רוצים לשתף פעולה?' : 'Want to collaborate?');
-const summary = cta ?? (he ? 'בואו נדבר' : 'Let’s talk');
+const COPY: Record<Lang, { lead: string; summary: string; nav: string; email: string; instagram: string; facebook: string; about: string }> = {
+  he: { lead: 'רוצים לשתף פעולה?', summary: 'בואו נדבר', nav: 'איך נוח לכם לדבר?', email: 'מייל', instagram: 'אינסטגרם', facebook: 'פייסבוק', about: 'קצת עליי' },
+  en: { lead: 'Want to collaborate?', summary: 'Let’s talk', nav: 'How would you like to get in touch?', email: 'Email', instagram: 'Instagram', facebook: 'Facebook', about: 'About me' },
+  ar: { lead: 'هل ترغبون في التعاون؟', summary: 'تواصلوا معي', nav: 'كيف تفضّلون التواصل؟', email: 'بريد إلكتروني', instagram: 'إنستغرام', facebook: 'فيسبوك', about: 'نبذة عني' },
+};
+const copy = COPY[lang];
+const lead = prompt ?? copy.lead;
+const summary = cta ?? copy.summary;
 const showLead = prompt !== '';
 ---
 <div class="collaborate" data-analytics-content="collaborate" data-analytics-label={analyticsLabel}>
   {showLead && <span>{lead}</span>}
   <details>
     <summary data-analytics-id="collaborate-contact">{summary}</summary>
-    <nav aria-label={he ? 'איך נוח לכם לדבר?' : 'How would you like to get in touch?'}>
-      <a href="mailto:seffyfisher1989@gmail.com">{he ? 'מייל' : 'Email'}</a>
-      <a href="https://instagram.com/shinlamed" target="_blank" rel="noopener">{he ? 'אינסטגרם' : 'Instagram'}</a>
-      <a href="https://www.facebook.com/shinlamed" target="_blank" rel="noopener">{he ? 'פייסבוק' : 'Facebook'}</a>
-      <a href={lurl(lang, 'about/')}>{he ? 'קצת עליי' : 'About me'}</a>
+    <nav aria-label={copy.nav}>
+      <a href="mailto:seffyfisher1989@gmail.com">{copy.email}</a>
+      <a href="https://instagram.com/shinlamed" target="_blank" rel="noopener">{copy.instagram}</a>
+      <a href="https://www.facebook.com/shinlamed" target="_blank" rel="noopener">{copy.facebook}</a>
+      <a href={lurl(lang, 'about/')}>{copy.about}</a>
     </nav>
   </details>
 </div>

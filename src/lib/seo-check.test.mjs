@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { lintContent } from './seo-check.mjs';
+import { lintContent, auditDist } from './seo-check.mjs';
 import { parseFrontmatter } from './frontmatter.mjs';
 
 const SH = 'שְׁלוּחִים'; // the site's exact niqqud form
@@ -73,4 +73,23 @@ test('frontmatter parser reads flow lists, block lists (CMS style) and escaped q
   assert.deepEqual(data.topics, ['grok-bot', 'ai-at-work']);
   assert.deepEqual(data.tags, ['a', 'b']);
   assert.equal(data.draft, 'false');
+});
+
+test('pre-launch /ar/ pages must be noindex without canonical; HE/EN may not hreflang to them', () => {
+  const site = 'https://example.com';
+  const page = ({ lang, path, robots, canonical, alts = {} }) => `<!doctype html><html lang="${lang}"><head><title>T</title><meta name="description" content="d">${canonical ? `<link rel="canonical" href="${site}${path}">` : ''}<meta name="robots" content="${robots}">${Object.entries(alts).map(([l, p]) => `<link rel="alternate" hreflang="${l}" href="${site}${p}">`).join('')}<meta property="og:image" content="https://cdn.example/x.jpg"><meta property="og:title" content="t"><meta property="og:description" content="d"><meta property="og:url" content="${site}${path}"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">{"@graph":[{"@type":"Person"},{"@type":"WebSite"}]}</script></head><body><h1>x</h1></body></html>`;
+  const build = (files) => {
+    const dist = mkdtempSync(join(tmpdir(), 'seo-dist-'));
+    for (const f of ['sitemap-index.xml', 'llms.txt', 'llms-full.txt', 'robots.txt']) writeFileSync(join(dist, f), '');
+    for (const [rel, html] of Object.entries(files)) { mkdirSync(join(dist, rel, '..'), { recursive: true }); writeFileSync(join(dist, rel), html); }
+    return dist;
+  };
+  const he = (alts) => page({ lang: 'he', path: '/', robots: 'index,follow', canonical: true, alts });
+  const ok = build({ 'index.html': he({ he: '/' }), 'ar/index.html': page({ lang: 'ar', path: '/ar/', robots: 'noindex', alts: { he: '/', ar: '/ar/' } }) });
+  assert.deepEqual(auditDist(ok, site, '', { arLaunched: false }).errors, []);
+  const indexed = build({ 'index.html': he({ he: '/' }), 'ar/index.html': page({ lang: 'ar', path: '/ar/', robots: 'index,follow', canonical: true }) });
+  assert.ok(auditDist(indexed, site, '', { arLaunched: false }).errors.some((e) => e.includes('must be noindex')));
+  const leaky = build({ 'index.html': he({ he: '/', ar: '/ar/' }), 'ar/index.html': page({ lang: 'ar', path: '/ar/', robots: 'noindex' }) });
+  assert.ok(auditDist(leaky, site, '', { arLaunched: false }).errors.some((e) => e.includes('hreflang ar')));
+  assert.ok(auditDist(ok, site, '', { arLaunched: true }).errors.some((e) => e.includes('noindex')));
 });

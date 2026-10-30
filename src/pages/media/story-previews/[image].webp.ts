@@ -1,16 +1,18 @@
 // Prerendered WebP assets, not a runtime image service. Source artwork stays untouched.
 import type { APIRoute, GetStaticPaths } from 'astro';
 import sharp from 'sharp';
+import { LOCALES } from '../../../i18n/ui';
 import { getPosts, keyOf } from '../../../lib/posts';
 import { splitFeaturedPosts } from '../../../lib/featured.mjs';
 import { storyImage, previewWidth, PREVIEW_QUALITY, PREVIEW_EFFORT } from '../../../lib/story-images.mjs';
 
 export const prerender = true;
 export const getStaticPaths: GetStaticPaths = async () => {
-  const he = await getPosts('he'), en = await getPosts('en');
-  const featured = new Set([...splitFeaturedPosts(he, he, 'he').featured, ...splitFeaturedPosts(en, he, 'en').featured].map(keyOf));
+  const he = await getPosts('he');
+  const byLang = await Promise.all(LOCALES.map(async (l) => [l, l === 'he' ? he : await getPosts(l)] as const));
+  const featured = new Set(byLang.flatMap(([l, list]) => splitFeaturedPosts(list, he, l).featured).map(keyOf));
   const assets = new Map();
-  for (const post of [...he, ...en]) {
+  for (const [, list] of byLang) for (const post of list) {
     const image = await storyImage(post);
     if (!image) continue;
     for (const requested of featured.has(keyOf(post)) ? [160, 320, 480, 768, 1120, 1536] : [160, 320]) {

@@ -4,11 +4,11 @@ backend:
   branch: main
 media_folder: public/images
 public_folder: /images
-# Multilingual mode (Sveltia CMS / Decap-compatible): Hebrew + English side by side in one editor.
-# multiple_folders -> src/content/posts/he/<slug>.md and src/content/posts/en/<slug>.md (same file name = a pair).
+# Multilingual mode (Sveltia CMS / Decap-compatible): Hebrew + English + Arabic side by side in one editor.
+# multiple_folders -> src/content/posts/{he,en,ar}/<slug>.md (translationKey links translations when slugs differ).
 i18n:
   structure: multiple_folders
-  locales: [he, en]
+  locales: [he, en, ar]
   default_locale: he
 collections:
   - name: posts
@@ -24,18 +24,18 @@ collections:
     sortable_fields: [date, title]
     fields:
       - { name: title, label: כותרת, widget: string, i18n: true }
-      - { name: description, label: תקציר, widget: string, i18n: true, hint: "באנגלית: 150–160 תווים, כתוב מחדש לקוראים מחו״ל" }
+      - { name: description, label: תקציר, widget: string, i18n: true, hint: "באנגלית ובערבית (MSA): 150–160 תווים, כתוב מחדש לקוראי השפה" }
       - { name: listDescription, label: תקציר קצר לרשימות, widget: string, required: false, i18n: true, hint: "משפט או שניים קצרים לדף הבית ולעמודי הנושאים. בכל מקרה התצוגה מוגבלת לשלוש שורות. אם ריק, משתמשים בתקציר הרגיל." }
-      - { name: seoTitle, label: כותרת לגוגל (SEO), widget: string, required: false, i18n: true, hint: "מופיעה בתוצאות חיפוש ובלשונית. עד כ־50 תווים (בלי שם הבלוג, הוא נוסף לבד). מה אנשים היו מקלידים. בעברית: בלי סוכנים/בוטים, ושְׁלוּחִים עם ניקוד. הכללים ב־SEO-GEO.md" }
+      - { name: seoTitle, label: כותרת לגוגל (SEO), widget: string, required: false, i18n: true, hint: "מופיעה בתוצאות חיפוש ובלשונית. עד כ־50 תווים (בלי שם הבלוג, הוא נוסף לבד). מה אנשים היו מקלידים. בעברית: בלי סוכנים/בוטים, ושְׁלוּחִים עם ניקוד. בערבית: בלי شلوخيم/رسول. הכללים ב־SEO-GEO.md" }
       - { name: seoDescription, label: תקציר לגוגל (SEO), widget: text, required: false, i18n: true, hint: "הקטע שמופיע בתוצאות חיפוש. 70–160 תווים, התשובה והמספרים כבר במשפט הראשון. לא מופיע בעמוד עצמו" }
-      - { name: topics, label: נושאים, widget: select, multiple: true, required: false, i18n: duplicate, options: [grok-bot, ai-at-work, everyday-ai, agent-teamwork], hint: "1–3 נושאים. קובע אילו עמודי נושא והמלצות ״עוד סיפורים״ הפוסט מופיע בהם. זהה בשתי השפות" }
-      - { name: date, label: תאריך, widget: datetime, time_format: false, date_format: YYYY-MM-DD, format: YYYY-MM-DD, i18n: duplicate, hint: "תאריך הפרסום בפועל (Asia/Jerusalem). זהה בשתי השפות" }
+      - { name: topics, label: נושאים, widget: select, multiple: true, required: false, i18n: duplicate, options: [grok-bot, ai-at-work, everyday-ai, agent-teamwork], hint: "1–3 נושאים. קובע אילו עמודי נושא והמלצות ״עוד סיפורים״ הפוסט מופיע בהם. זהה בכל השפות" }
+      - { name: date, label: תאריך, widget: datetime, time_format: false, date_format: YYYY-MM-DD, format: YYYY-MM-DD, i18n: duplicate, hint: "תאריך הפרסום בפועל (Asia/Jerusalem). זהה בכל השפות" }
       - { name: draft, label: טיוטה, widget: boolean, default: true, i18n: true, hint: "להשאיר מסומן עד אישור של ספי (בכל שפה בנפרד)" }
-      - { name: featured, label: בראש עמוד הבית, widget: boolean, default: false, required: false, i18n: duplicate, hint: "מציג את המעשייה בראש עמוד הבית לפני הרשימה הרגילה. בפוסט מתורגם ההגדרה בעברית קובעת גם לאנגלית; פוסט באנגלית ללא מקור עברי משתמש בהגדרה שלו. לא משנה נושאים או RSS." }
+      - { name: featured, label: בראש עמוד הבית, widget: boolean, default: false, required: false, i18n: duplicate, hint: "מציג את המעשייה בראש עמוד הבית לפני הרשימה הרגילה. בפוסט מתורגם ההגדרה בעברית קובעת גם לאנגלית ולערבית; פוסט ללא מקור עברי משתמש בהגדרה שלו. לא משנה נושאים או RSS." }
       - { name: tags, label: תגיות, widget: list, required: false, i18n: true }
       - { name: updated, label: עודכן ב, widget: datetime, time_format: false, date_format: YYYY-MM-DD, format: YYYY-MM-DD, required: false, i18n: duplicate, hint: "רק אם שינינו את הפוסט באופן מהותי אחרי הפרסום. נכנס ל־dateModified ול־lastmod בסייטמאפ" }
-      - { name: translationKey, label: מזהה תרגום, widget: string, required: false, i18n: duplicate, hint: "אופציונלי. ריק = שם הקובץ. מקשר בין העברית לאנגלית" }
-      - { name: body, label: תוכן, widget: markdown, i18n: true, hint: "באנגלית: בבועות צ׳אט אפשר להוסיף שורה original: עם הטקסט העברי המקורי. בלי ניקוד באנגלית" }
+      - { name: translationKey, label: מזהה תרגום, widget: string, required: false, i18n: duplicate, hint: "חובה כשה־slug שונה משם הקובץ העברי (בערבית משתמשים ב־slug הלטיני של האנגלית). מקשר בין העברית, האנגלית והערבית" }
+      - { name: body, label: תוכן, widget: markdown, i18n: true, hint: "באנגלית ובערבית: בבועות צ׳אט אפשר להוסיף שורה original: עם הטקסט העברי המקורי. בלי ניקוד עברי באנגלית ובערבית" }
   - name: pages
     label: עמודים
     i18n: true

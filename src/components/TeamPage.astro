@@ -8,10 +8,13 @@ import { pageNode, breadcrumbNode, nodeIds, withBrand } from '../lib/seo';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const he = lang === 'he';
-// Per-language view of the data file. English fields: name_en, role_en, category_en, example_en.
-const people = shluchim.map((s) => he
-  ? { ...s }
-  : { ...s, name: s.name_en || s.name, role: s.role_en ?? '', category: s.category_en || s.category, example: s.example_en ?? '' });
+type RawMember = (typeof shluchim)[number];
+const localize: Record<Lang, (s: RawMember) => { id: string; name: string; role: string; category: string; avatar: string; still: string; example: string }> = {
+  he: (s) => ({ id: s.id, name: s.name, role: s.role, category: s.category, avatar: s.avatar, still: s.still, example: s.example ?? '' }),
+  en: (s) => ({ id: s.id, name: s.name_en || s.name, role: s.role_en ?? '', category: s.category_en || s.category, avatar: s.avatar, still: s.still, example: s.example_en ?? '' }),
+  ar: (s) => ({ id: s.id, name: s.name_ar || s.name, role: s.role_ar ?? '', category: s.category_ar || s.category, avatar: s.avatar, still: s.still, example: s.example_ar ?? '' }),
+};
+const people = shluchim.map(localize[lang]);
 // Group by category, keeping the order of the data file.
 const groups = [...new Set(people.map((s) => s.category))].map((c) => ({ name: c, items: people.filter((s) => s.category === c) }));
 const EAGER = 4; // first cards are above the fold on mobile
@@ -19,33 +22,64 @@ let i = 0;
 const slug = (c: string) => c.toLowerCase().replace(/\s+/g, '-');
 // SEO: search copy + CollectionPage node.
 const n = people.length;
-const seoTitle = withBrand(he ? `צוות השְׁלוּחִים: ${n} עוזרי AI ומה כל אחד עושה` : `The team: ${n} AI agents and what each one does`, SITES[lang].title);
-const seoDescription = he
-  ? `הצוות המלא של ספי: ${n} עוזרי AI. מנהל צוות, עיצוב, פיתוח, אנליטיקס ועוד. מי הם ומה כל אחד עושה, עם דוגמה לכל אחד.`
-  : `Meet Seffy's full team of ${n} AI agents: a team manager, design, development, analytics and more. Who they are and what each one does.`;
+const COPY: Record<Lang, {
+  seoTitle: string; seoDescription: string; pageName: string; description: string;
+  count: string; nav: string; back: string;
+}> = {
+  he: {
+    seoTitle: `צוות השְׁלוּחִים: ${n} עוזרי AI ומה כל אחד עושה`,
+    seoDescription: `הצוות המלא של ספי: ${n} עוזרי AI. מנהל צוות, עיצוב, פיתוח, אנליטיקס ועוד. מי הם ומה כל אחד עושה, עם דוגמה לכל אחד.`,
+    pageName: 'השְׁלוּחִים',
+    description: 'כל השְׁלוּחִים של ספי: מי הם ומה כל אחד עושה.',
+    count: `${n} שְׁלוּחִים`,
+    nav: 'ניווט',
+    back: '→ לכל המעשיות',
+  },
+  en: {
+    seoTitle: `The team: ${n} AI agents and what each one does`,
+    seoDescription: `Meet Seffy's full team of ${n} AI agents: a team manager, design, development, analytics and more. Who they are and what each one does.`,
+    pageName: 'The Shluchim',
+    description: "All of Seffy's shluchim: who they are and what each one does.",
+    count: `${n} shluchim`,
+    nav: 'Navigation',
+    back: '← All stories',
+  },
+  ar: {
+    seoTitle: `الفريق: ${n} وكيل ذكاء اصطناعي وماذا يفعل كل واحد`,
+    seoDescription: `تعرّف إلى فريق سيفي الكامل المكوّن من ${n} مساعد ذكاء اصطناعي: مدير الفريق، التصميم، التطوير، التحليلات والمزيد. من هم وماذا يفعل كل واحد منهم بمثال عملي.`,
+    pageName: 'الفريق',
+    description: 'كل مساعدي الذكاء الاصطناعي لدى سيفي: من هم وماذا يفعل كل واحد منهم.',
+    count: `${n} مساعد ذكاء اصطناعي`,
+    nav: 'التنقل',
+    back: '→ كل الحكايات',
+  },
+};
+const copy = COPY[lang];
+const seoTitle = withBrand(copy.seoTitle, SITES[lang].title);
+const seoDescription = copy.seoDescription;
 const abs = (p: string) => new URL(p, Astro.site).href;
 const ids = nodeIds(abs(lurl('he')), abs(lurl(lang)));
 const pageUrl = abs(lurl(lang, 'team/'));
-const pageName = he ? 'השְׁלוּחִים' : 'The Shluchim';
+const pageName = copy.pageName;
 const jsonLd = [
   pageNode({ type: 'CollectionPage', url: pageUrl, name: pageName, description: seoDescription, lang, websiteId: ids.website }),
   breadcrumbNode([{ name: SITES[lang].title, url: abs(lurl(lang)) }, { name: pageName, url: pageUrl }]),
 ];
 ---
-<Base lang={lang} alternates={{ he: lurl('he', 'team/'), en: lurl('en', 'team/') }}
+<Base lang={lang} alternates={{ he: lurl('he', 'team/'), en: lurl('en', 'team/'), ar: lurl('ar', 'team/') }}
   title={pageName}
-  description={he ? 'כל השְׁלוּחִים של ספי: מי הם ומה כל אחד עושה.' : "All of Seffy's shluchim: who they are and what each one does."}
+  description={copy.description}
   seoTitle={seoTitle} seoDescription={seoDescription} jsonLd={jsonLd}>
   <header class="page-head">
-    {he ? <h1>השְׁלוּחִים</h1> : <h1>The Shluchim</h1>}
-    {he ? (
+    <h1>{pageName}</h1>
+    {lang === 'he' ? (
       <div class="team-intro">
         <p class="lede">שָׁלוּחַ זה עוזר AI שעושה בשבילי עבודה אמיתית.<br />הנה כל הצוות, ומה כל אחד עושה.</p>
         <p>למה צריך הרבה שְׁלוּחִים, ולא אחד שעושה הכול?<br />בהתחלה גם לי לקח זמן להבין את הפער, ולמה צריך את זה.</p>
         <p>אבל זה פשוט חיקוי משמעותי של המציאות.<br />כמו בווטסאפ, כשמתכתבים עם אנשים שונים.<br />מישהו שמומחה ועובד איתך על טקסטים, מישהי שמעצבת, ובחור אחר שמומחה באנליטיקס.<br />זה משנה הכול. זה הרבה הרבה יותר טבעי לעבודה.<br />לכל שָׁלוּחַ יש שם, פרצוף וצ׳אט משלו.<br />ויש מנהל, באשר, שדרכו מנהלים הכול מהמרכז, והוא יוצר קשר עם כל אחד בנפרד.</p>
         <p>גם בצד הטכני יש בזה חוכמה: לא מעמיסים את כל ההקשר על מקום אחד.<br />ואפילו בדיעבד, כשאני מחפש משהו, אני אומר לעצמי: זה קשור לבדיקות תוכנה.<br />וזה ישר הולך ל־QA (בדיקות איכות) שלי, ולא סתם לשָׁלוּחַ שכותב קוד.</p>
       </div>
-    ) : (
+    ) : lang === 'en' ? (
       <div class="team-intro">
         <p class="lede">Why lots of shluchim, and not one that does everything?<br /><span class="gloss">(Shluchim, singular shaliach, is Hebrew for "emissaries". It's what I call my AI agents.)</span></p>
         <p>At first it took me a while to get the difference too, and why you'd need it.</p>
@@ -55,8 +89,18 @@ const jsonLd = [
         <p>And even later on, when I'm looking for something, I tell myself: this has to do with software testing.<br />So it goes straight to my QA shaliach (QA = quality assurance, software testing), and not just to some shaliach that writes code.</p>
         <p class="team-def">Here's the whole team, and what each one does.</p>
       </div>
+    ) : (
+      <div class="team-intro">
+        <p class="lede">لماذا أعمل مع عدة مساعدي ذكاء اصطناعي بدلًا من مساعد واحد يفعل كل شيء؟<br /><span class="gloss">(«Shluchim» كلمة عبرية تعني «المبعوثين»، وهي الاسم الذي أطلقه على مبعوثيّ من مساعدي الذكاء الاصطناعي.)</span></p>
+        <p>في البداية احتجت أنا أيضًا إلى بعض الوقت لأفهم الفرق ولماذا يحتاج المرء إلى ذلك.</p>
+        <p>لكنه ببساطة محاكاة عملية للواقع.<br />تمامًا مثل واتساب حين تتراسل مع أشخاص مختلفين:<br />شخص خبير يعمل معك على النصوص، ومصممة للشاشات، وخبير آخر في التحليلات.<br />هذا يغير كل شيء، ويجعل طريقة العمل أكثر طبيعية بكثير.</p>
+        <p>لكل مساعد اسم ووجه ومحادثة خاصة به.<br />وهناك مدير للفريق، باشر، يُدار كل شيء عبره من المركز ويتواصل مع كل واحد على حدة.</p>
+        <p>وفي الجانب التقني أيضًا حكمة واضحة: لا نكدس كل السياق في مكان واحد.</p>
+        <p>وحتى لاحقًا حين أبحث عن شيء، أقول لنفسي: هذا يتعلق باختبار البرمجيات.<br />فيذهب مباشرة إلى مساعد ضمان الجودة لدي، لا إلى المساعد الذي يكتب الكود فحسب.</p>
+        <p class="team-def">إليك الفريق بأكمله، وما الذي يفعله كل واحد منهم.</p>
+      </div>
     )}
-    <p class="meta"><span>{he ? `${people.length} שְׁלוּחִים` : `${people.length} shluchim`}</span></p>
+    <p class="meta"><span>{copy.count}</span></p>
   </header>
   {groups.map((g) => (
     <section class="roster-group" aria-labelledby={`g-${he ? g.name : slug(g.name)}`}>
@@ -76,7 +120,7 @@ const jsonLd = [
       </ul>
     </section>
   ))}
-  <nav class="post-foot" aria-label={he ? 'ניווט' : 'Navigation'}>
-    <a class="back" href={lurl(lang)}>{he ? '→ לכל המעשיות' : '← All stories'}</a>
+  <nav class="post-foot" aria-label={copy.nav}>
+    <a class="back" href={lurl(lang)}>{copy.back}</a>
   </nav>
 </Base>

@@ -7,6 +7,7 @@ import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseFrontmatter } from './frontmatter.mjs';
 import { TOPICS, TOPIC_SLUGS } from '../data/topics.mjs';
+import { AR_LAUNCHED } from './site-env.mjs';
 
 const LIMITS = { title: 65, descMin: 70, descMax: 160 };
 const BRAND = { he: 'שלוחים', en: 'Shluchim' };
@@ -93,7 +94,7 @@ const tagsOf = (html, name) => [...html.matchAll(new RegExp(`<${name}\\b([^>]*)>
 const walk = (dir) => readdirSync(dir).flatMap((f) => { const p = join(dir, f); return statSync(p).isDirectory() ? walk(p) : [p]; });
 
 /** Audit the built site in `dist`. `site` = origin (no trailing slash), `base` = '' for a root deployment or '/shluchim'-style for a sub-path. */
-export function auditDist(dist, site, base) {
+export function auditDist(dist, site, base, { arLaunched = AR_LAUNCHED } = {}) {
   const errors = [];
   const warnings = [];
   const files = walk(dist);
@@ -126,12 +127,17 @@ export function auditDist(dist, site, base) {
     if (!title) err('missing <title>'); else if (decode(title).length > LIMITS.title + 20) warn(`<title> is ${decode(title).length} chars`);
     const description = metaBy('name', 'description');
     if (!description) err('missing meta description');
-    if (!canonical) err('missing canonical link');
+    // Pre-launch Arabic (/ar/, AR_LAUNCHED=false) is staged: it must be noindex with no canonical, and HE/EN must not hreflang to it.
+    const staged = !arLaunched && /^ar[\\/]/.test(rel);
+    if (staged) {
+      if (!/noindex/i.test(robots)) err('pre-launch /ar/ page must be noindex until AR_LAUNCHED');
+      if (canonical) err('pre-launch /ar/ page must not have a canonical link');
+    } else if (!canonical) err('missing canonical link');
     else {
       if (!canonical.startsWith(site)) err(`canonical is not on ${site}: ${canonical}`);
       pages.set(canonical, { file: rel, hreflang: Object.fromEntries(links.filter((l) => l.rel === 'alternate' && l.hreflang).map((l) => [l.hreflang, l.href])) });
     }
-    if (/noindex/i.test(robots)) err('page is noindex (public pages must be indexable)');
+    if (!staged && /noindex/i.test(robots)) err('page is noindex (public pages must be indexable)');
     const h1 = (html.match(/<h1\b/gi) ?? []).length;
     if (h1 !== 1) err(`${h1} <h1> elements (want exactly 1)`);
 

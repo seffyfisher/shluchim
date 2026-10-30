@@ -9,8 +9,8 @@ import { episodeForPost } from '../data/podcast';
 import { ideaPrompt } from '../lib/idea-prompt';
 import { imageLabels, imagePopover } from '../lib/image-viewer.mjs';
 import '../styles/image-viewer.css';
-import { langOf, keyOf, postUrl, getPosts, getTranslation, formatDate, formatDateShort, readingMinutes, readingLabel, topicsOf, relatedPosts } from '../lib/posts';
-import { lurl, t } from '../i18n/ui';
+import { langOf, keyOf, postUrl, getPosts, getTranslations, formatDate, formatDateShort, readingMinutes, readingLabel, topicsOf, relatedPosts } from '../lib/posts';
+import { lurl, t, type Lang } from '../i18n/ui';
 import { SITES, SEO_KEYWORDS, OG_IMAGE } from '../config';
 import { blogPostingNode, breadcrumbNode, nodeIds, withBrand, isoDate, wordCount } from '../lib/seo';
 import { postOgImage, ogUrl } from '../lib/og-images.mjs';
@@ -22,8 +22,8 @@ const lang = langOf(post);
 const ui = t(lang);
 const { Content } = await render(post);
 const d = post.data;
-const tr = await getTranslation(post);
-const alternates = tr ? { [langOf(tr)]: postUrl(tr) } : {};
+const trs = await getTranslations(post);
+const alternates: Partial<Record<Lang, string>> = Object.fromEntries(Object.entries(trs).map(([l, entry]) => [l, postUrl(entry!)]));
 
 const topics = topicsOf(post, lang);
 const related = relatedPosts(await getPosts(lang), post);
@@ -31,11 +31,12 @@ const related = relatedPosts(await getPosts(lang), post);
 // SEO: <title> / meta description come from seoTitle / seoDescription when set; the page itself keeps title + description.
 const abs = (p: string) => new URL(p, Astro.site).href;
 const pageUrl = abs(postUrl(post));
+const translations: Partial<Record<Lang, string>> = Object.fromEntries(Object.entries(trs).map(([l, entry]) => [l, abs(postUrl(entry!))]));
 const prompt = ideaPrompt(lang, {
   title: d.title, description: d.description, body: post.body ?? '', published: isoDate(d.date),
   updated: d.updated ? isoDate(d.updated) : undefined,
   pageUrl, blogUrl: abs(lurl(lang)), aboutUrl: abs(lurl(lang, 'about/')), feedUrl: abs(lurl(lang, 'rss.xml')),
-  translationUrl: tr ? abs(postUrl(tr)) : undefined,
+  translations,
   coverUrl: d.cover ? abs(d.cover.src) : undefined, coverAlt: d.coverAlt,
 });
 const seoTitle = d.seoTitle ? withBrand(d.seoTitle, SITES[lang].title) : undefined;

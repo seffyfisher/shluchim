@@ -9,34 +9,47 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const url = (p: string) => lurl('he', p); // shared assets
 const av = ABOUT_AVATAR[lang];
-const bubble = lang === 'he'
-  ? { t1: 'מה ניהיה?', t2: 'נו, מה?', a0: 'בועה מוסתרת', a1: 'לדבר עם הדמות', a2: 'לשאול שוב', g: 'הדמות מדברת (לחיצה או חיצים מחליפים)' }
-  : { t1: 'What’s going on?', t2: 'Well, what?', a0: 'Bubble hidden', a1: 'Talk to the character', a2: 'Ask again', g: 'The character talks (click or arrow keys to cycle)' };
-// English about lives at src/content/pages/en/about.md. Until it exists, /en/about/ is a minimal placeholder.
+const BUBBLES: Record<Lang, { t1: string; t2: string; a0: string; a1: string; a2: string; g: string }> = {
+  he: { t1: 'מה ניהיה?', t2: 'נו, מה?', a0: 'בועה מוסתרת', a1: 'לדבר עם הדמות', a2: 'לשאול שוב', g: 'הדמות מדברת (לחיצה או חיצים מחליפים)' },
+  en: { t1: 'What’s going on?', t2: 'Well, what?', a0: 'Bubble hidden', a1: 'Talk to the character', a2: 'Ask again', g: 'The character talks (click or arrow keys to cycle)' },
+  ar: { t1: 'ما الأخبار؟', t2: 'حسنًا، وماذا بعد؟', a0: 'الفقاعة مخفية', a1: 'تحدّث مع الشخصية', a2: 'اسأل مرة أخرى', g: 'الشخصية تتحدث (انقر أو استخدم الأسهم للتبديل)' },
+};
+const bubble = BUBBLES[lang];
+const FALLBACK: Record<Lang, { title: string; description: string; seoDescription: string }> = {
+  he: { title: 'אודות', description: 'למה הבלוג הזה קיים, וקצת על האדם שעובד עם השְׁלוּחִים.', seoDescription: 'למה הבלוג הזה קיים, וקצת על האדם שעובד עם השְׁלוּחִים.' },
+  en: { title: 'About', description: 'Why this blog exists, and a bit about the person who works with the shluchim.', seoDescription: 'Why this blog exists, and a bit about the person who works with the shluchim.' },
+  ar: { title: 'عن المدونة', description: 'لماذا وُجدت هذه المدونة، ونبذة عن سيفي فيشر وكيف يعمل يوميًا مع مساعدي الذكاء الاصطناعي.', seoDescription: 'لماذا وُجدت هذه المدونة، ونبذة عن سيفي فيشر وكيف يعمل يوميًا مع مساعدي الذكاء الاصطناعي الذين ينجزون له مهام حقيقية في العمل والحياة.' },
+};
+// Localized about lives at src/content/pages/<lang>/about.md. Until it exists, /<lang>/about/ renders a minimal placeholder.
 const pages = await getCollection('pages');
 const page = pages.find((p) => p.id === `${lang}/about`);
-const enExists = pages.some((p) => p.id === 'en/about');
 const hePage = pages.find((p) => p.id === 'he/about')!;
 const rendered = page ? await render(page) : null;
 const Content = rendered?.Content;
-const title = page?.data.title ?? 'About';
-const description = page?.data.description ?? 'Why this blog exists, and a bit about the person who works with the shluchim.';
+const title = page?.data.title ?? FALLBACK[lang].title;
+const description = page?.data.description ?? FALLBACK[lang].description;
 // SEO: search copy and an AboutPage node whose main entity is the author (Person) declared on every page.
 const abs = (p: string) => new URL(p, Astro.site).href;
 const ids = nodeIds(abs(lurl('he')), abs(lurl(lang)));
 const seoTitle = page?.data.seoTitle ? withBrand(page.data.seoTitle, SITES[lang].title) : undefined;
-const seoDescription = page?.data.seoDescription ?? description;
+const seoDescription = page?.data.seoDescription ?? FALLBACK[lang].seoDescription;
 const pageUrl = abs(lurl(lang, 'about/'));
 const jsonLd = [
   pageNode({ type: 'AboutPage', url: pageUrl, name: title, description: seoDescription, lang, websiteId: ids.website, mainEntityId: ids.person }),
   breadcrumbNode([{ name: SITES[lang].title, url: abs(lurl(lang)) }, { name: title, url: pageUrl }]),
 ];
 ---
-<Base noindex={!page} title={title} description={description} seoTitle={seoTitle} seoDescription={seoDescription} jsonLd={jsonLd} bodyClass="page-about" lang={lang} alternates={{ he: lurl('he', 'about/'), ...(lang === 'en' || enExists ? { en: lurl('en', 'about/') } : {}) }}>
+<Base noindex={!page} title={title} description={description} seoTitle={seoTitle} seoDescription={seoDescription} jsonLd={jsonLd} bodyClass="page-about" lang={lang} alternates={{ he: lurl('he', 'about/'), en: lurl('en', 'about/'), ar: lurl('ar', 'about/') }}>
   <style slot="head" set:html={`.page-about{--sheet:url(${url(av.sheetLg)})}@media (max-width:63.99rem){.page-about{--sheet:url(${url(av.sheetSm)})}}`}></style>
   <div class="about">
     <article class="prose">
-      {Content ? <Content /> : (
+      {Content ? <Content /> : lang === 'ar' ? (
+        <>
+          <h1>{title}</h1>
+          <p>مرحبًا، أنا سيفي فيشر. تعرض هذه المدونة بصورة عملية كيف أعمل يوميًا مع مساعدي ذكاء اصطناعي أسميهم «Shluchim»، وهي كلمة عبرية تعني «المبعوثين».</p>
+          <p>النسخة العربية الكاملة لهذه الصفحة في الطريق. وحتى ذلك الحين، يمكنك قراءة الصفحة <a href={lurl('he', 'about/')} hreflang="he" lang="he">{hePage.data.title}</a> بالعبرية أو <a href={lurl('en', 'about/')} hreflang="en" lang="en">About</a> بالإنجليزية.</p>
+        </>
+      ) : (
         <>
           <h1>About</h1>
           <p>Hi, I’m Seffy Fisher. This blog shows, as practically as possible, how I work with AI helpers I call <i>shluchim</i>, Hebrew for “emissaries”.</p>

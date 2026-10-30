@@ -2,17 +2,18 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { TOPIC_SLUGS } from './data/topics.mjs';
+import { LOCALES } from './i18n/ui.ts';
 
-// Content is split by language: src/content/posts/{he,en}/<slug>.md and src/content/pages/{he,en}/<name>.md.
-// Entry ids are "<lang>/<slug>". The URL uses only <slug> (Hebrew at the root, English under /en/).
-// `lang` defaults to the folder; `translationKey` (defaults to the file name) links a he/en pair.
+// Content is split by language: src/content/posts/{he,en,ar}/<slug>.md and src/content/pages/{he,en,ar}/<name>.md.
+// Entry ids are "<lang>/<slug>". The URL uses only <slug> (Hebrew at the root, English under /en/, Arabic under /ar/).
+// `lang` defaults to the folder; `translationKey` (defaults to the file name) links translations across languages.
 const i18nFields = {
-  lang: z.enum(['he', 'en']).optional(),
+  lang: z.enum(LOCALES).optional(),
   translationKey: z.string().optional(),
 };
 
 const posts = defineCollection({
-  loader: glob({ pattern: '{he,en}/**/*.md', base: './src/content/posts' }),
+  loader: glob({ pattern: '{he,en,ar}/**/*.md', base: './src/content/posts' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -46,7 +47,7 @@ const posts = defineCollection({
 });
 
 const pages = defineCollection({
-  loader: glob({ pattern: '{he,en}/**/*.md', base: './src/content/pages' }),
+  loader: glob({ pattern: '{he,en,ar}/**/*.md', base: './src/content/pages' }),
   schema: z.object({ title: z.string(), description: z.string(), seoTitle: z.string().optional(), seoDescription: z.string().optional(), ...i18nFields }),
 });
 

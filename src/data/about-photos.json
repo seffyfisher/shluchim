@@ -1,5 +1,5 @@
 {
-  "_note": "About page photos. Captions and alt text are DRAFTS for Ben's review: edit only here. Placement: a ```photo <id>``` block in src/content/pages/{he,en}/about.md.",
+  "_note": "About page photos. Captions and alt text are DRAFTS for Ben's review: edit only here. Placement: a ```photo <id>``` block in src/content/pages/{he,en,ar}/about.md.",
   "family": {
     "src": "/images/about/sefer-hashluchim-fisher.webp",
     "width": 1576,
@@ -7,8 +7,10 @@
     "display": 640,
     "caption_he": "",
     "caption_en": "",
+    "caption_ar": "",
     "alt_he": "תמונה משפחתית מודפסת וישנה, עם קמטים וקרעים בנייר: אישה עם שיער כהה מחזיקה פעוט עם כיפה כחולה, ולידה גבר עם זקן, כובע שחור וחליפה שחורה. בצד מודפס כיתוב עם השמות: הרב דוד פישר מבית חב״ד הרצליה, אשתו סלביה ובנם יוסף יצחק.",
-    "alt_en": "An old printed family photo with creases and tears in the paper: a dark-haired woman holds a toddler in a blue kippah, next to a bearded man in a black hat and black suit. A caption printed beside them, in Hebrew, gives their names: Rabbi David Fisher of Chabad House Herzliya, his wife Sylvia and their son Yosef Yitzchak."
+    "alt_en": "An old printed family photo with creases and tears in the paper: a dark-haired woman holds a toddler in a blue kippah, next to a bearded man in a black hat and black suit. A caption printed beside them, in Hebrew, gives their names: Rabbi David Fisher of Chabad House Herzliya, his wife Sylvia and their son Yosef Yitzchak.",
+    "alt_ar": "صورة عائلية مطبوعة وقديمة عليها ثنيات وتمزقات في الورق: امرأة داكنة الشعر تحمل طفلًا صغيرًا بقلنسوة زرقاء، وبجانبها رجل بلحية وقبعة وبذلة سوداوين، مع تعليق مطبوع بالعبرية يذكر أسماء أفراد العائلة."
   },
   "cover": {
     "src": "/images/about/sefer-hashluchim-cover.webp",
@@ -17,8 +19,10 @@
     "display": 260,
     "caption_he": "ספר השְׁלוּחִים.\nהספר שבו המשפחה שלי מופיעה.",
     "caption_en": "The Book of Shluchim.\nThe book my family appears in.",
+    "caption_ar": "كتاب المبعوثين.\nالكتاب الذي تظهر فيه عائلتي.",
     "alt_he": "כריכה כחולה ובלויה של ספר, ועליה באותיות זהב: ספר השלוחים.",
-    "alt_en": "A worn blue book cover with gold Hebrew lettering: Sefer HaShluchim, the Book of Shluchim."
+    "alt_en": "A worn blue book cover with gold Hebrew lettering: Sefer HaShluchim, the Book of Shluchim.",
+    "alt_ar": "غلاف كتاب أزرق قديم كُتب عليه بحروف ذهبية بالعبرية: سفر هشلوحيم (كتاب المبعوثين)."
   },
   "cypress": {
     "src": "/images/about/kfar-yuval-cypresses.webp",
@@ -27,7 +31,9 @@
     "display": 540,
     "caption_he": "הברושים של כפר יובל על הגבול",
     "caption_en": "The cypresses of Kfar Yuval, on the border",
+    "caption_ar": "أشجار السرو في كفار يوفال على الحدود",
     "alt_he": "שורה של ברושים גבוהים ודקים בשדה יבש, מאחוריהם בתים עם גגות אדומים ועצים, ובאופק רכס הרים מעורפל תחת שמיים כחולים עם עננים.",
-    "alt_en": "A row of tall, slender cypress trees in a dry field, with red-roofed houses and trees behind them and a hazy mountain ridge on the horizon under a blue sky with clouds."
+    "alt_en": "A row of tall, slender cypress trees in a dry field, with red-roofed houses and trees behind them and a hazy mountain ridge on the horizon under a blue sky with clouds.",
+    "alt_ar": "صف من أشجار السرو الطويلة والنحيلة في حقل جاف، خلفها بيوت ذات أسقف حمراء وأشجار، وفي الأفق سلسلة جبال ضبابية تحت سماء زرقاء مع غيوم."
   }
 }
