@@ -1,77 +1,161 @@
 ---
 import Base from '../layouts/Base.astro';
-import { friends } from '../data/friends';
+import { friends, type Friend } from '../data/friends';
 import { friendPortraits } from '../data/friend-portraits';
 import { lurl, type Lang } from '../i18n/ui';
 import { SITES } from '../config';
+import { getPosts, keyOf, postUrl } from '../lib/posts';
 import { pageNode, breadcrumbNode, nodeIds, withBrand } from '../lib/seo';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
-const he = lang === 'he';
-const title = he ? 'בני אנוש' : 'Humans';
-const description = he
-  ? 'אנשים שאני עוקב אחריהם ומקבל מהם השראה, עם קשר ובלי קשר ל־AI. כמה מילים וקישורים, כדי שגם אתם תוכלו להכיר.'
-  : 'People I follow and find inspiring, in AI and beyond. A few words and links so you can get to know them too.';
-const seoTitle = withBrand(he ? 'בני אנוש: אנשים שנותנים לי השראה' : 'Humans: people who inspire me', SITES[lang].title);
-const seoDescription = he
-  ? `${friends.length} אנשים שאני עוקב אחריהם ומקבל מהם השראה, עם קשר ובלי קשר ל־AI. כמה מילים על העשייה שלהם וקישורים לתוכן שהם משתפים.`
-  : `${friends.length} people I follow and find inspiring, in AI and beyond. Short introductions and links to the writing, work and ideas they share.`;
+const fName = (f: Friend) => ({ he: f.name, en: f.nameEn, ar: f.nameAr })[lang];
+const fTheme = (f: Friend) => ({ he: f.theme, en: f.themeEn, ar: f.themeAr })[lang];
+const fText = (f: Friend) => ({ he: f.text, en: f.textEn, ar: f.textAr })[lang];
+const COPY: Record<Lang, {
+  title: string; description: string; seoTitle: string; seoDescription: string;
+  subtitle: string; intro: string; jumpLabel: string; onPage: string; count: string;
+  listLabel: string; photoSource: (name: string, src: string) => string;
+  linksLabel: (name: string) => string; photoCredit: (photographer: string) => string;
+  moreHeading: string; moreIntro: string; stories: [string, string, string];
+  nav: string; back: string;
+}> = {
+  he: {
+    title: 'בני אנוש',
+    description: 'אנשים שאני עוקב אחריהם ומקבל מהם השראה, עם קשר ובלי קשר ל־AI. כמה מילים וקישורים, כדי שגם אתם תוכלו להכיר.',
+    seoTitle: 'בני אנוש: אנשים שנותנים לי השראה',
+    seoDescription: `${friends.length} אנשים שאני עוקב אחריהם ומקבל מהם השראה, עם קשר ובלי קשר ל־AI. כמה מילים על העשייה שלהם וקישורים לתוכן שהם משתפים.`,
+    subtitle: 'אנשים שאני עוקב אחריהם ומקבל מהם השראה',
+    intro: 'יש כאן אנשים שאני עוקב אחריהם ולומד מהעשייה שלהם, עם קשר ובלי קשר ל־AI. כמה מילים על כל אחד וקישורים, כדי שגם אתם תוכלו להכיר.',
+    jumpLabel: 'קפיצה לאדם בדף', onPage: 'על הדף', count: `${friends.length} בני אנוש`,
+    listLabel: 'אנשים שנותנים לי השראה',
+    photoSource: (name, src) => `מקור התמונה של ${name}: ${src}`,
+    linksLabel: (name) => `קישורים של ${name}`,
+    photoCredit: (p) => `צילום: ${p}`,
+    moreHeading: 'עוד מהסיפורים שלי',
+    moreIntro: 'בבלוג אני מתעד עבודה משותפת עם השְׁלוּחִים: מה ביקשתי, מה ניסינו ומה יצא. הנה כמה מהסיפורים:',
+    stories: [
+      'בנייה עם AI — איך נולד הבלוג הזה',
+      'עיצוב ומוצר — מרעיון לתהליך עבודה',
+      'עבודה עם צוות עוזרי AI — כתובת מייל אחת לכל הצוות',
+    ],
+    nav: 'ניווט', back: '→ לכל הסיפורים',
+  },
+  en: {
+    title: 'Humans',
+    description: 'People I follow and find inspiring, in AI and beyond. A few words and links so you can get to know them too.',
+    seoTitle: 'Humans: people who inspire me',
+    seoDescription: `${friends.length} people I follow and find inspiring, in AI and beyond. Short introductions and links to the writing, work and ideas they share.`,
+    subtitle: 'People I follow who inspire me',
+    intro: 'These are people I follow and learn from, in AI and beyond. A few words about each person and links so you can get to know them too.',
+    jumpLabel: 'Jump to a person', onPage: 'On this page', count: `${friends.length} humans`,
+    listLabel: 'People who inspire me',
+    photoSource: (name, src) => `Photo source for ${name}: ${src}`,
+    linksLabel: (name) => `Links for ${name}`,
+    photoCredit: () => 'Photo: Dana Barak',
+    moreHeading: 'More of my own stories',
+    moreIntro: 'On the blog I document working with my shluchim: what I asked for, what we tried and how it turned out. Here are a few of those stories:',
+    stories: [
+      'Building with AI — how this blog was born',
+      'Design and product — from an idea to a workflow',
+      'Working with an AI team — one email address for the whole team',
+    ],
+    nav: 'Navigation', back: '← All stories',
+  },
+  ar: {
+    title: 'بشر',
+    description: 'أشخاص أتابعهم وأستلهم من أعمالهم في الذكاء الاصطناعي وخارجه. بضع كلمات وروابط لتتعرف إليهم أيضًا.',
+    seoTitle: 'بشر: أشخاص يلهمونني',
+    seoDescription: `${friends.length} شخصًا أتابعهم وأستلهم من أعمالهم في الذكاء الاصطناعي وخارجه. نبذة قصيرة عن عمل كل واحد منهم وروابط للمحتوى والأفكار التي يشاركونها.`,
+    subtitle: 'أشخاص أتابعهم وأستلهم منهم',
+    intro: 'هنا أشخاص أتابعهم وأتعلم من عملهم، في الذكاء الاصطناعي وفي مجالات أخرى. بضع كلمات عن كل شخص وروابط لتتعرف إليهم أيضًا.',
+    jumpLabel: 'الانتقال إلى شخص في الصفحة', onPage: 'في هذه الصفحة', count: `${friends.length} شخصًا`,
+    listLabel: 'أشخاص يلهمونني',
+    photoSource: (name, src) => `مصدر صورة ${name}: ${src}`,
+    linksLabel: (name) => `روابط ${name}`,
+    photoCredit: () => 'تصوير: دانا باراك',
+    moreHeading: 'من حكاياتي في المدونة',
+    moreIntro: 'أوثق في المدونة عملي المشترك مع مساعدي الذكاء الاصطناعي: ماذا طلبت، وماذا جربنا، وماذا خرج. إليك بعض الحكايات:',
+    stories: [
+      'البناء بالذكاء الاصطناعي — كيف وُلدت هذه المدونة',
+      'التصميم والمنتج — من فكرة إلى مسار عمل',
+      'العمل مع فريق مساعدي الذكاء الاصطناعي — عنوان بريد واحد للفريق كله',
+    ],
+    nav: 'التنقل', back: '→ كل الحكايات',
+  },
+};
+const copy = COPY[lang];
+const title = copy.title;
+const description = copy.description;
+const seoTitle = withBrand(copy.seoTitle, SITES[lang].title);
+const seoDescription = copy.seoDescription;
+const STORY_KEYS = [
+  { key: '2026-10-10-building-the-shluchim-blog', he: 'posts/2026-10-10-building-the-shluchim-blog/', en: 'posts/2026-10-10-how-the-shluchim-blog-was-born/' },
+  { key: '2026-10-08-spec-driven-tickets-redesign', he: 'posts/2026-10-08-spec-driven-tickets-redesign/', en: 'posts/2026-10-08-spec-driven-design-for-the-tickets-page/' },
+  { key: '2026-10-11-grokbot-email-inbox', he: 'posts/2026-10-11-grokbot-email-inbox/', en: 'posts/2026-10-11-one-email-address-a-front-door/' },
+] as const;
+const langPosts = lang === 'ar' ? await getPosts('ar') : [];
+const storyLinks = STORY_KEYS.map((s, idx) => {
+  if (lang === 'he') return { href: lurl('he', s.he), label: copy.stories[idx], hreflang: undefined };
+  if (lang === 'en') return { href: lurl('en', s.en), label: copy.stories[idx], hreflang: undefined };
+  const arMatch = langPosts.find((p) => keyOf(p) === s.key);
+  return arMatch
+    ? { href: postUrl(arMatch), label: copy.stories[idx], hreflang: undefined }
+    : { href: lurl('en', s.en), label: copy.stories[idx], hreflang: 'en' as const };
+});
 const abs = (path: string) => new URL(path, Astro.site).href;
 const pageUrl = abs(lurl(lang, 'friends/'));
 const ids = nodeIds(abs(lurl('he')), abs(lurl(lang)));
 const jsonLd = [
   pageNode({ type: 'CollectionPage', url: pageUrl, name: title, description: seoDescription, lang, websiteId: ids.website,
-    list: friends.map((friend) => ({ name: he ? friend.name : friend.nameEn, url: friend.links[0].url })) }),
+    list: friends.map((friend) => ({ name: fName(friend), url: friend.links[0].url })) }),
   breadcrumbNode([{ name: SITES[lang].title, url: abs(lurl(lang)) }, { name: title, url: pageUrl }]),
 ];
 ---
 <Base bodyClass="page-friends" lang={lang} title={title} description={description} seoTitle={seoTitle} seoDescription={seoDescription}
-  alternates={{ he: lurl('he', 'friends/'), en: lurl('en', 'friends/') }} jsonLd={jsonLd}>
+  alternates={{ he: lurl('he', 'friends/'), en: lurl('en', 'friends/'), ar: lurl('ar', 'friends/') }} jsonLd={jsonLd}>
   <header class="page-head human-intro">
     <div class="intro-copy">
     <h1>{title}</h1>
-    <p class="page-subtitle">{he ? 'אנשים שאני עוקב אחריהם ומקבל מהם השראה' : 'People I follow who inspire me'}</p>
-    <p>{he ? 'יש כאן אנשים שאני עוקב אחריהם ולומד מהעשייה שלהם, עם קשר ובלי קשר ל־AI. כמה מילים על כל אחד וקישורים, כדי שגם אתם תוכלו להכיר.' : 'These are people I follow and learn from, in AI and beyond. A few words about each person and links so you can get to know them too.'}</p>
+    <p class="page-subtitle">{copy.subtitle}</p>
+    <p>{copy.intro}</p>
     </div>
   </header>
-  <nav class="people-index" aria-label={he ? 'קפיצה לאדם בדף' : 'Jump to a person'}>
-    <div class="index-heading"><span>{he ? 'על הדף' : 'On this page'}</span><span>{he ? `${friends.length} בני אנוש` : `${friends.length} humans`}</span></div>
-    <ul>{friends.map((friend) => <li><a href={`#${friend.id}`}>{he ? friend.name : friend.nameEn}</a></li>)}</ul>
+  <nav class="people-index" aria-label={copy.jumpLabel}>
+    <div class="index-heading"><span>{copy.onPage}</span><span>{copy.count}</span></div>
+    <ul>{friends.map((friend) => <li><a href={`#${friend.id}`}>{fName(friend)}</a></li>)}</ul>
   </nav>
-  <ul class="friends" aria-label={he ? 'אנשים שנותנים לי השראה' : 'People who inspire me'}>
+  <ul class="friends" aria-label={copy.listLabel}>
     {friends.map((friend, index) => (
       <li class="friend" id={friend.id}>
         <div class="friend-heading">
           <a class="portrait-link" href={friendPortraits[friend.id].source}
             style={`--portrait-color: ${friend.pastel}; --portrait-position: ${friendPortraits[friend.id].position ?? '50% 50%'}`}
-            aria-label={he ? `מקור התמונה של ${friend.name}: ${friendPortraits[friend.id].sourceName}` : `Photo source for ${friend.nameEn}: ${friendPortraits[friend.id].sourceName}`} target="_blank" rel="noopener">
+            aria-label={copy.photoSource(fName(friend), friendPortraits[friend.id].sourceName)} target="_blank" rel="noopener">
             <img class="person-photo" src={friendPortraits[friend.id].src} alt="" width="80" height="80"
               loading={index < 4 ? 'eager' : 'lazy'} decoding="async" referrerpolicy="no-referrer" />
           </a>
           <div class="friend-identity">
-            <span class="theme">{he ? friend.theme : friend.themeEn}</span>
-            <h2><a href={friend.links[0].url} target="_blank" rel="noopener">{he ? friend.name : friend.nameEn}</a></h2>
+            <span class="theme">{fTheme(friend)}</span>
+            <h2><a href={friend.links[0].url} target="_blank" rel="noopener">{fName(friend)}</a></h2>
           </div>
         </div>
-        <p>{he ? friend.text : friend.textEn}</p>
-        <ul class="friend-links" aria-label={he ? `קישורים של ${friend.name}` : `Links for ${friend.nameEn}`}>
-          {friend.links.map((link) => <li><a href={link.url} target="_blank" rel="noopener">{he ? link.he : link.en}<span aria-hidden="true"> ↗</span></a></li>)}
+        <p>{fText(friend)}</p>
+        <ul class="friend-links" aria-label={copy.linksLabel(fName(friend))}>
+          {friend.links.map((link) => <li><a href={link.url} target="_blank" rel="noopener">{link[lang]}<span aria-hidden="true"> ↗</span></a></li>)}
         </ul>
-        {friendPortraits[friend.id].photographer && <p class="photo-credit">{he ? `צילום: ${friendPortraits[friend.id].photographer}` : 'Photo: Dana Barak'}</p>}
+        {friendPortraits[friend.id].photographer && <p class="photo-credit">{copy.photoCredit(friendPortraits[friend.id].photographer)}</p>}
       </li>
     ))}
   </ul>
   <section class="connections" aria-labelledby="connections-title">
-    <h2 id="connections-title">{he ? 'עוד מהסיפורים שלי' : 'More of my own stories'}</h2>
-    <p>{he ? 'בבלוג אני מתעד עבודה משותפת עם השְׁלוּחִים: מה ביקשתי, מה ניסינו ומה יצא. הנה כמה מהסיפורים:' : 'On the blog I document working with my shluchim: what I asked for, what we tried and how it turned out. Here are a few of those stories:'}</p>
+    <h2 id="connections-title">{copy.moreHeading}</h2>
+    <p>{copy.moreIntro}</p>
     <ul>
-      <li><a href={lurl(lang, he ? 'posts/2026-10-10-building-the-shluchim-blog/' : 'posts/2026-10-10-how-the-shluchim-blog-was-born/')}>{he ? 'בנייה עם AI — איך נולד הבלוג הזה' : 'Building with AI — how this blog was born'}</a></li>
-      <li><a href={lurl(lang, he ? 'posts/2026-10-08-spec-driven-tickets-redesign/' : 'posts/2026-10-08-spec-driven-design-for-the-tickets-page/')}>{he ? 'עיצוב ומוצר — מרעיון לתהליך עבודה' : 'Design and product — from an idea to a workflow'}</a></li>
-      <li><a href={lurl(lang, he ? 'posts/2026-10-11-grokbot-email-inbox/' : 'posts/2026-10-11-one-email-address-a-front-door/')}>{he ? 'עבודה עם צוות עוזרי AI — כתובת מייל אחת לכל הצוות' : 'Working with an AI team — one email address for the whole team'}</a></li>
+      {storyLinks.map((item) => <li><a href={item.href} hreflang={item.hreflang}>{item.label}</a></li>)}
     </ul>
   </section>
-  <nav class="post-foot" aria-label={he ? 'ניווט' : 'Navigation'}>
-    <a class="back" href={lurl(lang)}>{he ? '→ לכל הסיפורים' : '← All stories'}</a>
+  <nav class="post-foot" aria-label={copy.nav}>
+    <a class="back" href={lurl(lang)}>{copy.back}</a>
   </nav>
 </Base>
 <style>

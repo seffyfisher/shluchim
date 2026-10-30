@@ -4,7 +4,7 @@ import '../styles/not-found.css';
 import shluchim from '../data/shluchim.json';
 import { TOPICS, TOPIC_SLUGS } from '../data/topics.mjs';
 import { lurl } from '../i18n/ui';
-import { getPosts, postUrl } from '../lib/posts';
+import { getPosts, getTopicPosts, postUrl } from '../lib/posts';
 
 // A small, still group keeps the recital as the only moving focal point.
 const portraits = import.meta.glob<string>('../assets/shluchim/*-still.webp', { eager: true, query: '?url', import: 'default' });
@@ -15,7 +15,8 @@ const people = shluchim.filter((person) => selectedHeads.includes(person.id)).ma
   return { ...person, image };
 });
 const sceneDescription = `ארבעה ראשים של השְׁלוּחִים — ${people.map((person) => person.name).join(', ')} — סביב מצבת דפדפן עם 404. נוסח הקדיש מופיע לפי סדר הקריאה ונע מטה.`;
-const [hePosts, enPosts] = await Promise.all([getPosts('he'), getPosts('en')]);
+const [hePosts, enPosts, arPosts] = await Promise.all([getPosts('he'), getPosts('en'), getPosts('ar')]);
+const arTopics = (await Promise.all(TOPIC_SLUGS.map(async (slug) => ((await getTopicPosts(slug, 'ar')).length > 0 ? slug : null)))).filter((s): s is string => s !== null);
 const siteLinks = [
   { name: 'דף הבית', path: '' }, { name: 'השְׁלוּחִים', path: 'team/' },
   { name: 'בני אנוש', path: 'friends/' }, { name: 'קישורים', path: 'links/' }, { name: 'פידבקים', path: 'feedback/' }, { name: 'אודות', path: 'about/' },
@@ -24,8 +25,12 @@ const englishLinks = [
   { name: 'Home & stories', path: '' }, { name: 'The Shluchim', path: 'team/' },
   { name: 'Humans', path: 'friends/' }, { name: 'About', path: 'about/' },
 ];
+const arabicLinks = [
+  { name: 'الرئيسية والحكايات', path: '' }, { name: 'الفريق', path: 'team/' },
+  { name: 'بشر', path: 'friends/' }, { name: 'عن المدونة', path: 'about/' },
+];
 ---
-<Base lang="he" noindex bodyClass="page-404" title="קדש" seoTitle="קדש: העמוד לא נמצא (404) · שְׁלוּחִים"
+<Base lang="he" noindex switchLinks={{ he: lurl('he'), en: lurl('en'), ar: lurl('ar') }} bodyClass="page-404" title="קדש" seoTitle="קדש: העמוד לא נמצא (404) · שְׁלוּחִים"
   description="העמוד שחיפשת כבר לא איתנו. השְׁלוּחִים התכנסו לקד(י)ש קטן, ומכאן אפשר לחזור לדף הבית, לצוות ולכל המעשיות בעברית ובאנגלית.">
   <div class="not-found">
     <header class="hero">
@@ -82,10 +87,12 @@ const englishLinks = [
         <nav aria-label="האתר"><h3>האתר</h3>{siteLinks.map((link) => <a href={lurl('he', link.path)}>{link.name}</a>)}<a href={`${lurl('he')}#stories`}>רשימת המעשיות</a><a href="https://he.wikipedia.org/wiki/%D7%97%D7%91%D7%A8%D7%94_%D7%A7%D7%93%D7%99%D7%A9%D7%90" target="_blank" rel="noopener noreferrer">עוד על חברה קדישא</a></nav>
         <nav aria-label="הנושאים"><h3>הנושאים</h3>{TOPIC_SLUGS.map((slug) => <a href={lurl('he', `topics/${slug}/`)}>{TOPICS[slug as keyof typeof TOPICS].he.label}</a>)}</nav>
         <nav lang="en" dir="ltr" aria-label="In English"><h3>In English</h3>{englishLinks.map((link) => <a href={lurl('en', link.path)}>{link.name}</a>)}{TOPIC_SLUGS.map((slug) => <a href={lurl('en', `topics/${slug}/`)}>{TOPICS[slug as keyof typeof TOPICS].en.label}</a>)}</nav>
+        <nav lang="ar" dir="rtl" aria-label="بالعربية"><h3>بالعربية</h3>{arabicLinks.map((link) => <a href={lurl('ar', link.path)}>{link.name}</a>)}{arTopics.map((slug) => <a href={lurl('ar', `topics/${slug}/`)}>{TOPICS[slug as keyof typeof TOPICS].ar.label}</a>)}</nav>
       </div>
       <div class="story-index">
         <section class="story-list"><h3>כל המעשיות בעברית ({hePosts.length})</h3><ul>{hePosts.map((post) => <li><a href={postUrl(post)}>{post.data.title}</a></li>)}</ul></section>
         <section class="story-list" lang="en" dir="ltr"><h3>All stories in English ({enPosts.length})</h3><ul>{enPosts.map((post) => <li><a href={postUrl(post)}>{post.data.title}</a></li>)}</ul></section>
+        {arPosts.length > 0 && <section class="story-list" lang="ar" dir="rtl"><h3>كل الحكايات بالعربية ({arPosts.length})</h3><ul>{arPosts.map((post) => <li><a href={postUrl(post)}>{post.data.title}</a></li>)}</ul></section>}
       </div>
     </section>
   </div>

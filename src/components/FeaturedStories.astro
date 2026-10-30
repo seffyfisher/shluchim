@@ -5,19 +5,25 @@ import { postUrl, formatDateShort, readingMinutes, readingLabel, keyOf } from '.
 import { storyImage, previewUrl, previewSrcset } from '../lib/story-images.mjs';
 interface Props { posts: CollectionEntry<'posts'>[]; lang: Lang }
 const { posts, lang } = Astro.props;
-const he = lang === 'he';
+const COPY: Record<Lang, { start: string; guideCta: string; storyCta: string; qMark: string }> = {
+  he: { start: 'כדאי להתחיל כאן', guideCta: 'למדריך המלא', storyCta: 'למעשיה המלאה', qMark: '?' },
+  en: { start: 'A good place to start', guideCta: 'Read the full guide', storyCta: 'Read the full story', qMark: '?' },
+  ar: { start: 'نقطة بداية ممتازة', guideCta: 'اقرأ الدليل الكامل', storyCta: 'اقرأ الحكاية كاملة', qMark: '؟' },
+};
+const copy = COPY[lang];
 const entries = await Promise.all(posts.map(async (post) => {
   const guide = keyOf(post) === 'grok-bot-guide';
   const description = post.data.listDescription ?? post.data.description;
+  const qIdx = Math.max(-1, ...[copy.qMark, '?'].map((q) => description.indexOf(q)).filter((i) => i >= 0));
   // The guide's own opening question is its short editorial teaser; the article and metadata stay intact.
-  const teaser = guide && !post.data.listDescription && description.includes('?') ? description.slice(0, description.indexOf('?') + 1) : description;
+  const teaser = guide && !post.data.listDescription && qIdx >= 0 ? description.slice(0, qIdx + 1) : description;
   return { post, guide, teaser, image: await storyImage(post) };
 }));
 ---
 <section class="featured-section" aria-labelledby="featured-title">
   <header class="featured-heading">
-    <h2 id="featured-title">{he ? <>מעשיות <mark>נבחרות</mark></> : <>Featured <mark>stories</mark></>}</h2>
-    <p>{he ? 'כדאי להתחיל כאן' : 'A good place to start'}</p>
+    <h2 id="featured-title">{lang === 'he' ? <>מעשיות <mark>נבחרות</mark></> : lang === 'en' ? <>Featured <mark>stories</mark></> : <>حكايات <mark>مختارة</mark></>}</h2>
+    <p>{copy.start}</p>
   </header>
   <ol class="featured-stories" role="list">
     {entries.map(({ post, guide, teaser, image }) => (
@@ -29,7 +35,7 @@ const entries = await Promise.all(posts.map(async (post) => {
           <p class="meta"><time datetime={post.data.date.toISOString().slice(0, 10)}>{formatDateShort(post.data.date, lang)}</time><span>{readingLabel(readingMinutes(post.body, lang), lang)}</span></p>
           <h3><a href={postUrl(post)}>{post.data.title}</a></h3>
           <p class="dek">{teaser}</p>
-          <span class="featured-cta" aria-hidden="true">{he ? (guide ? 'למדריך המלא' : 'למעשיה המלאה') : (guide ? 'Read the full guide' : 'Read the full story')}</span>
+          <span class="featured-cta" aria-hidden="true">{guide ? copy.guideCta : copy.storyCta}</span>
         </div>
       </li>
     ))}

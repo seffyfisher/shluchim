@@ -5,11 +5,17 @@ import moon from '../assets/theme/moon.webp';
 import computer from '../assets/theme/computer.webp';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
-const legend = lang === 'he' ? 'ערכת נושא' : 'Theme';
+const COPY: Record<Lang, { legend: string; dark: string; light: string; system: string }> = {
+  he: { legend: 'ערכת נושא', dark: 'מצב לילה', light: 'מצב יום', system: 'לפי המערכת' },
+  en: { legend: 'Theme', dark: 'Dark mode', light: 'Light mode', system: 'System theme' },
+  ar: { legend: 'المظهر', dark: 'الوضع الداكن', light: 'الوضع الفاتح', system: 'حسب النظام' },
+};
+const copy = COPY[lang];
+const legend = copy.legend;
 const options = [
-  { value: 'dark', image: moon, label: lang === 'he' ? 'מצב לילה' : 'Dark mode' },
-  { value: 'light', image: sun, label: lang === 'he' ? 'מצב יום' : 'Light mode' },
-  { value: 'system', image: computer, label: lang === 'he' ? 'לפי המערכת' : 'System theme' },
+  { value: 'dark', image: moon, label: copy.dark },
+  { value: 'light', image: sun, label: copy.light },
+  { value: 'system', image: computer, label: copy.system },
 ];
 ---
 <span class="theme-control">

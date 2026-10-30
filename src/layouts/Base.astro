@@ -3,11 +3,13 @@ import '../styles/global.css';
 import '../styles/view-transitions.css';
 import heDisplayFontUrl from '../fonts/noa-shalev-regular-AlefAlefAlef.woff2?url';
 import enDisplayFontUrl from '../fonts/young-serif-400.woff2?url';
+import arFontUrl from '../fonts/readex-pro-arabic-var.woff2?url';
 import bodyFontUrl from '../fonts/Polin-Regular-core.woff2?url';
 import boldFontUrl from '../fonts/Polin-Extrabold-core.woff2?url';
-import { SITES, SHOW_DRAFTS, SHOW_SWITCHER_ON_HE, PERSON, SEO_HOME, SEO_KEYWORDS, OG_IMAGE, VERIFY, GA_MEASUREMENT_ID, PRESENCE_PUBLISHABLE_KEY } from '../config';
+import { AR_LAUNCHED, SITES, SHOW_DRAFTS, SHOW_SWITCHER_ON_HE, PERSON, SEO_HOME, SEO_KEYWORDS, OG_IMAGE, VERIFY, GA_MEASUREMENT_ID, PRESENCE_PUBLISHABLE_KEY } from '../config';
 import { TOPICS, TOPIC_SLUGS } from '../data/topics.mjs';
-import { LANG_META, lurl, other, t, isLang, type Lang } from '../i18n/ui';
+import { LANG_META, LOCALES, lurl, otherLangs, t, isLang, type Lang } from '../i18n/ui';
+import { getTopicPosts } from '../lib/posts';
 import { safeJson, personNode, websiteNode, blogNode, nodeIds } from '../lib/seo';
 import { gtagSnippet } from '../lib/analytics';
 import FollowBlock from '../components/FollowBlock.astro';
@@ -20,6 +22,8 @@ interface Props {
   lang?: Lang;
   /** Counterpart pages (full paths incl. base). Only pass a language when that page really exists. */
   alternates?: Partial<Record<Lang, string>>;
+  /** Language-switcher targets that are not SEO alternates (e.g. the 404 page sends every language to its home). */
+  switchLinks?: Partial<Record<Lang, string>>;
   /** Complete <title> text, brand included. Default: "<title> · <brand>". */
   seoTitle?: string;
   /** Meta description + JSON-LD text. Default: `description`. Social cards keep using `description`. */
@@ -41,7 +45,10 @@ const ui = t(lang);
 const meta = LANG_META[lang];
 const { title, description, noindex = false, masthead = false, bodyClass, seoTitle, seoDescription, ogType = 'website', image, imageAlt, imageWidth, imageHeight, published, modified, section, tags, markdown, jsonLd = [] } = Astro.props;
 const alternates: Partial<Record<Lang, string>> = { ...(Astro.props.alternates ?? {}), [lang]: Astro.url.pathname };
-const hasAlt = Object.keys(alternates).length > 1;
+// Pre-launch, /ar/ is noindex: HE/EN pages keep their he/en hreflang set (no alternate pointing at a noindex page). /ar/ pages list all three.
+const seoAlternates: Partial<Record<Lang, string>> = AR_LAUNCHED || lang === 'ar' ? alternates : Object.fromEntries(Object.entries(alternates).filter(([l]) => l !== 'ar'));
+const hasAlt = Object.keys(seoAlternates).length > 1;
+const switchLinks: Record<Lang, string> = Object.fromEntries(LOCALES.map((l) => [l, Astro.props.switchLinks?.[l] ?? alternates[l] ?? lurl(l)])) as Record<Lang, string>;
 const fullTitle = seoTitle ?? (title ? `${title} · ${SITE.title}` : SITE.title);
 const metaDescription = seoDescription ?? description ?? SITE.tagline;
 const shareTitle = title ?? seoTitle ?? SITE.title;
@@ -50,19 +57,21 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const abs = (p: string) => new URL(p, Astro.site).href;
 const shareImage = abs(image ?? lurl('he', OG_IMAGE.file[lang]));
 const shareImageAlt = imageAlt ?? OG_IMAGE.alt[lang];
-const robots = noindex || SHOW_DRAFTS ? 'noindex' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1';
+const isNoindex = noindex || (lang === 'ar' && !AR_LAUNCHED);
+const robots = isNoindex || SHOW_DRAFTS ? 'noindex' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1';
+const displayFontUrl: Record<Lang, string> = { he: heDisplayFontUrl, en: enDisplayFontUrl, ar: arFontUrl };
 // Structured data: every page carries the author (Person), the site (WebSite) and the Blog, so the graph is self-contained; pages add their own nodes (BlogPosting, breadcrumbs...).
 const { person: personId, website: websiteId, blog: blogId } = nodeIds(abs(lurl('he')), abs(lurl(lang)));
+const personAlt = AR_LAUNCHED || lang === 'ar' ? otherLangs(lang).map((l) => PERSON.name[l]) : PERSON.name[lang === 'he' ? 'en' : 'he'];
 const graph = [
-  personNode({ id: personId, name: PERSON.name[lang], alternateName: PERSON.name[lang === 'he' ? 'en' : 'he'], url: abs(lurl(lang, 'about/')), description: PERSON.description[lang], sameAs: [...PERSON.sameAs] }),
+  personNode({ id: personId, name: PERSON.name[lang], alternateName: personAlt, url: abs(lurl(lang, 'about/')), description: PERSON.description[lang], sameAs: [...PERSON.sameAs] }),
   websiteNode({ id: websiteId, url: abs(lurl(lang)), name: SITE.title, alternateName: lang === 'he' ? [SITE.displayTitle, 'Shluchim'] : undefined, description: SEO_HOME[lang].description, lang, publisherId: personId }),
   blogNode({ id: blogId, url: abs(lurl(lang)), name: SITE.title, description: SEO_HOME[lang].description, lang, websiteId, publisherId: personId, keywords: [...SEO_KEYWORDS[lang]] }),
   ...jsonLd,
 ];
 const url = (p = '') => lurl(lang, p);
-const o = other(lang);
 const showSwitch = lang !== 'he' || SHOW_SWITCHER_ON_HE;
-const switchHref = alternates[o] ?? lurl(o);
+const activeTopics = (await Promise.all(TOPIC_SLUGS.map(async (slug) => ((await getTopicPosts(slug, lang)).length > 0 ? slug : null)))).filter((s): s is string => s !== null);
 const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // production builds only; never drafts or `astro dev`
 ---
 <!doctype html>
@@ -72,7 +81,7 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={metaDescription} />
-    {!noindex && <link rel="canonical" href={canonical} />}
+    {!isNoindex && <link rel="canonical" href={canonical} />}
     <meta name="robots" content={robots} />
     <meta name="author" content={PERSON.name[lang]} />
     {VERIFY.google && <meta name="google-site-verification" content={VERIFY.google} />}
@@ -81,9 +90,9 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141414" />
     <script is:inline>try { const saved = localStorage.getItem('shluchim-theme'); if (saved === 'light' || saved === 'dark') { document.documentElement.dataset.theme = saved; document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => meta.setAttribute('content', saved === 'dark' ? '#141414' : '#fafafa')); } } catch { /* storage may be disabled */ }</script>
-    <link rel="preload" href={lang === 'he' ? heDisplayFontUrl : enDisplayFontUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={displayFontUrl[lang]} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={bodyFontUrl} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={boldFontUrl} as="font" type="font/woff2" crossorigin />
+    {lang !== 'ar' && <link rel="preload" href={boldFontUrl} as="font" type="font/woff2" crossorigin />}
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={SITE.title} />
     <meta property="og:url" content={canonical} />
@@ -104,9 +113,9 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
     {ogType === 'article' && section && <meta property="article:section" content={section} />}
     {ogType === 'article' && tags?.map((tag) => <meta property="article:tag" content={tag} />)}
     <meta property="og:locale" content={meta.og} />
-    {hasAlt && <meta property="og:locale:alternate" content={LANG_META[o].og} />}
-    {hasAlt && (['he', 'en'] as Lang[]).map((l) => <link rel="alternate" hreflang={l} href={new URL(alternates[l]!, Astro.site)} />)}
-    {hasAlt && <link rel="alternate" hreflang="x-default" href={new URL(alternates.en ?? alternates.he!, Astro.site)} />}
+    {hasAlt && otherLangs(lang).filter((l) => seoAlternates[l]).map((l) => <meta property="og:locale:alternate" content={LANG_META[l].og} />)}
+    {hasAlt && LOCALES.filter((l) => seoAlternates[l]).map((l) => <link rel="alternate" hreflang={l} href={new URL(seoAlternates[l]!, Astro.site)} />)}
+    {hasAlt && <link rel="alternate" hreflang="x-default" href={new URL(seoAlternates.en ?? seoAlternates.he ?? seoAlternates[lang]!, Astro.site)} />}
     {markdown && <link rel="alternate" type="text/markdown" href={markdown} />}
     <link rel="alternate" type="application/rss+xml" title={SITE.title} href={url('rss.xml')} />
     <link rel="sitemap" href={lurl('he', 'sitemap-index.xml')} />
@@ -124,7 +133,7 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
     {masthead ? (
       <header class="site masthead">
         <div class="wrap">
-          <div class="site-nav lang-row">{showSwitch && <a class="lang" href={switchHref} hreflang={o} lang={o} title={ui.switchHint}>{ui.switchTo}</a>}<ThemeToggle lang={lang} /></div>
+          <div class="site-nav lang-row">{showSwitch && <details class="lang-dropdown" data-analytics-content="language" data-analytics-label="lang_switcher"><summary class="lang" data-analytics-id="lang-switcher">{meta.label}</summary><ul class="lang-menu">{LOCALES.map((l) => <li><a href={switchLinks[l]} hreflang={l} lang={l} dir={LANG_META[l].dir} aria-current={l === lang ? 'true' : undefined}>{LANG_META[l].label}</a></li>)}</ul></details>}<ThemeToggle lang={lang} /></div>
           {SITE.kicker && <p class="kicker">{SITE.kicker}</p>}
           <h1 data-analytics-label="site_title"><a href={url()} aria-current="page" aria-label={SITE.displayTitle ?? SITE.title} title={SITE.title}>{lang !== 'he' ? SITE.displayTitle : (() => { const t = SITE.displayTitle ?? SITE.title; const cut = [...t].findIndex((c, i, a) => i > 0 && a.slice(0, i).join('').normalize('NFD').replace(/[\u0591-\u05C7]/g, '') === 'של' && !/[\u0591-\u05C7]/.test(c)); return cut > 0 ? <><span class="t-a" aria-hidden="true">{[...t].slice(0, cut).join('')}</span><span class="t-b" aria-hidden="true">{[...t].slice(cut).join('')}</span></> : t; })()}</a></h1>
           <p class="tagline">{SITE.tagline}</p>
@@ -136,7 +145,7 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
         <div class="wrap">
           <a class="name" href={url()} data-analytics-label="site_title">{SITE.title}</a>
           {SITE.kicker && <span class="kicker" lang="en" dir="ltr">{SITE.kicker}</span>}
-          <nav class="site-nav" aria-label={ui.navMain}><span class="nav-pages"><a href={url()} aria-current={Astro.url.pathname === url() ? 'page' : undefined}>{ui.stories}</a><a href={lurl('he', 'podcast/')} hreflang="he" aria-current={Astro.url.pathname === lurl('he', 'podcast/') ? 'page' : undefined}>{lang === 'he' ? 'הפודקסט' : 'Podcast (HE)'}</a><a href={url('team/')} aria-current={Astro.url.pathname.startsWith(url('team/')) ? 'page' : undefined}>{ui.team}</a><a href={url('friends/')} aria-current={Astro.url.pathname.startsWith(url('friends/')) ? 'page' : undefined}>{ui.friends}</a>{lang === 'he' && <a href={url('links/')} aria-current={Astro.url.pathname.startsWith(url('links/')) ? 'page' : undefined}>{ui.links}</a>}{lang === 'he' && <a href={url('feedback/')} aria-current={Astro.url.pathname.startsWith(url('feedback/')) ? 'page' : undefined}>{ui.feedback}</a>}<a href={url('about/')} aria-current={Astro.url.pathname.startsWith(url('about/')) ? 'page' : undefined}>{ui.about}</a></span><span class="nav-controls">{showSwitch && <a class="lang" href={switchHref} hreflang={o} lang={o} title={ui.switchHint}>{ui.switchTo}</a>}<ThemeToggle lang={lang} /></span></nav>
+          <nav class="site-nav" aria-label={ui.navMain}><span class="nav-pages"><a href={url()} aria-current={Astro.url.pathname === url() ? 'page' : undefined}>{ui.stories}</a><a href={lurl('he', 'podcast/')} hreflang="he" aria-current={Astro.url.pathname === lurl('he', 'podcast/') ? 'page' : undefined}>{ui.podcast}</a><a href={url('team/')} aria-current={Astro.url.pathname.startsWith(url('team/')) ? 'page' : undefined}>{ui.team}</a><a href={url('friends/')} aria-current={Astro.url.pathname.startsWith(url('friends/')) ? 'page' : undefined}>{ui.friends}</a>{lang === 'he' && <a href={url('links/')} aria-current={Astro.url.pathname.startsWith(url('links/')) ? 'page' : undefined}>{ui.links}</a>}{lang === 'he' && <a href={url('feedback/')} aria-current={Astro.url.pathname.startsWith(url('feedback/')) ? 'page' : undefined}>{ui.feedback}</a>}<a href={url('about/')} aria-current={Astro.url.pathname.startsWith(url('about/')) ? 'page' : undefined}>{ui.about}</a></span><span class="nav-controls">{showSwitch && <details class="lang-dropdown" data-analytics-content="language" data-analytics-label="lang_switcher"><summary class="lang" data-analytics-id="lang-switcher">{meta.label}</summary><ul class="lang-menu">{LOCALES.map((l) => <li><a href={switchLinks[l]} hreflang={l} lang={l} dir={LANG_META[l].dir} aria-current={l === lang ? 'true' : undefined}>{LANG_META[l].label}</a></li>)}</ul></details>}<ThemeToggle lang={lang} /></span></nav>
         </div>
       </header>
     )}
@@ -149,8 +158,8 @@ const analytics = import.meta.env.PROD && !SHOW_DRAFTS && GA_MEASUREMENT_ID; // 
         <FollowBlock lang={lang} />
         <CollaborateBlock lang={lang} />
         <p>{SITE.footerNote}</p>
-        <nav class="links topics" aria-label={ui.topics} data-analytics-label="footer_topics">{TOPIC_SLUGS.map((slug) => <a href={url(`topics/${slug}/`)}>{TOPICS[slug as keyof typeof TOPICS][lang].label}</a>)}</nav>
-        <p class="links" data-analytics-label="footer_links"><a href={url()}>{ui.allStories}</a><a href={lurl('he', 'podcast/')} hreflang="he">{lang === 'he' ? 'הפודקסט' : 'Podcast (HE)'}</a><a href={url('team/')}>{ui.team}</a><a href={url('friends/')}>{ui.friends}</a>{lang === 'he' && <a href={url('links/')}>{ui.links}</a>}{lang === 'he' && <a href={url('feedback/')}>{ui.feedback}</a>}<a href={url('about/')}>{ui.about}</a><a href={url('rss.xml')}>RSS</a></p>
+        {activeTopics.length > 0 && <nav class="links topics" aria-label={ui.topics} data-analytics-label="footer_topics">{activeTopics.map((slug) => <a href={url(`topics/${slug}/`)}>{TOPICS[slug as keyof typeof TOPICS][lang].label}</a>)}</nav>}
+        <p class="links" data-analytics-label="footer_links"><a href={url()}>{ui.allStories}</a><a href={lurl('he', 'podcast/')} hreflang="he">{ui.podcast}</a><a href={url('team/')}>{ui.team}</a><a href={url('friends/')}>{ui.friends}</a>{lang === 'he' && <a href={url('links/')}>{ui.links}</a>}{lang === 'he' && <a href={url('feedback/')}>{ui.feedback}</a>}<a href={url('about/')}>{ui.about}</a><a href={url('rss.xml')}>RSS</a></p>
       </div>
     </footer>
     {analytics && <script is:inline set:html={gtagSnippet(GA_MEASUREMENT_ID)} />}

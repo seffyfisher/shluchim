@@ -27,14 +27,21 @@ export function absolutizeMarkdown(body, pageUrl) {
 const LABELS = {
   he: { lang: 'Hebrew (he)', other: 'English version' },
   en: { lang: 'English (en)', other: 'Hebrew version' },
+  ar: { lang: 'Arabic (ar)', other: 'Hebrew version' },
 };
+const VERSION_LABELS = { he: 'Hebrew version', en: 'English version', ar: 'Arabic version' };
 
 /**
  * One story as Markdown: title, lede, a small metadata list, then the body.
- * a = { title, description, url, lang, author, published, updated?, topics: string[], translationUrl?, body }
+ * a = { title, description, url, lang, author, published, updated?, topics: string[], translationUrl?, translations?, body }
  */
 export function postMarkdown(a) {
   const L = LABELS[a.lang];
+  const trLines = a.translations
+    ? Object.entries(a.translations).filter(([l, u]) => l !== a.lang && u).map(([l, u]) => `- ${VERSION_LABELS[l]}: ${u}`)
+    : a.translationUrl
+      ? [`- ${L.other}: ${a.translationUrl}`]
+      : [];
   const meta = [
     `- URL: ${a.url}`,
     `- Author: ${a.author}`,
@@ -42,7 +49,7 @@ export function postMarkdown(a) {
     a.updated && a.updated !== a.published ? `- Updated: ${a.updated}` : null,
     `- Language: ${L.lang}`,
     a.topics?.length ? `- Topics: ${a.topics.join(', ')}` : null,
-    a.translationUrl ? `- ${L.other}: ${a.translationUrl}` : null,
+    ...trLines,
   ].filter(Boolean);
   const body = absolutizeMarkdown((a.body ?? '').trim(), a.url);
   return `# ${a.title}\n\n> ${a.description.replace(/\s+/g, ' ').trim()}\n\n${meta.join('\n')}\n\n${body}\n`;

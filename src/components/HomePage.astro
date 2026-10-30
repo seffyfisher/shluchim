@@ -20,46 +20,80 @@ const seo = SEO_HOME[lang];
 // Cards above the story list: the featured shaliach and the About card. The shaliach is fixed (not random: random needs JS).
 const FEATURED_SHALIACH = 'basher';
 const s = shluchim.find((x) => x.id === FEATURED_SHALIACH)!;
-const shaliach = he ? { name: s.name, role: s.role, example: s.example } : { name: s.name_en, role: s.role_en, example: s.example_en };
-// The about card is four short lines in small type (Seffy's own Hebrew wording, 2026-10-11; the English is a translation, one paragraph per line).
+const shaliach = ({
+  he: { name: s.name, role: s.role, example: s.example },
+  en: { name: s.name_en, role: s.role_en, example: s.example_en },
+  ar: { name: s.name_ar, role: s.role_ar, example: s.example_ar },
+} satisfies Record<Lang, { name: string; role: string; example?: string }>)[lang];
+// The about card is four short lines in small type (Seffy's own Hebrew wording, 2026-10-11; the English and Arabic are translations, one paragraph per line).
 // A line is a list of parts: plain text, or a link (L). Links: visual artist -> shinlamed.com, "Evrit" (the company) -> e-vrit.co.il, father of two -> the Hebrew Wikipedia article on parenthood.
 type Part = string | { t: string; href: string };
 const L = (t: string, href: string) => ({ t, href });
 const ART = 'https://shinlamed.com';
 const EVRIT = 'https://e-vrit.co.il';
 const PARENTHOOD = 'https://he.wikipedia.org/wiki/%D7%94%D7%95%D7%A8%D7%95%D7%AA';
-const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = he
-  ? { kick: 'האדם מאחורי הבלוג', title: 'מי אני', text: [['קוראים לי ספי פישר.'], ['אני ', L('אמן חזותי', ART), ', CTO של ', L('עברית', EVRIT), ' ', L('אבא לשניים', PARENTHOOD), ', ומופרע קשב עם בעיות ויסות רגשי.'], ['וכמו כולם, מנסה ללמוד להתמודד עם השינויים שה־AI מביא.'], ['הבלוג הזה הוא הדרך שלי לעשות את זה בקול רם.']], btn: 'עוד עליי' }
-  : { kick: 'The person behind the blog', title: 'Who I am', text: [['My name is Seffy Fisher.'], ["I'm a ", L('visual artist', ART), ', a CTO of ', L('Hebrew', EVRIT), ', a ', L('father of two', PARENTHOOD), ', and a person with ADHD and emotional regulation problems.'], ["Like everyone, I'm trying to learn to cope with the changes AI brings."], ['This blog is my way of doing that out loud.']], btn: 'More about me' };
+const ABOUT_CARDS: Record<Lang, { kick: string; title: string; text: Part[][]; btn: string }> = {
+  he: { kick: 'האדם מאחורי הבלוג', title: 'מי אני', text: [['קוראים לי ספי פישר.'], ['אני ', L('אמן חזותי', ART), ', CTO של ', L('עברית', EVRIT), ' ', L('אבא לשניים', PARENTHOOD), ', ומופרע קשב עם בעיות ויסות רגשי.'], ['וכמו כולם, מנסה ללמוד להתמודד עם השינויים שה־AI מביא.'], ['הבלוג הזה הוא הדרך שלי לעשות את זה בקול רם.']], btn: 'עוד עליי' },
+  en: { kick: 'The person behind the blog', title: 'Who I am', text: [['My name is Seffy Fisher.'], ["I'm a ", L('visual artist', ART), ', a CTO of ', L('Hebrew', EVRIT), ', a ', L('father of two', PARENTHOOD), ', and a person with ADHD and emotional regulation problems.'], ["Like everyone, I'm trying to learn to cope with the changes AI brings."], ['This blog is my way of doing that out loud.']], btn: 'More about me' },
+  ar: { kick: 'الإنسان خلف المدونة', title: 'من أنا', text: [['اسمي سيفي فيشر.'], ['أنا ', L('فنان بصري', ART), '، والمدير التقني في ', L('e-vrit', EVRIT), '، و', L('أب لطفلين', PARENTHOOD), '، ولدي اضطراب فرط الحركة وتشتت الانتباه وصعوبات في التنظيم العاطفي.'], ['ومثل الجميع، أحاول أن أتعلم كيف أتعامل مع التغييرات التي يجلبها الذكاء الاصطناعي.'], ['هذه المدونة هي طريقتي لفعل ذلك بصوت عالٍ.']], btn: 'المزيد عني' },
+};
+const aboutCard = ABOUT_CARDS[lang];
+const COPY: Record<Lang, {
+  introLabel: string; shaliachKick: string; shaliachHeading: (name: string) => string; meetTeam: string;
+  evritLabel: string; podcastTitle: string; podcastNote: string; listLabel: (n: number) => string;
+}> = {
+  he: {
+    introLabel: 'פתיח', shaliachKick: 'מִיהוּ שָׁלוּחַ?', shaliachHeading: (name) => `למשל ${name}`, meetTeam: 'הכירו את השְׁלוּחִים',
+    evritLabel: 'עברית', podcastTitle: 'הפודקסט', podcastNote: 'המעשיות, גם באוזניים.',
+    listLabel: (n) => `${n === 1 ? 'מעשיה אחת' : `${n} מעשיות`}, מהחדשה לישנה`,
+  },
+  en: {
+    introLabel: 'Intro', shaliachKick: 'Who is a shaliach?', shaliachHeading: (name) => name, meetTeam: 'Meet the shluchim',
+    evritLabel: 'Evrit', podcastTitle: 'Podcast (in Hebrew)', podcastNote: 'The stories, in audio too.',
+    listLabel: (n) => `${n === 1 ? 'One story' : `${n} stories`}, newest first`,
+  },
+  ar: {
+    introLabel: 'مقدمة', shaliachKick: 'ما المقصود بالمبعوث؟', shaliachHeading: (name) => `مثلًا ${name}`, meetTeam: 'تعرّف إلى الفريق',
+    evritLabel: 'e-vrit', podcastTitle: 'البودكاست (بالعبرية)', podcastNote: 'الحكايات مسموعة أيضًا.',
+    listLabel: (n) => `${n === 1 ? 'حكاية واحدة' : `${n} حكاية`}، من الأحدث إلى الأقدم`,
+  },
+};
+const copy = COPY[lang];
 ---
-<Base masthead noindex={!he && posts.length === 0} lang={lang} alternates={{ he: lurl('he'), en: lurl('en') }} seoTitle={seo.title} seoDescription={seo.description}>
+<Base masthead noindex={!he && posts.length === 0} lang={lang} alternates={{ he: lurl('he'), en: lurl('en'), ar: lurl('ar') }} seoTitle={seo.title} seoDescription={seo.description}>
   <StoryArtLoading slot="head" />
-  <section class="intro" aria-label={he ? 'פתיח' : 'Intro'}>
-    {he ? (
+  <section class="intro" aria-label={copy.introLabel}>
+    {lang === 'he' ? (
       <>
         <p>פה אני והשְׁלוּחִים, עוזרי הAI שלי, מתעדים עבודה משותפת</p>
         <p>כל מעשיה מראה מה ביקשתי, מה נעשה, אילו שְׁלוּחִים השתתפו ומה יצא.</p>
         <p>בלי פלאף, כמו חבר שאומר לך: בוא שב לידי ותראה מה אני עושה.</p>
       </>
-    ) : (
+    ) : lang === 'en' ? (
       <>
         <p>This is where my shluchim and I document every win we have.<br />(Shluchim, singular shaliach, is Hebrew for "emissaries". It's what I call my AI agents.)</p>
         <p>Each story shows what I asked for, what got done, which shluchim took part, and how it turned out.</p>
         <p>No fluff. Just a friend saying: come sit next to me and see what I'm doing.</p>
       </>
+    ) : (
+      <>
+        <p>هنا نوثق أنا ومبعوثيّ من مساعدي الذكاء الاصطناعي عملنا المشترك.<br />(«Shluchim» كلمة عبرية تعني «المبعوثين»، وهي الاسم الذي أطلقه على مساعدي الذكاء الاصطناعي لدي.)</p>
+        <p>تُظهر كل حكاية ماذا طلبت، وماذا نُفّذ، ومن شارك من المساعدين، وماذا خرج في النهاية.</p>
+        <p>بلا حشو، تمامًا كصديق يقول لك: تعال اجلس بجانبي وانظر ماذا أفعل.</p>
+      </>
     )}
   </section>
   <div class="cards">
     <article class="card">
-      <p class="kick">{he ? 'מִיהוּ שָׁלוּחַ?' : 'Who is a shaliach?'}</p>
+      <p class="kick">{copy.shaliachKick}</p>
       {/* The picture links to the team page too. The "Meet the shluchim" button below is the named link, so this one stays out of the tab order and the screen reader list. */}
       <a href={lurl(lang, 'team/')} tabindex="-1" aria-hidden="true">
         <Avatar avatar={s.avatar} still={s.still} />
       </a>
-      <h2>{he ? `למשל ${shaliach.name}` : shaliach.name}</h2>
+      <h2>{copy.shaliachHeading(shaliach.name)}</h2>
       <p>{shaliach.role}</p>
       <p class="example">{shaliach.example}</p>
-      <a class="btn" href={lurl(lang, 'team/')}>{he ? 'הכירו את השְׁלוּחִים' : 'Meet the shluchim'}</a>
+      <a class="btn" href={lurl(lang, 'team/')}>{copy.meetTeam}</a>
     </article>
     <article class="card">
       <p class="kick">{aboutCard.kick}</p>
@@ -68,25 +102,25 @@ const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = 
         <img class="avatar about-face" src={lurl('he', ABOUT_AVATAR[lang].stillSm)} alt="" width="112" height="112" loading="lazy" decoding="async" />
       </a>
       <h2>{aboutCard.title}</h2>
-      {aboutCard.text.map((line) => <p class="about-line">{line.map((part) => typeof part === 'string' ? part : <a href={part.href} target="_blank" rel="noopener">{part.href === EVRIT ? <EvritLogo class="evrit-logo" role="img" aria-label={he ? 'עברית' : 'Evrit'} /> : part.t}</a>)}</p>)}
+      {aboutCard.text.map((line) => <p class="about-line">{line.map((part) => typeof part === 'string' ? part : <a href={part.href} target="_blank" rel="noopener">{part.href === EVRIT ? <EvritLogo class="evrit-logo" role="img" aria-label={copy.evritLabel} /> : part.t}</a>)}</p>)}
       <a class="btn" href={lurl(lang, 'about/')}>{aboutCard.btn}</a>
     </article>
   </div>
   <div class="podcast-home">
-    <a href={lurl('he', 'podcast/')} hreflang="he">{he ? 'הפודקסט' : 'Podcast (in Hebrew)'}</a>
-    <span>{he ? 'המעשיות, גם באוזניים.' : 'The stories, in audio too.'}</span>
+    <a href={lurl('he', 'podcast/')} hreflang="he">{copy.podcastTitle}</a>
+    <span>{copy.podcastNote}</span>
   </div>
   {posts.length === 0 ? (
-    he
+    lang === 'he'
       ? <p class="empty">עוד אין פה מעשיות.<br />השְׁלוּחִים כבר עובדים על הראשונה.</p>
-      : <p class="empty">The English translations are on their way.<br />Meanwhile, the stories are all <a href={lurl('he')} hreflang="he" lang="he">in Hebrew</a>.</p>
+      : lang === 'en'
+        ? <p class="empty">The English translations are on their way.<br />Meanwhile, the stories are all <a href={lurl('he')} hreflang="he" lang="he">in Hebrew</a>.</p>
+        : <p class="empty">الترجمة العربية للحكايات في الطريق.<br />وحتى ذلك الحين، يمكنك قراءة الحكايات <a href={lurl('he')} hreflang="he" lang="he">بالعبرية</a> أو <a href={lurl('en')} hreflang="en" lang="en">بالإنجليزية</a>.</p>
   ) : (
     <div id="stories" class="home-stories">
       {featured.length > 0 && <FeaturedStories posts={featured} lang={lang} />}
       {history.length > 0 && <>
-        <h2 class="list-label">{he
-          ? `${history.length === 1 ? 'מעשיה אחת' : `${history.length} מעשיות`}, מהחדשה לישנה`
-          : `${history.length === 1 ? 'One story' : `${history.length} stories`}, newest first`}</h2>
+        <h2 class="list-label">{copy.listLabel(history.length)}</h2>
         <StoryList posts={history} lang={lang} illustrated />
       </>}
     </div>

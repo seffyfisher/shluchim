@@ -6,11 +6,12 @@
 //   - a line "original: <Hebrew text>" right after a message, or
 //   - a ```chat-he block right after the ```chat block (messages paired by order).
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-const USER = new Set(['seffy', 'ספי']);
-const ORIG = new Set(['original', 'מקור']);
+const USER = new Set(['seffy', 'ספי', 'سيفي']);
+const ORIG = new Set(['original', 'מקור', 'الأصل']);
 const L = {
   he: { dir: 'rtl', chat: 'שיחה', user: 'ספי', orig: 'המקור בעברית' },
   en: { dir: 'ltr', chat: 'Conversation', user: 'Seffy', orig: 'Hebrew original' },
+  ar: { dir: 'rtl', chat: 'محادثة', user: 'سيفي', orig: 'المحادثة الأصلية بالعبرية' },
 };
 
 export function parseChat(src) {

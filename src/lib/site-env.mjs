@@ -1,3 +1,7 @@
+// Pre-launch gate for Arabic (/ar/): while false, all /ar/ pages emit <meta name="robots" content="noindex" />
+// (and omit <link rel="canonical">) and are excluded from the XML sitemap and llms.txt until Phase D launch.
+export const AR_LAUNCHED = false;
+
 // Where the site lives: ONE place for the defaults (astro.config.mjs, the list guard, remark plugins and
 // scripts/indexnow.mjs all read it). CI can override with the repo variables SITE_URL / BASE_PATH
 // (an empty variable falls back to these defaults).

@@ -1,3 +1,6 @@
+import type { Lang } from './i18n/ui.ts';
+export { AR_LAUNCHED } from './lib/site-env.mjs';
+
 // Blog identity — rename here only.
 export const SITE = {
   title: 'שלוחים',
@@ -28,7 +31,32 @@ export const SITE_EN = {
   dir: 'ltr',
 };
 
-export const SITES = { he: { ...SITE, explainer: '' }, en: SITE_EN } as const;
+// Arabic identity (served under /ar/). Brand stays Latin 'Shluchim'; explainer pairs المبعوثين with the AI tech frame.
+export const SITE_AR = {
+  title: 'Shluchim',
+  displayTitle: 'Shluchim',
+  kicker: '',
+  tagline: '«مبعوث المرء كالمرء نفسه» | حكايات عن مساعدي ذكاء اصطناعي لغويين وبشر من لحم ودم',
+  explainer: '«Shluchim» كلمة عبرية تعني «المبعوثين»: مساعدو الذكاء الاصطناعي الذين ينجزون عملًا حقيقيًا من أجلي.',
+  author: 'بن',
+  footerNote: 'جميع الحقوق محفوظة لسيفي فيشر وفريق مساعدي الذكاء الاصطناعي الذين يوثقون الحياة المشتركة.',
+  lang: 'ar',
+  dir: 'rtl',
+};
+
+export interface SiteIdentity {
+  title: string;
+  displayTitle: string;
+  kicker: string;
+  tagline: string;
+  explainer: string;
+  author: string;
+  footerNote: string;
+  lang: Lang;
+  dir: 'rtl' | 'ltr';
+}
+
+export const SITES = { he: { ...SITE, lang: 'he', dir: 'rtl', explainer: '' }, en: SITE_EN as SiteIdentity, ar: SITE_AR as SiteIdentity } satisfies Record<Lang, SiteIdentity>;
 
 // Pre-launch: the Hebrew pages show no language switcher until Seffy approves the English launch,
 // so the Hebrew site stays visually unchanged. English pages always link back to Hebrew.
@@ -63,7 +91,7 @@ export const GA_MEASUREMENT_ID: string = process.env.GA_MEASUREMENT_ID ?? 'G-73T
 // he: left-facing set (public/about/, from main). en: the original right-facing set (public/about/en/), for LTR.
 // `mirror` is a reserved per-language flag (false for both; nothing flips the character with CSS).
 const aboutSet = (dir: string) => ({ sheetLg: `${dir}yawn-lg.webp`, sheetSm: `${dir}yawn-sm.webp`, stillLg: `${dir}still-lg.webp`, stillSm: `${dir}still-sm.webp`, mirror: false });
-export const ABOUT_AVATAR = { he: aboutSet('about/'), en: aboutSet('about/en/') } as const;
+export const ABOUT_AVATAR = { he: aboutSet('about/'), en: aboutSet('about/en/'), ar: aboutSet('about/') } satisfies Record<Lang, ReturnType<typeof aboutSet>>;
 
 // ---------------------------------------------------------------------------------------------
 // SEO / GEO (search engines and AI answer engines). Nothing here changes what a reader sees.
@@ -72,12 +100,13 @@ export const ABOUT_AVATAR = { he: aboutSet('about/'), en: aboutSet('about/en/') 
 // Who the structured data says the author/publisher is. `sameAs` = public profiles linked from the About page
 // (adding more, e.g. a LinkedIn URL, helps search and AI engines tie the blog to one person; leave nothing private here).
 export const PERSON = {
-  name: { he: 'ספי פישר', en: 'Seffy Fisher' },
+  name: { he: 'ספי פישר', en: 'Seffy Fisher', ar: 'سيفي فيشر' } satisfies Record<Lang, string>,
   sameAs: ['https://instagram.com/shinlamed', 'https://www.facebook.com/shinlamed'],
   description: {
     he: 'ספי פישר כותב על עבודה יומיומית עם בינה מלאכותית: עוזרי AI שהוא קורא להם שְׁלוּחִים.',
     en: 'Seffy Fisher writes about working with AI agents, which he calls shluchim, in everyday life and at work.',
-  },
+    ar: 'يكتب سيفي فيشر عن العمل اليومي مع الذكاء الاصطناعي ومساعدي الذكاء الاصطناعي في الحياة والعمل.',
+  } satisfies Record<Lang, string>,
 } as const;
 
 // Homepage <title> / description / social alt text. The visible page copy is separate (HomePage.astro).
@@ -92,24 +121,30 @@ export const SEO_HOME = {
     title: 'Shluchim: practical, everyday AI agent stories',
     description: 'Real stories of practical, everyday AI: AI agents that analyze data, design, write and run reminders for me, built on Grok Bot. What I asked, what came out.',
   },
-} as const;
+  ar: {
+    title: 'Shluchim: حكايات عملية عن وكلاء الذكاء الاصطناعي',
+    description: 'حكايات حقيقية عن الذكاء الاصطناعي في العمل والحياة اليومية: وكلاء ذكاء اصطناعي يحللون البيانات ويصممون وينفذون المهام عبر Grok Bot. ماذا طلبت وماذا خرج.',
+  },
+} satisfies Record<Lang, { title: string; description: string }>;
 
 // Machine-readable keywords (JSON-LD `keywords`, llms.txt). Not rendered on the page, so the Hebrew list can name the
 // search terms people actually use without touching the reader-facing vocabulary rule.
 export const SEO_KEYWORDS = {
   he: ['בינה מלאכותית', 'מעשיות על בינה מלאכותית', 'AI פרקטי', 'AI ביומיום', 'עוזרי AI', 'גרוקבוט', 'Grok Bot', 'שְׁלוּחִים'],
   en: ['AI agents', 'practical AI', 'everyday AI', 'stories about AI', 'AI bots', 'Grok Bot', 'AI assistants at work', 'shluchim'],
-} as const;
+  ar: ['وكلاء الذكاء الاصطناعي', 'مساعد ذكاء اصطناعي شخصي', 'الذكاء الاصطناعي في العمل', 'الذكاء الاصطناعي اليومي', 'حكايات الذكاء الاصطناعي', 'Grok Bot', 'Shluchim'],
+} satisfies Record<Lang, readonly string[]>;
 
 // Default social-share image per language (public/og/, 1200x630). A post with a `cover` uses its own cover instead.
 export const OG_IMAGE = {
   width: 1200,
   height: 630,
-  file: { he: 'og/shluchim-he.jpg', en: 'og/shluchim-en.jpg' },
+  file: { he: 'og/shluchim-he.jpg', en: 'og/shluchim-en.jpg', ar: 'og/shluchim-ar.jpg' } satisfies Record<Lang, string>,
   alt: {
     he: 'שְׁלוּחִים: מעשיות על בינה מלאכותית בעבודה אמיתית, עם דמויות עוזרי ה־AI של ספי',
     en: "Shluchim: stories of practical AI at work, with the cast of Seffy's AI agents",
-  },
+    ar: 'Shluchim: حكايات عن الذكاء الاصطناعي العملي في العمل، مع شخصيات مساعدي الذكاء الاصطناعي لدى سيفي',
+  } satisfies Record<Lang, string>,
 } as const;
 
 // Search-console ownership tokens (the "HTML tag" method). Empty = no tag is rendered.

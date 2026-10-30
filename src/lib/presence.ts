@@ -1,6 +1,28 @@
 import { readerAvatars, MAX_READER_AVATARS } from './reader-avatars.ts';
+import { isLang, type Lang } from '../i18n/ui.ts';
 
 const READER_ID = /^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}$/i;
+
+const PRESENCE_COPY: Record<Lang, { locale: string; solo: string; many: (n: string) => string; more: (extra: number) => string }> = {
+  he: {
+    locale: 'he-IL',
+    solo: 'רק אתה כאן כרגע. אל דאגה, עוד רגע מישהו מצטרף.',
+    many: (n) => `יש כאן עכשיו ${n} קוראים`,
+    more: (extra) => `ועוד ${extra} קוראים`,
+  },
+  en: {
+    locale: 'en',
+    solo: "Just you here right now. Don't worry, someone will join soon.",
+    many: (n) => `${n} readers here right now`,
+    more: (extra) => `${extra} more readers`,
+  },
+  ar: {
+    locale: 'ar-u-nu-latn',
+    solo: 'أنت وحدك هنا الآن. لا تقلق، سينضم قارئ آخر بعد قليل.',
+    many: (n) => `يوجد هنا الآن ${n} قراء`,
+    more: (extra) => `و${extra} قراء آخرون`,
+  },
+};
 
 type Realtime = typeof import('@supabase/realtime-js');
 
@@ -88,16 +110,15 @@ export function mountOnlineReaders(
         // Ignore metadata, malformed IDs and prototype property names entirely.
         const keys = Object.keys(state).filter(id => id.length === 36 && READER_ID.test(id));
         const count = keys.length; // keys, not per-tab entries
-        const text = lang === 'he'
-          ? (count === 1 ? 'רק אתה כאן כרגע. אל דאגה, עוד רגע מישהו מצטרף.' : `יש כאן עכשיו ${count.toLocaleString('he-IL')} קוראים`)
-          : (count === 1 ? "Just you here right now. Don't worry, someone will join soon." : `${count.toLocaleString('en')} readers here right now`);
+        const copy = PRESENCE_COPY[isLang(lang) ? lang : 'en'];
+        const text = count === 1 ? copy.solo : copy.many(count.toLocaleString(copy.locale));
         if (label.textContent !== text) label.textContent = text;
         renderAvatars?.update(keys);
         if (overflow) {
           const extra = Math.max(0, count - MAX_READER_AVATARS);
           overflow.hidden = extra === 0;
-          overflow.textContent = extra ? `+${extra.toLocaleString(lang === 'he' ? 'he-IL' : 'en')}` : '';
-          overflow.setAttribute('aria-label', lang === 'he' ? `ועוד ${extra} קוראים` : `${extra} more readers`);
+          overflow.textContent = extra ? `+${extra.toLocaleString(copy.locale)}` : '';
+          overflow.setAttribute('aria-label', copy.more(extra));
         }
         element.setAttribute('data-ready', '');
       };
