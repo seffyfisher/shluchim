@@ -478,6 +478,9 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 .card h2 { font-family: var(--font-system); font-weight: 600; font-size: var(--step-1); line-height: 1.3; margin: 0; overflow-wrap: anywhere; }
 /* The avatar art looks to the right. In Hebrew it sits at the right edge of the card, so mirror it to face the text (English already faces inward). */
 :root[dir="rtl"] .card .avatar { transform: scaleX(-1); }
+/* Seffy's About still is drawn looking the other way (left), so it gets the opposite flip: mirrored in English, as-is in Hebrew. Both faces then look the same way as Bashar. */
+.card .avatar.about-face { transform: scaleX(-1); }
+:root[dir="rtl"] .card .avatar.about-face { transform: none; }
 .card .example { font-size: .8rem; padding-top: .35rem; border-top: 1px dashed var(--line); }
 .card .btn { margin-top: auto; display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: 1.1rem; border: 1px solid var(--fg); border-radius: 999px; color: var(--fg); font-size: var(--step--1); font-weight: 600; text-decoration: none; }
 .card .btn:hover { background: var(--fg); color: var(--bg); }
