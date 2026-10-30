@@ -435,8 +435,14 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
   :root[data-theme="dark"] .theme-state[data-mode="dark"],
   :root[data-theme="light"] .theme-state[data-mode="light"] { display: inline-flex; }
   .theme-toggle:not(:popover-open) { display: none; }
-  .theme-toggle:popover-open { position: fixed; position-anchor: --theme-current; position-area: block-end center; position-try-fallbacks: flip-block; margin: .5rem 0; background: var(--bg); box-shadow: 0 .5rem 1.5rem rgb(0 0 0 / .18); }
-  .theme-toggle:popover-open:hover { background: var(--surface); }
+  /* Seffy 2026-10-30: the menu is a short vertical list under the chip, not the wide strip */
+  .theme-toggle:popover-open { direction: inherit; position: fixed; position-anchor: --theme-current; position-area: block-end span-inline-start; position-try-fallbacks: flip-block; display: flex; flex-direction: column; align-items: stretch; gap: .125rem; width: auto; min-width: 9rem; height: auto; margin: .5rem 0; padding: .25rem; border-radius: 1.25rem; background: var(--bg); box-shadow: 0 .5rem 1.5rem rgb(0 0 0 / .18); }
+  .theme-toggle:popover-open:hover { background: var(--bg); }
+  .theme-toggle:popover-open .theme-thumb { display: none; }
+  .theme-toggle:popover-open .theme-option { display: flex; align-items: center; justify-content: flex-start; gap: .6rem; min-height: 2.75rem; padding-inline: .75rem; font-size: var(--step--1); color: var(--fg); white-space: nowrap; }
+  .theme-toggle:popover-open .theme-option:hover { background: var(--surface); }
+  .theme-toggle:popover-open .theme-option:has(input:checked) { background: var(--surface); font-weight: 600; }
+  .theme-toggle:popover-open .theme-option > span.sr-only { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip-path: none; }
 }
 /* Browsers without the Popover API keep the inline strip on phones too. */
 @supports not selector(:popover-open) {
