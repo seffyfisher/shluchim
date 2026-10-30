@@ -188,3 +188,20 @@ Exception (Seffy, 2026-10-10): the site tagline (`tagline` in `src/config.ts`) i
 - No niqqud in English text (only on `original:` lines). The build warns about it, and about Hebrew posts with no English pair.
 - About in English: `src/content/pages/en/about.md` (`title`, `description`, `lang: en`, `translationKey: about`). Team: `name_en`, `role_en`, `category_en`, `example_en` in `src/data/shluchim.json`.
 - Preview: `npm run build:drafts && npm run preview:drafts`, then open `/en/`.
+
+## Arabic (/ar/) — staged, not launched (SEF-263; standing rules 2026-10-30)
+
+<div dir="rtl">
+
+ערבית היא שפה שלישית תחת `/ar/` (RTL, ‏MSA קלה בגוף ראשון). התשתית והמעטפת קיימות, אבל **עדיין אין פוסטים בערבית** והאתר הערבי **לא מושק**: `AR_LAUNCHED = false` ב־`src/lib/site-env.mjs`, וכל עמוד `/ar/` יוצא עם `noindex`, בלי canonical, מחוץ לסייטמאפ ול־`llms.txt`. השקה (שלב D) רק בהחלטה של ספי דרך יוסף.
+
+</div>
+
+- Arabic posts (Phase C only, not before): `src/content/posts/ar/<same file name as the English post>.md` -> `/ar/posts/<slug>/`. Same Latin slug as EN/HE; `lang: ar`, `translationKey: "<Hebrew file name without .md>"`, `date` same as Hebrew, `draft: true` until approved, `seoTitle`, `seoDescription`, same `topics`. Translate from Hebrew, cross-check against English.
+- About in Arabic: `src/content/pages/ar/about.md` (`title`, `description`, `seoTitle`, `seoDescription`, `lang: ar`, `translationKey: about`; same ```` ```photo <id>``` ```` blocks; captions/alt in `src/data/about-photos.json` `caption_ar` / `alt_ar`).
+- Team: `name_ar`, `role_ar`, `category_ar`, `example_ar` in `src/data/shluchim.json`. Friends: `nameAr`, `textAr`, `themeAr` (and `ar:` keys) in `src/data/friends.ts`. UI strings: `UI.ar` in `src/i18n/ui.ts`; topics: `ar` in `src/data/topics.mjs`.
+- **Brand (binding):** logo, `<title>` brand, URL and `og:site_name` are always Latin **Shluchim**. Never شلوخيم, رسول or مرسلون as the brand, and never وكيل as a name. In body text, مبعوث / المبعوثون may appear only as the gloss of the Hebrew word ("emissaries"), framed as مساعدو ذكاء اصطناعي.
+- **Vocabulary:** visible UI and SEO titles/descriptions say **مساعد** (not وكيل). Only `SEO_KEYWORDS.ar` in `src/config.ts` may keep وكلاء الذكاء الاصطناعي. Digits 0–9 (Western). No italics, no letter-spacing (CSS already enforces it; font is Readex Pro).
+- **Language dropdown:** labels stay in their own script, order `עברית · العربية · English` (`LANG_MENU_ORDER` in `src/i18n/ui.ts`), menu always RTL and right-aligned.
+- **Critic gate before merge of any visible Arabic** (new or changed post, page or UI string): the Arabic critic shaliach ("מבקר ערבית · שלוחים") runs a **dual pass** with the `arabic-blog-writing` and `arabic-seo` skills, plus brand and faithfulness to the Hebrew, and approves in writing. Yosef then shows Seffy a back-translation to Hebrew. No merge of visible Arabic without both.
+- Do not flip `AR_LAUNCHED`, add `/ar/` to the sitemap / `llms.txt`, or add HE/EN hreflang to `/ar/` before Phase D. Preview: `npm run build` and open `/ar/` (it is noindex by design).

@@ -38,6 +38,14 @@ Technical publishing conventions remain in [PUBLISHING.md](PUBLISHING.md).
 - Every link to another site, in Hebrew and English and on the Humans page, must have `target="_blank"` and `rel="noopener"`. Links to this site, including absolute URLs and fragments, open in the same tab. Preserve other `rel` tokens such as `nofollow`.
 - Astro templates set external-link attributes explicitly; `src/lib/links.mjs` uses the configured `SITE_URL` host to apply the rule to Markdown and raw HTML and fails every build if any rendered link violates it. Keep enforcement at build time, without browser JavaScript.
 
+## Arabic (/ar/) work (SEF-263, 2026-10-30)
+
+- `/ar/` is staged: keep `AR_LAUNCHED = false` and `noindex`; do not add `/ar/` to sitemap, `llms.txt` or HE/EN hreflang. Launch is Phase D, only on Seffy's decision via Yosef.
+- No Arabic posts until Phase C. Don't create `src/content/posts/ar/*` in other work.
+- Brand: Latin **Shluchim** in logo/titles/URL/`og:site_name`; never شلوخيم / رسول / مرسلون, never وكيل as a name. Visible copy says مساعد; only `SEO_KEYWORDS.ar` may use وكلاء. MSA, digits 0–9. Dropdown labels stay `עברית · العربية · English` in that order, RTL-aligned.
+- Any new or changed visible Arabic text needs the Arabic critic's written dual-pass (`arabic-blog-writing` + `arabic-seo`) before merge. Open such PRs as drafts and list the strings for review. Details: `PUBLISHING.md` ("Arabic (/ar/)") and `SEO-GEO.md`.
+- When adding any per-language branch, handle all of `LOCALES` (he, en, ar); never `he ? … : …` that silently treats ar as en.
+
 ## SEO / GEO: ממשיכים לקדם את הבלוג (standing rule from Seffy, 2026-10-11)
 
 המטרה: שהבלוג, בעברית ובאנגלית, יימצא בגוגל, בבינג ובמנועי AI, ושזה לא יתפרק עם הזמן. המדריך המלא: [SEO-GEO.md](SEO-GEO.md). הכללים כאן מחייבים כל מי שנוגע בתוכן או בתבניות.
