@@ -122,8 +122,8 @@ export const SEO_HOME = {
     description: 'Real stories of practical, everyday AI: AI agents that analyze data, design, write and run reminders for me, built on Grok Bot. What I asked, what came out.',
   },
   ar: {
-    title: 'Shluchim: حكايات عملية عن وكلاء الذكاء الاصطناعي',
-    description: 'حكايات حقيقية عن الذكاء الاصطناعي في العمل والحياة اليومية: وكلاء ذكاء اصطناعي يحللون البيانات ويصممون وينفذون المهام عبر Grok Bot. ماذا طلبت وماذا خرج.',
+    title: 'Shluchim: حكايات عملية عن مساعدي الذكاء الاصطناعي',
+    description: 'حكايات حقيقية عن الذكاء الاصطناعي في العمل والحياة اليومية: مساعدو ذكاء اصطناعي يحللون البيانات ويصممون وينفذون المهام عبر Grok Bot. ماذا طلبت وماذا خرج.',
   },
 } satisfies Record<Lang, { title: string; description: string }>;
 

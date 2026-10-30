@@ -55,7 +55,7 @@ const COPY: Record<Lang, {
   ar: {
     introLabel: 'مقدمة', shaliachKick: 'ما المقصود بالمبعوث؟', shaliachHeading: (name) => `مثلًا ${name}`, meetTeam: 'تعرّف إلى الفريق',
     evritLabel: 'e-vrit', podcastTitle: 'البودكاست (بالعبرية)', podcastNote: 'الحكايات مسموعة أيضًا.',
-    listLabel: (n) => `${n === 1 ? 'حكاية واحدة' : `${n} حكاية`}، من الأحدث إلى الأقدم`,
+    listLabel: (n) => n === 1 ? 'حكاية واحدة، من الأحدث إلى الأقدم' : n === 2 ? 'حكايتان، من الأحدث إلى الأقدم' : n >= 3 && n <= 10 ? `${n} حكايات، من الأحدث إلى الأقدم` : `${n} حكاية، من الأحدث إلى الأقدم`,
   },
 };
 const copy = COPY[lang];
