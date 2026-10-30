@@ -9,7 +9,7 @@ import shluchim from '../data/shluchim.json';
 import { getPosts } from '../lib/posts';
 import { splitFeaturedPosts } from '../lib/featured.mjs';
 import { lurl, t, type Lang } from '../i18n/ui';
-import { SEO_HOME } from '../config';
+import { SEO_HOME, ABOUT_AVATAR } from '../config';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const ui = t(lang);
@@ -63,6 +63,10 @@ const aboutCard: { kick: string; title: string; text: Part[][]; btn: string } = 
     </article>
     <article class="card">
       <p class="kick">{aboutCard.kick}</p>
+      {/* Seffy's face from the About page (its still, no bubble). Same treatment as the shaliach picture above. */}
+      <a href={lurl(lang, 'about/')} tabindex="-1" aria-hidden="true">
+        <img class="avatar about-face" src={lurl('he', ABOUT_AVATAR[lang].stillSm)} alt="" width="112" height="112" loading="lazy" decoding="async" />
+      </a>
       <h2>{aboutCard.title}</h2>
       {aboutCard.text.map((line) => <p class="about-line">{line.map((part) => typeof part === 'string' ? part : <a href={part.href} target="_blank" rel="noopener">{part.href === EVRIT ? <EvritLogo class="evrit-logo" role="img" aria-label={he ? 'עברית' : 'Evrit'} /> : part.t}</a>)}</p>)}
       <a class="btn" href={lurl(lang, 'about/')}>{aboutCard.btn}</a>
