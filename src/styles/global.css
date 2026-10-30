@@ -435,6 +435,9 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 .lang-dropdown[open] summary.lang::after { rotate: 225deg; translate: 0 .1rem; }
 .lang-menu { position: absolute; top: calc(100% + .4rem); inset-inline-end: 0; z-index: 20; display: flex; flex-direction: column; gap: .125rem; min-width: 8.5rem; margin: 0; padding: .25rem; list-style: none; border: 1px solid var(--fg); border-radius: 1.25rem; background: var(--bg); box-shadow: 0 .5rem 1.5rem rgb(0 0 0 / .18); }
 .site-nav .lang-menu li { margin: 0; padding: 0; }
+/* Menu is always RTL and right-aligned, on every language page (Seffy, 2026-10-30). Each label keeps its own dir on the inner span. */
+.lang-menu, .lang-menu li, .site-nav .lang-menu a { direction: rtl; text-align: right; }
+.site-nav .lang-menu a, .site-nav .lang-menu a:first-child { justify-content: flex-start; }
 .site-nav .lang-menu a, .site-nav .lang-menu a:first-child { display: flex; align-items: center; width: 100%; min-height: 2.75rem; margin: 0; padding-inline: .85rem; border-radius: .9rem; color: var(--fg); font-weight: 400; text-decoration: none; white-space: nowrap; }
 .site-nav .lang-menu a::before { content: none; }
 .site-nav .lang-menu a:hover { background: var(--surface); color: var(--fg); text-decoration: none; }

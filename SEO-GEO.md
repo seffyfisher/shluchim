@@ -91,6 +91,15 @@ Do this in both languages. Write each language on its own, do not translate word
 | שלוחים (as AI helpers) | niqqud form in copy, "עוזרי AI" next to it, `llms.txt` disambiguation, `WebSite.alternateName` | "שלוחים בינה מלאכותית", "Shluchim AI agents blog". The bare word belongs to Chabad |
 | סוכני AI, בוטים (Hebrew) | JSON-LD `keywords`, `llms.txt` only (see the vocabulary decision above) | not targeted in visible copy |
 
+## Arabic (/ar/): staged until launch (SEF-263, 2026-10-30)
+
+- URLs: `/ar/`, `/ar/about/`, `/ar/team/`, `/ar/friends/`, `/ar/topics/<slug>/`, and later `/ar/posts/<same Latin slug as EN>/`.
+- After launch (Phase D): `hreflang="ar"` on every page that has an Arabic pair, reciprocal with he/en; `x-default` stays English; `og:locale` `ar_AR` (`LANG_META.ar.og`); `<html lang="ar" dir="rtl">`.
+- **Until launch (`AR_LAUNCHED = false` in `src/lib/site-env.mjs`):** every `/ar/` page is `noindex` with no canonical; HE and EN pages must **not** emit hreflang to `/ar/` (Base.astro filters it, the guard errors if it leaks); `/ar/` stays out of the sitemap, `llms.txt` and `llms-full.txt`. The guard (`src/lib/seo-check.mjs`) checks this; do not relax it.
+- Flipping to launch is Phase D only, on Seffy's decision via Yosef, together with Search Console / Bing submission of the Arabic URLs.
+- Keywords: `SEO_KEYWORDS.ar` in `src/config.ts` may target وكلاء الذكاء الاصطناعي (what people search). Visible copy and `seoTitle` / `seoDescription` use مساعد / مساعدو الذكاء الاصطناعي, never وكيل. The brand in titles, `og:site_name` and URLs is Latin **Shluchim** only (never شلوخيم / رسول / مرسلون).
+- Arabic search copy goes through the Arabic critic's dual pass (`arabic-blog-writing` + `arabic-seo`) before merge, like any visible Arabic.
+
 ## What the guard checks
 
 It runs on every build. A normal build and the deploy only warn and never stop publishing. `SEO_STRICT=1` (`npm run seo:check`, and the "SEO guard" workflow on every PR and push to main) fails on errors.

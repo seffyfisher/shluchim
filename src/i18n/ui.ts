@@ -2,6 +2,8 @@
 export const LOCALES = ['he', 'en', 'ar'] as const;
 export type Lang = (typeof LOCALES)[number];
 export const DEFAULT_LANG: Lang = 'he';
+// Language dropdown order (Seffy, 2026-10-30): עברית · العربية · English. LOCALES order stays as is for hreflang/data.
+export const LANG_MENU_ORDER: readonly Lang[] = ['he', 'ar', 'en'];
 
 export const LANG_META: Record<Lang, { dir: 'rtl' | 'ltr'; og: string; label: string; intl: string; wpm: number }> = {
   he: { dir: 'rtl', og: 'he_IL', label: 'עברית', intl: 'he-IL', wpm: 180 },
