@@ -5,27 +5,51 @@ import moon from '../assets/theme/moon.webp';
 import computer from '../assets/theme/computer.webp';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
+const legend = lang === 'he' ? 'ערכת נושא' : 'Theme';
 const options = [
   { value: 'dark', image: moon, label: lang === 'he' ? 'מצב לילה' : 'Dark mode' },
   { value: 'light', image: sun, label: lang === 'he' ? 'מצב יום' : 'Light mode' },
   { value: 'system', image: computer, label: lang === 'he' ? 'לפי המערכת' : 'System theme' },
 ];
 ---
-<fieldset class="theme-toggle">
-  <legend class="sr-only">{lang === 'he' ? 'ערכת נושא' : 'Theme'}</legend>
-  <span class="theme-thumb" aria-hidden="true"></span>
-  {options.map(({ value, image, label }) => (
-    <label class="theme-option" title={label}>
-      <input class="sr-only" type="radio" name="shluchim-theme-mode" value={value} checked={value === 'system'} />
-      <img src={image.src} alt="" aria-hidden="true" width="24" height="24" />
-      <span class="sr-only">{label}</span>
-    </label>
-  ))}
-</fieldset>
+<span class="theme-control">
+  {/* Phones: one chip with the current theme; it opens the same three-choice strip as a popover. */}
+  <button class="theme-current" type="button" popovertarget="theme-menu">
+    <span class="sr-only">{legend}: </span>
+    {options.map(({ value, image, label }) => (
+      <span class="theme-state" data-mode={value}>
+        <img src={image.src} alt="" aria-hidden="true" width="24" height="24" />
+        <span class="sr-only">{label}</span>
+      </span>
+    ))}
+  </button>
+  <fieldset class="theme-toggle" id="theme-menu" popover>
+    <legend class="sr-only">{legend}</legend>
+    <span class="theme-thumb" aria-hidden="true"></span>
+    {options.map(({ value, image, label }) => (
+      <label class="theme-option" title={label}>
+        <input class="sr-only" type="radio" name="shluchim-theme-mode" value={value} checked={value === 'system'} />
+        <img src={image.src} alt="" aria-hidden="true" width="24" height="24" />
+        <span class="sr-only">{label}</span>
+      </label>
+    ))}
+  </fieldset>
+</span>
 <script>
   const key = 'shluchim-theme';
   const preference = matchMedia('(prefers-color-scheme: dark)');
   const choices = document.querySelectorAll<HTMLInputElement>('.theme-option input');
+  const menu = document.querySelector<HTMLElement>('.theme-toggle');
+  // Opening is plain HTML (popovertarget). JS only closes the phone popover once a choice is
+  // tapped, and when keyboard focus leaves it; CSS cannot react to a radio change by closing a popover.
+  const isOpen = () => { try { return !!menu?.matches(':popover-open'); } catch { return false; } };
+  const close = () => { if (isOpen()) menu?.hidePopover(); };
+  let pointerChoice = false;
+  menu?.addEventListener('pointerdown', () => { pointerChoice = true; });
+  menu?.addEventListener('focusout', (event) => {
+    const next = event.relatedTarget as Node | null;
+    if (next && !menu.contains(next)) close();
+  });
   type Theme = 'light' | 'dark' | null;
   const parse = (value: string | null): Theme => value === 'light' || value === 'dark' ? value : null;
   const sync = () => choices.forEach((choice) => { choice.checked = choice.value === (document.documentElement.dataset.theme || 'system'); });
@@ -46,6 +70,8 @@ const options = [
   preference.addEventListener('change', sync);
   for (const choice of choices) choice.addEventListener('change', () => {
     if (choice.checked) apply(parse(choice.value));
+    if (pointerChoice) close();
+    pointerChoice = false;
   });
   // A choice made in another open blog tab should remain the same preference here.
   window.addEventListener('storage', (event) => {

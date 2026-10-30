@@ -389,11 +389,12 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 .nav-pages { display: flex; flex-wrap: wrap; align-items: center; gap: .9rem; }
 @media (max-width: 40rem) {
   /* Seffy 2026-10-27: keep every nav link; if they don't fit, scroll the menu — don't wrap/shorten/footer-only */
-  .bar .site-nav { width: 100%; gap: .35rem .9rem; padding-bottom: .5rem; flex-wrap: nowrap; align-items: center; }
+  /* Seffy 2026-10-30: page links get the whole first row; language + theme sit on their own row below */
+  .bar .site-nav { width: 100%; gap: .35rem .9rem; padding-bottom: .5rem; flex-direction: column; flex-wrap: nowrap; align-items: stretch; }
   .nav-pages {
-    flex: 1 1 auto;
+    flex: none;
     min-width: 0;
-    width: auto;
+    width: 100%;
     max-width: 100%;
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -406,7 +407,7 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
   }
   .nav-pages a, .nav-pages a:first-child { padding-inline: 0; margin-inline-start: 0; flex: none; white-space: nowrap; }
   .nav-pages a + a::before { content: none; }
-  .nav-controls { flex: none; }
+  .nav-controls { flex: none; width: 100%; justify-content: flex-end; }
 }
 .theme-toggle { direction: ltr; position: relative; display: inline-grid; grid-template-columns: repeat(3, 2rem); align-items: center; flex: none; width: 6.5rem; min-inline-size: 0; margin: 0; padding-inline: .1875rem; transition: background-color .2s ease; }
 .theme-toggle .theme-thumb { box-sizing: border-box; position: absolute; z-index: 0; top: calc(50% - 1rem); left: .1875rem; width: 2rem; height: 2rem; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); transform: translateX(4rem); transition: transform .2s ease; }
@@ -417,7 +418,38 @@ footer.site .topics { flex-wrap: wrap; gap: 0 1.25rem; margin-top: .75rem; }
 :root[data-theme="light"] .theme-thumb { transform: translateX(2rem); }
 .theme-toggle:hover { background: var(--surface); }
 @media (prefers-reduced-motion: reduce) { .theme-toggle, .theme-toggle .theme-thumb { transition: none; } }
-@media (scripting: none) { .theme-toggle { display: none; } }
+@media (scripting: none) { .theme-control { display: none; } }
+/* Desktop keeps the always-visible three-choice strip; the popover attribute only matters on phones. */
+.theme-control { display: inline-flex; flex: none; }
+.theme-toggle[popover] { inset: auto; overflow: visible; }
+.theme-current { display: none; }
+@media (max-width: 40rem) {
+  /* Seffy 2026-10-30: the current theme takes one chip; tapping it opens the three choices */
+  .theme-current { box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: .25rem; width: 4.5rem; height: 2.75rem; padding: 0; border: 1px solid var(--fg); border-radius: 999px; background: transparent; color: var(--fg); font: inherit; cursor: pointer; anchor-name: --theme-current; transition: background-color .2s ease; }
+  .theme-current::after { content: ''; width: .4rem; height: .4rem; border: solid currentColor; border-width: 0 1.5px 1.5px 0; rotate: 45deg; translate: 0 -.15rem; }
+  .theme-current:hover { background: var(--surface); }
+  .theme-current:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+  .theme-state { display: none; }
+  .theme-state img { display: block; width: 1.5rem; height: 1.5rem; object-fit: contain; }
+  :root:not([data-theme="dark"]):not([data-theme="light"]) .theme-state[data-mode="system"],
+  :root[data-theme="dark"] .theme-state[data-mode="dark"],
+  :root[data-theme="light"] .theme-state[data-mode="light"] { display: inline-flex; }
+  .theme-toggle:not(:popover-open) { display: none; }
+  /* Seffy 2026-10-30: the menu is a short vertical list under the chip, not the wide strip */
+  .theme-toggle:popover-open { direction: inherit; position: fixed; position-anchor: --theme-current; position-area: block-end span-inline-start; position-try-fallbacks: flip-block; display: flex; flex-direction: column; align-items: stretch; gap: .125rem; width: auto; min-width: 9rem; height: auto; margin: .5rem 0; padding: .25rem; border-radius: 1.25rem; background: var(--bg); box-shadow: 0 .5rem 1.5rem rgb(0 0 0 / .18); }
+  .theme-toggle:popover-open:hover { background: var(--bg); }
+  .theme-toggle:popover-open .theme-thumb { display: none; }
+  .theme-toggle:popover-open .theme-option { display: flex; align-items: center; justify-content: flex-start; gap: .6rem; min-height: 2.75rem; padding-inline: .75rem; font-size: var(--step--1); color: var(--fg); white-space: nowrap; }
+  .theme-toggle:popover-open .theme-option:hover { background: var(--surface); }
+  .theme-toggle:popover-open .theme-option:has(input:checked) { background: var(--surface); font-weight: 600; }
+  .theme-toggle:popover-open .theme-option > span.sr-only { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip-path: none; }
+}
+/* Browsers without the Popover API keep the inline strip on phones too. */
+@supports not selector(:popover-open) {
+  .theme-current { display: none !important; }
+  .theme-toggle { display: inline-grid !important; position: relative; }
+}
+@media (prefers-reduced-motion: reduce) { .theme-current { transition: none; } }
 @media (max-width: 63.99rem) { .page-about .site-nav a { min-height: 2.75rem; } .page-about header.site.bar .name { padding-block: 0; } }
 @media (max-width: 28rem) {
   .page-about { padding-top: 0; }
