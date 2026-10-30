@@ -1,6 +1,15 @@
 {
-  "_about": "Weekly curated wall for /feedback/. Source of truth: public.feedback_public_quotes (not status=approved). Synced 2026-10-27 Asia/Jerusalem — 6 public quotes. reaction joined from feedback for postmark labels.",
+  "_about": "Weekly curated wall for /feedback/. Source of truth: public.feedback_public_quotes (not status=approved). Synced 2026-10-30 Asia/Jerusalem — 7 public quotes. reaction joined from feedback for postmark labels.",
   "items": [
+    {
+      "id": "10e80c32",
+      "source": "feedback_public_quotes",
+      "created_at": "2026-10-29T20:49:57+02:00",
+      "page": "/posts/grok-bot-guide/",
+      "reaction": "helped",
+      "message": "היה מעניין וכיף לקרוא",
+      "name": null
+    },
     {
       "id": "a1104c33",
       "source": "feedback_public_quotes",
