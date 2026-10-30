@@ -153,6 +153,13 @@ This is how I feel from working with my team.
 4. Decide ahead of time what waits for your approval. For example publishing, or anything that goes out under your name.
 5. Something that repeats? Show the shaliach once on screen, and it will save that as a skill you can run again.
 
+## Tip: a file you pick up from:
+
+Ask your shaliach to create a central handoff file, like HANDOFF.md.
+A living file that carries the work from one day to the next.
+At the end of the workday it updates what got done, what's left, and what was decided.
+In the morning you open a new chat, and continue from there.
+
 ## And if you want stickers:
 
 ![An open pack of shluchim stickers](/images/posts/grokbot-architecture-sticker-pack-open-2048.webp)
