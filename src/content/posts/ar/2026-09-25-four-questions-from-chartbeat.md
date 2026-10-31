@@ -7,7 +7,7 @@ seoDescription: "سمعت عن Chartbeat في اجتماع، فتواصل مسا
 topics: ["ai-at-work"]
 date: 2026-09-25
 updated: 2026-10-16
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-09-25-chartbeat-ga4-reply"
 ---

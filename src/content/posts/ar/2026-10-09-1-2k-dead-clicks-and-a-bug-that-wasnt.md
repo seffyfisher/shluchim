@@ -6,7 +6,7 @@ seoTitle: "1.2k نقرة ميتة على مربّع الموافقة: خلل أ�
 seoDescription: "أظهر Clarity نحو 1.2k نقرة ميتة على مربّع الموافقة في صفحة الدفع. مساعد فحص الجودة أجرى 48 نقرة على الموقع الحي: ليس خللًا. المشكلة تزاحم على مساحة النقر."
 topics: ["ai-at-work"]
 date: 2026-10-08
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-09-terms-checkbox-dead-clicks"
 ---

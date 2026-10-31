@@ -6,7 +6,7 @@ seoTitle: "مساعد يتّصل هاتفيًّا بالعبرية: كيف بن�
 seoDescription: "بنيت مساعدًا يجري مكالمات هاتفية بالعبرية: منصّتان، وشهر بلا رقم، ومكالمة أولى صامتة، وفي النهاية داني، أسوأ ستاند أب في إسرائيل. مع تسجيل."
 topics: ["everyday-ai", "agent-teamwork"]
 date: 2026-10-12
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-12-dial-bot"
 ---

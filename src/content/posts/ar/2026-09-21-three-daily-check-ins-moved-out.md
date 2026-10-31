@@ -7,7 +7,7 @@ seoDescription: "لديك مساعد ذكاء اصطناعي جاهز، فماذ
 topics: ["agent-teamwork"]
 date: 2026-09-21
 updated: 2026-10-16
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-09-21-thin-work-checkin-bot"
 ---

@@ -7,7 +7,7 @@ seoDescription: "أرسلت صور أعمالي من الهاتف إلى مسا�
 topics: ["everyday-ai"]
 date: 2026-09-19
 updated: 2026-10-16
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-09-19-shinlamed-studio-upload"
 ---

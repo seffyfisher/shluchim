@@ -17,6 +17,10 @@ export const GET = async ({ site }: APIContext) => {
   const topicLines = (lang: Lang) => TOPIC_SLUGS.map((s) => `- [${TOPICS[s as keyof typeof TOPICS][lang].title}](${abs(lurl(lang, `topics/${s}/`))}): ${TOPICS[s as keyof typeof TOPICS][lang].seoDescription}`);
   const arSection = showAr ? `
 
+## العربية
+
+Shluchim (شْلوحيم) مدونة شخصية لسيفي فيشر عن الذكاء الاصطناعي العملي في الحياة اليومية. «شْلوحيم» كلمة عبرية تعني «المبعوثين»، وهو الاسم الذي يطلقه سيفي على مساعدي الذكاء الاصطناعي لديه. ليست المدونة عن مبعوثي حركة حباد.
+
 ## مواضيع (العربية)
 
 ${topicLines('ar').join('\n')}
@@ -41,7 +45,7 @@ ${ar.map(line).join('\n')}
 
 - Topics covered: ${SEO_KEYWORDS.en.join(', ')}.
 - Hebrew topics (נושאים): ${SEO_KEYWORDS.he.join(', ')}.${arMeta}
-- Languages: ${showAr ? 'Hebrew (primary, right-to-left), English, and Arabic (right-to-left)' : 'Hebrew (primary, right-to-left) and English'}. Most stories exist in both languages, and a few are Hebrew only; the pages link to each other with hreflang.
+- Languages: ${showAr ? 'Hebrew (primary, right-to-left), English, and Arabic (right-to-left)' : 'Hebrew (primary, right-to-left) and English'}. ${showAr ? 'Most stories exist in Hebrew, English and Arabic, and a few are in fewer languages' : 'Most stories exist in both languages, and a few are Hebrew only'}; the pages link to each other with hreflang.
 - Format: first-person accounts, one story per page, newest first. The archive starts on 2026-09-11.
 - Citing: link to the story's own URL and name "Seffy Fisher, Shluchim blog".
 - Markdown: every story is also available as plain Markdown at its URL with \`.md\` instead of the trailing slash (for example ${abs(lurl('en', 'posts/grok-bot-guide.md'))}). The full text of all stories is in [llms-full.txt](${abs(lurl('he', 'llms-full.txt'))}).

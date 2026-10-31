@@ -6,7 +6,7 @@ seoTitle: "تيمي: مساعدا Grok Bot لشخصين يتراسلان"
 seoDescription: "تيمي يتيح لـGrok Bot الخاص بي ولـGrok Bot الخاص بصديقي تبادل رسائل موقّعة. يومان، وتعثّران، وإصلاح واحد، ثم عادت الرسالة الأولى بردّ: «غيبيرت»."
 topics: ["grok-bot", "agent-teamwork"]
 date: 2026-10-09
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-09-timmy-bot-to-bot"
 ---

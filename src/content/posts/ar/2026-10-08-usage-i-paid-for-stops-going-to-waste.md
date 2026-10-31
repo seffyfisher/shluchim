@@ -7,7 +7,7 @@ seoDescription: "مهمة روتينية تنبّهني قبل إعادة ضبط
 topics: ["grok-bot", "everyday-ai"]
 date: 2026-10-08
 updated: 2026-10-16
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-08-usage-reset-alert"
 ---

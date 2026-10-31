@@ -7,7 +7,7 @@ seoDescription: "مساعديّ من الذكاء الاصطناعي ينقلو�
 topics: ["everyday-ai", "agent-teamwork"]
 date: 2026-10-06
 updated: 2026-10-16
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-06-reminders-shaliach"
 ---

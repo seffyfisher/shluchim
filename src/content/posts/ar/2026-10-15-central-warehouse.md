@@ -7,7 +7,7 @@ seoTitle: "مستودع واحد للعمل مع الذكاء الاصطناعي
 seoDescription: "أفكار ومستندات تعمل عليها مع الذكاء الاصطناعي تُدفن في المحادثات. مستودع واحد خارج الأداة، عندي Linear، وأربعة أسطر لكل مهمة. تكمل غدًا حتى مع أداة أخرى."
 topics: ["everyday-ai", "ai-at-work"]
 date: 2026-10-20
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-15-central-warehouse"
 socialImage: "/images/posts/central-warehouse-1-shelf-1672.webp"

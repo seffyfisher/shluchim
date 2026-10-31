@@ -7,7 +7,7 @@ seoDescription: "التحضير للجنة طبية مع مساعد ذكاء ا�
 topics: ["everyday-ai"]
 date: 2026-09-17
 updated: 2026-10-16
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-09-17-messy-email-to-dossier"
 ---

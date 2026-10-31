@@ -7,7 +7,7 @@ seoDescription: "مهمة روتينية تكتب كل يوم اثنين في ا
 topics: ["ai-at-work"]
 date: 2026-10-03
 updated: 2026-10-16
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-05-linear-weekly-brief"
 ---

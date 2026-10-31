@@ -7,7 +7,7 @@ seoDescription: "كل يوم اثنين يلخّص مساعد ذكاء اصطن�
 topics: ["ai-at-work"]
 date: 2026-09-28
 updated: 2026-10-16
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-05-clarity-weekly-digest"
 ---

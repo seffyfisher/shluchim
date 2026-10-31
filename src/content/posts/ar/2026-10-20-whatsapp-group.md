@@ -7,7 +7,7 @@ seoTitle: "مجموعة واتساب لمن يبني مساعدي ذكاء اص�
 seoDescription: "مجموعة واتساب صغيرة لمن يبني مساعدي ذكاء اصطناعي في Grok Bot أو في أدوات مشابهة. تسألون أين علقتم، وترون ما بناه الآخرون فعلًا. حوار، لا قناة تحديثات."
 topics: ["grok-bot"]
 date: 2026-10-20
-draft: true
+draft: false
 hideWaCta: true
 lang: ar
 translationKey: "2026-10-20-whatsapp-group"

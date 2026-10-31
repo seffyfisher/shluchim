@@ -7,7 +7,7 @@ seoDescription: "كوخافا، مساعدة ذكاء اصطناعي للتطو�
 topics: ["ai-at-work"]
 date: 2026-10-07
 updated: 2026-10-16
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-07-bar2go-pickup-points"
 ---

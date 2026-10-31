@@ -7,7 +7,7 @@ seoTitle: "العمل الجماعي مع الذكاء الاصطناعي: أن 
 seoDescription: "طلبتُ أن تتحوّل 3 غرف عمل إلى غرفة مشتركة. تأمّل في مشاركة السياق بين الناس حين يستعين كل موظف بأسطول مساعدين، وفي الحاجة إلى التركيز والخصوصية."
 topics: ["ai-at-work", "agent-teamwork"]
 date: 2026-10-15
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-15-break-context-window"
 socialImage: "/images/posts/break-context-window-opening-walls-1536.webp"

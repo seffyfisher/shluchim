@@ -7,7 +7,7 @@ seoDescription: "يسعّر Clerk حسب المستخدمين النشطين ش�
 topics: ["ai-at-work"]
 date: 2026-10-02
 updated: 2026-10-16
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-02-clerk-auth-cost"
 ---

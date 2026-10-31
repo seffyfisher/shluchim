@@ -14,6 +14,8 @@ const routeNames = {
   '/posts/2026-10-06-reminders-shaliach/': 'he-post',
   '/podcast/': 'he-podcast',
   '/posts/2026-10-13-wake-up-sky/': 'he-podcast-post',
+  '/ar/': 'ar-home',
+  '/ar/posts/2026-10-06-one-shaliach-for-all-reminders/': 'ar-post',
 };
 const routes = Object.keys(routeNames);
 const reportDir = resolve('lighthouse-reports');

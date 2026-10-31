@@ -6,7 +6,7 @@ seoTitle: "العمل بالصوت مع ChatGPT وCodex"
 seoDescription: "ساعتان ونصف عملًا بالصوت مع Codex أثمرتا أكثر من 4 PRs في الساعة. هكذا تحوّل محادثة مع مساعد صوتي الطلبات إلى إصلاحات كود وبريد وأبحاث بالتوازي."
 topics: ["ai-at-work", "everyday-ai"]
 date: 2026-10-13
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-13-wake-up-sky"
 cover: "../../../assets/posts/wake-up-sky.jpg"
