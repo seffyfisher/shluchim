@@ -7,7 +7,7 @@ seoDescription: "الشيف، مساعد ذكاء اصطناعي، يخطّط ق
 topics: ["everyday-ai", "grok-bot"]
 date: 2026-10-05
 updated: 2026-10-16
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-05-chef-weekly-dinners"
 ---

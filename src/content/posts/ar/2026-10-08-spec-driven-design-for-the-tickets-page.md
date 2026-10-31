@@ -6,7 +6,7 @@ seoTitle: "عملية تصميم spec-driven بُنيت بالذكاء الاص�
 seoDescription: "بنت نيتسا، مساعدة ذكاء اصطناعي للتصميم، خلال يومين عملية تصميم قابلة للتكرار قائمة على المواصفات. وأوصل أول تطبيق لها صفحة الباقات حتى التسليم للتطوير."
 topics: ["ai-at-work"]
 date: 2026-10-07
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-08-spec-driven-tickets-redesign"
 cover: "../../../assets/posts/spec-driven-tickets-redesign.webp"

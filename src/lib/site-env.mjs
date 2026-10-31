@@ -1,6 +1,7 @@
-// Pre-launch gate for Arabic (/ar/): while false, all /ar/ pages emit <meta name="robots" content="noindex" />
-// (and omit <link rel="canonical">) and are excluded from the XML sitemap and llms.txt until Phase D launch.
-export const AR_LAUNCHED = false;
+// Launch gate for Arabic (/ar/). Launched in Phase D (SEF-263, 2026-10-31): /ar/ pages are indexable with a canonical,
+// HE/EN pages hreflang to them, and they are in the XML sitemap, llms.txt and llms-full.txt.
+// Setting it back to false re-stages /ar/: every /ar/ page becomes noindex without a canonical and drops out of those.
+export const AR_LAUNCHED = true;
 
 // Where the site lives: ONE place for the defaults (astro.config.mjs, the list guard, remark plugins and
 // scripts/indexnow.mjs all read it). CI can override with the repo variables SITE_URL / BASE_PATH

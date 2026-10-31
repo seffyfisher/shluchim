@@ -7,7 +7,7 @@ seoTitle: "وصفة فاصوليا الليما لإيال شاني جاهزة �
 seoDescription: "رسالة صوتية واحدة، وبعد ما يزيد قليلًا على ساعة أعدّ مساعدو الذكاء الاصطناعي لأمّي ملف PDF من 12 صفحة: مسبّحة ليما لإيال شاني، خطوة بخطوة، مع صور واقعية."
 topics: ["everyday-ai", "grok-bot"]
 date: 2026-10-23
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-23-lima-beans-for-mom"
 socialImage: "/images/posts/lima-beans-for-mom-share-1200.webp"

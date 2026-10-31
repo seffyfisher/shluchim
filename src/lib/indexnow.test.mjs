@@ -7,17 +7,24 @@ const files = {
   'src/content/posts/he/a.md': '---\ndraft: false\ntopics: ["grok-bot"]\n---\nbody',
   'src/content/posts/en/b.md': '---\ndraft: false\ntopics: ["ai-at-work"]\n---\nbody',
   'src/content/posts/he/d.md': '---\ndraft: true\ntopics: ["grok-bot"]\n---\nbody',
+  'src/content/posts/ar/c.md': '---\ndraft: false\ntopics: ["grok-bot"]\n---\nbody',
+  'src/content/posts/ar/e.md': '---\ndraft: true\n---\nbody',
   'src/content/posts/he/example-draft.md': '---\ndraft: false\n---\n',
 };
 const read = (f) => { if (!(f in files)) throw new Error('gone'); return files[f]; };
 
-test('a published story brings its URL, both homepages and the hubs of its topics', () => {
+test('a published story brings its URL, every homepage and the hubs of its topics', () => {
   const u = urlsFor(['src/content/posts/he/a.md'], read, BASE);
-  assert.deepEqual(u.sort(), [BASE, `${BASE}en/`, `${BASE}posts/a/`, `${BASE}topics/grok-bot/`, `${BASE}en/topics/grok-bot/`].sort());
+  assert.deepEqual(u.sort(), [BASE, `${BASE}en/`, `${BASE}ar/`, `${BASE}posts/a/`, `${BASE}topics/grok-bot/`, `${BASE}en/topics/grok-bot/`, `${BASE}ar/topics/grok-bot/`].sort());
 });
 
 test('English stories live under /en/', () => {
   assert.ok(urlsFor(['src/content/posts/en/b.md'], read, BASE).includes(`${BASE}en/posts/b/`));
+});
+
+test('Arabic stories live under /ar/ and Arabic drafts are never announced', () => {
+  assert.ok(urlsFor(['src/content/posts/ar/c.md'], read, BASE).includes(`${BASE}ar/posts/c/`));
+  assert.deepEqual(urlsFor(['src/content/posts/ar/e.md'], read, BASE), []);
 });
 
 test('drafts, the example draft, deleted files and unrelated files are never announced', () => {

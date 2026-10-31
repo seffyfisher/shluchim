@@ -40,8 +40,8 @@ Technical publishing conventions remain in [PUBLISHING.md](PUBLISHING.md).
 
 ## Arabic (/ar/) work (SEF-263, 2026-10-30)
 
-- `/ar/` is staged: keep `AR_LAUNCHED = false` and `noindex`; do not add `/ar/` to sitemap, `llms.txt` or HE/EN hreflang. Launch is Phase D, only on Seffy's decision via Yosef.
-- No Arabic posts until Phase C. Don't create `src/content/posts/ar/*` in other work.
+- `/ar/` is launched (Phase D, 2026-10-31): `AR_LAUNCHED = true`, so `/ar/` is indexable, in the sitemap, `llms.txt` / `llms-full.txt`, IndexNow and HE/EN hreflang. Don't flip it back without Seffy's decision via Yosef.
+- New Arabic posts start as `draft: true` and go live only after the Arabic critic gate below.
 - Brand: Latin **Shluchim** in logo/titles/URL/`og:site_name`; never شلوخيم / رسول / مرسلون, never وكيل as a name. Visible copy says مساعد; only `SEO_KEYWORDS.ar` may use وكلاء. MSA, digits 0–9. Dropdown labels stay `עברית · العربية · English` in that order, RTL-aligned.
 - Any new or changed visible Arabic text needs the Arabic critic's written dual-pass (`arabic-blog-writing` + `arabic-seo`) before merge. Open such PRs as drafts and list the strings for review. Details: `PUBLISHING.md` ("Arabic (/ar/)") and `SEO-GEO.md`.
 - When adding any per-language branch, handle all of `LOCALES` (he, en, ar); never `he ? … : …` that silently treats ar as en.

@@ -7,7 +7,7 @@ seoTitle: "رامي ليفي يحجب عناوين IP من الخارج: الت�
 seoDescription: "أعاد رامي ليفي الرمز 403 لمساعدي في السحابة لأن IP كان أمريكيًّا. التوجيه عبر حاسوبي أعطاه عنوانًا إسرائيليًّا و200، والآن يملأ الشيف السلّة كل أسبوع."
 topics: ["everyday-ai"]
 date: 2026-10-13
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-13-chef-rami-levy-routing"
 ---

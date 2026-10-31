@@ -3,19 +3,20 @@
 import { parseFrontmatter } from './frontmatter.mjs';
 import { TOPIC_SLUGS } from '../data/topics.mjs';
 
-const PREFIX = { he: '', en: 'en/' };
+const PREFIX = { he: '', en: 'en/', ar: 'ar/' };
+const LANGS = Object.keys(PREFIX);
 
 /**
  * URLs (absolute, trailing slash) to submit for a set of changed files.
  * `read(path)` returns the file's text. Only published stories count: a draft never gets announced.
- * Any changed story also refreshes both homepages and the topic hubs the story belongs to.
+ * Any changed story also refreshes every homepage (he, en, ar) and the topic hubs the story belongs to.
  */
 export function urlsFor(changed, read, siteBase) {
   const urls = new Set();
   const topics = new Set();
   let stories = false;
   for (const file of changed) {
-    const m = /^src\/content\/posts\/(he|en)\/([^/]+)\.md$/.exec(file);
+    const m = /^src\/content\/posts\/(he|en|ar)\/([^/]+)\.md$/.exec(file);
     if (m) {
       let data;
       try { data = parseFrontmatter(read(file)).data; } catch { continue; } // deleted or unreadable
@@ -25,12 +26,12 @@ export function urlsFor(changed, read, siteBase) {
       stories = true;
       continue;
     }
-    const p = /^src\/content\/pages\/(he|en)\/about\.md$/.exec(file);
+    const p = /^src\/content\/pages\/(he|en|ar)\/about\.md$/.exec(file);
     if (p) urls.add(`${siteBase}${PREFIX[p[1]]}about/`);
     if (file === 'src/data/topics.mjs') for (const t of TOPIC_SLUGS) topics.add(t);
   }
-  if (stories) for (const l of ['he', 'en']) urls.add(`${siteBase}${PREFIX[l]}`);
-  for (const t of topics) for (const l of ['he', 'en']) if (TOPIC_SLUGS.includes(t)) urls.add(`${siteBase}${PREFIX[l]}topics/${t}/`);
+  if (stories) for (const l of LANGS) urls.add(`${siteBase}${PREFIX[l]}`);
+  for (const t of topics) for (const l of LANGS) if (TOPIC_SLUGS.includes(t)) urls.add(`${siteBase}${PREFIX[l]}topics/${t}/`);
   return [...urls];
 }
 

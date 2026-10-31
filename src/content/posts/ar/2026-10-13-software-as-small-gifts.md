@@ -7,7 +7,7 @@ seoTitle: "هدية برمجية شخصية لأجهزة Mac وWindows: TypoSwap
 seoDescription: "TypoSwap هدية برمجية لنظامَي تشغيل، Mac وWindows: تصحيح محلي بين العبرية والإنجليزية، ونص جاهز للّصق، وتثبيت يُفتح كما تُفتح الهدية. وما زالت نسخة تجريبية."
 topics: ["everyday-ai", "ai-at-work"]
 date: 2026-10-18
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-13-software-as-small-gifts"
 ---

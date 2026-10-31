@@ -7,7 +7,7 @@ seoTitle: "لماذا تفعل كل شيء وحدك رغم وجود مساعد �
 seoDescription: "لديّ مساعد شخصي، وإلى أن أتذكّر أن أطلب منه أكون قد أنجزت العمل وحدي. اربط الطلب بعمل يومي، وافحص عيّنة، وتوقّف عن إدارة المساعدين واحدًا واحدًا."
 topics: ["everyday-ai", "grok-bot"]
 date: 2026-10-26
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-26-still-alone"
 socialImage: "/images/posts/still-alone-20261027-tip-share-1200.webp"

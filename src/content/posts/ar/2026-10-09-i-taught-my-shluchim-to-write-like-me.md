@@ -6,7 +6,7 @@ seoTitle: "تعليم مساعدي الذكاء الاصطناعي الكتاب�
 seoDescription: "ملف أسلوبي في الكتابة من طبقتين، وأربع جولات اختبار عمياء، حتى لم أعد أميّز بين كتابة المساعدين وكتابتي. ومعه اكتشاف عن علامات الترقيم عندي."
 topics: ["agent-teamwork"]
 date: 2026-10-09
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-09-voice-profile"
 socialImage: "/images/posts/voice-profile-share-1200x630.webp"

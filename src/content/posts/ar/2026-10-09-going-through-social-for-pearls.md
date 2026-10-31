@@ -7,7 +7,7 @@ seoDescription: "دخلت مساعدة ذكاء اصطناعي إلى مجموع
 topics: ["ai-at-work"]
 date: 2026-10-09
 updated: 2026-10-16
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-09-social-pearls"
 ---

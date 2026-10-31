@@ -7,7 +7,7 @@ seoDescription: "مصدر زيارات باسم product_page في GA4 أظهر 2
 topics: ["ai-at-work", "agent-teamwork"]
 date: 2026-09-09
 updated: 2026-10-16
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-09-11-product-page-beach"
 ---

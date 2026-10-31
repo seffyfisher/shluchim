@@ -6,7 +6,7 @@ seoTitle: "صور ملف شخصي متحرّكة لمساعدي الذكاء ا�
 seoDescription: "حوّل باشِر صفحات تعابير الشخصيات إلى صور ملف شخصي متحرّكة (APNG)، وغيّر كل مساعد صورته بنفسه. إحداها تدور 360° في حلقة متكرّرة بلا أي فاصل."
 topics: ["agent-teamwork"]
 date: 2026-10-09
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-09-animated-avatars"
 socialImage: "/images/posts/animated-avatars-share-1200x630.webp"

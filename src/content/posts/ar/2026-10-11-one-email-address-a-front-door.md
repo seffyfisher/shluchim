@@ -6,7 +6,7 @@ seoTitle: "بريد إلكتروني لـGrok Bot: كيف تفتحه، و+tag، 
 seoDescription: "طلبت من باشِر أن يفتح لـGrok Bot صندوق بريد خاصًّا به. العنوان دائم، ويمكن تقسيم البريد بـ+tag، والبريد الوارد لا يوقظ أي مساعد من دون مهمة روتينية."
 topics: ["grok-bot", "agent-teamwork"]
 date: 2026-10-11
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-11-grokbot-email-inbox"
 ---

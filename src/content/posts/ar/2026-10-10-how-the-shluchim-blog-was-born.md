@@ -7,7 +7,7 @@ seoDescription: "مساعد ذكاء اصطناعي للكتابة يوثّق ك
 topics: ["grok-bot", "agent-teamwork"]
 date: 2026-10-09
 updated: 2026-10-16
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-10-building-the-shluchim-blog"
 ---

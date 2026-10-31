@@ -7,7 +7,7 @@ seoTitle: "فريق مساعدي ذكاء اصطناعي بدل محادثة و�
 seoDescription: "لماذا تنسى المحادثة الطويلة التفاصيل، وكيف يعمل فريق من مساعدي الذكاء الاصطناعي الصغار على حاسوب سحابي مشترك، لكلٍّ منهم مهمة واحدة. مع أمثلة حقيقية من فريقي."
 topics: ["agent-teamwork", "grok-bot"]
 date: 2026-10-30
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-10-30-grokbot-architecture"
 socialImage: "/images/posts/grokbot-architecture-share-1200.webp"

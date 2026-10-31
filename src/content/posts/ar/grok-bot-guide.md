@@ -7,7 +7,7 @@ seoDescription: "ما هو Grok Bot، وكيف تبدأ، وكم يكلّف، و
 topics: ["grok-bot", "ai-at-work"]
 date: 2026-10-12
 updated: 2026-10-12
-draft: true
+draft: false
 featured: true
 lang: ar
 translationKey: "grok-bot-guide"
