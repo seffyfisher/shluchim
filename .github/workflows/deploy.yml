@@ -39,7 +39,7 @@ jobs:
       - run: npm run test:story-loading # prevent below-fold art competing with initial content
       - run: npm run test:fonts # font payload, glyph rasterization, geometry and rare-character fallback
       - run: npm run test:presence-lifecycle # native background/pagehide/bfcache cleanup with the real SDK
-      - run: npm run perf:check # mobile Lighthouse must score 100 before any deployment
+      - run: npm run perf:check # mobile Lighthouse median must be >= 90 before any deployment
       - name: Check production hosting before deploying
         if: github.event_name != 'pull_request'
         env:
