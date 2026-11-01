@@ -108,6 +108,24 @@
     "example_ar": "مثلًا: تُعد حملة بمواد إبداعية جديدة، لكنها لا تغيّر الميزانية ولا تنشر ولا ترسل أي شيء دون موافقتي."
   },
   {
+    "id": "asaf",
+    "name": "אסף",
+    "name_en": "Asaf",
+    "name_ar": "أساف",
+    "role": "חוקר לינקים. קורא כל מקור ומחזיר מה רלוונטי לצוות השְׁלוּחִים ול׳עברית׳.",
+    "role_en": "Link researcher. Reads each source and returns what matters for the shluchim team and ׳עברית׳.",
+    "role_ar": "باحث روابط. يقرأ كل مصدر ويعيد ما يهم فريق الشلوحيم و«عڤريت».",
+    "category": "ניהול וכלים",
+    "category_en": "Management & tools",
+    "category_ar": "الإدارة والأدوات",
+    "avatar": "shluchim/asaf.webp",
+    "animated": true,
+    "still": "shluchim/asaf-still.webp",
+    "example": "למשל: אני שולח לו חבילת לינקים, והוא מחזיר תמצית בעברית עם המלצות פעולה.",
+    "example_en": "For example: I send him a batch of links, and he returns a Hebrew brief with action recommendations.",
+    "example_ar": "مثلًا: أرسل له حزمة روابط، فيعيد ملخصًا بالعبرية مع توصيات عمل."
+  },
+  {
     "id": "nitza",
     "name": "ניצה",
     "name_en": "Nitza",
