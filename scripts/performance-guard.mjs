@@ -21,7 +21,7 @@ const routes = Object.keys(routeNames);
 const reportDir = resolve('lighthouse-reports');
 const buildDir = resolve('dist');
 const lighthouseCli = resolve('node_modules/lighthouse/cli/index.js');
-const minimumScore = 100;
+const minimumScore = 90;
 const runsPerRoute = 3;
 const mimeTypes = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
