@@ -14,7 +14,7 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const ui = t(lang);
 const posts = await getPosts(lang);
-const { featured, history } = splitFeaturedPosts(posts, lang === 'he' ? posts : await getPosts('he'), lang);
+const { latest, featured, history } = splitFeaturedPosts(posts, lang === 'he' ? posts : await getPosts('he'), lang);
 const he = lang === 'he';
 const seo = SEO_HOME[lang];
 // Cards above the story list: the featured shaliach and the About card. The shaliach is fixed (not random: random needs JS).
@@ -40,21 +40,21 @@ const ABOUT_CARDS: Record<Lang, { kick: string; title: string; text: Part[][]; b
 const aboutCard = ABOUT_CARDS[lang];
 const COPY: Record<Lang, {
   introLabel: string; shaliachKick: string; shaliachHeading: (name: string) => string; meetTeam: string;
-  evritLabel: string; podcastTitle: string; podcastNote: string; listLabel: (n: number) => string;
+  evritLabel: string; podcastTitle: string; podcastNote: string; latestLabel: string; listLabel: (n: number) => string;
 }> = {
   he: {
     introLabel: 'פתיח', shaliachKick: 'מִיהוּ שָׁלוּחַ?', shaliachHeading: (name) => `למשל ${name}`, meetTeam: 'הכירו את השְׁלוּחִים',
-    evritLabel: 'עברית', podcastTitle: 'הפודקסט', podcastNote: 'המעשיות, גם באוזניים.',
+    evritLabel: 'עברית', podcastTitle: 'הפודקסט', podcastNote: 'המעשיות, גם באוזניים.', latestLabel: 'המעשיה החדשה ביותר',
     listLabel: (n) => `${n === 1 ? 'מעשיה אחת' : `${n} מעשיות`}, מהחדשה לישנה`,
   },
   en: {
     introLabel: 'Intro', shaliachKick: 'Who is a shaliach?', shaliachHeading: (name) => name, meetTeam: 'Meet the shluchim',
-    evritLabel: 'Evrit', podcastTitle: 'Podcast (in Hebrew)', podcastNote: 'The stories, in audio too.',
+    evritLabel: 'Evrit', podcastTitle: 'Podcast (in Hebrew)', podcastNote: 'The stories, in audio too.', latestLabel: 'Latest story',
     listLabel: (n) => `${n === 1 ? 'One story' : `${n} stories`}, newest first`,
   },
   ar: {
     introLabel: 'مقدمة', shaliachKick: 'ما المقصود بالمبعوث؟', shaliachHeading: (name) => `مثلًا ${name}`, meetTeam: 'تعرّف إلى الفريق',
-    evritLabel: 'e-vrit', podcastTitle: 'البودكاست (بالعبرية)', podcastNote: 'الحكايات مسموعة أيضًا.',
+    evritLabel: 'e-vrit', podcastTitle: 'البودكاست (بالعبرية)', podcastNote: 'الحكايات مسموعة أيضًا.', latestLabel: 'أحدث حكاية',
     listLabel: (n) => n === 1 ? 'حكاية واحدة، من الأحدث إلى الأقدم' : n === 2 ? 'حكايتان، من الأحدث إلى الأقدم' : n >= 3 && n <= 10 ? `${n} حكايات، من الأحدث إلى الأقدم` : `${n} حكاية، من الأحدث إلى الأقدم`,
   },
 };
@@ -118,6 +118,11 @@ const copy = COPY[lang];
         : <p class="empty">الترجمة العربية للحكايات في الطريق.<br />وحتى ذلك الحين، يمكنك قراءة الحكايات <a href={lurl('he')} hreflang="he" lang="he">بالعبرية</a> أو <a href={lurl('en')} hreflang="en" lang="en">بالإنجليزية</a>.</p>
   ) : (
     <div id="stories" class="home-stories">
+      {/* Homepage order: the newest story first (same card as the list), then the featured block, then the rest newest-first. */}
+      {latest && <section class="latest-story" aria-labelledby="latest-title">
+        <h2 class="list-label" id="latest-title">{copy.latestLabel}</h2>
+        <StoryList posts={[latest]} lang={lang} illustrated />
+      </section>}
       {featured.length > 0 && <FeaturedStories posts={featured} lang={lang} />}
       {history.length > 0 && <>
         <h2 class="list-label">{copy.listLabel(history.length)}</h2>
