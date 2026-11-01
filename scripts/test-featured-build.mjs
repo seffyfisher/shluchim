@@ -33,7 +33,8 @@ try {
   const englishKeys = new Set(en.map(keyOf));
   const paired = he.filter((p) => englishKeys.has(keyOf(p))).sort((a, b) => newest(b, a, new Map()));
   assert.ok(paired.length >= 3, 'fixture needs at least three published pairs');
-  const selected = paired.slice(0, 2);
+  // The newest pair plus an older one: covers both a featured latest post (shown once, in the latest slot) and a regular featured card.
+  const selected = [paired[0], paired[2]];
   const selectedKeys = new Set(selected.map(keyOf));
   for (const p of selected) writeFileSync(p.path, readFileSync(p.path, 'utf8').replace(/^---\r?\n/, '---\nfeatured: true\n'));
   // A paired English flag cannot override the Hebrew source.
@@ -47,19 +48,26 @@ try {
 
   const heByKey = new Map(he.map((p) => [keyOf(p), p]));
   const expected = (posts) => {
-    const chronological = posts.toSorted((a, b) => newest(a, b, heByKey));
-    return [...chronological.filter((p) => selectedKeys.has(keyOf(p))), ...chronological.filter((p) => !selectedKeys.has(keyOf(p)))].map(slugOf);
+    const [latest, ...rest] = posts.toSorted((a, b) => newest(a, b, heByKey));
+    const featured = rest.filter((p) => selectedKeys.has(keyOf(p)));
+    return { latest: slugOf(latest), featured: featured.map(slugOf), order: [latest, ...featured, ...rest.filter((p) => !selectedKeys.has(keyOf(p)))].map(slugOf) };
   };
   for (const [lang, posts, page] of [['he', he, 'index.html'], ['en', en, 'en/index.html']]) {
     const html = readFileSync(join(fixture, 'dist', page), 'utf8');
     const actual = listed(html);
-    assert.deepEqual(actual, expected(posts), `${lang} homepage order`);
+    const want = expected(posts);
+    assert.deepEqual(actual, want.order, `${lang} homepage order: latest, featured, then history`);
+    const latestSection = /<section class="latest-story"[^>]*>([\s\S]*?)<\/section>/.exec(html)?.[1];
+    assert.ok(latestSection, `${lang} homepage has a latest-story slot`);
+    assert.deepEqual(listed(latestSection), [want.latest], `${lang} latest slot holds exactly the newest post`);
+    assert.ok(want.featured.length > 0, `${lang} fixture keeps at least one featured card besides the latest post`);
     assert.equal(new Set(actual).size, actual.length, `${lang} homepage must not duplicate posts`);
     const featuredSection = /<section class="featured-section"[^>]*>([\s\S]*?)<\/section>/.exec(html)?.[1];
     assert.ok(featuredSection, `${lang} homepage has a separate featured editorial section`);
     assert.match(featuredSection, /<h2 id="featured-title">/, `${lang} featured section has a visible accessible heading`);
     assert.match(featuredSection, /<mark>/, `${lang} selected heading retains the marker accent`);
-    assert.deepEqual(listed(featuredSection), actual.slice(0, selected.length), `${lang} featured cards contain exactly the selected posts`);
+    assert.deepEqual(listed(featuredSection), want.featured, `${lang} featured cards contain the selected posts except the latest one`);
+    assert.ok(html.indexOf('class="latest-story"') < html.indexOf('class="featured-section"'), `${lang} latest slot renders above featured`);
     assert.match(html, /class="stories stories-illustrated"/, `${lang} chronological feed enables article thumbnails`);
     assert.doesNotMatch(featuredSection, /class="badge"/, `${lang} featured cards have no redundant badge`);
   }
@@ -67,7 +75,7 @@ try {
     cpSync(join(fixture, 'dist'), resolve(process.env.FEATURED_PREVIEW_DIR), { recursive: true });
     console.log(`Controlled preview saved to ${resolve(process.env.FEATURED_PREVIEW_DIR)}`);
   }
-  console.log('Controlled featured build: Hebrew and English order, inheritance, and uniqueness OK');
+  console.log('Controlled featured build: Hebrew and English order (latest, featured, history), inheritance, and uniqueness OK');
 } finally {
   rmSync(fixture, { recursive: true, force: true });
 }

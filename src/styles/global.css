@@ -166,6 +166,8 @@ main { padding-block: 2.5rem 4rem; }
 /* Selected editorial direction: warm paper and one quiet marker accent, scoped to featured stories. */
 .home-stories { --stories-width: min(60rem, calc(100vw - 2 * var(--gutter))); width: var(--stories-width); margin-inline: calc((100% - var(--stories-width)) / 2); }
 .featured-section { --featured-paper: light-dark(#fff4e1, #2b261f); margin-block: 0 2rem; }
+.latest-story + .featured-section { margin-top: 2.5rem; }
+.latest-story + .list-label { border-top: 1px solid var(--line); }
 .featured-heading { margin-bottom: 1.25rem; }
 .featured-heading h2 { font-family: var(--font-display); font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem); font-weight: 400; line-height: 1.2; }
 .featured-heading mark { padding: .02em .16em .08em; border-radius: .12em; background: #ffe18a; color: #171717; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
