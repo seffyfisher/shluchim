@@ -77,4 +77,33 @@ export const friendPortraits: Record<string, Portrait> = {
     src: orKantorPortrait,
     source: 'https://www.orkantor.com/about-5-1', sourceName: 'Or Kantor',
   },
+,
+  'ori-steinitz': {
+    src: 'https://www.q-bt.co/wp-content/uploads/2025/11/Ori.jpg',
+    source: 'https://www.q-bt.co/team/ori-steinitz/', sourceName: 'Q – Behavioral Thinking', position: '50% 20%',
+  },
+  'shlomo-genchin': {
+    src: 'https://uix-stack-force.s3.amazonaws.com/linkedin_profile_pictures/shlomogenchin.jpeg',
+    source: 'https://www.stackforce.co/talent/69cb78375f3a0165d0f78d64', sourceName: 'Stackforce / LinkedIn',
+  },
+  'eyal-shahar': {
+    src: 'https://ey.al/assets/images/intro-eyal.png',
+    source: 'https://ey.al/', sourceName: 'Eyal Shahar', position: '50% 12%',
+  },
+  'hadar-bismut': {
+    src: 'https://en.glue-team.co.il/assets/img/hadar-portrait.png',
+    source: 'https://en.glue-team.co.il/about.html', sourceName: 'Glue',
+  },
+  'yonatan-harel': {
+    src: 'https://hajongler.com/images/profile.webp',
+    source: 'https://hajongler.com/', sourceName: 'hajongler.com',
+  },
+  'shahar-polak': {
+    src: 'https://www.shaharpolak.com/book/shahar_polak_the_author.webp',
+    source: 'https://www.shaharpolak.com/', sourceName: 'Shahar Polak',
+  },
+  'shahaf-rodberg': {
+    src: 'https://www.prtfl.co.il/wp-content/uploads/2021/03/%D7%A9%D7%97%D7%A3-%D7%A8%D7%95%D7%93%D7%91%D7%A8%D7%92.-%D7%A6%D7%99%D7%9C%D7%95%D7%9D-%D7%93%D7%A0%D7%99%D7%90%D7%9C-%D7%A9%D7%98%D7%A8%D7%99%D7%AA.jpg',
+    source: 'https://www.prtfl.co.il/archives/143912', sourceName: 'מגזין פורטפוליו', photographer: 'דניאל שטרית',
+  },
 };
