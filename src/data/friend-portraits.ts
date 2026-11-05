@@ -77,7 +77,7 @@ export const friendPortraits: Record<string, Portrait> = {
     src: orKantorPortrait,
     source: 'https://www.orkantor.com/about-5-1', sourceName: 'Or Kantor',
   },
-,
+
   'ori-steinitz': {
     src: 'https://www.q-bt.co/wp-content/uploads/2025/11/Ori.jpg',
     source: 'https://www.q-bt.co/team/ori-steinitz/', sourceName: 'Q – Behavioral Thinking', position: '50% 20%',
