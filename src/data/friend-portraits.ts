@@ -1,8 +1,9 @@
 // Public profile portraits selected from each creator's site/profile or speaker page, 2026-10-12.
 // Keep the original URLs and publishing pages together so attribution survives future image changes.
-// Remote portraits use their original hosts; Or Kantor's approved crop is bundled locally.
+// Remote portraits use their original hosts; Or Kantor and Eyal Shahar approved crops are bundled locally.
 // No generated likenesses or third-party news photos.
 import orKantorPortrait from '../assets/creators/or-kantor-portrait.jpg?url';
+import eyalShaharPortrait from '../assets/creators/eyal-shahar-portrait.jpg?url';
 interface Portrait {
   src: string;
   source: string;
@@ -87,8 +88,9 @@ export const friendPortraits: Record<string, Portrait> = {
     source: 'https://www.stackforce.co/talent/69cb78375f3a0165d0f78d64', sourceName: 'Stackforce / LinkedIn',
   },
   'eyal-shahar': {
-    src: 'https://ey.al/assets/images/intro-eyal.png',
-    source: 'https://ey.al/', sourceName: 'Eyal Shahar', position: '50% 12%',
+    // Padded crop of the approved ey.al intro portrait (headroom for circular crop).
+    src: eyalShaharPortrait,
+    source: 'https://ey.al/', sourceName: 'Eyal Shahar', position: '50% 50%',
   },
   'hadar-bismut': {
     src: 'https://en.glue-team.co.il/assets/img/hadar-portrait.png',
