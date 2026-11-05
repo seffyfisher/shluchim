@@ -1,8 +1,20 @@
 {
   "schemaVersion": 1,
   "source": "https://www.spreaker.com/show/7465546/episodes/feed",
-  "updatedAt": "2026-10-25T06:50:44.290498Z",
+  "updatedAt": "2026-11-05T12:16:18.950605Z",
   "episodes": [
+    {
+      "guid": "https://api.spreaker.com/episode/76189862",
+      "title": "השלוח שדופק בדלת | פרק 3",
+      "published": "2026-11-05T12:13:54Z",
+      "durationSeconds": 364,
+      "number": null,
+      "language": "he",
+      "description": "מתקינים, ועכשיו מה? השָׁלוּחַ שלמד לדפוק בדלת — ואז גם מרכז אחד לכל התזכורות. שגרת צ׳ק־אין שמדפיקה אותך לפעולה, וצילום מסך במקום עוד משימה ששוכחים. אחר כך שלוח אחד שמרים את כל התזכורות במקום עשרות התראות. הפוסטים: https://shluchim.shinlamed.com/posts/2026-09-21-thin-work-checkin-bot/…",
+      "pageUrl": "https://www.spreaker.com/episode/hslwh-sdwpq-bdlt-prq-3--76189862",
+      "audioUrl": "https://api.spreaker.com/download/episode/76189862/ep3_knock.mp3",
+      "audioType": "audio/mpeg"
+    },
     {
       "guid": "https://api.spreaker.com/episode/75971655",
       "title": "איך השְׁלוּחִים שלי מרימים טלפון (איפה אתם?) | פרק 2",
