@@ -36,6 +36,7 @@
   "devDependencies": {
     "lighthouse": "13.4.1",
     "puppeteer-core": "25.13.0",
+    "supabase": "^2.122.0",
     "ws": "8.22.0"
   }
 }
