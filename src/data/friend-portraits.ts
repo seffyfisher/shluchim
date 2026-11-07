@@ -4,6 +4,7 @@
 // No generated likenesses or third-party news photos.
 import orKantorPortrait from '../assets/creators/or-kantor-portrait.jpg?url';
 import eyalShaharPortrait from '../assets/creators/eyal-shahar-portrait.jpg?url';
+import hadasAlmogPortrait from '../assets/creators/hadas-almog-portrait.jpg?url';
 interface Portrait {
   src: string;
   source: string;
@@ -107,5 +108,11 @@ export const friendPortraits: Record<string, Portrait> = {
   'shahaf-rodberg': {
     src: 'https://www.prtfl.co.il/wp-content/uploads/2021/03/%D7%A9%D7%97%D7%A3-%D7%A8%D7%95%D7%93%D7%91%D7%A8%D7%92.-%D7%A6%D7%99%D7%9C%D7%95%D7%9D-%D7%93%D7%A0%D7%99%D7%90%D7%9C-%D7%A9%D7%98%D7%A8%D7%99%D7%AA.jpg',
     source: 'https://www.prtfl.co.il/archives/143912', sourceName: 'מגזין פורטפוליו', photographer: 'דניאל שטרית',
+  },
+  'hadas-almog': {
+    // Her own Substack profile avatar (illustrated portrait), bundled locally:
+    // https://substack-post-media.s3.amazonaws.com/public/images/5ef4814e-a458-45ac-9a78-f231ec97b483_1250x1250.jpeg
+    src: hadasAlmogPortrait,
+    source: 'https://substack.com/@hadasalmog', sourceName: 'Substack',
   },
 };
