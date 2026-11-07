@@ -143,4 +143,9 @@ export const friends: Friend[] = [
     textEn: 'Internet curator and TabTabTab newsletter writer; opens tabs of curiosity, creativity and critique of content.',
     textAr: 'أمين محتوى إنترنت وكاتب نشرة TabTabTab؛ يفتح تبويبات من الفضول والإبداع ونقد المحتوى.',
     links: [{ he: 'טאבטאבטאב', en: 'TabTabTab', ar: 'TabTabTab', url: 'https://www.rodberg.me/tabtabtab' }] },
+  { id: 'hadas-almog', silhouette: 'female', pastel: '#E9C4A6', theme: 'עבודה ו־AI', themeEn: 'Work & AI', themeAr: 'العمل والذكاء الاصطناعي', name: 'הדס אלמוג', nameEn: 'Hadas Almog', nameAr: 'هداس ألموغ',
+    text: 'כותבת את The Human Signal בסאבסטק: על עבודה, מנהיגות, AI והמציאות האנושית שמתחת להחלטות בארגונים.',
+    textEn: 'Writes The Human Signal on Substack: notes on work, leadership, AI and the human realities beneath organizational decisions.',
+    textAr: 'تكتب نشرة The Human Signal على Substack: عن العمل والقيادة والذكاء الاصطناعي والواقع الإنساني وراء قرارات المؤسسات.',
+    links: [{ he: 'The Human Signal בסאבסטק', en: 'The Human Signal on Substack', ar: 'The Human Signal على Substack', url: 'https://hadasalmog.substack.com/' }] },
 ];
