@@ -1,6 +1,9 @@
 ---
 title: "Waking up tomorrow morning with a new song in my heart"
 description: "I wanted to broaden my musical taste, but I never got around to digging through blogs, Spotify and Reddit. So I asked a shaliach to do it for me every Sunday morning, and build me a Spotify playlist."
+seoTitle: "Discover new music weekly with an AI playlist"
+seoDescription: "About 20 songs every Sunday morning: I asked an AI agent to dig through Reddit and music blogs, skip the mainstream and build me a Spotify playlist."
+topics: ["everyday-ai"]
 date: 2026-11-08
 draft: true
 lang: en
