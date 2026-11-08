@@ -5,7 +5,7 @@ seoTitle: "اكتشاف موسيقى جديدة كل أسبوع مع مساعد 
 seoDescription: "كيف طلبتُ من مساعد ذكاء اصطناعي أن يتصفّح ريديت ومدوّنات الموسيقى كل أحد، ويختار نحو 20 أغنية بعيدة عن السائد، ويُعدّ لي قائمة تشغيل على سبوتيفاي."
 topics: ["everyday-ai"]
 date: 2026-11-08
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-11-06-music-discovery-playlist"
 ---

@@ -6,7 +6,7 @@ seoTitle: "פלייליסט שבועי בספוטיפיי עם שְׁלוּחִ�
 seoDescription: "כ־20 שירים כל ראשון בבוקר: ביקשתי מהשלוח שלי לעבור על רדיט ובלוגי מוזיקה, לבחור מחוץ למיינסטרים ולהכין לי פלייליסט בספוטיפיי."
 topics: ["everyday-ai"]
 date: 2026-11-08
-draft: true
+draft: false
 lang: he
 translationKey: "2026-11-06-music-discovery-playlist"
 ---

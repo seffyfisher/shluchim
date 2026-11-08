@@ -5,7 +5,7 @@ seoTitle: "Discover new music weekly with an AI playlist"
 seoDescription: "About 20 songs every Sunday morning: I asked a shaliach to dig through Reddit and music blogs, skip the mainstream and build me a Spotify playlist."
 topics: ["everyday-ai"]
 date: 2026-11-08
-draft: true
+draft: false
 lang: en
 translationKey: 2026-11-06-music-discovery-playlist
 ---
