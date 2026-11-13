@@ -18,6 +18,8 @@ And then I remembered who forgets to fill them in every month.
 
 (Shluchim, singular shaliach, is Hebrew for "emissaries". It's what I call my AI agents.)
 
+![Basher, the shaliach with the red mohawk, holds a paper card in his mouth and punches it in an old mechanical time clock.](/images/posts/2026-11-13-shaliach-punches-the-clock-punch-clock-1536.webp)
+
 My mom works in HR.
 We talked about the headache of collecting hours from employees.
 Everyone has their own way of reporting, they send it by email,
@@ -49,8 +51,6 @@ and he left the special days for me to decide on.
 He suggested, I approved:
 
 > Skip election day, no need to fill it in. Save the rest.
-
-![Basher, the shaliach with the red mohawk, holds a paper card in his mouth and punches it in an old mechanical time clock.](/images/posts/2026-11-13-shaliach-punches-the-clock-punch-clock-1536.webp)
 
 **And then I asked for it to happen next month too**
 
