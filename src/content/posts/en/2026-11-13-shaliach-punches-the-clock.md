@@ -7,7 +7,7 @@ seoTitle: "My AI shaliach now fills in my missing work hours"
 seoDescription: "Now my AI shaliach punches the clock too. It all started when I explained to my mom, who works in HR, how AI can sort out the mess of timesheets."
 topics: ["everyday-ai"]
 date: 2026-11-13
-draft: true
+draft: false
 lang: en
 translationKey: "2026-11-13-shaliach-punches-the-clock"
 socialImage: "/images/posts/2026-11-13-shaliach-punches-the-clock-share-1200.webp"

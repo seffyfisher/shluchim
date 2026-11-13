@@ -7,7 +7,7 @@ seoTitle: "مساعد ذكاء اصطناعي يسجّل ساعات العمل �
 seoDescription: "صار مساعد الذكاء الاصطناعي يسجّل دوامي أيضًا. بدأ الأمر حين شرحت لأمي، التي تعمل في الموارد البشرية، كيف يمكن للذكاء الاصطناعي أن يحلّ فوضى تقارير ساعات العمل."
 topics: ["everyday-ai"]
 date: 2026-11-13
-draft: true
+draft: false
 lang: ar
 translationKey: "2026-11-13-shaliach-punches-the-clock"
 socialImage: "/images/posts/2026-11-13-shaliach-punches-the-clock-share-1200.webp"

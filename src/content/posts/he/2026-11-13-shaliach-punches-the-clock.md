@@ -7,7 +7,7 @@ seoTitle: "השלוח שלי התחיל לדפוק כרטיס"
 seoDescription: "עכשיו השלוח שלי דופק גם כרטיס. הכול התחיל כשהסברתי לאמא שלי איך בינה מלאכותית יכולה לפתור את הבלגן של דיווחי השעות. מבלוג שְׁלוּחִים."
 topics: ["everyday-ai"]
 date: 2026-11-13
-draft: true
+draft: false
 lang: he
 translationKey: "2026-11-13-shaliach-punches-the-clock"
 socialImage: "/images/posts/2026-11-13-shaliach-punches-the-clock-share-1200.webp"
