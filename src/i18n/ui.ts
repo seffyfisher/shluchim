@@ -34,6 +34,7 @@ export const UI = {
     ideaFail: 'ההעתקה האוטומטית לא עבדה. הפרומפט המלא מסומן כאן: העתק אותו ידנית, עבור לשלוח שלך והדבק לו אותו.',
     ideaLabel: 'המאמר המלא וההוראה לשְׁלוּחִים שלך',
     ideaManualHelp: 'הטקסט מסומן להעתקה ידנית. אחרי ההעתקה, הדבק אותו בשיחה עם השלוח שלך.',
+    waShare: 'שיתוף בווטסאפ',
   },
   en: {
     skip: 'Skip to content', preview: "Preview mode: includes drafts that aren't approved for publishing yet", navMain: 'Main',
@@ -56,6 +57,7 @@ export const UI = {
     ideaFail: 'Automatic copy did not work. The complete prompt is selected below: copy it by hand, head to your AI assistant and paste it there.',
     ideaLabel: 'The complete article and instruction for your shluchim',
     ideaManualHelp: 'The text is selected for manual copying. After copying, paste it into a conversation with your AI assistant.',
+    waShare: 'Share on WhatsApp',
   },
   ar: {
     skip: 'تخطَّ إلى المحتوى', preview: 'وضع المعاينة: يتضمن مسودات لم يُعتمد نشرها بعد', navMain: 'الرئيسي',
@@ -78,6 +80,7 @@ export const UI = {
     ideaFail: 'لم ينجح النسخ التلقائي. النص الكامل محدد أدناه: انسخه يدويًا، ثم انتقل إلى مساعد الذكاء الاصطناعي لديك والصقه هناك.',
     ideaLabel: 'المقال الكامل والتعليمة الجاهزة لمساعد الذكاء الاصطناعي لديك',
     ideaManualHelp: 'النص محدد للنسخ اليدوي. بعد النسخ، الصقه في محادثة مع مساعد الذكاء الاصطناعي لديك.',
+    waShare: 'مشاركة عبر واتساب',
   },
 } satisfies Record<Lang, Record<string, string>>;
 
