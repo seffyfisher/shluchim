@@ -133,7 +133,12 @@ remains governed by the web stream settings.
 
 The collaboration footer reuses the delegated disclosure, email and navigation
 tracking. Instagram/Facebook clicks belong to GA4 Enhanced Measurement, with no
-duplicate custom click. These events answer whether readers open contact options
+duplicate custom click. The post-page WhatsApp share link (`https://wa.me/?text=…`)
+is the same: an outbound click, so Enhanced Measurement records the attempt and
+the site's delegated tracker does not send a duplicate `select_content`. Opening
+WhatsApp does not confirm a message was sent. Visits that arrive from a share are
+identified by the link's UTM query: `utm_source=whatsapp`, `utm_medium=organic_social`,
+`utm_content=<translationKey>_wabutton` (`keyOf(post)`, stable across locales). These events answer whether readers open contact options
 and which route they choose; opening an app/link does not confirm a message was
 sent. The native disclosure and links work without JavaScript or analytics.
 
