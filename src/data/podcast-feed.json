@@ -1,8 +1,20 @@
 {
   "schemaVersion": 1,
   "source": "https://www.spreaker.com/show/7465546/episodes/feed",
-  "updatedAt": "2026-11-05T12:16:18.950605Z",
+  "updatedAt": "2026-11-16T22:43:26.426978Z",
   "episodes": [
+    {
+      "guid": "https://api.spreaker.com/episode/76410074",
+      "title": "המחסן של כאילו | פרק 4",
+      "published": "2026-11-16T22:41:37Z",
+      "durationSeconds": 410,
+      "number": 4,
+      "language": "he",
+      "description": "הרעיון הכי טוב שלכם מהשבוע קבור עכשיו באיזו שיחה עם AI. בהצלחה למצוא אותו. אצלי הכול נכנס למחסן אחד מחוץ לכלי ה־AI, ליניאר במקרה שלי, ואני פשוט אומר לשלוח ״תרשום לי במחסן״. ככה ברור איפה הכול, ואפשר להמשיך מחר מאיפה שעצרנו, גם עם כלי אחר. הפוסט: https://shluchim.shinlamed.com/posts/2026-10-15-central-warehouse/ This…",
+      "pageUrl": "https://www.spreaker.com/episode/hmhsn-sl-k-ylw-prq-4--76410074",
+      "audioUrl": "https://api.spreaker.com/download/episode/76410074/source.mp3",
+      "audioType": "audio/mpeg"
+    },
     {
       "guid": "https://api.spreaker.com/episode/76189862",
       "title": "השלוח שדופק בדלת | פרק 3",
