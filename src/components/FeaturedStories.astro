@@ -3,8 +3,8 @@ import type { CollectionEntry } from 'astro:content';
 import type { Lang } from '../i18n/ui';
 import { postUrl, formatDateShort, readingMinutes, readingLabel, keyOf } from '../lib/posts';
 import { storyImage, previewUrl, previewSrcset } from '../lib/story-images.mjs';
-interface Props { posts: CollectionEntry<'posts'>[]; lang: Lang }
-const { posts, lang } = Astro.props;
+interface Props { posts: CollectionEntry<'posts'>[]; lang: Lang; start?: { href: string; label: string } }
+const { posts, lang, start } = Astro.props;
 const COPY: Record<Lang, { start: string; guideCta: string; storyCta: string; qMark: string }> = {
   he: { start: 'כדאי להתחיל כאן', guideCta: 'למדריך המלא', storyCta: 'למעשיה המלאה', qMark: '?' },
   en: { start: 'A good place to start', guideCta: 'Read the full guide', storyCta: 'Read the full story', qMark: '?' },
@@ -24,6 +24,8 @@ const entries = await Promise.all(posts.map(async (post) => {
   <header class="featured-heading">
     <h2 id="featured-title">{lang === 'he' ? <>מעשיות <mark>נבחרות</mark></> : lang === 'en' ? <>Featured <mark>stories</mark></> : <>حكايات <mark>مختارة</mark></>}</h2>
     <p>{copy.start}</p>
+    {/* A plain link to the start-here guide, next to the pinned stories. It is not a story card, so the newest/featured/history order and its no-duplicates rule are untouched. */}
+    {start && <a class="featured-start" href={start.href}>{start.label}</a>}
   </header>
   <ol class="featured-stories" role="list">
     {entries.map(({ post, guide, teaser, image }) => (

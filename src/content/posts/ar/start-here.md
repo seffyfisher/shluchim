@@ -6,7 +6,7 @@ seoTitle: "ابدؤوا من هنا: كيف تبنون أول shaliach بلا خ
 seoDescription: "جديدون على Shluchim؟ ست خطوات صغيرة: تنشئون shaliach، وتكلّمونه بصوتكم، وتعطونه مهمة، وتتحققون منها، وتضعون قاعدة موافقة وروتينًا للساعة 9:00."
 topics: ["grok-bot", "everyday-ai"]
 date: 2026-11-17
-draft: true
+draft: false
 lang: ar
 translationKey: "start-here"
 ---

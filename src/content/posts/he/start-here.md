@@ -7,7 +7,7 @@ seoTitle: "מתחילים כאן: איך בונים שלוח ראשון, בלי 
 seoDescription: "מתחילים עם שְׁלוּחִים? שישה צעדים קטנים: יוצרים שלוח, מדברים אליו בקול, נותנים משימה, בודקים, קובעים כלל אישור ושגרה ל־9:00."
 topics: ["grok-bot", "everyday-ai"]
 date: 2026-11-17
-draft: true
+draft: false
 hideWaCta: true
 lang: he
 translationKey: "start-here"
