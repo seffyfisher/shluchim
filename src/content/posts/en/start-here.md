@@ -4,6 +4,7 @@ description: "New to shluchim? Five real stories to start, plus six small steps 
 listDescription: "New here? What shluchim are, five stories to start with, and six small steps to your first shaliach."
 seoTitle: "Start here: build your first shaliach, no technical background"
 seoDescription: "New to shluchim? Five real stories to start, plus six small steps to your first shaliach in Grok Bot: voice, one task, a check, approvals, a 9:00 routine."
+topics: ["grok-bot", "everyday-ai"]
 date: 2026-11-17
 draft: true
 lang: en
