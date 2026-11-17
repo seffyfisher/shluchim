@@ -79,7 +79,7 @@ const jsonLd = [
       <p class="lede">{d.description}</p>
       <WhatsAppShare href={waShareHref} lang={lang} />
     </header>
-    {podcastEpisode && <PodcastListen episode={podcastEpisode} />}
+    {podcastEpisode && <PodcastListen episode={podcastEpisode} lang={lang} />}
     {d.cover && <>
       <button class="image-enlarge image-enlarge-cover" type="button" popovertarget="post-cover" aria-label={imageLabels(lang).open}>
         <Image class="cover" src={d.cover} alt={d.coverAlt ?? ''} widths={[400, 800, 1200]} sizes="(max-width: 46rem) 100vw, 46rem" />

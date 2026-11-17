@@ -8,15 +8,16 @@ test('audio belongs only to the explicitly associated post ID', () => {
   assert.equal(episode.spotifyId, '1Ccf2UKMMvEhrCb4mvnKJt');
   assert.equal(episode.durationIso, 'PT5M14S');
   assert.equal(episode.aiNarrated, true);
-  // A title, partial slug or translation never silently acquires Hebrew audio.
-  for (const id of ['עורו, שמיים.', '2026-10-13-wake-up-sky', 'en/2026-10-13-wake-up-sky', 'he/unrelated']) {
+  // A title or partial slug never silently acquires Hebrew audio. Translations need their own explicit mapping.
+  for (const id of ['עורו, שמיים.', '2026-10-13-wake-up-sky', 'he/unrelated', 'en/unrelated']) {
     assert.equal(episodeForPost(id), undefined);
   }
+  for (const lang of ['en', 'ar']) assert.equal(episodeForPost(`${lang}/2026-10-13-wake-up-sky`).spotifyId, '1Ccf2UKMMvEhrCb4mvnKJt');
 });
 
 test('a mistyped or removed associated post fails validation', () => {
   assert.throws(() => validatePodcastAssociations(['he/unrelated']), /unknown post he\/2026-10-13-wake-up-sky/);
-  const postIds = ['he', 'en'].flatMap((lang) => readdirSync(new URL(`../content/posts/${lang}/`, import.meta.url))
+  const postIds = ['he', 'en', 'ar'].flatMap((lang) => readdirSync(new URL(`../content/posts/${lang}/`, import.meta.url))
     .filter((name) => name.endsWith('.md')).map((name) => `${lang}/${name.slice(0, -3)}`));
   assert.doesNotThrow(() => validatePodcastAssociations(postIds));
 });

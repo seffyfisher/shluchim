@@ -23,6 +23,8 @@ export interface Episode {
   aiNarrated: boolean;
   postPath?: string;
   postTitle?: string;
+  /** Further Hebrew source posts of the same episode (an episode can be based on several posts). */
+  morePosts?: readonly { path: string; title: string }[];
 }
 
 export const EPISODES = {
@@ -58,6 +60,39 @@ export const EPISODES = {
     postPath: 'posts/2026-10-12-dial-bot/',
     postTitle: 'איך השְׁלוּחִים שלי יכולים עכשיו גם להוציא שיחות יוצאות בטלפון.',
   },
+  'knock-3': {
+    rssGuid: 'https://api.spreaker.com/episode/76189862',
+    number: 3,
+    title: 'השלוח שדופק בדלת | פרק 3',
+    description: 'מתקינים, ועכשיו מה? השָׁלוּחַ שלמד לדפוק בדלת, ואז גם מרכז אחד לכל התזכורות. שגרת צ׳ק־אין שמדפיקה אותך לפעולה, וצילום מסך במקום עוד משימה ששוכחים. אחר כך שלוח אחד שמרים את כל התזכורות במקום עשרות התראות.',
+    spotifyId: '6uNHeTuZMUp2SRauPVPHCV',
+    spotifyUrl: 'https://open.spotify.com/episode/6uNHeTuZMUp2SRauPVPHCV',
+    spreakerUrl: 'https://www.spreaker.com/episode/hslwh-sdwpq-bdlt-prq-3--76189862',
+    published: '2026-11-05',
+    duration: '6:04',
+    durationIso: 'PT6M4S',
+    language: 'he',
+    aiNarrated: true,
+    postPath: 'posts/2026-09-21-thin-work-checkin-bot/',
+    postTitle: 'מתקינים, ועכשיו מה? השלוח שלמד לדפוק בדלת.',
+    morePosts: [{ path: 'posts/2026-10-06-reminders-shaliach/', title: 'שלוח אחד לכל התזכורות.' }],
+  },
+  'warehouse-4': {
+    rssGuid: 'https://api.spreaker.com/episode/76410074',
+    number: 4,
+    title: 'המחסן של כאילו | פרק 4',
+    description: 'הרעיון הכי טוב שלכם מהשבוע קבור עכשיו באיזו שיחה עם AI. בהצלחה למצוא אותו. אצלי הכול נכנס למחסן אחד מחוץ לכלי ה־AI, ליניאר במקרה שלי, ואני פשוט אומר לשלוח ״תרשום לי במחסן״.',
+    spotifyId: '0ozEsrv46dmQR80Lnk6RRn',
+    spotifyUrl: 'https://open.spotify.com/episode/0ozEsrv46dmQR80Lnk6RRn',
+    spreakerUrl: 'https://www.spreaker.com/episode/hmhsn-sl-k-ylw-prq-4--76410074',
+    published: '2026-11-16',
+    duration: '6:49',
+    durationIso: 'PT6M49S',
+    language: 'he',
+    aiNarrated: true,
+    postPath: 'posts/2026-10-15-central-warehouse/',
+    postTitle: 'המחסן של כאילו',
+  },
 } as const satisfies Record<string, Episode>;
 
 /** Only verified GUID enrichment can supply Spotify/post links to an RSS row. */
@@ -76,9 +111,30 @@ export function validateEpisodeEnrichment(feedGuids: string[]) {
 }
 
 // Exact content collection IDs, including language. Never compare display titles.
-const POST_EPISODES: Record<string, keyof typeof EPISODES> = {
+// The audio is Hebrew-only. Every HE, EN and AR version of a source post gets the same block,
+// but each translation needs its own explicit line here (the English and Arabic blocks carry
+// their own labels and say the audio is in Hebrew). `npm run podcast:verify` fails when an
+// episode's source post, in any language, is missing from this map.
+export const POST_EPISODES: Record<string, keyof typeof EPISODES> = {
+  // Episode 1
   'he/2026-10-13-wake-up-sky': 'wake-up-sky-1',
+  'en/2026-10-13-wake-up-sky': 'wake-up-sky-1',
+  'ar/2026-10-13-wake-up-sky': 'wake-up-sky-1',
+  // Episode 2
   'he/2026-10-12-dial-bot': 'dial-bot-2',
+  'en/2026-10-12-my-shluchim-can-make-phone-calls': 'dial-bot-2',
+  'ar/2026-10-12-my-shluchim-can-make-phone-calls': 'dial-bot-2',
+  // Episode 3 (two source posts)
+  'he/2026-09-21-thin-work-checkin-bot': 'knock-3',
+  'en/2026-09-21-three-daily-check-ins-moved-out': 'knock-3',
+  'ar/2026-09-21-three-daily-check-ins-moved-out': 'knock-3',
+  'he/2026-10-06-reminders-shaliach': 'knock-3',
+  'en/2026-10-06-one-shaliach-for-all-reminders': 'knock-3',
+  'ar/2026-10-06-one-shaliach-for-all-reminders': 'knock-3',
+  // Episode 4
+  'he/2026-10-15-central-warehouse': 'warehouse-4',
+  'en/2026-10-15-central-warehouse': 'warehouse-4',
+  'ar/2026-10-15-central-warehouse': 'warehouse-4',
 };
 
 export function episodeForPost(postId: string): Episode | undefined {
