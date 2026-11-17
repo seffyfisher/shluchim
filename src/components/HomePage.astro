@@ -6,7 +6,7 @@ import StoryArtLoading from './StoryArtLoading.astro';
 import Avatar from './Avatar.astro';
 import EvritLogo from '../assets/evrit-logo.svg';
 import shluchim from '../data/shluchim.json';
-import { getPosts } from '../lib/posts';
+import { getPosts, keyOf, postUrl } from '../lib/posts';
 import { splitFeaturedPosts } from '../lib/featured.mjs';
 import { lurl, t, type Lang } from '../i18n/ui';
 import { SEO_HOME, ABOUT_AVATAR } from '../config';
@@ -59,6 +59,10 @@ const COPY: Record<Lang, {
   },
 };
 const copy = COPY[lang];
+// "New here? Start here": a link to the start-here guide in the featured area. Hidden automatically while the guide is a draft or missing in this language.
+const START_LABEL: Record<Lang, string> = { he: 'חדש כאן? התחילו כאן', en: 'New here? Start here', ar: 'ابدؤوا من هنا' };
+const startPost = posts.find((p) => keyOf(p) === 'start-here');
+const start = startPost ? { href: postUrl(startPost), label: START_LABEL[lang] } : undefined;
 ---
 <Base masthead noindex={!he && posts.length === 0} lang={lang} alternates={{ he: lurl('he'), en: lurl('en'), ar: lurl('ar') }} seoTitle={seo.title} seoDescription={seo.description}>
   <StoryArtLoading slot="head" />
@@ -123,7 +127,7 @@ const copy = COPY[lang];
         <h2 class="list-label" id="latest-title">{copy.latestLabel}</h2>
         <StoryList posts={[latest]} lang={lang} illustrated />
       </section>}
-      {featured.length > 0 && <FeaturedStories posts={featured} lang={lang} />}
+      {featured.length > 0 && <FeaturedStories posts={featured} lang={lang} start={start} />}
       {history.length > 0 && <>
         <h2 class="list-label">{copy.listLabel(history.length)}</h2>
         <StoryList posts={history} lang={lang} illustrated />
