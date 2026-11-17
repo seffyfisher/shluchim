@@ -1,6 +1,15 @@
 {
-  "_about": "Weekly curated wall for /feedback/. Source of truth: public.feedback_public_quotes (not status=approved). Synced 2026-11-01 Asia/Jerusalem — 8 public quotes. reaction joined from feedback for postmark labels.",
+  "_about": "Weekly curated wall for /feedback/. Source of truth: public.feedback_public_quotes (not status=approved). Synced 2026-11-08 Asia/Jerusalem — 9 public quotes. reaction joined from feedback for postmark labels.",
   "items": [
+    {
+      "id": "f152a2d2",
+      "source": "feedback_public_quotes",
+      "created_at": "2026-11-03T08:38:23+02:00",
+      "page": "/posts/2026-11-01-20-tabs-adhd/",
+      "reaction": "helped",
+      "message": "בדיוק בניתי הרצאה שמתחילה מלמה כל כך טוב לי בעידן הai בגלל הadhd שלי(: בקיצור התחבר לי בול, תמשיך לכתוב",
+      "name": null
+    },
     {
       "id": "9f9a6afb",
       "source": "feedback_public_quotes",
