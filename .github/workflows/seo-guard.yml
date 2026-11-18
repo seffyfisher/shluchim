@@ -31,3 +31,4 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run seo:check   # SEO_STRICT=1 astro build: any problem fails the job
+      - run: npm run podcast:verify -- --dist   # every episode: on /podcast/, Spotify id, player + links in each post language

@@ -65,11 +65,38 @@ For each approved release:
 3. To put a player in a post, add its exact content collection ID, including
    language, to `POST_EPISODES`. The first is
    `he/2026-10-13-wake-up-sky` → `wake-up-sky-1`. RSS synchronization never edits
-   this map. An English association requires its own explicit mapping and
-   language-appropriate component labels/disclosure; it is not inherited.
-4. Include archive appearance, verified Spotify enrichment and the optional
-   post association in the release checklist. Run checks and follow the approved
+   this map. Every language version of a source post (HE, EN, AR) gets the same
+   block in the same place, but each needs its own explicit line, because the
+   audio is Hebrew-only and the EN/AR block carries its own labels and says so
+   (`src/i18n/podcast.ts`). It is not inherited. An episode can have several
+   source posts: link each in the RSS description, or list it in `postPath` /
+   `morePosts`.
+4. Run `npm run podcast:verify` (see below). Include archive appearance, verified
+   Spotify enrichment and the post associations in the release checklist. Run checks and follow the approved
    build/deployment process. Spotify enrichment and post mappings need a rebuild.
+
+## Completeness check: `npm run podcast:verify`
+
+An episode is published fully only when all of this is true. The check fails
+(exit 1, one line per problem) otherwise:
+
+- every episode in `podcast-feed.json` is listed on `/podcast/`;
+- every episode has an `EPISODES` entry with a well-formed Spotify ID and a
+  matching direct URL (the RSS item alone does not count);
+- every source post of the episode, in every non-draft HE/EN/AR version found
+  through its `translationKey`, has a `POST_EPISODES` line, and in the built
+  site its page has the on-site player, the Spotify link and the link to
+  `/podcast/`.
+
+Modes: the default is static and needs no build. `-- --dist` also reads the
+built HTML (run `npm run build` first). `-- --online` also asks Spotify's
+oEmbed that each ID resolves with the same title as the RSS item. Where it runs:
+at the end of `npm run podcast:sync`; in the `SEO guard` workflow (`--dist`, it
+flags but never blocks a deploy); and as the last step of `refresh-podcast.yml`
+(`--dist --online`), after the snapshot is persisted, so a new episode still
+reaches `/podcast/` before its Spotify ID exists but the run turns red until the
+gap is closed. Unit tests with deliberately broken fixtures:
+`src/lib/podcast-verify.test.mjs`.
 
 ## Verified initial RSS seed
 
