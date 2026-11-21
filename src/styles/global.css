@@ -231,7 +231,16 @@ main { padding-block: 2.5rem 4rem; }
 .prose figure { margin-inline: 0; }
 .prose figcaption { color: var(--muted); font-size: var(--step--1); margin-top: .5em; }
 code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: .85em; background: var(--surface); padding: .1em .35em; border-radius: 4px; direction: ltr; unicode-bidi: isolate; }
-.prose pre { direction: ltr; text-align: left; background: var(--code-bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.1rem; overflow-x: auto; font-size: .9rem; line-height: 1.6; white-space: pre; }
+.prose pre { direction: ltr; text-align: left; background: var(--code-bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 2.6rem 1.1rem 1rem; overflow-x: auto; font-size: .9rem; line-height: 1.6; white-space: pre; }
+/* Hebrew and Arabic prompt blocks read right to left, aligned right, and wrap instead of scrolling sideways. */
+html[lang="he"] .prose pre, html[lang="ar"] .prose pre { direction: rtl; text-align: right; white-space: pre-wrap; overflow-wrap: anywhere; }
+html[lang="he"] .prose pre code, html[lang="ar"] .prose pre code { direction: inherit; unicode-bidi: normal; white-space: inherit; }
+.code-block { position: relative; }
+.code-block > pre { margin: 0; }
+.code-copy { position: absolute; inset-block-start: .5rem; inset-inline-end: .6rem; min-block-size: 2rem; padding: .2rem .8rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--bg); color: var(--fg); font: inherit; font-size: .85rem; cursor: pointer; }
+.code-copy:hover, .code-copy[data-done] { background: var(--fg); color: var(--bg); }
+.code-copy:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+@media (pointer: coarse) { .code-copy { min-block-size: 2.75rem; min-inline-size: 2.75rem; } .prose pre { padding-block-start: 3.2rem; } }
 .prose pre code { background: none; padding: 0; font-size: inherit; }
 .prose pre.astro-code { background-color: var(--code-bg); }
 .astro-code, .astro-code span { color: var(--fg); } /* monochrome code */

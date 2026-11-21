@@ -13,6 +13,7 @@ export const LANG_META: Record<Lang, { dir: 'rtl' | 'ltr'; og: string; label: st
 
 export const UI = {
   he: {
+    codeCopy: 'העתקה', codeCopied: 'הועתק', codeCopyFail: 'ההעתקה לא עבדה, הטקסט מסומן. אפשר להעתיק ידנית.', // copy button on code blocks in posts (PostPage.astro)
     skip: 'דלג לתוכן', preview: 'מצב תצוגה מקדימה: כולל טיוטות שלא אושרו לפרסום', navMain: 'ראשי',
     stories: 'מעשיות', podcast: 'הפודקסט', team: 'השלוחים', about: 'אודות', friends: 'בני אנוש', links: 'קישורים', feedback: 'פידבקים', allStories: 'כל המעשיות', back: '→ לכל המעשיות',
     draft: 'טיוטה', postNav: 'ניווט בסוף המעשיה', nav: 'ניווט', chat: 'שיחה',
@@ -37,6 +38,7 @@ export const UI = {
     waShare: 'שיתוף בווטסאפ',
   },
   en: {
+    codeCopy: 'Copy', codeCopied: 'Copied', codeCopyFail: "Copy didn't work. The text is selected: copy it by hand.", // copy button on code blocks in posts (PostPage.astro)
     skip: 'Skip to content', preview: "Preview mode: includes drafts that aren't approved for publishing yet", navMain: 'Main',
     stories: 'Stories', podcast: 'Podcast (HE)', team: 'Team', about: 'About', friends: 'Humans', links: 'Links', feedback: 'Feedback', allStories: 'All stories', back: '← All stories',
     draft: 'Draft', postNav: 'Story navigation', nav: 'Navigation', chat: 'Conversation',
@@ -60,6 +62,7 @@ export const UI = {
     waShare: 'Share on WhatsApp',
   },
   ar: {
+    codeCopy: 'نسخ', codeCopied: 'تم النسخ', codeCopyFail: 'لم ينجح النسخ. النص محدد: انسخه يدويًا.', // copy button on code blocks in posts (PostPage.astro)
     skip: 'تخطَّ إلى المحتوى', preview: 'وضع المعاينة: يتضمن مسودات لم يُعتمد نشرها بعد', navMain: 'الرئيسي',
     stories: 'حكايات', podcast: 'البودكاست (بالعبرية)', team: 'الفريق', about: 'عن المدونة', friends: 'بشر', links: 'روابط', feedback: 'آراء القراء', allStories: 'كل الحكايات', back: '→ كل الحكايات',
     draft: 'مسودة', postNav: 'التنقل في نهاية الحكاية', nav: 'التنقل', chat: 'محادثة',
