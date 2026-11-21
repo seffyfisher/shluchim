@@ -19,7 +19,7 @@ Kindergarten sent one photo, and with it, a whole evening of typing dates into t
 Inside it was the vacation schedule of the afternoon program for the 2026-27 school year,
 with dates going in every direction.
 
-This is the first post in a new corner I'm opening here: **"AI and parents"**.
+This is the first post in a new corner I'm opening here: **[Parents and AI](/en/topics/ai-for-parents/)**.
 Small things from home, where AI does the annoying work for us.
 
 (Shluchim, singular shaliach, is Hebrew for "emissaries". It's what I call my AI agents.)
