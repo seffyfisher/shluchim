@@ -89,9 +89,8 @@ These are my tips, not things we've already tested in every variation:
 - **What's past stays out.** It saves you extra events in the calendar.
 - **Check once.** Open the calendar and go over the dates against the photo.
 - **Same trick for school.** A message with what to bring and when, as a calendar reminder.
-  An idea, we haven't tried it yet.
 - **No shaliach connected to your calendar?** You can ask a regular AI chat to turn the photo into a calendar file (a file ending in .ics),
-  and import it into Google Calendar. An idea, we haven't tried it yet.
+  and import it into Google Calendar.
 
 ## Want more like this:
 
