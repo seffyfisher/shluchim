@@ -14,7 +14,7 @@ translationKey: "2026-11-27-digital-puja-reading"
 Nir, or more accurately [Dr. Nir](https://iyyun.co.il/paper/%D7%A2%D7%9C-%D7%94%D7%9B%D7%95%D7%97-%D7%94%D7%99%D7%A6%D7%99%D7%A8%D7%AA%D7%99-%D7%A9%D7%9C-%D7%94%D7%AA%D7%A9%D7%95%D7%A7%D7%94-%D7%91%D7%9E%D7%97%D7%A9%D7%91%D7%94-%D7%94%D7%94%D7%95%D7%93%D7%99/), a friend of mine and a scholar of religions, told me about "digital puja."
 It grabbed me right away.
 
-![A lavender-gray shaliach head looking at a glowing book on a smartphone, beside a lit oil lamp, incense smoke, and orange petals, as notification icons fade away in the background](/images/posts/2026-11-27-digital-puja-reading-main-1672.webp)
+![Two vinyl shluchim inspired by Ganesha and Saraswati looking at a glowing open book on a smartphone, surrounded by marigold flowers, a lit oil lamp, and incense](/images/posts/2026-11-27-digital-puja-reading-main-1672.webp)
 
 Puja (even though the name sounds like a veggie omelet to me) is a Hindu ritual, and some people practice it online too.
 He told me about a Harvard article describing how some practitioners prepare for the digital ritual: cleaning the computer and keyboard, closing programs, clearing browser history, cache, and cookies.
@@ -78,6 +78,8 @@ You can reach it from anywhere.
 You can also leave it in a second.
 What it doesn't have is that clear physical presence and sense of space.
 
+![A vinyl shaliach inspired by Ganesha wearing a gold crown next to a smartphone showing an open book, a candle, incense, a bell, and marigold flowers](/images/posts/2026-11-27-digital-puja-reading-nightstand-1672.webp)
+
 I don't think a phone should recreate everything a printed book has.
 On the contrary, a page-flip animation doesn't fix it.
 I want it to be easy to step into a book, stay in it, and come back tomorrow without losing my place, diving straight back in.
@@ -98,6 +100,8 @@ My pace.
 My associations.
 Nobody on the outside sees what's actually happening in there.
 
+![Portrait of a vinyl shaliach inspired by Saraswati with a gold crown, lotus collar, and tiny golden book on a lavender background](/images/posts/2026-11-27-digital-puja-reading-saraswati-1672.webp)
+
 Those are the things I want to remember when I work on a reading app.
 What happens when I come back to a book?
 When I stop in the middle?
@@ -105,6 +109,8 @@ How much crap did I put up with today just so I can simply keep reading?
 
 That's what stayed with me from the puja story.
 They moved the ritual to a screen, and people still found a way to prepare for it there, creating a religious experience even in a digital version.
+
+![Portrait of a vinyl shaliach inspired by Ganesha with a gold crown and heavy-lidded eyes on a cream background](/images/posts/2026-11-27-digital-puja-reading-ganesha-1672.webp)
 
 Reading also has that moment of entry, a kind of regular ritual.
 By the bed, on the bus, at my daughter's after-school class.
