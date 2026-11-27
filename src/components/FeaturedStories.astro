@@ -6,9 +6,9 @@ import { storyImage, previewUrl, previewSrcset } from '../lib/story-images.mjs';
 interface Props { posts: CollectionEntry<'posts'>[]; lang: Lang; start?: { href: string; label: string } }
 const { posts, lang, start } = Astro.props;
 const COPY: Record<Lang, { start: string; guideCta: string; storyCta: string; qMark: string }> = {
-  he: { start: 'כדאי להתחיל כאן', guideCta: 'למדריך המלא', storyCta: 'למעשיה המלאה', qMark: '?' },
-  en: { start: 'A good place to start', guideCta: 'Read the full guide', storyCta: 'Read the full story', qMark: '?' },
-  ar: { start: 'نقطة بداية ممتازة', guideCta: 'اقرأ الدليل الكامل', storyCta: 'اقرأ الحكاية كاملة', qMark: '؟' },
+  he: { start: 'כדאי להתחיל כאן', guideCta: 'מה זה זה?', storyCta: 'למעשיה המלאה', qMark: '?' },
+  en: { start: 'A good place to start', guideCta: 'What is this?', storyCta: 'Read the full story', qMark: '?' },
+  ar: { start: 'نقطة بداية ممتازة', guideCta: 'ما هذا؟', storyCta: 'اقرأ الحكاية كاملة', qMark: '؟' },
 };
 const copy = COPY[lang];
 const entries = await Promise.all(posts.map(async (post) => {
@@ -19,13 +19,15 @@ const entries = await Promise.all(posts.map(async (post) => {
   const teaser = guide && !post.data.listDescription && qIdx >= 0 ? description.slice(0, qIdx + 1) : description;
   return { post, guide, teaser, image: await storyImage(post) };
 }));
+// "New here?" sits in the guide card, as its own button right before the guide's CTA. With no guide card it stays under the heading.
+const startInCard = !!start && entries.some((e) => e.guide);
 ---
 <section class="featured-section" aria-labelledby="featured-title">
   <header class="featured-heading">
     <h2 id="featured-title">{lang === 'he' ? <>מעשיות <mark>נבחרות</mark></> : lang === 'en' ? <>Featured <mark>stories</mark></> : <>حكايات <mark>مختارة</mark></>}</h2>
     <p>{copy.start}</p>
-    {/* A plain link to the start-here guide, next to the pinned stories. It is not a story card, so the newest/featured/history order and its no-duplicates rule are untouched. */}
-    {start && <a class="featured-start" href={start.href}>{start.label}</a>}
+    {/* A plain link to the start-here guide. It is not a story card, so the newest/featured/history order and its no-duplicates rule are untouched. */}
+    {start && !startInCard && <a class="featured-start" href={start.href}>{start.label}</a>}
   </header>
   <ol class="featured-stories" role="list">
     {entries.map(({ post, guide, teaser, image }) => (
@@ -37,7 +39,12 @@ const entries = await Promise.all(posts.map(async (post) => {
           <p class="meta"><time datetime={post.data.date.toISOString().slice(0, 10)}>{formatDateShort(post.data.date, lang)}</time><span>{readingLabel(readingMinutes(post.body, lang), lang)}</span></p>
           <h3><a href={postUrl(post)}>{post.data.title}</a></h3>
           <p class="dek">{teaser}</p>
-          <span class="featured-cta" aria-hidden="true">{guide ? copy.guideCta : copy.storyCta}</span>
+          {guide && startInCard && start ? (
+            <div class="featured-actions">
+              <a class="featured-start" href={start.href}>{start.label}</a>
+              <span class="featured-cta" aria-hidden="true">{copy.guideCta}</span>
+            </div>
+          ) : <span class="featured-cta" aria-hidden="true">{guide ? copy.guideCta : copy.storyCta}</span>}
         </div>
       </li>
     ))}
