@@ -42,7 +42,7 @@ jobs:
       - run: npm ci
       # A fetch/parse error fails the job before any commit or deploy. Existing
       # checked-in data and the last successful Pages deployment stay intact.
-      - run: npm run podcast:sync
+      - run: python3 scripts/sync-podcast.py
       - run: npm test
       - run: npm run seo:check
       - run: npm run build
@@ -73,3 +73,8 @@ jobs:
         # is necessary, and the existing deploy workflow repeats its build gate.
         # This comparison also retries a previously failed dispatch/deployment on
         # the next successful refresh even if the RSS data has not changed.
+      # Completeness gate. Deliberately AFTER the snapshot is persisted: a new episode must reach /podcast/ even
+      # before its Spotify id exists, but a gap (no Spotify id, post without the player in HE/EN/AR) turns this run
+      # red so nobody can forget it again. See LESSONS.md (2026-11-17).
+      - name: Podcast completeness (red = an episode is not fully published)
+        run: npm run podcast:verify -- --dist --online

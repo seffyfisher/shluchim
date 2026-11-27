@@ -86,6 +86,7 @@ const jsonLd = [
               {spreakerUrl && <a href={spreakerUrl} target="_blank" rel="noopener">האזנה באתר Spreaker<span class="sr-only"> (בטאב חדש)</span></a>}
               {!verified && <a href={episode.audioUrl} target="_blank" rel="noopener">קובץ השמע מ־Spreaker<span class="sr-only"> (בטאב חדש)</span></a>}
               {post ? <a href={postUrl(post)}>לקריאת ״{post.data.title}״</a> : verified?.postPath ? <a href={lurl('he', verified.postPath)}>לקריאת ״{verified.postTitle}״</a> : !spreakerUrl && <a href={episode.pageUrl} target={externalPage ? '_blank' : undefined} rel={externalPage ? 'noopener' : undefined}>לעמוד הפרק{externalPage && <span class="sr-only"> (בטאב חדש)</span>}</a>}
+              {verified?.morePosts?.map((more) => <a href={lurl('he', more.path)}>לקריאת ״{more.title}״</a>)}
             </p>
           </article>
         </li>;

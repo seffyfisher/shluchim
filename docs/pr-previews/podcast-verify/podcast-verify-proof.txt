@@ -1,0 +1,31 @@
+### A. Same checker against origin/main data (state before this PR; POST_EPISODES export added only so the script can import it)
+podcast:verify FAILED (static): 6 problem(s)
+  - episode 4 «המחסן של כאילו | פרק 4»: no Spotify enrichment. Add an EPISODES entry with the verified spotifyId (GUID https://api.spreaker.com/episode/76410074)
+  - episode ? «השלוח שדופק בדלת | פרק 3»: no Spotify enrichment. Add an EPISODES entry with the verified spotifyId (GUID https://api.spreaker.com/episode/76189862)
+  - episode 2 «איך השְׁלוּחִים שלי מרימים טלפון (איפה אתם?) | פרק 2»: post en/2026-10-12-my-shluchim-can-make-phone-calls has no podcast block (add it to POST_EPISODES)
+  - episode 2 «איך השְׁלוּחִים שלי מרימים טלפון (איפה אתם?) | פרק 2»: post ar/2026-10-12-my-shluchim-can-make-phone-calls has no podcast block (add it to POST_EPISODES)
+  - episode 1 «עורו, שמיים. | פרק 1»: post en/2026-10-13-wake-up-sky has no podcast block (add it to POST_EPISODES)
+  - episode 1 «עורו, שמיים. | פרק 1»: post ar/2026-10-13-wake-up-sky has no podcast block (add it to POST_EPISODES)
+exit 1
+
+### B. Temporary edit: drop the AR warehouse line from POST_EPISODES
+podcast:verify FAILED (static): 1 problem(s)
+  - episode 4 «המחסן של כאילו | פרק 4»: post ar/2026-10-15-central-warehouse has no podcast block (add it to POST_EPISODES)
+exit 1
+
+### C. Temporary edit: ep4 has no Spotify enrichment (episode only in the feed)
+podcast:verify FAILED (static): 1 problem(s)
+  - episode 4 «המחסן של כאילו | פרק 4»: no Spotify enrichment. Add an EPISODES entry with the verified spotifyId (GUID https://api.spreaker.com/episode/76410074)
+exit 1
+
+### D. Temporary edit of built output: EN ep3 post without the block, /podcast/ without the ep4 row
+podcast:verify FAILED (static+dist): 4 problem(s)
+  - episode 4 «המחסן של כאילו | פרק 4»: missing from /podcast/
+  - episode 3 «השלוח שדופק בדלת | פרק 3»: built page of en/2026-09-21-three-daily-check-ins-moved-out lacks the podcast block
+  - episode 3 «השלוח שדופק בדלת | פרק 3»: built page of en/2026-09-21-three-daily-check-ins-moved-out lacks the Spotify player
+  - episode 3 «השלוח שדופק בדלת | פרק 3»: built page of en/2026-09-21-three-daily-check-ins-moved-out lacks the Spotify link
+exit 1
+
+### E. Restored: pass (static + built output + Spotify oEmbed)
+podcast:verify OK (static+dist+online): 4 episodes, 15 post blocks
+exit 0
