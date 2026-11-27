@@ -3,7 +3,7 @@ title: "My shaliach started punching the clock"
 emoji: "🪪"
 description: "Now my shaliach punches the clock too. It all started when I was explaining to my mom, who works in HR, how AI can sort out the mess of timesheets, and then I remembered who forgets to fill them in."
 listDescription: "I was explaining to my mom how AI can sort out the mess of timesheets. Then I remembered who forgets to fill them in every month."
-seoTitle: "My AI shaliach now fills in my missing work hours"
+seoTitle: "My AI shaliach now helps me fill in my missing work hours"
 seoDescription: "Now my AI shaliach punches the clock too. It all started when I explained to my mom, who works in HR, how AI can sort out the mess of timesheets."
 topics: ["everyday-ai"]
 date: 2026-11-13
@@ -62,20 +62,24 @@ A skill is a capability you can run again and again,
 and a routine is a schedule that runs it at the time we set.
 Two days later, I updated the minimum to nine hours a day.
 
-Today, on the last workday of the month, at around 15:30,
-the shaliach fills in empty days as work from home, at least nine hours a day,
+But a reader of the blog wrote to me that he doesn't connect with the shaliach filling in hours on its own.
+He suggested the shaliach ask instead.
+In my view he's right: this is attendance data my employer sees,
+and it should rest on my answer, not on random hours.
+So I changed the routine.
+
+Today, at the end of every week, the shaliach asks me when I worked on my home days.
+If hours are missing on office days (Monday to Wednesday), it asks where I worked and fills them in from my answer,
 without overwriting existing attendance reports.
 Special days, like election day or a holiday, stay for me to review.
 
 ![Seffy, relaxed next to a cup of coffee, beside a big calendar whose squares are filling up with checkmarks, one more tile sliding into place.](/images/posts/2026-11-13-shaliach-punches-the-clock-calendar-fills-1536.webp)
 
 Sometimes I need to take a quick look and clarify what to fill in and what to leave empty.
-He does the rest of the work himself, including asking me how much I worked each day.
-For now, he fills in random hours, starting from 9:00.
-Later on, he'll be able to take it from my activity too, for example from the hours when I sent emails.
+He does the rest of the work himself, and I just answer the questions.
 
 Instead of waiting for the email from HR and then rushing to fill everything in,
-there's now a routine that takes care of it before the month closes.
+there's now a routine that checks in with me every week and takes care of it before the month closes.
 
 **A small task, one less thing on my mind**
 

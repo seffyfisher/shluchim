@@ -147,6 +147,41 @@ export const TOPICS = {
       ],
     },
   },
+  'ai-for-parents': {
+    he: {
+      label: 'AI להורים',
+      chip: 'AI להורים',
+      title: 'AI להורים: הדברים הקטנים והמעצבנים של החיים עם ילדים',
+      seoTitle: 'AI להורים: שימושים פשוטים לגן, לבית הספר ולבית',
+      seoDescription: 'איך הורים משתמשים ב־AI ביומיום: תמונה של הודעה מהגן שהופכת לאירועים ביומן המשפחתי, תזכורות, רשימות וסידורים קטנים. דוגמאות אמיתיות, בלי ז׳רגון.',
+      intro: [
+        'הודעות מהגן, לוחות חופשות, אישורים לחתום ורשימות ציוד. הדברים הקטנים שאף הורה לא רוצה להקליד.',
+        'כאן השימושים של השְׁלוּחִים בשביל הורים: מה ביקשנו, מה יצא, ומה כדאי לבדוק.',
+      ],
+    },
+    en: {
+      label: 'AI for parents',
+      chip: 'AI for parents',
+      title: 'AI for parents: the small, annoying parts of life with kids',
+      seoTitle: 'AI for parents: simple uses for kindergarten, school and home',
+      seoDescription: 'How parents use AI day to day: a photo of a kindergarten notice becomes events in the shared family calendar, plus reminders, lists and small errands. Real examples.',
+      intro: [
+        'Daycare notices, vacation schedules, permission slips and supply lists. The small things no parent wants to type.',
+        'These are the ways my shluchim help parents: what we asked, what came out, and what to double-check.',
+      ],
+    },
+    ar: {
+      label: 'الذكاء الاصطناعي للأهل',
+      chip: 'الذكاء الاصطناعي للأهل',
+      title: 'الذكاء الاصطناعي للأهل: التفاصيل الصغيرة المزعجة في الحياة مع الأطفال',
+      seoTitle: 'الذكاء الاصطناعي للأهل: استخدامات بسيطة للروضة والمدرسة والبيت',
+      seoDescription: 'كيف يستخدم الأهل الذكاء الاصطناعي في يومهم: صورة إعلان من الروضة تتحول إلى مواعيد في التقويم العائلي المشترك، مع تذكيرات وقوائم ومهام صغيرة. أمثلة حقيقية.',
+      intro: [
+        'إعلانات الروضة، جداول العطل، أذونات تحتاج إلى توقيع وقوائم الأغراض. التفاصيل الصغيرة التي لا يحب أي أب أو أم كتابتها.',
+        'هنا طرق استخدام مبعوثيّ من الذكاء الاصطناعي لمساعدة الأهل: ماذا طلبنا، وماذا خرج، وما الذي يجب التأكد منه.',
+      ],
+    },
+  },
 };
 
 export const TOPIC_SLUGS = Object.keys(TOPICS);
