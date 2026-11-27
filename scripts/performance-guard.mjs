@@ -88,7 +88,7 @@ async function audit(baseUrl, route, runIndex) {
   if (data.finalUrl !== url) throw new Error(`${route}: audited ${data.finalUrl} instead of ${url}`);
   const score = Math.round(100 * data.categories.performance.score);
   const metrics = metricIds.map((id) => `${id}: ${data.audits[id]?.displayValue ?? 'unknown'}`).join(', ');
-  console.log(`${route} run ${runIndex}: Performance ${score}/100; ${metrics}; report: ${report}`);
+  console.log(`${route} run ${runIndex}${runIndex === 'warmup' ? ' (discarded)' : ''}: Performance ${score}/100; ${metrics}; report: ${report}`);
   return score;
 }
 
@@ -102,6 +102,11 @@ try {
   } else {
     baseUrl = new URL(baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`).href;
   }
+  // The first Lighthouse run after a cold Chrome/runner start is noisy: only
+  // the first audited route (/) ever dipped (73-84 from 600-1,600 ms of
+  // unattributed blocking time and GC) while every later route stayed 100.
+  // One discarded warm-up keeps the 90 gate measuring the page, not startup.
+  await audit(baseUrl, routes[0], 'warmup');
   let passed = true;
   for (const route of routes) {
     const scores = [];
