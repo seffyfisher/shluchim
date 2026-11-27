@@ -6,11 +6,13 @@ import { storyImage, previewUrl, previewSrcset } from '../lib/story-images.mjs';
 interface Props { posts: CollectionEntry<'posts'>[]; lang: Lang; start?: { href: string; label: string } }
 const { posts, lang, start } = Astro.props;
 const COPY: Record<Lang, { start: string; guideCta: string; storyCta: string; qMark: string }> = {
-  he: { start: 'כדאי להתחיל כאן', guideCta: 'מה זה זה?', storyCta: 'למעשיה המלאה', qMark: '?' },
-  en: { start: 'A good place to start', guideCta: 'What is this?', storyCta: 'Read the full story', qMark: '?' },
-  ar: { start: 'نقطة بداية ممتازة', guideCta: 'ما هذا؟', storyCta: 'اقرأ الحكاية كاملة', qMark: '؟' },
+  he: { start: 'כדאי להתחיל כאן', guideCta: 'מה זה גרוקבוט?', storyCta: 'למעשיה המלאה', qMark: '?' },
+  en: { start: 'A good place to start', guideCta: 'What is Grok Bot?', storyCta: 'Read the full story', qMark: '?' },
+  ar: { start: 'نقطة بداية ممتازة', guideCta: 'ما هو Grok Bot؟', storyCta: 'اقرأ الحكاية كاملة', qMark: '؟' },
 };
 const copy = COPY[lang];
+// In Arabic the Latin name is isolated in <bdi> so the Arabic question mark stays at the end of the RTL line (on the left). The label is one inline <span> so the inline-flex button keeps the space before <bdi>.
+const [ctaBefore, ctaName, ctaAfter] = lang === 'ar' ? ['ما هو ', 'Grok Bot', '؟'] : [copy.guideCta, '', ''];
 const entries = await Promise.all(posts.map(async (post) => {
   const guide = keyOf(post) === 'grok-bot-guide';
   const description = post.data.listDescription ?? post.data.description;
@@ -42,9 +44,9 @@ const startInCard = !!start && entries.some((e) => e.guide);
           {guide && startInCard && start ? (
             <div class="featured-actions">
               <a class="featured-start" href={start.href}>{start.label}</a>
-              <span class="featured-cta" aria-hidden="true">{copy.guideCta}</span>
+              <span class="featured-cta" aria-hidden="true"><span>{ctaBefore}{ctaName && <bdi>{ctaName}</bdi>}{ctaAfter}</span></span>
             </div>
-          ) : <span class="featured-cta" aria-hidden="true">{guide ? copy.guideCta : copy.storyCta}</span>}
+          ) : <span class="featured-cta" aria-hidden="true">{guide ? <span>{ctaBefore}{ctaName && <bdi>{ctaName}</bdi>}{ctaAfter}</span> : copy.storyCta}</span>}
         </div>
       </li>
     ))}

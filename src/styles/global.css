@@ -175,7 +175,8 @@ main { padding-block: 2.5rem 4rem; }
 .featured-start:hover, .featured-start:focus-visible { background: var(--fg); color: var(--bg); }
 .featured-start:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
 /* "New here?" + the guide CTA: two separate buttons side by side, "New here?" first in reading order. The start link sits above the card's stretched link. */
-.featured-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .625rem; margin-top: .25rem; }
+.featured-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: .25rem; }
+.featured-actions :is(.featured-start, .featured-cta) { padding-inline: .7rem; white-space: nowrap; }
 .featured-actions .featured-start { position: relative; z-index: 1; margin: 0; background: var(--featured-paper); }
 .featured-actions .featured-start:hover, .featured-actions .featured-start:focus-visible { background: var(--fg); color: var(--featured-paper); }
 .featured-actions .featured-cta { margin: 0; }
